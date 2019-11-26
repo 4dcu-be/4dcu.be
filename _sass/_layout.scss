@@ -91,6 +91,7 @@ pre code.hljs {
 		text-shadow: 0 2px 1px rgba(0,0,0,0.67) !important;
 		background-position: 50% 50%;
 		background-size: cover;
+		background-attachment: fixed;
 		.title {
 			font-size: modular-scale(6);
 		}
@@ -101,7 +102,7 @@ pre code.hljs {
 	.scrim {
 		padding: 3em 1em;
 		&.has-cover {
-			background-color: rgba(0,0,0,0.2);
+			background-color: rgba(0,0,0,0.4);
 			padding: 6em 1em !important;
 			@include media($tablet) {
 				padding: 9em 1em !important;
@@ -219,12 +220,14 @@ pre code.hljs {
 	margin-top: 66px;
 	.wrapper {
 		@include outer-container;
+		max-width: 60em;
 		padding: 1em;
 	}
 	/*
 	*	index.html
 	*/
 	.post-list {
+	  @include span-columns(9);
 		padding-top: 1em !important;
 		@extend %default-ul;
 	}
@@ -243,6 +246,14 @@ pre code.hljs {
 			text-align: right;
 			font-size: 0.9em;
 		}
+	}
+	.category-wrapper {
+	  @include span-columns(3);
+	  padding-left: 30px;
+	  padding-top: 1em !important;
+	}
+	.category-list {
+		@extend %default-ul;
 	}
 	.pagination {
 		padding-top: 2em;

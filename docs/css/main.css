@@ -102,8 +102,9 @@ select {
   max-width: 100%;
   width: auto; }
 
-ul.default, .page-content ul.post-list, .page-content .page ul.posts-list, .site-footer .site-navigation ul, .site-footer .site-contact ul,
+ul.default, .page-content ul.post-list, .page-content ul.category-list, .page-content .page ul.posts-list, .site-footer .site-navigation ul, .site-footer .site-contact ul,
 .page-content ol.post-list,
+.page-content ol.category-list,
 .page-content .page ol.posts-list,
 ol.default {
   list-style-type: none;
@@ -289,7 +290,8 @@ pre code.hljs {
     box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px;
     text-shadow: 0 2px 1px rgba(0, 0, 0, 0.67) !important;
     background-position: 50% 50%;
-    background-size: cover; }
+    background-size: cover;
+    background-attachment: fixed; }
     .site-header-container.has-cover .title, .post-header-container.has-cover .title {
       font-size: 2.985984em; }
     .site-header-container.has-cover .subtitle, .site-header-container.has-cover .info, .post-header-container.has-cover .subtitle, .post-header-container.has-cover .info {
@@ -297,7 +299,7 @@ pre code.hljs {
   .site-header-container .scrim, .post-header-container .scrim {
     padding: 3em 1em; }
     .site-header-container .scrim.has-cover, .post-header-container .scrim.has-cover {
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: rgba(0, 0, 0, 0.4);
       padding: 6em 1em !important; }
       @media screen and (min-width: 768px) {
         .site-header-container .scrim.has-cover, .post-header-container .scrim.has-cover {
@@ -412,13 +414,20 @@ pre code.hljs {
     max-width: 48em;
     margin-left: auto;
     margin-right: auto;
+    max-width: 60em;
     padding: 1em; }
     .page-content .wrapper::after {
       clear: both;
       content: "";
       display: table; }
   .page-content .post-list {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 74.4105871005%;
     padding-top: 1em !important; }
+    .page-content .post-list:last-child {
+      margin-right: 0; }
   .page-content .post-meta {
     max-width: 48em;
     margin-left: auto;
@@ -447,6 +456,15 @@ pre code.hljs {
       font-size: 0.9em; }
       .page-content .post-meta .post-categories:last-child {
         margin-right: 0; }
+  .page-content .category-wrapper {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 23.2317613015%;
+    padding-left: 30px;
+    padding-top: 1em !important; }
+    .page-content .category-wrapper:last-child {
+      margin-right: 0; }
   .page-content .pagination {
     padding-top: 2em;
     text-align: center;
