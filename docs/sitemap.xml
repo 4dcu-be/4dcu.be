@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://localhost:4000/programming/2015/04/20/welcome-to-jekyll.html</loc>
+<loc>https://blog.4dcu.be/programming/2015/04/20/welcome-to-jekyll.html</loc>
 <lastmod>2015-04-20T10:43:59+02:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/about/</loc>
+<loc>https://blog.4dcu.be/about/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/posts/</loc>
+<loc>https://blog.4dcu.be/posts/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/tag/jekyll/</loc>
+<loc>https://blog.4dcu.be/tag/jekyll/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/tag/welcome/</loc>
+<loc>https://blog.4dcu.be/tag/welcome/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/category/programming/</loc>
+<loc>https://blog.4dcu.be/category/programming/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/</loc>
+<loc>https://blog.4dcu.be/</loc>
 </url>
 </urlset>
