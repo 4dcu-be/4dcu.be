@@ -32,7 +32,7 @@ $green: #27ae60;	  	// Nephritis
 $blue: #2980b9;				// Belize Hole
 $purple: #8e44ad;			// Wisteria
 $orange: #d35400;			// Pumpkin
-$red:	#c0392b;				// Pomegranate
+$red:	#b33939;				// Eye of Newt
 $gray: #7f8c8d;				// Asbestos
 // Even more colors
 $bc-red: #bc0000;
@@ -40,8 +40,9 @@ $bc-red: #bc0000;
 // Font Colors
 $base-background-color: #fff;
 $base-font-color: $dark-gray;
-$action-color: $blue;
-$highlight-color: tint($action-color, 33%);
+$action-color: $red;
+$highlight-color: shade($action-color, 33%);
+$dark-color: shade($action-color, 33%);
 
 // Border
 $base-border-color: $light-gray;

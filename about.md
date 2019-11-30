@@ -5,14 +5,14 @@ permalink: /about/
 main_nav: true
 ---
 
-![alt text]({{ site.baseurl }}/assets/profile-placeholder.gif "Profile Picture"){:.profile}
+A 4D cube, also known as a hypercube or [tesseract](https://en.wikipedia.org/wiki/Tesseract), is the 4D equivalent of 
+a cube, just as a cube is the 3D equivalent of a square. It appears very often in popular (and less popular) culture 
+ranging from Marvel Blockbusters to cult-classics (e.g. 
+[Cube²: Hypercube](https://en.wikipedia.org/wiki/Cube_2:_Hypercube)). Seemed like a suitable name  for a blog focusing 
+on tech, programming and building things.
 
-Centrarium is a custom theme for Jekyll, made by [Ben Centra][bencentra] for his own blog. He'd be humbled if you liked it enough to use it as well! Installation and configuration instructions can be found in the [GitHub repository](https://github.com/bencentra/centrarium).
+I'm Sebastian, if you are looking for my professional curriculum you are in the wrong spot ! This will be about little
+hobby projects I work on to hone my programming skills or try new technology. If you want to find out more about my
+research head over to [sebastian.proost.science](https://sebastian.proost.science) for details on what I'm doing at
+work.
 
-This page is a good place to write about yourself, your project, your product, or whatever it is your site is for. You can replace the image above, or you can get rid of it entirely. 
-
-You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/). And you can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
-
-[centrarium]: https://github.com/bencentra/centrarium
-[bencentra]: http://bencentra.com
-[jekyll]: https://github.com/jekyll/jekyll

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Sentiment Analysis and the Shape of Stories</title>
+  <meta name="description" content="When I accidentally stumbled upon a presentation from Kurt Vonnegut on how stories have a shape I started thinking… “Would you be able to use natural languag...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2019">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/mono-blue.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="When I accidentally stumbled upon a presentation from Kurt Vonnegut on how stories have a shape I started thinking… “Would you be able to use natural languag..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/2019/12/01/Sentiment-Analysis.html">
+  <meta property="og:site_name" content="4Dcu.be" />
+  <meta property="og:title" content="Sentiment Analysis and the Shape of Stories" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Sentiment Analysis and the Shape of Stories">
+  <meta name="twitter:description" content="When I accidentally stumbled upon a presentation from Kurt Vonnegut on how stories have a shape I started thinking… “Would you be able to use natural languag...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/instacode.png">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/2019/12/01/Sentiment-Analysis.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/2019/12/01/Sentiment-Analysis.html">
+	<link rel="alternate" type="application/rss+xml" title="4Dcu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="4Dcu.be">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">Sentiment Analysis and the Shape of Stories</h1>
+      <p class="info">by <strong>Sebastian Proost</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">December 1, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>When I accidentally stumbled upon a presentation from <a href="https://en.wikipedia.org/wiki/Kurt_Vonnegut">Kurt Vonnegut</a> 
+on how <a href="https://www.youtube.com/watch?v=oP3c1h8v2ZQ">stories have a shape</a> I started thinking… “Would you be able 
+to use natural language processing (NLP) to pick up these shapes based on sentiment analysis of the actual text?” So 
+here I’ll show you the approach I came up with, and the application on 
+<a href="https://en.wikipedia.org/wiki/J._R._R._Tolkien">J.R.R. Tolkien</a>’s 
+<a href="https://en.wikipedia.org/wiki/The_Lord_of_the_Rings">Lord of the Rings</a> - The Fellowship of the Ring. All code can be
+found in a Jupyter notebook in <a href="https://github.com/4dcu-be/ShapeOfStories-SentimentAnalysis">this repository</a>.</p>
+
+<p>To understand what this post is about you should really have a look at this video.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/oP3c1h8v2ZQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+<h2 id="sentiment-analysis-in-python">Sentiment Analysis in Python</h2>
+
+<p>Python has the <a href="https://www.nltk.org/">Natural Language Toolkit</a> which includes a very easy way to do sentiment 
+analysis. Import the correct library, create a SentimentIntsenityAnalyzer() and apply it on a fragment of text. Done! 
+Just look at the examples below how a few lines of code can pick up which fragments are positive, negative or 
+neutral (reflected in the ‘pos’, ‘neg’, ‘neu’). Furthermore there is a <strong>compound score</strong> that is positive if the overall
+sentiment of the text is good and negative if it is bad, this is the metric we want to create the shape of the story.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">nltk.sentiment.vader</span> <span class="kn">import</span> <span class="n">SentimentIntensityAnalyzer</span>
+<span class="n">sid</span> <span class="o">=</span> <span class="n">SentimentIntensityAnalyzer</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">sid</span><span class="o">.</span><span class="n">polarity_scores</span><span class="p">(</span><span class="s">"He smiled, he was happy. It had been an amazing day!"</span><span class="p">))</span>
+<span class="c1"># {'neg': 0.0, 'neu': 0.415, 'pos': 0.585, 'compound': 0.906}
+</span><span class="k">print</span><span class="p">(</span><span class="n">sid</span><span class="o">.</span><span class="n">polarity_scores</span><span class="p">(</span><span class="s">"They feared the others. When they show up, bad things happen."</span><span class="p">))</span>
+<span class="c1"># {'neg': 0.427, 'neu': 0.573, 'pos': 0.0, 'compound': -0.7717}
+</span><span class="k">print</span><span class="p">(</span><span class="n">sid</span><span class="o">.</span><span class="n">polarity_scores</span><span class="p">(</span><span class="s">"While driving to their destination, nothing happened."</span><span class="p">))</span>
+<span class="c1"># {'neg': 0.0, 'neu': 1.0, 'pos': 0.0, 'compound': 0.0}
+</span></code></pre></div></div>
+
+<h2 id="parsing-your-book">Parsing your book</h2>
+
+<p>You’ll have to go over your book and extract the paragraphs. Titles, subtitles, … will need to be removed. 
+Specifically for Lord of the Rings - The Fellowship of the Ring dialog and songs were removed as well. Only paragraphs 
+of sufficient length are stored. So in total we are only considering the 303 longest paragraphs in this book for the 
+analysis.</p>
+
+<p>I stored the parsed book to a .json file like this:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w"> </span><span class="nl">"paragraph"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Paragraph one text..."</span><span class="w"> </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w"> </span><span class="nl">"paragraph"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Paragraph two text..."</span><span class="w"> </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<p>LotR is protected by copyright. I have both a physical as a digital copy legally, though I can’t share the parsed 
+book here. There is no general way to parse an ebook into paragraphs as depending on the source the way a paragraph ends
+will be encoded differently.</p>
+
+<p>Using the code below, this file can be loaded and the sentiment analysis applied to each paragraph. Scores are stored 
+into a pandas dataframe. As sentiment analysis can be rather noisy and one paragraph can be very positive, followed by 
+a rather negative one, however a few negative ones in a row are relevant. Therefore a rolling window will be applied 
+to the scores to get the average score over a number of paragraphs.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">from</span> <span class="nn">nltk.sentiment.vader</span> <span class="kn">import</span> <span class="n">SentimentIntensityAnalyzer</span>
+<span class="n">sid</span> <span class="o">=</span> <span class="n">SentimentIntensityAnalyzer</span><span class="p">()</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'./output/The_Fellowship_Of_The_Ring.paragraphs.json'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
+
+<span class="c1"># create a data frame with the sentiment scores
+</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">sid</span><span class="o">.</span><span class="n">polarity_scores</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s">'paragraph'</span><span class="p">])</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">data</span><span class="p">])</span>
+
+<span class="c1"># Create a column with paragraph numbers (starting with 1)
+</span><span class="n">df</span><span class="p">[</span><span class="s">'paragraph_num'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="c1"># Apply a rolling window on the compound score to smooth out noise
+# Downside is that the first and last elements will be NA
+</span><span class="n">df</span><span class="p">[</span><span class="s">'smooth_compound'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'compound'</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">win_type</span><span class="o">=</span><span class="s">'triang'</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>That is all there is to it! We now have a data frame with for each paragraph the sentiment scores and applied a rolling 
+window to create a smoothed result. Now we just need to visualize the shape of our book and see if this makes sense. 
+While normally Seaborn can be used to quickly get a visualization of your data, here I wanted to have a curve with the
+area under it colored by the sentiment, green in case it is positive blue for negative sections. To do this I had to use
+matplotlib directly.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">'figure.figsize'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+
+<span class="n">blue</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.2980392156862745</span><span class="p">,</span> <span class="mf">0.4470588235294118</span><span class="p">,</span> <span class="mf">0.6901960784313725</span><span class="p">)</span>
+<span class="n">green</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.3333333333333333</span><span class="p">,</span> <span class="mf">0.6588235294117647</span><span class="p">,</span> <span class="mf">0.40784313725490196</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s">"white"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Lord of the Rings - The Fellowship of the Ring'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'Paragraph'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Sentiment'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">paragraph_num</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">smooth_compound</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">smooth_compound</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">green</span><span class="p">,</span> <span class="n">interpolate</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">paragraph_num</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">smooth_compound</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">smooth_compound</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">blue</span><span class="p">,</span> <span class="n">interpolate</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">'gray'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.svg" alt="Sentiment plot of Lord of the Rings - The Fellowship of the Ring" /></p>
+
+<p>This looks pretty close to what I wanted ! However, does it make sense … To figure this out lets add some annotations
+to the plot. I pinpointed paragraphs containing key moments in the story and will add them to the plot. This will give
+us a better view if the plot makes sense and if it really follows the story.</p>
+
+<p>The code to do this is similar as above, with the exception dots and text will be added.</p>
+
+<p><strong>Note that the section below the code contains SPOILERS for both the book and the movie</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">annotations</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s">'Frodo meets Aragorn'</span><span class="p">,</span> <span class="p">(</span><span class="mi">105</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">104</span><span class="p">][</span><span class="s">'smooth_compound'</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s">'Black Riders arrive in Bree'</span><span class="p">,</span> <span class="p">(</span><span class="mi">116</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">115</span><span class="p">][</span><span class="s">'smooth_compound'</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s">'Black Riders assembling near Weathertop'</span><span class="p">,</span> <span class="p">(</span><span class="mi">129</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">128</span><span class="p">][</span><span class="s">'smooth_compound'</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s">'Frodo meets up with Bilbo in Rivendell'</span><span class="p">,</span> <span class="p">(</span><span class="mi">152</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">151</span><span class="p">][</span><span class="s">'smooth_compound'</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s">'"Fly, you fools"'</span><span class="p">,</span> <span class="p">(</span><span class="mi">241</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">240</span><span class="p">][</span><span class="s">'smooth_compound'</span><span class="p">]))</span>
+<span class="p">]</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s">"white"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Lord of the Rings - The Fellowship of the Ring'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'Paragraph'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Sentiment'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">paragraph_num</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">smooth_compound</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">smooth_compound</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">green</span><span class="p">,</span> <span class="n">interpolate</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">paragraph_num</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">smooth_compound</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">smooth_compound</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">blue</span><span class="p">,</span> <span class="n">interpolate</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">'gray'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">annotations</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">'black'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="mf">0.05</span><span class="p">))</span>
+  
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'Fellowship.annotated.svg'</span><span class="p">,</span><span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">svg_out</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">svg_out</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s">"svg"</span><span class="p">)</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.annotated.svg" alt="Annotated Sentiment plot of Lord of the Rings - The Fellowship of the Ring" /></p>
+
+<h2 id="discussion">Discussion</h2>
+
+<p>I was surprised how well the image actually reflects the story! For those that need a reminder here is a 
+short outline of the story specifically focusing on the annotations added to the image.</p>
+
+<p>The Fellowship of the Ring starts with a Birthday party where the Hobbits and their village in The Shire are introduced.
+So the story starts very happy and cheerful, as Tolkien describes these characters in great depth this takes up a major
+portion of the book. Meeting new characters, like Strider/Aragorn, is often met with positive sentiment.</p>
+
+<p>The sentiment goes down considerably once Frodo makes his way to Bree and the Black Riders (later revealed as the
+ringwraights or <a href="https://lotr.fandom.com/wiki/Nazg%C3%BBl">Nazgûl</a>) start chasing them, leading to a confrontation at 
+the Weathertop. Here Frodo is injured and needs to be rushed to Rivendell. This section in both the book and the movie
+is rather dark, the Hobbits fear the Riders and start to understand their mission is far more perilous than they ever
+imagined.</p>
+
+<p>At Rivendell Frodo is healed and meets up with his Uncle Bilbo again. Here the Hobbits are safe and this is reflected in
+the sentiment of the text. While in Rivendell Elrond also talks about Sauron, Isildur and the Ring, this flashback is
+rather negative (Isildur failed to destroy the ring) and this is clearly visible in the plot as well. Once the 
+Fellowship is assembled and they leave Rivendell for Mordor their spirits are good, when being forced to go through the 
+Mines of Moria however things start looking grim. Gandalf ultimately defeats the Balrog yet is pulled down into the dark
+depths of the mine himself. The last words he utters “Fly, you fools!” before going down the Abyss is one of the most 
+negative moments in both the book and the movie. This is also the sharpest negative peak in the plot. The others 
+make it out of the Mines alive and are able to find shelter with the elves of Lothlórien.</p>
+
+<p>Once they leave the forest and their host Galadriel the Lady of Lórien, things quickly take a turn
+for the worst at the end of the story. Orcs are closing in on them, Boromir betrays them and tries to take the ring from
+Frodo (Unlike the movie his death isn’t included in this book, it is at the start of The Two Towers), the Fellowship 
+breaks up and hence fails to complete their quest.</p>
+
+<p>I wonder if this approach would work as well for other books ?</p>
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/NLP">NLP</a>,&nbsp;<a href="/tag/NLTK">NLTK</a>,&nbsp;<a href="/tag/pandas">pandas</a>,&nbsp;<a href="/tag/matplotlib">matplotlib</a>,&nbsp;<a href="/tag/LotR">LotR</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Sentiment+Analysis+and+the+Shape+of+Stories&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2019%2F12%2F01%2FSentiment-Analysis.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4Dcu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:sebastian.proost@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">sebastian.proost@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+              <i class="fa fa-twitter"></i>
+              <span class="username">ProostSebastian</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/sepro/4dcu.be" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">sepro</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">A blog about nerdy things ...</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/programming/2019/12/01/Sentiment-Analysis.html',
+    'title': 'Sentiment Analysis and the Shape of Stories'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

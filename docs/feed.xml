@@ -5,20 +5,28 @@
     <description>A blog about nerdy things ...</description>
     <link>https://blog.4dcu.be/</link>
     <atom:link href="https://blog.4dcu.be/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 26 Nov 2019 22:06:18 +0100</pubDate>
-    <lastBuildDate>Tue, 26 Nov 2019 22:06:18 +0100</lastBuildDate>
+    <pubDate>Sat, 30 Nov 2019 15:41:18 +0100</pubDate>
+    <lastBuildDate>Sat, 30 Nov 2019 15:41:18 +0100</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
-        <title>Welcome to Jekyll!</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different...</description>
-        <pubDate>Mon, 20 Apr 2015 10:43:59 +0200</pubDate>
-        <link>https://blog.4dcu.be/programming/2015/04/20/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">https://blog.4dcu.be/programming/2015/04/20/welcome-to-jekyll.html</guid>
+        <title>Sentiment Analysis and the Shape of Stories</title>
+        <description>&lt;p&gt;When I accidentally stumbled upon a presentation from &lt;a href=&quot;https://en.wikipedia.org/wiki/Kurt_Vonnegut&quot;&gt;Kurt Vonnegut&lt;/a&gt; on how &lt;a href=&quot;https://www.youtube.com/watch?v=oP3c1h8v2ZQ&quot;&gt;stories have a shape&lt;/a&gt; I started thinking… “Would you be able to use natural language processing...</description>
+        <pubDate>Sun, 01 Dec 2019 13:00:00 +0100</pubDate>
+        <link>https://blog.4dcu.be/programming/2019/12/01/Sentiment-Analysis.html</link>
+        <guid isPermaLink="true">https://blog.4dcu.be/programming/2019/12/01/Sentiment-Analysis.html</guid>
         
-        <category>jekyll</category>
+        <category>python</category>
         
-        <category>welcome</category>
+        <category>NLP</category>
+        
+        <category>NLTK</category>
+        
+        <category>pandas</category>
+        
+        <category>matplotlib</category>
+        
+        <category>LotR</category>
         
         
         <category>programming</category>

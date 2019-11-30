@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>https://blog.4dcu.be/programming/2015/04/20/welcome-to-jekyll.html</loc>
-<lastmod>2015-04-20T10:43:59+02:00</lastmod>
+<loc>https://blog.4dcu.be/programming/2019/12/01/Sentiment-Analysis.html</loc>
+<lastmod>2019-12-01T13:00:00+01:00</lastmod>
 </url>
 <url>
 <loc>https://blog.4dcu.be/about/</loc>
@@ -11,10 +11,22 @@
 <loc>https://blog.4dcu.be/posts/</loc>
 </url>
 <url>
-<loc>https://blog.4dcu.be/tag/jekyll/</loc>
+<loc>https://blog.4dcu.be/tag/python/</loc>
 </url>
 <url>
-<loc>https://blog.4dcu.be/tag/welcome/</loc>
+<loc>https://blog.4dcu.be/tag/nlp/</loc>
+</url>
+<url>
+<loc>https://blog.4dcu.be/tag/nltk/</loc>
+</url>
+<url>
+<loc>https://blog.4dcu.be/tag/pandas/</loc>
+</url>
+<url>
+<loc>https://blog.4dcu.be/tag/matplotlib/</loc>
+</url>
+<url>
+<loc>https://blog.4dcu.be/tag/lotr/</loc>
 </url>
 <url>
 <loc>https://blog.4dcu.be/category/programming/</loc>

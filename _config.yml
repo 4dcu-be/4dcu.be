@@ -7,9 +7,12 @@ plugins:
 
 exclude:
   - "/vendor/"
+  - "/.idea/"
 
 # Build website in docs folder so I can use github to host it
 destination: "./docs"
+
+future: true
 
 # Site settings
 title: 4Dcu.be
@@ -29,7 +32,7 @@ logo: "/assets/logo.png"
 # Build settings
 markdown: kramdown
 inter_post_navigation: true
-highlightjs_theme: "monokai-sublime"
+highlightjs_theme: "mono-blue"
 
 # Pagination Settings
 # https://github.com/sverrirs/jekyll-paginate-v2/blob/master/README-GENERATOR.md#site-configuration
@@ -58,13 +61,13 @@ ga_tracking_id: "UA-47068418-5"
 # Category descriptions (for archive pages)
 descriptions:
   - cat: programming
-    desc: ""
+    desc: "Everything related with code, programming, ..."
 
   - cat: games
-    desc: ""
+    desc: "sdf"
 
   - cat: DIY
-    desc: ""
+    desc: "qsdf"
 
 # Social icons and sharing options
 social:

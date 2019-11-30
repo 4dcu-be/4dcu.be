@@ -102,7 +102,7 @@ pre code.hljs {
 	.scrim {
 		padding: 3em 1em;
 		&.has-cover {
-			background-color: rgba(0,0,0,0.4);
+			background-color: rgba(12,0,0,0.5);
 			padding: 6em 1em !important;
 			@include media($tablet) {
 				padding: 9em 1em !important;
@@ -115,7 +115,7 @@ pre code.hljs {
 *	Header
 */
 .navigation {
-	box-shadow: 0 2px $highlight-color;
+	box-shadow: 0 3px $highlight-color;
 	padding: 0 1em;
 	margin: 0;
 	// Remove this to make header scrollable again
@@ -152,8 +152,8 @@ pre code.hljs {
     	padding-left: $em-base;
     }
     img {
-      max-height: 2.5em;
-      margin-top: 0.75em;
+      max-height: 90%;
+      margin-top: 0;
       padding-right: 1em;
     }
     span {
@@ -227,12 +227,17 @@ pre code.hljs {
 	*	index.html
 	*/
 	.post-list {
-	  @include span-columns(9);
+	  @include span-columns(12);
+		@include media ($tablet) {
+			@include span-columns(9);
+			display: inline;
+		}
 		padding-top: 1em !important;
 		@extend %default-ul;
 	}
 	.post-meta {
 		@include outer-container;
+		max-width: 60em;
 		// padding: 1em 0;
 		color: $medium-gray;
 		.post-date {
@@ -248,8 +253,13 @@ pre code.hljs {
 		}
 	}
 	.category-wrapper {
-	  @include span-columns(3);
-	  padding-left: 30px;
+	  @include span-columns(12);
+	  display: none;
+		@include media ($tablet) {
+			@include span-columns(3);
+			padding-left: 30px;
+			display: block;
+		}
 	  padding-top: 1em !important;
 	}
 	.category-list {
@@ -386,7 +396,7 @@ pre code.hljs {
 .site-footer {
 	$link-color: $white;
 	padding: 1em 1em 2em 1em;
-	background-color: $highlight-color;
+	background-color: desaturate($dark-color, 66%);
 	color: $white;
 	a {
 	  color: $link-color;
