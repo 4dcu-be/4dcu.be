@@ -27,7 +27,7 @@ description: A blog about nerdy things ...
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "https://blog.4dcu.be" # the base hostname & protocol for your site
 cover: "/assets/header_image.jpg"
-logo: "/assets/logo.png"
+logo: "/assets/icons/apple-icon-76x76.png"
 
 # Build settings
 markdown: kramdown
