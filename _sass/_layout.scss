@@ -315,6 +315,9 @@ pre code.hljs {
 		}
 		.tags {
 			font-size: 0.9em;
+			strong {
+				color: $gray;
+			}
 		}
 		.rss {
 			margin: 1em 0 0 0;
