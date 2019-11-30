@@ -15,7 +15,7 @@ destination: "./docs"
 future: true
 
 # Site settings
-title: 4Dcu.be
+title: 4DCu.be
 subtitle: "blogging about nerdy stuff I care about"
 email: sebastian.proost@gmail.com
 name: Sebastian Proost

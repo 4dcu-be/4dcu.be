@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Sentiment Analysis and the Shape of Stories"
+byline: "The shape of Lord of the Rings - The Fellowship of the Ring"
 date:   2019-12-01 12:00:00
 author: Sebastian Proost
 categories: programming
