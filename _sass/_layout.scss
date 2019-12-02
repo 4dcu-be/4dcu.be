@@ -293,7 +293,10 @@ pre code.hljs {
 	img {
 		display: block;
 		margin: auto;
-		width: 90%;
+		width: 100%;
+	  @include media ($tablet) {
+				width: 90%;
+		}
 	}
 	/*
 	*	Posts
@@ -476,7 +479,12 @@ pre code.hljs {
 		}
 	}
 }
+
 code {
   width:100%;
   overflow-x: auto
+}
+
+iframe {
+  max-width: 100%;
 }

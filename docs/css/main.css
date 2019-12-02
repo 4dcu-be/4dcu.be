@@ -506,7 +506,10 @@ pre code.hljs {
   .page-content img {
     display: block;
     margin: auto;
-    width: 90%; }
+    width: 100%; }
+    @media screen and (min-width: 768px) {
+      .page-content img {
+        width: 90%; } }
   .page-content .post ul {
     margin-bottom: 1em; }
   .page-content .post .post-header-container .scrim {
@@ -706,3 +709,6 @@ pre code.hljs {
 code {
   width: 100%;
   overflow-x: auto; }
+
+iframe {
+  max-width: 100%; }

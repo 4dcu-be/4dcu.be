@@ -13,3 +13,6 @@ vendor/
 
 # IDE
 .idea
+
+# Don't upload draft posts
+_drafts
