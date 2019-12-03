@@ -438,6 +438,8 @@ pre code.hljs {
         display: inline; }
         .page-content .post-list:last-child {
           margin-right: 0; } }
+    .page-content .post-list .post-excerpt {
+      text-align: justify; }
   .page-content .post-meta {
     max-width: 48em;
     margin-left: auto;
@@ -516,8 +518,6 @@ pre code.hljs {
     padding: 2em 1em 1em 1em; }
   .page-content .post .post-meta {
     padding-bottom: 1em; }
-  .page-content .post .post-excerpt {
-    text-align: justify; }
   .page-content .post .post-content {
     text-align: justify;
     padding: 1em 0; }

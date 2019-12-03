@@ -234,6 +234,10 @@ pre code.hljs {
 		}
 		padding-top: 1em !important;
 		@extend %default-ul;
+
+	  .post-excerpt {
+		  text-align: justify;
+		}
 	}
 	.post-meta {
 		@include outer-container;
@@ -312,9 +316,6 @@ pre code.hljs {
 		}
 		.post-meta {
 			padding-bottom: 1em;
-		}
-		.post-excerpt{
-		  text-align: justify;
 		}
 		.post-content {
 		  text-align: justify;
