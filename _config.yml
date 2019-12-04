@@ -64,10 +64,10 @@ descriptions:
     desc: "Everything related with code, programming, ..."
 
   - cat: games
-    desc: "sdf"
+    desc: "All work and no play ..."
 
   - cat: DIY
-    desc: "qsdf"
+    desc: "Not everything needs to be digital !"
 
 # Social icons and sharing options
 social:
