@@ -235,6 +235,20 @@ pre code.hljs {
 		padding-top: 1em !important;
 		@extend %default-ul;
 
+		.post-excerpt-image {
+		  display: inline;
+		  float: left;
+		  margin-right: 1em;
+		  width: 100%;
+			height: auto;
+		  object-fit: cover;
+      object-position: center;
+      @include media ($mobile) {
+				height: 150px;
+		    width: auto;
+      }
+    }
+
 	  .post-excerpt {
 		  text-align: justify;
 		}

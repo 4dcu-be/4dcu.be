@@ -23,6 +23,9 @@ pagination:
 				<a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
 			</h2>
 			<section class="post-excerpt" itemprop="description">
+				<a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
+				  <img class="post-excerpt-image" src="{{ post.thumbnail | prepend: site.baseurl }}" />
+				</a>
 				<p>{{ post.content | strip_html | truncatewords: 50 }}</p>
 				{% assign words = post.content | number_of_words %}
 			</section>

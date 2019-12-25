@@ -438,6 +438,18 @@ pre code.hljs {
         display: inline; }
         .page-content .post-list:last-child {
           margin-right: 0; } }
+    .page-content .post-list .post-excerpt-image {
+      display: inline;
+      float: left;
+      margin-right: 1em;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      object-position: center; }
+      @media screen and (min-width: 480px) {
+        .page-content .post-list .post-excerpt-image {
+          height: 150px;
+          width: auto; } }
     .page-content .post-list .post-excerpt {
       text-align: justify; }
   .page-content .post-meta {
