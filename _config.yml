@@ -52,6 +52,10 @@ jekyll-archives:
     category: '/category/:name/'
     tag: '/tag/:name/'
 
+thumbnail:
+    resize_dimensions: '430x288^'
+    crop_dimensions: '430x288+0+0'
+
 # Disqus comments
 disqus_shortname: 4dcube
 

@@ -7,6 +7,7 @@ author: Sebastian Proost
 categories: programming
 tags:	python NLP NLTK pandas matplotlib LotR
 cover:  "/assets/images/headers/python_code.jpg"
+thumbnail: "/assets/images/thumbnails/python_code.jpg"
 ---
 
 When I accidentally stumbled upon a presentation from [Kurt Vonnegut](https://en.wikipedia.org/wiki/Kurt_Vonnegut) 
