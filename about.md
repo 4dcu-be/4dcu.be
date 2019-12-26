@@ -3,6 +3,7 @@ layout: page
 title: About
 permalink: /about/
 main_nav: true
+cover:  "/assets/images/headers/hard_disk.jpg"
 ---
 
 A 4D cube, also known as a hypercube or [tesseract](https://en.wikipedia.org/wiki/Tesseract), is the 4D equivalent of 
