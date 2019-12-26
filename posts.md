@@ -3,6 +3,7 @@ layout: page
 title: "Posts"
 permalink: /posts/
 main_nav: true
+cover:  "/assets/images/headers/data_center.jpg"
 ---
 {% for category in site.categories %}
   {% capture cat %}{{ category | first }}{% endcapture %}
