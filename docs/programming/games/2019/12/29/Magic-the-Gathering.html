@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Machine Learning: the Gathering</title>
+  <meta name="description" content="In Magic: the Gathering, a collectable card game, competitive players tend to gravitate towards a few dozen of the best decks made up out of a subset of all ...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2019">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="In Magic: the Gathering, a collectable card game, competitive players tend to gravitate towards a few dozen of the best decks made up out of a subset of all ..." />
+  <meta property="og:url" content="http://localhost:4000/programming/games/2019/12/29/Magic-the-Gathering.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Machine Learning: the Gathering" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://localhost:4000/assets/images/headers/machine_learning.jpg" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Machine Learning: the Gathering">
+  <meta name="twitter:description" content="In Magic: the Gathering, a collectable card game, competitive players tend to gravitate towards a few dozen of the best decks made up out of a subset of all ...">
+  <meta name="twitter:image" content="http://localhost:4000/assets/images/headers/machine_learning.jpg">
+  <meta name="twitter:url" content="http://localhost:4000/programming/games/2019/12/29/Magic-the-Gathering.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/programming/games/2019/12/29/Magic-the-Gathering.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="http://localhost:4000/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/images/headers/machine_learning.jpg);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">Machine Learning: the Gathering</h1>
+			
+      <p class="info"><em>predicting your opponents deck from the first few cards played</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted December 29, 2019 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>, 
+    
+  
+    
+    <a href="/category/games">Games</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>In <a href="https://magic.wizards.com/en">Magic: the Gathering</a>, a collectable card game, competitive players tend to gravitate towards a few dozen of the best 
+decks made up out of a subset of all available cards. For instance in the Legacy format nearly all 18000 cards can be 
+played, yet you’ll only see about 500 show up in tournaments with some (e.g. Brainstorm and Force of Will) showing up 
+in &gt; 50% of all high-ranking decks.</p>
+
+<p>When playing in such an event it is key to quickly identify your opponent’s deck and adapt your own game plan 
+accordingly. Top players are able to very quickly do this, bad ones like myself need a few more turns. Here we’ll see 
+if we can train a model that takes in a few known cards and outputs a prediction which deck is being played.</p>
+
+<p>In this blog-post I’ll show you how I made a classifier that can take a list of known cards in your opponent’s deck and
+return a list of possible decks they are playing. But let’s start with two examples of what it can do first.</p>
+
+<p>Let’s look at this scenario, on the first turn your opponent leads with <strong>Wasteland</strong>, on his second turn he plays a
+<strong>Plains</strong> and uses it to cast <strong>Mother of Runes</strong>.</p>
+
+<div class="gallery-3-col">
+
+  <p><img src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/wasteland.jpg" alt="Wasteland" title="Wasteland" />
+<img src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/plains.jpg" alt="Plains" title="Plains" />
+<img src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/mother-of-runes.jpg" alt="Mother of Runes" title="Mother of Runes" /></p>
+
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">predict_deck</span><span class="p">([</span><span class="s">"Plains"</span><span class="p">,</span> <span class="s">"Mother of Runes"</span><span class="p">,</span> <span class="s">"Wasteland"</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Deck</th>
+      <th style="text-align: right">Probability</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Death &amp; Taxes</td>
+      <td style="text-align: right">0.62</td>
+    </tr>
+    <tr>
+      <td>Pikula</td>
+      <td style="text-align: right">0.34</td>
+    </tr>
+    <tr>
+      <td>Other - Aggro</td>
+      <td style="text-align: right">0.04</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>That worked rather well! The most likely deck here is the mono-white Death &amp; Taxes deck, with the Black-White Pikula
+(also known as Deadguy Ale) in second position. Death &amp; Taxes I would have immediately picked as the likely deck as 
+well, however Pikula is something I never encountered and wouldn’t have considered an option here.</p>
+
+<div class="gallery-3-col">
+
+  <p><img src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/arcum-s-astrolabe.jpg" alt="Arcum's Astrolabe" title="Arcum's Astrolabe" />
+<img src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/noble-hierarch.jpg" alt="Noble Hierarch" title="Noble Hierarch" />
+<img src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/brainstorm.jpg" alt="Brainstorm" title="Brainstorm" /></p>
+
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">predict_deck</span><span class="p">([</span><span class="s">"Arcum's Astrolabe"</span><span class="p">,</span> <span class="s">"Noble Hierarch"</span><span class="p">,</span> <span class="s">"Brainstorm"</span><span class="p">,</span> <span class="s">"Snow-Covered Forest"</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Deck</th>
+      <th style="text-align: right">Probability</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>BUG Midrange</td>
+      <td style="text-align: right">0.56</td>
+    </tr>
+    <tr>
+      <td>Bant Aggro</td>
+      <td style="text-align: right">0.32</td>
+    </tr>
+    <tr>
+      <td>UWx Control</td>
+      <td style="text-align: right">0.06</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>So in case your opponent started with a <strong>Snow-Covered Forest</strong> and <strong>Noble Hierarch</strong> on turn one with an 
+<strong>Arcum’s Astrolabe</strong> and <strong>Brainstorm</strong> on turn two, there are two rather likely decks they might be playing. A 
+Black-Blue-Green Midrange deck or a Blue-Green-White Aggro deck. At this point there is no way to know for sure, yet.</p>
+
+<p>As you can see, this classifier can do what top players can do as well. Based on very limited information make an 
+educated guess what deck they are facing. You can <a href="https://github.com/4dcu-be/Machine-Learning-the-Gathering">find the full code how to do this on GitHub in 
+this repository</a>, the
+interesting parts I’ll discuss here.</p>
+
+<h2 id="getting-decklists">Getting decklists</h2>
+
+<p>To start we’ll need a example decks for all types of decks, also called archetypes. There are several websites that
+store decklists, the one I’ve used is <a href="http://www.mtgtop8.com/">MTG Top 8</a>. Using the requests library to download the
+site data, and Beautiful Soup to parse the html, I got all Legacy decklists from the last two weeks 
+(downloaded 29/12/2019). You can find all code how to do this in the repo, collecting data and parsing it isn’t the
+most exciting thing to do though.</p>
+
+<h2 id="building-the-training-dataset">Building the training dataset</h2>
+
+<p>From each deck we’ll take samples with a few random cards, these are then turned into a presence-absence matrix. In such
+a matrix each column represents a card and each row a sample, if a card is present in the sample the corresponding cell
+is 1, if it is absent it is 0. Furthermore for each row we need to keep track of the archetype in another list. In 
+practise we’ll generate for each deck, for a number of different subset sizes, <strong>1500</strong> random samples.</p>
+
+<p>The result looks like this:</p>
+
+<h3 id="the-card-matrix-with-samples">The card matrix with samples</h3>
+
+<p>This will be the X_train data.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sample</th>
+      <th>Abrupt Decay</th>
+      <th>Ad Nauseam</th>
+      <th>Aether Vial</th>
+      <th>Altar of Dementia</th>
+      <th>Ancient Tomb</th>
+      <th>Ancient Ziggurat</th>
+      <th>Angrath’s Rampage</th>
+      <th>Animate Dead</th>
+      <th>…</th>
+      <th>Watcher for Tomorrow</th>
+      <th>Waterlogged Grove</th>
+      <th>Wayward Servant</th>
+      <th>Whirlpool Rider</th>
+      <th>Wildborn Preserver</th>
+      <th>Windswept Heath</th>
+      <th>Wirewood Symbiote</th>
+      <th>Wishclaw Talisman</th>
+      <th>Wooded Foothills</th>
+      <th>Young Pyromancer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>…</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>…</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>…</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>…</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="the-classes">The classes</h3>
+
+<p>The archetypes are the y_train data, essentially a list of categories for the fit function.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sample</th>
+      <th>archetype</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Artifacts Blue</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>BUG Midrange</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Bant Aggro</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Bant Control</td>
+    </tr>
+    <tr>
+      <td>…</td>
+      <td>…</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="building-a-classifier">Building a Classifier</h2>
+
+<p>Once the data is in the right format building a classifier is easy. Here I selected a RandomForestClassifier and played
+around with the settings to end up with this.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="n">rfc</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> 
+                             <span class="n">criterion</span><span class="o">=</span> <span class="s">'gini'</span><span class="p">,</span> 
+                             <span class="n">max_features</span><span class="o">=</span> <span class="mi">5</span><span class="p">,</span> 
+                             <span class="n">n_estimators</span><span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
+<span class="c1"># Build the classifier
+</span><span class="n">rfc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>While this classifier will work, there is an issue! Since we are drawing a number of times random cards from each deck,
+decks that are popular will be over-represented in our dataset. This imbalance in the input data will negatively 
+influence the classifier. We need to provide a training set with the same number of samples for each archetype. This can
+be done using pure python, but the library imbalanced-learn makes this easy. It is unfortunately not part of sklearn
+so you have to install it.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda <span class="nb">install</span> <span class="nt">-c</span> glemaitre imbalanced-learn
+</code></pre></div></div>
+
+<p>Once the library is installed we can balance our dataset by randomly selecting a subset of samples from over-represented
+decklists. This process is called random undersampling.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">imblearn.under_sampling</span> <span class="kn">import</span> <span class="n">RandomUnderSampler</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+
+<span class="n">rus</span> <span class="o">=</span> <span class="n">RandomUnderSampler</span><span class="p">(</span><span class="n">return_indices</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">X_rus</span><span class="p">,</span> <span class="n">y_rus</span><span class="p">,</span> <span class="n">id_rus</span> <span class="o">=</span> <span class="n">rus</span><span class="o">.</span><span class="n">fit_sample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Print how much data we lose because of the Under Sampling
+</span><span class="k">print</span><span class="p">(</span><span class="s">'Indices removed '</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">id_rus</span><span class="p">))</span>
+
+<span class="c1"># Build a new classifier on the under sampled dataset
+</span><span class="n">rfc</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> 
+                             <span class="n">criterion</span><span class="o">=</span> <span class="s">'gini'</span><span class="p">,</span> 
+                             <span class="n">max_features</span><span class="o">=</span> <span class="mi">5</span><span class="p">,</span> 
+                             <span class="n">n_estimators</span><span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+                             <span class="n">n_jobs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">rfc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_rus</span><span class="p">,</span> <span class="n">y_rus</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="using-the-classifier">Using the classifier</h2>
+
+<p>The final part we lack is a function that can take a list of known cards in the opponent’s deck, convert that to the 
+right format, run the classifier and return us with a list of probable decks. To do this we need to have a list of all
+cards in the presence-absence matrix (the column names), which we’ll store in a variable <strong>all_cards</strong>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="k">def</span> <span class="nf">predict_deck</span><span class="p">(</span><span class="n">cards_known</span><span class="p">):</span>
+    <span class="s">"""
+    This will take a list of known cards and convert it in a matrix compatible with the classifier.
+    Next, this classifier will be used to predict which deck the known cards are coming from and 
+    return the results as a sorted pandas dataframe.
+    """</span>
+    <span class="n">cards_array</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cards_known</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">all_cards</span><span class="p">]]</span>
+
+    <span class="n">cards_not_in_model</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cards_known</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">all_cards</span><span class="p">]</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cards_not_in_model</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Some cards were not included when trainig the model, these will be ignored: </span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="s">','</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cards_not_in_model</span><span class="p">))</span>
+    
+    <span class="n">decks_proba</span> <span class="o">=</span> <span class="n">rfc</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">cards_array</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">decks</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">rfc</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span> <span class="n">decks_proba</span><span class="p">)),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"Deck"</span><span class="p">,</span> <span class="s">"Score"</span><span class="p">])</span>\
+              <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s">"Score"</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">decks</span>
+</code></pre></div></div>
+
+<p>That’s the function from the very beginning of this post. Again on this page there are only bits and pieces of code 
+highlighted, the notebook on GitHub contains a <a href="https://github.com/4dcu-be/Machine-Learning-the-Gathering">fully working example</a>.
+This is a rather nice example how we could go from a set of decklists to a dataset to train the classifier to a working
+classifier.</p>
+
+<p>Personally, I think it is awesome how you can, in a matter of minutes, pull a set of all decklists and train a 
+classifier on any format you want. While I played a fair bit of Legacy, and currently play Standard, I have no 
+experience with Modern and Pioneer. This classifier would very quickly give me a way to <em>(gu)estimate</em> what an 
+opponent is playing without having to known each competitive deck in the format.</p>
+
+<h2 id="legal">Legal</h2>
+
+<p>Parts of this post are unofficial Fan Content permitted under the Wizards of the Coast Fan Content Policy. The literal 
+and graphical information presented on this site about Magic: The Gathering, including card images, the mana symbols, 
+and Oracle text, is copyright Wizards of the Coast, LLC, a subsidiary of Hasbro, Inc. 4DCu.be is not produced by, 
+endorsed by, supported by, or affiliated with Wizards of the Coast.</p>
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/sklearn">sklearn</a>,&nbsp;<a href="/tag/machine-learning">machine-learning</a>,&nbsp;<a href="/tag/pandas">pandas</a>,&nbsp;<a href="/tag/mtg">mtg</a>,&nbsp;<a href="/tag/magic-the-gathering">magic-the-gathering</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Machine+Learning%3A+the+Gathering&url=http%3A%2F%2Flocalhost%3A4000%2Fprogramming%2Fgames%2F2019%2F12%2F29%2FMagic-the-Gathering.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/programming/games/diy/2019/12/04/25-Fortnights.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">25 Fortnights of Code</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '4dcube';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:sebastian.proost@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">sebastian.proost@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+              <i class="fa fa-twitter"></i>
+              <span class="username">ProostSebastian</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/sepro/4dcu.be" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">sepro</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">A blog about nerdy things ...</p>
+			<p class="text">Last update: December 29, 2019</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/programming/games/2019/12/29/Magic-the-Gathering.html',
+    'title': 'Machine Learning: the Gathering'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

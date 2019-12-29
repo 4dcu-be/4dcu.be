@@ -137,23 +137,31 @@ table {
   font-feature-settings: "kern", "liga", "tnum";
   border-collapse: collapse;
   margin: 14.4px 0;
+  margin-left: auto;
+  margin-right: auto;
   table-layout: fixed;
-  width: 100%; }
+  max-width: 100%;
+  overflow-x: auto;
+  display: block; }
 
 th {
   border-bottom: 1px solid #b7b7b7;
   font-weight: 600;
-  padding: 14.4px 0;
-  text-align: left; }
+  padding: 14.4px 14.4px;
+  text-align: left;
+  background-color: #f2f2f2; }
 
 td {
   border-bottom: 1px solid #ddd;
-  padding: 14.4px 0; }
+  padding: 14.4px 14.4px; }
 
 tr,
 td,
 th {
   vertical-align: middle; }
+
+tr:nth-child(even) {
+  background-color: #f2f2f2; }
 
 body {
   -webkit-font-feature-settings: "kern", "liga", "pnum";
@@ -729,3 +737,11 @@ iframe {
   max-width: 100%;
   margin: auto;
   display: block; }
+
+.gallery-3-col {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center; }
+  .gallery-3-col img {
+    display: inline;
+    width: 30%; }

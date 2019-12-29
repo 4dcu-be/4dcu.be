@@ -509,3 +509,14 @@ iframe {
   margin: auto;
   display: block;
 }
+
+.gallery-3-col {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  img {
+    display: inline;
+    width: 30%
+  }
+
+}

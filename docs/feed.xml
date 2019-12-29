@@ -5,9 +5,35 @@
     <description>A blog about nerdy things ...</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 26 Dec 2019 16:25:35 +0100</pubDate>
-    <lastBuildDate>Thu, 26 Dec 2019 16:25:35 +0100</lastBuildDate>
+    <pubDate>Sun, 29 Dec 2019 22:57:50 +0100</pubDate>
+    <lastBuildDate>Sun, 29 Dec 2019 22:57:50 +0100</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>Machine Learning: the Gathering</title>
+        <description>&lt;p&gt;In &lt;a href=&quot;https://magic.wizards.com/en&quot;&gt;Magic: the Gathering&lt;/a&gt;, a collectable card game, competitive players tend to gravitate towards a few dozen of the best decks made up out of a subset of all...</description>
+        <pubDate>Sun, 29 Dec 2019 13:00:00 +0100</pubDate>
+        <link>http://localhost:4000/programming/games/2019/12/29/Magic-the-Gathering.html</link>
+        <guid isPermaLink="true">http://localhost:4000/programming/games/2019/12/29/Magic-the-Gathering.html</guid>
+        
+        <category>python</category>
+        
+        <category>sklearn</category>
+        
+        <category>machine-learning</category>
+        
+        <category>pandas</category>
+        
+        <category>mtg</category>
+        
+        <category>magic-the-gathering</category>
+        
+        
+        <category>programming</category>
+        
+        <category>games</category>
+        
+      </item>
     
       <item>
         <title>25 Fortnights of Code</title>
