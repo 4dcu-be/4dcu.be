@@ -5,13 +5,13 @@
     <description>A blog about nerdy things ...</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 29 Dec 2019 22:57:50 +0100</pubDate>
-    <lastBuildDate>Sun, 29 Dec 2019 22:57:50 +0100</lastBuildDate>
+    <pubDate>Mon, 30 Dec 2019 08:59:24 +0100</pubDate>
+    <lastBuildDate>Mon, 30 Dec 2019 08:59:24 +0100</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
         <title>Machine Learning: the Gathering</title>
-        <description>&lt;p&gt;In &lt;a href=&quot;https://magic.wizards.com/en&quot;&gt;Magic: the Gathering&lt;/a&gt;, a collectable card game, competitive players tend to gravitate towards a few dozen of the best decks made up out of a subset of all...</description>
+        <description>&lt;p&gt;In &lt;a href=&quot;https://magic.wizards.com/en&quot;&gt;Magic: the Gathering&lt;/a&gt;, a collectible card game, competitive players tend to gravitate towards a few dozen of the best decks made up out of a subset of all...</description>
         <pubDate>Sun, 29 Dec 2019 13:00:00 +0100</pubDate>
         <link>http://localhost:4000/programming/games/2019/12/29/Magic-the-Gathering.html</link>
         <guid isPermaLink="true">http://localhost:4000/programming/games/2019/12/29/Magic-the-Gathering.html</guid>

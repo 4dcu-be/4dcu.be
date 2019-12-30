@@ -8,6 +8,7 @@ categories: programming
 tags:	python NLP NLTK pandas matplotlib LotR
 cover:  "/assets/images/headers/python_code.jpg"
 thumbnail: "/assets/images/thumbnails/python_code.jpg"
+github: "https://github.com/4dcu-be/ShapeOfStories-SentimentAnalysis"
 ---
 
 When I accidentally stumbled upon a presentation from [Kurt Vonnegut](https://en.wikipedia.org/wiki/Kurt_Vonnegut) 

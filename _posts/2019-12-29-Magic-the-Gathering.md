@@ -1,18 +1,19 @@
 ---
 layout: post
 title:  "Machine Learning: the Gathering"
-byline: "predicting your opponents deck from the first few cards played"
+byline: "predicting your opponent's deck from the first few cards played"
 date:   2019-12-29 12:00:00
 author: Sebastian Proost
 categories: programming games
 tags:	python sklearn machine-learning pandas mtg magic-the-gathering
 cover:  "/assets/images/headers/machine_learning.jpg"
 thumbnail: "/assets/images/thumbnails/machine_learning.jpg"
+github: "https://github.com/4dcu-be/Machine-Learning-the-Gathering"
 ---
 
-In [Magic: the Gathering](https://magic.wizards.com/en), a collectable card game, competitive players tend to gravitate towards a few dozen of the best 
+In [Magic: the Gathering](https://magic.wizards.com/en), a collectible card game, competitive players tend to gravitate towards a few dozen of the best 
 decks made up out of a subset of all available cards. For instance in the Legacy format nearly all 18000 cards can be 
-played, yet you'll only see about 500 show up in tournaments with some (e.g. Brainstorm and Force of Will) showing up 
+played, yet you'll only see about 500 show up in tournaments with some cards (e.g. Brainstorm and Force of Will) showing up 
 in > 50% of all high-ranking decks.
 
 When playing in such an event it is key to quickly identify your opponent's deck and adapt your own game plan 
@@ -22,7 +23,7 @@ if we can train a model that takes in a few known cards and outputs a prediction
 In this blog-post I'll show you how I made a classifier that can take a list of known cards in your opponent's deck and
 return a list of possible decks they are playing. But let's start with two examples of what it can do first.
 
-Let's look at this scenario, on the first turn your opponent leads with **Wasteland**, on his second turn he plays a
+Imagine this scenario, on the first turn your opponent leads with **Wasteland**, on his second turn he plays a
 **Plains** and uses it to cast **Mother of Runes**.
 
 <div class="gallery-3-col" markdown="1">
@@ -33,9 +34,13 @@ Let's look at this scenario, on the first turn your opponent leads with **Wastel
 
 </div>
 
+We can feed this information in a function like this:
+
 ```python
 predict_deck(["Plains", "Mother of Runes", "Wasteland"]).head(3)
 ```
+
+And the result is a list of likely decks based on that combination of cards.
 
 | Deck          | Probability |
 |---------------|------------:|
@@ -192,7 +197,7 @@ def predict_deck(cards_known):
     return decks
 ```   
 
-That's the function from the very beginning of this post. Again on this page there are only bits and pieces of code 
+That's the function from the very beginning of this post. Again, on this page there are only bits and pieces of code 
 highlighted, the notebook on GitHub contains a [fully working example](https://github.com/4dcu-be/Machine-Learning-the-Gathering).
 This is a rather nice example how we could go from a set of decklists to a dataset to train the classifier to a working
 classifier.
@@ -200,7 +205,7 @@ classifier.
 Personally, I think it is awesome how you can, in a matter of minutes, pull a set of all decklists and train a 
 classifier on any format you want. While I played a fair bit of Legacy, and currently play Standard, I have no 
 experience with Modern and Pioneer. This classifier would very quickly give me a way to *(gu)estimate* what an 
-opponent is playing without having to known each competitive deck in the format.
+opponent is playing without having to know each competitive deck in the format.
 
 ## Legal
 

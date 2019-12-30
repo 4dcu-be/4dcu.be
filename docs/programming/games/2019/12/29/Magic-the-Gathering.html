@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Machine Learning: the Gathering</title>
-  <meta name="description" content="In Magic: the Gathering, a collectable card game, competitive players tend to gravitate towards a few dozen of the best decks made up out of a subset of all ...">
+  <meta name="description" content="In Magic: the Gathering, a collectible card game, competitive players tend to gravitate towards a few dozen of the best decks made up out of a subset of all ...">
   
   <meta name="author" content="Sebastian Proost">
   <meta name="copyright" content="&copy; Sebastian Proost 2019">
@@ -40,7 +40,7 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="In Magic: the Gathering, a collectable card game, competitive players tend to gravitate towards a few dozen of the best decks made up out of a subset of all ..." />
+  <meta property="og:description" content="In Magic: the Gathering, a collectible card game, competitive players tend to gravitate towards a few dozen of the best decks made up out of a subset of all ..." />
   <meta property="og:url" content="http://localhost:4000/programming/games/2019/12/29/Magic-the-Gathering.html">
   <meta property="og:site_name" content="4DCu.be" />
   <meta property="og:title" content="Machine Learning: the Gathering" />
@@ -55,7 +55,7 @@
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Machine Learning: the Gathering">
-  <meta name="twitter:description" content="In Magic: the Gathering, a collectable card game, competitive players tend to gravitate towards a few dozen of the best decks made up out of a subset of all ...">
+  <meta name="twitter:description" content="In Magic: the Gathering, a collectible card game, competitive players tend to gravitate towards a few dozen of the best decks made up out of a subset of all ...">
   <meta name="twitter:image" content="http://localhost:4000/assets/images/headers/machine_learning.jpg">
   <meta name="twitter:url" content="http://localhost:4000/programming/games/2019/12/29/Magic-the-Gathering.html">
   
@@ -150,7 +150,7 @@
     <header class="post-header">
       <h1 class="title">Machine Learning: the Gathering</h1>
 			
-      <p class="info"><em>predicting your opponents deck from the first few cards played</em></p>
+      <p class="info"><em>predicting your opponent's deck from the first few cards played</em></p>
 			
     </header>
   </div>
@@ -176,9 +176,9 @@
 </section>
 
 <article class="post-content">
-  <p>In <a href="https://magic.wizards.com/en">Magic: the Gathering</a>, a collectable card game, competitive players tend to gravitate towards a few dozen of the best 
+  <p>In <a href="https://magic.wizards.com/en">Magic: the Gathering</a>, a collectible card game, competitive players tend to gravitate towards a few dozen of the best 
 decks made up out of a subset of all available cards. For instance in the Legacy format nearly all 18000 cards can be 
-played, yet you’ll only see about 500 show up in tournaments with some (e.g. Brainstorm and Force of Will) showing up 
+played, yet you’ll only see about 500 show up in tournaments with some cards (e.g. Brainstorm and Force of Will) showing up 
 in &gt; 50% of all high-ranking decks.</p>
 
 <p>When playing in such an event it is key to quickly identify your opponent’s deck and adapt your own game plan 
@@ -188,7 +188,7 @@ if we can train a model that takes in a few known cards and outputs a prediction
 <p>In this blog-post I’ll show you how I made a classifier that can take a list of known cards in your opponent’s deck and
 return a list of possible decks they are playing. But let’s start with two examples of what it can do first.</p>
 
-<p>Let’s look at this scenario, on the first turn your opponent leads with <strong>Wasteland</strong>, on his second turn he plays a
+<p>Imagine this scenario, on the first turn your opponent leads with <strong>Wasteland</strong>, on his second turn he plays a
 <strong>Plains</strong> and uses it to cast <strong>Mother of Runes</strong>.</p>
 
 <div class="gallery-3-col">
@@ -199,8 +199,12 @@ return a list of possible decks they are playing. But let’s start with two exa
 
 </div>
 
+<p>We can feed this information in a function like this:</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">predict_deck</span><span class="p">([</span><span class="s">"Plains"</span><span class="p">,</span> <span class="s">"Mother of Runes"</span><span class="p">,</span> <span class="s">"Wasteland"</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </code></pre></div></div>
+
+<p>And the result is a list of likely decks based on that combination of cards.</p>
 
 <table>
   <thead>
@@ -540,7 +544,7 @@ cards in the presence-absence matrix (the column names), which we’ll store in 
     <span class="k">return</span> <span class="n">decks</span>
 </code></pre></div></div>
 
-<p>That’s the function from the very beginning of this post. Again on this page there are only bits and pieces of code 
+<p>That’s the function from the very beginning of this post. Again, on this page there are only bits and pieces of code 
 highlighted, the notebook on GitHub contains a <a href="https://github.com/4dcu-be/Machine-Learning-the-Gathering">fully working example</a>.
 This is a rather nice example how we could go from a set of decklists to a dataset to train the classifier to a working
 classifier.</p>
@@ -548,7 +552,7 @@ classifier.</p>
 <p>Personally, I think it is awesome how you can, in a matter of minutes, pull a set of all decklists and train a 
 classifier on any format you want. While I played a fair bit of Legacy, and currently play Standard, I have no 
 experience with Modern and Pioneer. This classifier would very quickly give me a way to <em>(gu)estimate</em> what an 
-opponent is playing without having to known each competitive deck in the format.</p>
+opponent is playing without having to know each competitive deck in the format.</p>
 
 <h2 id="legal">Legal</h2>
 
@@ -740,7 +744,7 @@ endorsed by, supported by, or affiliated with Wizards of the Coast.</p>
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about nerdy things ...</p>
-			<p class="text">Last update: December 29, 2019</p>
+			<p class="text">Last update: December 30, 2019</p>
     </div>
 
   </div>
