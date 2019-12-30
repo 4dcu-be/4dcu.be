@@ -139,10 +139,7 @@ table {
   margin: 14.4px 0;
   margin-left: auto;
   margin-right: auto;
-  table-layout: fixed;
-  max-width: 100%;
-  overflow-x: auto;
-  display: block; }
+  table-layout: fixed; }
 
 th {
   border-bottom: 1px solid #b7b7b7;
@@ -745,3 +742,8 @@ iframe {
   .gallery-3-col img {
     display: inline;
     width: 30%; }
+
+.large-table {
+  max-width: 100%;
+  overflow-x: auto;
+  display: block; }

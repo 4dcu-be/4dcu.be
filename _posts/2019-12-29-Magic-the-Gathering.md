@@ -100,6 +100,7 @@ The result looks like this:
 
 This will be the X_train data.
 
+{:.large-table}
 | Sample | Abrupt Decay | Ad Nauseam | Aether Vial | Altar of Dementia | Ancient Tomb | Ancient Ziggurat | Angrath's Rampage | Animate Dead | ... | Watcher for Tomorrow | Waterlogged Grove | Wayward Servant | Whirlpool Rider | Wildborn Preserver | Windswept Heath | Wirewood Symbiote | Wishclaw Talisman | Wooded Foothills | Young Pyromancer |
 |--------|--------------|------------|-------------|-------------------|--------------|------------------|-------------------|--------------|-----|----------------------|-------------------|-----------------|-----------------|--------------------|-----------------|-------------------|-------------------|------------------|------------------|
 | 1      | 0            | 0          | 0           | 0                 | 1            | 0                | 0                 | 0            | ... | 0                    | 0                 | 0               | 0               | 0                  | 0               | 0                 | 0                 | 0                | 0                |
@@ -107,6 +108,7 @@ This will be the X_train data.
 | 3      | 0            | 0          | 0           | 0                 | 0            | 0                | 0                 | 0            | ... | 0                    | 0                 | 0               | 0               | 0                  | 1               | 0                 | 0                 | 1                | 0                |
 | 4      | 0            | 0          | 0           | 0                 | 0            | 0                | 0                 | 0            | ... | 0                    | 0                 | 0               | 0               | 0                  | 0               | 0                 | 0                 | 0                | 0                |
 | ...    | ...          | ...        | ...         | ...               | ...          | ...              | ...               | ...          | ... | ...                  | ...               | ...             | ...             | ...                | ...             | ...               | ...               | ...              | ...              |
+
 
 ### The classes
 
