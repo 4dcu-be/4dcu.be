@@ -144,7 +144,7 @@ be done using pure python, but the library imbalanced-learn makes this easy. It 
 so you have to install it.
 
 ```bash
-conda install -c glemaitre imbalanced-learn
+conda install -c conda-forge imbalanced-learn
 ```
 
 Once the library is installed we can balance our dataset by randomly selecting a subset of samples from over-represented
