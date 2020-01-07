@@ -2,8 +2,9 @@
 layout: default
 ---
 <div class="post-header-container {% if page.cover %}has-cover{% endif %}" {% if page.cover %}style="background-image: url({{ page.cover | prepend: site.baseurl }});"{% endif %}>
-	<div class="scrim {% if page.cover %}has-cover{% endif %} {% if page.scrim_options %}{{ page.scrim_options }}{% endif %}">
+	<div class="scrim {% if page.cover %}has-cover{% endif %} {% if page.cover_options %}{{ page.cover_options }}{% endif %}">
 		<header class="post-header">
+			{% if page.include_sticker %}<img src="{{site.sticker | prepend: site.baseurl }}" alt="sticker" class="sticker" />{% endif %}
 			<h1 class="title">{{ page.title }}</h1>
 			{% if page.byline %}
 			<p class="info"><em>{{ page.byline }}</em></p>

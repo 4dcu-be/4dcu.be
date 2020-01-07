@@ -4,7 +4,7 @@ title: "Posts"
 permalink: /posts/
 main_nav: true
 cover:  "/assets/images/headers/data_center.jpg"
-scrim_options: narrow
+include_sticker: true
 ---
 {% for category in site.categories %}
   {% capture cat %}{{ category | first }}{% endcapture %}
