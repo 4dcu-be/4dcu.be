@@ -305,11 +305,13 @@ pre code.hljs {
   .site-header-container .scrim, .post-header-container .scrim {
     padding: 3em 1em; }
     .site-header-container .scrim.has-cover, .post-header-container .scrim.has-cover {
-      background-color: rgba(12, 0, 0, 0.5);
-      padding: 6em 1em !important; }
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 6em 1em; }
       @media screen and (min-width: 768px) {
         .site-header-container .scrim.has-cover, .post-header-container .scrim.has-cover {
-          padding: 9em 1em !important; } }
+          padding: 9em 1em; } }
+    .site-header-container .scrim.narrow, .post-header-container .scrim.narrow {
+      padding: 1em 1em; }
 
 /*
 *	Header
@@ -529,10 +531,10 @@ pre code.hljs {
     @media screen and (min-width: 768px) {
       .page-content img {
         width: 90%; } }
+  .page-content img.original-size {
+    width: auto !important; }
   .page-content .post ul {
     margin-bottom: 1em; }
-  .page-content .post .post-header-container .scrim {
-    padding: 2em 1em 1em 1em; }
   .page-content .post .post-meta {
     padding-bottom: 1em; }
   .page-content .post .post-content {
@@ -742,6 +744,14 @@ iframe {
   .gallery-3-col img {
     display: inline;
     width: 30%; }
+
+.gallery-2-col {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center; }
+  .gallery-2-col img {
+    display: inline;
+    width: 47%; }
 
 .large-table {
   max-width: 100%;

@@ -4,6 +4,7 @@ title: "Posts"
 permalink: /posts/
 main_nav: true
 cover:  "/assets/images/headers/data_center.jpg"
+scrim_options: narrow
 ---
 {% for category in site.categories %}
   {% capture cat %}{{ category | first }}{% endcapture %}
@@ -25,4 +26,5 @@ cover:  "/assets/images/headers/data_center.jpg"
   </ul>
   {% if forloop.last == false %}<hr>{% endif %}
 {% endfor %}
-<br>
+
+![Box with things](/assets/box_small.png){:.original-size}

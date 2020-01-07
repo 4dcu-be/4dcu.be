@@ -85,8 +85,8 @@ social:
 
   - name: GitHub
     icon: github
-    username: sepro
-    url: https://github.com/sepro/4dcu.be
+    username: 4dcu-be
+    url: https://github.com/4dcu-be/4dcu.be
     desc: Fork me on GitHub
     share: false
 
@@ -102,6 +102,6 @@ protocols:
 
     twitter_image: "/assets/logo.png"
 
-    os_repo: "https://github.com/sepro/4dcu.be"
+    os_repo: "https://github.com/4dcu-be/4dcu.be"
     os_rcs_type: "git"
-    os_src: "git@github.com:sepro/4dcu.be.git"
+    os_src: "git@github.com:4dcu-be/4dcu.be.git"

@@ -102,11 +102,14 @@ pre code.hljs {
 	.scrim {
 		padding: 3em 1em;
 		&.has-cover {
-			background-color: rgba(12,0,0,0.5);
-			padding: 6em 1em !important;
+			background-color: rgba(0,0,0,0.5);
+			padding: 6em 1em;
 			@include media($tablet) {
-				padding: 9em 1em !important;
+				padding: 9em 1em;
 			}
+		}
+		&.narrow {
+		  padding: 1em 1em;
 		}
 	}
 }
@@ -316,17 +319,16 @@ pre code.hljs {
 				width: 90%;
 		}
 	}
+	img.original-size {
+	  width: auto !important;
+
+	}
 	/*
 	*	Posts
 	*/
 	.post {
 		ul {
 			margin-bottom: 1em;
-		}
-		.post-header-container {
-			.scrim {
-				padding: 2em 1em 1em 1em;
-			}
 		}
 		.post-meta {
 			padding-bottom: 1em;
@@ -517,6 +519,17 @@ iframe {
   img {
     display: inline;
     width: 30%
+  }
+
+}
+
+.gallery-2-col {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  img {
+    display: inline;
+    width: 47%
   }
 
 }
