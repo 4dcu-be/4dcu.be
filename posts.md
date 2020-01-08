@@ -27,4 +27,4 @@ include_sticker: true
   {% if forloop.last == false %}<hr>{% endif %}
 {% endfor %}
 
-![Box with things](/assets/box_small.png){:.original-size}
+![Box with things](/assets/box_medium.png){:.small}

@@ -536,7 +536,10 @@ pre code.hljs {
       .page-content img {
         width: 90%; } }
   .page-content img.original-size {
-    width: auto !important; }
+    width: auto; }
+  .page-content img.small {
+    width: unset;
+    max-width: 200px; }
   .page-content .post ul {
     margin-bottom: 1em; }
   .page-content .post .post-meta {

@@ -325,8 +325,12 @@ pre code.hljs {
 		}
 	}
 	img.original-size {
-	  width: auto !important;
+	  width: auto;
 
+	}
+	img.small {
+	  width: unset;
+	  max-width: 200px;
 	}
 	/*
 	*	Posts
