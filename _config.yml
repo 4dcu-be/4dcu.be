@@ -87,7 +87,14 @@ social:
   - name: GitHub
     icon: github
     username: 4dcu-be
-    url: https://github.com/4dcu-be/4dcu.be
+    url: https://github.com/4dcu-be
+    desc: Fork me on GitHub
+    share: false
+
+  - name: GitHub
+    icon: github
+    username: sepro
+    url: https://github.com/sepro
     desc: Fork me on GitHub
     share: false
 
