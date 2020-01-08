@@ -4,6 +4,7 @@ plugins:
   - jekyll-archives
   - jekyll-sitemap
   - jekyll-paginate-v2
+  - mini_magick
 
 exclude:
   - "/vendor/"
@@ -16,10 +17,10 @@ future: true
 
 # Site settings
 title: 4DCu.be
-subtitle: "blogging about nerdy stuff I care about"
+subtitle: "a blog about programming, gaming, technology, ..."
 email: sebastian.proost@gmail.com
 name: Sebastian Proost
-description: A blog about nerdy things ...
+description: "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more."
 
 # Base URL of site (i.e. /blog). It should always start with a slash,
 # and never end with a slash. Set it to a blank value if hosting at the

@@ -329,7 +329,7 @@ you have feedback feel free to open issues there, or post comments on the posts 
 
 	
 	<li>
-		<a href="https://github.com/4dcu-be/" title="Fork me on GitHub">
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
 			<i class="fa fa-github"></i>
 			<span class="username">4dcu-be</span>
 		</a>
@@ -441,7 +441,7 @@ you have feedback feel free to open issues there, or post comments on the posts 
 
 	
 	<li>
-		<a href="https://github.com/4dcu-be/" title="Fork me on GitHub">
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
 			<i class="fa fa-github"></i>
 			<span class="username">4dcu-be</span>
 		</a>
@@ -463,7 +463,7 @@ you have feedback feel free to open issues there, or post comments on the posts 
 
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
-      <p class="text">A blog about nerdy things ...</p>
+      <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
 			<p class="text">Last update: January 8, 2020</p>
     </div>
 
@@ -474,8 +474,6 @@ you have feedback feel free to open issues there, or post comments on the posts 
 <!-- Scripts -->
 <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
-<script src="//unpkg.com/popper.js@1"></script>
-<script src="//unpkg.com/tippy.js@5"></script>
 <script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
 
 <script type="text/javascript">
@@ -492,14 +490,6 @@ $(document).ready(function() {
     });
   });
 
-	// Enable tooltips via Tippy.js
-	if (Array.isArray(window.tooltips)) {
-		window.tooltips.forEach(function(tooltip) {
-			var selector = tooltip[0];
-			var config = tooltip[1];
-			tippy(selector, config);
-		})
-	}
 });
 
 </script>
@@ -513,14 +503,13 @@ $(document).ready(function() {
 	$('.nav-link-contact').click(function(ev) {
 	  ev.preventDefault();
 	  MicroModal.show('modal-1', {
-	  		onClose: function() { console.log("test"); $('.nav-link-contact').blur(); },
+	  		onClose: function() { $('.nav-link-contact').blur(); },
 	  		disableFocus: true
 	  });
 	});
 
 });
 </script>
-
 
 
 

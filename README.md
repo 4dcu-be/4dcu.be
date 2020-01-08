@@ -1,8 +1,16 @@
-# Centrarium [![Circle CI](https://circleci.com/gh/bencentra/centrarium/tree/master.svg?style=svg)](https://circleci.com/gh/bencentra/centrarium/tree/master)
+# 4DCu.be
 
-A simple yet classy theme for your Jekyll website or blog. Customizable to fit your style or brand.
+![sticker](./assets/sticker_medium.png)
 
-Built with these awesome libraries:
+Code for Sebastian Proost's blog about programming, gaming, technology, ...
+
+
+## Acknowledgements
+
+Based on a jekyll theme by [Ben Centra](http://bencentra.github.io/centrarium/) and can be used for your blog as well,
+read the instructions below how to get started.
+
+Which includes these awesome libraries:
 * [Bourbon][bourbon]
 * [Neat][neat]
 * [Bitters][bitters]
@@ -10,12 +18,6 @@ Built with these awesome libraries:
 * [Font Awesome][fontawesome]
 * [HighlightJS][highlightjs]
 * [Lightbox][lightbox]
-
-Here's a [demo](http://bencentra.com/centrarium). It also works on [GitHub Pages](http://bencentra.github.io/centrarium/). I also use it for [my own website][bencentra].
-
-Inspired by dirkfabisch's [Mediator](https://github.com/dirkfabisch/mediator) theme, which I previously used for my own blog, as well as [Type Theme](http://rohanchandra.github.io/type-theme/).
-
-Cover image by Chris M. Morris ([flickr][cover]).
 
 ## Features
 
@@ -29,10 +31,11 @@ This theme comes with a number of features, including:
 * Lightbox for viewing full-screen photos and albums
 * Google Analytics with custom page name tracking
 * Social media integration (Twitter, Facebook, LinkedIn, GitHub, and more)
+* Thumbnail generator
 
 ## Installation
 
-If you're just getting started with Jekyll, you can use this repository as a starting point for your own site. Just [download this project](https://github.com/bencentra/centrarium/archive/master.zip) and add all the files to your project. Add your blog posts to the `posts/` directory, and create your pages with the proper Jekyll front matter (see `posts.html` for an example).
+If you're just getting started with Jekyll, you can use this repository as a starting point for your own site. Just download this project and add all the files to your project. Add your blog posts to the `posts/` directory, and create your pages with the proper Jekyll front matter (see `posts.html` for an example).
 
 If your site already uses Jekyll, follow these steps:
 
@@ -46,15 +49,13 @@ Don't forget to install Jekyll and other dependencies:
 cd centrarium
 # install Bundler if you don't have it already
 gem install bundler
-# install jekyll, jekyll-archives, jekyll-sitemap, and jekyll-paginate
+# install jekyll, jekyll-archives, jekyll-sitemap, mini_magick and jekyll-paginate-v2
 bundle install
 ```
 
-## Stackbit Deploy
+You will need to install [ImageMagick](https://imagemagick.org/) on your system as well for the thumbnail generation.
 
-This theme is ready to import into Stackbit. This theme can be deployed to Netlify and you can connect any headless CMS including Forestry, NetlifyCMS, DatoCMS or Contentful. 
-
-[![Create with Stackbit](https://assets.stackbit.com/badge/create-with-stackbit.svg)](https://app.stackbit.com/create?theme=https://github.com/bencentra/centrarium)
+__NOTE :__ This theme is not compatible with github pages as it uses a custom plugin. [Here is a guide](http://ixti.net/software/2013/01/28/using-jekyll-plugins-on-github-pages.html) how to host it on github. In a nutshell, the trick is to build the website to the `./docs` locally and commit/push this along with the other files. GitHub can then be set up to host the site directly from the `./docs` folder.
 
 ## Updating Header and Footer Links
 
@@ -67,6 +68,7 @@ If you want change the CSS of the theme, you'll probably want to check out these
 * `base/_variables.scss`: Common values found throughout the project, including base font size, font families, colors, and more.
 * `base/_typography.scss`: Base typography values for the site (see `typography.html` for a demonstration)
 * `_layout.scss`: The primary styles for the layout and design of the theme.
+* Update the images for logo, stickers ... in `assets/`
 
 ### Important Variables
 
@@ -94,6 +96,10 @@ All configuration options can be found in `_config.yml`.
 * __url:__ The base hostname and protocol for your site.
 * __cover:__ The relative path to your site's cover image.
 * __logo:__ The relative path to your site's logo. Used in the navigation menu instead of the title if provided.
+* __sticker:__ The relative path to your site's sticker/mascot, can be added behind the page title.
+* __thumbnail__:
+  * __resize_dimensions__: e.g. '430x288^' size of the thumbnails
+  * __crop_dimensions__: e.g. '430x288+0+0' how to crop the thumbnail
 
 ### Build Settings
 
@@ -121,32 +127,8 @@ jekyll-archives:
     tag: '/tag/:name/'
 ```
 
-To fully disable the archive, remove the __jekyll-archives__ section AND remove it from the __gems__ list.
-
-__NOTE:__ the Jekyll Archive gem is NOT included with GitHub pages! Disable the archive feature if you intend to deploy your site to GitHub pages. [Here is a guide](http://ixti.net/software/2013/01/28/using-jekyll-plugins-on-github-pages.html) on how you can use the `jekyll archive` gem with GitHub pages. The general gist: compile the Jekyll site locally and then push that compiled site to GitHub.
-
 A sitemap is also generated using [jekyll-sitemap][sitemap].
 
-### Syntax Highlighting Settings
-
-Inside of a post, you can enable syntax highlighting with the `{% highlight <language> %}` Liquid tag. For example:
-
-```
-{% highlight javascript %}
-function demo(string, times) {
-  for (var i = 0; i < times; i++) {
-    console.log(string);
-  }
-}
-demo("hello, world!", 10);
-{% endhighlight %}
-```
-
-You can change the [HighlightJS theme][highlightjs_theme] in `_config.yml`:
-
-```yml
-highlightjs_theme: "monokai_sublime"
-```
 
 ### Disqus Settings
 
@@ -239,10 +221,7 @@ MIT. See [LICENSE.MD](https://github.com/bencentra/centrarium/blob/master/LICENS
 [bitters]: http://bitters.bourbon.io/
 [refills]: http://refills.bourbon.io/
 [fontawesome]: http://fortawesome.github.io/Font-Awesome/
-[highlightjs]: https://highlightjs.org/
-[highlightjs_theme]: https://highlightjs.org/static/demo/
 [lightbox]: http://lokeshdhakar.com/projects/lightbox2/
-[cover]: https://www.flickr.com/photos/79666107@N00/3796678503/in/photolist-6MuYfc-61Rtft-8XzPmY-a6Cozm-54eSMs-6oMJmk-aepZQq-9YkPHp-fiAEGE-dVP4Z5-oxPyJP-atKUFJ-9YHWA5-9YF2f2-9YF2gR-9YHVGN-9YHVvs-qZYYQ6-4JqP2i-a2peGy-9YHVUm-9YHVF7-9YHVCL-9YF3NK-cYteMo-aiPmb9-69dtAi-9YF21x-4aWpmn-7SLiUL-77pqVX-8vXbYv-4HGDSH-a2h5P1-8LsZrQ-9aj1ez-auPZ7q-9YHVMd-9YF2bi-9YF23D-8LpWpn-9an6KL-9YHVZL-dqZ3Cz-2GuvnX-9YHWUo-9YHVWd-p5Roh5-i1zTbv-6sYrUT
 [disqus]: https://disqus.com/
 [ga]: http://www.google.com/analytics/
 [archives]: https://github.com/jekyll/jekyll-archives

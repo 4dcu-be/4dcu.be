@@ -33,8 +33,6 @@
 <!-- Scripts -->
 <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
-<script src="//unpkg.com/popper.js@1"></script>
-<script src="//unpkg.com/tippy.js@5"></script>
 <script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
 
 <script type="text/javascript">
@@ -51,14 +49,6 @@ $(document).ready(function() {
     });
   });
 
-	// Enable tooltips via Tippy.js
-	if (Array.isArray(window.tooltips)) {
-		window.tooltips.forEach(function(tooltip) {
-			var selector = tooltip[0];
-			var config = tooltip[1];
-			tippy(selector, config);
-		})
-	}
 });
 
 </script>
@@ -72,14 +62,13 @@ $(document).ready(function() {
 	$('.nav-link-contact').click(function(ev) {
 	  ev.preventDefault();
 	  MicroModal.show('modal-1', {
-	  		onClose: function() { console.log("test"); $('.nav-link-contact').blur(); },
+	  		onClose: function() { $('.nav-link-contact').blur(); },
 	  		disableFocus: true
 	  });
 	});
 
 });
 </script>
-
 {% endif %}
 
 {% if page.custom_js %}
