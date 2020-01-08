@@ -86,7 +86,8 @@ pre code.hljs {
 	width: 100%;
 	text-align: center;
 	img.sticker {
-		    width: auto;
+		    width: 100%;
+		    max-width: 300px;
 		    margin-top: -3em;
 		    margin-bottom: -7.5em;
 	}

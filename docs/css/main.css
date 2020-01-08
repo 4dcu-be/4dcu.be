@@ -292,7 +292,8 @@ pre code.hljs {
   width: 100%;
   text-align: center; }
   .site-header-container img.sticker, .post-header-container img.sticker {
-    width: auto;
+    width: 100%;
+    max-width: 300px;
     margin-top: -3em;
     margin-bottom: -7.5em; }
   .site-header-container.has-cover, .post-header-container.has-cover {
