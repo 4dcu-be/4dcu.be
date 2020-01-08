@@ -425,10 +425,10 @@ pre code.hljs {
 *	Footer
 */
 .site-footer {
-	$link-color: $white;
+	$link-color: $light-gray;
 	padding: 1em 1em 2em 1em;
-	background-color: desaturate($dark-color, 66%);
-	color: $white;
+	background-color: $dark-gray;
+	color: $light-gray;
 	a {
 	  color: $link-color;
 	  &:active,

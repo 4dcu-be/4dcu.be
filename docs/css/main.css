@@ -629,8 +629,8 @@ pre code.hljs {
 */
 .site-footer {
   padding: 1em 1em 2em 1em;
-  background-color: #4f4f4f;
-  color: #fff;
+  background-color: #333;
+  color: #ddd;
   /*
   *	Site Navigation (left)
   */
@@ -641,9 +641,9 @@ pre code.hljs {
   *	Site Description/Signature (right)
   */ }
   .site-footer a {
-    color: #fff; }
+    color: #ddd; }
     .site-footer a:active, .site-footer a:focus, .site-footer a:hover {
-      color: #e6e6e6; }
+      color: #c4c4c4; }
     .site-footer a:active, .site-footer a:focus {
       outline: none; }
   .site-footer .wrapper {
