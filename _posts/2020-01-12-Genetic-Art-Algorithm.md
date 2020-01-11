@@ -8,7 +8,7 @@ categories: programming
 tags:	python evolution genetic-algorithm algorithm art
 cover:  "/assets/posts/2020-01-12-Genetic-Art-Algorithm/post_header.jpg"
 thumbnail: "/assets/images/thumbnails/starry_night_generation_5000.jpg"
-github: ""
+github: "https://github.com/4dcu-be/Genetic-Art-Algorithm"
 ---
 
 Genetic algorithms are fun, they require a different way of thinking. Here I'll guide you through my process of building 
@@ -20,6 +20,7 @@ an algorithm that evolves 150 random triangles into a famous piece of art. The w
 ![The output of the algorithm after 5000 generations](/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png)
 </div>
 
+The code for this post can be found on GitHub [here](https://github.com/4dcu-be/Genetic-Art-Algorithm)
 
 ## Genetic Algorithms
 
