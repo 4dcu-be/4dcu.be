@@ -532,9 +532,13 @@ pre code.hljs {
     display: block;
     margin: auto;
     width: 100%; }
+    .page-content img.half-width {
+      width: 50%; }
     @media screen and (min-width: 768px) {
       .page-content img {
-        width: 90%; } }
+        width: 90%; }
+        .page-content img.half-width {
+          width: 45%; } }
   .page-content img.original-size {
     width: auto; }
   .page-content img.small {
@@ -764,6 +768,9 @@ iframe {
   max-width: 100%;
   overflow-x: auto;
   display: block; }
+
+code {
+  padding: 15px 25px; }
 
 /**************************\
   Basic Modal Styles

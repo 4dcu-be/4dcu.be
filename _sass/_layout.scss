@@ -320,8 +320,14 @@ pre code.hljs {
 		display: block;
 		margin: auto;
 		width: 100%;
+		&.half-width {
+		  width: 50%;
+		}
 	  @include media ($tablet) {
 				width: 90%;
+			  &.half-width {
+		      width: 45%;
+		    }
 		}
 	}
 	img.original-size {
@@ -547,4 +553,8 @@ iframe {
     max-width: 100%;
     overflow-x: auto;
     display: block;
+}
+
+code {
+    padding: 15px 25px;
 }
