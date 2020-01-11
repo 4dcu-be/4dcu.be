@@ -793,7 +793,8 @@ code {
   background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  z-index: 10; }
 
 .modal__container {
   background-color: #fff;
