@@ -381,9 +381,9 @@ areas.
 The chromosomes in this case are very static, they are always the same length (150 items) and apart from the occasional
 swapping of items nothing happens. In nature chromosomes evolve continuously in size and duplication of genes is often a 
 source of innovation. The mutation function could be adjusted to add an extra triangle every so often or you could come
-up with more complex ways to mate paintings so lists of different numbers of items could be mated. However, as adding
-additional triangles should also come at a cost that should be taken into account for the fitness. In nature having a
-larger genome means copying more DNA each time a cell divides, so genomes cannot be infinitely large. There needs to be
+up with more complex ways to mate paintings so lists of different numbers of items could be mated. However, adding
+additional triangles should come at a cost that should be taken into account for the fitness. In nature having a
+larger genome means copying more DNA each time a cell divides, so genomes cannot grow infinitely large. There needs to be
 a similar penalty to the fitness here. Tweaking this extra parameter could be difficult.
 
 Finally, different styles could be used. Here using a limited number of triangles was used because it was the first 
