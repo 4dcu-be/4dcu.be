@@ -15,7 +15,6 @@
 
   <!-- External libraries -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
 
   <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
   <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
@@ -186,11 +185,11 @@ an algorithm that evolves 150 random triangles into a famous piece of art. The w
 <a href="https://en.wikipedia.org/wiki/The_Starry_Night">The Starry Night</a>. The original and the version the algorithm created after 5000 generations are shown below.</p>
 
 <div class="gallery-2-col">
-  <p><a href="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_full.jpg" data-lightbox="blog" data-title="The Original of Van Gogh, titled Starry Night">
-<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_full.jpg" alt="The Original of Van Gogh, titled Starry Night" />
+  <p><a href="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_full.jpg" class="lightgallery-link" data-sub-html="The Original of Van Gogh, titled Starry Night">
+<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_full.jpg" alt="The Original of Van Gogh, titled Starry Night" data-src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_full.jpg" />
 </a>
-<a href="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" data-lightbox="blog" data-title="The output of the algorithm after 5000 generations">
-<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" alt="The output of the algorithm after 5000 generations" />
+<a href="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" class="lightgallery-link" data-sub-html="The output of the algorithm after 5000 generations">
+<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" alt="The output of the algorithm after 5000 generations" data-src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" />
 </a></p>
 </div>
 
@@ -526,8 +525,8 @@ the population every fifty generations (so we don’t have to start over again i
 <p>Here you can see the best individual from generation 1, 250, 500, 750, 1000, 1500, 2500, 3500 and 4500 (left to right, 
 top to bottom).</p>
 
-<p><a href="/assets/posts/2020-01-12-Genetic-Art-Algorithm/evolution_grid.png" data-lightbox="blog" data-title="Output after various generations">
-<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/evolution_grid.png" alt="Output after various generations" />
+<p><a href="/assets/posts/2020-01-12-Genetic-Art-Algorithm/evolution_grid.png" class="lightgallery-link" data-sub-html="Output after various generations">
+<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/evolution_grid.png" alt="Output after various generations" data-src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/evolution_grid.png" />
 </a></p>
 
 <h3 id="different-runs-different-output">Different runs, different output</h3>
@@ -537,11 +536,11 @@ can differ between runs. Below you can see the result of two independent runs ea
 though these images have comparable distances to the target image, they are quite different from each other.</p>
 
 <div class="gallery-2-col">
-  <p><a href="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" data-lightbox="blog" data-title="The output of the algorithm after 5000 generations">
-<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" alt="The output of the algorithm after 5000 generations" />
+  <p><a href="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" class="lightgallery-link" data-sub-html="The output of the algorithm after 5000 generations">
+<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" alt="The output of the algorithm after 5000 generations" data-src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" />
 </a>
-<a href="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.run_2.png" data-lightbox="blog" data-title="The output of the algorithm after a second run with 5000 generations">
-<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.run_2.png" alt="The output of the algorithm after a second run with 5000 generations" />
+<a href="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.run_2.png" class="lightgallery-link" data-sub-html="The output of the algorithm after a second run with 5000 generations">
+<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.run_2.png" alt="The output of the algorithm after a second run with 5000 generations" data-src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.run_2.png" />
 </a></p>
 </div>
 
@@ -842,7 +841,7 @@ better) ideas emerged. These I’ll work out and I will cover them in a later po
 
 <!-- Scripts -->
 <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
 <script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
 
 <script type="text/javascript">
@@ -862,12 +861,13 @@ $(document).ready(function() {
 });
 
 </script>
-<script>
-    lightbox.option({
-      'resizeDuration': 200,
-      'fadeDuration': 0,
-      'wrapAround': true
-    })
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
 </script>
 
 <!-- Contact Modal -->

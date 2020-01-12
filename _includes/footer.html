@@ -32,7 +32,7 @@
 
 <!-- Scripts -->
 <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="{{ "/js/lightgallery.min.js" | prepend: site.baseurl }}"></script>
 <script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
 
 <script type="text/javascript">
@@ -52,12 +52,13 @@ $(document).ready(function() {
 });
 
 </script>
-<script>
-    lightbox.option({
-      'resizeDuration': 200,
-      'fadeDuration': 0,
-      'wrapAround': true
-    })
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
 </script>
 {% if site.email %}
 <!-- Contact Modal -->

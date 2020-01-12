@@ -15,7 +15,6 @@
 
   <!-- External libraries -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
 
   <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
   <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
@@ -489,7 +488,7 @@ you have feedback feel free to open issues there, or post comments on the posts 
 
 <!-- Scripts -->
 <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
 <script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
 
 <script type="text/javascript">
@@ -509,12 +508,13 @@ $(document).ready(function() {
 });
 
 </script>
-<script>
-    lightbox.option({
-      'resizeDuration': 200,
-      'fadeDuration': 0,
-      'wrapAround': true
-    })
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
 </script>
 
 <!-- Contact Modal -->

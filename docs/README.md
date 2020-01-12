@@ -7,7 +7,7 @@ Code for Sebastian Proost's blog about programming, gaming, technology, ...
 
 ## Acknowledgements
 
-Based on a jekyll theme by [Ben Centra](http://bencentra.github.io/centrarium/) and can be used for your blog as well,
+4DCu.be is based on a jekyll theme by [Ben Centra][Ben Centra] and can be used for your blog as well,
 read the instructions below how to get started.
 
 Which includes these awesome libraries:
@@ -16,8 +16,7 @@ Which includes these awesome libraries:
 * [Bitters][bitters]
 * [Refills][refills]
 * [Font Awesome][fontawesome]
-* [HighlightJS][highlightjs]
-* [Lightbox][lightbox]
+* [Lightgallery][Lightgallery]
 
 ## Features
 
@@ -28,7 +27,7 @@ This theme comes with a number of features, including:
 * Archiving of posts by categories and tags
 * Syntax highlighting for code snippets
 * Disqus integration for post comments
-* Lightbox for viewing full-screen photos and albums
+* Lightgallery for viewing full-screen photos and albums
 * Google Analytics with custom page name tracking
 * Social media integration (Twitter, Facebook, LinkedIn, GitHub, and more)
 * Thumbnail generator
@@ -200,20 +199,9 @@ $ ls js/
 Popmotion.js Vue.js
 ```
 
-## Contributing
-
-Want to help make this theme even better? Contributions from the community are welcome!
-
-Please follow these steps:
-
-1. Fork/clone this repository.
-2. Develop (and test!) your changes.
-3. Open a pull request on GitHub. A description and/or screenshot of changes would be appreciated!
-4. I ([Ben Centra](https://github.com/bencentra)) will review and merge the pull request.
-
 ## License
 
-MIT. See [LICENSE.MD](https://github.com/bencentra/centrarium/blob/master/LICENSE.md).
+MIT. See [LICENSE.MD](https://github.com/4dcu-be/4dcu.be/blob/master/LICENSE.md).
 
 [bencentra]: http://bencentra.com
 [bourbon]: http://bourbon.io/
@@ -221,8 +209,9 @@ MIT. See [LICENSE.MD](https://github.com/bencentra/centrarium/blob/master/LICENS
 [bitters]: http://bitters.bourbon.io/
 [refills]: http://refills.bourbon.io/
 [fontawesome]: http://fortawesome.github.io/Font-Awesome/
-[lightbox]: http://lokeshdhakar.com/projects/lightbox2/
+[Lightgallery]: https://sachinchoolur.github.io/lightgallery.js/
 [disqus]: https://disqus.com/
 [ga]: http://www.google.com/analytics/
 [archives]: https://github.com/jekyll/jekyll-archives
 [sitemap]: https://github.com/jekyll/jekyll-sitemap
+[Ben Centra]: http://bencentra.github.io/centrarium/

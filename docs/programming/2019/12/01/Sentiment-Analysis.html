@@ -15,7 +15,6 @@
 
   <!-- External libraries -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
 
   <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
   <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
@@ -285,8 +284,8 @@ matplotlib directly.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p><a href="/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.svg" data-lightbox="blog" data-title="Sentiment plot of Lord of the Rings - The Fellowship of the Ring">
-<img src="/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.svg" alt="Sentiment plot of Lord of the Rings - The Fellowship of the Ring" />
+<p><a href="/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.svg" class="lightgallery-link" data-sub-html="Sentiment plot of Lord of the Rings - The Fellowship of the Ring">
+<img src="/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.svg" alt="Sentiment plot of Lord of the Rings - The Fellowship of the Ring" data-src="/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.svg" />
 </a></p>
 
 <p>This looks pretty close to what I wanted ! However, does it make sense … To figure this out lets add some annotations
@@ -327,8 +326,8 @@ us a better view if the plot makes sense and if it really follows the story.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p><a href="/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.annotated.svg" data-lightbox="blog" data-title="Annotated Sentiment plot of Lord of the Rings - The Fellowship of the Ring">
-<img src="/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.annotated.svg" alt="Annotated Sentiment plot of Lord of the Rings - The Fellowship of the Ring" />
+<p><a href="/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.annotated.svg" class="lightgallery-link" data-sub-html="Annotated Sentiment plot of Lord of the Rings - The Fellowship of the Ring">
+<img src="/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.annotated.svg" alt="Annotated Sentiment plot of Lord of the Rings - The Fellowship of the Ring" data-src="/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.annotated.svg" />
 </a></p>
 
 <h2 id="discussion">Discussion</h2>
@@ -638,7 +637,7 @@ breaks up and hence fails to complete their quest.</p>
 
 <!-- Scripts -->
 <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
 <script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
 
 <script type="text/javascript">
@@ -658,12 +657,13 @@ $(document).ready(function() {
 });
 
 </script>
-<script>
-    lightbox.option({
-      'resizeDuration': 200,
-      'fadeDuration': 0,
-      'wrapAround': true
-    })
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
 </script>
 
 <!-- Contact Modal -->

@@ -15,7 +15,6 @@
 
   <!-- External libraries -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
 
   <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
   <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
@@ -202,14 +201,14 @@ return a list of possible decks they are playing. But let’s start with two exa
 
 <div class="gallery-3-col">
 
-  <p><a href="/assets/posts/2019-12-29-Magic-the-Gathering/cards/wasteland.jpg" data-lightbox="blog" data-title="Wasteland">
-<img src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/wasteland.jpg" alt="Wasteland" />
+  <p><a href="/assets/posts/2019-12-29-Magic-the-Gathering/cards/wasteland.jpg" class="lightgallery-link" data-sub-html="Wasteland">
+<img src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/wasteland.jpg" alt="Wasteland" data-src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/wasteland.jpg" />
 </a>
-<a href="/assets/posts/2019-12-29-Magic-the-Gathering/cards/plains.jpg" data-lightbox="blog" data-title="Plains">
-<img src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/plains.jpg" alt="Plains" />
+<a href="/assets/posts/2019-12-29-Magic-the-Gathering/cards/plains.jpg" class="lightgallery-link" data-sub-html="Plains">
+<img src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/plains.jpg" alt="Plains" data-src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/plains.jpg" />
 </a>
-<a href="/assets/posts/2019-12-29-Magic-the-Gathering/cards/mother-of-runes.jpg" data-lightbox="blog" data-title="Mother of Runes">
-<img src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/mother-of-runes.jpg" alt="Mother of Runes" />
+<a href="/assets/posts/2019-12-29-Magic-the-Gathering/cards/mother-of-runes.jpg" class="lightgallery-link" data-sub-html="Mother of Runes">
+<img src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/mother-of-runes.jpg" alt="Mother of Runes" data-src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/mother-of-runes.jpg" />
 </a></p>
 
 </div>
@@ -250,14 +249,14 @@ well, however Pikula is something I never encountered and wouldn’t have consid
 
 <div class="gallery-3-col">
 
-  <p><a href="/assets/posts/2019-12-29-Magic-the-Gathering/cards/arcum-s-astrolabe.jpg" data-lightbox="blog" data-title="Arcum's Astrolabe">
-<img src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/arcum-s-astrolabe.jpg" alt="Arcum's Astrolabe" />
+  <p><a href="/assets/posts/2019-12-29-Magic-the-Gathering/cards/arcum-s-astrolabe.jpg" class="lightgallery-link" data-sub-html="Arcum's Astrolabe">
+<img src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/arcum-s-astrolabe.jpg" alt="Arcum's Astrolabe" data-src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/arcum-s-astrolabe.jpg" />
 </a>
-<a href="/assets/posts/2019-12-29-Magic-the-Gathering/cards/noble-hierarch.jpg" data-lightbox="blog" data-title="Noble Hierarch">
-<img src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/noble-hierarch.jpg" alt="Noble Hierarch" />
+<a href="/assets/posts/2019-12-29-Magic-the-Gathering/cards/noble-hierarch.jpg" class="lightgallery-link" data-sub-html="Noble Hierarch">
+<img src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/noble-hierarch.jpg" alt="Noble Hierarch" data-src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/noble-hierarch.jpg" />
 </a>
-<a href="/assets/posts/2019-12-29-Magic-the-Gathering/cards/brainstorm.jpg" data-lightbox="blog" data-title="Brainstorm">
-<img src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/brainstorm.jpg" alt="Brainstorm" />
+<a href="/assets/posts/2019-12-29-Magic-the-Gathering/cards/brainstorm.jpg" class="lightgallery-link" data-sub-html="Brainstorm">
+<img src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/brainstorm.jpg" alt="Brainstorm" data-src="/assets/posts/2019-12-29-Magic-the-Gathering/cards/brainstorm.jpg" />
 </a></p>
 
 </div>
@@ -866,7 +865,7 @@ endorsed by, supported by, or affiliated with Wizards of the Coast.</p>
 
 <!-- Scripts -->
 <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
 <script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
 
 <script type="text/javascript">
@@ -886,12 +885,13 @@ $(document).ready(function() {
 });
 
 </script>
-<script>
-    lightbox.option({
-      'resizeDuration': 200,
-      'fadeDuration': 0,
-      'wrapAround': true
-    })
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
 </script>
 
 <!-- Contact Modal -->
