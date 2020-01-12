@@ -28,9 +28,9 @@ Imagine this scenario, on the first turn your opponent leads with **Wasteland**,
 
 <div class="gallery-3-col" markdown="1">
 
-![Wasteland](/assets/posts/2019-12-29-Magic-the-Gathering/cards/wasteland.jpg "Wasteland")
-![Plains](/assets/posts/2019-12-29-Magic-the-Gathering/cards/plains.jpg "Plains")
-![Mother of Runes](/assets/posts/2019-12-29-Magic-the-Gathering/cards/mother-of-runes.jpg "Mother of Runes")
+![Wasteland](/assets/posts/2019-12-29-Magic-the-Gathering/cards/wasteland.jpg)
+![Plains](/assets/posts/2019-12-29-Magic-the-Gathering/cards/plains.jpg)
+![Mother of Runes](/assets/posts/2019-12-29-Magic-the-Gathering/cards/mother-of-runes.jpg)
 
 </div>
 
@@ -54,9 +54,9 @@ well, however Pikula is something I never encountered and wouldn't have consider
 
 <div class="gallery-3-col" markdown="1">
 
-![Arcum's Astrolabe](/assets/posts/2019-12-29-Magic-the-Gathering/cards/arcum-s-astrolabe.jpg "Arcum's Astrolabe")
-![Noble Hierarch](/assets/posts/2019-12-29-Magic-the-Gathering/cards/noble-hierarch.jpg "Noble Hierarch")
-![Brainstorm](/assets/posts/2019-12-29-Magic-the-Gathering/cards/brainstorm.jpg "Brainstorm")
+![Arcum's Astrolabe](/assets/posts/2019-12-29-Magic-the-Gathering/cards/arcum-s-astrolabe.jpg)
+![Noble Hierarch](/assets/posts/2019-12-29-Magic-the-Gathering/cards/noble-hierarch.jpg)
+![Brainstorm](/assets/posts/2019-12-29-Magic-the-Gathering/cards/brainstorm.jpg)
 
 </div>
 

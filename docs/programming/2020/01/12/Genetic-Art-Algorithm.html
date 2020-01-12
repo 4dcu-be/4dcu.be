@@ -186,8 +186,12 @@ an algorithm that evolves 150 random triangles into a famous piece of art. The w
 <a href="https://en.wikipedia.org/wiki/The_Starry_Night">The Starry Night</a>. The original and the version the algorithm created after 5000 generations are shown below.</p>
 
 <div class="gallery-2-col">
-  <p><img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_full.jpg" alt="The Original of Van Gogh, titled Starry Night" />
-<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" alt="The output of the algorithm after 5000 generations" /></p>
+  <p><a href="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_full.jpg" data-lightbox="blog" data-title="The Original of Van Gogh, titled Starry Night">
+<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_full.jpg" alt="The Original of Van Gogh, titled Starry Night" />
+</a>
+<a href="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" data-lightbox="blog" data-title="The output of the algorithm after 5000 generations">
+<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" alt="The output of the algorithm after 5000 generations" />
+</a></p>
 </div>
 
 <p>The code for this post can be found on GitHub <a href="https://github.com/4dcu-be/Genetic-Art-Algorithm">here</a></p>
@@ -522,7 +526,9 @@ the population every fifty generations (so we don’t have to start over again i
 <p>Here you can see the best individual from generation 1, 250, 500, 750, 1000, 1500, 2500, 3500 and 4500 (left to right, 
 top to bottom).</p>
 
-<p><img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/evolution_grid.png" alt="Output after various generations" /></p>
+<p><a href="/assets/posts/2020-01-12-Genetic-Art-Algorithm/evolution_grid.png" data-lightbox="blog" data-title="Output after various generations">
+<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/evolution_grid.png" alt="Output after various generations" />
+</a></p>
 
 <h3 id="different-runs-different-output">Different runs, different output</h3>
 
@@ -531,8 +537,12 @@ can differ between runs. Below you can see the result of two independent runs ea
 though these images have comparable distances to the target image, they are quite different from each other.</p>
 
 <div class="gallery-2-col">
-  <p><img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" alt="The output of the algorithm after 5000 generations" />
-<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.run_2.png" alt="The output of the algorithm after a second run with 5000 generations" /></p>
+  <p><a href="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" data-lightbox="blog" data-title="The output of the algorithm after 5000 generations">
+<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" alt="The output of the algorithm after 5000 generations" />
+</a>
+<a href="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.run_2.png" data-lightbox="blog" data-title="The output of the algorithm after a second run with 5000 generations">
+<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.run_2.png" alt="The output of the algorithm after a second run with 5000 generations" />
+</a></p>
 </div>
 
 <h2 id="conclusion--outlook">Conclusion &amp; outlook</h2>
@@ -823,7 +833,7 @@ better) ideas emerged. These I’ll work out and I will cover them in a later po
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: January 11, 2020</p>
+			<p class="text">Last update: January 12, 2020</p>
     </div>
 
   </div>
@@ -852,7 +862,13 @@ $(document).ready(function() {
 });
 
 </script>
-
+<script>
+    lightbox.option({
+      'resizeDuration': 200,
+      'fadeDuration': 0,
+      'wrapAround': true
+    })
+</script>
 
 <!-- Contact Modal -->
 <script type="text/javascript">
