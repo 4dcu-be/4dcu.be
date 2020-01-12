@@ -16,7 +16,7 @@ an algorithm that evolves 150 random triangles into a famous piece of art. The w
 [The Starry Night]. The original and the version the algorithm created after 5000 generations are shown below.
 
 <div class="gallery-2-col" markdown="1">
-![The Original of Van Gogh, titled Starry Night](/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_full.jpg){:.test}
+![The Original of Van Gogh, titled Starry Night](/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_full.jpg)
 ![The output of the algorithm after 5000 generations](/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png)
 </div>
 
