@@ -3,7 +3,7 @@ layout: page
 title: "Posts"
 permalink: /posts/
 main_nav: true
-cover:  "/assets/images/headers/data_center.jpg"
+cover:  "/assets/images/headers/gameboyzero.jpg"
 include_sticker: true
 ---
 {% for category in site.categories %}

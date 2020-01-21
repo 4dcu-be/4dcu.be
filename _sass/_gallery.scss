@@ -1,0 +1,38 @@
+.gallery-items {
+
+  flex-wrap: wrap;
+  margin: 0px;
+
+  .gallery-item {
+    width: 50%;
+    margin: 0;
+    padding: 0px;
+    background: #000;
+    overflow: hidden;
+    display: inline-grid;
+
+			@include media($tablet) {
+				width: 33%;
+			}
+
+		  @include media($desktop) {
+				width: 25%;
+			}
+
+    img {
+      height: auto;
+      max-width: 100%;
+      width: 100%;
+      -webkit-transform: scale(1);
+      transform: scale(1);
+      -webkit-transition: .3s ease-in-out;
+      transition: .3s ease-in-out;
+    }
+
+    img:hover {
+      transform: scale(1.3);
+      opacity: .5;
+    }
+  }
+
+}

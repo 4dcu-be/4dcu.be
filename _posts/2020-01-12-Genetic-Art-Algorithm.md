@@ -9,6 +9,12 @@ tags:	python evolution genetic-algorithm algorithm art
 cover:  "/assets/posts/2020-01-12-Genetic-Art-Algorithm/post_header.jpg"
 thumbnail: "/assets/images/thumbnails/starry_night_generation_5000.jpg"
 github: "https://github.com/4dcu-be/Genetic-Art-Algorithm"
+
+gallery_items:
+  - image: "/assets/posts/2020-01-12-Genetic-Art-Algorithm/post_header.jpg"
+    gallery_image: "/assets/images/gallery/starry_night.jpg"
+    description: "Van Gogh's The Starry Night generated using 150 triangles placed by a genetic algorithm."
+
 ---
 
 Genetic algorithms are fun, they require a different way of thinking. Here I'll guide you through my process of building 
@@ -120,8 +126,8 @@ class Triangle:
 ### The painting class
 
 The painting contains a list of Triangles, along with the necessary functions to draw the triangles (using the 
-[Pillow]) library and to compare the image with the target (using the 
-[Imagecompare]). Furthermore, there is a function to mate two paintings, this
+[Pillow] library) and to compare the image with the target (using the 
+[Imagecompare] library). Furthermore, there is a function to mate two paintings, this
 is inspired by **crossing over** events in biology where two chromosomes exchange parts to create two new chromosomes.
 
 

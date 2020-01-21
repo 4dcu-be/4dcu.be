@@ -53,12 +53,15 @@ jekyll-archives:
   permalinks:
     category: '/category/:name/'
     tag: '/tag/:name/'
-  cover: "/assets/images/headers/data_center.jpg"
+  cover: "/assets/images/headers/gameboyzero.jpg"
 
 thumbnail:
     resize_dimensions: '430x288^'
     crop_dimensions: '430x288+0+0'
 
+gallery_items:
+    resize_dimensions: '430x288^'
+    crop_dimensions: '430x288+0+0'
 # Disqus comments
 disqus_shortname: 4dcube
 

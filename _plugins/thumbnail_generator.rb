@@ -6,7 +6,7 @@ module Jekyll
     safe true
 
     def generate(site)
-       posts = site.posts.docs.select { |post| post['thumbnail'] }
+       posts = site.posts.docs.select { |post| post.data['thumbnail'] }
        resize_dimensions = Jekyll.configuration({})['thumbnail']['resize_dimensions']
        crop_dimensions = Jekyll.configuration({})['thumbnail']['crop_dimensions']
        posts.each do |post|

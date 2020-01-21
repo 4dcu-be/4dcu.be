@@ -1568,6 +1568,34 @@ iframe {
 code {
   padding: 15px 25px; }
 
+.gallery-items {
+  flex-wrap: wrap;
+  margin: 0px; }
+  .gallery-items .gallery-item {
+    width: 50%;
+    margin: 0;
+    padding: 0px;
+    background: #000;
+    overflow: hidden;
+    display: inline-grid; }
+    @media screen and (min-width: 768px) {
+      .gallery-items .gallery-item {
+        width: 33%; } }
+    @media screen and (min-width: 960px) {
+      .gallery-items .gallery-item {
+        width: 25%; } }
+    .gallery-items .gallery-item img {
+      height: auto;
+      max-width: 100%;
+      width: 100%;
+      -webkit-transform: scale(1);
+      transform: scale(1);
+      -webkit-transition: .3s ease-in-out;
+      transition: .3s ease-in-out; }
+    .gallery-items .gallery-item img:hover {
+      transform: scale(1.3);
+      opacity: .5; }
+
 /**************************\
   Basic Modal Styles
 \**************************/
