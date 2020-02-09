@@ -6,6 +6,7 @@ plugins:
   - jekyll-paginate-v2
   - mini_magick
 
+include: ['_pages']
 exclude:
   - "/vendor/"
   - "/.idea/"
