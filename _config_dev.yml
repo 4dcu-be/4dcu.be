@@ -15,8 +15,8 @@ exclude:
   - "LICENSE.md"
   - "README.md"
 
-# Build website in docs folder so I can use github to host it
-destination: "./docs"
+# Build website in _site during development
+destination: "./_site"
 
 future: true
 
@@ -31,7 +31,7 @@ description: "A blog about Programming (mostly in Python), Machine Learning, Gam
 # and never end with a slash. Set it to a blank value if hosting at the
 # root of your server.
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "https://blog.4dcu.be" # the base hostname & protocol for your site
+url: "http://localhost:4000" # the base hostname & protocol for your site
 cover: "/assets/header_image.jpg"
 logo: "/assets/icons/apple-icon-76x76.png"
 sticker: "/assets/sticker_large.png"

@@ -5,19 +5,6 @@
 Code for Sebastian Proost's blog about programming, gaming, technology, ...
 
 
-## Acknowledgements
-
-4DCu.be is based on a jekyll theme by [Ben Centra][Ben Centra] and can be used for your blog as well,
-read the instructions below how to get started.
-
-Which includes these awesome libraries:
-* [Bourbon][bourbon]
-* [Neat][neat]
-* [Bitters][bitters]
-* [Refills][refills]
-* [Font Awesome][fontawesome]
-* [Lightgallery][Lightgallery]
-
 ## Features
 
 This theme comes with a number of features, including:
@@ -34,18 +21,15 @@ This theme comes with a number of features, including:
 
 ## Installation
 
-If you're just getting started with Jekyll, you can use this repository as a starting point for your own site. Just download this project and add all the files to your project. Add your blog posts to the `posts/` directory, and create your pages with the proper Jekyll front matter (see `posts.html` for an example).
+If you're just getting started with Jekyll, you can use this repository as a starting point for your own site. Just 
+download this project and add all the files to your project. Add your blog posts to the `posts/` directory, 
+and create your pages with the proper Jekyll front matter (see `posts.html` for an example).
 
-If your site already uses Jekyll, follow these steps:
+Installing Jekyll and the dependencies:
 
-1. Replace the files in the `_includes`, `_layouts`, and `_sass` directories with those from this project.
-2. Replace your `index.html` with the one from this project, and copy over the `posts.html` file as well.
-3. Copy the contents of the `_config.yml` from this project in to yours, and update the necessary information.
-
-Don't forget to install Jekyll and other dependencies:
 ```bash
 # cd into project directory
-cd centrarium
+cd 4dcu.be
 # install Bundler if you don't have it already
 gem install bundler
 # install jekyll, jekyll-archives, jekyll-sitemap, mini_magick and jekyll-paginate-v2
@@ -56,29 +40,29 @@ You will need to install [ImageMagick](https://imagemagick.org/) on your system 
 
 __NOTE :__ This theme is not compatible with github pages as it uses a custom plugin. [Here is a guide](http://ixti.net/software/2013/01/28/using-jekyll-plugins-on-github-pages.html) how to host it on github. In a nutshell, the trick is to build the website to the `./docs` locally and commit/push this along with the other files. GitHub can then be set up to host the site directly from the `./docs` folder.
 
-## Updating Header and Footer Links
+## Building the site
 
-Links in the header and footer are auto-generated. Links will be made for all files marked `category: page`, that have a title, and have the custom `main_nav` front-matter variable set to `true`. You can modify the rules for link generation in `_layouts/nav_links.html`.
+On windows you can use the batch files included. run_server.bat will start the development server and the site will
+become available locally on localhost:4000. To build the site into the docs folder (requirement to host on GitHub) use
+run_build.bat
 
-## Updating Styles
+```commandline
+run_server.bat
+run_build.bat
+```
 
-If you want change the CSS of the theme, you'll probably want to check out these files in the `_sass/` directory:
+The command to start the dev server is (without using the batch file):
 
-* `base/_variables.scss`: Common values found throughout the project, including base font size, font families, colors, and more.
-* `base/_typography.scss`: Base typography values for the site (see `typography.html` for a demonstration)
-* `_layout.scss`: The primary styles for the layout and design of the theme.
-* Update the images for logo, stickers ... in `assets/`
+```commandline
+bundle exec jekyll serve --config _config_dev.yml
+```
 
-### Important Variables
+The underlaying command to (re-)build the website is:
 
-Here are the important variables from `base/_variables.scss` you can tweak to customize the theme to your liking:
+```commandline
+bundle exec jekyll build --config _config.yml
+```
 
-* `$base-font-family`: The font-family of the body text. Make sure to `@import` any new fonts!
-* `$heading-font-family`: The font-family of the headers. Make sure to `@import` any new fonts!
-* `$base-font-size`: The base font-size. Defaults to $em-base from Bourbon (`bourbon/settings/_px-to-em.scss`).
-* `$base-font-color`: The color for the body text.
-* `$action-color`: The color for links in the body text.
-* `$highlight-color`: The color for the footer and page headers (when no cover image provided).
 
 ## Configuration
 
@@ -111,7 +95,9 @@ See the documentation for [jekyll-paginate-v2](https://github.com/sverrirs/jekyl
 
 ### Archive Settings
 
-Although this theme comes with a combined, categorized archive (see `posts.html`), you can enable further archive creation thanks to [jekyll-archives][archives]. Support for category and tag archive pages is included, but you can also add your own archive pages for years, months, and days.
+Although this theme comes with a combined, categorized archive (see `posts.html`), you can enable further archive
+creation thanks to [jekyll-archives][archives]. Support for category and tag archive pages is included, but you can also
+add your own archive pages for years, months, and days.
 
 To change archive settings, see the __jekyll-archives__ section of `_config.yml`:
 
@@ -159,13 +145,18 @@ social:
 
 ### Social Protocols
 
-Using the Open Graph Protocol or Twitter Card metadata, you can automatically set the images and text used when people share your site on Twitter or Facebook. These take a bit of setup, but are well worth it. The relevant fields are at the end of the `_config.yml` file.
+Using the Open Graph Protocol or Twitter Card metadata, you can automatically set the images and text used when people
+share your site on Twitter or Facebook. These take a bit of setup, but are well worth it. The relevant fields are at the
+end of the `_config.yml` file.
 
-Also there is another protocol, the Open Source protocol, for saying where your site is hosted if the source is open. This helps develops more easily see your code if they are interested, or if they have issues. For more, see http://osprotocol.com.
+Also there is another protocol, the Open Source protocol, for saying where your site is hosted if the source is open.
+This helps develops more easily see your code if they are interested, or if they have issues. For more, see
+http://osprotocol.com.
 
 ### Category Descriptions
 
-You can enhance the `posts.html` archive page with descriptions of your post categories. See the __descriptions__ section of `_config.yml`:
+You can enhance the `posts.html` archive page with descriptions of your post categories. See the __descriptions__
+section of `_config.yml`:
 
 ```yml
 # Category descriptions (for archive pages)
@@ -176,15 +167,16 @@ descriptions:
 
 ### Custom Page-Specific Javascript
 
-You can add page-specific javascript files by adding them to the top-level `/js` directory and including the filename in the __custom_js__ page's configuration file:
+You can add page-specific javascript files by adding them to the top-level `/js` directory and including the filename in
+the __custom_js__ page's configuration file:
 
 ```yml
 # Custom js (for individual pages)
 ---
 layout: post
 title:  "Dummy Post"
-date:   2015-04-18 08:43:59
-author: Ben Centra
+date:   20120-02-09 12:00:00
+author: Sebastian Proost
 categories: Dummy
 custom_js:
 - Popmotion
@@ -199,9 +191,50 @@ $ ls js/
 Popmotion.js Vue.js
 ```
 
+## Modifying the theme
+
+### Updating Header and Footer Links
+
+Links in the header and footer are auto-generated. Links will be made for all files marked `category: page`, that have a
+ title, and have the custom `main_nav` front-matter variable set to `true`. You can modify the rules for link generation
+ in `_layouts/nav_links.html`.
+
+### Updating Styles
+
+If you want change the CSS of the theme, you'll probably want to check out these files in the `_sass/` directory:
+
+* `base/_variables.scss`: Common values found throughout the project, including base font size, font families, colors, and more.
+* `base/_typography.scss`: Base typography values for the site (see `typography.html` for a demonstration)
+* `_layout.scss`: The primary styles for the layout and design of the theme.
+* Update the images for logo, stickers ... in `assets/`
+
+#### Important Variables
+
+Here are the important variables from `base/_variables.scss` you can tweak to customize the theme to your liking:
+
+* `$base-font-family`: The font-family of the body text. Make sure to `@import` any new fonts!
+* `$heading-font-family`: The font-family of the headers. Make sure to `@import` any new fonts!
+* `$base-font-size`: The base font-size. Defaults to $em-base from Bourbon (`bourbon/settings/_px-to-em.scss`).
+* `$base-font-color`: The color for the body text.
+* `$action-color`: The color for links in the body text.
+* `$highlight-color`: The color for the footer and page headers (when no cover image provided).
+
+
 ## License
 
 MIT. See [LICENSE.MD](https://github.com/4dcu-be/4dcu.be/blob/master/LICENSE.md).
+
+## Acknowledgements
+
+4DCu.be is based on a jekyll theme by [Ben Centra][Ben Centra]. 
+
+Which includes these awesome libraries:
+* [Bourbon][bourbon]
+* [Neat][neat]
+* [Bitters][bitters]
+* [Refills][refills]
+* [Font Awesome][fontawesome]
+* [Lightgallery][Lightgallery]
 
 [bencentra]: http://bencentra.com
 [bourbon]: http://bourbon.io/

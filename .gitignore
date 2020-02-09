@@ -17,3 +17,5 @@ vendor/
 # Don't upload draft posts
 _drafts
 _drafts/*
+
+_site/
