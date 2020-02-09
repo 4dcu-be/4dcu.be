@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Minimalist Art Using a Genetic Algorithm</title>
+  <meta name="description" content="While the genetic algorithm in the previous postworked very well, it didn’t quite produce the style of minimalist artwork I was trying to achieve. Furthermor...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="While the genetic algorithm in the previous postworked very well, it didn’t quite produce the style of minimalist artwork I was trying to achieve. Furthermor..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/2020/02/10/Genetic-Art-Algorithm-2.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Minimalist Art Using a Genetic Algorithm" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/vermeer_header.jpg" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Minimalist Art Using a Genetic Algorithm">
+  <meta name="twitter:description" content="While the genetic algorithm in the previous postworked very well, it didn’t quite produce the style of minimalist artwork I was trying to achieve. Furthermor...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/vermeer_header.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/2020/02/10/Genetic-Art-Algorithm-2.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/2020/02/10/Genetic-Art-Algorithm-2.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/vermeer_header.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Minimalist Art Using a Genetic Algorithm</h1>
+			
+      <p class="info"><em>a different take on Vermeer's Girl with a Pearl Earring</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted February 10, 2020 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>While the genetic algorithm in the <a href="/programming/2020/01/12/Genetic-Art-Algorithm.html">previous post</a>
+worked very well, it didn’t quite produce the style of minimalist artwork I was trying to achieve. Furthermore, it didn’t allow
+the chromosomes to evolve using duplication and deletion of existing genes (which is very common in biology). So
+after mulling over these issues a few days, I found a solution using a <a href="https://en.wikipedia.org/wiki/Voronoi_diagram">Voronoi diagram</a>. The final 
+result (shown below) is much closer to what I was aiming for. The painting to re-drawn by the algorithm this time is
+Vermeer’s <a href="https://en.wikipedia.org/wiki/Girl_with_a_Pearl_Earring">Girl with a Pearl Earring</a>.</p>
+
+<div class="gallery-2-col">
+  <p><a href="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/girl_with_pearl_earring.jpg" class="lightgallery-link" data-sub-html="Vermeer's Girl with a Pearl Earring">
+<img src="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/girl_with_pearl_earring.jpg" alt="Vermeer's Girl with a Pearl Earring" data-src="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/girl_with_pearl_earring.jpg" />
+</a>
+<a href="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/vermeer_generation_05600.png" class="lightgallery-link" data-sub-html="The output of the algorithm after 5600 generations">
+<img src="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/vermeer_generation_05600.png" alt="The output of the algorithm after 5600 generations" data-src="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/vermeer_generation_05600.png" />
+</a></p>
+</div>
+
+<h2 id="voronoi-diagrams-aka-partitions-or-cells">Voronoi diagrams (aka partitions or cells)</h2>
+
+<p>The plot below illustrates Voronoi diagrams; each blue point is an input point, black edges and orange corners are 
+calculated. Black edges are equidistant between two neighboring points and orange points (endpoints of an edge) are equidistant 
+between three neighbors. This creates a polygon around each input point that is convex and non-overlapping. These 
+polygons can be colored and drawn as solid shapes which creates a cell pattern. (You can find an entertaining 
+explanation with more details <a href="https://youtu.be/Q804hv73L6U?t=66">here</a>)</p>
+
+<div class="gallery-2-col">
+  <p><a href="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/voronoi_plot.png" class="lightgallery-link" data-sub-html="Voronoi plot, blue dots are the input. Black edges and orange points are calculated based on the input">
+<img src="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/voronoi_plot.png" alt="Voronoi plot, blue dots are the input. Black edges and orange points are calculated based on the input" data-src="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/voronoi_plot.png" />
+</a>
+<a href="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/voronoi_polygons.png" class="lightgallery-link" data-sub-html="Colored the individual polygons of the plot">
+<img src="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/voronoi_polygons.png" alt="Colored the individual polygons of the plot" data-src="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/voronoi_polygons.png" />
+</a></p>
+</div>
+
+<p>In Python Voronoi diagrams can easily be created and plotted from a list of points using the <strong>Voronoi</strong> classe and <strong>voronoi_plot_2d</strong>
+function which are included in <a href="https://www.scipy.org/">SciPy</a>. Excluding the imports you only need four lines of code !</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="kn">import</span> <span class="n">Voronoi</span><span class="p">,</span> <span class="n">voronoi_plot_2d</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+
+<span class="c1"># Generate 200 random points between 0-500, 0-500
+</span><span class="n">points</span> <span class="o">=</span> <span class="p">[(</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">500</span><span class="p">),</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">)]</span>
+
+<span class="n">vor</span> <span class="o">=</span> <span class="n">Voronoi</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+<span class="n">voronoi_plot_2d</span><span class="p">(</span><span class="n">vor</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="the-new-genes-and-chromosomes">The new genes and chromosomes</h2>
+
+<p>Here the chromosome is a list of 2D points, each with an RGB color attached to it (the genes). These points can move, 
+or the color can shift in a mutation step. The order of the points doesn’t matter and making a copy of a gene doesn’t 
+have an impact on the image it produces. However it does provide additional ‘genetic material’ that can evolve and 
+can create complexity as duplicate points start to diverge. Points can also be removed again from the chromosome, as 
+Voronoi partitions are used, the gap will be filled automatically by the surrounding genes.</p>
+
+<p>Here is the code for a single point, aka the gene. The code for the chromosome is nearly identical to that from the
+previous post with the exception of some trivial functions to duplicate genes and remove a random gene.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">shuffle</span><span class="p">,</span> <span class="n">randint</span><span class="p">,</span> <span class="n">choices</span><span class="p">,</span> <span class="n">choice</span>
+
+<span class="k">class</span> <span class="nc">ColoredPoint</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img_width</span><span class="p">,</span> <span class="n">img_height</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coordinates</span> <span class="o">=</span> <span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">img_width</span><span class="p">)),</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">img_height</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>  <span class="c1"># Random value for the Red channel
+</span>                      <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>  <span class="c1"># Random value for the Green channel
+</span>                      <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>  <span class="c1"># Random value for the Blue channel
+</span>                      <span class="mi">255</span><span class="p">)</span>              <span class="c1"># The Alpha channel is fixed
+</span>
+    <span class="k">def</span> <span class="nf">mutate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+        <span class="n">mutations</span> <span class="o">=</span> <span class="p">[</span><span class="s">'shift'</span><span class="p">,</span> <span class="s">'color'</span><span class="p">]</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
+
+        <span class="n">mutation_type</span> <span class="o">=</span> <span class="n">choices</span><span class="p">(</span><span class="n">mutations</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">mutation_type</span> <span class="o">==</span> <span class="s">'shift'</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">coordinates</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span><span class="o">*</span><span class="n">sigma</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span><span class="o">*</span><span class="n">sigma</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">mutation_type</span> <span class="o">==</span> <span class="s">'color'</span><span class="p">:</span>
+            <span class="n">red</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">25</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span><span class="o">*</span><span class="n">sigma</span><span class="p">)</span>
+            <span class="n">green</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">25</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span><span class="o">*</span><span class="n">sigma</span><span class="p">)</span>
+            <span class="n">blue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">25</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span><span class="o">*</span><span class="n">sigma</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="n">red</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="n">blue</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+
+            <span class="c1"># Ensure color is within correct range
+</span>            <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
+                <span class="nb">min</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">255</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span>
+            <span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="evolution-through-duplication">Evolution through duplication</h2>
+
+<p>As points can be duplicated (and this initially has no impact on the image), this allows us to start with a relatively 
+small number of points, evolve these for a while until we get close to the 
+optimal. Then we can trigger a <em>whole genome duplication</em> where a chromosome is doubled. This will initially have no
+impact on the image, but as the duplicated points start to diverge, this can create additional complexity and a better fit
+to the target image. However, an excess of points will run rather slowly as it will take more time to draw the image (and
+since we are drawing hundreds of images each generation this matters) and it will be harder to randomly make a beneficial mutation.
+To solve this issue we need to reduce the number of genes every so often as well. (While I haven’t been able to test this, 
+starting small, evolving to an optimum, duplicating the genome and evolving further should require fewer generations than when 
+starting from a larger set of randomly initiated points.)</p>
+
+<p>This is very similar to events that happened throughout the evolutionary history of many, many plants and animals, 
+including humans !</p>
+
+<p>The strategy used to generate the image in the beginning of the post was to start with 250 points and evolve them for 
+~1000 generations, then double the number of points and evolve for another 1000 generations, shrink the genome by 
+removing 100 points and double again. Then the population was left to evolve for a while and then force to shed 100 
+genes, this process was repeated a few times to end up with a final image that contains 600 points.</p>
+
+<p><a href="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/vermeer_evolution.png" class="lightgallery-link" data-sub-html="The evolution at generation 1, 250, 500, 750, 1000, 1500, 2500, 3500 and 5500">
+<img src="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/vermeer_evolution.png" alt="The evolution at generation 1, 250, 500, 750, 1000, 1500, 2500, 3500 and 5500" data-src="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/vermeer_evolution.png" />
+</a></p>
+
+<p>In the image above you can see the best individual (out of a population of 250) of generation 1, 250, 500, 750, 1000, 
+1500, 2500, 3500 and 5500. Between generation 1000-1500 and 2500-3500 there were duplications followed by a number of 
+normal evolutionary steps and a few reductions steps. The complexity and detail of the image clearly increases at these
+steps.</p>
+
+<h2 id="comparison-to-the-previous-algorithm">Comparison to the previous algorithm</h2>
+
+<p>I used this approach on Van Gogh’s A Starry Night as well, to compare the visual style of this algorithm with the previous
+one. Both images have a comparable fitness (distance to the target painting).</p>
+
+<div class="gallery-2-col">
+  <p><a href="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/starry_night_voronoi.png" class="lightgallery-link" data-sub-html="Van Gogh's A Starry Night using the Voronoi based algorithm">
+<img src="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/starry_night_voronoi.png" alt="Van Gogh's A Starry Night using the Voronoi based algorithm" data-src="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/starry_night_voronoi.png" />
+</a>
+<a href="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/starry_night_generation_5000.png" class="lightgallery-link" data-sub-html="Van Gogh's A Starry Night using the Triangle based algorithm">
+<img src="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/starry_night_generation_5000.png" alt="Van Gogh's A Starry Night using the Triangle based algorithm" data-src="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/starry_night_generation_5000.png" />
+</a></p>
+</div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This approach generates a minimalist style I was initially aiming for, while allowing for duplication and loss events
+which mimic biology. Mission accomplished!</p>
+
+<p>The code used here is mostly the same as the <a href="/programming/2020/01/12/Genetic-Art-Algorithm.html">previous post</a>, so I 
+didn’t go over it in much depth. However, everything can be found on GitHub! Check the
+<a href="https://github.com/4dcu-be/Genetic-Art-Algorithm-part-2">repository</a> for the full working code.</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/evolution">evolution</a>,&nbsp;<a href="/tag/genetic-algorithm">genetic-algorithm</a>,&nbsp;<a href="/tag/algorithm">algorithm</a>,&nbsp;<a href="/tag/art">art</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Minimalist+Art+Using+a+Genetic+Algorithm&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2020%2F02%2F10%2FGenetic-Art-Algorithm-2.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/programming/2020/01/12/Genetic-Art-Algorithm.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Genetic Art Algorithm</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '4dcube';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+
+				</ul>
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
+			<p class="text">Last update: February 9, 2020</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/programming/2020/02/10/Genetic-Art-Algorithm-2.html',
+    'title': 'Minimalist Art Using a Genetic Algorithm'
+  });
+</script>
+
+
+  </body>
+
+</html>
