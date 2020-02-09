@@ -6,7 +6,7 @@
 </li>
 
 {% for social in site.social %}
-	{% if social.url != "" %}
+	{% if social.url %}
 	<li>
 		<i class="fa fa-{{ social.icon }}"></i>
 		<a href="{{ social.url }}" title="{{ social.desc }}">

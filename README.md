@@ -18,10 +18,11 @@ This theme comes with a number of features, including:
 * Google Analytics with custom page name tracking
 * Social media integration (Twitter, Facebook, LinkedIn, GitHub, and more)
 * Thumbnail generator
+* Gallery generator (to highlight the best images)
 
 ## Installation
 
-If you're just getting started with Jekyll, you can use this repository as a starting point for your own site. Just 
+Feel free to use this template as the base for your blog. Just 
 download this project and add all the files to your project. Add your blog posts to the `posts/` directory, 
 and create your pages with the proper Jekyll front matter (see `posts.html` for an example).
 
@@ -38,7 +39,10 @@ bundle install
 
 You will need to install [ImageMagick](https://imagemagick.org/) on your system as well for the thumbnail generation.
 
-__NOTE :__ This theme is not compatible with github pages as it uses a custom plugin. [Here is a guide](http://ixti.net/software/2013/01/28/using-jekyll-plugins-on-github-pages.html) how to host it on github. In a nutshell, the trick is to build the website to the `./docs` locally and commit/push this along with the other files. GitHub can then be set up to host the site directly from the `./docs` folder.
+__NOTE :__ This theme is not compatible with github pages as it uses a custom plugin. 
+[Here is a guide](http://ixti.net/software/2013/01/28/using-jekyll-plugins-on-github-pages.html) how to host it on 
+github. In a nutshell, the trick is to build the website to the `./docs` locally and commit/push this along with the 
+other files. GitHub can then be set up to host the site directly from the `./docs` folder.
 
 ## Building the site
 
@@ -135,12 +139,12 @@ Your personal social network settings are combined with the social sharing optio
 
 ```yml
 social:
-  - name: Twitter                         # Name of the service
-    icon: twitter                         # Font Awesome icon to use (minus fa- prefix)
-    username: TheBenCentra                # (User) Name to display in the footer link
-    url: https://twitter.com/TheBenCentra # URL of your profile (leave blank to not display in footer)
-    desc: Follow me on Twitter            # Description to display as link title, etc
-    share: true                           # Include in the "Share" section of posts
+  - name: Twitter                             # Name of the service
+    icon: twitter                             # Font Awesome icon to use (minus fa- prefix)
+    username: ProostSebastian                 # (User) Name to display in the footer link
+    url: https://twitter.com/ProostSebastian  # URL of your profile (leave blank to not display in footer)
+    desc: Follow me on Twitter                # Description to display as link title, etc
+    share: true                               # Include in the "Share" section of posts
 ```
 
 ### Social Protocols
@@ -175,7 +179,7 @@ the __custom_js__ page's configuration file:
 ---
 layout: post
 title:  "Dummy Post"
-date:   20120-02-09 12:00:00
+date:   2020-02-09 12:00:00
 author: Sebastian Proost
 categories: Dummy
 custom_js:
@@ -236,7 +240,6 @@ Which includes these awesome libraries:
 * [Font Awesome][fontawesome]
 * [Lightgallery][Lightgallery]
 
-[bencentra]: http://bencentra.com
 [bourbon]: http://bourbon.io/
 [neat]: http://neat.bourbon.io/
 [bitters]: http://bitters.bourbon.io/
