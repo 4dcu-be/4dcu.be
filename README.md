@@ -19,6 +19,7 @@ This theme comes with a number of features, including:
 * Social media integration (Twitter, Facebook, LinkedIn, GitHub, and more)
 * Thumbnail generator
 * Gallery generator (to highlight the best images)
+* AOS integration (Animate on Scroll)
 
 ## Installation
 
@@ -239,6 +240,7 @@ Which includes these awesome libraries:
 * [Refills][refills]
 * [Font Awesome][fontawesome]
 * [Lightgallery][Lightgallery]
+* [AOS][AOS]
 
 [bourbon]: http://bourbon.io/
 [neat]: http://neat.bourbon.io/
@@ -246,6 +248,7 @@ Which includes these awesome libraries:
 [refills]: http://refills.bourbon.io/
 [fontawesome]: http://fortawesome.github.io/Font-Awesome/
 [Lightgallery]: https://sachinchoolur.github.io/lightgallery.js/
+[AOS]: https://michalsnik.github.io/aos/
 [disqus]: https://disqus.com/
 [ga]: http://www.google.com/analytics/
 [archives]: https://github.com/jekyll/jekyll-archives
