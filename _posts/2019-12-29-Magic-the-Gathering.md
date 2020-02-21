@@ -206,7 +206,7 @@ classifier on any format you want. While I played a fair bit of Legacy, and curr
 experience with Modern and Pioneer. This classifier would very quickly give me a way to *(gu)estimate* what an 
 opponent is playing without having to know each competitive deck in the format.
 
-**Update 21/02/2020: Imblearn depricated the return_indices parameter. The code has been updated
+**Update 21/02/2020: Imblearn depricated the return_indices parameter. The code has been updated**
 
 ## Legal
 
