@@ -154,11 +154,8 @@ decklists. This process is called random undersampling.
 from imblearn.under_sampling import RandomUnderSampler
 from sklearn.ensemble import RandomForestClassifier
 
-rus = RandomUnderSampler(return_indices=True)
-X_rus, y_rus, id_rus = rus.fit_sample(X_train, y_train)
-
-# Print how much data we lose because of the Under Sampling
-print('Indices removed ', len(id_rus))
+rus = RandomUnderSampler()
+X_rus, y_rus = rus.fit_sample(X_train, y_train)
 
 # Build a new classifier on the under sampled dataset
 rfc = RandomForestClassifier(max_depth=None, 
@@ -208,6 +205,8 @@ Personally, I think it is awesome how you can, in a matter of minutes, pull a se
 classifier on any format you want. While I played a fair bit of Legacy, and currently play Standard, I have no 
 experience with Modern and Pioneer. This classifier would very quickly give me a way to *(gu)estimate* what an 
 opponent is playing without having to know each competitive deck in the format.
+
+**Update 21/02/2020: Imblearn depricated the return_indices parameter. The code has been updated
 
 ## Legal
 

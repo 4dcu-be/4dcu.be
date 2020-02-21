@@ -525,11 +525,8 @@ decklists. This process is called random undersampling.</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">imblearn.under_sampling</span> <span class="kn">import</span> <span class="n">RandomUnderSampler</span>
 <span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
 
-<span class="n">rus</span> <span class="o">=</span> <span class="n">RandomUnderSampler</span><span class="p">(</span><span class="n">return_indices</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">X_rus</span><span class="p">,</span> <span class="n">y_rus</span><span class="p">,</span> <span class="n">id_rus</span> <span class="o">=</span> <span class="n">rus</span><span class="o">.</span><span class="n">fit_sample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
-<span class="c1"># Print how much data we lose because of the Under Sampling
-</span><span class="k">print</span><span class="p">(</span><span class="s">'Indices removed '</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">id_rus</span><span class="p">))</span>
+<span class="n">rus</span> <span class="o">=</span> <span class="n">RandomUnderSampler</span><span class="p">()</span>
+<span class="n">X_rus</span><span class="p">,</span> <span class="n">y_rus</span> <span class="o">=</span> <span class="n">rus</span><span class="o">.</span><span class="n">fit_sample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
 <span class="c1"># Build a new classifier on the under sampled dataset
 </span><span class="n">rfc</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> 
@@ -578,6 +575,8 @@ classifier.</p>
 classifier on any format you want. While I played a fair bit of Legacy, and currently play Standard, I have no 
 experience with Modern and Pioneer. This classifier would very quickly give me a way to <em>(gu)estimate</em> what an 
 opponent is playing without having to know each competitive deck in the format.</p>
+
+<p>**Update 21/02/2020: Imblearn depricated the return_indices parameter. The code has been updated</p>
 
 <h2 id="legal">Legal</h2>
 
@@ -901,7 +900,7 @@ endorsed by, supported by, or affiliated with Wizards of the Coast.</p>
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: February 15, 2020</p>
+			<p class="text">Last update: February 21, 2020</p>
     </div>
 
   </div>
