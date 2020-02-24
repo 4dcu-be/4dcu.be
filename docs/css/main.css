@@ -1580,10 +1580,10 @@ code {
     display: inline-grid; }
     @media screen and (min-width: 768px) {
       .gallery-items .gallery-item {
-        width: 33%; } }
+        width: 32%; } }
     @media screen and (min-width: 960px) {
       .gallery-items .gallery-item {
-        width: 25%; } }
+        width: 24%; } }
     .gallery-items .gallery-item img {
       height: auto;
       max-width: 100%;

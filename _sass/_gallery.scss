@@ -12,11 +12,11 @@
     display: inline-grid;
 
 			@include media($tablet) {
-				width: 33%;
+				width: 32%;
 			}
 
 		  @include media($desktop) {
-				width: 25%;
+				width: 24%;
 			}
 
     img {
