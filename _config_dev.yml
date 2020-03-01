@@ -72,7 +72,8 @@ gallery_items:
 disqus_shortname: 4dcube
 
 # Google analytics
-ga_tracking_id: "UA-47068418-5"
+# Disable for development
+# ga_tracking_id: "UA-47068418-5"
 
 # Category descriptions (for archive pages)
 descriptions:
