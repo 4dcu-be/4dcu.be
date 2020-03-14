@@ -16,7 +16,7 @@ gallery_items:
 
 ---
 
-This blog is build using [Jekyll], which can be used to generate a static website based on a set of templates (for the
+This blog is built using [Jekyll], which can be used to generate a static website based on a set of templates (for the
 layout) and markdown files (for the content). The main advantage is that GitHub pages can be leveraged to host those
 static pages for free. However, while there are plenty of great [themes] available, some features I really wanted are
 usually not included. Fortunately, [Jekyll] supports plugins to fill those gaps, here you'll read about some plugins 
@@ -24,13 +24,13 @@ I made for this blog and [Beyond the Known] (a travel blog).
 
 ## Getting started
 
-For both blogs I'm involved in, the [Centrarium] theme was used as a starting point. This them already included many 
+For both blogs I'm involved in, the [Centrarium] theme was used as a starting point. This theme already included many 
 bits and pieces I wanted. There really isn't any need to re-invent the wheel for every project. I did make a number of changes
 to the theme, for instance I removed support for [HighlightJS] in favor for default code highlighter present in Jekyll.
 I also prefer [LightGallery] over [Lightbox], so I swapped that out as well. 
 
-These changes are pure html and css, you just need to pinpoint where the relevant code in the **\_includes** or 
-**\_layouts** folder and make the change. However I wanted a few more things that took a little bit more effort to
+These changes are pure html, js and css, you just need to pinpoint where the relevant code in the **\_sass**, **\_includes** or 
+**\_layouts** folder and make the change. However, I wanted a few more things that took a little bit more effort to
 include.
 
 ## Automatic LightGallery links for all images
@@ -42,8 +42,8 @@ In markdown you have a rather simple way to include an image.
 ```
 
 Technically, you should add the website's baseurl to the path. This way the site will work also when hosted in a 
-sub-directory. This can be done by adding **{%raw%}{{ site.baseurl }}/{%endraw%}** before the path. However if you ever want to 
-use the markdown files with another framework this will come back to haunt you... To include the image, with all the 
+sub-directory. This can be done by adding **{%raw%}{{ site.baseurl }}/{%endraw%}** before the path. This however is specific for the theme I started from and if you ever want to 
+use the markdown files with another theme or,framework this will come back to haunt you... To include the image, with all the 
 required features for LightGallery, you'll have to resort to including pure html in your markdown file.
 
 {% raw %}
@@ -66,7 +66,6 @@ code below needs to be added.
 {% raw %}
 ```ruby
 Jekyll::Hooks.register :posts, :pre_render do |post, payload|
-  docExt = post.extname.tr('.', '')
   post.content.gsub!(/^!\[(.*)\]\(([^\)]+)\)((?:{:[^}]+})*)/, "<a href=\"{{ site.baseurl }}\\2\" class=\"lightgallery-link\" data-sub-html=\"\\1\">\n![\\1]({{ site.baseurl }}\\2)\\3{:data-src=\"{{ site.baseurl }}\\2\"}\n</a>")
 end
 ```
@@ -79,12 +78,12 @@ declaration.
 
 ## Thumbnail generator
 
-Without pictures, the overview of posts looks rather dull, so adding a thumbnail there to grab the attention is a must.
+Without pictures, the overview pages look rather dull, so adding a thumbnail there to grab the attention is a must.
 As I will include a header image for each post, using the same image as the thumbnail is an option. However, the header
 image is far larger than needed, so I wanted to automatically scale this down. Using a generator you can can create new
 files using Ruby code, this can be used to create a low-resolution thumbnail for each header automatically.
 
-First, we need to add the desired size of the thumbnails in the website's **_config.yaml**, as shown below. These
+First, we need to add the desired size of the thumbnails in the website's **_config.yml**, as shown below. These
 are parameters that will be passed to ImageMagik.
 
 ```yaml
@@ -158,9 +157,9 @@ end
 ```
 
 This will select all posts with a thumbnail path defined and load the dimensions from the configuration. Then it will
-iterate over the selected posts, resize the header to the desired size and write the output to the thumbnail path, if
-the thumbnail doesn't exist and the input file is older than the generated thumbnail (to avoid unnecessarily resizing 
-images over and over).
+iterate over the selected posts, resize the header to the desired size and write the output to the thumbnail path. 
+to avoid unnecessarily resizing images over and over it will check if the thumbnail exists and the input file isn't 
+newer than the thumbnail.
 
 Finally, the image needs to be included in the posts overview, but this is as trivial as getting the post's title !
 

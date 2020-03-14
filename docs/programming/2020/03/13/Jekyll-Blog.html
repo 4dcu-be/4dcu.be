@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Jekyll Plugins</title>
-  <meta name="description" content="This blog is build using Jekyll, which can be used to generate a static website based on a set of templates (for thelayout) and markdown files (for the conte...">
+  <meta name="description" content="This blog is built using Jekyll, which can be used to generate a static website based on a set of templates (for thelayout) and markdown files (for the conte...">
   
   <meta name="author" content="Sebastian Proost">
   <meta name="copyright" content="&copy; Sebastian Proost 2020">
@@ -40,7 +40,7 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="This blog is build using Jekyll, which can be used to generate a static website based on a set of templates (for thelayout) and markdown files (for the conte..." />
+  <meta property="og:description" content="This blog is built using Jekyll, which can be used to generate a static website based on a set of templates (for thelayout) and markdown files (for the conte..." />
   <meta property="og:url" content="https://blog.4dcu.be/programming/2020/03/13/Jekyll-Blog.html">
   <meta property="og:site_name" content="4DCu.be" />
   <meta property="og:title" content="Jekyll Plugins" />
@@ -55,7 +55,7 @@
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Jekyll Plugins">
-  <meta name="twitter:description" content="This blog is build using Jekyll, which can be used to generate a static website based on a set of templates (for thelayout) and markdown files (for the conte...">
+  <meta name="twitter:description" content="This blog is built using Jekyll, which can be used to generate a static website based on a set of templates (for thelayout) and markdown files (for the conte...">
   <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2020-03-13-Jekyll-Blog/map_extension.png">
   <meta name="twitter:url" content="https://blog.4dcu.be/programming/2020/03/13/Jekyll-Blog.html">
   
@@ -197,7 +197,7 @@
 </section>
 
 <article class="post-content">
-  <p>This blog is build using <a href="https://jekyllrb.com/">Jekyll</a>, which can be used to generate a static website based on a set of templates (for the
+  <p>This blog is built using <a href="https://jekyllrb.com/">Jekyll</a>, which can be used to generate a static website based on a set of templates (for the
 layout) and markdown files (for the content). The main advantage is that GitHub pages can be leveraged to host those
 static pages for free. However, while there are plenty of great <a href="http://jekyllthemes.org/">themes</a> available, some features I really wanted are
 usually not included. Fortunately, <a href="https://jekyllrb.com/">Jekyll</a> supports plugins to fill those gaps, here you’ll read about some plugins 
@@ -205,13 +205,13 @@ I made for this blog and <a href="http://beyond-the-known.eu/">Beyond the Known<
 
 <h2 id="getting-started">Getting started</h2>
 
-<p>For both blogs I’m involved in, the <a href="https://github.com/bencentra/centrarium">Centrarium</a> theme was used as a starting point. This them already included many 
+<p>For both blogs I’m involved in, the <a href="https://github.com/bencentra/centrarium">Centrarium</a> theme was used as a starting point. This theme already included many 
 bits and pieces I wanted. There really isn’t any need to re-invent the wheel for every project. I did make a number of changes
 to the theme, for instance I removed support for <a href="https://highlightjs.org/">HighlightJS</a> in favor for default code highlighter present in Jekyll.
 I also prefer <a href="http://sachinchoolur.github.io/lightGallery/">LightGallery</a> over <a href="https://lokeshdhakar.com/projects/lightbox2/">Lightbox</a>, so I swapped that out as well.</p>
 
-<p>These changes are pure html and css, you just need to pinpoint where the relevant code in the <strong>_includes</strong> or 
-<strong>_layouts</strong> folder and make the change. However I wanted a few more things that took a little bit more effort to
+<p>These changes are pure html, js and css, you just need to pinpoint where the relevant code in the <strong>_sass</strong>, <strong>_includes</strong> or 
+<strong>_layouts</strong> folder and make the change. However, I wanted a few more things that took a little bit more effort to
 include.</p>
 
 <h2 id="automatic-lightgallery-links-for-all-images">Automatic LightGallery links for all images</h2>
@@ -222,8 +222,8 @@ include.</p>
 </code></pre></div></div>
 
 <p>Technically, you should add the website’s baseurl to the path. This way the site will work also when hosted in a 
-sub-directory. This can be done by adding <strong>{{ site.baseurl }}/</strong> before the path. However if you ever want to 
-use the markdown files with another framework this will come back to haunt you… To include the image, with all the 
+sub-directory. This can be done by adding <strong>{{ site.baseurl }}/</strong> before the path. This however is specific for the theme I started from and if you ever want to 
+use the markdown files with another theme or,framework this will come back to haunt you… To include the image, with all the 
 required features for LightGallery, you’ll have to resort to including pure html in your markdown file.</p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{{ site.baseurl }}/path/to/the/image.jpg"</span> <span class="na">class=</span><span class="s">"lightgallery-link"</span> <span class="na">data-sub-html=</span><span class="s">"image_description"</span><span class="nt">&gt;</span>
@@ -241,7 +241,6 @@ Jekyll parses them, here we’ll include a hook that converts everything for us 
 code below needs to be added.</p>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">Jekyll</span><span class="o">::</span><span class="no">Hooks</span><span class="p">.</span><span class="nf">register</span> <span class="ss">:posts</span><span class="p">,</span> <span class="ss">:pre_render</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="p">,</span> <span class="n">payload</span><span class="o">|</span>
-  <span class="n">docExt</span> <span class="o">=</span> <span class="n">post</span><span class="p">.</span><span class="nf">extname</span><span class="p">.</span><span class="nf">tr</span><span class="p">(</span><span class="s1">'.'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
   <span class="n">post</span><span class="p">.</span><span class="nf">content</span><span class="p">.</span><span class="nf">gsub!</span><span class="p">(</span><span class="sr">/^!\[(.*)\]\(([^\)]+)\)((?:{:[^}]+})*)/</span><span class="p">,</span> <span class="s2">"&lt;a href=</span><span class="se">\"</span><span class="s2">{{ site.baseurl }}</span><span class="se">\\</span><span class="s2">2</span><span class="se">\"</span><span class="s2"> class=</span><span class="se">\"</span><span class="s2">lightgallery-link</span><span class="se">\"</span><span class="s2"> data-sub-html=</span><span class="se">\"\\</span><span class="s2">1</span><span class="se">\"</span><span class="s2">&gt;</span><span class="se">\n</span><span class="s2">![</span><span class="se">\\</span><span class="s2">1]({{ site.baseurl }}</span><span class="se">\\</span><span class="s2">2)</span><span class="se">\\</span><span class="s2">3{:data-src=</span><span class="se">\"</span><span class="s2">{{ site.baseurl }}</span><span class="se">\\</span><span class="s2">2</span><span class="se">\"</span><span class="s2">}</span><span class="se">\n</span><span class="s2">&lt;/a&gt;"</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div></div>
@@ -253,12 +252,12 @@ declaration.</p>
 
 <h2 id="thumbnail-generator">Thumbnail generator</h2>
 
-<p>Without pictures, the overview of posts looks rather dull, so adding a thumbnail there to grab the attention is a must.
+<p>Without pictures, the overview pages look rather dull, so adding a thumbnail there to grab the attention is a must.
 As I will include a header image for each post, using the same image as the thumbnail is an option. However, the header
 image is far larger than needed, so I wanted to automatically scale this down. Using a generator you can can create new
 files using Ruby code, this can be used to create a low-resolution thumbnail for each header automatically.</p>
 
-<p>First, we need to add the desired size of the thumbnails in the website’s <strong>_config.yaml</strong>, as shown below. These
+<p>First, we need to add the desired size of the thumbnails in the website’s <strong>_config.yml</strong>, as shown below. These
 are parameters that will be passed to ImageMagik.</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">plugins</span><span class="pi">:</span>
@@ -328,9 +327,9 @@ the place where the resized image will be written to.</p>
 </code></pre></div></div>
 
 <p>This will select all posts with a thumbnail path defined and load the dimensions from the configuration. Then it will
-iterate over the selected posts, resize the header to the desired size and write the output to the thumbnail path, if
-the thumbnail doesn’t exist and the input file is older than the generated thumbnail (to avoid unnecessarily resizing 
-images over and over).</p>
+iterate over the selected posts, resize the header to the desired size and write the output to the thumbnail path. 
+to avoid unnecessarily resizing images over and over it will check if the thumbnail exists and the input file isn’t 
+newer than the thumbnail.</p>
 
 <p>Finally, the image needs to be included in the posts overview, but this is as trivial as getting the post’s title !</p>
 
