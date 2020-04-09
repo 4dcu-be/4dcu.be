@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Jekyll Plugins"
-byline: "lift your blog to a higher level"
+title:  "Improving blogs with custom Jekyll Plugins"
+byline: "taking things to a higher level"
 date:   2020-03-13 12:00:00
 author: Sebastian Proost
 categories: programming
