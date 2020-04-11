@@ -367,13 +367,14 @@ Pelican can trigger functions at different stages of the build. By creating a pl
 find where keyforge.json is stored and the API key and connect to the different websites, pulling in all required 
 information.</p>
 
-<p>Pelican uses three components to create pages, a Reader (which reads files and converts them), a generator that takes
-the Reader’s data, processes it, generates a url and sends it with the correct template to the writer that will combine
-data and template into a single html file.</p>
+<p>Pelican uses three components to create pages, <strong>Readers</strong> (which reads files and converts them to a page e.g. blog posts, 
+articles, …), <strong>Generators</strong> that take data, processes it, generates a url and sends it with the correct template to a 
+<strong>Writer</strong> that will combine data and template into a single html file. Generators are use to generate overview pages 
+per category, … The default Writer is usually sufficient, so adding Readers and Generators is where the magic happens
+to create your own specific site’s structure.</p>
 
-<p>The function <em>get_keyforge_external_data</em> will write everything required to a single json file, so a Reader class can
-be omitted here, but we’ll have to create a generate that loads the data, builds a url for each deck and ships the 
-relevant data to our templates.</p>
+<p>The function <em>get_keyforge_external_data</em> will write everything required to a single json file, so we can forgo a Reader
+and use a Generator, that loads the data, builds a url for each deck and ships the relevant data to our templates.</p>
 
 <p>Here is a stub on how to create a function and register it to trigger on initialization and how to create a generator and
 register it with Pelican so it will produce our html files.</p>
@@ -761,7 +762,7 @@ as it is entwined with react which could prove handy to create a powerful, inter
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: April 9, 2020</p>
+			<p class="text">Last update: April 11, 2020</p>
     </div>
 
   </div>
