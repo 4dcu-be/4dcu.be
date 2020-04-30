@@ -22,7 +22,7 @@ static pages for free. However, while there are plenty of great [themes] availab
 usually not included. Fortunately, [Jekyll] supports plugins to fill those gaps, here you'll read about some plugins 
 I made for this blog and [Beyond the Known] (a travel blog).
 
-## Getting started
+## Getting Started
 
 For both blogs I'm involved in, the [Centrarium] theme was used as a starting point. This theme already included many 
 bits and pieces I wanted. There really isn't any need to re-invent the wheel for every project. I did make a number of changes
@@ -33,7 +33,7 @@ These changes are pure html, js and css, you just need to pinpoint where the rel
 **\_layouts** folder and make the change. However, I wanted a few more things that took a little bit more effort to
 include.
 
-## Automatic LightGallery links for all images
+## Automatic LightGallery Links for All Images
 
 In markdown you have a rather simple way to include an image.
 
@@ -76,7 +76,7 @@ link tags and add a section to set the data-src of the image correctly. This wil
 defined at the start of the line, so it can still be disabled by simply putting a space in front of the image 
 declaration.
 
-## Thumbnail generator
+## Thumbnail Generator
 
 Without pictures, the overview pages look rather dull, so adding a thumbnail there to grab the attention is a must.
 As I will include a header image for each post, using the same image as the thumbnail is an option. However, the header
