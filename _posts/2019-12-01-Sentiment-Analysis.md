@@ -23,7 +23,7 @@ found in a Jupyter notebook in [this repository](https://github.com/4dcu-be/Shap
 To understand what this post is about you should really have a look at this video. 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/oP3c1h8v2ZQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Sentiment Analysis in Python
+## Sentiment analysis in Python
 
 Python has the [Natural Language Toolkit](https://www.nltk.org/) which includes a very easy way to do sentiment 
 analysis. Import the correct library, create a SentimentIntsenityAnalyzer() and apply it on a fragment of text. Done! 

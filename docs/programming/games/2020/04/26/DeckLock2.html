@@ -173,6 +173,8 @@
 
 	
 
+	
+
 <li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
 
       </ul>
@@ -259,7 +261,7 @@ SB:  3 [UDS] Compost
 cards and also includes an API that can be used to fetch useful details to include. The set, included here between
 square brackets is optional, if nothing is entered the most recent version is selected.</p>
 
-<h3 id="the-reader-class">The Reader Class</h3>
+<h3 id="the-reader-class">The Reader class</h3>
 
 <p>Below you’ll find the code for the Reader, this needs to be a class that is build upon <a href="https://blog.getpelican.com/">Pelican</a>’s BaseReader, it needs
 to have a property <strong>enabled</strong> which should be set to True and a property <strong>file_extensions</strong> which is a list of extensions that
@@ -396,7 +398,7 @@ readers.</p>
 <span class="k">def</span> <span class="nf">register</span><span class="p">():</span>
     <span class="n">signals</span><span class="o">.</span><span class="n">readers_init</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">add_reader</span><span class="p">)</span>
 </code></pre></div></div>
-<h3 id="updating-the-configuration">Updating the Configuration</h3>
+<h3 id="updating-the-configuration">Updating the configuration</h3>
 
 <p>Just like for <a href="https://www.keyforgegame.com/">KeyForge</a> a few settings need to be included in the configuration file. Even if there are no decks, this 
 setting is required, setting this to False will remove <a href="/programming/games/2019/12/29/Magic-the-Gathering.html">Magic: the Gathering</a> from the main page overview. The other
@@ -414,7 +416,7 @@ mtg_overview.html is known to Pelican and will be rendered and stored as mtg.htm
 <span class="n">TEMPLATE_PAGES</span> <span class="o">=</span> <span class="p">{</span><span class="s">'mtg_overview.html'</span><span class="p">:</span> <span class="s">'mtg.html'</span><span class="p">}</span>
 </code></pre></div></div>
 
-<h2 id="a-note-on-card-images">A Note on Card Images</h2>
+<h2 id="a-note-on-card-images">A Note on card images</h2>
 
 <p>DeckLock will download images from Scryfall when building a local version using <em>make html</em>. For private use this is 
 permitted in most countries. However, when building a version to release on the internet including copyrighted images 
@@ -434,11 +436,11 @@ for hosting DeckLock online.</p>
 <p>These settings can be changed but should obviously be used with careful consideration. Re-hosting copyrighted material 
 might have repercussions.</p>
 
-<h2 id="other-improvements">Other Improvements</h2>
+<h2 id="other-improvements">Other improvements</h2>
 
 <p>Along with support for <a href="/programming/games/2019/12/29/Magic-the-Gathering.html">Magic: the Gathering</a> a number of other improvements were made. Most notably is the inclusion
-of a proper logo for DeckLock. But also under the hood there are a number of improvements. I’m currently looking at other 
-games, most likely <a href="https://www.playgwent.com/en">Gwent</a> which can be added … Stay tuned.</p>
+of a proper logo for DeckLock. But also under the hood there are a number of improvements. <a href="https://www.playgwent.com/en">Gwent</a> has been added in 
+[part 3].</p>
 
 
 </article>
@@ -727,6 +729,8 @@ games, most likely <a href="https://www.playgwent.com/en">Gwent</a> which can be
 
 	
 
+	
+
 <li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
 
       </ul>
@@ -782,7 +786,7 @@ games, most likely <a href="https://www.playgwent.com/en">Gwent</a> which can be
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: April 30, 2020</p>
+			<p class="text">Last update: May 24, 2020</p>
     </div>
 
   </div>

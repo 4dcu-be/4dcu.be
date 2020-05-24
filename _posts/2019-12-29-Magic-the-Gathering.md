@@ -122,7 +122,7 @@ The archetypes are the y_train data, essentially a list of categories for the fi
 | 4      | Bant Control   |
 | ...    | ...            |
 
-## Building a Classifier
+## Building a classifier
 
 Once the data is in the right format building a classifier is easy. Here I selected a RandomForestClassifier and played
 around with the settings to end up with this. 

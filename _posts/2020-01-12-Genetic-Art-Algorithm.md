@@ -28,7 +28,7 @@ an algorithm that evolves 150 random triangles into a famous piece of art. The w
 
 The code for this post can be found on GitHub [here](https://github.com/4dcu-be/Genetic-Art-Algorithm)
 
-## Genetic Algorithms
+## Genetic algorithms
 
 Before we start, a quick word about genetic algorithms. There is a rather lengthy description on 
 [WikiPedia], but here we'll keep it short and simple. These algorithms are 

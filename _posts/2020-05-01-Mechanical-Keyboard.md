@@ -20,7 +20,7 @@ gathering more information building one seemed like a fun project. You can see t
 
 ![Mechanical keyboard fully assembled](/assets/posts/2020-05-01-Mechanical-Keyboard/keyboard-final2.jpg)
 
-## What is a Mechanical Keyboard
+## What is a mechanical keyboard
 
 If you have no idea what a mechanical keyboard is, here is the tl;dr. Mass produced
 keyboards use rubber domes under the keys to register keystrokes. While this is cheap to produce, the typing experience
@@ -41,7 +41,7 @@ are available in a second or third (or fourth ...) layer, using a key you can sw
 shift key turns lower case letters into capital ones a keyboard can be set up that the menu key transforms the numbers
 into function keys (F1, F2, ...).
 
-## Building a Mechanical Keyboard
+## Building a mechanical keyboard
 
 While there are fully assembled keyboards available, building one yourself allows you to pick the parts and aesthetics 
 that match your preferences. However, this can also be daunting as there are many, many options for all components
@@ -107,12 +107,12 @@ Make sure to test all LEDs before proceeding. Note that the LED under the Caps-L
 is active on the DZ60. If that one doesn't light up immediately don't panic, use the wire or tweezers to enable 
 Caps-Lock and see if it turns on.
 
-### Step 2: Install the Stabilizers
+### Step 2: Install the stabilizers
 
 Figure out where the stabilizers go for our layout and install them. There are plenty of videos on youtube that show
 how to properly install them. Optionally you can apply some lube. 
 
-### Step 3: Mount the Backplate and Solder Switches
+### Step 3: Mount the backplate and solder switches
 
 Important note, the backplate is soldered in place with the switches and cannot be installed later on. Push in a few 
 switches in places where there is only one possible position (most of the top row, most letters) and place the backplate
@@ -130,7 +130,7 @@ required. Be careful not to damage the PCB.
 This is a time-consuming process, take your time and test regularly if all soldered switches are working. In spots where
 there are multiple options, check with switches with the keycaps attached where the switch needs to be installed.
 
-### Step 4: Install Some KeyCaps
+### Step 4: Install some keycaps
 
 You can start putting the keycaps on at this point. This is pretty straightforward, put the cap on the switch and push 
 it down firmly. Just make sure not the cover the holes to screw holes yet, you'll need to be able to access those to
@@ -138,7 +138,7 @@ put the PCB in the case. Test one more time if everything works.
 
 ![Installing the keycaps](/assets/posts/2020-05-01-Mechanical-Keyboard/installing-keycaps.jpg)
 
-### Step 5: Put the PCB in the Case
+### Step 5: Put the PCB in the case
 
 Put the PCB in the case, screw it in place and place the last few keycaps. The hardware part is done!
 

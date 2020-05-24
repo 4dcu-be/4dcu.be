@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>25 Fortnights of Code</title>
-  <meta name="description" content="I have a lot of projects sitting on my hard drive, most of them are half-finished and poorly documented. My resolution for 2020 is to improve this!">
+  <title>DeckLock part 3: How about a game of Gwent?</title>
+  <meta name="description" content="Gwent support in DeckLock has been on my ToDo list for some time as it currently is my favorite game. The artwork is stunning, it is well balanced and reward...">
   
   <meta name="author" content="Sebastian Proost">
   <meta name="copyright" content="&copy; Sebastian Proost 2020">
@@ -40,12 +40,12 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="I have a lot of projects sitting on my hard drive, most of them are half-finished and poorly documented. My resolution for 2020 is to improve this!" />
-  <meta property="og:url" content="https://blog.4dcu.be/programming/games/diy/2019/12/04/25-Fortnights.html">
+  <meta property="og:description" content="Gwent support in DeckLock has been on my ToDo list for some time as it currently is my favorite game. The artwork is stunning, it is well balanced and reward..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/games/2020/05/25/DeckLock3.html">
   <meta property="og:site_name" content="4DCu.be" />
-  <meta property="og:title" content="25 Fortnights of Code" />
+  <meta property="og:title" content="DeckLock part 3: How about a game of Gwent?" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://blog.4dcu.be/assets/images/headers/python_code.jpg" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2020-05-25-DeckLock3/gwent_header.jpg" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -54,17 +54,17 @@
   
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="25 Fortnights of Code">
-  <meta name="twitter:description" content="I have a lot of projects sitting on my hard drive, most of them are half-finished and poorly documented. My resolution for 2020 is to improve this!">
-  <meta name="twitter:image" content="https://blog.4dcu.be/assets/images/headers/python_code.jpg">
-  <meta name="twitter:url" content="https://blog.4dcu.be/programming/games/diy/2019/12/04/25-Fortnights.html">
+  <meta name="twitter:title" content="DeckLock part 3: How about a game of Gwent?">
+  <meta name="twitter:description" content="Gwent support in DeckLock has been on my ToDo list for some time as it currently is my favorite game. The artwork is stunning, it is well balanced and reward...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2020-05-25-DeckLock3/gwent_header.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/games/2020/05/25/DeckLock3.html">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://blog.4dcu.be/programming/games/diy/2019/12/04/25-Fortnights.html">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/games/2020/05/25/DeckLock3.html">
 	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
 	
 	<!-- Tooltips -->
@@ -186,12 +186,12 @@
     <div class="page-content">
         <div class="post">
 
-<div class="post-header-container has-cover" style="background-image: url(/assets/images/headers/python_code.jpg);">
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2020-05-25-DeckLock3/gwent_header.jpg);">
   <div class="scrim has-cover ">
     <header class="post-header">
-      <h1 class="title">25 Fortnights of Code</h1>
+      <h1 class="title">DeckLock part 3: How about a game of Gwent?</h1>
 			
-      <p class="info"><em>my take on the 100 days of code</em></p>
+      <p class="info"><em>Adding support for Gwent to DeckLock</em></p>
 			
     </header>
   </div>
@@ -202,7 +202,7 @@
 
 
 <section class="post-meta">
-  <div class="post-date">Posted December 4, 2019 by Sebastian Proost</div>
+  <div class="post-date">Posted May 25, 2020 by Sebastian Proost</div>
   <div class="post-categories">
   in 
     
@@ -210,31 +210,75 @@
     
   
     
-    <a href="/category/games">Games</a>, 
-    
-  
-    
-    <a href="/category/diy">Diy</a>
+    <a href="/category/games">Games</a>
     
   
   </div>
 </section>
 
 <article class="post-content">
-  <p>I have a lot of projects sitting on my hard drive, most of them are half-finished and poorly documented. My resolution 
-for 2020 is to improve this!</p>
+  <p><a href="https://www.playgwent.com/en">Gwent</a> support in DeckLock has been on my ToDo list for some time as it currently is my favorite game. The 
+artwork is stunning, it is well balanced and rewards skill. Though it being a digital-only card game makes it 
+somewhat different from <a href="https://www.keyforgegame.com/">KeyForge</a> and <a href="/programming/games/2019/12/29/Magic-the-Gathering.html">Magic: the Gathering</a>. As the latter have printed, physical cards the
+cards themselves can’t be changed. Occasionally, an errata is issued or cards that are to powerful are banned 
+from competitive play. In <a href="https://www.playgwent.com/en">Gwent</a> however, there are no physical cards, and cards can change from one update
+to another making them stronger, weaker or changing them entirely. As the official website does allow users
+to share their decklists, it only has data for the latest version. Therefore I opted to add decks using a
+decklist that contains information on the version and get card data from <a href="https://gwent.one/">The Voice of Gwent</a> which contains
+data for all cards for all versions.</p>
 
-<p>The <a href="https://www.100daysofcode.com/">100 Days of Code</a> challenge has been popular for some time now and many people 
-have done their own version of this. I would like to give it a slightly different spin, <strong>25 fortnights of code</strong>. 
-Instead of coding one hour a day, I would like to write <strong>one post</strong> every <strong>two weeks</strong> for <strong>one year</strong>. Most posts 
-will be code related, but I’ll also focus on documenting everything and presenting it in a clear way.</p>
+<p>Adding a deck works very much the same way as for a <a href="/programming/games/2019/12/29/Magic-the-Gathering.html">Magic: the Gathering</a> deck which was described in <a href="/programming/games/2020/04/26/DeckLock2.html">part 2</a>.
+Though as there is no standard format to represent a similar one to M:tG was used. The first few lines contain
+extra information, most importantly the version of Gwent the deck is compatible with, followed by the actual 
+deck list.</p>
 
-<p>Though I will only properly start in January 2020, I put up the <a href="/programming/2019/12/01/Sentiment-Analysis.html">first post</a> 
-already to give a glimpse on what to expect. What’s up next isn’t yet decided, however I will tell you I have a few more
-machine learning related projects in my folder, something with art and genetic algorithms and messing with GPX files.</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// NAME : Soldiers Ball
+// CREATOR : Team Leviathan Gaming
+// GWENT_VERSION : 6.2.0
+// FACTION : Nilfgard
+1 Imperial Formation
+1 Magic Lamp
+1 Masquerade Ball
+1 Vincent Van Moorlehem
+1 Joachim de Wett
+1 Ramon Tyrconnel
+1 Maraal
+1 Yennefer's Invocation
+1 Affan Hillergrand
+1 Ffion var Gaernel
+1 Sweers
+1 Albrich
+1 Van Moorlehem's Cupbearer
+1 Roderick of Dun Tynne
+2 Ard Feainn Crossbowman
+1 Ard Feainn Tortoise
+1 Tourney Joust
+2 Alba Spearman
+2 Magne Division
+1 Recruit
+2 Fangs of the Empire
+2 Van Moorlehem Hunter
+</code></pre></div></div>
 
-<p>All code related with posts here will be made available on GitHub in the <a href="https://github.com/4dcu-be">4DCu.be</a> page. If
-you have feedback feel free to open issues there, or post comments on the posts directly.</p>
+<p>This is the example of the Soldiers’ Ball deck from <a href="http://teamleviathangaming.com/meta">Team Leviathan Gaming</a>. This needs to be stored as a text file
+with a .gwent extention in the content folder and the Gwent <a href="https://blog.getpelican.com/">Pelican</a> plugin included in the new version of <a href="https://github.com/4dcu-be/DeckLock">DeckLock</a>
+will process it. If you’ve read <a href="/programming/games/2020/04/05/DeckLock.html">part 1</a> and <a href="/programming/games/2020/04/26/DeckLock2.html">part 2</a> of the DeckLock posts, there is nothing remarkable about
+the implementation.</p>
+
+<h2 id="handling-images">Handling images</h2>
+
+<p>One consequence of having digital cards that can change over time is how they are stored on <a href="https://gwent.one/">The Voice of Gwent</a>. You
+can download the images of the cards, but as other properies (like the power, the abilities, …) can change from one
+version to another, additional information is cleverly added using CSS.</p>
+
+<p><a href="/assets/posts/2020-05-25-DeckLock3/card-composition.jpg" class="lightgallery-link" data-sub-html="The Voice of Gwent cleverly combines parts with CSS">
+<img src="/assets/posts/2020-05-25-DeckLock3/card-composition.jpg" alt="The Voice of Gwent cleverly combines parts with CSS" data-src="/assets/posts/2020-05-25-DeckLock3/card-composition.jpg" />
+</a></p>
+
+<h2 id="code">Code</h2>
+
+<p>All the code for <a href="https://github.com/4dcu-be/DeckLock">DeckLock</a> is up on GitHub <a href="https://github.com/4dcu-be/DeckLock">https://github.com/4dcu-be/DeckLock</a>
+and you can check out the <a href="http://4dcu.be/DeckLock">demo</a> with the Decks I have and enjoy playing across the different games.</p>
 
 
 </article>
@@ -242,7 +286,7 @@ you have feedback feel free to open issues there, or post comments on the posts 
 
 
 <section class="tags">
-	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/intro">intro</a>
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/pelican">pelican</a>,&nbsp;<a href="/tag/blog">blog</a>,&nbsp;<a href="/tag/games">games</a>,&nbsp;<a href="/tag/keyforge">keyforge</a>,&nbsp;<a href="/tag/mtg">mtg</a>,&nbsp;<a href="/tag/magic-the-gathering">magic-the-gathering</a>,&nbsp;<a href="/tag/gwent">gwent</a>
 </section>
 
 
@@ -256,7 +300,7 @@ you have feedback feel free to open issues there, or post comments on the posts 
   
     
     
-      <a href="//twitter.com/share?text=25+Fortnights+of+Code&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2Fdiy%2F2019%2F12%2F04%2F25-Fortnights.html&via=ProostSebastian"
+      <a href="//twitter.com/share?text=DeckLock+part+3%3A+How+about+a+game+of+Gwent%3F&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2020%2F05%2F25%2FDeckLock3.html&via=ProostSebastian"
         onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
         <i class="fa fa-twitter-square fa-lg"></i>
       </a>
@@ -289,7 +333,7 @@ you have feedback feel free to open issues there, or post comments on the posts 
     
     
     
-      <a href="//www.facebook.com/sharer.php?t=25+Fortnights+of+Code&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2Fdiy%2F2019%2F12%2F04%2F25-Fortnights.html"
+      <a href="//www.facebook.com/sharer.php?t=DeckLock+part+3%3A+How+about+a+game+of+Gwent%3F&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2020%2F05%2F25%2FDeckLock3.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -305,7 +349,7 @@ you have feedback feel free to open issues there, or post comments on the posts 
     
     
     
-      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2Fdiy%2F2019%2F12%2F04%2F25-Fortnights.html"
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2020%2F05%2F25%2FDeckLock3.html"
         onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
         <i class="fa fa-linkedin-square fa-lg"></i>
       </a>
@@ -319,24 +363,16 @@ you have feedback feel free to open issues there, or post comments on the posts 
 	<section class="post-navigation">
 		<span class="prev-post">
 			
-				<a href="/programming/2019/12/01/Sentiment-Analysis.html">
+				<a href="/diy/2020/05/01/Mechanical-Keyboard.html">
 					<span class="fa-stack fa-lg">
 						<i class="fa fa-square fa-stack-2x"></i>
 						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
 					</span>
-					<span class="page-number">Sentiment Analysis and the Shape of Stories</span>
+					<span class="page-number">Building a Mechanical Keyboard</span>
 				</a>
 			
 		</span>
 		<span class="next-post">
-			
-				<a href="/programming/games/2019/12/29/Magic-the-Gathering.html">
-					<span class="page-number">Machine Learning: the Gathering</span>
-					<span class="fa-stack fa-lg">
-						<i class="fa fa-square fa-stack-2x"></i>
-						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
-					</span>
-				</a>
 			
 		</span>
 	</section>
@@ -656,8 +692,8 @@ $(document).ready(function() {
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
   ga('create', 'UA-47068418-5', 'auto');
   ga('send', 'pageview', {
-    'page': '/programming/games/diy/2019/12/04/25-Fortnights.html',
-    'title': '25 Fortnights of Code'
+    'page': '/programming/games/2020/05/25/DeckLock3.html',
+    'title': 'DeckLock part 3: How about a game of Gwent?'
   });
 </script>
 
