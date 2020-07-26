@@ -45,6 +45,10 @@
 <lastmod>2020-05-25T14:00:00+02:00</lastmod>
 </url>
 <url>
+<loc>https://blog.4dcu.be/programming/2020/07/26/BusyBoard.html</loc>
+<lastmod>2020-07-26T14:00:00+02:00</lastmod>
+</url>
+<url>
 <loc>https://blog.4dcu.be/about/</loc>
 </url>
 <url>
@@ -136,6 +140,12 @@
 </url>
 <url>
 <loc>https://blog.4dcu.be/tag/gwent/</loc>
+</url>
+<url>
+<loc>https://blog.4dcu.be/tag/flask/</loc>
+</url>
+<url>
+<loc>https://blog.4dcu.be/tag/sqlalchemy/</loc>
 </url>
 <url>
 <loc>https://blog.4dcu.be/category/programming/</loc>
