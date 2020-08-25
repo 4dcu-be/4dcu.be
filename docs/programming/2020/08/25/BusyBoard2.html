@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Integrate BusyBoard into HomeAssistant</title>
+  <meta name="description" content="Let’s take the little app created in the previous post up to the next level and integrate it into a home automationplatform Home Assistant (HA). That way if ...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Let’s take the little app created in the previous post up to the next level and integrate it into a home automationplatform Home Assistant (HA). That way if ..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/2020/08/25/BusyBoard2.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Integrate BusyBoard into HomeAssistant" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2020-08-25-BusyBoard2/moon_light.jpg" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Integrate BusyBoard into HomeAssistant">
+  <meta name="twitter:description" content="Let’s take the little app created in the previous post up to the next level and integrate it into a home automationplatform Home Assistant (HA). That way if ...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2020-08-25-BusyBoard2/moon_light.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/2020/08/25/BusyBoard2.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/2020/08/25/BusyBoard2.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2020-08-25-BusyBoard2/moon_light.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Integrate BusyBoard into HomeAssistant</h1>
+			
+      <p class="info"><em>and trigger automations when you are busy</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted August 25, 2020 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>Let’s take the little app created in the <a href="/programming/2020/07/26/BusyBoard.html">previous post</a> up to the next level and integrate it into a home automation
+platform <a href="https://www.home-assistant.io/">Home Assistant</a> (HA). That way if you change your status on the BusyBoard, Home Assistant can pick this up and
+trigger an automation. Here we’ll add an API to BusyBoard which can be read easily from Home Assistant so we can
+turn a smart light on (and switch the color to red).</p>
+
+<p>While the BusyBoard was a nifty solution to indicate to your household when you are busy with work and should not be 
+interrupted, this does require everyone to check the BusyBoard regularly. Not the most user-friendly experience! It would be far
+more convenient if we can somehow indicate thi in the real world … similar to an “On Air” sign in radio- and tv-studios.
+As I’ve already got a few smart lights linked up with HA this can fairly easily be done, but we’ll need an API in
+BusyBoard we can read from Home Assistant, so let’s implement this.</p>
+
+<h2 id="adding-an-api-to-busyboard">Adding an API to BusyBoard</h2>
+
+<p>If you are developing a larger application an you need an API, have a look at packages like <a href="https://flask-restful.readthedocs.io/en/latest/">Flask-Restful</a>
+or even a framework designed specifically for APIs like <a href="https://fastapi.tiangolo.com/">FastAPI</a>! Here however we don’t need bells and whistles, we 
+simply need an endpoint for each users where we can see if they are busy or not. The first step is do add a function to the
+database model to export a user to a dictionary. To do this a little code needs to be added to the model 
+(in <em>./busyboard/models.py</em>) as shown below.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">'users'</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">busy</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">)</span>
+    <span class="n">busy_with</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">can_be_disturbed</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">)</span>
+    <span class="n">notes</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Unicode</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span>
+    <span class="n">last_change</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">)</span>
+
+    <span class="c1">### see repository for the full code, new function below
+</span>
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s">'id'</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="nb">id</span><span class="p">),</span>
+            <span class="s">'name'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+            <span class="s">'busy'</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">busy</span><span class="p">),</span>
+            <span class="s">'busy_with'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">busy_with</span><span class="p">),</span>
+            <span class="s">'can_be_distrubed'</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">can_be_disturbed</span><span class="p">),</span>
+            <span class="s">'last_change'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last_change</span><span class="p">)</span>
+        <span class="p">}</span>
+</code></pre></div></div>
+
+<p>This couldn’t be more straightforward, a single function that an export the data from the model as a dictionary. Here,
+all fields are explicitly converted to integers, strings and bools. This isn’t strictly necessary for all fields, but it
+helps avoiding errors when converting them to JSON later on.</p>
+
+<p>Next, we’ll need to add the routes to <em>./busyboard/<strong>init</strong>.py</em>, again this is very simple. A few lines of code
+shown below will do the trick.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="o">@</span><span class="n">app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/api/users'</span><span class="p">)</span>
+    <span class="o">@</span><span class="n">app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/api/users/'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">api_users</span><span class="p">():</span>
+        <span class="n">users</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="nb">all</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="nb">list</span><span class="p">([</span><span class="n">u</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">users</span><span class="p">]))</span>
+
+    <span class="o">@</span><span class="n">app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/api/users/&lt;int:user_id&gt;'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">api_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>So now if we go to e.g. <em>&lt;busyboard_url&gt;/api/users/1</em> we’ll get a JSON response which looks like:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"busy"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"busy_with"</span><span class="p">:</span><span class="w"> </span><span class="s2">"programming"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"can_be_distrubed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"last_change"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-07-26 12:51:05.656357"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sebast-I-AH-n"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>That was easy enough, now let’s move over to Home Assistant to read this API and do something cool in response.</p>
+
+<h2 id="configuring-home-assistant">Configuring Home Assistant</h2>
+
+<p>Home Assistant comes with support to read REST APIs, so also here there is very little configuration required. The
+only thing needed is to add a rest-sensor for each user that reads the field “busy”. In the Home Assistant settings
+folder open the file <em>configuration.yml</em> with a text editor and add the following part to the sensor section. Note that
+the URL will have to be adjusted to the spot where your instance of BusyBoard is running.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="na">sensor</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">rest</span>
+    <span class="na">resource</span><span class="pi">:</span> <span class="s">&lt;busyboard_url&gt;/api/users/1</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">user_name</span>
+    <span class="na">value_template</span><span class="pi">:</span> <span class="s1">'</span><span class="s">{{</span><span class="nv"> </span><span class="s">value_json.busy</span><span class="nv"> </span><span class="s">}}'</span>
+
+</code></pre></div></div>
+
+<p>After this you’ll have to restart Home Assistant and the sensor will be available as <em>sensor.user_name</em>. Now using the
+GUI or directly in the configuration file <em>automations.yaml</em> you can create a new automation that triggers another device, like a light. 
+You’ll have to add a trigger that goes of once the sensor goes from <strong>False</strong> to <strong>True</strong> and the other way around, the action will 
+be a service, in this case a smart light, will be switched on or off. Details how to do this will depend a lot on the
+type of light you are using and how it is configured in HA. Though feel free to use the section from my <em>automations.yaml</em>
+file as a reference (shown below).</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1597674094193'</span>
+  <span class="na">alias</span><span class="pi">:</span> <span class="s">User Busy</span>
+  <span class="na">trigger</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">entity_id</span><span class="pi">:</span> <span class="s">sensor.user_name</span>
+    <span class="na">from</span><span class="pi">:</span> <span class="s1">'</span><span class="s">False'</span>
+    <span class="na">platform</span><span class="pi">:</span> <span class="s">state</span>
+    <span class="na">to</span><span class="pi">:</span> <span class="s1">'</span><span class="s">True'</span>
+  <span class="na">condition</span><span class="pi">:</span> <span class="pi">[]</span>
+  <span class="na">action</span><span class="pi">:</span>
+    <span class="na">service</span><span class="pi">:</span> <span class="s">light.turn_on</span>
+    <span class="na">data</span><span class="pi">:</span>
+      <span class="na">brightness</span><span class="pi">:</span> <span class="m">255</span>
+      <span class="na">rgb_color</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="m">255</span>
+      <span class="pi">-</span> <span class="m">0</span>
+      <span class="pi">-</span> <span class="m">0</span>
+      <span class="na">entity_id</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">light.blinkstick</span>
+<span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1597674578965'</span>
+  <span class="na">alias</span><span class="pi">:</span> <span class="s">User No Longer Busy</span>
+  <span class="na">trigger</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">entity_id</span><span class="pi">:</span> <span class="s">sensor.user_name</span>
+    <span class="na">from</span><span class="pi">:</span> <span class="s1">'</span><span class="s">True'</span>
+    <span class="na">platform</span><span class="pi">:</span> <span class="s">state</span>
+    <span class="na">to</span><span class="pi">:</span> <span class="s1">'</span><span class="s">False'</span>
+  <span class="na">condition</span><span class="pi">:</span> <span class="pi">[]</span>
+  <span class="na">action</span><span class="pi">:</span>
+    <span class="na">service</span><span class="pi">:</span> <span class="s">light.turn_off</span>
+    <span class="na">entity_id</span><span class="pi">:</span> <span class="s">light.blinkstick</span>
+
+</code></pre></div></div>
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I’ve got it set up that if someone is busy in the office, this <a href="https://www.blinkstick.com/products/blinkstick-square">BlinkStick Square</a>, built into a 3D printed moon, which 
+is in the living room, will light up red. A clear sign the office is off limits for the time being.</p>
+
+<p><a href="/assets/posts/2020-08-25-BusyBoard2/moon_light.jpg" class="lightgallery-link" data-sub-html="The smart light inside this moon will turn deep red if someone indicates they are busy">
+<img src="/assets/posts/2020-08-25-BusyBoard2/moon_light.jpg" alt="The smart light inside this moon will turn deep red if someone indicates they are busy" data-src="/assets/posts/2020-08-25-BusyBoard2/moon_light.jpg" />
+</a></p>
+
+<p>With a few lines of code a custom webservice can easily be integrated into Home Assistant and we can trigger devices in
+the real world. If you want to look at the full code, this can be found on <a href="https://github.com/4dcu-be/BusyBoard">GitHub</a></p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/flask">flask</a>,&nbsp;<a href="/tag/sqlalchemy">sqlalchemy</a>,&nbsp;<a href="/tag/home-assistant">home-assistant</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Integrate+BusyBoard+into+HomeAssistant&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2020%2F08%2F25%2FBusyBoard2.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Integrate+BusyBoard+into+HomeAssistant&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2020%2F08%2F25%2FBusyBoard2.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2020%2F08%2F25%2FBusyBoard2.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/programming/2020/07/26/BusyBoard.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">BusyBoard: no more interruptions during meetings</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '4dcube';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
+			<p class="text">Last update: August 25, 2020</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/programming/2020/08/25/BusyBoard2.html',
+    'title': 'Integrate BusyBoard into HomeAssistant'
+  });
+</script>
+
+
+  </body>
+
+</html>
