@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Gwent: Pro Ladder Analysis and National Rankings</title>
+  <meta name="description" content="Data for on players in Pro Ladder is released on playgwent.com, but it is limited.You get the rank, the score, the country of origin and the number of matche...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Data for on players in Pro Ladder is released on playgwent.com, but it is limited.You get the rank, the score, the country of origin and the number of matche..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/games/2020/09/01/GwentProRankAnalysis.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Gwent: Pro Ladder Analysis and National Rankings" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2020-09-01-GwentProRankAnalysis/gwent_pro_rank.jpg" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Gwent: Pro Ladder Analysis and National Rankings">
+  <meta name="twitter:description" content="Data for on players in Pro Ladder is released on playgwent.com, but it is limited.You get the rank, the score, the country of origin and the number of matche...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2020-09-01-GwentProRankAnalysis/gwent_pro_rank.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/games/2020/09/01/GwentProRankAnalysis.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/games/2020/09/01/GwentProRankAnalysis.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2020-09-01-GwentProRankAnalysis/gwent_pro_rank.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Gwent: Pro Ladder Analysis and National Rankings</h1>
+			
+      <p class="info"><em></em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted September 1, 2020 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>, 
+    
+  
+    
+    <a href="/category/games">Games</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>Data for on players in Pro Ladder is released on <a href="https://masters.playgwent.com/en/">playgwent.com</a>, but it is limited.
+You get the rank, the score, the country of origin and the number of matches played. Using some fairly basic data
+analysis tricks there must be more we can do with these data! Using python we’ll scrape data for the top 
+<a href="https://masters.playgwent.com/en/rankings/masters-2/season-of-the-draconid/1/1">Gwent players on pro-ladder</a> 
+and calculate additional statistics about the current season, popularity of the game in different countries, players’ 
+efficiency, players national rank, …</p>
+
+<p>A jupyter notebook with all code can be found on <a href="https://github.com/4dcu-be/GwentRank">GitHub</a> which you can explore
+through <a href="https://mybinder.org/v2/gh/4dcu-be/GwentRank/master?filepath=Gwent%20Stats.ipynb">Binder</a> without installing
+anything. For those that want to check their own national rank or ladder efficiency index (and don’t care about the 
+code). Download links for the full tables discussed here (in Excel-format) are available here:</p>
+
+<ul>
+  <li><a href="/assets/posts/2020-09-01-GwentProRankAnalysis/seasonal_stats.xlsx">Seasonal summary</a> : Number of games played each season in Masters 2, minimum and maximum MMR as well as top 500,200 and 64 cutoffs.</li>
+  <li><a href="/assets/posts/2020-09-01-GwentProRankAnalysis/player_stats.xlsx">Player Statistics</a> : Player data for each Season, with ladder efficiency and national rank added.</li>
+  <li><a href="/assets/posts/2020-09-01-GwentProRankAnalysis/player_summaries.xlsx">Player Summaries</a> : Summary data for each player that made an appearance in pro rank. Includes number of appearances on
+  the leaderboards, min and max MMR, best rank, best national rank, …</li>
+  <li><a href="/assets/posts/2020-09-01-GwentProRankAnalysis/national_stats.xlsx">National Statistics</a> : Data per country, number of pro players per million inhabitants, …</li>
+</ul>
+
+<h2 id="getting-the-data">Getting the Data</h2>
+
+<p>Python has two powerful packages to scrape data from the web: the requests library to download data and BeautifulSoup
+to parse the HTML that comes back and extract information. The tabular data from <a href="https://masters.playgwent.com/en/">playgwent.com</a>
+is pretty straightforward to parse. There is the rank, the player’s handle, the number of matches played and their score
+(which is called the Matchmaking Rating or MMR).</p>
+
+<p>Furthermore, there is a flag icon indicating the country the player is
+from. These icons have a class that contains the two letter code, which follows the official <a href="https://www.iso.org/iso-3166-country-codes.html">ISO 3166 international
+standard</a>.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"flag-icon flag-icon-pl"</span><span class="nt">&gt;&lt;/i&gt;</span>
+</code></pre></div></div>
+
+<p>The two letter code can be easily extracted from the the html tag, while converting it to a human readable name can be
+done in a few lines of code using the python library <a href="https://pypi.org/project/pycountry/">pycountry</a>. As shown in the
+stub below, you can provide it with a two letter code (<em>pl</em> in the example below) and it will return all other names, including the
+common name (<em>Poland</em> here). So after scraping the data, the pycountry library was used to get proper names for all
+countries.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pycountry</span>
+<span class="n">pycountry</span><span class="o">.</span><span class="n">countries</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">alpha_2</span><span class="o">=</span><span class="s">'pl'</span><span class="p">)</span>
+
+<span class="c1"># Output: 
+# Country(alpha_2='PL', alpha_3='POL', name='Poland', numeric='616', official_name='Republic of Poland')
+</span></code></pre></div></div>
+<p>While reading the data we’ll also keep track of which players were in the top 500 the season before (note that this
+does require all seasons to be loaded and in orde). So we end up with a table (called full_df in the code), that looks 
+like this:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">rank</th>
+      <th style="text-align: right">name</th>
+      <th style="text-align: right">country</th>
+      <th style="text-align: right">matches</th>
+      <th style="text-align: right">mmr</th>
+      <th style="text-align: right">season</th>
+      <th style="text-align: right">previous_top500</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">kolemoen</td>
+      <td style="text-align: right">Germany</td>
+      <td style="text-align: right">431</td>
+      <td style="text-align: right">10484</td>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">no</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">2</td>
+      <td style="text-align: right">kams134</td>
+      <td style="text-align: right">Poland</td>
+      <td style="text-align: right">923</td>
+      <td style="text-align: right">10477</td>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">no</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">TailBot</td>
+      <td style="text-align: right">Poland</td>
+      <td style="text-align: right">538</td>
+      <td style="text-align: right">10472</td>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">no</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">4</td>
+      <td style="text-align: right">Pajabol</td>
+      <td style="text-align: right">Poland</td>
+      <td style="text-align: right">820</td>
+      <td style="text-align: right">10471</td>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">no</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">5</td>
+      <td style="text-align: right">Adzikov</td>
+      <td style="text-align: right">Poland</td>
+      <td style="text-align: right">1105</td>
+      <td style="text-align: right">10442</td>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">no</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="adding-national-rank-and-efficiency-statistics">Adding National Rank and Efficiency Statistics</h2>
+
+<p>The rank on playgwent.com is the global rank, adding a national rank can be done in a single line of code. The
+<em>groupby</em> function in combination with the <em>rank</em> function does exactly what we want here.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">full_df</span><span class="p">[</span><span class="s">'national_rank'</span><span class="p">]</span> <span class="o">=</span> <span class="n">full_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">'country'</span><span class="p">,</span><span class="s">'season'</span><span class="p">])[</span><span class="s">"mmr"</span><span class="p">]</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="s">"first"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In Gwent you need to play at least 25 games with four out of six factions. 
+This will give you a base score, MMR, of 9600. Winning a game increases the MMR, depending on the current rank of your
+opponent (usually about 7 points are gained) and losing costs you MMR points. The highest reached MMR per faction is 
+summed up to get the final score. So with a higher win-rate, better scores can be obtained with fewer games. To find out
+which players are more efficient in climbing (and arguably better at the game than others at the same MMR) we we take 
+the MMR, substract the base value (9600) and divide by the number of matches. However, as 
+increasing the MMR score becomes progressively more difficult as players will face better opponents as they climb the
+ladder, Lerio2 from Team Legacy proposed to divide by the square root of the number of matches. Their metric, the
+<a href="https://teamlegacy.org/2020/08/05/gwent-players-scores-and-efficiency-index/">Ladder Efficiency Index</a> or <em>LEI</em> is 
+calculated here as well.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">full_df</span><span class="p">[</span><span class="s">'efficiency'</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">full_df</span><span class="p">[</span><span class="s">'mmr'</span><span class="p">]</span><span class="o">-</span><span class="mi">9600</span><span class="p">))</span><span class="o">/</span><span class="n">full_df</span><span class="p">[</span><span class="s">'matches'</span><span class="p">]</span>
+<span class="n">full_df</span><span class="p">[</span><span class="s">'lei'</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">full_df</span><span class="p">[</span><span class="s">'mmr'</span><span class="p">]</span><span class="o">-</span><span class="mi">9600</span><span class="p">))</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">full_df</span><span class="p">[</span><span class="s">'matches'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Now our full dataframe has two additional columns one with the simple linear efficiency and one with Team Legacy’s 
+Ladder Efficiency Index.</p>
+
+<table class="large-table">
+  <thead>
+    <tr>
+      <th style="text-align: right">rank</th>
+      <th style="text-align: right">name</th>
+      <th style="text-align: right">country</th>
+      <th style="text-align: right">matches</th>
+      <th style="text-align: right">mmr</th>
+      <th style="text-align: right">season</th>
+      <th style="text-align: right">previous_top500</th>
+      <th style="text-align: right">national_rank</th>
+      <th style="text-align: right">efficiency</th>
+      <th style="text-align: right">lei</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">kolemoen</td>
+      <td style="text-align: right">Germany</td>
+      <td style="text-align: right">431</td>
+      <td style="text-align: right">10484</td>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">no</td>
+      <td style="text-align: right">1.0</td>
+      <td style="text-align: right">2.051044</td>
+      <td style="text-align: right">42.580782</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">2</td>
+      <td style="text-align: right">kams134</td>
+      <td style="text-align: right">Poland</td>
+      <td style="text-align: right">923</td>
+      <td style="text-align: right">10477</td>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">no</td>
+      <td style="text-align: right">1.0</td>
+      <td style="text-align: right">0.950163</td>
+      <td style="text-align: right">28.866807</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">TailBot</td>
+      <td style="text-align: right">Poland</td>
+      <td style="text-align: right">538</td>
+      <td style="text-align: right">10472</td>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">no</td>
+      <td style="text-align: right">2.0</td>
+      <td style="text-align: right">1.620818</td>
+      <td style="text-align: right">37.594590</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">4</td>
+      <td style="text-align: right">Pajabol</td>
+      <td style="text-align: right">Poland</td>
+      <td style="text-align: right">820</td>
+      <td style="text-align: right">10471</td>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">no</td>
+      <td style="text-align: right">3.0</td>
+      <td style="text-align: right">1.062195</td>
+      <td style="text-align: right">30.416639</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">5</td>
+      <td style="text-align: right">Adzikov</td>
+      <td style="text-align: right">Poland</td>
+      <td style="text-align: right">1105</td>
+      <td style="text-align: right">10442</td>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">no</td>
+      <td style="text-align: right">4.0</td>
+      <td style="text-align: right">0.761991</td>
+      <td style="text-align: right">25.329753</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>You can download the full table <a href="/assets/posts/2020-09-01-GwentProRankAnalysis/player_stats.xlsx">here</a>.</p>
+
+<h2 id="season-summary">Season Summary</h2>
+
+<p>About every month or so there is a new season in Gwent. Using the <em>groupby</em> function we can very quickly create a summary
+how many games were played by the pro-ranked players (do note that only the 2860 best players are listed on the website).
+We’ll also add the cutoff values for rank 500, 200 and 64 as these are important thresholds for competitive players. 
+Here the aggregate function <em>agg</em> is used in combination with NamedAgg to calculate all statistics in one go.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">per_season_df</span> <span class="o">=</span> <span class="n">full_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">'season'</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+    <span class="n">min_mmr</span>     <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="s">'mmr'</span><span class="p">,</span> <span class="s">'min'</span><span class="p">),</span>
+    <span class="n">max_mmr</span>     <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="s">'mmr'</span><span class="p">,</span> <span class="s">'max'</span><span class="p">),</span>
+    <span class="n">num_matches</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="s">'matches'</span><span class="p">,</span> <span class="s">'sum'</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="n">top500_cutoffs</span> <span class="o">=</span> <span class="n">full_df</span><span class="p">[</span><span class="n">full_df</span><span class="p">[</span><span class="s">'rank'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">500</span><span class="p">][[</span><span class="s">'season'</span><span class="p">,</span> <span class="s">'mmr'</span><span class="p">]]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s">'mmr'</span><span class="p">:</span> <span class="s">'top500_cutoff'</span><span class="p">})</span>
+<span class="n">top200_cutoffs</span> <span class="o">=</span> <span class="n">full_df</span><span class="p">[</span><span class="n">full_df</span><span class="p">[</span><span class="s">'rank'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">200</span><span class="p">][[</span><span class="s">'season'</span><span class="p">,</span> <span class="s">'mmr'</span><span class="p">]]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s">'mmr'</span><span class="p">:</span> <span class="s">'top200_cutoff'</span><span class="p">})</span>
+<span class="n">top64_cutoffs</span>  <span class="o">=</span> <span class="n">full_df</span><span class="p">[</span><span class="n">full_df</span><span class="p">[</span><span class="s">'rank'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">64</span><span class="p">][[</span><span class="s">'season'</span><span class="p">,</span> <span class="s">'mmr'</span><span class="p">]]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s">'mmr'</span><span class="p">:</span> <span class="s">'top64_cutoff'</span><span class="p">})</span>
+
+<span class="n">per_season_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">per_season_df</span><span class="p">,</span> <span class="n">top500_cutoffs</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s">'season'</span><span class="p">)</span>
+<span class="n">per_season_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">per_season_df</span><span class="p">,</span> <span class="n">top200_cutoffs</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s">'season'</span><span class="p">)</span>
+<span class="n">per_season_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">per_season_df</span><span class="p">,</span> <span class="n">top64_cutoffs</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s">'season'</span><span class="p">)</span>
+<span class="n">per_season_df</span>
+</code></pre></div></div>
+<p>The full output from this you can see below:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">season</th>
+      <th style="text-align: right">min_mmr</th>
+      <th style="text-align: right">max_mmr</th>
+      <th style="text-align: right">num_matches</th>
+      <th style="text-align: right">top500_cutoff</th>
+      <th style="text-align: right">top200_cutoff</th>
+      <th style="text-align: right">top64_cutoff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">2407</td>
+      <td style="text-align: right">10484</td>
+      <td style="text-align: right">699496</td>
+      <td style="text-align: right">9749</td>
+      <td style="text-align: right">9872</td>
+      <td style="text-align: right">10061</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_02 Love 2020</td>
+      <td style="text-align: right">7776</td>
+      <td style="text-align: right">10537</td>
+      <td style="text-align: right">769358</td>
+      <td style="text-align: right">9832</td>
+      <td style="text-align: right">9952</td>
+      <td style="text-align: right">10117</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_03 Bear 2020</td>
+      <td style="text-align: right">9427</td>
+      <td style="text-align: right">10669</td>
+      <td style="text-align: right">862678</td>
+      <td style="text-align: right">9867</td>
+      <td style="text-align: right">9995</td>
+      <td style="text-align: right">10204</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_04 Elf 2020</td>
+      <td style="text-align: right">9666</td>
+      <td style="text-align: right">10751</td>
+      <td style="text-align: right">1004830</td>
+      <td style="text-align: right">9952</td>
+      <td style="text-align: right">10087</td>
+      <td style="text-align: right">10293</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_05 Viper 2020</td>
+      <td style="text-align: right">9635</td>
+      <td style="text-align: right">10622</td>
+      <td style="text-align: right">859640</td>
+      <td style="text-align: right">9910</td>
+      <td style="text-align: right">10028</td>
+      <td style="text-align: right">10255</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_06 Magic 2020</td>
+      <td style="text-align: right">9624</td>
+      <td style="text-align: right">10597</td>
+      <td style="text-align: right">793401</td>
+      <td style="text-align: right">9896</td>
+      <td style="text-align: right">10002</td>
+      <td style="text-align: right">10191</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_07 Griffin 2020</td>
+      <td style="text-align: right">9698</td>
+      <td style="text-align: right">10667</td>
+      <td style="text-align: right">996742</td>
+      <td style="text-align: right">9978</td>
+      <td style="text-align: right">10100</td>
+      <td style="text-align: right">10289</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_08 Draconid 2020</td>
+      <td style="text-align: right">9666</td>
+      <td style="text-align: right">10546</td>
+      <td style="text-align: right">838212</td>
+      <td style="text-align: right">9946</td>
+      <td style="text-align: right">10061</td>
+      <td style="text-align: right">10246</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The number of matches played by the top players is an indication how many people are playing the game, as more
+active players would require more games to be played to climb pro ladder. You can see that the popularity peaked during
+the Season of the Elves. During this season also some new leader abilities
+were introduced, so the fresh content could also to players return to the game. A similar increase in matches can be 
+seen in the Season of the Griffin with the release of new cards through the Master Mirror expansion. So it seems that 
+new content is a good incentive for players to play more, and spark a fiercer competition.</p>
+
+<p>You can download the full table <a href="/assets/posts/2020-09-01-GwentProRankAnalysis/seasonal_stats.xlsx">here</a>.</p>
+
+<h2 id="where-is-gwent-being-played">Where is Gwent Being Played</h2>
+
+<p>So using the <em>groupby</em> function in combination with the <em>agg</em> we can very quickly count how many pro players there are
+per country. We can then combine this with the population size of each country (and somewhat up-to-date list can be found
+<a href="https://www.kaggle.com/erikbruin/countries-of-the-world-iso-codes-and-population/data#">here</a>). By dividing the number
+of players in pro-ladder by the number of inhabitants (in millions) we can get the number of pro players per capita.</p>
+
+<table class="large-table">
+  <thead>
+    <tr>
+      <th style="text-align: right">season</th>
+      <th style="text-align: right">country</th>
+      <th style="text-align: right">total_matches</th>
+      <th style="text-align: right">num_players</th>
+      <th style="text-align: right">pro_players_per_million</th>
+      <th style="text-align: right">matches_per_player</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">M2_08 Draconid 2020</td>
+      <td style="text-align: right">Poland</td>
+      <td style="text-align: right">72225</td>
+      <td style="text-align: right">267</td>
+      <td style="text-align: right">7.047129</td>
+      <td style="text-align: right">270.505618</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_08 Draconid 2020</td>
+      <td style="text-align: right">Estonia</td>
+      <td style="text-align: right">1726</td>
+      <td style="text-align: right">7</td>
+      <td style="text-align: right">5.280436</td>
+      <td style="text-align: right">246.571429</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_08 Draconid 2020</td>
+      <td style="text-align: right">Russian Federation</td>
+      <td style="text-align: right">195905</td>
+      <td style="text-align: right">673</td>
+      <td style="text-align: right">4.613626</td>
+      <td style="text-align: right">291.092125</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_08 Draconid 2020</td>
+      <td style="text-align: right">Belarus</td>
+      <td style="text-align: right">10260</td>
+      <td style="text-align: right">39</td>
+      <td style="text-align: right">4.125931</td>
+      <td style="text-align: right">263.076923</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_08 Draconid 2020</td>
+      <td style="text-align: right">Ukraine</td>
+      <td style="text-align: right">52333</td>
+      <td style="text-align: right">162</td>
+      <td style="text-align: right">3.682351</td>
+      <td style="text-align: right">323.043210</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The top 5 countries is comprised out of Eastern European Countries, which is no surprise as the company that created
+Gwent is based in Poland and The Witcher lore has been created based on Slavic myths and legends. Iceland, Finland, 
+Hong Kong, Malta and Croatia complete the top 10. These are all relatively small countries, so a single player 
+making it up to Pro Rank boosts them up in the ranking.</p>
+
+<p>You can download the full table, which includes data for all seasons and countries <a href="/assets/posts/2020-09-01-GwentProRankAnalysis/national_stats.xlsx">here</a>.</p>
+
+<h2 id="which-country-has-the-best-gwent-team">Which Country has the best Gwent Team</h2>
+
+<p>Now we know where the most pro players are per capita, but what if countries were able to send a team of three 
+e-athletes to a world championship? Which countries would do best with their team of three pro players. To this end
+all countries with three or more players were selected, and the top 3 players for each of those countries picked.
+Next, the average MMR and total MMR for those players, was calculated as well as the efficiency to climb and the rank
+for each country. The code is up on GitHub for those interested, but also here it is a simple matter of filtering and
+grouping data using built-in pandas functions.</p>
+
+<p>The results for Season of the Draconid are shown below. It seems that China has the best team of three this season
+followed by Russia and Poland.</p>
+
+<table class="large-table">
+  <thead>
+    <tr>
+      <th style="text-align: right">season</th>
+      <th style="text-align: right">country</th>
+      <th style="text-align: right">mean_mmr</th>
+      <th style="text-align: right">total_mmr</th>
+      <th style="text-align: right">mean_matches_per_player</th>
+      <th style="text-align: right">total_matches</th>
+      <th style="text-align: right">nation_rank</th>
+      <th style="text-align: right">efficiency</th>
+      <th style="text-align: right">lei</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">M2_08 Draconid 2020</td>
+      <td style="text-align: right">China</td>
+      <td style="text-align: right">10489.333333</td>
+      <td style="text-align: right">31468</td>
+      <td style="text-align: right">409</td>
+      <td style="text-align: right">1227</td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">2.174409</td>
+      <td style="text-align: right">43.974703</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_08 Draconid 2020</td>
+      <td style="text-align: right">Russian Federation</td>
+      <td style="text-align: right">10479.666667</td>
+      <td style="text-align: right">31439</td>
+      <td style="text-align: right">636</td>
+      <td style="text-align: right">1908</td>
+      <td style="text-align: right">2</td>
+      <td style="text-align: right">1.383124</td>
+      <td style="text-align: right">34.881052</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_08 Draconid 2020</td>
+      <td style="text-align: right">Poland</td>
+      <td style="text-align: right">10439.333333</td>
+      <td style="text-align: right">31318</td>
+      <td style="text-align: right">657</td>
+      <td style="text-align: right">1971</td>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">1.277524</td>
+      <td style="text-align: right">32.745512</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="player-summaries">Player Summaries</h2>
+
+<p>For players that made it up to Pro Rank during multiple seasons we’ll quickly generate a summary. Again the <em>groupby</em> and
+<em>agg</em> function are being leveraged again to group things and get the summary statistics. We’ll count the number of 
+appearnaces on pro ladder, the min, mean, max MMR score. Average number of matches and total number of matches as well as
+the best global and national ranks.</p>
+
+<p>This can give you a quick impression of all the data available on a player. Here you can see the output from myself (handle <em>sepro</em>).</p>
+
+<table class="large-table">
+  <thead>
+    <tr>
+      <th style="text-align: right">name</th>
+      <th style="text-align: right">country</th>
+      <th style="text-align: right">appearances</th>
+      <th style="text-align: right">min_mmr</th>
+      <th style="text-align: right">mean_mmr</th>
+      <th style="text-align: right">max_mmr</th>
+      <th style="text-align: right">mean_matches</th>
+      <th style="text-align: right">num_matches</th>
+      <th style="text-align: right">best_rank</th>
+      <th style="text-align: right">best_national_rank</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">sepro</td>
+      <td style="text-align: right">Belgium</td>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">9746</td>
+      <td style="text-align: right">9746</td>
+      <td style="text-align: right">9820</td>
+      <td style="text-align: right">243</td>
+      <td style="text-align: right">728</td>
+      <td style="text-align: right">1138</td>
+      <td style="text-align: right">2.0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>You can download the full table <a href="/assets/posts/2020-09-01-GwentProRankAnalysis/player_summaries.xlsx">here</a> to find your
+own or your favorite players stats.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Initially, I set out to get players national ranks. When you are from a small country just making it to 
+Pro Rank will likely give you bragging rights about being in the top 3 of your country. Though with some fairly basic
+data science you can very quickly get a lot more details on various aspects of the game.</p>
+
+<p>This type of project I would really recommend for people starting out with programming. Find a topic you like and write
+some code to get some data about it, do some analysis and generate a few plots.</p>
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/jupyter">jupyter</a>,&nbsp;<a href="/tag/pandas">pandas</a>,&nbsp;<a href="/tag/gwent">gwent</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Gwent%3A+Pro+Ladder+Analysis+and+National+Rankings&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2020%2F09%2F01%2FGwentProRankAnalysis.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Gwent%3A+Pro+Ladder+Analysis+and+National+Rankings&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2020%2F09%2F01%2FGwentProRankAnalysis.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2020%2F09%2F01%2FGwentProRankAnalysis.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/programming/2020/08/25/BusyBoard2.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Integrate BusyBoard into HomeAssistant</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '4dcube';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
+			<p class="text">Last update: September 1, 2020</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/programming/games/2020/09/01/GwentProRankAnalysis.html',
+    'title': 'Gwent: Pro Ladder Analysis and National Rankings'
+  });
+</script>
+
+
+  </body>
+
+</html>
