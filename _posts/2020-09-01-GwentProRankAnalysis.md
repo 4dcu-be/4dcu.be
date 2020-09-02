@@ -61,6 +61,7 @@ While reading the data we'll also keep track of which players were in the top 50
 does require all seasons to be loaded and in orde). So we end up with a table (called full_df in the code), that looks 
 like this:
 
+{:.large-table}
 | rank |     name | country | matches |   mmr |          season | previous_top500 |
 |-----:|---------:|--------:|--------:|------:|----------------:|----------------:|
 |    1 | kolemoen | Germany |     431 | 10484 | M2_01 Wolf 2020 |              no |
@@ -134,6 +135,7 @@ per_season_df
 ``` 
 The full output from this you can see below:
 
+{:.large-table}
 |              season | min_mmr | max_mmr | num_matches | top500_cutoff | top200_cutoff | top64_cutoff |
 |--------------------:|--------:|--------:|------------:|--------------:|--------------:|-------------:|
 |     M2_01 Wolf 2020 |    2407 |   10484 |      699496 |          9749 |          9872 |        10061 |
