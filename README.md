@@ -3,7 +3,7 @@
 ![sticker](./assets/sticker_medium.png)
 
 Code for Sebastian Proost's blog about programming, gaming, technology, ...
-
+ 
 
 ## Features
 
