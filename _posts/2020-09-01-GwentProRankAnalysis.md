@@ -29,6 +29,11 @@ code). Download links for the full tables discussed here (in Excel-format) are a
   * [Seasonal summary](/assets/posts/2020-09-01-GwentProRankAnalysis/seasonal_stats.xlsx) : Number of games played each season in Masters 2, minimum and maximum MMR as well as top 500,200 and 64 cutoffs.
   * [National Statistics](/assets/posts/2020-09-01-GwentProRankAnalysis/national_stats.xlsx) : Data per country, number of pro players per million inhabitants, ...
 
+**Update 03/09/2020: ** Credit where credit is due! After putting this blog post up I found two article by Lerio2 that
+predate mine where he did a very similar analysis to check the popularity and rank countries (based on teams of 4 players). 
+Even though I did my analysis independently, he had the idea several months earlier and deserves full credit for that! 
+You can read his articles called Nations of Gwent : [here](https://teamlegacy.org/2020/04/17/gwent-for-geeks-nations-of-gwent/) and [here](https://teamlegacy.org/2020/07/02/gwent-for-geeks-nations-of-gwent-vol-2/)
+
 ## Getting the Data
 
 Python has two powerful packages to scrape data from the web: the requests library to download data and BeautifulSoup
