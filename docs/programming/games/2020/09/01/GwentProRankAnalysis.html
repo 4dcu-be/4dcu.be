@@ -183,6 +183,8 @@
 
 	
 
+	
+
 <li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
 
       </ul>
@@ -280,7 +282,7 @@ countries.</p>
 does require all seasons to be loaded and in orde). So we end up with a table (called full_df in the code), that looks 
 like this:</p>
 
-<table class="large-table">
+<table class="large-table narrow-rows">
   <thead>
     <tr>
       <th style="text-align: right">rank</th>
@@ -354,7 +356,7 @@ This will give you a base score, MMR, of 9600. Winning a game increases the MMR,
 opponent (usually about 7 points are gained) and losing costs you MMR points. The highest reached MMR per faction is 
 summed up to get the final score. So with a higher win-rate, better scores can be obtained with fewer games. To find out
 which players are more efficient in climbing (and arguably better at the game than others at the same MMR) we we take 
-the MMR, substract the base value (9600) and divide by the number of matches. However, as 
+the MMR, subtract the base value (9600) and divide by the number of matches. However, as 
 increasing the MMR score becomes progressively more difficult as players will face better opponents as they climb the
 ladder, Lerio2 from Team Legacy proposed to divide by the square root of the number of matches. Their metric, the
 <a href="https://teamlegacy.org/2020/08/05/gwent-players-scores-and-efficiency-index/">Ladder Efficiency Index</a> or <em>LEI</em> is 
@@ -367,7 +369,7 @@ calculated here as well.</p>
 <p>Now our full dataframe has two additional columns one with the simple linear efficiency and one with Team Legacy’s 
 Ladder Efficiency Index.</p>
 
-<table class="large-table">
+<table class="large-table narrow-rows">
   <thead>
     <tr>
       <th style="text-align: right">rank</th>
@@ -472,7 +474,7 @@ Here the aggregate function <em>agg</em> is used in combination with NamedAgg to
 </code></pre></div></div>
 <p>The full output from this you can see below:</p>
 
-<table class="large-table">
+<table class="large-table narrow-rows">
   <thead>
     <tr>
       <th style="text-align: right">season</th>
@@ -576,7 +578,7 @@ per country. We can then combine this with the population size of each country (
 <a href="https://www.kaggle.com/erikbruin/countries-of-the-world-iso-codes-and-population/data#">here</a>). By dividing the number
 of players in pro-ladder by the number of inhabitants (in millions) we can get the number of pro players per capita.</p>
 
-<table class="large-table">
+<table class="large-table narrow-rows">
   <thead>
     <tr>
       <th style="text-align: right">season</th>
@@ -650,7 +652,7 @@ grouping data using built-in pandas functions.</p>
 <p>The results for Season of the Draconid are shown below. It seems that China has the best team of three this season
 followed by Russia and Poland.</p>
 
-<table class="large-table">
+<table class="large-table narrow-rows">
   <thead>
     <tr>
       <th style="text-align: right">season</th>
@@ -710,7 +712,7 @@ the best global and national ranks.</p>
 
 <p>This can give you a quick impression of all the data available on a player. Here you can see the output from myself (handle <em>sepro</em>).</p>
 
-<table class="large-table">
+<table class="large-table narrow-rows">
   <thead>
     <tr>
       <th style="text-align: right">name</th>
@@ -845,6 +847,14 @@ some code to get some data about it, do some analysis and generate a few plots.<
 			
 		</span>
 		<span class="next-post">
+			
+				<a href="/programming/2020/09/05/Testing-Benfords-Law.html">
+					<span class="page-number">Putting Benford's Law to the Test</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
 			
 		</span>
 	</section>
@@ -1041,6 +1051,8 @@ some code to get some data about it, do some analysis and generate a few plots.<
 
 	
 
+	
+
 <li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
 
       </ul>
@@ -1096,7 +1108,7 @@ some code to get some data about it, do some analysis and generate a few plots.<
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: September 3, 2020</p>
+			<p class="text">Last update: September 5, 2020</p>
     </div>
 
   </div>

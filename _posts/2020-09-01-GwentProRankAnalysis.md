@@ -66,7 +66,7 @@ While reading the data we'll also keep track of which players were in the top 50
 does require all seasons to be loaded and in orde). So we end up with a table (called full_df in the code), that looks 
 like this:
 
-{:.large-table}
+{:.large-table .narrow-rows }
 | rank |     name | country | matches |   mmr |          season | previous_top500 |
 |-----:|---------:|--------:|--------:|------:|----------------:|----------------:|
 |    1 | kolemoen | Germany |     431 | 10484 | M2_01 Wolf 2020 |              no |
@@ -90,7 +90,7 @@ This will give you a base score, MMR, of 9600. Winning a game increases the MMR,
 opponent (usually about 7 points are gained) and losing costs you MMR points. The highest reached MMR per faction is 
 summed up to get the final score. So with a higher win-rate, better scores can be obtained with fewer games. To find out
 which players are more efficient in climbing (and arguably better at the game than others at the same MMR) we we take 
-the MMR, substract the base value (9600) and divide by the number of matches. However, as 
+the MMR, subtract the base value (9600) and divide by the number of matches. However, as 
 increasing the MMR score becomes progressively more difficult as players will face better opponents as they climb the
 ladder, Lerio2 from Team Legacy proposed to divide by the square root of the number of matches. Their metric, the
 [Ladder Efficiency Index](https://teamlegacy.org/2020/08/05/gwent-players-scores-and-efficiency-index/) or *LEI* is 
@@ -104,7 +104,7 @@ full_df['lei'] = ((full_df['mmr']-9600))/np.sqrt(full_df['matches'])
 Now our full dataframe has two additional columns one with the simple linear efficiency and one with Team Legacy's 
 Ladder Efficiency Index.
 
-{:.large-table}
+{:.large-table .narrow-rows }
 | rank |     name | country | matches |   mmr |          season | previous_top500 | national_rank | efficiency |       lei |
 |-----:|---------:|--------:|--------:|------:|----------------:|----------------:|--------------:|-----------:|----------:|
 |    1 | kolemoen | Germany |     431 | 10484 | M2_01 Wolf 2020 |              no |           1.0 |   2.051044 | 42.580782 |
@@ -140,7 +140,7 @@ per_season_df
 ``` 
 The full output from this you can see below:
 
-{:.large-table}
+{:.large-table .narrow-rows }
 |              season | min_mmr | max_mmr | num_matches | top500_cutoff | top200_cutoff | top64_cutoff |
 |--------------------:|--------:|--------:|------------:|--------------:|--------------:|-------------:|
 |     M2_01 Wolf 2020 |    2407 |   10484 |      699496 |          9749 |          9872 |        10061 |
@@ -168,7 +168,7 @@ per country. We can then combine this with the population size of each country (
 [here](https://www.kaggle.com/erikbruin/countries-of-the-world-iso-codes-and-population/data#)). By dividing the number
 of players in pro-ladder by the number of inhabitants (in millions) we can get the number of pro players per capita.
 
-{:.large-table}
+{:.large-table .narrow-rows }
 |              season |            country | total_matches | num_players | pro_players_per_million | matches_per_player |
 |--------------------:|-------------------:|--------------:|------------:|------------------------:|-------------------:|
 | M2_08 Draconid 2020 |             Poland |         72225 |         267 |                7.047129 |         270.505618 |
@@ -196,7 +196,7 @@ grouping data using built-in pandas functions.
 The results for Season of the Draconid are shown below. It seems that China has the best team of three this season
 followed by Russia and Poland.
 
-{:.large-table}
+{:.large-table .narrow-rows }
 |              season |            country |     mean_mmr | total_mmr | mean_matches_per_player | total_matches | nation_rank | efficiency |       lei |
 |--------------------:|-------------------:|-------------:|----------:|------------------------:|--------------:|------------:|-----------:|----------:|
 | M2_08 Draconid 2020 |              China | 10489.333333 |     31468 |                     409 |          1227 |           1 |   2.174409 | 43.974703 |
@@ -212,7 +212,7 @@ the best global and national ranks.
 
 This can give you a quick impression of all the data available on a player. Here you can see the output from myself (handle *sepro*).
 
-{:.large-table}
+{:.large-table .narrow-rows }
 |  name | country | appearances | min_mmr | mean_mmr | max_mmr | mean_matches | num_matches | best_rank | best_national_rank |
 |------:|--------:|------------:|--------:|---------:|--------:|-------------:|------------:|----------:|-------------------:|
 | sepro | Belgium |           3 |    9746 |     9746 |    9820 |          243 |         728 |      1138 |                2.0 |

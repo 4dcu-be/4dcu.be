@@ -5,9 +5,27 @@
     <description>A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</description>
     <link>https://blog.4dcu.be/</link>
     <atom:link href="https://blog.4dcu.be/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 03 Sep 2020 13:23:22 +0200</pubDate>
-    <lastBuildDate>Thu, 03 Sep 2020 13:23:22 +0200</lastBuildDate>
+    <pubDate>Sat, 05 Sep 2020 15:21:44 +0200</pubDate>
+    <lastBuildDate>Sat, 05 Sep 2020 15:21:44 +0200</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>Putting Benford's Law to the Test</title>
+        <description>&lt;p&gt;After seeing the Episode on &lt;a href=&quot;https://en.wikipedia.org/wiki/Benford%27s_law&quot;&gt;Benford’s Law&lt;/a&gt; in &lt;a href=&quot;https://twitter.com/latifnasser&quot;&gt;Latif Nasser&lt;/a&gt;’s &lt;a href=&quot;https://www.imdb.com/title/tt12753692/?ref_=fn_al_tt_2&quot;&gt;Connected&lt;/a&gt; (currently on Netflix), I had to test if this is true and if I could find...</description>
+        <pubDate>Sat, 05 Sep 2020 14:00:00 +0200</pubDate>
+        <link>https://blog.4dcu.be/programming/2020/09/05/Testing-Benfords-Law.html</link>
+        <guid isPermaLink="true">https://blog.4dcu.be/programming/2020/09/05/Testing-Benfords-Law.html</guid>
+        
+        <category>python</category>
+        
+        <category>jupyter</category>
+        
+        <category>pandas</category>
+        
+        
+        <category>programming</category>
+        
+      </item>
     
       <item>
         <title>Gwent: Pro Ladder Analysis and National Rankings</title>
@@ -202,28 +220,6 @@
         
         
         <category>diy</category>
-        
-      </item>
-    
-      <item>
-        <title>Minimalist Art Using a Genetic Algorithm</title>
-        <description>&lt;p&gt;While the genetic algorithm in the &lt;a href=&quot;/programming/2020/01/12/Genetic-Art-Algorithm.html&quot;&gt;previous post&lt;/a&gt; worked very well, it didn’t quite produce the style of minimalist artwork I was trying to achieve. Furthermore, it didn’t allow...</description>
-        <pubDate>Mon, 10 Feb 2020 13:00:00 +0100</pubDate>
-        <link>https://blog.4dcu.be/programming/2020/02/10/Genetic-Art-Algorithm-2.html</link>
-        <guid isPermaLink="true">https://blog.4dcu.be/programming/2020/02/10/Genetic-Art-Algorithm-2.html</guid>
-        
-        <category>python</category>
-        
-        <category>evolution</category>
-        
-        <category>genetic-algorithm</category>
-        
-        <category>algorithm</category>
-        
-        <category>art</category>
-        
-        
-        <category>programming</category>
         
       </item>
     

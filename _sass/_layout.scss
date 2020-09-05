@@ -558,3 +558,12 @@ iframe {
 code {
     padding: 15px 25px;
 }
+
+.narrow-rows td,th  {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.small-image {
+  max-width: 400px;
+}
