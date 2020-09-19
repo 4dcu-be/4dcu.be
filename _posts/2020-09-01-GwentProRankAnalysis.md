@@ -215,7 +215,7 @@ This can give you a quick impression of all the data available on a player. Here
 {:.large-table .narrow-rows }
 |  name | country | appearances | min_mmr | mean_mmr | max_mmr | mean_matches | num_matches | best_rank | best_national_rank |
 |------:|--------:|------------:|--------:|---------:|--------:|-------------:|------------:|----------:|-------------------:|
-| sepro | Belgium |           3 |    9746 |     9746 |    9820 |          243 |         728 |      1138 |                2.0 |
+| sepro | Belgium |           3 |    9746 |     9782 |    9820 |          243 |         728 |      1138 |                2.0 |
 
 You can download the full table [here](/assets/posts/2020-09-01-GwentProRankAnalysis/player_summaries.xlsx) to find your
 own or your favorite players stats.

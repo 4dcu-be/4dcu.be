@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Adding an Aqara Cube to Home Assistant</title>
+  <meta name="description" content="Aqara cubes are a fantastic way to switch on and off different devices in a smart home. However, gettingthem to run with Home Assistant is not trivial … Here...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Aqara cubes are a fantastic way to switch on and off different devices in a smart home. However, gettingthem to run with Home Assistant is not trivial … Here..." />
+  <meta property="og:url" content="https://blog.4dcu.be/diy/2020/09/20/MQTT.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Adding an Aqara Cube to Home Assistant" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2020-09-10-MQTT/web_P9161032.jpg" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Adding an Aqara Cube to Home Assistant">
+  <meta name="twitter:description" content="Aqara cubes are a fantastic way to switch on and off different devices in a smart home. However, gettingthem to run with Home Assistant is not trivial … Here...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2020-09-10-MQTT/web_P9161032.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/diy/2020/09/20/MQTT.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/diy/2020/09/20/MQTT.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2020-09-10-MQTT/web_P9161032.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Adding an Aqara Cube to Home Assistant</h1>
+			
+      <p class="info"><em>to control my kitchen lights</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted September 20, 2020 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/diy">Diy</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p><a href="https://www.aqara.com/us/cube.html">Aqara cubes</a> are a fantastic way to switch on and off different devices in a smart home. However, getting
+them to run with Home Assistant is not trivial … Here you can read all about how I’ve hooked up one of
+those cute cubes to Home Assistant to control my kitchen light.</p>
+
+<p>Each house/apartment probably has a few things that start to bother you after living there for a while. In
+our apartment this is the location of the kitchen light switch. You enter the kitchen … you can’t reach it … you
+leave the kitchen and realize the light is still on … you can go through the kitchen to the switch, make your way back
+in the dark, … After a few dozen times this becomes annoying. As proof-of-concept I already added a <a href="https://sonoff.tech/product/wifi-diy-smart-switches/sonoff-mini">Sonoff Mini</a> (with <a href="https://tasmota.github.io/docs/devices/Sonoff-Mini/">tasmota</a> firmware)
+behind that switch, so I can toggle the light using my phone. With that working, it is now time to add a physical switch 
+that can be placed in a more convenient location. So I decided to expand Home Assistant with a
+device that allows me to control the kitchen light and other smart lights throughout the apartment. Aqara cubes are
+small cubes which you can tap, turn, shake, rotate, … to control different devices, pefect for what I had in mind. 
+Though they would need an extra HUB, and I don’t want an additional smart HUB. I want my Raspberry Pi to function as
+the main HUB for all devices … this turned out to be easier said than done!</p>
+
+<p>Aqara cubes (and other Aqara sensors, switches, …) communicate through the <a href="https://en.wikipedia.org/wiki/Zigbee">Zigbee protocol</a> with a HUB, this is a very 
+efficient protocol for battery powered devices (compared to WiFi) though you need either a HUB or hack your way around 
+one … I decided to do the latter and expand my Raspberry Pi which runs Home Assistant with an Zigbee antenna.<br />
+Home Assistant, unfortunately, can’t communicate directly with Zigbee devices. Therefore, the stock firmware on the Zigbee dongle had to be replaced 
+with the <a href="https://github.com/Koenkk/Z-Stack-firmware">Z-Stack firmware</a>. In combination with <a href="https://www.zigbee2mqtt.io">Zigbee2MQTT</a> this will allow Zigbee devices to pair with the 
+Raspberry Pi with Zigbee antenna, the communication will be captured by <a href="https://www.zigbee2mqtt.io">Zigbee2MQTT</a>, translated and forwarded to an 
+MQTT broker … which Home Assistant can listen to.</p>
+
+<p>This is a little abstract and hard to grok, so I sketched up an overview how all these fit together.</p>
+
+<p><a href="/assets/posts/2020-09-10-MQTT/network_layout.png" class="lightgallery-link" data-sub-html="Overview of how different software and devices are connected">
+<img src="/assets/posts/2020-09-10-MQTT/network_layout.png" alt="Overview of how different software and devices are connected" class="small-image" data-src="/assets/posts/2020-09-10-MQTT/network_layout.png" loading="lazy" />
+</a></p>
+
+<h2 id="parts-list">Parts List</h2>
+
+<p>So for this I bought a couple things off Amazon :</p>
+
+<ul>
+  <li>A (third party) Arduino Uno, with USB cable (USB-A, the old, bulky connector)</li>
+  <li>A Zigbee dongle based on the CC2531 chip</li>
+  <li>An Aqara Cube</li>
+</ul>
+
+<p>Furthermore you’ll need some cables to connect the Arduino with Zigbee stick. Depending on how you wish to do this you
+might need a soldering iron with solder, heat-shrink tubing, some pin headers and connectors you can put on the cables.</p>
+
+<p>Since the Zigbee dongle is a bare PCB, I 3D printed a case desgined by hansaya for this type of dongle which can be 
+found on <a href="https://www.thingiverse.com/thing:2803664">Thingiverse</a>. An overview of all parts I used is shown below.</p>
+
+<p><a href="/assets/posts/2020-09-10-MQTT/web_P9161030.jpg" class="lightgallery-link" data-sub-html="All parts needed (apart from the Raspberry Pi running HA) in one picture">
+<img src="/assets/posts/2020-09-10-MQTT/web_P9161030.jpg" alt="All parts needed (apart from the Raspberry Pi running HA) in one picture" data-src="/assets/posts/2020-09-10-MQTT/web_P9161030.jpg" loading="lazy" />
+</a></p>
+
+<p>On the software side there are quite a few packages you’ll need :</p>
+
+<ul>
+  <li>GNU binutils (On windows the easiest way to get this is using <a href="https://www.cygwin.com/">Cygwin</a>)</li>
+  <li><a href="https://www.arduino.cc/en/main/software">Arduino IDE</a></li>
+  <li>The Arduino <a href="https://github.com/RedBearLab/CCLoader">CCLoader</a> firmware and software</li>
+  <li>The <a href="https://github.com/Koenkk/Z-Stack-firmware">Z-Stack firmware</a> for CC2531</li>
+</ul>
+
+<p>Last but not least you’ll need to have Home Assistant and the Mosquitto MQTT Broker running on a device 
+and a couple of smart switches and/or lights to turn on and off.</p>
+
+<p><strong>Note:</strong> The majority of the steps are to get the zigbee2mqtt firmware on a common Zigbee Antenna with the 
+CC2531 chip. There are antenna’s available with this firmware pre-loaded, which cost only a few bucks more. So,
+if you just want to get everything running, consider picking up a stick with the pre-loaded firmware and skip
+ahead to <a href="#step-4-installing-mosquitto-and-zigbee2mqtt">step 4</a>.</p>
+
+<h2 id="step-0-test-everything">Step 0: Test Everything</h2>
+
+<p>Before messing with firmware, test the device with the native configuration. Once you start flashing alternative firmware,
+especially if you would solder wires directly to pins to do so, voids your warranty. Make sure the Arduino and Zigbee stick are
+recognised when you plug them into a USB port of your computer.</p>
+
+<h2 id="step-1-prepare-the-arduino">Step 1: Prepare the Arduino</h2>
+
+<p>First install the <a href="https://www.arduino.cc/en/main/software">Arduino IDE</a>, this will be used to upload the <a href="https://github.com/RedBearLab/CCLoader">CCLoader</a> firmware to the Arduino. Once the Arduino IDE
+is installed, plug in the Arduino UNO and wait for the drivers to install. Next, get the CCLoader code from GitHub,
+extract it and open <em>Arduino\CCLoader\CCLoader.ino</em> in the Arduino IDE, in Tools select the right type of Arduino and
+the port it is on and click the upload button to compile the CCLoader code and upload the firmware to the Arduino.</p>
+
+<h2 id="step-2-connect-the-arduino-to-the-zigbee">Step 2: Connect the Arduino to the Zigbee</h2>
+
+<p>The Arduino will be used to flash the new firmware to the Zigbee Antenna. To do this, four cables need to be 
+connected to the debug pins on the Zigbee Antenna. There is plenty of information in the <a href="https://www.zigbee2mqtt.io/information/alternative_flashing_methods.html">Zigbee2MQTT documentation</a> how
+this can be done. Since I won’t need to reprogram the stick later on, I decided to bend the debug pins on the dongle
+to get easy access to them, solder a cable to each of the required pins, and solder a standard header pin, that fits 
+the Arduino, on the other end of those cables. Bending the pins and putting solder on them will likely render them 
+useless for other applications, but these dongles are cheap enough that if I ever need one with the stock firmware 
+(unlikely), I won’t break the bank picking up a second one.</p>
+
+<div class="gallery-2-col">
+  <p><a href="/assets/posts/2020-09-10-MQTT/web_P9161035.jpg" class="lightgallery-link" data-sub-html="Debug pins on the Zigbee dongle with wires attached">
+<img src="/assets/posts/2020-09-10-MQTT/web_P9161035.jpg" alt="Debug pins on the Zigbee dongle with wires attached" data-src="/assets/posts/2020-09-10-MQTT/web_P9161035.jpg" loading="lazy" />
+</a>
+<a href="/assets/posts/2020-09-10-MQTT/web_P9161039.jpg" class="lightgallery-link" data-sub-html="Zigbee dongle with cables attached">
+<img src="/assets/posts/2020-09-10-MQTT/web_P9161039.jpg" alt="Zigbee dongle with cables attached" data-src="/assets/posts/2020-09-10-MQTT/web_P9161039.jpg" loading="lazy" />
+</a></p>
+</div>
+
+<h2 id="step-3-prepare-the-mqtt-firmware-and-flash-the-zigbee-dongle">Step 3: Prepare the MQTT Firmware and Flash the Zigbee dongle</h2>
+
+<p>For this section the <a href="https://www.zigbee2mqtt.io/information/alternative_flashing_methods.html">Zigbee2MQTT documentation</a> is excellent. The only step I struggled with was to get binutils working.
+Installing <a href="https://www.cygwin.com/">Cygwin</a> and adding the binutils package to the installation was the solution. Alternatively, you can 
+download the processed firmware I used <a href="/assets/posts/2020-09-10-MQTT/CC2531ZNP-Prod_sepro.bin">here</a>.</p>
+
+<p>Next, using CCLoader you can flash that firmware to the Zigbee Dongle. This is a single command as shown below.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CCLoader_x86_64.exe <span class="o">[</span>Number of the COM port] CC2531ZNP-Prod_sepro.bin 0
+</code></pre></div></div>
+
+<p>Note that you should not have any other software that can talk to the Arduino running while doing this. This includes the Arduino IDE! I wasted half an hour
+looking for things I did wrong before realizing this. Once I closed the IDE and ran CCLoader I finally got the screen below, success! Also note that when
+connecting the Zigbee dongle using four wires, it needs to be powered through its USB port while flashing, so make sure it
+is plugged into.</p>
+
+<p><a href="/assets/posts/2020-09-10-MQTT/firmware_upload_success.png" class="lightgallery-link" data-sub-html="Flashing the firmware to the stick was a success !">
+<img src="/assets/posts/2020-09-10-MQTT/firmware_upload_success.png" alt="Flashing the firmware to the stick was a success !" data-src="/assets/posts/2020-09-10-MQTT/firmware_upload_success.png" loading="lazy" />
+</a></p>
+
+<p>You can double check flashing the Z-Stack firmware was successful by opening the device manager (windows), now the 
+Zigbee Dongle should appear as a USB Serial Device.</p>
+
+<p><a href="/assets/posts/2020-09-10-MQTT/mqtt_com6.png" class="lightgallery-link" data-sub-html="The new firmware is working, the device now is recognized as a USB Serial Device">
+<img src="/assets/posts/2020-09-10-MQTT/mqtt_com6.png" alt="The new firmware is working, the device now is recognized as a USB Serial Device" class="small-image" data-src="/assets/posts/2020-09-10-MQTT/mqtt_com6.png" loading="lazy" />
+</a></p>
+
+<h2 id="step-4-installing-mosquitto-and-zigbee2mqtt">Step 4: Installing Mosquitto and Zigbee2MQTT</h2>
+
+<p>First, you can plug the Zigbee dongle with the brand new firmware into the device that runs Home Assistant. Next, 
+log into that device, as we’ll need to install and configure a few things. First, we’ll install the Mosquitto MQTT 
+broker, this is essentially the central switchboard for MQTT devices. All devices will send their status to the MQTT
+broker, the broker will forward that information to devices that need to respond, and more importantly, this is the
+piece of software Home Assistant can communicate with. Installing this on a Raspberry Pi is easy, just a few commands
+are needed.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>mosquitto mosquitto-clients
+<span class="nb">sudo </span>systemctl <span class="nb">enable </span>mosquitto
+<span class="nb">sudo </span>systemctl status mosquitto
+</code></pre></div></div>
+
+<p>If this is successful, the MQTT broker is now running on your Raspberry Pi. Next, up is Zigbee2MQTT, this is a Node.js
+application, so both Node and npm need to be installed first. Here I’ll defer to the official Zigbee2MQTT installation
+guide : <a href="https://www.zigbee2mqtt.io/getting_started/running_zigbee2mqtt.html">https://www.zigbee2mqtt.io/getting_started/running_zigbee2mqtt.html</a>.
+The only change I made was that I installed everything as the user <em>homeassistant</em> as that is the one I’m using to run
+homeassistant (and not the default user pi). This is easy, just replace the word pi with whatever user name you need.</p>
+
+<p>After completing all the steps and pairing all (just one in my case) devices this is what my configuration file, located at <em>/opt/zigbee2mqtt/data/configuration.yaml</em>
+looked like. I enabled support for Home Assistant and disabled new devices joining (make sure to do this after all devices are paired). 
+As Mosquitto is running on the same device, the MQTT server is located at localhost.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">homeassistant</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">permit_join</span><span class="pi">:</span> <span class="no">false</span>
+<span class="na">mqtt</span><span class="pi">:</span>
+  <span class="na">base_topic</span><span class="pi">:</span> <span class="s">zigbee2mqtt</span>
+  <span class="na">server</span><span class="pi">:</span> <span class="s1">'</span><span class="s">mqtt://localhost'</span>
+<span class="na">serial</span><span class="pi">:</span>
+  <span class="na">port</span><span class="pi">:</span> <span class="s">/dev/ttyACM0</span>
+<span class="na">devices</span><span class="pi">:</span>
+  <span class="s1">'</span><span class="s">0x00158d0003495e50'</span><span class="pi">:</span>
+    <span class="na">friendly_name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Aqara</span><span class="nv"> </span><span class="s">Cube'</span>
+</code></pre></div></div>
+
+<p>One part I will copy from the official docs are the commands below. These are to start and stop the service and check
+the logs. The latter is very handy when debugging as you can see exactly what devices are sending (and this is also the
+one I tend to forget).</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Stopping Zigbee2MQTT
+sudo systemctl stop zigbee2mqtt
+
+# Starting Zigbee2MQTT
+sudo systemctl start zigbee2mqtt
+
+# View the log of Zigbee2MQTT
+sudo journalctl -u zigbee2mqtt.service -f
+</code></pre></div></div>
+
+<p>When running Zigbee2MQTT you can see all devices that are connected and which message they are passing along.</p>
+
+<p><a href="/assets/posts/2020-09-10-MQTT/paired_registered.png" class="lightgallery-link" data-sub-html="Zigbee2MQTT picking up the Aqara Cube">
+<img src="/assets/posts/2020-09-10-MQTT/paired_registered.png" alt="Zigbee2MQTT picking up the Aqara Cube" data-src="/assets/posts/2020-09-10-MQTT/paired_registered.png" loading="lazy" />
+</a></p>
+
+<p>Now everything works, the 3D printed case can be snapped on the Zigbee stick and we can move onto the final phase.</p>
+
+<p><a href="/assets/posts/2020-09-10-MQTT/web_P9171041.jpg" class="lightgallery-link" data-sub-html="Zigbee Stick with 3D printed case">
+<img src="/assets/posts/2020-09-10-MQTT/web_P9171041.jpg" alt="Zigbee Stick with 3D printed case" data-src="/assets/posts/2020-09-10-MQTT/web_P9171041.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="step-5-configuring-home-assistant">Step 5: Configuring Home Assistant</h2>
+
+<p>Time to tie everything together and configure Home Assistant. There are a few bits to add to <em>configuration.yaml</em> 
+(located in /home/homeassistant/.homeassistant/). We’ll have to make sure Home Assistant is aware there is an MQTT
+broker it should be listening too, to do so we’ll add these lines to <em>configuration.yaml</em>.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">mqtt</span><span class="pi">:</span>
+  <span class="na">discovery</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">broker</span><span class="pi">:</span> <span class="s">localhost</span>
+  <span class="na">birth_message</span><span class="pi">:</span>
+    <span class="na">topic</span><span class="pi">:</span> <span class="s1">'</span><span class="s">hass/status'</span>
+    <span class="na">payload</span><span class="pi">:</span> <span class="s1">'</span><span class="s">online'</span>
+  <span class="na">will_message</span><span class="pi">:</span>
+    <span class="na">topic</span><span class="pi">:</span> <span class="s1">'</span><span class="s">hass/status'</span>
+    <span class="na">payload</span><span class="pi">:</span> <span class="s1">'</span><span class="s">offline'</span>
+</code></pre></div></div>
+
+<p>I also added an input list to the configuration file which will be used to cycle through colors with the Aqara cube. To
+do this the next section was added to <em>configuration.yaml</em></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">input_select</span><span class="pi">:</span>
+  <span class="na">color</span><span class="pi">:</span>
+      <span class="na">initial</span><span class="pi">:</span> <span class="s">CadetBlue</span>
+      <span class="na">options</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">CadetBlue</span>
+        <span class="pi">-</span> <span class="s">CornflowerBlue</span>
+        <span class="pi">-</span> <span class="s">DarkSlateBlue</span>
+        <span class="pi">-</span> <span class="s">DarkOrchid</span>
+        <span class="pi">-</span> <span class="s">DeepPink</span>
+        <span class="pi">-</span> <span class="s">FireBrick</span>
+        <span class="pi">-</span> <span class="s">OrangeRed</span>
+        <span class="pi">-</span> <span class="s">DarkOrange</span>
+        <span class="pi">-</span> <span class="s">Gold</span>
+        <span class="pi">-</span> <span class="s">GreenYellow</span>
+        <span class="pi">-</span> <span class="s">Green</span>
+        <span class="pi">-</span> <span class="s">LightSeaGreen</span>
+</code></pre></div></div>
+
+<p>Now, go to the Home Assistant interface and from the configuration check if the configuration files are still valid and
+restart HA. Now we can finally get to the part where we’ll make automations to turn the cube into a physical switch for
+my kitchen light. Open up <em>automations.yaml</em> and add the section below.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1597674578966'</span>
+  <span class="na">alias</span><span class="pi">:</span> <span class="s">Cube Kitchen Light</span>
+  <span class="na">trigger</span><span class="pi">:</span>
+    <span class="na">platform</span><span class="pi">:</span> <span class="s">mqtt</span>
+    <span class="na">topic</span><span class="pi">:</span> <span class="s">zigbee2mqtt/Aqara Cube</span>
+  <span class="na">condition</span><span class="pi">:</span>
+    <span class="na">condition</span><span class="pi">:</span> <span class="s">template</span>
+    <span class="na">value_template</span><span class="pi">:</span> <span class="s1">'</span><span class="s">{{</span><span class="nv"> </span><span class="s">"flip90"</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">trigger.payload_json.action</span><span class="nv"> </span><span class="s">}}'</span>
+  <span class="na">action</span><span class="pi">:</span>
+    <span class="na">entity_id</span><span class="pi">:</span> <span class="s">switch.sonoff</span>
+    <span class="na">service</span><span class="pi">:</span> <span class="s">switch.toggle</span>
+</code></pre></div></div>
+
+<p>This automation will trigger each time the cube is flipped 90 degrees, it will simply toggle the Sonoff Mini that is 
+sitting in between the power and the light. Save the file, reload the scripts from HA’s configuration panel and flip the
+cube.</p>
+
+<p>So this actually solved my grievances with the kitchen light. Though the Aqara cube supports controlling more devices
+with different movements and I have one more smart light I would like to control, a LED strip providing some indirect
+light near the TV. These lights switch on and off automatically as the TV is switched on and off already, but it could
+be nice to have an easy way to switch them on without the TV to be on and cycle through some colors that I like.</p>
+
+<p>For switching those lights on, we’ll use the full flip motion where you pick up the cube and put it back on its top. 
+Turning the cube, like a dial, is another supported motion and that we’ll use to control the colors. This took some
+playing around with different options and lots off googling, but persistence persevered and the following automations
+worked.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1597674578967'</span>
+  <span class="na">alias</span><span class="pi">:</span> <span class="s">Cube TV Light</span>
+  <span class="na">trigger</span><span class="pi">:</span>
+    <span class="na">platform</span><span class="pi">:</span> <span class="s">mqtt</span>
+    <span class="na">topic</span><span class="pi">:</span> <span class="s">zigbee2mqtt/Aqara Cube</span>
+  <span class="na">condition</span><span class="pi">:</span>
+    <span class="na">condition</span><span class="pi">:</span> <span class="s">template</span>
+    <span class="na">value_template</span><span class="pi">:</span> <span class="s1">'</span><span class="s">{{</span><span class="nv"> </span><span class="s">"flip180"</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">trigger.payload_json.action</span><span class="nv"> </span><span class="s">}}'</span>
+  <span class="na">action</span><span class="pi">:</span>
+    <span class="na">service</span><span class="pi">:</span> <span class="s">light.toggle</span>
+
+<span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1597674578968'</span>
+  <span class="na">alias</span><span class="pi">:</span> <span class="s">Cube - rotate CW</span>
+  <span class="na">trigger</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">mqtt</span>
+    <span class="na">topic</span><span class="pi">:</span> <span class="s">zigbee2mqtt/Aqara Cube</span>
+  <span class="na">condition</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">template</span>
+    <span class="na">value_template</span><span class="pi">:</span> <span class="s1">'</span><span class="s">{{</span><span class="nv"> </span><span class="s">trigger.payload_json.action</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">['</span><span class="s1">'</span><span class="s">rotate_right'</span><span class="s1">'</span><span class="s">]</span><span class="nv"> </span><span class="s">}}'</span>
+  <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+    <span class="na">entity_id</span><span class="pi">:</span> <span class="s">light.tv_led_strip</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s1">'</span><span class="s">on'</span>
+  <span class="na">action</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">entity_id</span><span class="pi">:</span> <span class="s">input_select.color</span>
+    <span class="na">service</span><span class="pi">:</span> <span class="s">input_select.select_next</span>
+  <span class="pi">-</span> <span class="na">data_template</span><span class="pi">:</span>
+      <span class="na">color_name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">{{</span><span class="nv"> </span><span class="s">states('</span><span class="s1">'</span><span class="s">input_select.color'</span><span class="s1">'</span><span class="s">)</span><span class="nv"> </span><span class="s">}}'</span>
+      <span class="na">entity_id</span><span class="pi">:</span> <span class="s">light.tv_led_strip</span>
+      <span class="na">transition</span><span class="pi">:</span> <span class="m">0</span>
+    <span class="na">service</span><span class="pi">:</span> <span class="s">light.turn_on</span>
+  <span class="na">initial_state</span><span class="pi">:</span> <span class="s1">'</span><span class="s">on'</span>
+
+<span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1597674578969'</span>
+  <span class="na">alias</span><span class="pi">:</span> <span class="s">Cube - rotate CCW</span>
+  <span class="na">trigger</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">mqtt</span>
+    <span class="na">topic</span><span class="pi">:</span> <span class="s">zigbee2mqtt/Aqara Cube</span>
+  <span class="na">condition</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">template</span>
+    <span class="na">value_template</span><span class="pi">:</span>  <span class="s1">'</span><span class="s">{{</span><span class="nv"> </span><span class="s">trigger.payload_json.action</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">['</span><span class="s1">'</span><span class="s">rotate_left'</span><span class="s1">'</span><span class="s">]</span><span class="nv"> </span><span class="s">}}'</span>
+  <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+    <span class="na">entity_id</span><span class="pi">:</span> <span class="s">light.tv_led_strip</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s1">'</span><span class="s">on'</span>
+  <span class="na">action</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">entity_id</span><span class="pi">:</span> <span class="s">input_select.color</span>
+    <span class="na">service</span><span class="pi">:</span> <span class="s">input_select.select_previous</span>
+  <span class="pi">-</span> <span class="na">data_template</span><span class="pi">:</span>
+      <span class="na">color_name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">{{</span><span class="nv"> </span><span class="s">states('</span><span class="s1">'</span><span class="s">input_select.color'</span><span class="s1">'</span><span class="s">)</span><span class="nv"> </span><span class="s">}}'</span>
+      <span class="na">entity_id</span><span class="pi">:</span> <span class="s">light.tv_led_strip</span>
+      <span class="na">transition</span><span class="pi">:</span> <span class="m">0</span>
+    <span class="na">service</span><span class="pi">:</span> <span class="s">light.turn_on</span>
+  <span class="na">initial_state</span><span class="pi">:</span> <span class="s1">'</span><span class="s">on'</span>
+</code></pre></div></div>
+
+<p>The first automation is simple and just toggles the light group (which is the LED strip and the Moon light from a 
+<a href="/programming/2020/08/25/BusyBoard2.html">previous post</a>), same as with the kitchen lights. The other two automations are a bit more complicated, then the
+cube is rotated like a dial, if the LED strip is on, it will cycle through to the previous/next color (which are defined as an 
+input select in <em>configuration.yaml</em>) and then assign that color to the LED strip.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This looked a daunting project in the beginning, but zigbee2mqtt has excellent documentation that makes the
+process a lot easier than you would expect at first glance. Also there are many smart devices that communicate
+through the Zigbee protocol (for instance the new Ikea smart lights), so with this configuration we can further expand
+our smart devices as we see fit. The cube still can detect tap, shake and slide motions which could be used to control
+additional devices …</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/home-assistant">home-assistant</a>,&nbsp;<a href="/tag/arduino">arduino</a>,&nbsp;<a href="/tag/mqtt">MQTT</a>,&nbsp;<a href="/tag/zigbee">Zigbee</a>,&nbsp;<a href="/tag/aqara">Aqara</a>,&nbsp;<a href="/tag/yaml">yaml</a>,&nbsp;<a href="/tag/3d-printing">3d-printing</a>,&nbsp;<a href="/tag/soldering">soldering</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Adding+an+Aqara+Cube+to+Home+Assistant&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2020%2F09%2F20%2FMQTT.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Adding+an+Aqara+Cube+to+Home+Assistant&u=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2020%2F09%2F20%2FMQTT.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2020%2F09%2F20%2FMQTT.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/programming/2020/09/05/Testing-Benfords-Law.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Putting Benford's Law to the Test</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '4dcube';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
+			<p class="text">Last update: September 19, 2020</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/diy/2020/09/20/MQTT.html',
+    'title': 'Adding an Aqara Cube to Home Assistant'
+  });
+</script>
+
+
+  </body>
+
+</html>
