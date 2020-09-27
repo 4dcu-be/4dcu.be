@@ -12,9 +12,10 @@ github: "https://github.com/4dcu-be/kual-dashboard"
 ---
 
 Kindles have amazing e-Ink displays, if we can manage to install Python on one, we could turn an old kindle into
-a low-power dashboard! My Paperwhite 3 has issues! Even after replacing the battery, it lasts only 2-3 days when being
-used moderately. That isn't nearly enough during trips where it can't be charged daily. While I will buy a new ebook
-reader sooner or later, I really hate to throw an otherwise fine device away. Especially one that has a great display
+a low-power dashboard! An old Kindle is also considerably cheaper than a new e-Ink display module that can be hooked up to 
+a Raspberry Pi. So it makes a lot of sense to repurpose my old Kindle that has issues. Even after replacing the battery, 
+it lasts only 2-3 days when being used moderately. That isn't nearly enough during trips where it can't be charged daily. 
+While I will buy a new ebook reader sooner or later, I really hate to throw an otherwise fine device away. Especially one that has a great display
 that still works perfectly fine. Fortunately, I found a way to repurpose it and breath some new life into this device.
 
 ![All parts needed for the serial jailbreak](/assets/posts/2020-09-27-PythonKindleDashboard_1/all_parts.jpg)
