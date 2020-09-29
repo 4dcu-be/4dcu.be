@@ -199,6 +199,8 @@
 
 	
 
+	
+
 <li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
 
       </ul>
@@ -237,7 +239,8 @@
 </section>
 
 <article class="post-content">
-  <p>Kindles have amazing e-Ink displays, if we can manage to install Python on one, we could turn an old kindle into a low-power dashboard! An old Kindle is also considerably cheaper than a new e-Ink display module that can be hooked up to 
+  <p>Kindles have amazing e-Ink displays, if we can manage to install Python on one, we could turn an old kindle into a
+low-power dashboard! An old Kindle is also considerably cheaper than a new e-Ink display module that can be hooked up to 
 a Raspberry Pi. So it makes a lot of sense to repurpose my old Kindle that has issues. Even after replacing the battery, 
 it lasts only 2-3 days when being used moderately. That isn’t nearly enough during trips where it can’t be charged daily. 
 While I will buy a new ebook reader sooner or later, I really hate to throw an otherwise fine device away. Especially one that has a great display
@@ -305,11 +308,13 @@ on the kindle.</p>
     │   config.xml
     │   menu.json
     │
-    └───bin
-            extract.py
-            run.py
-            start.sh
-            start_once.sh
+    ├───bin
+    │       extract.py
+    │       run.py
+    │       start.sh
+    │       start_once.sh
+    │
+    └───cache
 </code></pre></div></div>
 
 <p>There are two files which are essential for the KUAL extension <em>config.xml</em> and <em>menu.json</em>, these you can see below. 
@@ -372,7 +377,7 @@ therefore a script <em>start_once.sh</em> is included, which will run the script
     <span class="nb">sleep </span>5
 
     <span class="nb">echo</span> <span class="s2">""</span> <span class="o">&gt;</span> /sys/class/rtc/rtc1/wakealarm
-    <span class="c"># Following line contains sleep time in seconds</span>
+    <span class="c"># Following line contains the sleep time in seconds</span>
     <span class="nb">echo</span> <span class="s2">"+3600"</span> <span class="o">&gt;</span> /sys/class/rtc/rtc1/wakealarm
     <span class="c"># Following line will put device into deep sleep until the alarm above is triggered</span>
     <span class="nb">echo </span>mem <span class="o">&gt;</span> /sys/power/state
@@ -486,6 +491,14 @@ Stay tuned as this will come up in the next post.</p>
 			
 		</span>
 		<span class="next-post">
+			
+				<a href="/diy/2020/09/27/PythonKindleDashboard_2.html">
+					<span class="page-number">Kindle + Python = e-Ink Dashboard (part 2)</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
 			
 		</span>
 	</section>
@@ -698,6 +711,8 @@ Stay tuned as this will come up in the next post.</p>
 
 	
 
+	
+
 <li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
 
       </ul>
@@ -753,7 +768,7 @@ Stay tuned as this will come up in the next post.</p>
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: September 27, 2020</p>
+			<p class="text">Last update: September 29, 2020</p>
     </div>
 
   </div>
