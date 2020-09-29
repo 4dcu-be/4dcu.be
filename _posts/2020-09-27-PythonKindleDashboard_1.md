@@ -48,7 +48,7 @@ first, as it will be removed when rebooting the device). Now the software jailbr
 
 ![Wires soldered in place](/assets/posts/2020-09-27-PythonKindleDashboard_1/soldering.jpg)
 
-Once you have successfully jailbroken the kindle, install [KUAL](https://www.mobileread.com/forums/showthread.php?t=203326). 
+Once you have successfully jailbroken the Kindle, install [KUAL](https://www.mobileread.com/forums/showthread.php?t=203326). 
 This is a launcher that allows other packages to be started from a menu. Next, install the MobileRead Package Installer
 aka. [MRPI](https://www.mobileread.com/forums/showthread.php?t=251143), which will simplify the next step. Finally,
 we'll need Python 3.8, which you can find [here](https://www.mobileread.com/forums/showthread.php?t=225030). Drop the
@@ -159,7 +159,7 @@ shows KUAL with our own freshly created buttons, that will soon run some Python 
 
 ## Conclusion
 
-While not without issues, it was possible to jailbreak the kindle paperwhite 3, install python and run custom code on
+While not without issues, it was possible to jailbreak the Kindle Paperwhite 3, install Python and run custom code on
 it. This means everything is ready to start hacking together a few scripts to actually turn the kindle into a dashboard.
 Stay tuned as this will come up in the next post.
 
