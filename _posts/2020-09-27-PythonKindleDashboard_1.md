@@ -32,7 +32,7 @@ warranty, so in case you want to try and do so it is at your own risk. There are
   apply a jailbreak. Use [this guide](https://www.mobileread.com/forums/showthread.php?t=267541), if you want to give this method a shot.
 
 For the serial jailbreak, apart from a soldering iron and a few wires, you'll also need a USB to Serial stick. There
-are plenty of these to be found on Amazon, eBay, ... but make sure you have a model that supports 1.8 V as this is what
+are plenty of these to be found on Amazon, eBay, ... but make sure you have a model that supports **1.8 V** as this is what
 the Kindle requires. 
 
 ![USB to serial stick that support 1.8, 3.3 and 5V](/assets/posts/2020-09-27-PythonKindleDashboard_1/usb_to_serial.jpg)
@@ -60,7 +60,7 @@ binaries in the right folder, from KUAL start MRPI and they will be installed.
 
 Python is installed and KUAL provides us with a way to start our script. Let's start to build a KUAL extension. Here
 we'll just discuss the boilerplate code, the dashboard python script will be discussed in the next post. The file 
-structure of our extension can be seen below, the folder *dashboard* will need to be copied to the *extensions* folder 
+structure of our extension can be seen below, the folder `dashboard` will need to be copied to the `extensions` folder 
 on the kindle.
 
 
