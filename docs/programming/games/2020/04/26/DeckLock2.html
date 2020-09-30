@@ -290,14 +290,14 @@ square brackets is optional, if nothing is entered the most recent version is se
 <h3 id="the-reader-class">The Reader class</h3>
 
 <p>Below you’ll find the code for the Reader, this needs to be a class that is build upon <a href="https://blog.getpelican.com/">Pelican</a>’s BaseReader, it needs
-to have a property <strong>enabled</strong> which should be set to True and a property <strong>file_extensions</strong> which is a list of extensions that
+to have a property <code class="highlighter-rouge">enabled</code> which should be set to True and a property <code class="highlighter-rouge">file_extensions</code> which is a list of extensions that
 should be processed by this reader, in this case only .mwDeck files. Note that there are a number of helper functions in
 full code that are required to make this work. Head over to the <a href="https://github.com/4dcu-be/DeckLock">DeckLock GitHub repository</a> to check out the full code.</p>
 
 <p>Upon creation of an MTGReader the cached data will be loaded (if it exists) and create a path to store card images (if 
 necessary).</p>
 
-<p>The function <strong>read</strong> attached to the MTGReader is required, here the metadata is set. A category and data are required by 
+<p>The function <code class="highlighter-rouge">read</code> attached to the MTGReader is required, here the metadata is set. A category and data are required by 
 Pelican though we won’t be using them so we just specify any value. Here the required template is also specified which
 is important to ensure the data will be rendered using the correct template. The next block of code reads the .mwDeck
 file, fetches card details and the image from <a href="https://scryfall.com/">Scryfall</a> if it isn’t included in the cached data and creates a 
@@ -307,8 +307,8 @@ the path to the output file are also constructed here from the deck’s name.</p
 <p>The deck data along with empty content is returned, Pelican will ensure a reader is created for each .mwDeck file in
 the posts folder, processed and combined with a template.</p>
 
-<p>Finally, you’ll need to create a function that adds the reader (here <strong>add_reader</strong> but you are free to choose another name)
-and a <strong>register</strong> function (name is not optional here). The latter will connect the add_reader function to Pelican’s set of
+<p>Finally, you’ll need to create a function that adds the reader (here <code class="highlighter-rouge">add_reader</code> but you are free to choose another name)
+and a <code class="highlighter-rouge">register</code> function (name is not optional here). The latter will connect the add_reader function to Pelican’s set of
 readers.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">MTGReader</span><span class="p">(</span><span class="n">BaseReader</span><span class="p">):</span>
@@ -444,19 +444,19 @@ mtg_overview.html is known to Pelican and will be rendered and stored as mtg.htm
 
 <h2 id="a-note-on-card-images">A Note on card images</h2>
 
-<p>DeckLock will download images from Scryfall when building a local version using <em>make html</em>. For private use this is 
+<p>DeckLock will download images from Scryfall when building a local version using <code class="highlighter-rouge">make html</code>. For private use this is 
 permitted in most countries. However, when building a version to release on the internet including copyrighted images 
 might no be a smart thing to do. Most likely it even is illegal. To this end, there are a few options included in the 
-file <em>publishconf.py</em> which is used when building the version intended for on-line use. The latter can be build with 
-the command <em>make release</em>.</p>
+file <code class="highlighter-rouge">publishconf.py</code> which is used when building the version intended for on-line use. The latter can be build with 
+the command <code class="highlighter-rouge">make release</code>.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">USE_EXTERNAL_LINKS</span> <span class="o">=</span> <span class="bp">True</span>
 <span class="n">STATIC_EXCLUDES</span> <span class="o">=</span> <span class="p">[</span><span class="s">'assets/keyforge'</span><span class="p">,</span> <span class="s">'assets/mtg'</span><span class="p">]</span>
 </code></pre></div></div>
 
-<p>USE_EXTERNAL_LINKS will use links to external platforms for card images rather than the downloaded images. For M:tG,
+<p><code class="highlighter-rouge">USE_EXTERNAL_LINKS</code> will use links to external platforms for card images rather than the downloaded images. For M:tG,
 Scryfall will be used, for KeyForge the official images from the master vault are used. By excluding the assets folders 
-for both games by setting STATIC_EXCLUDES, we prevent <a href="https://blog.getpelican.com/">Pelican</a> from copying the downloaded image to the output intended
+for both games by setting <code class="highlighter-rouge">STATIC_EXCLUDES</code>, we prevent <a href="https://blog.getpelican.com/">Pelican</a> from copying the downloaded image to the output intended
 for hosting DeckLock online.</p>
 
 <p>These settings can be changed but should obviously be used with careful consideration. Re-hosting copyrighted material 
@@ -838,7 +838,7 @@ of a proper logo for DeckLock. But also under the hood there are a number of imp
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: September 29, 2020</p>
+			<p class="text">Last update: September 30, 2020</p>
     </div>
 
   </div>

@@ -194,8 +194,8 @@ class CustomIndexView(AdminIndexView):
 
 ### __init__.py
 
-Here is all the code to set up the busyboard app, nothing really surprising here apart maybe the **createdb** section.
-This adds an command line interface option to create the database using **flask createdb**
+Here is all the code to set up the busyboard app, nothing really surprising here apart maybe the `createdb` section.
+This adds an command line interface option to create the database using `flask createdb`
 
 ```python
 import os

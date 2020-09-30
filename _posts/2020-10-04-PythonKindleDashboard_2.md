@@ -17,8 +17,8 @@ will turn the device in a proper DashBoard. To do this we'll create a miniature 
 that will fetch data from relevant websites (the extract part), combine it into a dictionary (the transform) and 
 put all parts in an SVG image (the load). The latter can then be converted into a PNG which we can show on the screen.
 
-So in this post we'll create the last files shown in the file structure for our KUAL Dashboard extension, *run.py* and
-*extract.py*. As always, all code for this project can be found on [GitHub](https://github.com/4dcu-be/kual-dashboard).
+So in this post we'll create the last files shown in the file structure for our KUAL Dashboard extension, `run.py` and
+`extract.py`. As always, all code for this project can be found on [GitHub](https://github.com/4dcu-be/kual-dashboard).
 
 ```text
 │   .gitignore
@@ -54,7 +54,7 @@ code is an acceptable trade-off.
 
 ### Grabbing Data from Google Scholar
 
-All functions to grab and parse data from websites is contained in *extract.py*, my [Google Scholar] page is the
+All functions to grab and parse data from websites is contained in `extract.py`, my [Google Scholar] page is the
 easiest to parse so let's start there. 
 
 ```python
@@ -189,10 +189,10 @@ def get_gwent_data(url):
 
 ## Time to Transform and Load
 
-So now we have to finish *run.py* which will be called by the shell script every hour, run the extract functions,
+So now we have to finish `run.py` which will be called by the shell script every hour, run the extract functions,
 combine the output and visualize it. Though let's forget about that for a second and just create something that
-puts some useful information on the screen. We can do a system call to *eips* which is a system tool available on the
-kindle to draw something on the screen or, with the *-c* flag, clear the screen.
+puts some useful information on the screen. We can do a system call to `eips` which is a system tool available on the
+kindle to draw something on the screen or, with the `-c` flag, clear the screen.
 
 ```python
 # bin/python3
@@ -244,11 +244,21 @@ if __name__ == "__main__":
 
 It works ! See the picture below how it looks on the Kindle. The font is ugly and small, but all information is pulled 
 in and shown. I left it running overnight a couple days to catch errors (this is how I found out errors fetching data
-needed to be handled and that the cache can not be written to the Kindle's designated temp folder as it is cleared to 
+needed to be handled and that the cache can not be written to the Kindle's designated temp folder as it is cleared too 
 frequently). So one more thing to do, make everything look nice!
 
+## Power Consumption
 
 
+
+## Conclusion
+
+While I initially thought getting something to run on a Kindle would be the hard part, it turns out I was wrong. Making 
+sure a script runs perpetually wasn't trivial either. Any uncaught errors would cause
+issues and some would only pop up on the Kindle (e.g. `print` statements cause BrokenPipe errors, the life-span of data
+in the cache folder, ...) and after running several hours. Making it very time consuming to pick up and fix errors.
+However, despite all that, the Kindle is now turned into a dashboard for my desk! Saving the device from being thrown 
+away, mission accomplished !
 
 
 

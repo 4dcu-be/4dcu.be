@@ -79,7 +79,7 @@ like this:
 ## Adding National Rank and Efficiency Statistics
 
 The rank on playgwent.com is the global rank, adding a national rank can be done in a single line of code. The
-*groupby* function in combination with the *rank* function does exactly what we want here.
+`groupby` function in combination with the `rank` function does exactly what we want here.
 
 ```python
 full_df['national_rank'] = full_df.groupby(['country','season'])["mmr"].rank("first", ascending=False)
@@ -117,10 +117,10 @@ You can download the full table [here](/assets/posts/2020-09-01-GwentProRankAnal
 
 ## Season Summary
 
-About every month or so there is a new season in Gwent. Using the *groupby* function we can very quickly create a summary
+About every month or so there is a new season in Gwent. Using the `groupby` function we can very quickly create a summary
 how many games were played by the pro-ranked players (do note that only the 2860 best players are listed on the website).
 We'll also add the cutoff values for rank 500, 200 and 64 as these are important thresholds for competitive players. 
-Here the aggregate function *agg* is used in combination with NamedAgg to calculate all statistics in one go.
+Here the aggregate function `agg` is used in combination with NamedAgg to calculate all statistics in one go.
 
 ```python
 per_season_df = full_df.groupby(['season']).agg(
@@ -163,7 +163,7 @@ You can download the full table [here](/assets/posts/2020-09-01-GwentProRankAnal
 
 ## Where is Gwent Being Played
 
-So using the *groupby* function in combination with the *agg* we can very quickly count how many pro players there are
+So using the `groupby` function in combination with the `agg` we can very quickly count how many pro players there are
 per country. We can then combine this with the population size of each country (and somewhat up-to-date list can be found
 [here](https://www.kaggle.com/erikbruin/countries-of-the-world-iso-codes-and-population/data#)). By dividing the number
 of players in pro-ladder by the number of inhabitants (in millions) we can get the number of pro players per capita.

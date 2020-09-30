@@ -362,7 +362,7 @@ like this:</p>
 <h2 id="adding-national-rank-and-efficiency-statistics">Adding National Rank and Efficiency Statistics</h2>
 
 <p>The rank on playgwent.com is the global rank, adding a national rank can be done in a single line of code. The
-<em>groupby</em> function in combination with the <em>rank</em> function does exactly what we want here.</p>
+<code class="highlighter-rouge">groupby</code> function in combination with the <code class="highlighter-rouge">rank</code> function does exactly what we want here.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">full_df</span><span class="p">[</span><span class="s">'national_rank'</span><span class="p">]</span> <span class="o">=</span> <span class="n">full_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">'country'</span><span class="p">,</span><span class="s">'season'</span><span class="p">])[</span><span class="s">"mmr"</span><span class="p">]</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="s">"first"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </code></pre></div></div>
@@ -468,10 +468,10 @@ Ladder Efficiency Index.</p>
 
 <h2 id="season-summary">Season Summary</h2>
 
-<p>About every month or so there is a new season in Gwent. Using the <em>groupby</em> function we can very quickly create a summary
+<p>About every month or so there is a new season in Gwent. Using the <code class="highlighter-rouge">groupby</code> function we can very quickly create a summary
 how many games were played by the pro-ranked players (do note that only the 2860 best players are listed on the website).
 We’ll also add the cutoff values for rank 500, 200 and 64 as these are important thresholds for competitive players. 
-Here the aggregate function <em>agg</em> is used in combination with NamedAgg to calculate all statistics in one go.</p>
+Here the aggregate function <code class="highlighter-rouge">agg</code> is used in combination with NamedAgg to calculate all statistics in one go.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">per_season_df</span> <span class="o">=</span> <span class="n">full_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">'season'</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
     <span class="n">min_mmr</span>     <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="s">'mmr'</span><span class="p">,</span> <span class="s">'min'</span><span class="p">),</span>
@@ -589,7 +589,7 @@ new content is a good incentive for players to play more, and spark a fiercer co
 
 <h2 id="where-is-gwent-being-played">Where is Gwent Being Played</h2>
 
-<p>So using the <em>groupby</em> function in combination with the <em>agg</em> we can very quickly count how many pro players there are
+<p>So using the <code class="highlighter-rouge">groupby</code> function in combination with the <code class="highlighter-rouge">agg</code> we can very quickly count how many pro players there are
 per country. We can then combine this with the population size of each country (and somewhat up-to-date list can be found
 <a href="https://www.kaggle.com/erikbruin/countries-of-the-world-iso-codes-and-population/data#">here</a>). By dividing the number
 of players in pro-ladder by the number of inhabitants (in millions) we can get the number of pro players per capita.</p>
@@ -1140,7 +1140,7 @@ some code to get some data about it, do some analysis and generate a few plots.<
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: September 29, 2020</p>
+			<p class="text">Last update: September 30, 2020</p>
     </div>
 
   </div>

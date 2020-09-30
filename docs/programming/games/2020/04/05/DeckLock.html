@@ -307,18 +307,18 @@ instead.</p>
 <h3 id="configuring-the-makefile">Configuring the Makefile</h3>
 
 <p>As we are using a virtual environment with pelican installed there, the patch to the executable in
-the enviroment needs to be set in the Makefile. Open the file and change the path on the line below to match your
-system. The pelican executable should be in venv/bin or venv/Scripts.</p>
+the environment needs to be set in the Makefile. Open the file and change the path on the line below to match your
+system. The pelican executable should be in <code class="highlighter-rouge">venv/bin</code> or <code class="highlighter-rouge">venv/Scripts</code>.</p>
 
 <div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">PELICAN</span><span class="o">?=</span>d:<span class="se">\G</span>it<span class="se">\D</span>eckLock<span class="se">\v</span><span class="nb">env</span><span class="se">\S</span>cripts<span class="se">\p</span>elican
 </code></pre></div></div>
 
 <h3 id="pelicanconfpy-and-publishconfpy">pelicanconf.py and publishconf.py</h3>
 
-<p>pelicanconf.py should be ready to go, though feel free to have a look to see if any of the
+<p><code class="highlighter-rouge">pelicanconf.py</code> should be ready to go, though feel free to have a look to see if any of the
 settings and paths need to be changed.</p>
 
-<p>In publishconf.py however you will need to specify the final url of your site.</p>
+<p>In <code class="highlighter-rouge">publishconf.py</code> however you will need to specify the final url of your site.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">SITEURL</span> <span class="o">=</span> <span class="s">"https://4dcu.be/DeckLock"</span>
 </code></pre></div></div>
@@ -326,22 +326,22 @@ settings and paths need to be changed.</p>
 <h3 id="decks-of-keyforge-api-key">Decks of KeyForge API key</h3>
 
 <p>If you want to include deck statistics from <a href="https://decksofkeyforge.com/">Decks of KeyForge</a> you’ll have to create an account and get an API key from
-<a href="https://decksofkeyforge.com/">https://decksofkeyforge.com/</a>. Create a file <em>.env</em> in the and add the line below.</p>
+<a href="https://decksofkeyforge.com/">https://decksofkeyforge.com/</a>. Create a file <code class="highlighter-rouge">.env</code> in the and add the line below.</p>
 
-<p>A .env file, which will not be committed, is used to keep your api key secret.</p>
+<p>A <code class="highlighter-rouge">.env</code> file, which will not be committed, is used to keep your api key secret.</p>
 
 <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DOK_API_KEY=your_api_key
 </code></pre></div></div>
 
 <h3 id="keyforge-deck-ids">KeyForge Deck IDs</h3>
 
-<p>Next, you’ll have to specify where the KeyForge data can be found (folder), in pelicanconf.py. Note that this path is
+<p>Next, you’ll have to specify where the KeyForge data can be found (folder), in <code class="highlighter-rouge">pelicanconf.py</code>. Note that this path is
 relative to the content folder</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">KEYFORGE_PATH</span> <span class="o">=</span> <span class="s">"./data"</span>
 </code></pre></div></div>
 
-<p>Now, add a keyforge.json file to ./content/data, structured as followed with the identifiers of the decks to include.
+<p>Now, add a <code class="highlighter-rouge">keyforge.json</code> file to <code class="highlighter-rouge">./content/data</code>, structured as followed with the identifiers of the decks to include.
 A file with the KeyForge Decks I own is included as an example, the structure should be a shown below.</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w">
@@ -355,16 +355,16 @@ A file with the KeyForge Decks I own is included as an example, the structure sh
 
 <h3 id="building-the-platform">Building the platform</h3>
 
-<p>You can use make to build the website (if make is available on your system), use <em>make html</em> to create a local instance
-to test in the <em>_site</em> directory. Use <em>make release</em> to create the version for publication in the <em>./docs</em> folder.</p>
+<p>You can use make to build the website (if make is available on your system), use <code class="highlighter-rouge">make html</code> to create a local instance
+to test in the <code class="highlighter-rouge">_site</code> directory. Use <code class="highlighter-rouge">make release</code> to create the version for publication in the <code class="highlighter-rouge">./docs</code> folder.</p>
 
 <pre><code class="language-commandline">make html
 
 make release
 </code></pre>
 
-<p>alternatively you can use pelican directly, the content is in the folder ./content and the output folder should be set 
-to ./_site for a local test build. Write the output to the ./docs folder with the publication settings so this can be
+<p>alternatively you can use pelican directly, the content is in the folder <code class="highlighter-rouge">./content</code> and the output folder should be set 
+to <code class="highlighter-rouge">./_site</code> for a local test build. Write the output to the <code class="highlighter-rouge">./docs</code> folder with the publication settings so this can be
 hosted easily on GitHub.</p>
 
 <pre><code class="language-commandline">pelican ./content -o ./_site
@@ -374,22 +374,16 @@ pelican ./content -o ./docs -s publishconf.py
 
 <h3 id="hosting-locally-for-testing">Hosting locally for testing</h3>
 
-<p>You can use Pelican’s built in webserver using the command below.</p>
+<p>You can use Pelican’s built in webserver using the command <code class="highlighter-rouge">make serve</code>.</p>
 
-<pre><code class="language-commandline">make serve
-</code></pre>
-
-<p>Or you can build the site using <em>make html</em>, navigate to the <em>_site</em> folder and start a webserver
-by running the command.</p>
-
-<pre><code class="language-commandline">python -m http.server
-</code></pre>
+<p>Or you can build the site using <code class="highlighter-rouge">make html</code>, navigate to the <code class="highlighter-rouge">_site</code> folder and start a webserver
+by running the command <code class="highlighter-rouge">python -m http.server</code>.</p>
 
 <p>In both cases you can see your site by pointing your browser to <a href="http://localhost:8000">http://localhost:8000</a>.</p>
 
 <h3 id="hosting-on-github">Hosting on GitHub</h3>
 
-<p>DeckLock includes a <em>make release</em> command which will write the final version of the website to the <em>./docs</em> folder. Make
+<p>DeckLock includes a <code class="highlighter-rouge">make release</code> command which will write the final version of the website to the <code class="highlighter-rouge">./docs</code> folder. Make
 sure to commit and push all files in your repository. On GitHub you can specify that this folder is used for the project pages, enable this in the settings and you’ll have
 free hosting to show off the decks you have in your card game collection.</p>
 
@@ -397,7 +391,7 @@ free hosting to show off the decks you have in your card game collection.</p>
 
 <p>All code is available on <a href="https://github.com/4dcu-be/DeckLock">https://github.com/4dcu-be/DeckLock</a>. In a nutshell, 
 Pelican can trigger functions at different stages of the build. By creating a plugin a function 
-<em>get_keyforge_external_data</em> was added that will trigger when Pelican initializes. This function will read the settings,
+<code class="highlighter-rouge">get_keyforge_external_data</code> was added that will trigger when Pelican initializes. This function will read the settings,
 find where keyforge.json is stored and the API key and connect to the different websites, pulling in all required 
 information.</p>
 
@@ -407,7 +401,7 @@ articles, …), <strong>Generators</strong> that take data, processes it, genera
 per category, … The default Writer is usually sufficient, so adding Readers and Generators is where the magic happens
 to create your own specific site’s structure.</p>
 
-<p>The function <em>get_keyforge_external_data</em> will write everything required to a single json file, so we can forgo a Reader
+<p>The function <code class="highlighter-rouge">get_keyforge_external_data</code> will write everything required to a single json file, so we can forgo a Reader
 and use a Generator, that loads the data, builds a url for each deck and ships the relevant data to our templates.</p>
 
 <p>Here is a stub on how to create a function and register it to trigger on initialization and how to create a generator and
@@ -838,7 +832,7 @@ as it is entwined with react which could prove handy to create a powerful, inter
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: September 29, 2020</p>
+			<p class="text">Last update: September 30, 2020</p>
     </div>
 
   </div>

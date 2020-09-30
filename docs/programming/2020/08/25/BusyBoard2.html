@@ -256,7 +256,7 @@ BusyBoard we can read from Home Assistant, so let’s implement this.</p>
 or even a framework designed specifically for APIs like <a href="https://fastapi.tiangolo.com/">FastAPI</a>! Here however we don’t need bells and whistles, we 
 simply need an endpoint for each users where we can see if they are busy or not. The first step is do add a function to the
 database model to export a user to a dictionary. To do this a little code needs to be added to the model 
-(in <em>./busyboard/models.py</em>) as shown below.</p>
+(in <code class="highlighter-rouge">./busyboard/models.py</code>) as shown below.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">'users'</span>
@@ -286,7 +286,7 @@ database model to export a user to a dictionary. To do this a little code needs 
 all fields are explicitly converted to integers, strings and bools. This isn’t strictly necessary for all fields, but it
 helps avoiding errors when converting them to JSON later on.</p>
 
-<p>Next, we’ll need to add the routes to <em>./busyboard/<strong>init</strong>.py</em>, again this is very simple. A few lines of code
+<p>Next, we’ll need to add the routes to <code class="highlighter-rouge">./busyboard/__init__.py</code>, again this is very simple. A few lines of code
 shown below will do the trick.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="o">@</span><span class="n">app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/api/users'</span><span class="p">)</span>
@@ -301,7 +301,7 @@ shown below will do the trick.</p>
         <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
 </code></pre></div></div>
 
-<p>So now if we go to e.g. <em>&lt;busyboard_url&gt;/api/users/1</em> we’ll get a JSON response which looks like:</p>
+<p>So now if we go to e.g. <code class="highlighter-rouge">\&lt;busyboard_url\&gt;/api/users/1</code> we’ll get a JSON response which looks like:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"busy"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -319,7 +319,7 @@ shown below will do the trick.</p>
 
 <p>Home Assistant comes with support to read REST APIs, so also here there is very little configuration required. The
 only thing needed is to add a rest-sensor for each user that reads the field “busy”. In the Home Assistant settings
-folder open the file <em>configuration.yml</em> with a text editor and add the following part to the sensor section. Note that
+folder open the file <code class="highlighter-rouge">configuration.yml</code> with a text editor and add the following part to the sensor section. Note that
 the URL will have to be adjusted to the spot where your instance of BusyBoard is running.</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -331,11 +331,11 @@ the URL will have to be adjusted to the spot where your instance of BusyBoard is
 
 </code></pre></div></div>
 
-<p>After this you’ll have to restart Home Assistant and the sensor will be available as <em>sensor.user_name</em>. Now using the
-GUI or directly in the configuration file <em>automations.yaml</em> you can create a new automation that triggers another device, like a light. 
+<p>After this you’ll have to restart Home Assistant and the sensor will be available as <code class="highlighter-rouge">sensor.user_name</code>. Now using the
+GUI or directly in the configuration file <code class="highlighter-rouge">automations.yaml</code> you can create a new automation that triggers another device, like a light. 
 You’ll have to add a trigger that goes of once the sensor goes from <strong>False</strong> to <strong>True</strong> and the other way around, the action will 
 be a service, in this case a smart light, will be switched on or off. Details how to do this will depend a lot on the
-type of light you are using and how it is configured in HA. Though feel free to use the section from my <em>automations.yaml</em>
+type of light you are using and how it is configured in HA. Though feel free to use the section from my <code class="highlighter-rouge">automations.yaml</code>
 file as a reference (shown below).</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1597674094193'</span>
@@ -751,7 +751,7 @@ the real world. If you want to look at the full code, this can be found on <a hr
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: September 29, 2020</p>
+			<p class="text">Last update: September 30, 2020</p>
     </div>
 
   </div>

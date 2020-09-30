@@ -555,7 +555,7 @@ iframe {
     display: block;
 }
 
-code {
+.highlight > code {
     padding: 15px 25px;
 }
 
@@ -566,4 +566,9 @@ code {
 
 .small-image {
   max-width: 400px;
+}
+
+code.highlighter-rouge {
+	  display: inline;
+    padding: 0px 2px;
 }

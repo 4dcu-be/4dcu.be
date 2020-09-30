@@ -315,7 +315,7 @@ recognised when you plug them into a USB port of your computer.</p>
 
 <p>First install the <a href="https://www.arduino.cc/en/main/software">Arduino IDE</a>, this will be used to upload the <a href="https://github.com/RedBearLab/CCLoader">CCLoader</a> firmware to the Arduino. Once the Arduino IDE
 is installed, plug in the Arduino UNO and wait for the drivers to install. Next, get the CCLoader code from GitHub,
-extract it and open <em>Arduino\CCLoader\CCLoader.ino</em> in the Arduino IDE, in Tools select the right type of Arduino and
+extract it and open <code class="highlighter-rouge">Arduino\CCLoader\CCLoader.ino</code> in the Arduino IDE, in Tools select the right type of Arduino and
 the port it is on and click the upload button to compile the CCLoader code and upload the firmware to the Arduino.</p>
 
 <h2 id="step-2-connect-the-arduino-to-the-zigbee">Step 2: Connect the Arduino to the Zigbee</h2>
@@ -384,7 +384,7 @@ guide : <a href="https://www.zigbee2mqtt.io/getting_started/running_zigbee2mqtt.
 The only change I made was that I installed everything as the user <em>homeassistant</em> as that is the one I’m using to run
 homeassistant (and not the default user pi). This is easy, just replace the word pi with whatever user name you need.</p>
 
-<p>After completing all the steps and pairing all (just one in my case) devices this is what my configuration file, located at <em>/opt/zigbee2mqtt/data/configuration.yaml</em>
+<p>After completing all the steps and pairing all (just one in my case) devices this is what my configuration file, located at <code class="highlighter-rouge">/opt/zigbee2mqtt/data/configuration.yaml</code>
 looked like. I enabled support for Home Assistant and disabled new devices joining (make sure to do this after all devices are paired). 
 As Mosquitto is running on the same device, the MQTT server is located at localhost.</p>
 
@@ -428,9 +428,9 @@ sudo journalctl -u zigbee2mqtt.service -f
 
 <h2 id="step-5-configuring-home-assistant">Step 5: Configuring Home Assistant</h2>
 
-<p>Time to tie everything together and configure Home Assistant. There are a few bits to add to <em>configuration.yaml</em> 
+<p>Time to tie everything together and configure Home Assistant. There are a few bits to add to <code class="highlighter-rouge">configuration.yaml</code>
 (located in /home/homeassistant/.homeassistant/). We’ll have to make sure Home Assistant is aware there is an MQTT
-broker it should be listening too, to do so we’ll add these lines to <em>configuration.yaml</em>.</p>
+broker it should be listening too, to do so we’ll add these lines to <code class="highlighter-rouge">configuration.yaml</code>.</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">mqtt</span><span class="pi">:</span>
   <span class="na">discovery</span><span class="pi">:</span> <span class="no">true</span>
@@ -444,7 +444,7 @@ broker it should be listening too, to do so we’ll add these lines to <em>confi
 </code></pre></div></div>
 
 <p>I also added an input list to the configuration file which will be used to cycle through colors with the Aqara cube. To
-do this the next section was added to <em>configuration.yaml</em></p>
+do this the next section was added to <code class="highlighter-rouge">configuration.yaml</code></p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">input_select</span><span class="pi">:</span>
   <span class="na">color</span><span class="pi">:</span>
@@ -466,7 +466,7 @@ do this the next section was added to <em>configuration.yaml</em></p>
 
 <p>Now, go to the Home Assistant interface and from the configuration check if the configuration files are still valid and
 restart HA. Now we can finally get to the part where we’ll make automations to turn the cube into a physical switch for
-my kitchen light. Open up <em>automations.yaml</em> and add the section below.</p>
+my kitchen light. Open up <code class="highlighter-rouge">automations.yaml</code> and add the section below.</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1597674578966'</span>
   <span class="na">alias</span><span class="pi">:</span> <span class="s">Cube Kitchen Light</span>
@@ -552,7 +552,7 @@ worked.</p>
 <p>The first automation is simple and just toggles the light group (which is the LED strip and the Moon light from a 
 <a href="/programming/2020/08/25/BusyBoard2.html">previous post</a>), same as with the kitchen lights. The other two automations are a bit more complicated, then the
 cube is rotated like a dial, if the LED strip is on, it will cycle through to the previous/next color (which are defined as an 
-input select in <em>configuration.yaml</em>) and then assign that color to the LED strip.</p>
+input select in <code class="highlighter-rouge">configuration.yaml</code>) and then assign that color to the LED strip.</p>
 
 <h2 id="conclusion">Conclusion</h2>
 
@@ -932,7 +932,7 @@ additional devices …</p>
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: September 29, 2020</p>
+			<p class="text">Last update: September 30, 2020</p>
     </div>
 
   </div>

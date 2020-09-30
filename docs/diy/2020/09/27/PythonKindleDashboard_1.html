@@ -317,12 +317,12 @@ on the kindle.</p>
     └───cache
 </code></pre></div></div>
 
-<p>There are two files which are essential for the KUAL extension <em>config.xml</em> and <em>menu.json</em>, these you can see below. 
+<p>There are two files which are essential for the KUAL extension <code class="highlighter-rouge">config.xml</code> and <code class="highlighter-rouge">menu.json</code>, these you can see below. 
 They are mostly self-explenatory, however make sure the id in the config file matches the name of your extension’s 
-folder (in this case dashboard). In <em>menu.json</em> you can define where you want buttons to start your script in KUAL’s
-menu (here they are in the main menu). As the dashboard script (<em>start.sh</em>) goes into an infinite loop, requiring the kindle to 
+folder (in this case dashboard). In <code class="highlighter-rouge">menu.json</code> you can define where you want buttons to start your script in KUAL’s
+menu (here they are in the main menu). As the dashboard script (<code class="highlighter-rouge">start.sh</code>) goes into an infinite loop, requiring the kindle to 
 be restarted to stop it, for debugging/testing purposes there is also a version included that will run only one loop to
-test if everything is in order (<em>start_once.sh</em>).</p>
+test if everything is in order (<code class="highlighter-rouge">start_once.sh</code>).</p>
 
 <p><strong>config.xml</strong></p>
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
@@ -355,10 +355,10 @@ test if everything is in order (<em>start_once.sh</em>).</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>For the actual dashboard all files are in the <em>bin</em> folder, where there is a shell script, <em>start.sh</em>, that will run the python
+<p>For the actual dashboard all files are in the <code class="highlighter-rouge">bin</code> folder, where there is a shell script, <code class="highlighter-rouge">start.sh</code>, that will run the python
 script, put the system into a deep sleep and repeat once it wakes up. Note that this script will run forever and the kindle
 needs to be restarted to kill it. While this is fine for a dashboard, for debugging/testing this is a little annoying,
-therefore a script <em>start_once.sh</em> is included, which will run the script once and stop.</p>
+therefore a script <code class="highlighter-rouge">start_once.sh</code> is included, which will run the script once and stop.</p>
 
 <p><strong>bin/start.sh</strong></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
@@ -760,7 +760,7 @@ Stay tuned as this will come up in the next post.</p>
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: September 29, 2020</p>
+			<p class="text">Last update: September 30, 2020</p>
     </div>
 
   </div>

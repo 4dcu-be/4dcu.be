@@ -26,7 +26,7 @@ To understand what this post is about you should really have a look at this vide
 ## Sentiment analysis in Python
 
 Python has the [Natural Language Toolkit](https://www.nltk.org/) which includes a very easy way to do sentiment 
-analysis. Import the correct library, create a SentimentIntsenityAnalyzer() and apply it on a fragment of text. Done! 
+analysis. Import the correct library, create a `SentimentIntsenityAnalyzer()` and apply it on a fragment of text. Done! 
 Just look at the examples below how a few lines of code can pick up which fragments are positive, negative or 
 neutral (reflected in the 'pos', 'neg', 'neu'). Furthermore there is a **compound score** that is positive if the overall
 sentiment of the text is good and negative if it is bad, this is the metric we want to create the shape of the story.

@@ -61,7 +61,7 @@ the finess of each individual in a population.
 A chromosome here is a list of triangles. A single triangle has three point with x,y coordinates and a color with 
 opacity. A few different changes can occur during a mutation, the triangle can move (shift all points), change shape (move points
 individually) or the color can change. There also is a more significant event that will destroy the current triangle and
-replace it with a totally random one. This is all taken care of by the .mutate function. The sigma value can be used to
+replace it with a totally random one. This is all taken care of by the `.mutate` function. The sigma value can be used to
 specify the strenght of a mutation (how strong the change will be) and the weights are used to specify which types of 
 mutation will occur more often than others.
 

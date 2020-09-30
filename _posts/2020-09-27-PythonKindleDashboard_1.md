@@ -81,12 +81,12 @@ on the kindle.
     └───cache
 ```
 
-There are two files which are essential for the KUAL extension *config.xml* and *menu.json*, these you can see below. 
+There are two files which are essential for the KUAL extension `config.xml` and `menu.json`, these you can see below. 
 They are mostly self-explenatory, however make sure the id in the config file matches the name of your extension's 
-folder (in this case dashboard). In *menu.json* you can define where you want buttons to start your script in KUAL's
-menu (here they are in the main menu). As the dashboard script (*start.sh*) goes into an infinite loop, requiring the kindle to 
+folder (in this case dashboard). In `menu.json` you can define where you want buttons to start your script in KUAL's
+menu (here they are in the main menu). As the dashboard script (`start.sh`) goes into an infinite loop, requiring the kindle to 
 be restarted to stop it, for debugging/testing purposes there is also a version included that will run only one loop to
-test if everything is in order (*start_once.sh*).
+test if everything is in order (`start_once.sh`).
 
 **config.xml**
 ```xml
@@ -121,10 +121,10 @@ test if everything is in order (*start_once.sh*).
 }
 ```
 
-For the actual dashboard all files are in the *bin* folder, where there is a shell script, *start.sh*, that will run the python
+For the actual dashboard all files are in the `bin` folder, where there is a shell script, `start.sh`, that will run the python
 script, put the system into a deep sleep and repeat once it wakes up. Note that this script will run forever and the kindle
 needs to be restarted to kill it. While this is fine for a dashboard, for debugging/testing this is a little annoying,
-therefore a script *start_once.sh* is included, which will run the script once and stop.
+therefore a script `start_once.sh` is included, which will run the script once and stop.
 
 **bin/start.sh**
 ```bash

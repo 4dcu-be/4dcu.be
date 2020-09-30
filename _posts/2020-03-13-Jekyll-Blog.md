@@ -29,8 +29,8 @@ bits and pieces I wanted. There really isn't any need to re-invent the wheel for
 to the theme, for instance I removed support for [HighlightJS] in favor for default code highlighter present in Jekyll.
 I also prefer [LightGallery] over [Lightbox], so I swapped that out as well. 
 
-These changes are pure html, js and css, you just need to pinpoint where the relevant code in the **\_sass**, **\_includes** or 
-**\_layouts** folder and make the change. However, I wanted a few more things that took a little bit more effort to
+These changes are pure html, js and css, you just need to pinpoint where the relevant code in the `_sass`, `_includes` or 
+`_layouts` folder and make the change. However, I wanted a few more things that took a little bit more effort to
 include.
 
 ## Automatic LightGallery links for all images
@@ -42,7 +42,7 @@ In markdown you have a rather simple way to include an image.
 ```
 
 Technically, you should add the website's baseurl to the path. This way the site will work also when hosted in a 
-sub-directory. This can be done by adding **{%raw%}{{ site.baseurl }}/{%endraw%}** before the path. This however is specific for the theme I started from and if you ever want to 
+sub-directory. This can be done by adding `{%raw%}{{ site.baseurl }}/{%endraw%}` before the path. This however is specific for the theme I started from and if you ever want to 
 use the markdown files with another theme or,framework this will come back to haunt you... To include the image, with all the 
 required features for LightGallery, you'll have to resort to including pure html in your markdown file.
 
@@ -60,7 +60,7 @@ syntax in my markdown files, but convert this to the html when building the page
 **Jekyll Hook**. Hooks are run before the file is parsed and they give you a spot to process the markdown files before
 Jekyll parses them, here we'll include a hook that converts everything for us automatically.
 
-To do this a folder **\_plugins** needs to be created in your project, and a file **lightgallery_links.rb** with the 
+To do this a folder `_plugins` needs to be created in your project, and a file `lightgallery_links.rb` with the 
 code below needs to be added.
 
 {% raw %}
@@ -83,7 +83,7 @@ As I will include a header image for each post, using the same image as the thum
 image is far larger than needed, so I wanted to automatically scale this down. Using a generator you can can create new
 files using Ruby code, this can be used to create a low-resolution thumbnail for each header automatically.
 
-First, we need to add the desired size of the thumbnails in the website's **_config.yml**, as shown below. These
+First, we need to add the desired size of the thumbnails in the website's `_config.yml`, as shown below. These
 are parameters that will be passed to ImageMagik.
 
 ```yaml
@@ -96,7 +96,7 @@ thumbnail:
     crop_dimensions: '430x288+0+0'
 ```
 
-We'll also need to add mini_magic to the **Gemfile**, it should look like this:
+We'll also need to add mini_magic to the `Gemfile`, it should look like this:
 
 ```bash
 source 'https://rubygems.org'
@@ -123,7 +123,7 @@ cover:  "/assets/posts/2020-03-13-Jekyll-Blog/map_extension.png"
 thumbnail: "/assets/images/thumbnails/jekyll_map.jpg"
 ```
 
-Finally, place a file **thumbnail_generator.rb** in the **\_plugins** folder with the code below.
+Finally, place a file `thumbnail_generator.rb` in the `_plugins` folder with the code below.
 
 ```ruby
 require "mini_magick"
@@ -177,7 +177,7 @@ coords:
   lng: 3.8708973
 ```
 
-A Google Maps API key needs to be obtained from [Google Developer Console] and defined in the **\_config.yml** file. 
+A Google Maps API key needs to be obtained from [Google Developer Console] and defined in the `_config.yml` file. 
 Make sure to set the appropriate restrictions on your key!
 
 ```yaml
@@ -186,7 +186,7 @@ google_maps_api_key: "your key here"
 ```
 
 Next, we need a json file that contains for each post: the coordinates, the title, the link and the
-description. We'll grab that file later when the actual map is generated. To do this create a file **map_data.json** in the
+description. We'll grab that file later when the actual map is generated. To do this create a file `map_data.json` in the
 main folder of the website with this code:
 
 {%raw%}
@@ -221,10 +221,10 @@ layout: null
 ``` 
 {%endraw%}
 
-Now we can include a map on a page using the code below. This will include JQuery to load the data in **map_data.json** 
+Now we can include a map on a page using the code below. This will include JQuery to load the data in `map_data.json` 
 (which is build from the coordinates in the
 posts' headers), these will be converted to markers on the map (complete with a popup menu) and together with the map
-added to the div with id="map". 
+added to the div with `id="map"`. 
 
 ```html
 <div id="map"></div>

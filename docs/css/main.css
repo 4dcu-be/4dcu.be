@@ -1565,7 +1565,7 @@ iframe {
   overflow-x: auto;
   display: block; }
 
-code {
+.highlight > code {
   padding: 15px 25px; }
 
 .narrow-rows td, th {
@@ -1574,6 +1574,10 @@ code {
 
 .small-image {
   max-width: 400px; }
+
+code.highlighter-rouge {
+  display: inline;
+  padding: 0px 2px; }
 
 .gallery-items {
   flex-wrap: wrap;

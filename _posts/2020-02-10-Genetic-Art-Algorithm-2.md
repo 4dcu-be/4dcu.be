@@ -42,7 +42,7 @@ explanation with more details [here](https://youtu.be/Q804hv73L6U?t=66))
 ![Colored the individual polygons of the plot](/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/voronoi_polygons.png)
 </div>
 
-In Python Voronoi diagrams can easily be created and plotted from a list of points using the **Voronoi** classe and **voronoi_plot_2d**
+In Python Voronoi diagrams can easily be created and plotted from a list of points using the `Voronoi` class and `voronoi_plot_2d`
 function which are included in [SciPy]. Excluding the imports you only need four lines of code !
 
 ```python

@@ -252,8 +252,8 @@ bits and pieces I wanted. There really isn’t any need to re-invent the wheel f
 to the theme, for instance I removed support for <a href="https://highlightjs.org/">HighlightJS</a> in favor for default code highlighter present in Jekyll.
 I also prefer <a href="http://sachinchoolur.github.io/lightGallery/">LightGallery</a> over <a href="https://lokeshdhakar.com/projects/lightbox2/">Lightbox</a>, so I swapped that out as well.</p>
 
-<p>These changes are pure html, js and css, you just need to pinpoint where the relevant code in the <strong>_sass</strong>, <strong>_includes</strong> or 
-<strong>_layouts</strong> folder and make the change. However, I wanted a few more things that took a little bit more effort to
+<p>These changes are pure html, js and css, you just need to pinpoint where the relevant code in the <code class="highlighter-rouge">_sass</code>, <code class="highlighter-rouge">_includes</code> or 
+<code class="highlighter-rouge">_layouts</code> folder and make the change. However, I wanted a few more things that took a little bit more effort to
 include.</p>
 
 <h2 id="automatic-lightgallery-links-for-all-images">Automatic LightGallery links for all images</h2>
@@ -264,7 +264,7 @@ include.</p>
 </code></pre></div></div>
 
 <p>Technically, you should add the website’s baseurl to the path. This way the site will work also when hosted in a 
-sub-directory. This can be done by adding <strong>{{ site.baseurl }}/</strong> before the path. This however is specific for the theme I started from and if you ever want to 
+sub-directory. This can be done by adding <code class="highlighter-rouge">{{ site.baseurl }}/</code> before the path. This however is specific for the theme I started from and if you ever want to 
 use the markdown files with another theme or,framework this will come back to haunt you… To include the image, with all the 
 required features for LightGallery, you’ll have to resort to including pure html in your markdown file.</p>
 
@@ -279,7 +279,7 @@ syntax in my markdown files, but convert this to the html when building the page
 <strong>Jekyll Hook</strong>. Hooks are run before the file is parsed and they give you a spot to process the markdown files before
 Jekyll parses them, here we’ll include a hook that converts everything for us automatically.</p>
 
-<p>To do this a folder <strong>_plugins</strong> needs to be created in your project, and a file <strong>lightgallery_links.rb</strong> with the 
+<p>To do this a folder <code class="highlighter-rouge">_plugins</code> needs to be created in your project, and a file <code class="highlighter-rouge">lightgallery_links.rb</code> with the 
 code below needs to be added.</p>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">Jekyll</span><span class="o">::</span><span class="no">Hooks</span><span class="p">.</span><span class="nf">register</span> <span class="ss">:posts</span><span class="p">,</span> <span class="ss">:pre_render</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="p">,</span> <span class="n">payload</span><span class="o">|</span>
@@ -299,7 +299,7 @@ As I will include a header image for each post, using the same image as the thum
 image is far larger than needed, so I wanted to automatically scale this down. Using a generator you can can create new
 files using Ruby code, this can be used to create a low-resolution thumbnail for each header automatically.</p>
 
-<p>First, we need to add the desired size of the thumbnails in the website’s <strong>_config.yml</strong>, as shown below. These
+<p>First, we need to add the desired size of the thumbnails in the website’s <code class="highlighter-rouge">_config.yml</code>, as shown below. These
 are parameters that will be passed to ImageMagik.</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">plugins</span><span class="pi">:</span>
@@ -311,7 +311,7 @@ are parameters that will be passed to ImageMagik.</p>
     <span class="na">crop_dimensions</span><span class="pi">:</span> <span class="s1">'</span><span class="s">430x288+0+0'</span>
 </code></pre></div></div>
 
-<p>We’ll also need to add mini_magic to the <strong>Gemfile</strong>, it should look like this:</p>
+<p>We’ll also need to add mini_magic to the <code class="highlighter-rouge">Gemfile</code>, it should look like this:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> <span class="s1">'https://rubygems.org'</span>
 gem <span class="s1">'jekyll'</span>, <span class="s1">'&lt;4'</span>
@@ -336,7 +336,7 @@ the place where the resized image will be written to.</p>
 <span class="na">thumbnail</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/assets/images/thumbnails/jekyll_map.jpg"</span>
 </code></pre></div></div>
 
-<p>Finally, place a file <strong>thumbnail_generator.rb</strong> in the <strong>_plugins</strong> folder with the code below.</p>
+<p>Finally, place a file <code class="highlighter-rouge">thumbnail_generator.rb</code> in the <code class="highlighter-rouge">_plugins</code> folder with the code below.</p>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"mini_magick"</span>
 <span class="kp">include</span> <span class="no">MiniMagick</span>
@@ -388,7 +388,7 @@ google maps, and need to be included in the header of the post as shown here:</p
   <span class="na">lng</span><span class="pi">:</span> <span class="m">3.8708973</span>
 </code></pre></div></div>
 
-<p>A Google Maps API key needs to be obtained from <a href="https://console.developers.google.com/">Google Developer Console</a> and defined in the <strong>_config.yml</strong> file. 
+<p>A Google Maps API key needs to be obtained from <a href="https://console.developers.google.com/">Google Developer Console</a> and defined in the <code class="highlighter-rouge">_config.yml</code> file. 
 Make sure to set the appropriate restrictions on your key!</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Google maps API key</span>
@@ -396,7 +396,7 @@ Make sure to set the appropriate restrictions on your key!</p>
 </code></pre></div></div>
 
 <p>Next, we need a json file that contains for each post: the coordinates, the title, the link and the
-description. We’ll grab that file later when the actual map is generated. To do this create a file <strong>map_data.json</strong> in the
+description. We’ll grab that file later when the actual map is generated. To do this create a file <code class="highlighter-rouge">map_data.json</code> in the
 main folder of the website with this code:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
@@ -428,10 +428,10 @@ main folder of the website with this code:</p>
 <span class="p">]</span>
 </code></pre></div></div>
 
-<p>Now we can include a map on a page using the code below. This will include JQuery to load the data in <strong>map_data.json</strong> 
+<p>Now we can include a map on a page using the code below. This will include JQuery to load the data in <code class="highlighter-rouge">map_data.json</code> 
 (which is build from the coordinates in the
 posts’ headers), these will be converted to markers on the map (complete with a popup menu) and together with the map
-added to the div with id=”map”.</p>
+added to the div with <code class="highlighter-rouge">id="map"</code>.</p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"map"</span><span class="nt">&gt;&lt;/div&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"map_spacer"</span><span class="nt">&gt;&lt;/div&gt;</span>
@@ -887,7 +887,7 @@ be put towards generating content!</p>
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: September 29, 2020</p>
+			<p class="text">Last update: September 30, 2020</p>
     </div>
 
   </div>
