@@ -17,25 +17,8 @@ will turn the device in a proper DashBoard. To do this we'll create a miniature 
 that will fetch data from relevant websites (the extract part), combine it into a dictionary (the transform) and 
 put all parts in an SVG image (the load). The latter can then be converted into a PNG which we can show on the screen.
 
-So in this post we'll create the last files shown in the file structure for our KUAL Dashboard extension, `run.py` and
-`extract.py`. As always, all code for this project can be found on [GitHub](https://github.com/4dcu-be/kual-dashboard).
+As always, all code for this project can be found on [GitHub](https://github.com/4dcu-be/kual-dashboard).
 
-```text
-│   .gitignore
-│   README.md
-│
-└───dashboard
-    │   config.xml
-    │   menu.json
-    │
-    ├───bin
-    │       extract.py
-    │       run.py
-    │       start.sh
-    │       start_once.sh
-    │
-    └───cache
-```
 
 ## Coding the Extract Functions
 
@@ -245,7 +228,67 @@ if __name__ == "__main__":
 It works ! See the picture below how it looks on the Kindle. The font is ugly and small, but all information is pulled 
 in and shown. I left it running overnight a couple days to catch errors (this is how I found out errors fetching data
 needed to be handled and that the cache can not be written to the Kindle's designated temp folder as it is cleared too 
-frequently). So one more thing to do, make everything look nice!
+frequently). 
+
+An easy way to create a dashboard is using an SVG file that looks exactly the way you like, but with a token in spots 
+where you want the dynamic text and values to appear. I've used this trick before and this is also what was used in the
+weather dashboard I've been using as a reference for this project. This is very easy code-wise, just see the updated
+`run.py` below. All extracted data is combined in a dict, `./svg/template.svg` is loaded as a text file and all the
+tokens are replaced by the values to display. Finally, the output is written to disk. There is one line of code that
+will check if the operating system is windows and adjust the path accordingly. This is useful for debugging as I can
+execute the code on my main machine without issues.
+
+```python
+# bin/python3
+# encoding: utf-8
+
+from datetime import datetime
+import os
+from os.path import join
+from extract import get_google_scholar, get_gwent_data, get_tvmaze_data
+
+scholar_url = "http://scholar.google.com/citations?user=4niBmJUAAAAJ&hl=en"
+gwent_url = "http://www.playgwent.com/en/profile/sepro"
+tvmaze_ids = [6,  # The 100
+              79,  # The Goldbergs
+              38963,  # The Mandalorian
+              ]
+
+svg_path = '/mnt/base-us/extensions/dashboard/svg/' if os.name != 'nt' else '../svg'
+
+
+def create_svg(svg_data, svg_template, svg_output):
+    with open(svg_template, 'r') as fin:
+        template = fin.read()
+
+        for k, v in svg_data.items():
+            template = template.replace(k, v)
+
+        with open(svg_output, 'w') as fout:
+            fout.write(template)
+
+
+if __name__ == "__main__":
+    # Get Data
+    gs_data = get_google_scholar(scholar_url)
+    gwent_data = get_gwent_data(gwent_url)
+    tvmaze_data = get_tvmaze_data(tvmaze_ids)
+
+    # Combine into dict
+    svg_data = {"GS_HINDEX": gs_data.get("h_index"),
+                "GS_CITATIONS": gs_data.get("citations"),
+                "GWENT_LADDER_RANK": gwent_data.get("ladder") + (" (Rank " + gwent_data.get("rank") + ")" if "Pro" not in gwent_data.get("ladder") else ""),
+                "GWENT_MMR": gwent_data.get("mmr"),
+                "GWENT_POSITION": gwent_data.get("position"),
+                "LASTUPDATE": datetime.now().strftime("%d/%m/%Y, %H:%M:%S")}
+
+    # Load Data into SVG
+    create_svg(svg_data, join(svg_path, "template.svg"), join(svg_path, "tmp.svg"))
+```
+
+# Revising start.sh
+
+
 
 ## Power Consumption
 

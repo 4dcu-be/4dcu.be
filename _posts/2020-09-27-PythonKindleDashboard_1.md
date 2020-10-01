@@ -73,7 +73,6 @@ on the kindle.
     │   menu.json
     │
     ├───bin
-    │       extract.py
     │       run.py
     │       start.sh
     │       start_once.sh
@@ -82,11 +81,14 @@ on the kindle.
 ```
 
 There are two files which are essential for the KUAL extension `config.xml` and `menu.json`, these you can see below. 
-They are mostly self-explenatory, however make sure the id in the config file matches the name of your extension's 
+They are mostly self-explanatory, however make sure the id in the config file matches the name of your extension's 
 folder (in this case dashboard). In `menu.json` you can define where you want buttons to start your script in KUAL's
 menu (here they are in the main menu). As the dashboard script (`start.sh`) goes into an infinite loop, requiring the kindle to 
 be restarted to stop it, for debugging/testing purposes there is also a version included that will run only one loop to
 test if everything is in order (`start_once.sh`).
+
+`run.py` is a placeholder that will be discussed in the next post, this is the python script that will get the data 
+online and turn it into something we can display on the Kindle.
 
 **config.xml**
 ```xml
@@ -111,10 +113,16 @@ test if everything is in order (`start_once.sh`).
     {
         "name": "Dashboard 4DCu.be",
         "priority": -999,
+        "exitmenu": false,
+        "refresh": false,
+        "status": false,
         "action": "./bin/start.sh"
     }, {
         "name": "Dashboard 4DCu.be (Debug)",
         "priority": -998,
+        "exitmenu": false,
+		"refresh": false,
+		"status": false,
         "action": "./bin/start_once.sh"
     }
     ]

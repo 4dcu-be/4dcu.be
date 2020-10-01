@@ -309,7 +309,6 @@ on the kindle.</p>
     │   menu.json
     │
     ├───bin
-    │       extract.py
     │       run.py
     │       start.sh
     │       start_once.sh
@@ -318,11 +317,14 @@ on the kindle.</p>
 </code></pre></div></div>
 
 <p>There are two files which are essential for the KUAL extension <code class="highlighter-rouge">config.xml</code> and <code class="highlighter-rouge">menu.json</code>, these you can see below. 
-They are mostly self-explenatory, however make sure the id in the config file matches the name of your extension’s 
+They are mostly self-explanatory, however make sure the id in the config file matches the name of your extension’s 
 folder (in this case dashboard). In <code class="highlighter-rouge">menu.json</code> you can define where you want buttons to start your script in KUAL’s
 menu (here they are in the main menu). As the dashboard script (<code class="highlighter-rouge">start.sh</code>) goes into an infinite loop, requiring the kindle to 
 be restarted to stop it, for debugging/testing purposes there is also a version included that will run only one loop to
 test if everything is in order (<code class="highlighter-rouge">start_once.sh</code>).</p>
+
+<p><code class="highlighter-rouge">run.py</code> is a placeholder that will be discussed in the next post, this is the python script that will get the data 
+online and turn it into something we can display on the Kindle.</p>
 
 <p><strong>config.xml</strong></p>
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
@@ -345,10 +347,16 @@ test if everything is in order (<code class="highlighter-rouge">start_once.sh</c
     </span><span class="p">{</span><span class="w">
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dashboard 4DCu.be"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"priority"</span><span class="p">:</span><span class="w"> </span><span class="mi">-999</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"exitmenu"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"refresh"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./bin/start.sh"</span><span class="w">
     </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dashboard 4DCu.be (Debug)"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"priority"</span><span class="p">:</span><span class="w"> </span><span class="mi">-998</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"exitmenu"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+		</span><span class="nl">"refresh"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+		</span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./bin/start_once.sh"</span><span class="w">
     </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
@@ -760,7 +768,7 @@ Stay tuned as this will come up in the next post.</p>
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: September 30, 2020</p>
+			<p class="text">Last update: October 1, 2020</p>
     </div>
 
   </div>

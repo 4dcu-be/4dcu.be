@@ -29,6 +29,8 @@ code). Download links for the full tables discussed here (in Excel-format) are a
   * [Seasonal summary](/assets/posts/2020-09-01-GwentProRankAnalysis/seasonal_stats.xlsx) : Number of games played each season in Masters 2, minimum and maximum MMR as well as top 500,200 and 64 cutoffs.
   * [National Statistics](/assets/posts/2020-09-01-GwentProRankAnalysis/national_stats.xlsx) : Data per country, number of pro players per million inhabitants, ...
 
+**Update 01/10/2020:** All downloadable files were updated and now contain data from the last season (Season of the Dryad).
+
 **Update 03/09/2020:** Credit where credit is due! After putting this blog post up I found two articles by Lerio2 that
 predate mine where he did the same analysis to check the popularity and rank countries (based on teams of 4 players). 
 Though I did my analysis independently, he had the idea several months earlier and deserves full credit for that! 
