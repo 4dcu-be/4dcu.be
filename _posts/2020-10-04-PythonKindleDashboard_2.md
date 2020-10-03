@@ -6,9 +6,13 @@ date:   2020-10-04 12:00:00
 author: Sebastian Proost
 categories: diy
 tags:	python kindle dashboard
-cover:  "/assets/posts/2020-09-27-PythonKindleDashboard_1/kindle_pw3.jpg"
-thumbnail: "/assets/images/thumbnails/kindle_pw3"
+cover:  "/assets/posts/2020-10-04-PythonKindleDashboard_2/header.jpg"
+thumbnail: "/assets/images/thumbnails/kindle_pw3_2"
 github: "https://github.com/4dcu-be/kual-dashboard"
+gallery_items:
+  - image: "/assets/posts/2020-10-04-PythonKindleDashboard_2/final_dashboard.jpg"
+    gallery_image: "/assets/images/gallery/kual_dashboard.jpg"
+    description: "Custom dashboard running on a Kindle Paperwhite 3."
 ---
 
 In the [last post] a Kindle Paperwhite 3 was jailbroken, Python 3.8 installed and all boilerplate code was added to 
@@ -126,111 +130,98 @@ def get_tvmaze_data(ids):
     return sorted(output, key=lambda x: x['airdate'])
 ```
 
-## Catching Errors with a Decorator
+## Caching and Catching Errors with a Decorator
+
+Most sites don't provide new data every hour, so there is no need to fetch the data that often. We can simply store the
+results and the next time we refresh check the time since the last modification. If that is recent enough we load the
+data and provide that. If the file is older than the chach time, we fetch new data from the internet.
 
 As the data comes from the internet a few things can go wrong, the Kindle's Wifi might not come up fast enough, or 
 the internet might be down, or one of the websites times out ... and these errors aren't caught yet. I also don't want
-the dashboard to display empty information for an hour or more because one website was temporarily unreachable. To over-
-come this issue a decorator can be created that will try to run one of the extract functions, if it works write a file
-to disk with the output, if it fails load the previously written file and return that.
+the dashboard to display empty information for an hour or more because one website was temporarily unreachable. Here we
+can also leverage the cache, if we fail to get up to fetch data from the internet, we load the cache regardless of the
+age and show that. It is better to show (slightly) out of date information than no information at all.
+
+The decorator shown below elegantly combines both of these, note there is some boiler plate code for checking the last
+modification to a file. This part of the code is included in `./dashboard/bin/cache.py`
 
 ```python
 import json
+import os
+from datetime import datetime
 from functools import wraps
-from os.path import join
 
-cache_dir = '/mnt/base-us/extensions/dashboard/cache/'
+cache_dir = '/mnt/base-us/extensions/dashboard/cache/' if os.name != 'nt' else '../cache'
 
-def failwithcache(cache_file):
-    def deco_failwithcache(f):
+
+def hours_since_last_modification(file_path):
+    """"
+    Returns the number of hours since a file was modified. -1 indicates the file doesn't exists
+    """
+    if os.path.exists(file_path):
+        last_modification = os.stat(file_path).st_mtime
+        return (datetime.now().timestamp() - last_modification) / 3600
+    else:
+        return -1
+
+
+def cache(cache_file, cache_time):
+    """
+    Decorator that combine two things:
+        * if the decorated function fails (for any reason) it will pull the most recent data
+        from cache and return those.
+        * if the cache file is more recent than cache_time and return the
+        cached data if the file is recent enough
+
+    :param cache_file: File to write cache to
+    :param cache_time: How long (in hours) a file should be cached
+    """
+
+    def deco_cache(f):
         @wraps(f)
-        def f_failwithcache(*args, **kwargs):
+        def f_cache(*args, **kwargs):
+            hslm = hours_since_last_modification(cache_file)
+            if 0 <= hslm < cache_time:
+                with open(cache_file, 'r') as fin:
+                    output = json.load(fin)
+                return output
+
             try:
                 output = f(*args, **kwargs)
-                with open(join(cache_dir, cache_file), 'w') as fout:
+                with open(cache_file, 'w') as fout:
                     json.dump(output, fout)
             except:
-                with open(join(cache_dir, cache_file)) as fin:
+                with open(cache_file, 'r') as fin:
                     output = json.load(fin)
             return output
-        return f_failwithcache
-    return deco_failwithcache
+
+        return f_cache
+
+    return deco_cache
 ```
 
 To get this running we'll need to decorate the extract functions like shown below. The decorator takes one argument, the 
 filename to write to (potentially this could be done automatically based on the decorated function's name).
 
 ```python
-@failwithcache('scholar.json')
-def get_google_scholar(url):
-    ...
+# ...
+from dashboard.bin.cache import cache_dir, cache
+# ...
 
-@failwithcache('gwent.json')
+@cache(join(cache_dir, 'scholar.json'), 8)
+def get_google_scholar(url):
+    # ...
+
+@cache(join(cache_dir, 'gwent.json'), 1)
 def get_gwent_data(url):
-    ...
+    # ...
 ```
 
 ## Time to Transform and Load
 
 So now we have to finish `run.py` which will be called by the shell script every hour, run the extract functions,
-combine the output and visualize it. Though let's forget about that for a second and just create something that
-puts some useful information on the screen. We can do a system call to `eips` which is a system tool available on the
-kindle to draw something on the screen or, with the `-c` flag, clear the screen.
-
-```python
-# bin/python3
-# encoding: utf-8
-
-from datetime import datetime
-import os
-from extract import get_google_scholar, get_gwent_data, get_tvmaze_data
-
-scholar_url = "http://scholar.google.com/citations?user=4niBmJUAAAAJ&hl=en"
-gwent_url = "http://www.playgwent.com/en/profile/sepro"
-
-tvmaze_ids = [6,  # The 100
-              79,  # The Goldbergs
-              38963,  # The Mandalorian
-              ]
-
-if __name__ == "__main__":
-    # Load data. printing text here is for debugging only, should be removed later
-    os.system('eips -c')
-
-    os.system('eips 15  4 \'Loading Data ...\'')
-    os.system('eips 15  6 \'Google Scholar ...\'')
-    gs_data = get_google_scholar(scholar_url)
-    os.system('eips 15  7 \'Gwent ...\'')
-    gwent_data = get_gwent_data(gwent_url)
-    os.system('eips 15  8 \'TVMaze ...\'')
-    tvmaze_data = get_tvmaze_data(tvmaze_ids)
-
-    # All data is loaded, let's put it on the screen
-    os.system('eips -c')
-    os.system('eips -c')
-    os.system('eips 15  2 \'Google Scholar\'')
-    os.system('eips 15  4 \'H-index   : %s\'' % gs_data.get('h_index', 'NA'))
-    os.system('eips 15  5 \'Citations : %s\'' % gs_data.get('citations', 'NA'))
-
-    os.system('eips 15  9 \'Gwent (%s)\'' % gwent_data.get('ladder', 'error'))
-    os.system('eips 15  11 \'Player    : %s\'' % gwent_data.get('player', 'NA'))
-    os.system('eips 15  12 \'MMR       : %s\'' % gwent_data.get('mmr', 'NA'))
-    os.system('eips 15  13 \'Position  : %s\'' % gwent_data.get('position', 'NA'))
-
-    os.system('eips 15  17 \'TVMaze\'')
-    for line, episode in enumerate(tvmaze_data[:3], start=19):
-        os.system('eips 15  %d \'%s: %s %s\'' % (line, episode['name'], episode['episode_name'], episode['airdate']))
-
-    os.system('eips 15  26 \'Last Update  : %s\'' % datetime.now().strftime("%d/%m/%Y, %H:%M:%S"))
-
-```
-
-It works ! See the picture below how it looks on the Kindle. The font is ugly and small, but all information is pulled 
-in and shown. I left it running overnight a couple days to catch errors (this is how I found out errors fetching data
-needed to be handled and that the cache can not be written to the Kindle's designated temp folder as it is cleared too 
-frequently). 
-
-An easy way to create a dashboard is using an SVG file that looks exactly the way you like, but with a token in spots 
+combine the output and visualize it. An easy way to create a dashboard is using an SVG file that looks exactly the way 
+you like, but with a token in spots 
 where you want the dynamic text and values to appear. I've used this trick before and this is also what was used in the
 weather dashboard I've been using as a reference for this project. This is very easy code-wise, just see the updated
 `run.py` below. All extracted data is combined in a dict, `./svg/template.svg` is loaded as a text file and all the
@@ -247,11 +238,13 @@ import os
 from os.path import join
 from extract import get_google_scholar, get_gwent_data, get_tvmaze_data
 
+
 scholar_url = "http://scholar.google.com/citations?user=4niBmJUAAAAJ&hl=en"
 gwent_url = "http://www.playgwent.com/en/profile/sepro"
-tvmaze_ids = [6,  # The 100
-              79,  # The Goldbergs
-              38963,  # The Mandalorian
+tvmaze_ids = [6,        # The 100
+              79,       # The Goldbergs
+              38963,    # The Mandalorian
+              17128     # This Is Us
               ]
 
 svg_path = '/mnt/base-us/extensions/dashboard/svg/' if os.name != 'nt' else '../svg'
@@ -268,6 +261,15 @@ def create_svg(svg_data, svg_template, svg_output):
             fout.write(template)
 
 
+def fmt_date(date_input):
+    d = datetime.strptime(date_input, '%Y-%m-%d')
+    return d.strftime('%d/%m/%Y')
+
+
+def is_today(date_input, fmt="%Y-%m-%d"):
+    return date_input == datetime.now().strftime(fmt)
+
+
 if __name__ == "__main__":
     # Get Data
     gs_data = get_google_scholar(scholar_url)
@@ -280,28 +282,112 @@ if __name__ == "__main__":
                 "GWENT_LADDER_RANK": gwent_data.get("ladder") + (" (Rank " + gwent_data.get("rank") + ")" if "Pro" not in gwent_data.get("ladder") else ""),
                 "GWENT_MMR": gwent_data.get("mmr"),
                 "GWENT_POSITION": gwent_data.get("position"),
-                "LASTUPDATE": datetime.now().strftime("%d/%m/%Y, %H:%M:%S")}
+                "LASTUPDATE": "Last Update: " + datetime.now().strftime("%d/%m/%Y - %H:%M:%S")}
+
+    for i in range(3):
+        if i < len(tvmaze_data):
+            svg_data["TV_SHOW_%d" % (i + 1)] = tvmaze_data[i]["name"]
+            svg_data["TV_EPISODE_%d" % (i + 1)] = tvmaze_data[i]["episode_name"]
+            svg_data["TV_AIRDATE_%d" % (i + 1)] = "TODAY" if is_today(tvmaze_data[i]["airdate"]) \
+                else fmt_date(tvmaze_data[i]["airdate"])
+        else:
+            svg_data["TV_SHOW_%d" % (i+1)] = "No upcoming episodes found"
+            svg_data["TV_EPISODE_%d" % (i + 1)] = ""
+            svg_data["TV_AIRDATE_%d" % (i + 1)] = ""
 
     # Load Data into SVG
     create_svg(svg_data, join(svg_path, "template.svg"), join(svg_path, "tmp.svg"))
+
 ```
 
-# Revising start.sh
+## Revising start.sh
+
+Now `run.py` will create a new SVG file each time it is called. However we need to revise `start.sh` to convert this
+SVG into a PNG image and show that image on the screen. The Weather Dashboard uses a combination of [rsvg-convert] and
+pngcruch to create a png file compatible with the Kindle's own `eips` command to put it on the screen. Here, the
+SVG is still converted using the same tool, but `fbink` is used, which can put any png image on the screen correctly,
+without the need for an additional conversion using pngcruch. Furthermore, the temporary files will be cleaned up in this
+script.
+
+One big issue is that the Kindle mounts most partitions with the `noexec` flag, meaning you can't execute code and
+scripts from there. For scripts that isn't much of an issue as you can overcome this by starting them through the 
+interpreter; `/bin/sh <scriptname>` and `python3 <scriptname>` can be used for shell and python scripts respectively. To
+run rsvg-convert there is a bigger issue as this is a binary file. The workaround here is to copy the executable code
+and libraries to a share where code can be executed, here `/var/tmp` is used, add the path to the libraries to the 
+environmental variable `LD_LIBRARY_PATH` and run the program from there.
+
+To avoid flooding KUAL's log over time (especially `fbink` is very verbose) all output from the tools is caught and
+piped to `/dev/null` (essentially the command line's garbage bin) by appending `> /dev/null 2>&1` to the command.
+
+```bash
+#!/bin/sh
+
+cd "/mnt/base-us/extensions/dashboard/"
+
+# Make sure there is enough time to reconnect to the wifi
+sleep 30
+
+# Remove files
+if [ -f ./svg/tmp.svg ]; then
+    rm ./svg/tmp.svg
+fi
+
+if [ -f ./svg/tmp.png ]; then
+    rm ./svg/tmp.png
+fi
+
+# Run script to download data and generate new SVG file
+python3 ./bin/run.py
+
+# Copy rsvg-convert to a share where it can be started
+# The shared folder that can be accessed via USB is mounted with the noexec flag,
+# copying file to /var/tmp gets around this restriction.
+if [ ! -f /var/tmp/rsvg-convert ]; then
+    cp -rf ./external/* /var/tmp
+fi
+
+# Check if svg exists and if it does convert it to PNG and show on screen
+if [ -e ./svg/tmp.svg ]; then
+  export LD_LIBRARY_PATH=/var/tmp/rsvg-convert-lib:/usr/lib:/lib
+  /var/tmp/rsvg-convert-lib/rsvg-convert --background-color=white -o ./svg/tmp.png ./svg/tmp.svg > /dev/null 2>&1
+  fbink -c -g file=./svg/tmp.png,w=1072,halign=center,valign=center > /dev/null 2>&1
+fi
+
+# Make sure the screen is fully refreshed before going to sleep
+sleep 5
+
+echo "" > /sys/class/rtc/rtc1/wakealarm
+# Following line contains sleep time in seconds
+echo "+3600" > /sys/class/rtc/rtc1/wakealarm
+# Following line will put device into deep sleep until the alarm above is triggered
+echo mem > /sys/power/state
+
+# Kill self and spawn a new instance
+/bin/sh ./bin/start.sh && exit
+```
 
 
+## Disable the Kindle's Deep Sleep
 
-## Power Consumption
+Normally, after 10 minutes of inactivity, a Kindle goes into deep sleep, without the wakeup timer enabled. This needs to be disabled,
+otherwise each time the Dashboard wakes up for ~45 seconds to refresh its data, the clock is ticking ... 
+and once 10 minutes have passed in total the Kindle goes into deep sleep permanently until the power button
+is pressed. The dashboard will stop refreshing once this happens. To disable the Kindle's deep sleep you can type `~ds`
+in the **search bar** and hit enter. 
 
-
+![The final result, the dashboard running on a Kindle Paperwhite 3](/assets/posts/2020-10-04-PythonKindleDashboard_2/final_dashboard.jpg)
 
 ## Conclusion
 
-While I initially thought getting something to run on a Kindle would be the hard part, it turns out I was wrong. Making 
-sure a script runs perpetually wasn't trivial either. Any uncaught errors would cause
-issues and some would only pop up on the Kindle (e.g. `print` statements cause BrokenPipe errors, the life-span of data
-in the cache folder, ...) and after running several hours. Making it very time consuming to pick up and fix errors.
+While I initially thought getting something to run on a Kindle would be the hard part, it turns out I was wrong... Making 
+sure a script runs perpetually was harder. With issues popping up only after some time, it becomes very time consuming 
+to pick up and fix errors. It took me quite some time to figure out that the Kindle was still going into deep sleep on 
+its own, realize a forgotten `print` statement caused a strange error in combination with a long running script and 
+KUAL, ... Not being able to execute code directly from the extension folder also was unexpected and took a fair bit of
+hacking to figure out what was going on, and where I would be able to run the program from.
+
 However, despite all that, the Kindle is now turned into a dashboard for my desk! Saving the device from being thrown 
-away, mission accomplished !
+away, mission accomplished ! Only thing to do is 3D print a nice stand for it.
 
 
 
@@ -315,3 +401,5 @@ away, mission accomplished !
 [urllib]: https://docs.python.org/3/howto/urllib2.html
 [requests]: https://requests.readthedocs.io/en/master/
 [BeautifulSoup]: https://www.crummy.com/software/BeautifulSoup/bs4/doc/
+[Weather Dashboard]: https://github.com/x-magic/kindle-weather-stand-alone
+[rsvg-convert]: https://en.wikipedia.org/wiki/Librsvg
