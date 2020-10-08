@@ -4,7 +4,7 @@ title:  "Kindle + Python = e-Ink Dashboard (part 2)"
 byline: "repurposing an old kindle paperwhite 3"
 date:   2020-10-04 12:00:00
 author: Sebastian Proost
-categories: diy programming games
+categories: diy
 tags:	python kindle dashboard gwent TV
 cover:  "/assets/posts/2020-10-04-PythonKindleDashboard_2/header.jpg"
 thumbnail: "/assets/images/thumbnails/kindle_pw3_2"
