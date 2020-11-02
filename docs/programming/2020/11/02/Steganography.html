@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Steganography using PIL and NumPy</title>
+  <meta name="description" content="Steganography is the practice of hiding information in other images, audio, text, … You can add hidden messages to  pictures, hide a file within another file...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Steganography is the practice of hiding information in other images, audio, text, … You can add hidden messages to  pictures, hide a file within another file..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/2020/11/02/Steganography.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Steganography using PIL and NumPy" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2020-11-02-Steganography/post_header.jpg" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Steganography using PIL and NumPy">
+  <meta name="twitter:description" content="Steganography is the practice of hiding information in other images, audio, text, … You can add hidden messages to  pictures, hide a file within another file...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2020-11-02-Steganography/post_header.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/2020/11/02/Steganography.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/2020/11/02/Steganography.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2020-11-02-Steganography/post_header.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Steganography using PIL and NumPy</h1>
+			
+      <p class="info"><em>hiding messages in plain sight</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted November 2, 2020 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>Steganography is the practice of hiding information in other images, audio, text, … You can add hidden messages to 
+pictures, hide a file within another file, … Here we’ll try to hide some information inside an image.</p>
+
+<p>Images are essentially two dimensional lists of pixels, which in turn consist of three integer numbers in the range 
+0-255 that represent values for red, green and blue. The difference between a pixel with value rgb(230, 129, 200) and 
+rgb(229, 129, 201) are virtually imperceptible. So we can leverage this and hide information in that least significant 
+bits of each pixel.</p>
+
+<p>To hide a message in an image a function is needed that <strong>converts a string to a binary representation</strong> and one that 
+<strong>embeds that data in the least significant bits of an image</strong>. To reveal the message we need to be able to reverse 
+this, so first a function will <strong>extract the least significant bits</strong> and the final step is to <strong>convert them back into 
+a string</strong>.</p>
+
+<h2 id="converting-text-to-binary-and-back">Converting Text to Binary and Back</h2>
+
+<p>To convert text to binary and back I found a function on <a href="https://stackoverflow.com/questions/7396849/convert-binary-to-ascii-and-vice-versa">StackOverflow</a> though it is a little hard to understand. So let’s dissect the encode_text function step by step.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">str.encode</code> is used to turn the string into bytes</li>
+  <li><code class="highlighter-rouge">int.from_bytes</code> now creates an integer number from those bytes. This works because in Python integer numbers can be arbitrarily large.</li>
+  <li>this number is converted into binary (e.g. 0b00101011010101010101010001… ) using <code class="highlighter-rouge">bin()</code></li>
+  <li>an array slice is used to remove the first two characters (0b)</li>
+  <li><code class="highlighter-rouge">zfill</code> is used to make sure the output is a multiple of 8</li>
+</ul>
+
+<p>To revert from a binary the padding and slicing can be omitted and the other steps need to be reversed.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">int()</code> is used to convert a binary representation back to an integer number, note the parameter 2</li>
+  <li>using the <code class="highlighter-rouge">int.to_bytes</code> this number is converted back to a list of bytes</li>
+  <li><code class="highlighter-rouge">str.decode</code> converts bytes back to text</li>
+</ul>
+
+<p>To check if this works a bit of <em>Lorem ipsum</em> is converted to binary and back.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Convert the hidden message to bytes
+</span>
+<span class="k">def</span> <span class="nf">encode_text</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8'</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s">'surrogatepass'</span><span class="p">):</span>
+    <span class="n">bits</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">encoding</span><span class="p">,</span> <span class="n">errors</span><span class="p">),</span> <span class="s">'big'</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="n">bits</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">bits</span><span class="p">)</span> <span class="o">+</span> <span class="mi">7</span><span class="p">)</span> <span class="o">//</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">decode_text</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8'</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s">'surrogatepass'</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">n</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">((</span><span class="n">n</span><span class="o">.</span><span class="n">bit_length</span><span class="p">()</span> <span class="o">+</span> <span class="mi">7</span><span class="p">)</span> <span class="o">//</span> <span class="mi">8</span><span class="p">,</span> <span class="s">'big'</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">encoding</span><span class="p">,</span> <span class="n">errors</span><span class="p">)</span> <span class="ow">or</span> <span class="s">'</span><span class="se">\0</span><span class="s">'</span>
+        
+
+<span class="n">hidden_message</span> <span class="o">=</span> <span class="s">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</span>
+
+<span class="n">encoded_text</span> <span class="o">=</span> <span class="n">encode_text</span><span class="p">(</span><span class="n">hidden_message</span><span class="p">)</span>
+<span class="n">decoded_text</span> <span class="o">=</span> <span class="n">decode_text</span><span class="p">(</span><span class="n">encoded_text</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"encoded:"</span><span class="p">,</span> <span class="n">encoded_text</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"decoded:"</span><span class="p">,</span> <span class="n">decoded_text</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>encoded: 010011000110111101110010011001010110110100100000011010010111000001110011011101010110110100100000011001000110111101101100011011110111001000100000011100110110100101110100001000000110000101101101011001010111010000101100001000000110001101101111011011100111001101100101011000110111010001100101011101000111010101110010001000000110000101100100011010010111000001101001011100110110001101101001011011100110011100100000011001010110110001101001011101000010110000100000011100110110010101100100001000000110010001101111001000000110010101101001011101010111001101101101011011110110010000100000011101000110010101101101011100000110111101110010001000000110100101101110011000110110100101100100011010010110010001110101011011100111010000100000011101010111010000100000011011000110000101100010011011110111001001100101001000000110010101110100001000000110010001101111011011000110111101110010011001010010000001101101011000010110011101101110011000010010000001100001011011000110100101110001011101010110000100101110
+decoded: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+</code></pre></div></div>
+
+<h2 id="hiding-information-in-an-image">Hiding Information in an Image</h2>
+
+<p>With functions to convert any text into binary and back, the code to bake that binary information into an image can be 
+written. Here the <a href="https://pillow.readthedocs.io/en/stable/">PIL</a> library is used to load the image, which is than 
+turned into a one-dimensional list of all Red, Green and Blue values of the pixel in the image.</p>
+
+<p>A suffix <STOP> is added to the hidden message so when decoding the image it is clear where the message ends. This is 
+then converted to binary. Next, a loop goes over all bits, and encodes them in the least significant bit of the 
+flattened image. This is done by applying a binary mask (0b11111110) to the value to set the least significant bit to 
+zero and then a binary *or* operation is used to set that value to the desired value.</STOP></p>
+
+<p>The clause <code class="highlighter-rouge">ix &lt; len(encoded_text) else value</code> ensures that if that pixels in spots where hidden information isn’t 
+stored remain identical.</p>
+
+<p>Finally, the one-dimensional array is turned back into a 2D image with 3 color channels and exported as PIL image. To 
+test this, and image <code class="highlighter-rouge">pear.png</code> is loaded, a Hello World message inserted and the image written to disk again. Make 
+sure that when saving the image, a lossless file format is used. JPEG files are compressed in a way that some minor 
+details are lost, this could remove the hidden content, so here PNG is used.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="k">def</span> <span class="nf">encode_in_image</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">text_message</span><span class="p">):</span>
+    <span class="c1"># Open the image, store the shape and convert to one-dimensional list
+</span>    <span class="n">input_im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s">"RGB"</span><span class="p">)</span>
+    <span class="n">image_shape</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">input_im</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">flat_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">input_im</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+    <span class="c1"># Encode the message and add prefix
+</span>    <span class="n">encoded_text</span> <span class="o">=</span> <span class="n">encode_text</span><span class="p">(</span><span class="n">text_message</span> <span class="o">+</span> <span class="s">"&lt;STOP&gt;"</span><span class="p">)</span>
+    
+    <span class="c1"># Enter message in the least significant bit where necessary
+</span>    <span class="n">encoded_array</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="mb">0b11111110</span> <span class="o">&amp;</span> <span class="n">value</span><span class="p">)</span> <span class="o">|</span> <span class="nb">int</span><span class="p">(</span><span class="n">encode_bit</span><span class="p">)</span> <span class="k">if</span> <span class="n">ix</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">encoded_text</span><span class="p">)</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="p">(</span><span class="n">encode_bit</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">encoded_text</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">flat_array</span><span class="p">),</span> <span class="s">'0'</span><span class="p">),</span> <span class="n">flat_array</span><span class="p">))]</span>
+
+    <span class="c1"># Turn encoded array into image and return
+</span>    <span class="n">encoded_im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">encoded_array</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">image_shape</span><span class="p">)</span>    
+    <span class="k">return</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">(</span><span class="n">encoded_im</span><span class="p">))</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s">'RGB'</span><span class="p">)</span>
+
+
+
+<span class="n">encoded_im</span> <span class="o">=</span> <span class="n">encode_in_image</span><span class="p">(</span><span class="s">'pears.png'</span><span class="p">,</span> <span class="s">"Hello World"</span><span class="p">)</span>
+<span class="n">encoded_im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">'pears_with_hidden_message.png'</span><span class="p">)</span>
+<span class="n">encoded_im</span>
+</code></pre></div></div>
+
+<p><a href="/assets/posts/2020-11-02-Steganography/pears_with_hidden_message.png" class="lightgallery-link" data-sub-html="Image of some pears ... but with a hidden message injected ...">
+<img src="/assets/posts/2020-11-02-Steganography/pears_with_hidden_message.png" alt="Image of some pears ... but with a hidden message injected ..." data-src="/assets/posts/2020-11-02-Steganography/pears_with_hidden_message.png" loading="lazy" />
+</a></p>
+
+<h2 id="extracting-the-hidden-content">Extracting the Hidden Content</h2>
+
+<p>Cool, our image looks identical to the input image. By eye the minor differences are imperceivable. One last function 
+to add, to extract the hidden message from an image. This is fairly simple, after te image is loaded it is flattened 
+into a one-dimensional array again. For each value the least significant bit is extracted using a bit mask. These 
+values are joined into a single string, which is decoded using the <code class="highlighter-rouge">decode_text</code> function. Finally, we need to 
+break the decoded text on the suffix <STOP>, beyond that suffix there is no information encoded and there will be a lot 
+of gibberish returned. A simple ```split()``` does that trick.</STOP></p>
+
+<p>Finally, we run that code on the image where a message was embedded … and voila, our original message comes out again.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">extract_from_image</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="c1"># Open image
+</span>    <span class="n">encoded_im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s">"RGB"</span><span class="p">))</span>
+
+    <span class="c1"># Extract least significant bits from flat (one-dimensional) image
+</span>    <span class="n">extracted_bits</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="mb">0b00000001</span> <span class="o">&amp;</span> <span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">encoded_im</span><span class="o">.</span><span class="n">flatten</span><span class="p">()]</span>
+
+    <span class="c1"># Join bits together, decode and split at &lt;STOP&gt;
+</span>    <span class="n">extracted_bits</span> <span class="o">=</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">extracted_bits</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">decode_text</span><span class="p">(</span><span class="n">extracted_bits</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s">'replace'</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'&lt;STOP&gt;'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    
+<span class="n">extract_from_image</span><span class="p">(</span><span class="s">'pears_with_hidden_message.png'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'Hello World'
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Being able to hide information in a plain looking file is a cool gimmick. There are plenty of cool use-cases known, you
+can find more information on <a href="https://en.wikipedia.org/wiki/Steganography">WikiPedia</a> about this. As a binary signature is inserted, essentially all kinds of data
+could be hidden. For text, you need just under three pixels to store a single character using only the least significant
+ bit. So a fair amount of text can be stored in an image. You could double that amount by either compressing the text 
+ first, and by the information into the two least significant bits of each pixels channels. Computerphile has an 
+ example where the entire works of Shakespeare are included in a single image of three. Check out that movie 
+ <a href="https://www.youtube.com/watch?v=TWEXCYQKyDc">here</a>.</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/numpy">numpy</a>,&nbsp;<a href="/tag/steganography">steganography</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Steganography+using+PIL+and+NumPy&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2020%2F11%2F02%2FSteganography.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Steganography+using+PIL+and+NumPy&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2020%2F11%2F02%2FSteganography.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2020%2F11%2F02%2FSteganography.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/diy/2020/10/17/3D-printing_2.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Five reasons for 3D printing</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '4dcube';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
+			<p class="text">Last update: November 2, 2020</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/programming/2020/11/02/Steganography.html',
+    'title': 'Steganography using PIL and NumPy'
+  });
+</script>
+
+
+  </body>
+
+</html>
