@@ -5,10 +5,10 @@ byline: "ABM using Mesa and Pandas"
 date:   2020-11-11 12:00:00
 author: Sebastian Proost
 categories: programming games
-tags:	python numpy gwent mesa abm agent_based_modelling pandas
+tags:	python numpy gwent mesa abm agent_based_modeling pandas
 cover:  "/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/crowd_header.jpg"
 thumbnail: "/assets/images/thumbnails/crowd_header.png"
-github: "https://github.com/4dcu-be/GwentAgentBasedModelling"
+github: "https://github.com/4dcu-be/GwentAgentBasedModeling"
 ---
 
 In an article I contributed to [Team Bandit Gang]'s website, data is shown about the number of games Pro Ranked players
@@ -317,7 +317,7 @@ familiar pandas dataframe the actual analysis can begin. This however is reserve
 
 
 [Team Bandit Gang]: https://teambanditgang.com/climbing-pro-ladder-grind-vs-skill/
-[GitHub]: https://github.com/4dcu-be/GwentAgentBasedModelling
+[GitHub]: https://github.com/4dcu-be/GwentAgentBasedModeling
 [Gwent Masters]: https://masters.playgwent.com/en/
 [Mesa]: https://mesa.readthedocs.io/en/stable/#
 [ELO]: https://en.wikipedia.org/wiki/Elo_rating_system

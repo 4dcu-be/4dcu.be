@@ -5,10 +5,10 @@ byline: "let's dive into the data the ABM generated"
 date:   2020-11-11 13:00:00
 author: Sebastian Proost
 categories: programming games
-tags:	python numpy gwent mesa abm agent_based_modelling pandas seaborn
+tags:	python numpy gwent mesa abm agent_based_modeling pandas seaborn
 cover:  "/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/graph_header.jpg"
 thumbnail: "/assets/images/thumbnails/graph_header.png"
-github: "https://github.com/4dcu-be/GwentAgentBasedModelling"
+github: "https://github.com/4dcu-be/GwentAgentBasedModeling"
 ---
 
 With the Agent Based Model (ABM) from the [previous post] we can simulate any number of Gwent players, with known 
