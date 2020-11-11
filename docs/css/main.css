@@ -1579,6 +1579,10 @@ code.highlighter-rouge {
   display: inline;
   padding: 0px 2px; }
 
+.large-code code {
+  max-height: 400px;
+  overflow-y: scroll; }
+
 .gallery-items {
   flex-wrap: wrap;
   margin: 0px; }

@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>An Agent Based Model to look at Gwent Pro Ladder (results)</title>
+  <meta name="description" content="With the Agent Based Model (ABM) from the previous post we can simulate any number of Gwent players, with known  skill and play rate, playing throughout a se...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="With the Agent Based Model (ABM) from the previous post we can simulate any number of Gwent players, with known  skill and play rate, playing throughout a se..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/games/2020/11/11/Gwent-Pro-Rank-ABM_2.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="An Agent Based Model to look at Gwent Pro Ladder (results)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/graph_header.jpg" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="An Agent Based Model to look at Gwent Pro Ladder (results)">
+  <meta name="twitter:description" content="With the Agent Based Model (ABM) from the previous post we can simulate any number of Gwent players, with known  skill and play rate, playing throughout a se...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/graph_header.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/games/2020/11/11/Gwent-Pro-Rank-ABM_2.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/games/2020/11/11/Gwent-Pro-Rank-ABM_2.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/graph_header.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">An Agent Based Model to look at Gwent Pro Ladder (results)</h1>
+			
+      <p class="info"><em>let's dive into the data the ABM generated</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted November 11, 2020 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>, 
+    
+  
+    
+    <a href="/category/games">Games</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>With the Agent Based Model (ABM) from the <a href="/programming/games/2020/11/11/Gwent-Pro-Rank-ABM.html">previous post</a> we can simulate any number of Gwent players, with known 
+skill and play rate, playing throughout a season. Using this model we’ll try to get a firmer grasp on the ladder system
+and test whether this rewards skill or grinding games…</p>
+
+<h2 id="climbing-pro-ladder-skill-vs-grind">Climbing Pro Ladder Skill vs Grind</h2>
+
+<p>The ABM mimics a population of agents playing Gwent for an entire season with different innate skill and time to play. 
+Though unlike with actual people we can change the parameters of the model to examine what we want to test. So in the 
+first model we’ll disable any kind of learning, where agents would get better as they play more games, to see only the 
+impact of playing more games on the peak MMR score (of a single faction).</p>
+
+<p>To do this a model was run with these parameters:</p>
+
+<ul>
+  <li><strong>8000 players</strong></li>
+  <li><strong>100 steps</strong> resulting in players playing 25-170 games per season</li>
+  <li><strong>no learning</strong> players don’t get better by playing more games</li>
+  <li><strong>initial skill</strong> ranges from 1200-2700 distributed similarly as chess players</li>
+</ul>
+
+<p>After running the model with these parameters, we can group players by skill (in bins of 200 ELO) and amount of games
+played (in 25 percentile bins). Then we can plot out their peak MMR and see how well they did. The resulting graph 
+(shown below) immediately reveals two flaws with the current system. The spread within a group of players with similar skill,
+that played a similar number of games is quite large. Simple luck of when you play your games and who you queue into can make
+a difference of up to 70 MMR! Furthermore, players that play more tend to acquire a higher peak MMR than players with 
+similar skill that play fewer games. Therefore players able to put in more games each season have a distinct advantage
+over those with less time on their hands.</p>
+
+<p><a href="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/elo_vs_peakMMR_experience_factor_0.png" class="lightgallery-link" data-sub-html="Peak MMR in different groups of players in the ABM simulation">
+<img src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/elo_vs_peakMMR_experience_factor_0.png" alt="Peak MMR in different groups of players in the ABM simulation" data-src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/elo_vs_peakMMR_experience_factor_0.png" loading="lazy" />
+</a></p>
+
+<p>When looking at actual data, it became obvious that players in the higher ranks tend to play more than players further
+down. When recreating this plot with the simulated data, this pattern doesn’t appear. This will be discussed further
+down in the article.</p>
+
+<p><a href="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_0.png" class="lightgallery-link" data-sub-html="Ridgline plot with distribution of games played in different groups of players based on their final rank">
+<img src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_0.png" alt="Ridgline plot with distribution of games played in different groups of players based on their final rank" class="small-image" data-src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_0.png" loading="lazy" />
+</a></p>
+
+<h2 id="adding-learning-to-the-model">Adding Learning to the Model</h2>
+
+<p>We can reasonably assume that as a player plays more games their familiarity with the deck they are playing and the
+meta are increasing. Simply put, they get better at the games by playing more games. Perhaps this can explain the 
+increase in players with a lot of games under their belt at the higher positions? To test this an experience factor is
+added to the model which gives players an ELO bonus as they play more games defined. A new model was run with this
+learning factor set to 20, as the ELO bonus is calculated as <code class="highlighter-rouge">experience_factor * sqrt(games_played)</code> this would give
+a player that played 100 games a 200 ELO increase over a player that played none even if their innate skill was the same.</p>
+
+<p>As other parameters were left the same, for this simulation these settings were used:</p>
+
+<ul>
+  <li><strong>experience factor 20</strong></li>
+  <li><strong>8000 players</strong></li>
+  <li><strong>100 steps</strong> as before</li>
+  <li><strong>initial skill</strong> ranges from 1200-2700 with the same distribution as the previous</li>
+</ul>
+
+<p>Now the same plot can be created showing the peak MMR of the agents grouped by innate skill and the number of
+games they played. As agents now learn by playing games the difference in peak MMR between players that play little and
+those that play a lot, despite starting at a similar skill level, increases.</p>
+
+<p><a href="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/elo_vs_peakMMR_experience_factor_20.png" class="lightgallery-link" data-sub-html="Peak MMR in different groups of players in the ABM simulation where agents learn from playing games">
+<img src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/elo_vs_peakMMR_experience_factor_20.png" alt="Peak MMR in different groups of players in the ABM simulation where agents learn from playing games" data-src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/elo_vs_peakMMR_experience_factor_20.png" loading="lazy" />
+</a></p>
+
+<p>To check if with agents learning, as you would expect from actual players, those that play more frequently shift to
+higher ranks the same ridgeline plot was created. There is a minor shift, but it is barely perceptible and nowhere near
+the clear shift that is observed in real data.</p>
+
+<p><a href="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_20.png" class="lightgallery-link" data-sub-html="Ridgline plot with distribution of games played in different groups of players based on their final rank with learning enabled">
+<img src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_20.png" alt="Ridgline plot with distribution of games played in different groups of players based on their final rank with learning enabled" class="small-image" data-src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_20.png" loading="lazy" />
+</a></p>
+
+<p>Even with the experience factor pushed to 100 (data in repository), which is far beyond the skill increase you can expect in real life, this
+pattern cannot be replicated. There is another factor at play here, one that is not included in our model…</p>
+
+<h2 id="discussion">Discussion</h2>
+
+<p>Using a model we can check a number of things which cannot be easily tested in real life, and this reveals a few
+things about how the ladder system works. With an Agent Based Model we know exactly what the innate skill is of each
+agent and we can check how high up the ladder they can get in a number of games. So we can quantify how well ladder is
+at ranking individuals based on their actual skill. Also the impact of playing more games could be uncovered both with
+players getting better by playing more games in the absence of any learning.</p>
+
+<h3 id="will-playing-more-games-get-you-higher-up">Will Playing More Games Get You Higher Up?</h3>
+
+<p><strong>Answer: Yes, but not much</strong></p>
+
+<p>Playing more games gives you a relatively small advantage over players that play fewer games, even in the absence of
+a player getting better by playing more games. However, this advantage isn’t big enough that an average player will
+suddenly be able to get into the Top 200 or even the Top 500 simply by playing a ton of games.</p>
+
+<p>As a matter of fact, there is a lot of variance between innate skill and peak MMR reached. By playing 30-50 games and
+being lucky with who you queue into, you could end up at 50 MMR higher than an equally skilled player that plays two or three
+times more games but has worse luck.</p>
+
+<h3 id="why-are-players-higher-up-playing-more-">Why Are Players Higher Up Playing More ?</h3>
+
+<p><strong>Answer: Human psychology ?</strong></p>
+
+<p>Players that play more don’t simply end up higher in the ranks because they play more. No amount of learning can account
+for the shift that is observed in real data. So human players exhibit behaviour that doesn’t emerge from the model. I’ll
+go out on a limb and give a few hypotheses which could explain this discrepancy between the model and observation.</p>
+
+<ul>
+  <li>Players that were playing a lot in previous seasons will be (i) more proficient at the game due to experience and 
+  (ii) will continue to do play the game more than average.</li>
+  <li>While the gains are relatively small, the way ladder works gives a small advantage to frequent players. The higher 
+  up ladder you get the more competitive it gets and more players are willing to play additional games to leverage this
+  minor edge over their competition.</li>
+  <li>Players in higher ranks notice that other players at their level play more. Therefore there is a push to keep up
+  the pace.</li>
+  <li>A combination of all of the above … there probably isn’t a single explanation that applies to all players</li>
+</ul>
+
+<h3 id="is-there-a-need-to-grind-">Is There a Need to Grind ?</h3>
+
+<p><strong>Answer: Yes, at higher ranks</strong></p>
+
+<p>Playing more games gives you an advantage and this advantage becomes bigger within the most skilled groups of players. That
+taken together with the fact players in those groups tend to play quite a few games each season, you lose that edge unless you play even more …
+This is a feedback loop where players might feel compelled to play more than they would otherwise. Even though that 
+edge isn’t big, a small difference in MMR in that relatively small pool of top players could mean the difference between
+a top 200 spot, crown points and a spot in an official tournament or missing out on all that.</p>
+
+<h3 id="is-peak-mmr-a-good-metric-">Is Peak MMR a Good Metric ?</h3>
+
+<p><strong>Answer: It can be improved</strong></p>
+
+<p>Peak MMR as a metric is reasonably well correlated with the innate skill of a player, so overall it does a fair job
+capturing the skill of a player. Though there are two main issues that emerged from this analysis:</p>
+
+<ul>
+  <li><strong>There is a lot of variance</strong>, similarly skilled players that play roughly the same number of games can end up with 
+  peak MMR scores that are up to ~70 point apart. This is simply based on luck and who you queue into.</li>
+  <li><strong>Playing more leads to higher peak MMR scores</strong>, even in the absence of learning. Having a winning streak at the right time
+  can push the peak MMR score up. Playing more games increases the chance of such a streak happening at the right moment.</li>
+</ul>
+
+<p>Because the simulation assumes players are playing with a single faction, and Gwent sums up the MMR scores for your
+four best factions this reduces variance as having luck with one will be cancelled out by having bad luck with another.
+This could be further improved by recalculating MMR each 5-10 games, similar to how calculations are done to adjust ELO
+scores for Chess players at the end of a tournament.</p>
+
+<p>The impact of playing more games is very easy to get rid of … by ranking based on the current MMR instead of the peak
+MMR. As you can see in the graph below, in the absence of learning, when considering current MMR there is no difference
+between players with comparable skill based on the number of games they play.</p>
+
+<p><a href="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/elo_vs_currentMMR_experience_factor_0.png" class="lightgallery-link" data-sub-html="Current MMR in different groups of players in the ABM simulation">
+<img src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/elo_vs_currentMMR_experience_factor_0.png" alt="Current MMR in different groups of players in the ABM simulation" data-src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/elo_vs_currentMMR_experience_factor_0.png" loading="lazy" />
+</a></p>
+
+<p>Peak MMR creates an incentive to play as many games as possible, and gives players the option to play more
+leisurely once they no longer wish to climb with a certain faction. Therefore this cultivates a more active player base.
+The current MMR would not allow players to start playing more casually in ranked as this would lower their score again.
+Once you reach an MMR that feels like it would be a peak for you, it would actually be better to stop playing that
+faction for the remainder of the season. This would mean fewer people are active and queue times would increase making
+that part of the game worse.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>No, you can’t grind your way to a top 200 spot unless you have the skills to get there. Though playing more games than 
+your competitors with similar skills is an advantage. In the top brackets where players play fairly frequently this 
+would mean playing even more games to use that as a competitive advantage.</p>
+
+<p>Should peak MMR be replaced by current MMR as the metric? As a game developer CDPR likely wants as many people online 
+playing as possible, and using peak MMR to measure ladder performance aligns well with that. However, this incentivises 
+players to play more and competitive players to not only compete to play their best, but also as much as possible. In an
+age where <a href="https://digitalwellbeing.org/">digital wellbeing</a> is starting to show up on the agenda of companies like Google, Samsung and Apple, this is something
+CDPR might need to have a look at sooner or later.</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/numpy">numpy</a>,&nbsp;<a href="/tag/gwent">gwent</a>,&nbsp;<a href="/tag/mesa">mesa</a>,&nbsp;<a href="/tag/abm">abm</a>,&nbsp;<a href="/tag/agent_based_modelling">agent_based_modelling</a>,&nbsp;<a href="/tag/pandas">pandas</a>,&nbsp;<a href="/tag/seaborn">seaborn</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=An+Agent+Based+Model+to+look+at+Gwent+Pro+Ladder+%28results%29&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2020%2F11%2F11%2FGwent-Pro-Rank-ABM_2.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=An+Agent+Based+Model+to+look+at+Gwent+Pro+Ladder+%28results%29&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2020%2F11%2F11%2FGwent-Pro-Rank-ABM_2.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2020%2F11%2F11%2FGwent-Pro-Rank-ABM_2.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/programming/games/2020/11/11/Gwent-Pro-Rank-ABM.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">An Agent Based Model to look at Gwent Pro Ladder (code)</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '4dcube';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
+			<p class="text">Last update: November 11, 2020</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/programming/games/2020/11/11/Gwent-Pro-Rank-ABM_2.html',
+    'title': 'An Agent Based Model to look at Gwent Pro Ladder (results)'
+  });
+</script>
+
+
+  </body>
+
+</html>
