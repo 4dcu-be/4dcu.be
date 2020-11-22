@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Static Site Generators: Jekyll vs Pelican vs Gatsby</title>
+  <meta name="description" content="There are many static site generators out there! Which one to pick is far from trivial. In this post three generators used in some of my projects are being c...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="There are many static site generators out there! Which one to pick is far from trivial. In this post three generators used in some of my projects are being c..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/2020/11/22/Static-Web-Generators.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Static Site Generators: Jekyll vs Pelican vs Gatsby" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2020-11-22-Static-Web-Generators/generator_header.jpg" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Static Site Generators: Jekyll vs Pelican vs Gatsby">
+  <meta name="twitter:description" content="There are many static site generators out there! Which one to pick is far from trivial. In this post three generators used in some of my projects are being c...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2020-11-22-Static-Web-Generators/generator_header.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/2020/11/22/Static-Web-Generators.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/2020/11/22/Static-Web-Generators.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2020-11-22-Static-Web-Generators/generator_header.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Static Site Generators: Jekyll vs Pelican vs Gatsby</h1>
+			
+      <p class="info"><em>which one should you use?</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted November 22, 2020 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>There are many static site generators out there! Which one to pick is far from trivial. In this post three generators
+used in some of my projects are being compared, helping you pick the right one for your next project!</p>
+
+<p>On <a href="https://jamstack.org/generators/">JamStack</a> there is a long list of generators to choose from, making it seem like an impossible task to pick one for
+your next project. If you feel like it is impossible to make a choice, this blog post is for you! Here three widely
+different tools, that I used in a few projects this year, are discussed with their strengths and weaknesses.</p>
+
+<p>This is based on (and therefore biased by) my experience with these, feel free to share your opinion in the comment
+section below.</p>
+
+<h2 id="jekyll">Jekyll</h2>
+
+<p><a href="/assets/posts/2020-11-22-Static-Web-Generators/jekyll-logo-2x.png" class="lightgallery-link" data-sub-html="Jekyll logo">
+<img src="/assets/posts/2020-11-22-Static-Web-Generators/jekyll-logo-2x.png" alt="Jekyll logo" class="small-image" data-src="/assets/posts/2020-11-22-Static-Web-Generators/jekyll-logo-2x.png" loading="lazy" />
+</a></p>
+
+<p><a href="https://jekyllrb.com/">Jekyll</a>, released in 2008, is one of the first static site generators and has grown in popularity as it has 
+integrated in GitHub. While it is possible to build a wide variety of sites using Jekyll, at the core it is intended
+for blogs. It is rather opinionated about file structure, post metadata, extensions, … but once you accept these 
+patterns it really allows you to forget the web development aspect and focus on the content.</p>
+
+<h3 id="pros">Pros</h3>
+
+<p>Jekyll has been around for over 12 years now and there are plenty of themes and templates available (e.g. <a href="http://jekyllthemes.org/">JekyllThemes</a>). 
+There are a number of plugins to extend Jekyll available, which can add useful functionality to your website like
+a post-archive, bibliography (for scientific posts which include references), galleries, …</p>
+
+<p>Any static website can be hosted on GitHub for free, though one that is made using Jekyll can also be built by GitHub.
+Add your template and content to a fresh repository, make the repository root the origin for the project page in the 
+settings (see below) and you are good to go. Now you actually don’t need Jekyll installed locally anymore, you can make
+changes to the repository (either locally and commit/push them or directly on GitHub through the online interface), once
+the new data hits GitHub’s servers they will rebuild the website and changes will appear seconds later online. This 
+allows you to add content relatively easy on the road from any device that has a browser and an internet connection.</p>
+
+<p><a href="/assets/posts/2020-11-22-Static-Web-Generators/github_settings.png" class="lightgallery-link" data-sub-html="GitHub settings page, here you can configure GitHub to build your site">
+<img src="/assets/posts/2020-11-22-Static-Web-Generators/github_settings.png" alt="GitHub settings page, here you can configure GitHub to build your site" data-src="/assets/posts/2020-11-22-Static-Web-Generators/github_settings.png" loading="lazy" />
+</a></p>
+
+<p>A very opinionated system like Jekyll can be a boon, there usually is one, and only one, way to do things. For some this
+might feel like a restriction, for others it allows them to just create the content they want without the hassle of 
+learning much about web development.</p>
+
+<p>From the three platforms discussed here, Jekyll is the most beginner friendly! Though all frameworks have some learning 
+curve (if you don’t like that head over to <a href="https://wordpress.com/">wordpress.com</a>) but my impression is that Jekyll was the quickest to get up 
+and running.</p>
+
+<h3 id="cons">Cons</h3>
+
+<p>Jekyll is based on Ruby, not a particularly popular programming language these days, so if you do want/need to extend it, 
+you’ll have to learn that language. While this is just a small hurdle for minor changes, like the ones I describe in
+<a href="/programming/2020/03/13/Jekyll-Blog.html">this post</a>, adding in larger features (e.g. adding support for new filetypes) 
+would require you to study up on this programming language (which I personally don’t have other use for). While there
+are great plugins available, the number of plugins is somewhat limited compared to other platforms.</p>
+
+<p>Building your website on GitHub further limits the number of plugins you can use (they only support a handful of 
+whitelisted plugins, everything else is off limits). While having GitHub build the page for
+your can be convenient, not having access to all plugins (e.g. one to create a post archive for your blog) can make it
+impossible to include all features you want. While you can work around this by building the website locally in the
+<code class="highlighter-rouge">/docs</code> folder or pushing the build version into the <code class="highlighter-rouge">gh-pages</code> branch. It does take away some of the 
+flexibility you have making quick changes through GitHub directly.</p>
+
+<p>While with the right template a Jekyll website can look modern and sleek, it will be somewhat harder to do than with
+for instance <a href="https://www.gatsbyjs.com/">Gatsby</a> which is powered by JavaScript and React out-of-the-box.</p>
+
+<h3 id="where-to-use-it-">Where to use it ?</h3>
+
+<p>I would pick Jekyll in a heartbeat to document a project. As the code will be in GitHub, adding a few 
+markdown files in the <code class="highlighter-rouge">/docs</code> folder and picking a template to create simple, but to the point documentation is a
+boon. This can also be easily changed and extended though GitHub’s system. So anyone that adds a feature to the code
+can add the corresponding documentation without having to install any additional tools on their system.</p>
+
+<p>For simple websites, where there are few variable elements that need to updated from time to time, there is also a case 
+to be made for Jekyll. Here all work can go into creating the web design and the few variable pieces can be pulled from
+a YAML file. Now updating those values is as simple as changing the values in that YAML file and GitHub can take care
+of everything else. I can think of plenty of cases, ranging from small businesses, sports clubs, … where this would be
+an efficient way to set up and maintain a website. My previous resume was set up like this, and while I have switched to
+one powered by <a href="https://www.gatsbyjs.com/">Gatsby</a> last week. You can still find the previous version <a href="https://sebastian.proost.science/resume-pre2020/">here</a>.</p>
+
+<p>Both blogs I’ve set up (<a href="https://www.beyond-the-known.eu/">Beyond the Known</a> and this one), are also powered by Jekyll, though they both use plugins and
+customizations that GitHub doesn’t support. So these are build locally into the <code class="highlighter-rouge">/docs</code> folder and committed to 
+GitHub. A bit more involved, but a similar step is required for all other static site generators.</p>
+
+<h2 id="pelican">Pelican</h2>
+
+<p><a href="/assets/posts/2020-11-22-Static-Web-Generators/pelly.png" class="lightgallery-link" data-sub-html="Pelican logo">
+<img src="/assets/posts/2020-11-22-Static-Web-Generators/pelly.png" alt="Pelican logo" class="small-image" data-src="/assets/posts/2020-11-22-Static-Web-Generators/pelly.png" loading="lazy" />
+</a></p>
+
+<p>Given that I’m most proficient with Python, a static site generator which is based on Python sounds very attractive. 
+There are a few option available, though Pelican was the most popular of those platforms, so I picked this to play around
+with and ultimately created <a href="/programming/games/2020/04/05/DeckLock.html">DeckLock</a>, a website to keep track of decks I have for various collectible card games.</p>
+
+<h3 id="pros-1">Pros</h3>
+
+<p>Pelican is powered by Python, which means you can easily leverage all libraries in the Python ecosystem. For instance, 
+in <a href="/programming/games/2020/04/05/DeckLock.html">DeckLock</a> the requests library is used to download data from the web, which is then parsed 
+using the JSON library or BeautifulSoup. Each time the site is built, it will get data that is missing automatically
+and put it in the corresponding pages. This opens up a ton of avenues for dashboards. You can pull in new data,
+update a local SQLite database, do some statistics with pandas and numpy (or even run a machine learning model) and
+push the output into a few JSON objects which the template will visualize (e.g. using Charts.js).</p>
+
+<p>The advanced documentation really focuses on Pelican’s internals and how to extend them. This is exactly what you need
+if you want to create something that goes beyond the scope of blogs, news websites, …</p>
+
+<h3 id="cons-1">Cons</h3>
+
+<p>Only a hundred or so themes are available for Pelican (e.g. <a href="http://www.pelicanthemes.com/">Pelican Themes</a>), and they are often of lower quality than
+those for <a href="https://jekyllrb.com/">Jekyll</a>. So you might not find something that will work for you as is, and will have to spend more time
+adjusting the template to your liking.</p>
+
+<p>While getting started with Pelican was easy for someone that has worked with Python before, the learning curve however 
+is a little steeper than with Jekyll.</p>
+
+<h3 id="where-to-use-it--1">Where to use it ?</h3>
+
+<p>Pelican is a great option if you need to do some significant processing of your input before it can be turned into
+a page. <a href="/programming/games/2020/04/05/DeckLock.html">DeckLock</a> starts with very limited information (e.g. a decks identifier for a KeyForge deck), pulls in all
+information it needs (like the decklist, card art, card details, … ), does some additional statistics and then turns 
+that into a page using a template. While I won’t say this is impossible using <a href="https://jekyllrb.com/">Jekyll</a> or <a href="https://www.gatsbyjs.com/">Gatsby</a>, it will be 
+quite a bit more complicated. Being able to leverage amazing packages from the Python ecosystem really gives Pelican a
+step up here.</p>
+
+<p>Where this is not a requirement, <a href="https://jekyllrb.com/">Jekyll</a> or <a href="https://www.gatsbyjs.com/">Gatsby</a> are probably better alternatives. Both feel like more mature 
+platforms that have more resources available.</p>
+
+<h2 id="gatsby">Gatsby</h2>
+
+<p><a href="/assets/posts/2020-11-22-Static-Web-Generators/Gatsby.jpg" class="lightgallery-link" data-sub-html="Gatsbyjs logo">
+<img src="/assets/posts/2020-11-22-Static-Web-Generators/Gatsby.jpg" alt="Gatsbyjs logo" class="small-image" data-src="/assets/posts/2020-11-22-Static-Web-Generators/Gatsby.jpg" loading="lazy" />
+</a></p>
+
+<p>The most recent framework I checked and used to build the current version of my resume <a href="http://sebastian.proost.science/">http://sebastian.proost.science/</a>.
+<a href="https://www.gatsbyjs.com/">Gatsby</a> is powered by JavaScript which gives it a distinct advantage over <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://docs.getpelican.com/en/latest/">Pelican</a>, it won’t just combine
+the content with a template… it can also use modern web technology (like react) to build that template. So
+if the front-end matters, Gatsby provides a way to incorporate the latest JavaScript tools into your static website.</p>
+
+<h2 id="pros-2">Pros</h2>
+
+<p>Gatsby will turn a template into a static website, just like Jekyll and Pelican, though the type of template is the
+main difference. While the other frameworks will use Jinja to put the content in an HTML template, Gatsby allows you
+to build templates using React, GraphQL, React-router and webpack. These modern web technologies allow for some cool
+features to be included in your website that would be hard to achieve with the other frameworks.</p>
+
+<p>Along with Gatsby, you get the React ecosystem. This provides you with many great options to include in the layout that
+are far more time consuming to include using other frameworks.</p>
+
+<h3 id="cons-2">Cons</h3>
+
+<p>Steepest learning curve of the frameworks discussed here. Apart from knowing the frameworks and some HTML + CSS to pull
+of the template, Gatsby will require some knowledge of React, modern JavaScript (ES6 is the current flavor), npm, …
+Not something everybody will be able or willing to do.</p>
+
+<h3 id="where-to-use-it--2">Where to use it ?</h3>
+
+<p>If you picked up the basics, you can use Gatsby for just about everything you can use Jekyll for. 
+The only thing is that you can’t get GitHub to build your site, though using <a href="https://www.netlify.com/">Netlify</a> that issue can be resolved. So
+as long as you are willing to put in the extra time to learn JavaScript, React, npm, … there is little reason to go
+for <a href="https://jekyllrb.com/">Jekyll</a></p>
+
+<p>For a niche project like <a href="/programming/games/2020/04/05/DeckLock.html">DeckLock</a> where all sorts of pre-processing is necessary to build a page Python might have better
+options. So here <a href="https://docs.getpelican.com/en/latest/">Pelican</a> could be an advantage, though with some extra effort this can be pulled of in JS and hence
+Gatsby as well.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I must admit I didn’t think highly about statically generated sites a few year ago. Mostly because my first
+encounter with a statically generated site was abysmal. It simply wasn’t the right tool for that job, but a misguided 
+attempt at avoiding the use of a proper database. With a terrible implementation on top, having to maintain that code 
+was a major pain…</p>
+
+<p>However, while working on a few blogs, <a href="/programming/games/2020/04/05/DeckLock.html">DeckLock</a> and <a href="http://sebastian.proost.science/">my resume</a> I have come around completely on this. Where
+appropriate this can be a great option to create fast-loading websites that are cheap (or even free) to host and easy to 
+maintain.</p>
+
+<p>My personal pick for future projects will likely be <a href="https://www.gatsbyjs.com/">Gatsby</a>, I’ve already learned the basics and this gives the best 
+options to include modern web technology in the front end. <a href="https://jekyllrb.com/">Jekyll</a> I’ll probably phase out in favor of Gatsby, though 
+for quickly creating neat documentation on GitHub it is still the most efficient option. So I don’t expect to abandon it
+completely in the near future. <a href="https://docs.getpelican.com/en/latest/">Pelican</a> turned out to be a great option for <a href="/programming/games/2020/04/05/DeckLock.html">DeckLock</a> though this is
+a rather niche case, for more mainstream applications there are better options.</p>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+
+<p>Header image by <a href="https://unsplash.com/@jayphen">Jayphen Simpson</a> on <a href="https://unsplash.com/s/photos/generator">Unsplash</a></p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/ruby">ruby</a>,&nbsp;<a href="/tag/javascript">javascript</a>,&nbsp;<a href="/tag/pelican">pelican</a>,&nbsp;<a href="/tag/jekyll">jekyll</a>,&nbsp;<a href="/tag/gatsby">gatsby</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Static+Site+Generators%3A+Jekyll+vs+Pelican+vs+Gatsby&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2020%2F11%2F22%2FStatic-Web-Generators.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Static+Site+Generators%3A+Jekyll+vs+Pelican+vs+Gatsby&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2020%2F11%2F22%2FStatic-Web-Generators.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2020%2F11%2F22%2FStatic-Web-Generators.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/programming/games/2020/11/11/Gwent-Pro-Rank-ABM_2.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">An Agent Based Model to look at Gwent Pro Ladder (results)</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '4dcube';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
+			<p class="text">Last update: November 22, 2020</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/programming/2020/11/22/Static-Web-Generators.html',
+    'title': 'Static Site Generators: Jekyll vs Pelican vs Gatsby'
+  });
+</script>
+
+
+  </body>
+
+</html>
