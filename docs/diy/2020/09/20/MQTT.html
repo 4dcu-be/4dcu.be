@@ -272,7 +272,7 @@ in the dark, … After a few dozen times this becomes annoying. As proof-of-conc
 behind that switch, so I can toggle the light using my phone. With that working, it is now time to add a physical switch 
 that can be placed in a more convenient location. So I decided to expand Home Assistant with a
 device that allows me to control the kitchen light and other smart lights throughout the apartment. Aqara cubes are
-small cubes which you can tap, turn, shake, rotate, … to control different devices, pefect for what I had in mind. 
+small cubes which you can tap, turn, shake, rotate, … to control different devices, perfect for what I had in mind. 
 Though they would need an extra HUB, and I don’t want an additional smart HUB. I want my Raspberry Pi to function as
 the main HUB for all devices … this turned out to be easier said than done!</p>
 
@@ -289,6 +289,11 @@ MQTT broker … which Home Assistant can listen to.</p>
 <p><a href="/assets/posts/2020-09-10-MQTT/network_layout.png" class="lightgallery-link" data-sub-html="Overview of how different software and devices are connected">
 <img src="/assets/posts/2020-09-10-MQTT/network_layout.png" alt="Overview of how different software and devices are connected" class="small-image" data-src="/assets/posts/2020-09-10-MQTT/network_layout.png" loading="lazy" />
 </a></p>
+
+<p><strong>Update 03/12/2020:</strong> This post was written for Home Assistant 0.92.3, though as I recently switched to version 0.118.4
+I can confirm this is still up to date, except the <code class="highlighter-rouge">light.toggle</code> in one of the automations, which no longer switches on 
+all lights, individual devices need to be specified. This section has been updated, though it will be different for 
+every setup. Also note that when configuring MQTT devices there are now user-friendly options through the interface to do so.</p>
 
 <h2 id="parts-list">Parts List</h2>
 
@@ -526,7 +531,11 @@ worked.</p>
     <span class="na">condition</span><span class="pi">:</span> <span class="s">template</span>
     <span class="na">value_template</span><span class="pi">:</span> <span class="s1">'</span><span class="s">{{</span><span class="nv"> </span><span class="s">"flip180"</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">trigger.payload_json.action</span><span class="nv"> </span><span class="s">}}'</span>
   <span class="na">action</span><span class="pi">:</span>
-    <span class="na">service</span><span class="pi">:</span> <span class="s">light.toggle</span>
+  <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">light.toggle</span>
+    <span class="na">entity_id</span><span class="pi">:</span> <span class="s">light.tv_led_strip</span>
+  <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">light.toggle</span>
+    <span class="na">data</span><span class="pi">:</span> <span class="pi">{}</span>
+    <span class="na">entity_id</span><span class="pi">:</span> <span class="s">light.blinkstick</span>
 
 <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1597674578968'</span>
   <span class="na">alias</span><span class="pi">:</span> <span class="s">Cube - rotate CW</span>
