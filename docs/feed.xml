@@ -5,9 +5,23 @@
     <description>A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</description>
     <link>https://blog.4dcu.be/</link>
     <atom:link href="https://blog.4dcu.be/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 22 Nov 2020 15:35:39 +0100</pubDate>
-    <lastBuildDate>Sun, 22 Nov 2020 15:35:39 +0100</lastBuildDate>
+    <pubDate>Thu, 03 Dec 2020 23:05:58 +0100</pubDate>
+    <lastBuildDate>Thu, 03 Dec 2020 23:05:58 +0100</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>CodeForces: Trying on Competitive Coding</title>
+        <description>&lt;p&gt;How well do you know your algorithms? If you are a self-taught coder (like me), this might be a gap in your knowledge! This post is my attempt to get...</description>
+        <pubDate>Thu, 03 Dec 2020 14:00:00 +0100</pubDate>
+        <link>https://blog.4dcu.be/programming/2020/12/03/CodeForces.html</link>
+        <guid isPermaLink="true">https://blog.4dcu.be/programming/2020/12/03/CodeForces.html</guid>
+        
+        <category>python</category>
+        
+        
+        <category>programming</category>
+        
+      </item>
     
       <item>
         <title>Static Site Generators: Jekyll vs Pelican vs Gatsby</title>
@@ -214,24 +228,6 @@
         
         
         <category>diy</category>
-        
-      </item>
-    
-      <item>
-        <title>Putting Benford's Law to the Test</title>
-        <description>&lt;p&gt;After seeing the Episode on &lt;a href=&quot;https://en.wikipedia.org/wiki/Benford%27s_law&quot;&gt;Benford’s Law&lt;/a&gt; in &lt;a href=&quot;https://twitter.com/latifnasser&quot;&gt;Latif Nasser&lt;/a&gt;’s &lt;a href=&quot;https://www.imdb.com/title/tt12753692/?ref_=fn_al_tt_2&quot;&gt;Connected&lt;/a&gt; (currently on Netflix), I had to test if this is true and if I could find...</description>
-        <pubDate>Sat, 05 Sep 2020 14:00:00 +0200</pubDate>
-        <link>https://blog.4dcu.be/programming/2020/09/05/Testing-Benfords-Law.html</link>
-        <guid isPermaLink="true">https://blog.4dcu.be/programming/2020/09/05/Testing-Benfords-Law.html</guid>
-        
-        <category>python</category>
-        
-        <category>jupyter</category>
-        
-        <category>pandas</category>
-        
-        
-        <category>programming</category>
         
       </item>
     

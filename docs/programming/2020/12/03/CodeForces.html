@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>CodeForces: Trying on Competitive Coding</title>
+  <meta name="description" content="How well do you know your algorithms? If you are a self-taught coder (like me), this might be a gap in your knowledge! This post is my attempt to get some ex...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="How well do you know your algorithms? If you are a self-taught coder (like me), this might be a gap in your knowledge! This post is my attempt to get some ex..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/2020/12/03/CodeForces.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="CodeForces: Trying on Competitive Coding" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/images/headers/python_code.jpg" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="CodeForces: Trying on Competitive Coding">
+  <meta name="twitter:description" content="How well do you know your algorithms? If you are a self-taught coder (like me), this might be a gap in your knowledge! This post is my attempt to get some ex...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/images/headers/python_code.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/2020/12/03/CodeForces.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/2020/12/03/CodeForces.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/images/headers/python_code.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">CodeForces: Trying on Competitive Coding</h1>
+			
+      <p class="info"><em></em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted December 3, 2020 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>How well do you know your algorithms? If you are a self-taught coder (like me), this might be a gap in your knowledge!
+This post is my attempt to get some extra practise under my belt writing algorithms to solve a few coding problems. On
+<a href="http://codeforces.com/">CodeForces</a>, a site where there are programming competitions, the assignments from previous competitions are all
+available as well as the infrastructure to check your solution. So let’s use this resource to level up our programming
+a little.</p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>On <a href="http://codeforces.com/">CodeForces</a> all problems have a difficulty ranging from 800 to 3500. The lower the difficulty the easier to problem
+is to solve. To get started I recommend picking an easy problem to tackle to get familiar with the platform, how to get
+the input, how to submit a solution, …</p>
+
+<p>I picked problem 119A titled “<a href="https://codeforces.com/problemset/problem/119/A">Epic Game</a>”, with the lowest difficulty of 800, to dip my toes in the water. The goal is 
+to write a problem solve this issue:</p>
+
+<hr />
+<p>Simon and Antisimon play a game. Initially each player receives one fixed positive integer that doesn’t change 
+throughout the game. Simon receives number <em>a</em> and Antisimon receives number <em>b</em>. They also have a heap of <em>n</em> stones. The 
+players take turns to make a move and Simon starts. During a move a player should take from the heap the number of 
+stones equal to the greatest common divisor of the fixed number he has received and the number of stones left in the 
+heap. A player loses when he cannot take the required number of stones (i. e. the heap has <strong>strictly</strong> less stones 
+left than one needs to take).</p>
+
+<p>Your task is to determine by the given <em>a</em>, <em>b</em> and <em>n</em> who wins the game.</p>
+
+<p><strong>Input</strong>
+The only string contains space-separated integers <em>a</em>, <em>b</em> and <em>n</em> (1≤<em>a</em>,<em>b</em>,<em>n</em>≤100) — the fixed numbers Simon and 
+Antisimon have received correspondingly and the initial number of stones in the pile.</p>
+
+<p><strong>Output</strong>
+If Simon wins, print “0” (without the quotes), otherwise print “1” (without the quotes).</p>
+
+<hr />
+
+<p>The first solution I came up with is very straight forward, the inner loop alternates between both players, adjusting
+<em>n</em> as described above. This is repeated (outer loop) until a player wins a game, in that case the winner is printed
+and the loop broken.</p>
+
+<p>There is some spice in how the input is read from standard input; <code class="highlighter-rouge">input().split()</code> will grab a line from STDIN and
+split it at whitespaces. the <code class="highlighter-rouge">map</code> function will apply the <code class="highlighter-rouge">int</code> on all parts turning the input from string into
+integer numbers. Using <code class="highlighter-rouge">*</code> a list can be passed as arguments to a function. As all challenges will get the data
+from STDIN, it pays off to know a few of these tricks to quickly and without too much code pull in that data.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]):</span>
+            <span class="n">gdc</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">gdc</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">n</span> <span class="o">-=</span> <span class="n">gdc</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">ix</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="k">return</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">solve</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+</code></pre></div></div>
+
+<p>If you save this code to a <code class="highlighter-rouge">.py</code> file, you can submit it on the platform. As CodeForces supports solutions is a 
+number of programming languages you’ll have to specify that <strong>Python 3.7.2</strong> is used here. Or you can select 
+<strong>PyPy 3.6 (7.2.0)</strong>, <a href="https://www.pypy.org/">PyPy</a> is a faster version of Python, and as there is a limit to how long your code can run 
+before failing, this could be an advantage (though it really doesn’t matter much here).</p>
+
+<p>I also noted that my code here has some later verbose sections, at the bottom of the post you can find my attempt to
+write is as short as possible.</p>
+
+<h2 id="the-next-problem">The Next Problem</h2>
+
+<p>Moving up to a more difficult problem “<a href="https://codeforces.com/problemset/problem/1351/C">Skier</a>”, where you have to track the movements of a skier and determine how
+fast he can complete a certain path. When going along a stretch they visited before he can move faster than going
+somewhere for the first time. You can read the full problem description below:</p>
+
+<hr />
+
+<p>Skier rides on a snowy field. Its movements can be described by a string of characters ‘S’, ‘N’, ‘W’, ‘E’ (which 
+correspond to 1 meter movement in the south, north, west or east direction respectively).</p>
+
+<p>It is known that if he moves along a previously unvisited segment of a path (i.e. this segment of the path is visited 
+the first time), then the time of such movement is 5 seconds. If he rolls along previously visited segment of a path 
+(i.e., this segment of the path has been covered by his path before), then it takes 1 second.</p>
+
+<p>Find the skier’s time to roll all the path.</p>
+
+<p><strong>Input</strong></p>
+
+<p>The first line contains an integer <em>t</em> (1≤<em>t</em>≤10<sup>4</sup>) — the number of test cases in the input. Then <em>t</em> test cases follow.</p>
+
+<p>Each set is given by one nonempty string of the characters ‘S’, ‘N’, ‘W’, ‘E’. The length of the string does not exceed 
+10<sup>5</sup> characters.</p>
+
+<p>The sum of the lengths of <em>t</em> given lines over all test cases in the input does not exceed 10<sup>5</sup>.</p>
+
+<p><strong>Output</strong></p>
+
+<p>For each test case, print the desired path time in seconds.</p>
+
+<hr />
+
+<p>So my initial idea was to convert the current move into start and stop coordinates. If those have been visited before
+(or in reverse order) increase the time by one, otherwise add those coordinates to the list of visited stretches and increase
+the time by five.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+        <span class="n">new_x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="s">"E"</span> <span class="k">else</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="s">"W"</span> <span class="k">else</span> <span class="n">x</span>
+        <span class="n">new_y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="s">"N"</span> <span class="k">else</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="s">"S"</span> <span class="k">else</span> <span class="n">y</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">new_x</span><span class="p">,</span> <span class="n">new_y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">visited</span> <span class="ow">or</span> <span class="p">(</span><span class="n">new_x</span><span class="p">,</span> <span class="n">new_y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">5</span>
+            <span class="n">visited</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">new_x</span><span class="p">,</span> <span class="n">new_y</span><span class="p">))</span>
+
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">new_x</span><span class="p">,</span> <span class="n">new_y</span>
+
+    <span class="k">return</span> <span class="n">count</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())):</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>While this solution is correct, CodeForces will not accept this as it takes to long to complete… Looking up in a list 
+if the upcoming section was visited before is a very slow step. I didn’t pay attention that the maximum input can be
+10<sup>5</sup> steps, so <strong>I didn’t pick the correct data structure</strong>. A dictionary is the better choice if you need to look 
+things up fast and frequently. So read the instructions carefully before getting started. Especially if you plan to 
+join a real competition where incorrect submissions will cost you points. Not to mention you lose time having to 
+re-implement your solution.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+
+
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">5</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+        <span class="n">nx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="s">"E"</span> <span class="k">else</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="s">"W"</span> <span class="k">else</span> <span class="n">x</span>
+        <span class="n">ny</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="s">"N"</span> <span class="k">else</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="s">"S"</span> <span class="k">else</span> <span class="n">y</span>
+
+        <span class="n">c</span> <span class="o">+=</span> <span class="nb">min</span><span class="p">(</span><span class="n">s</span><span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">)],</span> <span class="n">s</span><span class="p">[(</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)])</span>
+        <span class="n">s</span><span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span>
+
+    <span class="k">return</span> <span class="n">c</span>
+
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="nb">input</span><span class="p">()))</span>
+</code></pre></div></div>
+
+<p>Here a <code class="highlighter-rouge">defaultdict</code> is used which will return a value of five each time an element is accessed which hasn’t been set 
+yet. So, here we determine the current (x, y) and next (nx, ny) coordinates of the skier, grab the smallest value for that
+section and the reverse from the dictionary, increase the counter by that value. Set the value for that path in the 
+dictionary to one and update the current coordinates.</p>
+
+<h2 id="getting-stuck">Getting Stuck</h2>
+
+<p>After solving a few more problems with a difficulty ranging from 800-1600, I got stuck on “<a href="https://codeforces.com/problemset/problem/520/B">Two Buttons</a>”. While I 
+found a solution which included a recursive, depth-first search, I couldn’t get it to work fast enough. Even after
+adding every optimization I could think of … nothing … still way to slow. So I took a look at some of the valid 
+solutions which were remarkably simple! There was a trick necessary that I’m certain everyone with a CS degree will
+have encountered during their studies. While it is super inefficient to find the optimal path from start to finish as
+I was doing, it is simple to find the solution when going the opposite direction from stop till start. Now the solution,
+is trivial and can be written in a few lines of code.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">n</span> <span class="o">!=</span> <span class="n">m</span><span class="p">:</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">m</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">or</span> <span class="n">m</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">m</span> <span class="o">//</span> <span class="mi">2</span>
+
+    <span class="k">return</span> <span class="n">count</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())))</span>
+</code></pre></div></div>
+
+<h2 id="bonus-code-golf">Bonus: Code Golf</h2>
+
+<p>Code Golf is implementing code as short as possible. While this is not a requirement for CodeForces, I did attempt to
+shorten the code for <a href="https://codeforces.com/problemset/problem/119/A">Epic Game</a> here…</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
+<span class="n">s</span><span class="o">=</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">:</span><span class="n">s</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="k">if</span> <span class="n">n</span><span class="o">!=</span><span class="mi">0</span><span class="k">else</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()),</span><span class="mi">1</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>… and here is an abridged version for <a href="https://codeforces.com/problemset/problem/520/B">Two Buttons</a>. While correct it fails on one of the tests because it hits the 
+recursion limit (the number of times a function can call itself, the limit is 1000).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span><span class="o">=</span><span class="k">lambda</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">c</span><span class="p">:</span><span class="n">c</span> <span class="k">if</span> <span class="n">n</span><span class="o">==</span><span class="n">m</span> <span class="k">else</span> <span class="n">s</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">m</span><span class="o">&lt;</span><span class="n">n</span> <span class="ow">or</span> <span class="n">m</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="k">else</span> <span class="n">s</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()),</span> <span class="mi">0</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>This is very much against the Zen of Python that code should be readable, which this isn’t! So don’t use this when 
+writing code for projects that need to be maintained, it will come back and haunt someone (most likely you).</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Apart from having a few excuses to play with recursion, use lambdas and the <code class="highlighter-rouge">map</code> function to write short (albeit not
+very readable code), I’ve learned the most getting stuck! The common advice to approach a problem from a different
+angle here could quite literally be applied. This is a trick I will keep in mind when attempting to solve more 
+difficult code challenges.</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=CodeForces%3A+Trying+on+Competitive+Coding&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2020%2F12%2F03%2FCodeForces.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=CodeForces%3A+Trying+on+Competitive+Coding&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2020%2F12%2F03%2FCodeForces.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2020%2F12%2F03%2FCodeForces.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/programming/2020/11/22/Static-Web-Generators.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Static Site Generators: Jekyll vs Pelican vs Gatsby</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '4dcube';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
+			<p class="text">Last update: December 3, 2020</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/programming/2020/12/03/CodeForces.html',
+    'title': 'CodeForces: Trying on Competitive Coding'
+  });
+</script>
+
+
+  </body>
+
+</html>
