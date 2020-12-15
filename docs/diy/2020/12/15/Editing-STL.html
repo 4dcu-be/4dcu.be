@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>25 Fortnights of Code</title>
-  <meta name="description" content="I have a lot of projects sitting on my hard drive, most of them are half-finished and poorly documented. My resolution  for 2020 is to improve this!  ">
+  <title>Best Tools to Edit STL Files</title>
+  <meta name="description" content="After being inspired by The Smuggler’s Room I decided to build a Kyber Crystal Crate Bluetooth speaker myself. Though the 3D printable models they provide ne...">
   
   <meta name="author" content="Sebastian Proost">
   <meta name="copyright" content="&copy; Sebastian Proost 2020">
@@ -40,12 +40,12 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="I have a lot of projects sitting on my hard drive, most of them are half-finished and poorly documented. My resolution  for 2020 is to improve this!  " />
-  <meta property="og:url" content="https://blog.4dcu.be/programming/games/diy/2019/12/04/25-Fortnights.html">
+  <meta property="og:description" content="After being inspired by The Smuggler’s Room I decided to build a Kyber Crystal Crate Bluetooth speaker myself. Though the 3D printable models they provide ne..." />
+  <meta property="og:url" content="https://blog.4dcu.be/diy/2020/12/15/Editing-STL.html">
   <meta property="og:site_name" content="4DCu.be" />
-  <meta property="og:title" content="25 Fortnights of Code" />
+  <meta property="og:title" content="Best Tools to Edit STL Files" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://blog.4dcu.be/assets/images/headers/python_code.jpg" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2020-12-15-Editing-STL/blender_header.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -54,17 +54,17 @@
   
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="25 Fortnights of Code">
-  <meta name="twitter:description" content="I have a lot of projects sitting on my hard drive, most of them are half-finished and poorly documented. My resolution  for 2020 is to improve this!  ">
-  <meta name="twitter:image" content="https://blog.4dcu.be/assets/images/headers/python_code.jpg">
-  <meta name="twitter:url" content="https://blog.4dcu.be/programming/games/diy/2019/12/04/25-Fortnights.html">
+  <meta name="twitter:title" content="Best Tools to Edit STL Files">
+  <meta name="twitter:description" content="After being inspired by The Smuggler’s Room I decided to build a Kyber Crystal Crate Bluetooth speaker myself. Though the 3D printable models they provide ne...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2020-12-15-Editing-STL/blender_header.png">
+  <meta name="twitter:url" content="https://blog.4dcu.be/diy/2020/12/15/Editing-STL.html">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://blog.4dcu.be/programming/games/diy/2019/12/04/25-Fortnights.html">
+  <link rel="canonical" href="https://blog.4dcu.be/diy/2020/12/15/Editing-STL.html">
 	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
 	
 	<!-- Tooltips -->
@@ -238,12 +238,12 @@
     <div class="page-content">
         <div class="post">
 
-<div class="post-header-container has-cover" style="background-image: url(/assets/images/headers/python_code.jpg);">
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2020-12-15-Editing-STL/blender_header.png);">
   <div class="scrim has-cover ">
     <header class="post-header">
-      <h1 class="title">25 Fortnights of Code</h1>
+      <h1 class="title">Best Tools to Edit STL Files</h1>
 			
-      <p class="info"><em>my take on the 100 days of code</em></p>
+      <p class="info"><em>Comparing MeshMixer, Fusion360 and Blender</em></p>
 			
     </header>
   </div>
@@ -254,17 +254,9 @@
 
 
 <section class="post-meta">
-  <div class="post-date">Posted December 4, 2019 by Sebastian Proost</div>
+  <div class="post-date">Posted December 15, 2020 by Sebastian Proost</div>
   <div class="post-categories">
   in 
-    
-    <a href="/category/programming">Programming</a>, 
-    
-  
-    
-    <a href="/category/games">Games</a>, 
-    
-  
     
     <a href="/category/diy">Diy</a>
     
@@ -273,20 +265,99 @@
 </section>
 
 <article class="post-content">
-  <p>I have a lot of projects sitting on my hard drive, most of them are half-finished and poorly documented. My resolution 
-for 2020 is to improve this!</p>
+  <p>After being inspired by <a href="https://www.youtube.com/watch?v=2wUlkyUbZ-I">The Smuggler’s Room</a> I decided to build a Kyber Crystal
+Crate Bluetooth speaker myself. Though the 3D printable models they provide need some work after
+being printed … with tools I don’t have … So I decided to make the necessary changes to the models digitally before
+printing. To do this I experimented with three tools, <a href="https://www.meshmixer.com/">MeshMixer</a>, <a href="https://www.autodesk.com/products/fusion-360/personal">Fusion360</a> and <a href="https://www.blender.org/">Blender</a>, to edit STL files. All can
+be downloaded for free, though they all have their own strengths and weaknesses, let’s have a look at how they line up.</p>
 
-<p>The <a href="https://www.100daysofcode.com/">100 Days of Code</a> challenge has been popular for some time now and many people 
-have done their own version of this. I would like to give it a slightly different spin, <strong>25 fortnights of code</strong>. 
-Instead of coding one hour a day, I would like to write <strong>one post</strong> every <strong>two weeks</strong> for <strong>one year</strong>. Most posts 
-will be code related, but I’ll also focus on documenting everything and presenting it in a clear way.</p>
+<p>The Kyber Crystal Crate STLs used by the guys from <a href="https://www.youtube.com/watch?v=2wUlkyUbZ-I">The Smuggler’s Room</a>, can be found on <a href="https://www.thingiverse.com/thing:4329491">Thingiverse</a>. Though if
+you look at their project, there are quite a few modifications necessary to the prints before they can be used. Holes
+for ports and switches need to be added, a hole for the speaker, … Which requires a few tools I don’t have access too
+or would take me ages with hand tools to do. So I decided a better route would be to alter the models digitally before 
+printing, no extra tools required … except sanding, there will always be a ton of sanding with 3D printed projects …</p>
 
-<p>Though I will only properly start in January 2020, I put up the <a href="/programming/2019/12/01/Sentiment-Analysis.html">first post</a> 
-already to give a glimpse on what to expect. What’s up next isn’t yet decided, however I will tell you I have a few more
-machine learning related projects in my folder, something with art and genetic algorithms and messing with GPX files.</p>
+<h2 id="fusion360">Fusion360</h2>
 
-<p>All code related with posts here will be made available on GitHub in the <a href="https://github.com/4dcu-be">4DCu.be</a> page. If
-you have feedback feel free to open issues there, or post comments on the posts directly.</p>
+<p>Fusion360 is my goto program in case I need to model something myself, it is free to use under an educational licence 
+(which is great learning how the tool works and doing personal projects, though be aware that if you plan to sell models
+and/or prints, commercial, professional and for-profit use is not permitted under this type of licence). 
+The parametric modelling allows you to go back at any point, make a change to a size, position, … and the entire model 
+updates automatically. This is very powerful when designing prototypes for printing. However, STL files
+contain the models as a mesh, a collection of triangular faces, not a parametric model. This is a problem, while there
+are ways to convert a mesh into a surface representation that Fusion360 needs, this only works for relatively simple
+models. I did manage to make the desired recess into the side panel where the speakers should fit. More complex objects
+such as the main crate, were problematic to load, and even more problematic to edit.</p>
+
+<p>So for the first change I wanted to make, a simple recess in the side panel to fit the speaker, Fusion360 worked 
+fine. First make sure you click “do not capture design history” (by right-clicking the project name) directly after
+loading the model. Next, you need to select the object and from the menu go to Modify &gt; Mesh &gt; Mesh to BRep … this
+will convert the Mesh into surfaces you can work with in Fusion as you are used to. Optionally you can combine planar 
+faces for a cleaner representation.</p>
+
+<p><a href="/assets/posts/2020-12-15-Editing-STL/fusion360.png" class="lightgallery-link" data-sub-html="The first, simplest change in Fusion360. A great tool for designing but it isn't suited to edit complex meshes">
+<img src="/assets/posts/2020-12-15-Editing-STL/fusion360.png" alt="The first, simplest change in Fusion360. A great tool for designing but it isn't suited to edit complex meshes" data-src="/assets/posts/2020-12-15-Editing-STL/fusion360.png" loading="lazy" />
+</a></p>
+
+<p>So while it is a great tool, Fusion360 isn’t designed for editing STL files. It might work for some models, but your
+mileage may vary! I only used Fusion360 because it was a tool I was familiar with already, if you have to start out
+fresh, check out the other option first!</p>
+
+<h2 id="meshmixer">MeshMixer</h2>
+
+<p>AutoDesk’s MeshMixer is a user-friendly tool that allows you to, as in the name, combine meshes (such as objects in an
+STL file). It also has a few basic objects (such as cubes, spheres, cylinders, …) built in. Using MeshMixer it was
+straightforward to load even the most complex STL and add a few cubes to the inside of the care to attach the electronics.</p>
+
+<p>Similarly, a cube and cylinder were created where the holes for speakers, usb-port and on-off switch were necessary and
+then these shapes were subtracted from the main model to create actual holes. While it worked eventually, subtracting a 
+simple primitive from the complex geometry took a long time and the resulting mesh wasn’t perfect (you can see in the 
+image below the joins aren’t perfectly straight and edges are no longer crisp). I also found it hard to work in a very precise
+manner. Placing an object at an exact distance of another one, … isn’t included in the software.</p>
+
+<p><a href="/assets/posts/2020-12-15-Editing-STL/meshmixer.png" class="lightgallery-link" data-sub-html="MeshMixer can handle more complex modes, but the geometry it produces after combining objects isn't optimal">
+<img src="/assets/posts/2020-12-15-Editing-STL/meshmixer.png" alt="MeshMixer can handle more complex modes, but the geometry it produces after combining objects isn't optimal" data-src="/assets/posts/2020-12-15-Editing-STL/meshmixer.png" loading="lazy" />
+</a></p>
+
+<p>MeshMixer did allow for changing STL files that could not be edited using Fusion360, and it is very user-friendly. So this
+tool is often recommended as the first one to try. Finally, it has a few options that are often needed for 3D printing, 
+like slicing straight through a model to split a large model into parts that fit the build plate, readily available. 
+However, the resulting geometry after cutting holes in objects wasn’t ideal and in case issues arise, the tools to
+correct the issue by editing vertices in the mesh directly are lacking.</p>
+
+<h2 id="blender">Blender</h2>
+
+<p>Blender has been around the longest, and can be used to do extremely advanced 3D modelling and animation. To no surprise
+this tool has a steep learning curve. However, if you need more precision than MeshMixer, or you are working
+with complex geometry were MeshMixer runs into problems, this is your best bet!</p>
+
+<p>To add some holes to the sides of the crate for the sound of the speakers I had to resort to Blender. Aligning all
+cylinders correctly in MeshMixer was tough and even if this would have worked, MeshMixer wasn’t able to subtract the
+cylinders from the grill correctly.</p>
+
+<p><a href="/assets/posts/2020-12-15-Editing-STL/blender.png" class="lightgallery-link" data-sub-html="These changes, though still relatively simple, were only possible using Blender">
+<img src="/assets/posts/2020-12-15-Editing-STL/blender.png" alt="These changes, though still relatively simple, were only possible using Blender" data-src="/assets/posts/2020-12-15-Editing-STL/blender.png" loading="lazy" />
+</a></p>
+
+<p>While the most powerful tool I used, it is also the hardest one to use. While it took me a few minutes to get started
+with MeshMixer, Blender took significantly more time.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Hindsight being 20/20, I should have immediately used Blender for all parts. Though given I had prior experience with Fusion360 it
+made sense to try this first, even while being aware this wasn’t the best tool for the job. MeshMixer, despite
+being commonly recommended, I found rather limited and didn’t produce good results. It is a very user-friendly tool,
+and for those that quickly want to edit together a few STL files it might work. Though here, subtracting very simple
+geometry from complex ones, it didn’t produce a clean result and the lack of precision ended up being a game breaker too. 
+Investing a couple of hours to get familiar with Blender and figuring out the basics was well worth it. I was able to 
+make the changes to the grill (which neither Fusion360 nor MeshMixer could do without breaking the mesh). Furthermore, 
+it would have been better to make the other changes in Blender as well, as that would have been more accurate and 
+provided better results.</p>
+
+<p>So from now on, when editing STL files, Blender will be the first tool I’ll fire up!</p>
+
+<p>The prints, STL files and build guide for my own Kyber Crystal Crate Bluetooth speakers will come in a future post. 
+Stay tuned!</p>
 
 
 </article>
@@ -294,7 +365,7 @@ you have feedback feel free to open issues there, or post comments on the posts 
 
 
 <section class="tags">
-	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/intro">intro</a>
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/3d-printing">3d-printing</a>,&nbsp;<a href="/tag/creality">creality</a>,&nbsp;<a href="/tag/cr10s">CR10S</a>,&nbsp;<a href="/tag/fusion360">Fusion360</a>,&nbsp;<a href="/tag/meshmixer">MeshMixer</a>,&nbsp;<a href="/tag/blender">Blender</a>
 </section>
 
 
@@ -308,7 +379,7 @@ you have feedback feel free to open issues there, or post comments on the posts 
   
     
     
-      <a href="//twitter.com/share?text=25+Fortnights+of+Code&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2Fdiy%2F2019%2F12%2F04%2F25-Fortnights.html&via=ProostSebastian"
+      <a href="//twitter.com/share?text=Best+Tools+to+Edit+STL+Files&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2020%2F12%2F15%2FEditing-STL.html&via=ProostSebastian"
         onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
         <i class="fa fa-twitter-square fa-lg"></i>
       </a>
@@ -341,7 +412,7 @@ you have feedback feel free to open issues there, or post comments on the posts 
     
     
     
-      <a href="//www.facebook.com/sharer.php?t=25+Fortnights+of+Code&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2Fdiy%2F2019%2F12%2F04%2F25-Fortnights.html"
+      <a href="//www.facebook.com/sharer.php?t=Best+Tools+to+Edit+STL+Files&u=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2020%2F12%2F15%2FEditing-STL.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -357,7 +428,7 @@ you have feedback feel free to open issues there, or post comments on the posts 
     
     
     
-      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2Fdiy%2F2019%2F12%2F04%2F25-Fortnights.html"
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2020%2F12%2F15%2FEditing-STL.html"
         onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
         <i class="fa fa-linkedin-square fa-lg"></i>
       </a>
@@ -371,24 +442,16 @@ you have feedback feel free to open issues there, or post comments on the posts 
 	<section class="post-navigation">
 		<span class="prev-post">
 			
-				<a href="/programming/2019/12/01/Sentiment-Analysis.html">
+				<a href="/programming/2020/12/03/CodeForces.html">
 					<span class="fa-stack fa-lg">
 						<i class="fa fa-square fa-stack-2x"></i>
 						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
 					</span>
-					<span class="page-number">Sentiment Analysis and the Shape of Stories</span>
+					<span class="page-number">CodeForces: Trying on Competitive Coding</span>
 				</a>
 			
 		</span>
 		<span class="next-post">
-			
-				<a href="/programming/games/2019/12/29/Magic-the-Gathering.html">
-					<span class="page-number">Machine Learning: the Gathering</span>
-					<span class="fa-stack fa-lg">
-						<i class="fa fa-square fa-stack-2x"></i>
-						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
-					</span>
-				</a>
 			
 		</span>
 	</section>
@@ -760,8 +823,8 @@ $(document).ready(function() {
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
   ga('create', 'UA-47068418-5', 'auto');
   ga('send', 'pageview', {
-    'page': '/programming/games/diy/2019/12/04/25-Fortnights.html',
-    'title': '25 Fortnights of Code'
+    'page': '/diy/2020/12/15/Editing-STL.html',
+    'title': 'Best Tools to Edit STL Files'
   });
 </script>
 
