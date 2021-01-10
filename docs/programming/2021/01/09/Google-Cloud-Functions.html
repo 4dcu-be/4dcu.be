@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Setting up a Google Cloud Function</title>
+  <meta name="description" content="With Google’s Cloud Functions you can make simple microservices that can perform a task on Google’s infrastructure.  This allows some functionality of an app...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="With Google’s Cloud Functions you can make simple microservices that can perform a task on Google’s infrastructure.  This allows some functionality of an app..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/2021/01/09/Google-Cloud-Functions.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Setting up a Google Cloud Function" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2021-01-09-Google-Cloud-Functions/header.jpg" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Setting up a Google Cloud Function">
+  <meta name="twitter:description" content="With Google’s Cloud Functions you can make simple microservices that can perform a task on Google’s infrastructure.  This allows some functionality of an app...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2021-01-09-Google-Cloud-Functions/header.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/2021/01/09/Google-Cloud-Functions.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/2021/01/09/Google-Cloud-Functions.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2021-01-09-Google-Cloud-Functions/header.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Setting up a Google Cloud Function</h1>
+			
+      <p class="info"><em>making a microservice</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted January 9, 2021 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>With Google’s <a href="https://cloud.google.com/functions">Cloud Functions</a> you can make simple microservices that can perform a task on Google’s infrastructure. 
+This allows some functionality of an app to be moved to the cloud. which can be useful in a number of cases; for instance 
+the Dashboard from a <a href="/diy/2020/10/04/PythonKindleDashboard_2.html">previous post</a>. When running scripts on a platform like the Kindle Paperwhite, you are somewhat 
+limited to which tools and packages you can use easily. For instance installing additional python packages would be a 
+non-trivial step, as is installing other software. Therefore, the script makes use of vanilla regular expressions to 
+parse html instead of a more specialized package like <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">BeautifulSoup</a>.</p>
+
+<p>However, when more complex processing is required, re-implementing everything would be quite cumbersome. So here a
+cloud function could be a great solution. Each function can be called through an HTTP request, similarly as most web
+APIs. The script will then be run on Google’s hardware and the results are passed back in a response. As an example
+I’ll set up a Cloud Function that will grab citation data from a <a href="https://scholar.google.com/">Google Scholar</a> profile, as Scholar has no API, the 
+only way to get citation statistics is to parse them out of the HTML code. The code can be found on <a href="https://github.com/4dcu-be/ScholarJSON">GitHub</a></p>
+
+<h2 id="setting-up-a-google-cloud-account-and-create-a-function">Setting up a Google Cloud account and Create a Function</h2>
+
+<p>To get started a Google Cloud Account is required, this can be created <a href="https://cloud.google.com/">here</a>. Note that you’ll
+need to provide valid credit card details, though there is a free tier included in the account. As long as you don’t
+surpass that number of requests/compute time/… nothing will be charged to you card. (You also can set up a budget for 
+your account. This way even if the free tier is exhausted no more than the specified amount will be charged)</p>
+
+<p>Next, you’ll have to create a project, enable the Cloud Functions and create a new Cloud Function. This is well 
+documented on Google Cloud, so for detail how to do this I’ll defer to the official documentation.</p>
+
+<p><a href="/assets/posts/2021-01-09-Google-Cloud-Functions/cloud_functions.png" class="lightgallery-link" data-sub-html="Google Cloud interface, find Cloud Functions in the menu and create a new function to get started">
+<img src="/assets/posts/2021-01-09-Google-Cloud-Functions/cloud_functions.png" alt="Google Cloud interface, find Cloud Functions in the menu and create a new function to get started" data-src="/assets/posts/2021-01-09-Google-Cloud-Functions/cloud_functions.png" loading="lazy" />
+</a></p>
+
+<p>Once you start creating a function you’ll have to give it a name, and pick a server near you. Here well create a service
+that works over the web, so it should trigger on <em>HTTP</em> requests and set it to <em>unrestricted</em> access.</p>
+
+<p>If you click <em>Save</em> and <em>Next</em>, you will be able to add the code of your function through an online editor as shown 
+below. Though you’ll lack the features of a fully fledged IDE, for a small function it should suffice. Here
+we need to set the language to <em>Python 3.7</em>. Additional packages you wish to use can be added to <code class="highlighter-rouge">requirements.txt</code> while
+to main code resides in <code class="highlighter-rouge">main.py</code>. There also is an <em>entry point</em> to set, this should be the name of the function
+to run when the enpoint is requested, in the example this is <code class="highlighter-rouge">hello_world</code>.</p>
+
+<p><a href="/assets/posts/2021-01-09-Google-Cloud-Functions/cloud_editor.png" class="lightgallery-link" data-sub-html="You can implement your function through the online editor">
+<img src="/assets/posts/2021-01-09-Google-Cloud-Functions/cloud_editor.png" alt="You can implement your function through the online editor" data-src="/assets/posts/2021-01-09-Google-Cloud-Functions/cloud_editor.png" loading="lazy" />
+</a></p>
+
+<h2 id="writing-a-function">Writing a function</h2>
+
+<p>As Google (beyond the free tier) charges you for running their functions based on the number of request, RAM and
+CPU usage per milli-second. Functions should be kept simple and sleek. A few lines to process the request (enable Cross 
+Origin Resource Sharing, CORS) so we can pull this data in from other websites using JS and get the arguments)
+, build the URL, use the <a href="https://requests.readthedocs.io/en/master/">requests</a> library to grab the HTML and a few lines to process it. Everything, is returned as
+as JSON. Below you can find the code in <code class="highlighter-rouge">main.py</code>.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="k">def</span> <span class="nf">parse_scholar</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="c1"># Code to handle CORS (from docs)
+</span>    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">'OPTIONS'</span><span class="p">:</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">'Access-Control-Allow-Origin'</span><span class="p">:</span> <span class="s">'*'</span><span class="p">,</span>
+            <span class="s">'Access-Control-Allow-Methods'</span><span class="p">:</span> <span class="s">'GET'</span><span class="p">,</span>
+            <span class="s">'Access-Control-Allow-Headers'</span><span class="p">:</span> <span class="s">'Content-Type'</span><span class="p">,</span>
+            <span class="s">'Access-Control-Max-Age'</span><span class="p">:</span> <span class="s">'3600'</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="s">''</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+
+    <span class="c1"># Set CORS headers for the main request
+</span>    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">'Access-Control-Allow-Origin'</span><span class="p">:</span> <span class="s">'*'</span>
+    <span class="p">}</span>
+
+    <span class="n">request_json</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">request_json</span> <span class="ow">and</span> <span class="s">'user'</span> <span class="ow">in</span> <span class="n">request_json</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s">'https://scholar.google.com/citations?user={request_json["user"]}'</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'user'</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s">'https://scholar.google.com/citations?user={user}'</span>
+
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="n">hits</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">r'&lt;td class="gsc_rsb_std"&gt;(\d+)&lt;/td&gt;'</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">'citations'</span><span class="p">,</span> <span class="s">'citations_recent'</span><span class="p">,</span> <span class="s">'h_index'</span><span class="p">,</span> <span class="s">'h_index_recent'</span><span class="p">,</span> <span class="s">'i10_index'</span><span class="p">,</span> <span class="s">'i10_index_recent'</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">hits</span><span class="p">))),</span> <span class="mi">200</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+</code></pre></div></div>
+<p>For Google Cloud functions this needs to be paired with <code class="highlighter-rouge">requirements.txt</code>, which you can find below and make sure
+to set the target to <code class="highlighter-rouge">parse_scholar</code>. That should do the trick !</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># requirements.txt
+requests==2.25.1
+</code></pre></div></div>
+
+<p>To use your cloud function you need to point your browser to the trigger URL (which you can look up in the Cloud 
+Function settings under Trigger) and add a user argument with the Google Scholar profile ID. For me, my scholar ID is
+4niBmJUAAAAJ so I need to add ?user=4niBmJUAAAAJ to the trigger URL to pass that to the function. If everything works you
+get a response with the citation stats like this…</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+   </span><span class="nl">"citations"</span><span class="p">:</span><span class="s2">"5602"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"citations_recent"</span><span class="p">:</span><span class="s2">"3240"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"h_index"</span><span class="p">:</span><span class="s2">"24"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"h_index_recent"</span><span class="p">:</span><span class="s2">"23"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"i10_index"</span><span class="p">:</span><span class="s2">"29"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"i10_index_recent"</span><span class="p">:</span><span class="s2">"29"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="testing-cloud-functions-locally">Testing Cloud Functions Locally</h2>
+
+<p>While developing your function, locally testing it before deploying it on Google’s hardware is a good idea. The python
+package <a href="https://github.com/GoogleCloudPlatform/functions-framework-python">functions-framework</a> makes this easy. Simply pip install the package and run it using the commands below,
+note that the file containing your code needs to be called <code class="highlighter-rouge">main.py</code> and you specify the function as the target.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>functions-framework
+functions-framework <span class="nt">--target</span> parse_scholar <span class="nt">--debug</span>
+</code></pre></div></div>
+
+<p>Now you can test if the code works by pointing your browser to e.g. <strong>http://localhost:8080/?user=4niBmJUAAAAJ</strong>. Other
+solutions for testing locally based on Flask are also available, though this requires some extra code. A simple 
+one-liner seem, to me, a more elegant solution.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This made it very easy to move some code to the cloud where now it can be run with a simple request returning data,
+that would otherwise be hard to parse, as JSON. This could simplify the code for the DashBoard from a <a href="/diy/2020/10/04/PythonKindleDashboard_2.html">previous post</a>
+for instance, furthermore JSON data can easily be pulled in from JavaScript. I plan to add some code to my resume 
+website, <a href="https://sebastian.proost.science">sebastian.proost.science</a> that uses this function to get up-to-data citation statistics upon every visit. This
+would omit the need for me to update this regularly (which is why CORS is enabled).</p>
+
+<p>Header by <a href="https://unsplash.com/@ianjbattaglia">Ian Battaglia</a> on <a href="https://unsplash.com/s/photos/server">Unsplash</a></p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/google">google</a>,&nbsp;<a href="/tag/cloud">cloud</a>,&nbsp;<a href="/tag/web">web</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Setting+up+a+Google+Cloud+Function&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2021%2F01%2F09%2FGoogle-Cloud-Functions.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Setting+up+a+Google+Cloud+Function&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2021%2F01%2F09%2FGoogle-Cloud-Functions.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2021%2F01%2F09%2FGoogle-Cloud-Functions.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/programming/games/diy/2021/01/03/One-Year.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">One Year 4DCu.be</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '4dcube';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
+			<p class="text">Last update: January 10, 2021</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/programming/2021/01/09/Google-Cloud-Functions.html',
+    'title': 'Setting up a Google Cloud Function'
+  });
+</script>
+
+
+  </body>
+
+</html>
