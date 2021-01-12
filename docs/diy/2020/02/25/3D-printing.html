@@ -277,6 +277,10 @@
 some tips &amp; tricks I’ve picked up since buying a Creality CR10S. With some minor tweaks to the printer and the standard
 <a href="https://ultimaker.com/software/ultimaker-cura">Cura</a> profile some great results can be achieved.</p>
 
+<p><strong>Update 12/01/2021:</strong> Added an extra setting for PETG filament, as it oozes out more models with a lot of
+retractions were giving poor results. By setting the <em>Retraction Extra Prime Amount</em> to 0.2 (for a 0.4 mm nozzle)
+improves those models.</p>
+
 <h2 id="the-printer">The printer</h2>
 
 <p>The Creality CR10S I use for printing is stock with two exceptions: the glass heating bed and the firmware. The glass pane
@@ -440,13 +444,19 @@ might vary! Though, it should be a good starting point if you have a similar set
       <td>Travel Speed</td>
       <td style="text-align: right">150 mm/s</td>
       <td style="text-align: right">150 mm/s</td>
-      <td style="text-align: right">150 mms/s</td>
+      <td style="text-align: right">150 mm/s</td>
     </tr>
     <tr>
       <td><strong>Travel</strong></td>
       <td style="text-align: right"> </td>
       <td style="text-align: right"> </td>
       <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td>Retraction Extra Prime Amount</td>
+      <td style="text-align: right">0 mm³</td>
+      <td style="text-align: right">0 mm³</td>
+      <td style="text-align: right"><strong>0.2 mm³</strong></td>
     </tr>
     <tr>
       <td>Combing mode</td>
@@ -1096,7 +1106,7 @@ their work. It is here to stay and it will be interesting to see how it is used 
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: January 10, 2021</p>
+			<p class="text">Last update: January 12, 2021</p>
     </div>
 
   </div>
