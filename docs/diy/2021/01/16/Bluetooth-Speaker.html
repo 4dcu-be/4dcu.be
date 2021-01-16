@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Building a Bluetooth Speaker Part 1</title>
+  <meta name="description" content="Since seeing a Bluetooth Speaker build by The Smuggler’s Room I have been planning to do one my self, here I’ll discuss the electronics, putting everything i...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Since seeing a Bluetooth Speaker build by The Smuggler’s Room I have been planning to do one my self, here I’ll discuss the electronics, putting everything i..." />
+  <meta property="og:url" content="https://blog.4dcu.be/diy/2021/01/16/Bluetooth-Speaker.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Building a Bluetooth Speaker Part 1" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2021-01-16-Bluetooth-Speaker/modules.jpg" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Building a Bluetooth Speaker Part 1">
+  <meta name="twitter:description" content="Since seeing a Bluetooth Speaker build by The Smuggler’s Room I have been planning to do one my self, here I’ll discuss the electronics, putting everything i...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2021-01-16-Bluetooth-Speaker/modules.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/diy/2021/01/16/Bluetooth-Speaker.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/diy/2021/01/16/Bluetooth-Speaker.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2021-01-16-Bluetooth-Speaker/modules.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Building a Bluetooth Speaker Part 1</h1>
+			
+      <p class="info"><em>... the electronics</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted January 16, 2021 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/diy">Diy</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>Since seeing a Bluetooth Speaker build by <a href="https://www.youtube.com/watch?v=2wUlkyUbZ-I">The Smuggler’s Room</a> I have been planning to do one my self,
+here I’ll discuss the electronics, putting everything in a 3D printed case and painting it will be for the
+next. My build will be a little different from theirs, so I’ll include details here.</p>
+
+<p><strong>Parts Needed</strong></p>
+
+<ul>
+  <li>2x 5W speaker (small form factor)</li>
+  <li>1x 3.7V LiPo Battery <strong>with protection PCM module</strong> anything above 1000 mAh should give a very decent playtime.</li>
+  <li>1x Switch (two-way slide switch)</li>
+  <li>1x Bluetooth module with 2x5W amplifier (both an M38 or CT14 module will work)</li>
+  <li>1x LiPo charging circuit based on the TP4056 chip</li>
+  <li>Heat-shrink tubing</li>
+  <li>Soldering equipment</li>
+</ul>
+
+<p>So, two main differences with the components from <a href="https://www.youtube.com/watch?v=2wUlkyUbZ-I">The Smuggler’s Room</a>: I’m using an M38 Bluetooth module
+and a simpler charging circuit. While I initially used a CT14 module, the modules I got from my supplier had
+a rather annoying startup sound. Instead of a few discreet beeps to indicate the device was ready to pair/paired, it played
+a voice recording “Connecting the Bluetooth device” and “The Bluetooth device has been connected” … at the
+loudest possible volume. The M38 module I ordered as a replacement fortunately has a simple chime when connecting at a reasonable volume. 
+Additionally, the M38 chip can work as a USB audio device when connected to a computer via USB (though I won’t be using 
+it, that is a nice option to have).</p>
+
+<p>The difference in charging module is simply due to me ordering the wrong module … while it is 
+based on the same chip (TP4056) for charging LiPo batteries and provides over-charging protection, it is not designed to be wired up
+and provide power to another module (note the lack of Out+ and Out- pads on my module). Also, it doesn’t include
+over-discharge protection and hence has to be used with a LiPo battery that has this feature built-in. 
+Furthermore, because of the way these boards work, it is not recommended charging and using a device at the same time. 
+To add a bit of extra protection here I’ve wired the modules, batteries and switch in such a way that when the speaker 
+is on, it is running of the battery and the charging module isn’t connected and <em>visa versa</em>. You can check out my 
+wiring scheme below.</p>
+
+<p><a href="/assets/posts/2021-01-16-Bluetooth-Speaker/circuit.png" class="lightgallery-link" data-sub-html="How to connect all parts">
+<img src="/assets/posts/2021-01-16-Bluetooth-Speaker/circuit.png" alt="How to connect all parts" data-src="/assets/posts/2021-01-16-Bluetooth-Speaker/circuit.png" loading="lazy" />
+</a></p>
+
+<p>Soldering things together was really easy, all pads are clearly labelled and big so it is trivial to connect everything
+correctly. The speakers + and - need to be connected the same way as the speakers need to be in phase. Some heat-shrink
+tubing on the connectors of the switch is useful. The LiPo battery I’ve attached below is a 3500 mAh pack, though I will 
+replace it with a lighter version later on (as I need the 3500 mAh for a future project).</p>
+
+<p><a href="/assets/posts/2021-01-16-Bluetooth-Speaker/speakers.jpg" class="lightgallery-link" data-sub-html="Speakers with connectors soldered to them, make sure to connect them the same way to ensure they are in phase">
+<img src="/assets/posts/2021-01-16-Bluetooth-Speaker/speakers.jpg" alt="Speakers with connectors soldered to them, make sure to connect them the same way to ensure they are in phase" data-src="/assets/posts/2021-01-16-Bluetooth-Speaker/speakers.jpg" loading="lazy" />
+</a></p>
+
+<p>To charge the battery the system needs to be switched off and connected to a 1A power supply using micro-USB. A red
+light means charged, while blue means charging (or no battery connected). When switching on the speaker the power is
+cut from the charging circuit to the battery to prevent simultaneously using and charging. The switch makes it impossible
+to charge and use the battery simultaneously.</p>
+
+<p>If everything is working correctly, the speaker should show up as a Bluetooth speaker named <em>MH-M38</em> (the name will 
+depend on the module you got, and while the default can’t be changed, you can rename the device in Android). Now simply 
+connect and start playing some tunes to test the speaker.</p>
+
+<p><a href="/assets/posts/2021-01-16-Bluetooth-Speaker/modules.jpg" class="lightgallery-link" data-sub-html="The two modules, switch and LiPo battery soldered together">
+<img src="/assets/posts/2021-01-16-Bluetooth-Speaker/modules.jpg" alt="The two modules, switch and LiPo battery soldered together" data-src="/assets/posts/2021-01-16-Bluetooth-Speaker/modules.jpg" loading="lazy" />
+</a></p>
+
+<p><a href="/assets/posts/2021-01-16-Bluetooth-Speaker/connected.png" class="lightgallery-link" data-sub-html="Once switched on it shows up as MH-M38 in the list of Bluetooth devices">
+<img src="/assets/posts/2021-01-16-Bluetooth-Speaker/connected.png" alt="Once switched on it shows up as MH-M38 in the list of Bluetooth devices" data-src="/assets/posts/2021-01-16-Bluetooth-Speaker/connected.png" loading="lazy" />
+</a></p>
+
+<p>What the final quality of the sound will be remains to be seen. These speakers should be enclosed to get the best
+possible sound from them, so that will need to be benchmarked once everything is assembled. However, even without
+a case, the sound is louder and better than what my phone can produce without external speakers, so it is looking 
+promising… The case is 3D printed (see below), so stay tuned for more on this in an upcoming post !</p>
+
+<p><a href="/assets/posts/2021-01-16-Bluetooth-Speaker/case.jpg" class="lightgallery-link" data-sub-html="3D Printed case right off the build plate, still a lot of sanding to do ...">
+<img src="/assets/posts/2021-01-16-Bluetooth-Speaker/case.jpg" alt="3D Printed case right off the build plate, still a lot of sanding to do ..." data-src="/assets/posts/2021-01-16-Bluetooth-Speaker/case.jpg" loading="lazy" />
+</a></p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/bluetooth">bluetooth</a>,&nbsp;<a href="/tag/hardware">hardware</a>,&nbsp;<a href="/tag/speaker">speaker</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Building+a+Bluetooth+Speaker+Part+1&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2021%2F01%2F16%2FBluetooth-Speaker.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Building+a+Bluetooth+Speaker+Part+1&u=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2021%2F01%2F16%2FBluetooth-Speaker.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2021%2F01%2F16%2FBluetooth-Speaker.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/programming/2021/01/09/Google-Cloud-Functions.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Setting up a Google Cloud Function</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '4dcube';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
+			<p class="text">Last update: January 16, 2021</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/diy/2021/01/16/Bluetooth-Speaker.html',
+    'title': 'Building a Bluetooth Speaker Part 1'
+  });
+</script>
+
+
+  </body>
+
+</html>
