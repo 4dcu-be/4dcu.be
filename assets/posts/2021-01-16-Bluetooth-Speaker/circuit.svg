@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="circuit.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.3858164"
+     inkscape:cx="436.26308"
+     inkscape:cy="574.95589"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="2560"
+     inkscape:window-height="1361"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.20000005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1377"
+       width="178.9254"
+       height="134.39111"
+       x="3.7440336"
+       y="78.46666"
+       inkscape:export-filename="C:\Git\4dcu.be\assets\posts\2021-01-16-Bluetooth-Speaker\circuit.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <g
+       id="g1212"
+       transform="translate(-31.220841,-4.0646675)"
+       inkscape:export-filename="C:\Git\4dcu.be\assets\posts\2021-01-16-Bluetooth-Speaker\circuit.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <rect
+         y="137.70735"
+         x="172.87444"
+         height="25.390606"
+         width="26.459681"
+         id="rect815"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <g
+         transform="translate(110.11994,-5.8208336)"
+         id="g836">
+        <circle
+           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="path817"
+           cx="67.539619"
+           cy="148.5"
+           r="2.4804688" />
+        <circle
+           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="path817-0"
+           cx="84.430435"
+           cy="148.5"
+           r="2.4804688" />
+      </g>
+      <text
+         transform="rotate(-90)"
+         id="text840"
+         y="171.17229"
+         x="-152.94063"
+         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-size:5.64444447px;stroke-width:0.26458332"
+           y="171.17229"
+           x="-152.94063"
+           id="tspan838"
+           sodipodi:role="line">Bat +</tspan></text>
+      <text
+         transform="rotate(90)"
+         id="text840-4"
+         y="-201.21538"
+         x="136.91129"
+         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-size:5.64444447px;stroke-width:0.26458332"
+           y="-201.21538"
+           x="136.91129"
+           id="tspan838-1"
+           sodipodi:role="line">Bat -</tspan><tspan
+           id="tspan860"
+           style="font-size:5.64444447px;stroke-width:0.26458332"
+           y="-187.98621"
+           x="136.91129"
+           sodipodi:role="line" /></text>
+      <text
+         id="text864"
+         y="161.07031"
+         x="176.02287"
+         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-size:5.64444447px;stroke-width:0.26458332"
+           y="161.07031"
+           x="176.02287"
+           id="tspan862"
+           sodipodi:role="line">TP4056</tspan></text>
+    </g>
+    <g
+       id="g1233"
+       transform="translate(3.0994415e-7,-3.6839608)"
+       inkscape:export-filename="C:\Git\4dcu.be\assets\posts\2021-01-16-Bluetooth-Speaker\circuit.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <rect
+         y="137.32664"
+         x="11.358043"
+         height="55.300949"
+         width="26.037434"
+         id="rect815-8"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <circle
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path817-7"
+         cx="32.978424"
+         cy="141.65179"
+         r="2.4804688" />
+      <circle
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path817-2"
+         cx="32.978424"
+         cy="148.59711"
+         r="2.4804688" />
+      <circle
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path817-23"
+         cx="32.978424"
+         cy="155.54242"
+         r="2.4804688" />
+      <text
+         id="text840-9"
+         y="143.70645"
+         x="13.390003"
+         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-size:5.64444447px;stroke-width:0.26458332"
+           y="143.70645"
+           x="13.390003"
+           id="tspan838-17"
+           sodipodi:role="line">GND</tspan></text>
+      <text
+         id="text840-9-4"
+         y="150.61455"
+         x="13.271492"
+         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-size:5.64444447px;stroke-width:0.26458332"
+           y="150.61455"
+           x="13.271492"
+           id="tspan838-17-1"
+           sodipodi:role="line">5V</tspan></text>
+      <text
+         id="text840-9-5"
+         y="157.59982"
+         x="13.662855"
+         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-size:5.64444447px;stroke-width:0.26458332"
+           y="157.59982"
+           x="13.662855"
+           id="tspan838-17-6"
+           sodipodi:role="line">VBAT</tspan></text>
+      <g
+         transform="translate(1.0583333,2.6458334)"
+         id="g1029">
+        <g
+           id="g1000">
+          <circle
+             style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.57199025;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="path817-23-7"
+             cx="33.025669"
+             cy="165.13356"
+             r="1.4188039" />
+          <circle
+             style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.57199025;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="path817-23-7-2"
+             cx="33.025669"
+             cy="169.14955"
+             r="1.4188039" />
+        </g>
+        <g
+           transform="translate(0,10.606956)"
+           id="g1000-2">
+          <circle
+             style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.57199025;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="path817-23-7-3"
+             cx="33.025669"
+             cy="165.13356"
+             r="1.4188039" />
+          <circle
+             style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.57199025;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="path817-23-7-2-0"
+             cx="33.025669"
+             cy="169.14955"
+             r="1.4188039" />
+        </g>
+      </g>
+      <text
+         id="text864-7"
+         y="190.19753"
+         x="12.72205"
+         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-size:5.64444447px;stroke-width:0.26458332"
+           y="190.19753"
+           x="12.72205"
+           id="tspan862-9"
+           sodipodi:role="line">M38</tspan></text>
+    </g>
+    <g
+       id="g1075"
+       transform="matrix(0.34246266,0,0,0.34246266,46.723341,152.80846)"
+       inkscape:export-filename="C:\Git\4dcu.be\assets\posts\2021-01-16-Bluetooth-Speaker\circuit.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         id="path1061"
+         style="fill:#111111;stroke:#111111;stroke-width:5;stroke-linejoin:round"
+         d="M 39.389,13.769 22.235,28.606 H 6 v 19.093 h 15.989 l 17.4,15.051 z"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path1063"
+         style="fill:none;stroke:#111111;stroke-width:5;stroke-linecap:round"
+         d="M 48,27.6 A 19.5,19.5 0 0 1 48,49 m 7.1,-28.5 a 30,30 0 0 1 0,35.6 M 61.6,14 a 38.8,38.8 0 0 1 0,48.6"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       id="g1075-6"
+       transform="matrix(0.34246267,0,0,0.34246267,46.723341,178.92626)"
+       inkscape:export-filename="C:\Git\4dcu.be\assets\posts\2021-01-16-Bluetooth-Speaker\circuit.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         id="path1061-4"
+         style="fill:#111111;stroke:#111111;stroke-width:5;stroke-linejoin:round"
+         d="M 39.389,13.769 22.235,28.606 H 6 v 19.093 h 15.989 l 17.4,15.051 z"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path1063-1"
+         style="fill:none;stroke:#111111;stroke-width:5;stroke-linecap:round"
+         d="M 48,27.6 A 19.5,19.5 0 0 1 48,49 m 7.1,-28.5 a 30,30 0 0 1 0,35.6 M 61.6,14 a 38.8,38.8 0 0 1 0,48.6"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       id="g1199"
+       transform="translate(63.013598,68.342086)"
+       inkscape:export-filename="C:\Git\4dcu.be\assets\posts\2021-01-16-Bluetooth-Speaker\circuit.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <rect
+         y="65.300598"
+         x="20.091599"
+         height="43.278275"
+         width="38.742561"
+         id="rect1098"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <g
+         id="g1155"
+         transform="translate(0,-35.98335)">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+           x="50.614162"
+           y="106.41377"
+           id="text864-75"><tspan
+             sodipodi:role="line"
+             id="tspan862-98"
+             x="50.614162"
+             y="106.41377"
+             style="font-size:5.64444447px;stroke-width:0.26458332">+</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+           x="23.904631"
+           y="106.19053"
+           id="text864-75-3"><tspan
+             sodipodi:role="line"
+             id="tspan862-98-8"
+             x="23.904631"
+             y="106.19053"
+             style="font-size:5.64444447px;stroke-width:0.26458332">-</tspan></text>
+      </g>
+      <text
+         id="text864-4"
+         y="86.259766"
+         x="26.053297"
+         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           id="tspan1187"
+           style="font-size:5.64444447px;line-height:0;stroke-width:0.26458332"
+           y="86.259766"
+           x="26.053297"
+           sodipodi:role="line">3.7V LiPo</tspan></text>
+    </g>
+    <rect
+       style="fill:#808080;fill-opacity:1;stroke:none;stroke-width:1.67106342;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1239"
+       width="18.827492"
+       height="7.0365376"
+       x="41.743786"
+       y="97.12429"
+       inkscape:export-filename="C:\Git\4dcu.be\assets\posts\2021-01-16-Bluetooth-Speaker\circuit.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.81179798;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 39.140212,97.082924 H 63.174851"
+       id="path1235"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Git\4dcu.be\assets\posts\2021-01-16-Bluetooth-Speaker\circuit.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.82137167;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1237"
+       width="3.0428271"
+       height="7.5706935"
+       x="46.047485"
+       y="88.983063"
+       inkscape:export-filename="C:\Git\4dcu.be\assets\posts\2021-01-16-Bluetooth-Speaker\circuit.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <g
+       id="g1267"
+       transform="translate(0.855795)"
+       inkscape:export-filename="C:\Git\4dcu.be\assets\posts\2021-01-16-Bluetooth-Speaker\circuit.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1241"
+         d="m 44.31117,101.30818 v 7.22671"
+         style="fill:#4d4d4d;stroke:#454545;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path1241-2"
+         d="m 50.301736,101.30818 v 7.22671"
+         style="fill:#4d4d4d;stroke:#454545;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path1241-8"
+         d="m 56.292303,101.30818 v 7.22671"
+         style="fill:#4d4d4d;stroke:#454545;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <path
+       style="fill:none;stroke:#9a0000;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 45.166965,108.53489 0.09509,43.45537 H 32.900569"
+       id="path1287"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Git\4dcu.be\assets\posts\2021-01-16-Bluetooth-Speaker\circuit.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#9a0000;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 51.157531,108.53489 -3e-6,16.92572 h 64.660082 v 8.1776"
+       id="path1289"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Git\4dcu.be\assets\posts\2021-01-16-Bluetooth-Speaker\circuit.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#9a0000;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 57.148097,108.53489 v 4.94459 H 146.0557 v 25.2935"
+       id="path1291"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Git\4dcu.be\assets\posts\2021-01-16-Bluetooth-Speaker\circuit.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.20000005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 88.051808,133.63821 v -4.18389 h -36.89428 l 2e-6,8.61169 h -4.82511 c 0,0 0.102596,-1.14538 -1.070365,-1.14538 -1.172961,0 -1.04797,1.14538 -1.04797,1.14538 h -2.042403 -8.985848"
+       id="path1295"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccczccc"
+       inkscape:export-filename="C:\Git\4dcu.be\assets\posts\2021-01-16-Bluetooth-Speaker\circuit.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.20000005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 87.890698,129.45432 h 26.967782 c 0,0 0.13831,-0.91876 0.95913,-0.91876 0.82082,0 1.05692,0.91876 1.05692,0.91876 h 28.06365 c 0,0 0.33105,-0.8012 1.11752,-0.8012 0.78647,0 1.12931,0.8012 1.12931,0.8012 h 15.98659 v 9.18746"
+       id="path1297"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cczcczccc"
+       inkscape:export-filename="C:\Git\4dcu.be\assets\posts\2021-01-16-Bluetooth-Speaker\circuit.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:#ffd42a;stroke:#ffdd16;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 34.416611,164.14073 H 48.907816"
+       id="path1318"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Git\4dcu.be\assets\posts\2021-01-16-Bluetooth-Speaker\circuit.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#ffdd16;stroke-width:1.20000005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 34.277271,174.86979 10.984782,0 0,15.60592 3.645762,0"
+       id="path1318-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="C:\Git\4dcu.be\assets\posts\2021-01-16-Bluetooth-Speaker\circuit.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#0e00fe;stroke-width:1.20000005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
+       d="M 34.416609,167.97254 H 48.907815"
+       id="path1318-6"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Git\4dcu.be\assets\posts\2021-01-16-Bluetooth-Speaker\circuit.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#0e00fe;stroke-width:1.20000005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 34.277269,178.63193 h 7.746585 v 15.11823 h 6.883961"
+       id="path1318-6-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="C:\Git\4dcu.be\assets\posts\2021-01-16-Bluetooth-Speaker\circuit.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+  </g>
+</svg>

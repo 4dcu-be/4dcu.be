@@ -12,7 +12,7 @@ github: https://github.com/4dcu-be/ScholarJSON
 ---
 
 With Google's [Cloud Functions] you can make simple microservices that can perform a task on Google's infrastructure. 
-This allows some functionality of an app to be moved to the cloud. which can be useful in a number of cases; for instance 
+This allows some functionality of an app to be moved to the cloud. This can be useful in a number of cases; for instance 
 the Dashboard from a [previous post]. When running scripts on a platform like the Kindle Paperwhite, you are somewhat 
 limited to which tools and packages you can use easily. For instance installing additional python packages would be a 
 non-trivial step, as is installing other software. Therefore, the script makes use of vanilla regular expressions to 
