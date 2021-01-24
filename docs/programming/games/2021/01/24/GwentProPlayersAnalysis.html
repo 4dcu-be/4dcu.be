@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Gwent: How Many Pro Players Are Out There ?</title>
+  <meta name="description" content="I noticed that some people ended up on my blog by searching Google for “gwent how many players in pro rank”. They would have been disappointed as there is no...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="I noticed that some people ended up on my blog by searching Google for “gwent how many players in pro rank”. They would have been disappointed as there is no..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/games/2021/01/24/GwentProPlayersAnalysis.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Gwent: How Many Pro Players Are Out There ?" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2020-09-01-GwentProRankAnalysis/gwent_pro_rank.jpg" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Gwent: How Many Pro Players Are Out There ?">
+  <meta name="twitter:description" content="I noticed that some people ended up on my blog by searching Google for “gwent how many players in pro rank”. They would have been disappointed as there is no...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2020-09-01-GwentProRankAnalysis/gwent_pro_rank.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/games/2021/01/24/GwentProPlayersAnalysis.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/games/2021/01/24/GwentProPlayersAnalysis.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2020-09-01-GwentProRankAnalysis/gwent_pro_rank.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Gwent: How Many Pro Players Are Out There ?</h1>
+			
+      <p class="info"><em></em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted January 24, 2021 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>, 
+    
+  
+    
+    <a href="/category/games">Games</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>I noticed that some people ended up on my blog by searching Google for “gwent how many players in pro rank”. They would
+have been disappointed as there is no answer to that question yet, let’s see if we can change that! In this post
+using data science and web scraping, we’ll try to figure that out exactly how many people can be found on Gwent’s Pro
+Ladder.</p>
+
+<p>In-game Gwent only shows the top 1144 players for the current season, which is convenient but nowhere near the complete
+list. On the <a href="https://masters.playgwent.com/en/">Gwent Masters</a> website you can pull up the rankings of all Pro Players up to rank 2860, … more but still
+not complete … so I’ll explore three ways to get an idea of the total number of Pro Players out there.</p>
+
+<p>If you are just interested in the number of players, <a href="#method-3-hammering-the-gwent-masters-website">click here</a> to
+jump right to the numbers you are looking for.</p>
+
+<h2 id="method-1-being-the-lowest-ranked-player">Method 1: Being the Lowest Ranked Player</h2>
+
+<p>One trick you could use is ending in the top 500 one season, so you won’t drop out of Pro Rank. During the next season
+you play and lose one game, only one! This way you will have a grand total of 96 MMR and should be the lowest ranked player in 
+the game. At the end of the season, check your rank in-game and you’ll know how many players are on Pro Ladder as
+all of them will have an equal or better rank.</p>
+
+<p>Problem, I’m not good enough to fight my way up to the top 500 to try this… so I’ll have to resort to a 
+different approach as my Gwent skills won’t get me there.</p>
+
+<h2 id="method-2-estimating-from-a-partial-distribution">Method 2: Estimating From a Partial Distribution</h2>
+
+<p>Imagine for a moment a yearly running competition with about two thousand participants running a 15K. The local newspaper
+prints the full list of participants with their times the following week. However, as the competition grows more and more
+popular, it attracts more and more participants making it not feasible to publish the full list anymore. So to save ink
+and paper now they only publish those a list of those who finished in under one hour…</p>
+
+<p>Now if we still have access to a full list from a few years before, we can figure out which fraction of participants
+actually manages to run a 15K in under an hour. We can use this approach to estimate how many Pro Players there are in
+Gwent.</p>
+
+<p>Here it is important to note that during the Season of the Wolf in 2020 there were very few players in Pro Rank as you
+can see by the MMR score by the player at rank 2860. While there are probably a few more out there than 2860, it won’t
+be much more given the low MMR required to be listed on the website.</p>
+
+<table class="narrow-rows">
+  <thead>
+    <tr>
+      <th style="text-align: center">Season</th>
+      <th style="text-align: center">Min MMR (top 2860)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>M2_01 Wolf 2020</strong></td>
+      <td style="text-align: center"><strong>2407</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_02 Love 2020</td>
+      <td style="text-align: center">7776</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_03 Bear 2020</td>
+      <td style="text-align: center">9427</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_04 Elf 2020</td>
+      <td style="text-align: center">9666</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_05 Viper 2020</td>
+      <td style="text-align: center">9635</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_06 Magic 2020</td>
+      <td style="text-align: center">9624</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_07 Griffin 2020</td>
+      <td style="text-align: center">9698</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_08 Draconid 2020</td>
+      <td style="text-align: center">9666</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_09 Dryad 2020</td>
+      <td style="text-align: center">9678</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_10 Cat 2020</td>
+      <td style="text-align: center">9703</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_11 Mahakam 2020</td>
+      <td style="text-align: center">9706</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_12 Wild Hunt 2020</td>
+      <td style="text-align: center">9756</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Based on the scores, we can determine the percentile rank for each score, that is the percentage of players that had
+that score or less. A few percentile ranks are shown below, we can see that
+in the first season of M2 half of the players (50th percentile) got a score above 9051 MMR, only one in four (75th
+percentile) got 9685 and those with a score of 9810 are in the 90th percentile, indication only the best 10% players
+get that score or above.</p>
+
+<table class="narrow-rows">
+  <thead>
+    <tr>
+      <th style="text-align: center">Percentile</th>
+      <th style="text-align: center">MMR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">50</td>
+      <td style="text-align: center">9051</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">75</td>
+      <td style="text-align: center">9685</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">90</td>
+      <td style="text-align: center">9810</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>So based on these we can determine the fraction of players that can get above 9700, 9800, 9900, 10000 and, 10100, 
+next we look in other seasons how many players actually got above that score. Using these two number it is pretty
+easy to calculate the total number of players you would expect! If you are interested in the code, everything is 
+available on <a href="https://github.com/4dcu-be/GwentRank">GitHub</a>. The results are shown below:</p>
+
+<table class="narrow-rows">
+  <thead>
+    <tr>
+      <th style="text-align: center">Season</th>
+      <th style="text-align: center">Estimate (low)</th>
+      <th style="text-align: center">Estimate (high)</th>
+      <th style="text-align: center">Estimate (mean)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">M2_01 Wolf 2020</td>
+      <td style="text-align: center">2900</td>
+      <td style="text-align: center">3600</td>
+      <td style="text-align: center">3118</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_02 Love 2020</td>
+      <td style="text-align: center">4567</td>
+      <td style="text-align: center">7100</td>
+      <td style="text-align: center">5620</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_03 Bear 2020</td>
+      <td style="text-align: center">6036</td>
+      <td style="text-align: center">10300</td>
+      <td style="text-align: center">7329</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_04 Elf 2020</td>
+      <td style="text-align: center">9927</td>
+      <td style="text-align: center">18000</td>
+      <td style="text-align: center">12319</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_05 Viper 2020</td>
+      <td style="text-align: center">7767</td>
+      <td style="text-align: center">11400</td>
+      <td style="text-align: center">9372</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_06 Magic 2020</td>
+      <td style="text-align: center">6800</td>
+      <td style="text-align: center">9800</td>
+      <td style="text-align: center">8320</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_07 Griffin 2020</td>
+      <td style="text-align: center">12836</td>
+      <td style="text-align: center">19900</td>
+      <td style="text-align: center">14683</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_08 Draconid 2020</td>
+      <td style="text-align: center">9567</td>
+      <td style="text-align: center">13300</td>
+      <td style="text-align: center">11186</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_09 Dryad 2020</td>
+      <td style="text-align: center">9733</td>
+      <td style="text-align: center">12580</td>
+      <td style="text-align: center">11219</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_10 Cat 2020</td>
+      <td style="text-align: center">12800</td>
+      <td style="text-align: center">14620</td>
+      <td style="text-align: center">13774</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_11 Mahakam 2020</td>
+      <td style="text-align: center">12995</td>
+      <td style="text-align: center">18900</td>
+      <td style="text-align: center">16042</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_12 Wild Hunt 2020</td>
+      <td style="text-align: center">13000</td>
+      <td style="text-align: center">36000</td>
+      <td style="text-align: center">23085</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="method-3-hammering-the-gwent-masters-website">Method 3: Hammering the Gwent Masters Website</h2>
+
+<p>While on the Gwent Masters website only the top 2860 players are listed, if you search for a specific player you’ll
+find their results for that season. Even if they are below rank 2860! This got me thinking … If we get a list of 
+names from all players that were in the top 2860 in any season during Masters 2, we could brute-force check for each name
+and each season the rank of that player. If we are lucky there are a few top 500 players that remained in Pro Rank but
+didn’t play a lot of games the next season, so we can get some data on low ranks… it worked ! It did take several days
+and over 12000 HTTP requests putting some strain on CDPR’s servers, but the script pulled data for a lot more players 
+than were listed … including at least one player with the lowest possible MMR of 96 each season! These numbers should
+be very close to the exact number of Pro Players each season.</p>
+
+<table class="narrow-rows">
+  <thead>
+    <tr>
+      <th style="text-align: center">Season</th>
+      <th style="text-align: center">Players</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">M2_01 Wolf 2020</td>
+      <td style="text-align: center">2997</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_02 Love 2020</td>
+      <td style="text-align: center">4883</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_03 Bear 2020</td>
+      <td style="text-align: center">6632</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_04 Elf 2020</td>
+      <td style="text-align: center">10209</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_05 Viper 2020</td>
+      <td style="text-align: center">10079</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_06 Magic 2020</td>
+      <td style="text-align: center">9919</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_07 Griffin 2020</td>
+      <td style="text-align: center">14791</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_08 Draconid 2020</td>
+      <td style="text-align: center">13800</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_09 Dryad 2020</td>
+      <td style="text-align: center">14554</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_10 Cat 2020</td>
+      <td style="text-align: center">16011</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_11 Mahakam 2020</td>
+      <td style="text-align: center">16752</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">M2_12 Wild Hunt 2020</td>
+      <td style="text-align: center">22464</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="did-the-estimates-work-">Did the estimates work ?</h2>
+
+<p>While the last method makes the estimates obsolete, I was curious to know how well the method worked. A quick
+scatter plot with a linear regression shows the estimates are quite good. So while it is not perfect, it doesn’t require
+6-7 hours per season to scrape the required data. That makes it valuable to quickly estimate numbers before going all
+out with the scraping.</p>
+
+<p><a href="/assets/posts/2021-01-24-GwentProPlayersAnalysis/estimate_check.png" class="lightgallery-link" data-sub-html="A quick check how well the estimates worked">
+<img src="/assets/posts/2021-01-24-GwentProPlayersAnalysis/estimate_check.png" alt="A quick check how well the estimates worked" data-src="/assets/posts/2021-01-24-GwentProPlayersAnalysis/estimate_check.png" loading="lazy" />
+</a></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>There you have it, the total number of Pro Players each season! It is incredible to see that the total number of Pro
+Players increased nearly 10 fold over the course of a single year (do note that the last season was exceptionally long
+which allowed more players to reach Pro Rank). While Gwent had a rough start in 2021, with many
+game breaking bugs creeping in the game, I hope it will continue to grow. This also highlights that if you want to
+get those hard to get titles which are awarded to those that finish in the Top 500 or even the Top 200 are increasingly
+difficult to obtain.</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/jupyter">jupyter</a>,&nbsp;<a href="/tag/pandas">pandas</a>,&nbsp;<a href="/tag/gwent">gwent</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Gwent%3A+How+Many+Pro+Players+Are+Out+There+%3F&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2021%2F01%2F24%2FGwentProPlayersAnalysis.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Gwent%3A+How+Many+Pro+Players+Are+Out+There+%3F&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2021%2F01%2F24%2FGwentProPlayersAnalysis.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2021%2F01%2F24%2FGwentProPlayersAnalysis.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/diy/2021/01/16/Bluetooth-Speaker.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Building a Bluetooth Speaker Part 1</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '4dcube';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
+			<p class="text">Last update: January 24, 2021</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/programming/games/2021/01/24/GwentProPlayersAnalysis.html',
+    'title': 'Gwent: How Many Pro Players Are Out There ?'
+  });
+</script>
+
+
+  </body>
+
+</html>

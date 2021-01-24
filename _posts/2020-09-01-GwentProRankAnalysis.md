@@ -224,7 +224,7 @@ own or your favorite players stats.
 
 ## Conclusion
 
-Initially, I set out to get players national ranks. When you are from a small country just making it to 
+Initially, I set out to get players national ranks. When you are from a small country, just making it to 
 Pro Rank will likely give you bragging rights about being in the top 3 of your country. Though with some fairly basic
 data science you can very quickly get a lot more details on various aspects of the game.
 
