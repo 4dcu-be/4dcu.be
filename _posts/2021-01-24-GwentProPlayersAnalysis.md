@@ -2,7 +2,7 @@
 layout: post
 title:  "Gwent: How Many Pro Players Are Out There ?"
 byline: ""
-date:    12:00:00
+date: 2021-01-24 12:00:00
 author: Sebastian Proost
 categories: programming games
 tags:	python jupyter pandas gwent 
