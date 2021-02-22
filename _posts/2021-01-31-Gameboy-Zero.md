@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Gameboy Zero Builds"
+title:  "GameBoy Zero Builds"
 byline: ""
 date: 2021-01-31 12:00:00
 author: Sebastian Proost
@@ -11,13 +11,13 @@ thumbnail: "/assets/images/thumbnails/gbz_mkII.jpg"
 gallery_items:
   - image: "/assets/posts/2021-01-31-Gameboy-Zero/mkII.jpg"
     gallery_image: "/assets/images/gallery/gbz_mkII.jpg"
-    description: "New Gameboy Zero based on Kite's Circuit Sword Lite"  
+    description: "New GameBoy Zero based on Kite's Circuit Sword Lite"  
   - image: "/assets/posts/2021-01-31-Gameboy-Zero/mkII_back.jpg"
     gallery_image: "/assets/images/gallery/gbz_mkII_back.jpg"
-    description: "New Gameboy Zero based on Kite's Circuit Sword Lite"
+    description: "New GameBoy Zero based on Kite's Circuit Sword Lite"
 ---
 
-About a year ago I build a Gameboy Zero (a Raspberry Pi Zero in a gameboy shell) and this weekend I finished a second
+About a year ago I build a GameBoy Zero (a Raspberry Pi Zero in a gameboy shell) and this weekend I finished a second
 one. You can see some picture of the first one (black case) and the new one (transparant, blue shell) below. While I 
 thought about doing a proper build log, there are others who did a much better job at documenting how to build one than
 I would have. So if you are interested in building on of there for yourself, have a look at the link at the bottom, 
@@ -25,11 +25,11 @@ otherwise enjoy the pictures.
 
 ## New Build
 
-![New Gameboy Zero based on Kite's Circuit Sword Lite](/assets/posts/2021-01-31-Gameboy-Zero/mkII.jpg)
+![New GameBoy Zero based on Kite's Circuit Sword Lite](/assets/posts/2021-01-31-Gameboy-Zero/mkII.jpg)
 
 ![Backside has buttons with button membranes, big improvement over the clicky buttons from the previous build](/assets/posts/2021-01-31-Gameboy-Zero/mkII_back.jpg)
 
-This is the second Gameboy Zero I've built. This one is based on Kite's Circuit Sword Lite, which has a few advantages
+This is the second GameBoy Zero I've built. This one is based on Kite's Circuit Sword Lite, which has a few advantages
 over the Super-AIO board he released earlier. There is a PCB to have buttons on the back that use the same membranes as
 the ABXY buttons on the front, much better than the "clicky" ones I used in the previous build. Furthermore, I used all 
 available 3D printed parts, ensured wires were the right length, and only added a few dabs of hot glue strategically. 
@@ -38,7 +38,7 @@ this one turned out.
 
 ## Old Build
 
-![Gameboy Zero based on Kite's Super AIO board](/assets/posts/2021-01-31-Gameboy-Zero/mkI.jpg)
+![GameBoy Zero based on Kite's Super AIO board](/assets/posts/2021-01-31-Gameboy-Zero/mkI.jpg)
 
 ![Two clicky shoulder buttons on the back, they are functional, but I would recommend to go for a solution with membrane buttons](/assets/posts/2021-01-31-Gameboy-Zero/mkI_back.jpg)
 
