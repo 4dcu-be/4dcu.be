@@ -19,8 +19,9 @@ discussed in [part 1]. The shell is printed in PETG which had some issues with t
 were not dialed in 100% yet, so the prints required a fair bit of filling and sanding to get them
 where I needed to be. Enabling Retraction Extra Prime Amount helps a lot with PETG prints that require a lot of 
 retractions, so in the future I'll run PETG prints with these [updated settings].
-I was planning on painting these with paints for miniatures but this turned out to be a disaster
-quickly. So a trip to the hardware store to pick up a rattle can of orange spray paint was necessary!
+I was initially planning on painting these with paints for miniatures (which I had at hand in the right colors) but this 
+turned out to be a disaster ... So a trip to the hardware store to pick up a rattle can of orange spray paint was 
+necessary!
 
 ![Kyber Crystal Crate Bluetooth speaker](/assets/posts/2021-02-22-Bluetooth-Speaker/speaker_01.jpg)
 

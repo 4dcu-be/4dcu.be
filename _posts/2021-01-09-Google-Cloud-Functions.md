@@ -130,7 +130,7 @@ functions-framework --target parse_scholar --debug
 
 Now you can test if the code works by pointing your browser to e.g. **http://localhost:8080/?user=4niBmJUAAAAJ**. Other
 solutions for testing locally based on Flask are also available, though this requires some extra code. A simple 
-one-liner seem, to me, a more elegant solution.
+one-liner seems, to me, a more elegant solution.
 
 ## Conclusion
 
