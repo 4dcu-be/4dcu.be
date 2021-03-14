@@ -7,7 +7,7 @@ author: Sebastian Proost
 categories: diy
 tags:	python kindle dashboard
 cover:  "/assets/posts/2020-09-27-PythonKindleDashboard_1/kindle_pw3.jpg"
-thumbnail: "/assets/images/thumbnails/kindle_pw3"
+thumbnail: "/assets/images/thumbnails/kindle_pw3.jpg"
 github: "https://github.com/4dcu-be/kual-dashboard"
 ---
 

@@ -7,7 +7,7 @@ author: Sebastian Proost
 categories: diy
 tags:	python kindle dashboard gwent TV
 cover:  "/assets/posts/2020-10-04-PythonKindleDashboard_2/header.jpg"
-thumbnail: "/assets/images/thumbnails/kindle_pw3_2"
+thumbnail: "/assets/images/thumbnails/kindle_pw3_2.jpg"
 github: "https://github.com/4dcu-be/kual-dashboard"
 gallery_items:
   - image: "/assets/posts/2020-10-04-PythonKindleDashboard_2/final_dashboard.jpg"
