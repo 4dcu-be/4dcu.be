@@ -5,7 +5,7 @@ byline: ""
 date: 2021-01-31 12:00:00
 author: Sebastian Proost
 categories: diy games
-tags:	gameboy retrogaming raspberry_pi
+tags:	gameboy retrogaming raspberry-pi
 cover:  "/assets/posts/2021-01-31-Gameboy-Zero/mkII.jpg"
 thumbnail: "/assets/images/thumbnails/gbz_mkII.jpg"
 gallery_items:

@@ -5,7 +5,7 @@ byline: "... painting things"
 date:   2021-02-22 10:00:00
 author: Sebastian Proost
 categories: diy
-tags:	bluetooth hardware speaker star_wars rogue_one
+tags:	bluetooth hardware speaker star-wars rogue-one
 cover:  "/assets/posts/2021-02-22-Bluetooth-Speaker/header.jpg"
 thumbnail: "/assets/images/thumbnails/bluetooth_speaker_finished.jpg"
 gallery_items:

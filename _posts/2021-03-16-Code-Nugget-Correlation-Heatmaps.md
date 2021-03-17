@@ -5,7 +5,7 @@ byline: "using pandas, scipy and seaborn"
 date:   2021-03-16 10:00:00
 author: Sebastian Proost
 categories: programming
-tags:	python pandas data_science seaborn code_nugget
+tags:	python pandas data-science seaborn code-nugget
 cover:  "/assets/images/headers/python_code.jpg"
 thumbnail: "/assets/images/thumbnails/python_code.jpg"
 ---
@@ -14,7 +14,7 @@ While Pandas and Seaborn offer very quick ways to calculate correlations and sho
 correlations are statistically significant or not is omitted from those plots. Over the years I've collected bits and 
 pieces of code, like this, that turn out to be quite useful. Though them being scattered across a few dozen projects
 isn't very convenient when I actually need them. So I'll start to add some documentation and put them here with the tag 
-[Code Nugget]({site.baseurl}/tag/code_nugget), so they can easily be found by myself and others.
+[Code Nugget]({site.baseurl}/tag/code-nugget/), so they can easily be found by myself and others.
 
 Normally you can use ```corr_df = df.corr()``` to get a correlation matrix for numerical columns in a Pandas data frame.
 These in turn can be shown in a heatmap using ```sns.clustermap(corr_df, cmap="vlag", vmin=-1, vmax=1)```, leveraging 

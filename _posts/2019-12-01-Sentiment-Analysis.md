@@ -5,7 +5,7 @@ byline: "The shape of Lord of the Rings - The Fellowship of the Ring"
 date:   2019-12-01 12:00:00
 author: Sebastian Proost
 categories: programming
-tags:	python NLP NLTK pandas matplotlib LotR
+tags:	python NLP NLTK pandas matplotlib LotR data-science
 cover:  "/assets/posts/2019-12-01-Sentiment-Analysis/header.png"
 thumbnail: "/assets/images/thumbnails/sentiment_analysis.jpg"
 github: "https://github.com/4dcu-be/ShapeOfStories-SentimentAnalysis"

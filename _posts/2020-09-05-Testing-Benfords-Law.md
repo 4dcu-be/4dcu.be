@@ -5,7 +5,7 @@ byline: "numbers might not be as random as you think"
 date:   2020-09-05 12:00:00
 author: Sebastian Proost
 categories: programming
-tags:	python jupyter pandas
+tags:	python jupyter pandas data-science
 cover:  "/assets/posts/2020-09-05-Testing-Benfords-Law/log_table.jpg"
 thumbnail: "/assets/images/thumbnails/benfordslaw.jpg"
 github: "https://github.com/4dcu-be/BenfordsLaw"

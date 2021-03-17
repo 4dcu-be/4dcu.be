@@ -5,7 +5,7 @@ byline: ""
 date:   2020-09-01 12:00:00
 author: Sebastian Proost
 categories: programming games
-tags:	python jupyter pandas gwent 
+tags:	python jupyter pandas gwent data-science
 cover:  "/assets/posts/2020-09-01-GwentProRankAnalysis/gwent_pro_rank.jpg"
 thumbnail: "/assets/images/thumbnails/gwent_pro_rank.jpg"
 github: "https://github.com/4dcu-be/GwentRank"

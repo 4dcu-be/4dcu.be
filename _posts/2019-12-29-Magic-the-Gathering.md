@@ -5,7 +5,7 @@ byline: "predicting your opponent's deck from the first few cards played"
 date:   2019-12-29 12:00:00
 author: Sebastian Proost
 categories: programming games
-tags:	python sklearn machine-learning pandas mtg magic-the-gathering
+tags:	python sklearn machine-learning pandas mtg magic-the-gathering data-science
 cover:  "/assets/images/headers/machine_learning.jpg"
 thumbnail: "/assets/images/thumbnails/machine_learning.jpg"
 github: "https://github.com/4dcu-be/Machine-Learning-the-Gathering"

@@ -5,7 +5,7 @@ byline: "ABM using Mesa and Pandas"
 date:   2020-11-11 12:00:00
 author: Sebastian Proost
 categories: programming games
-tags:	python numpy gwent mesa abm agent_based_modeling pandas
+tags:	python numpy gwent mesa abm agent-based-modeling pandas data-science
 cover:  "/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/crowd_header.jpg"
 thumbnail: "/assets/images/thumbnails/crowd_header.png"
 github: "https://github.com/4dcu-be/GwentAgentBasedModeling"
