@@ -297,14 +297,14 @@
 <article class="post-content">
   <p>While Pandas and Seaborn offer very quick ways to calculate correlations and show them in a heatmap. Whether those
 correlations are statistically significant or not is omitted from those plots. Over the years I’ve collected bits and 
-pieces of code, like this one, that turn out to be quite useful. Though them being scattered across a few dozen projects
-isn’t very convenient when I actually need them. So I’ll start to add some documentation and put them here with add the tag 
-<a href="{site.baseurl}/tag/code_nugget">Code Nugget</a>, so they can easily be found by myself.</p>
+pieces of code, like this, that turn out to be quite useful. Though them being scattered across a few dozen projects
+isn’t very convenient when I actually need them. So I’ll start to add some documentation and put them here with the tag 
+<a href="{site.baseurl}/tag/code_nugget">Code Nugget</a>, so they can easily be found by myself and others.</p>
 
-<p>Normally you can use <code class="highlighter-rouge">corr_df = df.corr()</code> to get a correlation matrix for numerical columns in a pandas data frame.
+<p>Normally you can use <code class="highlighter-rouge">corr_df = df.corr()</code> to get a correlation matrix for numerical columns in a Pandas data frame.
 These in turn can be shown in a heatmap using <code class="highlighter-rouge">sns.clustermap(corr_df, cmap="vlag", vmin=-1, vmax=1)</code>, leveraging 
 SeaBorn’s <code class="highlighter-rouge">clustermap</code>. Easy, though the significance of those correlations isn’t reported. To get those you can’t
-rely on built-in functions, but a bit more effort is required.</p>
+rely on built-in functions and a bit more effort is required.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">spearmanr</span>
@@ -365,7 +365,7 @@ rely on built-in functions, but a bit more effort is required.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">"clustermap.png"</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>In this example we’ll load the iris dataset and convert it to a pandas data frame, next a new function <code class="highlighter-rouge">get_correlations</code>
+<p>In this example we’ll load the iris dataset and convert it to a Pandas data frame, next a new function <code class="highlighter-rouge">get_correlations</code>
 is defined that will return two new dataframes, one with the correlations (here spearman rank is used, see below) and 
 another one with the p-values for those correlations. Note we don’t store p-values for 
 combinations we don’t want to test (values on the diagonal) or don’t need to test (correlations are symmetrical, only
@@ -460,10 +460,10 @@ array, apply the function and transform it back to the original shape using <cod
   </tbody>
 </table>
 
-<p>Finally, the correlations need to be drawn and the <code class="highlighter-rouge">clustermap</code> function is great here. Though, we need a few
+<p>Finally, the correlations need to be drawn and the <code class="highlighter-rouge">clustermap</code> function is great here. Though we need a few
 extra lines of code to put an asterisk in the cells which are significant. While it isn’t exactly rocket science how
-this is done, it did require a fair bit of digging in the code for clustermap to find exactly how to hook this in.
-There are a ton of tweaks that could still be done here, but this will depend on your personal style and peference. The
+this is done, it did require a fair bit of digging in the <code class="highlighter-rouge">clustermap</code> code to find exactly how to hook this in.
+There are a ton of tweaks that could still be done here, but this will depend on your personal style and preference. The
 hard part is done! Check out the result below!</p>
 
 <p><a href="/assets/posts/2021-03-16-Code-Nugget-Correlation-Heatmaps/clustermap.png" class="lightgallery-link" data-sub-html="The output from the nugget of code, a correlation heatmap with stars indicating significant correlations">

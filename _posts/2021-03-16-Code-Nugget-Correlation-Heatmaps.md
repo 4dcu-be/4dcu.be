@@ -12,14 +12,14 @@ thumbnail: "/assets/images/thumbnails/python_code.jpg"
 
 While Pandas and Seaborn offer very quick ways to calculate correlations and show them in a heatmap. Whether those
 correlations are statistically significant or not is omitted from those plots. Over the years I've collected bits and 
-pieces of code, like this one, that turn out to be quite useful. Though them being scattered across a few dozen projects
-isn't very convenient when I actually need them. So I'll start to add some documentation and put them here with add the tag 
-[Code Nugget]({site.baseurl}/tag/code_nugget), so they can easily be found by myself.
+pieces of code, like this, that turn out to be quite useful. Though them being scattered across a few dozen projects
+isn't very convenient when I actually need them. So I'll start to add some documentation and put them here with the tag 
+[Code Nugget]({site.baseurl}/tag/code_nugget), so they can easily be found by myself and others.
 
-Normally you can use ```corr_df = df.corr()``` to get a correlation matrix for numerical columns in a pandas data frame.
+Normally you can use ```corr_df = df.corr()``` to get a correlation matrix for numerical columns in a Pandas data frame.
 These in turn can be shown in a heatmap using ```sns.clustermap(corr_df, cmap="vlag", vmin=-1, vmax=1)```, leveraging 
 SeaBorn's ```clustermap```. Easy, though the significance of those correlations isn't reported. To get those you can't
-rely on built-in functions, but a bit more effort is required.
+rely on built-in functions and a bit more effort is required.
 
 ```python
 from sklearn.datasets import load_iris
@@ -81,7 +81,7 @@ plt.tight_layout()
 plt.savefig("clustermap.png", dpi=200)
 ```
 
-In this example we'll load the iris dataset and convert it to a pandas data frame, next a new function ```get_correlations```
+In this example we'll load the iris dataset and convert it to a Pandas data frame, next a new function ```get_correlations```
 is defined that will return two new dataframes, one with the correlations (here spearman rank is used, see below) and 
 another one with the p-values for those correlations. Note we don't store p-values for 
 combinations we don't want to test (values on the diagonal) or don't need to test (correlations are symmetrical, only
@@ -107,10 +107,10 @@ array, apply the function and transform it back to the original shape using ```r
 |  petal width (cm) |      4.189447e-40 |         0.000334 |      8.156597e-70 |              NaN |
 
 
-Finally, the correlations need to be drawn and the ```clustermap``` function is great here. Though, we need a few
+Finally, the correlations need to be drawn and the ```clustermap``` function is great here. Though we need a few
 extra lines of code to put an asterisk in the cells which are significant. While it isn't exactly rocket science how
-this is done, it did require a fair bit of digging in the code for clustermap to find exactly how to hook this in.
-There are a ton of tweaks that could still be done here, but this will depend on your personal style and peference. The
+this is done, it did require a fair bit of digging in the ```clustermap``` code to find exactly how to hook this in.
+There are a ton of tweaks that could still be done here, but this will depend on your personal style and preference. The
 hard part is done! Check out the result below!
 
 
