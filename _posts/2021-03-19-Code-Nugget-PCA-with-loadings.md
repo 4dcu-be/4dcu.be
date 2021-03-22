@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "PCA Plots with Loadings"
+title:  "PCA Plots with Loadings in Python"
 byline: "using pandas, sklearn and seaborn"
 date:   2021-03-19 10:00:00
 author: Sebastian Proost

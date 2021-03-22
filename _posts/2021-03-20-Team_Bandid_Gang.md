@@ -18,7 +18,7 @@ shout out from the man, [Pawel Burza], himself.
 
 I'm happy to have been able to contribute to this by writing an article discussing the results from my post on the number
 of players in Gwent's Pro Ladder. For technical details check out the original post [here]. For the discussion about
-the past and current popularity of Gwent and whether it is dead, dying or very much alive, head over to my [article] 
+the past and current popularity of Gwent and whether it is dead, dying or very much alive, **head over to my [article]** 
 on [Team Bandit Gang]'s website.
 
 [Team Bandit Gang]: https://teambanditgang.com/
