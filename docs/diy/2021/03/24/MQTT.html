@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Adding Aqara Sensors to Home Assistant</title>
+  <meta name="description" content="Home Assistant is running great! It is time to add some more devices to my setup, and since all groundwork to add Zigbee devices using Zigbee2MQTT was done p...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Home Assistant is running great! It is time to add some more devices to my setup, and since all groundwork to add Zigbee devices using Zigbee2MQTT was done p..." />
+  <meta property="og:url" content="https://blog.4dcu.be/diy/2021/03/24/MQTT.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Adding Aqara Sensors to Home Assistant" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2021-03-25-MQTT/sensor_header.jpg" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Adding Aqara Sensors to Home Assistant">
+  <meta name="twitter:description" content="Home Assistant is running great! It is time to add some more devices to my setup, and since all groundwork to add Zigbee devices using Zigbee2MQTT was done p...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2021-03-25-MQTT/sensor_header.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/diy/2021/03/24/MQTT.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/diy/2021/03/24/MQTT.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2021-03-25-MQTT/sensor_header.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Adding Aqara Sensors to Home Assistant</h1>
+			
+      <p class="info"><em>to monitor temperature, humidity and air pressure</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted March 24, 2021 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/diy">Diy</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p><a href="https://www.home-assistant.io/">Home Assistant</a> is running great! It is time to add some more devices to my setup, and since all groundwork to add Zigbee
+devices using <a href="https://www.zigbee2mqtt.io">Zigbee2MQTT</a> was done previously (check out <a href="/diy/2020/09/20/MQTT.html">this post</a>) it makes sense to add more devices that
+support this protocol. For this post I picked up two <a href="https://www.aqara.com/us/temperature_humidity_sensor.html">Aqara sensors</a> which can measure temperature, humidity and air
+pressure in a small form factor.</p>
+
+<h2 id="pairing-new-zigbee-devices">Pairing new Zigbee devices</h2>
+
+<p>First we need to pair <a href="https://www.zigbee2mqtt.io">Zigbee2MQTT</a> to the new sensors, to do this we’ll have to log onto the Raspberry Pi and edit the 
+file <code class="highlighter-rouge">/opt/zigbee2mqtt/data/configuration.yaml</code>. Find the line that says <code class="highlighter-rouge">permit_join: false</code> and change this
+to <code class="highlighter-rouge">permit_join: true</code>. Then restart Zigbee2MQTT using the commands below.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>nano /opt/zigbee2mqtt/data/configuration.yaml
+<span class="nb">sudo </span>systemctl restart zigbee2mqtt
+</code></pre></div></div>
+
+<p>Now Zigbee2MQTT is ready to pair with new devices. To pair a sensor, press the button on top. Once you press 
+the button it will blink once indicating it is pairing and upon connecting it will blink twice. Now go back into
+<code class="highlighter-rouge">/opt/zigbee2mqtt/data/configuration.yaml</code> and give your device a name, this is done by adding a <code class="highlighter-rouge">friendly_name</code> tag
+to the device as shown below in my configuration file.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">...</span>
+<span class="na">devices</span><span class="pi">:</span>
+  <span class="s1">'</span><span class="s">0x00158d0003495e50'</span><span class="pi">:</span>
+    <span class="na">friendly_name</span><span class="pi">:</span> <span class="s">Aqara Cube</span>
+  <span class="s1">'</span><span class="s">0x00158d00068b6c2e'</span><span class="pi">:</span>
+    <span class="na">friendly_name</span><span class="pi">:</span> <span class="s">TMP Sensor Bedroom</span>
+  <span class="s1">'</span><span class="s">0x00158d0006a08eda'</span><span class="pi">:</span>
+    <span class="na">friendly_name</span><span class="pi">:</span> <span class="s">TMP Sensor Nursery</span>
+</code></pre></div></div>
+
+<p>While you could connect all devices in one go, I recommend adding them one by one and setting the name to something
+easy to remember. Once you have connected the last device set <code class="highlighter-rouge">permit_join</code> back to <code class="highlighter-rouge">false</code> and restart 
+Zigbee2MQTT one last time.</p>
+
+<h2 id="creating-an-interface-for-our-sensors">Creating an interface for our sensors</h2>
+
+<p>Once all new devices are paired you should see in Home Assistants Integrations page (in Configuration) that there are a few 
+additional MQTT devices found. Let’s quickly set up an interface to monitor them!</p>
+
+<p><a href="/assets/posts/2021-03-25-MQTT/MQTT_devices_found.png" class="lightgallery-link" data-sub-html="Integrations page shows that there are now 4 MQTT devices available, two from the previous post and two new ones">
+<img src="/assets/posts/2021-03-25-MQTT/MQTT_devices_found.png" alt="Integrations page shows that there are now 4 MQTT devices available, two from the previous post and two new ones" data-src="/assets/posts/2021-03-25-MQTT/MQTT_devices_found.png" loading="lazy" />
+</a></p>
+
+<p>At a later stage a smart socket could be used to turn the humidifier on automatically when necessary. For the time 
+being, I’m just interested in monitoring the temperature and humidity in our master bedroom and nursery. So in case it 
+feels cold, or dry I can go back and see what was going on the last 48 hours.</p>
+
+<p>So I’ve added a new page in Home Assistant and combined a glance card with two sensor cards into a nice overview for the
+two rooms. With recent versions of Home Assistant, these can be set up easily using the interface, or you can use the 
+yaml code below (don’t forget to change the sensors to match you system).</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">type</span><span class="pi">:</span> <span class="s">vertical-stack</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">Office/Nursery</span>
+<span class="na">cards</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">glance</span>
+    <span class="na">entities</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">entity</span><span class="pi">:</span> <span class="s">sensor.0x00158d0006a08eda_temperature</span>
+      <span class="pi">-</span> <span class="na">entity</span><span class="pi">:</span> <span class="s">sensor.0x00158d0006a08eda_humidity</span>
+      <span class="pi">-</span> <span class="na">entity</span><span class="pi">:</span> <span class="s">sensor.0x00158d0006a08eda_pressure</span>
+    <span class="na">show_name</span><span class="pi">:</span> <span class="no">false</span>
+  <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">horizontal-stack</span>
+    <span class="na">cards</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">sensor</span>
+        <span class="na">entity</span><span class="pi">:</span> <span class="s">sensor.0x00158d0006a08eda_temperature</span>
+        <span class="na">graph</span><span class="pi">:</span> <span class="s">line</span>
+        <span class="na">hours_to_show</span><span class="pi">:</span> <span class="m">48</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">Temperature</span>
+        <span class="na">detail</span><span class="pi">:</span> <span class="m">2</span>
+      <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">sensor</span>
+        <span class="na">entity</span><span class="pi">:</span> <span class="s">sensor.0x00158d0006a08eda_humidity</span>
+        <span class="na">graph</span><span class="pi">:</span> <span class="s">line</span>
+        <span class="na">hours_to_show</span><span class="pi">:</span> <span class="m">48</span>
+        <span class="na">detail</span><span class="pi">:</span> <span class="m">2</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">Humidity</span>
+</code></pre></div></div>
+
+<p><a href="/assets/posts/2021-03-25-MQTT/creating_card.png" class="lightgallery-link" data-sub-html="Simple but effective card added to Home assistant to monitor the new sensors">
+<img src="/assets/posts/2021-03-25-MQTT/creating_card.png" alt="Simple but effective card added to Home assistant to monitor the new sensors" data-src="/assets/posts/2021-03-25-MQTT/creating_card.png" loading="lazy" />
+</a></p>
+
+<h2 id="24-hour-test">24 Hour test</h2>
+
+<p>Given how inexpensive these sensors are I wanted to test how well they actually performed. So before installing them
+in their final location I put them side by side on my desk and pulled the data from Home Assistant after 24 hours. The
+temperature measurement is very consistent between both devices, usually it is off by less than 0.1 degrees. Comparing 
+temperatures in different rooms equipped with
+these sensors is perfectly possible. Humidity readings are also fairly consistent between the devices and vary about 
+1% between devices. Again good enough to directly compare readings of sensors
+in different rooms. The air pressure however is off by about 2-3 hPa on both devices and considerably lower than the 
+(outside) air pressure reported by the closes weather station. However, the correlation with the outside air pressure 
+was pretty good. So while the absolute value seems to be off, it is a consistent error and readings between devices
+can’t be directly compared, it is possible to calibrate and correct this. As I have no real use for barometric pressure readings,
+let along comparing them between rooms, this is a non-issue for me.</p>
+
+<p><a href="/assets/posts/2021-03-25-MQTT/24_h_test.png" class="lightgallery-link" data-sub-html="first 24 hours running two sensors side by side">
+<img src="/assets/posts/2021-03-25-MQTT/24_h_test.png" alt="first 24 hours running two sensors side by side" data-src="/assets/posts/2021-03-25-MQTT/24_h_test.png" loading="lazy" />
+</a></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Since creating the <a href="https://www.zigbee2mqtt.io">Zigbee2MQTT</a> stick was the hard part and this was done in the <a href="/diy/2020/09/20/MQTT.html">previous post</a> connecting an 
+Aqara cube to Home Assistant, adding two more sensors was a breeze. Apart from the lack of an interface to pair new
+devices, which required dropping into the console and type a few commands, it is pretty easy, and it is tempting to
+start adding additional devices …</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/home-assistant">home-assistant</a>,&nbsp;<a href="/tag/mqtt">MQTT</a>,&nbsp;<a href="/tag/zigbee">Zigbee</a>,&nbsp;<a href="/tag/aqara">Aqara</a>,&nbsp;<a href="/tag/yaml">yaml</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Adding+Aqara+Sensors+to+Home+Assistant&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2021%2F03%2F24%2FMQTT.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Adding+Aqara+Sensors+to+Home+Assistant&u=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2021%2F03%2F24%2FMQTT.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2021%2F03%2F24%2FMQTT.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/programming/games/2021/03/20/Team_Bandid_Gang.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Gwent Popularity Article on TBG!</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '4dcube';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
+			<p class="text">Last update: March 26, 2021</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/diy/2021/03/24/MQTT.html',
+    'title': 'Adding Aqara Sensors to Home Assistant'
+  });
+</script>
+
+
+  </body>
+
+</html>

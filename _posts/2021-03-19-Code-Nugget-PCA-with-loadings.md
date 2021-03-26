@@ -33,6 +33,7 @@ iris_df["species"] = [iris_obj.target_names[s] for s in iris_obj.target]
 iris_df.head()
 ```
 
+{:.large-table}
 |   | sepal length (cm) | sepal width (cm) | petal length (cm) | petal width (cm) | species |
 |--:|------------------:|-----------------:|------------------:|-----------------:|--------:|
 | 0 |               5.1 |              3.5 |               1.4 |              0.2 |  setosa |

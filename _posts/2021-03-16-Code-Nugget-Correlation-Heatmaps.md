@@ -87,6 +87,7 @@ another one with the p-values for those correlations. Note we don't store p-valu
 combinations we don't want to test (values on the diagonal) or don't need to test (correlations are symmetrical, only
 values below the diagonal are stored). Including these would make corrections for multiple testing unnecessarily harsh.
 
+{:.large-table}
 |                   | sepal length (cm) | sepal width (cm) | petal length (cm) | petal width (cm) |
 |------------------:|------------------:|-----------------:|------------------:|-----------------:|
 | sepal length (cm) |          1.000000 |        -0.166778 |          0.881898 |         0.834289 |
@@ -99,6 +100,7 @@ While we have p-values for all those values, shown below, these are not correcte
 (default cutoff <0.05), but the function requires a flat list of values. So we convert the matrix to a one-dimensional 
 array, apply the function and transform it back to the original shape using ```reshape```.
 
+{:.large-table}
 |                   | sepal length (cm) | sepal width (cm) | petal length (cm) | petal width (cm) |
 |------------------:|------------------:|-----------------:|------------------:|-----------------:|
 | sepal length (cm) |               NaN |              NaN |               NaN |              NaN |

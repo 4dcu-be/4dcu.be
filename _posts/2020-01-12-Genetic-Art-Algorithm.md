@@ -28,6 +28,9 @@ an algorithm that evolves 150 random triangles into a famous piece of art. The w
 
 The code for this post can be found on GitHub [here](https://github.com/4dcu-be/Genetic-Art-Algorithm)
 
+**Update 25/03/20201**: There was a change in the Evol API in version 0.5.2 where the function ```apply()``` has been 
+renamed to ```callback()```, the code here and in the repository has been updated.
+
 ## Genetic algorithms
 
 Before we start, a quick word about genetic algorithms. There is a rather lengthy description on 
@@ -65,6 +68,7 @@ replace it with a totally random one. This is all taken care of by the `.mutate`
 specify the strenght of a mutation (how strong the change will be) and the weights are used to specify which types of 
 mutation will occur more often than others.
 
+{:.large-code}
 ```python
 import random
 
@@ -130,7 +134,7 @@ The painting contains a list of Triangles, along with the necessary functions to
 [Imagecompare] library). Furthermore, there is a function to mate two paintings, this
 is inspired by **crossing over** events in biology where two chromosomes exchange parts to create two new chromosomes.
 
-
+{:.large-code}
 ```python
 from triangle import Triangle
 from random import shuffle, randint
@@ -242,6 +246,7 @@ find a partner to mate with and define how we wish to evolve the population. We'
 fitness scores (so we can see if there is still progress), that stores the image of the best individual and that stores
 the population every fifty generations (so we don't have to start over again if something goes wrong).
 
+{:.large-code}
 ```python
 from PIL import Image
 from evol import Evolution, Population
@@ -350,9 +355,9 @@ if __name__ == "__main__":
                  .breed(parent_picker=pick_best_and_random, combiner=mate, population_size=population_size)
                  .mutate(mutate_function=mutate_painting, rate=0.05, swap=0.25)
                  .evaluate(lazy=False)
-                 .apply(print_summary,
-                        img_template=image_template,
-                        checkpoint_path=checkpoint_path))
+                 .callback(print_summary,
+                           img_template=image_template,
+                           checkpoint_path=checkpoint_path))
 
     pop = pop.evolve(evolution, n=5000)
 ``` 

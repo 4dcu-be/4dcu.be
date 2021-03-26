@@ -259,6 +259,8 @@
 
 	
 
+	
+
 <li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
 
       </ul>
@@ -312,6 +314,9 @@ an algorithm that evolves 150 random triangles into a famous piece of art. The w
 
 <p>The code for this post can be found on GitHub <a href="https://github.com/4dcu-be/Genetic-Art-Algorithm">here</a></p>
 
+<p><strong>Update 25/03/20201</strong>: There was a change in the Evol API in version 0.5.2 where the function <code class="highlighter-rouge">apply()</code> has been 
+renamed to <code class="highlighter-rouge">callback()</code>, the code here and in the repository has been updated.</p>
+
 <h2 id="genetic-algorithms">Genetic algorithms</h2>
 
 <p>Before we start, a quick word about genetic algorithms. There is a rather lengthy description on 
@@ -350,7 +355,7 @@ replace it with a totally random one. This is all taken care of by the <code cla
 specify the strenght of a mutation (how strong the change will be) and the weights are used to specify which types of 
 mutation will occur more often than others.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">random</span>
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">random</span>
 
 
 <span class="k">class</span> <span class="nc">Triangle</span><span class="p">:</span>
@@ -413,7 +418,7 @@ mutation will occur more often than others.</p>
 <a href="https://github.com/datenhahn/imgcompare">Imagecompare</a> library). Furthermore, there is a function to mate two paintings, this
 is inspired by <strong>crossing over</strong> events in biology where two chromosomes exchange parts to create two new chromosomes.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">triangle</span> <span class="kn">import</span> <span class="n">Triangle</span>
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">triangle</span> <span class="kn">import</span> <span class="n">Triangle</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">shuffle</span><span class="p">,</span> <span class="n">randint</span>
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span>
 <span class="kn">from</span> <span class="nn">imgcompare</span> <span class="kn">import</span> <span class="n">image_diff</span>
@@ -523,7 +528,7 @@ find a partner to mate with and define how we wish to evolve the population. We�
 fitness scores (so we can see if there is still progress), that stores the image of the best individual and that stores
 the population every fifty generations (so we don’t have to start over again if something goes wrong).</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 <span class="kn">from</span> <span class="nn">evol</span> <span class="kn">import</span> <span class="n">Evolution</span><span class="p">,</span> <span class="n">Population</span>
 
 <span class="kn">import</span> <span class="nn">random</span>
@@ -630,9 +635,9 @@ the population every fifty generations (so we don’t have to start over again i
                  <span class="o">.</span><span class="n">breed</span><span class="p">(</span><span class="n">parent_picker</span><span class="o">=</span><span class="n">pick_best_and_random</span><span class="p">,</span> <span class="n">combiner</span><span class="o">=</span><span class="n">mate</span><span class="p">,</span> <span class="n">population_size</span><span class="o">=</span><span class="n">population_size</span><span class="p">)</span>
                  <span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">mutate_function</span><span class="o">=</span><span class="n">mutate_painting</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">swap</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
                  <span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">lazy</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-                 <span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="n">print_summary</span><span class="p">,</span>
-                        <span class="n">img_template</span><span class="o">=</span><span class="n">image_template</span><span class="p">,</span>
-                        <span class="n">checkpoint_path</span><span class="o">=</span><span class="n">checkpoint_path</span><span class="p">))</span>
+                 <span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">print_summary</span><span class="p">,</span>
+                           <span class="n">img_template</span><span class="o">=</span><span class="n">image_template</span><span class="p">,</span>
+                           <span class="n">checkpoint_path</span><span class="o">=</span><span class="n">checkpoint_path</span><span class="p">))</span>
 
     <span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="n">evolution</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
 </code></pre></div></div>
@@ -1054,6 +1059,8 @@ better) ideas emerged. These I’ll work out and I will cover them in a later po
 
 	
 
+	
+
 <li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
 
       </ul>
@@ -1109,7 +1116,7 @@ better) ideas emerged. These I’ll work out and I will cover them in a later po
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: March 22, 2021</p>
+			<p class="text">Last update: March 26, 2021</p>
     </div>
 
   </div>
