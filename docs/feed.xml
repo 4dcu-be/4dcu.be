@@ -5,9 +5,31 @@
     <description>A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</description>
     <link>https://blog.4dcu.be/</link>
     <atom:link href="https://blog.4dcu.be/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 27 Mar 2021 21:03:09 +0100</pubDate>
-    <lastBuildDate>Sat, 27 Mar 2021 21:03:09 +0100</lastBuildDate>
+    <pubDate>Mon, 05 Apr 2021 22:46:08 +0200</pubDate>
+    <lastBuildDate>Mon, 05 Apr 2021 22:46:08 +0200</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>A Python powered MacroPad/StreamDeck</title>
+        <description>&lt;p&gt;I decided to put left-over parts from my &lt;a href=&quot;/diy/2020/05/01/Mechanical-Keyboard.html&quot;&gt;mechanical keyboard&lt;/a&gt; and a Raspberry Pi Pico to good use and build a MacroPad. This is a small keypad, where each...</description>
+        <pubDate>Mon, 05 Apr 2021 12:00:00 +0200</pubDate>
+        <link>https://blog.4dcu.be/diy/2021/04/05/Macropad.html</link>
+        <guid isPermaLink="true">https://blog.4dcu.be/diy/2021/04/05/Macropad.html</guid>
+        
+        <category>raspberry-pi</category>
+        
+        <category>python</category>
+        
+        <category>mechanical-keyboard</category>
+        
+        <category>soldering</category>
+        
+        <category>electronics</category>
+        
+        
+        <category>diy</category>
+        
+      </item>
     
       <item>
         <title>Adding Aqara Sensors to Home Assistant</title>
@@ -198,26 +220,6 @@
         
         
         <category>programming</category>
-        
-      </item>
-    
-      <item>
-        <title>One Year 4DCu.be</title>
-        <description>&lt;p&gt;Yes! Twenty-five posts done in about a year. So, mission to do one post every two weeks on average, accomplished. In this post I want to summarize this journey, what...</description>
-        <pubDate>Sun, 03 Jan 2021 14:00:00 +0100</pubDate>
-        <link>https://blog.4dcu.be/programming/games/diy/2021/01/03/One-Year.html</link>
-        <guid isPermaLink="true">https://blog.4dcu.be/programming/games/diy/2021/01/03/One-Year.html</guid>
-        
-        <category>intro</category>
-        
-        <category>review</category>
-        
-        
-        <category>programming</category>
-        
-        <category>games</category>
-        
-        <category>diy</category>
         
       </item>
     
