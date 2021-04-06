@@ -324,7 +324,7 @@ code is an acceptable trade-off.</p>
 
 <h3 id="grabbing-data-from-google-scholar">Grabbing Data from Google Scholar</h3>
 
-<p>All functions to grab and parse data from websites is contained in <code class="highlighter-rouge">extract.py</code>, my <a href="https://scholar.google.com/citations?user=4niBmJUAAAAJ&amp;hl=en">Google Scholar</a> page is the
+<p>All functions to grab and parse data from websites is contained in <code class="language-plaintext highlighter-rouge">extract.py</code>, my <a href="https://scholar.google.com/citations?user=4niBmJUAAAAJ&amp;hl=en">Google Scholar</a> page is the
 easiest to parse so let’s start there.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">ssl</span>
@@ -334,11 +334,11 @@ easiest to parse so let’s start there.</p>
 
 
 <span class="k">def</span> <span class="nf">get_google_scholar</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
-    <span class="n">ssl_context</span> <span class="o">=</span> <span class="n">ssl</span><span class="o">.</span><span class="n">_create_unverified_context</span><span class="p">()</span>
-    <span class="k">with</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">ssl_context</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
-        <span class="n">html</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">ssl_context</span> <span class="o">=</span> <span class="n">ssl</span><span class="p">.</span><span class="n">_create_unverified_context</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">ssl_context</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
 
-    <span class="n">hits</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">r'&lt;td class="gsc_rsb_std"&gt;(\d+)&lt;/td&gt;'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">html</span><span class="p">))</span>
+    <span class="n">hits</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s">'&lt;td class="gsc_rsb_std"&gt;(\d+)&lt;/td&gt;'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">html</span><span class="p">))</span>
     <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">'citations'</span><span class="p">,</span> <span class="s">'citations_recent'</span><span class="p">,</span> <span class="s">'h_index'</span><span class="p">,</span> <span class="s">'h_index_recent'</span><span class="p">,</span> <span class="s">'i10_index'</span><span class="p">,</span> <span class="s">'i10_index_recent'</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">hits</span><span class="p">))</span>
@@ -360,16 +360,16 @@ not the prettiest code, it get’s the job done. It is just a matter of finding 
 of information is located and writing up a regular expression to parse it out.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_gwent_data</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
-    <span class="n">ssl_context</span> <span class="o">=</span> <span class="n">ssl</span><span class="o">.</span><span class="n">_create_unverified_context</span><span class="p">()</span>
-    <span class="k">with</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">ssl_context</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
-        <span class="n">html</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">ssl_context</span> <span class="o">=</span> <span class="n">ssl</span><span class="p">.</span><span class="n">_create_unverified_context</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">ssl_context</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
 
     <span class="n">output</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s">'player'</span><span class="p">:</span>   <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">r'&lt;strong class="l-player-details__name"&gt;\\n\s+(.*?)&lt;/strong&gt;'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">html</span><span class="p">))),</span>
-        <span class="s">'mmr'</span><span class="p">:</span>      <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">r'&lt;div class="l-player-details__table-mmr"&gt;.*?&lt;strong&gt;(.*?)&lt;/strong&gt;&lt;/div&gt;'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">html</span><span class="p">)))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">','</span><span class="p">,</span><span class="s">''</span><span class="p">),</span>
-        <span class="s">'position'</span><span class="p">:</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">r'&lt;div class="l-player-details__table-position"&gt;.*?&lt;strong&gt;(.*?)&lt;/strong&gt;&lt;/div&gt;'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">html</span><span class="p">)))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">','</span><span class="p">,</span><span class="s">''</span><span class="p">),</span>
-        <span class="s">'rank'</span><span class="p">:</span>     <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">r'&lt;span class="l-player-details__rank"&gt;&lt;strong&gt;(.*?)&lt;/strong&gt;&lt;/span&gt;'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">html</span><span class="p">))),</span>
-        <span class="s">'ladder'</span><span class="p">:</span>   <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">r'&lt;div class="l-player-details__table-ladder" &gt;&lt;span&gt;(.*?)&lt;/span&gt;&lt;/div&gt;'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">html</span><span class="p">))),</span>
+        <span class="s">'player'</span><span class="p">:</span>   <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s">'&lt;strong class="l-player-details__name"&gt;\\n\s+(.*?)&lt;/strong&gt;'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">html</span><span class="p">))),</span>
+        <span class="s">'mmr'</span><span class="p">:</span>      <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s">'&lt;div class="l-player-details__table-mmr"&gt;.*?&lt;strong&gt;(.*?)&lt;/strong&gt;&lt;/div&gt;'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">html</span><span class="p">))).</span><span class="n">replace</span><span class="p">(</span><span class="s">','</span><span class="p">,</span><span class="s">''</span><span class="p">),</span>
+        <span class="s">'position'</span><span class="p">:</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s">'&lt;div class="l-player-details__table-position"&gt;.*?&lt;strong&gt;(.*?)&lt;/strong&gt;&lt;/div&gt;'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">html</span><span class="p">))).</span><span class="n">replace</span><span class="p">(</span><span class="s">','</span><span class="p">,</span><span class="s">''</span><span class="p">),</span>
+        <span class="s">'rank'</span><span class="p">:</span>     <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s">'&lt;span class="l-player-details__rank"&gt;&lt;strong&gt;(.*?)&lt;/strong&gt;&lt;/span&gt;'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">html</span><span class="p">))),</span>
+        <span class="s">'ladder'</span><span class="p">:</span>   <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s">'&lt;div class="l-player-details__table-ladder" &gt;&lt;span&gt;(.*?)&lt;/span&gt;&lt;/div&gt;'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">html</span><span class="p">))),</span>
     <span class="p">}</span>
 
     <span class="k">return</span> <span class="n">output</span>
@@ -390,20 +390,20 @@ we need to get that endpoint additionally to find the name of the episode and th
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_tvmaze_data</span><span class="p">(</span><span class="n">ids</span><span class="p">):</span>
     <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="n">ssl_context</span> <span class="o">=</span> <span class="n">ssl</span><span class="o">.</span><span class="n">_create_unverified_context</span><span class="p">()</span>
+    <span class="n">ssl_context</span> <span class="o">=</span> <span class="n">ssl</span><span class="p">.</span><span class="n">_create_unverified_context</span><span class="p">()</span>
     <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">ids</span><span class="p">:</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="s">'http://api.tvmaze.com/shows/</span><span class="si">%</span><span class="s">d'</span> <span class="o">%</span> <span class="nb">id</span>
-        <span class="k">with</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">ssl_context</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-            <span class="n">links</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'_links'</span><span class="p">,</span> <span class="p">{})</span>
-            <span class="k">if</span> <span class="s">'nextepisode'</span> <span class="ow">in</span> <span class="n">links</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="k">with</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">links</span><span class="p">[</span><span class="s">'nextepisode'</span><span class="p">][</span><span class="s">'href'</span><span class="p">],</span> <span class="n">context</span><span class="o">=</span><span class="n">ssl_context</span><span class="p">)</span> <span class="k">as</span> <span class="n">episode_response</span><span class="p">:</span>
-                    <span class="n">episode_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">episode_response</span><span class="p">)</span>
-                    <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s">'http://api.tvmaze.com/shows/%d'</span> <span class="o">%</span> <span class="nb">id</span>
+        <span class="k">with</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">ssl_context</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+            <span class="n">links</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'_links'</span><span class="p">,</span> <span class="p">{})</span>
+            <span class="k">if</span> <span class="s">'nextepisode'</span> <span class="ow">in</span> <span class="n">links</span><span class="p">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">with</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">links</span><span class="p">[</span><span class="s">'nextepisode'</span><span class="p">][</span><span class="s">'href'</span><span class="p">],</span> <span class="n">context</span><span class="o">=</span><span class="n">ssl_context</span><span class="p">)</span> <span class="k">as</span> <span class="n">episode_response</span><span class="p">:</span>
+                    <span class="n">episode_data</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">episode_response</span><span class="p">)</span>
+                    <span class="n">output</span><span class="p">.</span><span class="n">append</span><span class="p">(</span>
                         <span class="p">{</span>
-                            <span class="s">'name'</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'name'</span><span class="p">,</span> <span class="s">'error'</span><span class="p">),</span>
-                            <span class="s">'episode_name'</span><span class="p">:</span> <span class="n">episode_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'name'</span><span class="p">,</span> <span class="s">'error'</span><span class="p">),</span>
-                            <span class="s">'airdate'</span><span class="p">:</span> <span class="n">episode_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'airdate'</span><span class="p">,</span> <span class="s">'error'</span><span class="p">),</span>
+                            <span class="s">'name'</span><span class="p">:</span> <span class="n">data</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'name'</span><span class="p">,</span> <span class="s">'error'</span><span class="p">),</span>
+                            <span class="s">'episode_name'</span><span class="p">:</span> <span class="n">episode_data</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'name'</span><span class="p">,</span> <span class="s">'error'</span><span class="p">),</span>
+                            <span class="s">'airdate'</span><span class="p">:</span> <span class="n">episode_data</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'airdate'</span><span class="p">,</span> <span class="s">'error'</span><span class="p">),</span>
                         <span class="p">}</span>
                     <span class="p">)</span>
 
@@ -423,23 +423,23 @@ can also leverage the cache, if we fail to get up to fetch data from the interne
 age and show that. It is better to show (slightly) out of date information than no information at all.</p>
 
 <p>The decorator shown below elegantly combines both of these, note there is some boiler plate code for checking the last
-modification to a file. This part of the code is included in <code class="highlighter-rouge">./dashboard/bin/cache.py</code></p>
+modification to a file. This part of the code is included in <code class="language-plaintext highlighter-rouge">./dashboard/bin/cache.py</code></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
 
-<span class="n">cache_dir</span> <span class="o">=</span> <span class="s">'/mnt/base-us/extensions/dashboard/cache/'</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s">'nt'</span> <span class="k">else</span> <span class="s">'../cache'</span>
+<span class="n">cache_dir</span> <span class="o">=</span> <span class="s">'/mnt/base-us/extensions/dashboard/cache/'</span> <span class="k">if</span> <span class="n">os</span><span class="p">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s">'nt'</span> <span class="k">else</span> <span class="s">'../cache'</span>
 
 
 <span class="k">def</span> <span class="nf">hours_since_last_modification</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
     <span class="s">""""
     Returns the number of hours since a file was modified. -1 indicates the file doesn't exists
     """</span>
-    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
-        <span class="n">last_modification</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="o">.</span><span class="n">st_mtime</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span> <span class="o">-</span> <span class="n">last_modification</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3600</span>
+    <span class="k">if</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+        <span class="n">last_modification</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">stat</span><span class="p">(</span><span class="n">file_path</span><span class="p">).</span><span class="n">st_mtime</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">timestamp</span><span class="p">()</span> <span class="o">-</span> <span class="n">last_modification</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3600</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
 
@@ -462,16 +462,16 @@ modification to a file. This part of the code is included in <code class="highli
             <span class="n">hslm</span> <span class="o">=</span> <span class="n">hours_since_last_modification</span><span class="p">(</span><span class="n">cache_file</span><span class="p">)</span>
             <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">hslm</span> <span class="o">&lt;</span> <span class="n">cache_time</span><span class="p">:</span>
                 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">cache_file</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
-                    <span class="n">output</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
+                    <span class="n">output</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
                 <span class="k">return</span> <span class="n">output</span>
 
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">output</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
                 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">cache_file</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
-                    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">fout</span><span class="p">)</span>
+                    <span class="n">json</span><span class="p">.</span><span class="n">dump</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">fout</span><span class="p">)</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">cache_file</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
-                    <span class="n">output</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
+                    <span class="n">output</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">output</span>
 
         <span class="k">return</span> <span class="n">f_cache</span>
@@ -497,12 +497,12 @@ filename to write to (potentially this could be done automatically based on the 
 
 <h2 id="time-to-transform-and-load">Time to Transform and Load</h2>
 
-<p>So now we have to finish <code class="highlighter-rouge">run.py</code> which will be called by the shell script every hour, run the extract functions,
+<p>So now we have to finish <code class="language-plaintext highlighter-rouge">run.py</code> which will be called by the shell script every hour, run the extract functions,
 combine the output and visualize it. An easy way to create a dashboard is using an SVG file that looks exactly the way 
 you like, but with a token in spots 
 where you want the dynamic text and values to appear. I’ve used this trick before and this is also what was used in the
 weather dashboard I’ve been using as a reference for this project. This is very easy code-wise, just see the updated
-<code class="highlighter-rouge">run.py</code> below. All extracted data is combined in a dict, <code class="highlighter-rouge">./svg/template.svg</code> is loaded as a text file and all the
+<code class="language-plaintext highlighter-rouge">run.py</code> below. All extracted data is combined in a dict, <code class="language-plaintext highlighter-rouge">./svg/template.svg</code> is loaded as a text file and all the
 tokens are replaced by the values to display. Finally, the output is written to disk. There is one line of code that
 will check if the operating system is windows and adjust the path accordingly. This is useful for debugging as I can
 execute the code on my main machine without issues.</p>
@@ -524,27 +524,27 @@ execute the code on my main machine without issues.</p>
 </span>              <span class="mi">17128</span>     <span class="c1"># This Is Us
 </span>              <span class="p">]</span>
 
-<span class="n">svg_path</span> <span class="o">=</span> <span class="s">'/mnt/base-us/extensions/dashboard/svg/'</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s">'nt'</span> <span class="k">else</span> <span class="s">'../svg'</span>
+<span class="n">svg_path</span> <span class="o">=</span> <span class="s">'/mnt/base-us/extensions/dashboard/svg/'</span> <span class="k">if</span> <span class="n">os</span><span class="p">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s">'nt'</span> <span class="k">else</span> <span class="s">'../svg'</span>
 
 
 <span class="k">def</span> <span class="nf">create_svg</span><span class="p">(</span><span class="n">svg_data</span><span class="p">,</span> <span class="n">svg_template</span><span class="p">,</span> <span class="n">svg_output</span><span class="p">):</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">svg_template</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
-        <span class="n">template</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">fin</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
 
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">svg_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">template</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">svg_data</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">template</span> <span class="o">=</span> <span class="n">template</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">svg_output</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
-            <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+            <span class="n">fout</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">fmt_date</span><span class="p">(</span><span class="n">date_input</span><span class="p">):</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date_input</span><span class="p">,</span> <span class="s">'</span><span class="si">%</span><span class="s">Y-</span><span class="si">%</span><span class="s">m-</span><span class="si">%</span><span class="s">d'</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">d</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">'</span><span class="si">%</span><span class="s">d/</span><span class="si">%</span><span class="s">m/</span><span class="si">%</span><span class="s">Y'</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date_input</span><span class="p">,</span> <span class="s">'%Y-%m-%d'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">d</span><span class="p">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">'%d/%m/%Y'</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">is_today</span><span class="p">(</span><span class="n">date_input</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s">"</span><span class="si">%</span><span class="s">Y-</span><span class="si">%</span><span class="s">m-</span><span class="si">%</span><span class="s">d"</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">date_input</span> <span class="o">==</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">is_today</span><span class="p">(</span><span class="n">date_input</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s">"%Y-%m-%d"</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">date_input</span> <span class="o">==</span> <span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">strftime</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
@@ -554,23 +554,23 @@ execute the code on my main machine without issues.</p>
     <span class="n">tvmaze_data</span> <span class="o">=</span> <span class="n">get_tvmaze_data</span><span class="p">(</span><span class="n">tvmaze_ids</span><span class="p">)</span>
 
     <span class="c1"># Combine into dict
-</span>    <span class="n">svg_data</span> <span class="o">=</span> <span class="p">{</span><span class="s">"GS_HINDEX"</span><span class="p">:</span> <span class="n">gs_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"h_index"</span><span class="p">),</span>
-                <span class="s">"GS_CITATIONS"</span><span class="p">:</span> <span class="n">gs_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"citations"</span><span class="p">),</span>
-                <span class="s">"GWENT_LADDER_RANK"</span><span class="p">:</span> <span class="n">gwent_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"ladder"</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="s">" (Rank "</span> <span class="o">+</span> <span class="n">gwent_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"rank"</span><span class="p">)</span> <span class="o">+</span> <span class="s">")"</span> <span class="k">if</span> <span class="s">"Pro"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">gwent_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"ladder"</span><span class="p">)</span> <span class="k">else</span> <span class="s">""</span><span class="p">),</span>
-                <span class="s">"GWENT_MMR"</span><span class="p">:</span> <span class="n">gwent_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"mmr"</span><span class="p">),</span>
-                <span class="s">"GWENT_POSITION"</span><span class="p">:</span> <span class="n">gwent_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"position"</span><span class="p">),</span>
-                <span class="s">"LASTUPDATE"</span><span class="p">:</span> <span class="s">"Last Update: "</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">"</span><span class="si">%</span><span class="s">d/</span><span class="si">%</span><span class="s">m/</span><span class="si">%</span><span class="s">Y - </span><span class="si">%</span><span class="s">H:</span><span class="si">%</span><span class="s">M:</span><span class="si">%</span><span class="s">S"</span><span class="p">)}</span>
+</span>    <span class="n">svg_data</span> <span class="o">=</span> <span class="p">{</span><span class="s">"GS_HINDEX"</span><span class="p">:</span> <span class="n">gs_data</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"h_index"</span><span class="p">),</span>
+                <span class="s">"GS_CITATIONS"</span><span class="p">:</span> <span class="n">gs_data</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"citations"</span><span class="p">),</span>
+                <span class="s">"GWENT_LADDER_RANK"</span><span class="p">:</span> <span class="n">gwent_data</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"ladder"</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="s">" (Rank "</span> <span class="o">+</span> <span class="n">gwent_data</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"rank"</span><span class="p">)</span> <span class="o">+</span> <span class="s">")"</span> <span class="k">if</span> <span class="s">"Pro"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">gwent_data</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"ladder"</span><span class="p">)</span> <span class="k">else</span> <span class="s">""</span><span class="p">),</span>
+                <span class="s">"GWENT_MMR"</span><span class="p">:</span> <span class="n">gwent_data</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"mmr"</span><span class="p">),</span>
+                <span class="s">"GWENT_POSITION"</span><span class="p">:</span> <span class="n">gwent_data</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"position"</span><span class="p">),</span>
+                <span class="s">"LASTUPDATE"</span><span class="p">:</span> <span class="s">"Last Update: "</span> <span class="o">+</span> <span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">strftime</span><span class="p">(</span><span class="s">"%d/%m/%Y - %H:%M:%S"</span><span class="p">)}</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">tvmaze_data</span><span class="p">):</span>
-            <span class="n">svg_data</span><span class="p">[</span><span class="s">"TV_SHOW_</span><span class="si">%</span><span class="s">d"</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">tvmaze_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s">"name"</span><span class="p">]</span>
-            <span class="n">svg_data</span><span class="p">[</span><span class="s">"TV_EPISODE_</span><span class="si">%</span><span class="s">d"</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">tvmaze_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s">"episode_name"</span><span class="p">]</span>
-            <span class="n">svg_data</span><span class="p">[</span><span class="s">"TV_AIRDATE_</span><span class="si">%</span><span class="s">d"</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="s">"TODAY"</span> <span class="k">if</span> <span class="n">is_today</span><span class="p">(</span><span class="n">tvmaze_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s">"airdate"</span><span class="p">])</span> \
+            <span class="n">svg_data</span><span class="p">[</span><span class="s">"TV_SHOW_%d"</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">tvmaze_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s">"name"</span><span class="p">]</span>
+            <span class="n">svg_data</span><span class="p">[</span><span class="s">"TV_EPISODE_%d"</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">tvmaze_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s">"episode_name"</span><span class="p">]</span>
+            <span class="n">svg_data</span><span class="p">[</span><span class="s">"TV_AIRDATE_%d"</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="s">"TODAY"</span> <span class="k">if</span> <span class="n">is_today</span><span class="p">(</span><span class="n">tvmaze_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s">"airdate"</span><span class="p">])</span> \
                 <span class="k">else</span> <span class="n">fmt_date</span><span class="p">(</span><span class="n">tvmaze_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s">"airdate"</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">svg_data</span><span class="p">[</span><span class="s">"TV_SHOW_</span><span class="si">%</span><span class="s">d"</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="s">"No upcoming episodes found"</span>
-            <span class="n">svg_data</span><span class="p">[</span><span class="s">"TV_EPISODE_</span><span class="si">%</span><span class="s">d"</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="s">""</span>
-            <span class="n">svg_data</span><span class="p">[</span><span class="s">"TV_AIRDATE_</span><span class="si">%</span><span class="s">d"</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="s">""</span>
+            <span class="n">svg_data</span><span class="p">[</span><span class="s">"TV_SHOW_%d"</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="s">"No upcoming episodes found"</span>
+            <span class="n">svg_data</span><span class="p">[</span><span class="s">"TV_EPISODE_%d"</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="s">""</span>
+            <span class="n">svg_data</span><span class="p">[</span><span class="s">"TV_AIRDATE_%d"</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="s">""</span>
 
     <span class="c1"># Load Data into SVG
 </span>    <span class="n">create_svg</span><span class="p">(</span><span class="n">svg_data</span><span class="p">,</span> <span class="n">join</span><span class="p">(</span><span class="n">svg_path</span><span class="p">,</span> <span class="s">"template.svg"</span><span class="p">),</span> <span class="n">join</span><span class="p">(</span><span class="n">svg_path</span><span class="p">,</span> <span class="s">"tmp.svg"</span><span class="p">))</span>
@@ -579,22 +579,22 @@ execute the code on my main machine without issues.</p>
 
 <h2 id="revising-startsh">Revising start.sh</h2>
 
-<p>Now <code class="highlighter-rouge">run.py</code> will create a new SVG file each time it is called. However we need to revise <code class="highlighter-rouge">start.sh</code> to convert this
+<p>Now <code class="language-plaintext highlighter-rouge">run.py</code> will create a new SVG file each time it is called. However we need to revise <code class="language-plaintext highlighter-rouge">start.sh</code> to convert this
 SVG into a PNG image and show that image on the screen. The Weather Dashboard uses a combination of <a href="https://en.wikipedia.org/wiki/Librsvg">rsvg-convert</a> and
-pngcruch to create a png file compatible with the Kindle’s own <code class="highlighter-rouge">eips</code> command to put it on the screen. Here, the
-SVG is still converted using the same tool, but <code class="highlighter-rouge">fbink</code> is used, which can put any png image on the screen correctly,
+pngcruch to create a png file compatible with the Kindle’s own <code class="language-plaintext highlighter-rouge">eips</code> command to put it on the screen. Here, the
+SVG is still converted using the same tool, but <code class="language-plaintext highlighter-rouge">fbink</code> is used, which can put any png image on the screen correctly,
 without the need for an additional conversion using pngcruch. Furthermore, the temporary files will be cleaned up in this
 script.</p>
 
-<p>One big issue is that the Kindle mounts most partitions with the <code class="highlighter-rouge">noexec</code> flag, meaning you can’t execute code and
+<p>One big issue is that the Kindle mounts most partitions with the <code class="language-plaintext highlighter-rouge">noexec</code> flag, meaning you can’t execute code and
 scripts from there. For scripts that isn’t much of an issue as you can overcome this by starting them through the 
-interpreter; <code class="highlighter-rouge">/bin/sh &lt;scriptname&gt;</code> and <code class="highlighter-rouge">python3 &lt;scriptname&gt;</code> can be used for shell and python scripts respectively. To
+interpreter; <code class="language-plaintext highlighter-rouge">/bin/sh &lt;scriptname&gt;</code> and <code class="language-plaintext highlighter-rouge">python3 &lt;scriptname&gt;</code> can be used for shell and python scripts respectively. To
 run rsvg-convert there is a bigger issue as this is a binary file. The workaround here is to copy the executable code
-and libraries to a share where code can be executed, here <code class="highlighter-rouge">/var/tmp</code> is used, add the path to the libraries to the 
-environmental variable <code class="highlighter-rouge">LD_LIBRARY_PATH</code> and run the program from there.</p>
+and libraries to a share where code can be executed, here <code class="language-plaintext highlighter-rouge">/var/tmp</code> is used, add the path to the libraries to the 
+environmental variable <code class="language-plaintext highlighter-rouge">LD_LIBRARY_PATH</code> and run the program from there.</p>
 
-<p>To avoid flooding KUAL’s log over time (especially <code class="highlighter-rouge">fbink</code> is very verbose) all output from the tools is caught and
-piped to <code class="highlighter-rouge">/dev/null</code> (essentially the command line’s garbage bin) by appending <code class="highlighter-rouge">&gt; /dev/null 2&gt;&amp;1</code> to the command.</p>
+<p>To avoid flooding KUAL’s log over time (especially <code class="language-plaintext highlighter-rouge">fbink</code> is very verbose) all output from the tools is caught and
+piped to <code class="language-plaintext highlighter-rouge">/dev/null</code> (essentially the command line’s garbage bin) by appending <code class="language-plaintext highlighter-rouge">&gt; /dev/null 2&gt;&amp;1</code> to the command.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
 
@@ -647,7 +647,7 @@ python3 ./bin/run.py
 <p>Normally, after 10 minutes of inactivity, a Kindle goes into deep sleep, without the wakeup timer enabled. This needs to be disabled,
 otherwise each time the Dashboard wakes up for ~45 seconds to refresh its data, the clock is ticking … 
 and once 10 minutes have passed in total the Kindle goes into deep sleep permanently until the power button
-is pressed. The dashboard will stop refreshing once this happens. To disable the Kindle’s deep sleep you can type <code class="highlighter-rouge">~ds</code>
+is pressed. The dashboard will stop refreshing once this happens. To disable the Kindle’s deep sleep you can type <code class="language-plaintext highlighter-rouge">~ds</code>
 in the <strong>search bar</strong> and hit enter.</p>
 
 <p><a href="/assets/posts/2020-10-04-PythonKindleDashboard_2/final_dashboard.jpg" class="lightgallery-link" data-sub-html="The final result, the dashboard running on a Kindle Paperwhite 3">
@@ -659,7 +659,7 @@ in the <strong>search bar</strong> and hit enter.</p>
 <p>While I initially thought getting something to run on a Kindle would be the hard part, it turns out I was wrong… Making 
 sure a script runs perpetually was harder. With issues popping up only after some time, it becomes very time consuming 
 to pick up and fix errors. It took me quite some time to figure out that the Kindle was still going into deep sleep on 
-its own, realize a forgotten <code class="highlighter-rouge">print</code> statement caused a strange error in combination with a long running script and 
+its own, realize a forgotten <code class="language-plaintext highlighter-rouge">print</code> statement caused a strange error in combination with a long running script and 
 KUAL, … Not being able to execute code directly from the extension folder also was unexpected and took a fair bit of
 hacking to figure out what was going on, and where I would be able to run the program from.</p>
 
@@ -1096,7 +1096,7 @@ away, mission accomplished ! Only thing to do is 3D print a nice stand for it.</
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: April 5, 2021</p>
+			<p class="text">Last update: April 6, 2021</p>
     </div>
 
   </div>

@@ -358,7 +358,7 @@ binaries in the right folder, from KUAL start MRPI and they will be installed.</
 
 <p>Python is installed and KUAL provides us with a way to start our script. Let’s start to build a KUAL extension. Here
 we’ll just discuss the boilerplate code, the dashboard python script will be discussed in the next post. The file 
-structure of our extension can be seen below, the folder <code class="highlighter-rouge">dashboard</code> will need to be copied to the <code class="highlighter-rouge">extensions</code> folder 
+structure of our extension can be seen below, the folder <code class="language-plaintext highlighter-rouge">dashboard</code> will need to be copied to the <code class="language-plaintext highlighter-rouge">extensions</code> folder 
 on the kindle.</p>
 
 <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>│   .gitignore
@@ -376,14 +376,14 @@ on the kindle.</p>
     └───cache
 </code></pre></div></div>
 
-<p>There are two files which are essential for the KUAL extension <code class="highlighter-rouge">config.xml</code> and <code class="highlighter-rouge">menu.json</code>, these you can see below. 
+<p>There are two files which are essential for the KUAL extension <code class="language-plaintext highlighter-rouge">config.xml</code> and <code class="language-plaintext highlighter-rouge">menu.json</code>, these you can see below. 
 They are mostly self-explanatory, however make sure the id in the config file matches the name of your extension’s 
-folder (in this case dashboard). In <code class="highlighter-rouge">menu.json</code> you can define where you want buttons to start your script in KUAL’s
-menu (here they are in the main menu). As the dashboard script (<code class="highlighter-rouge">start.sh</code>) goes into an infinite loop, requiring the kindle to 
+folder (in this case dashboard). In <code class="language-plaintext highlighter-rouge">menu.json</code> you can define where you want buttons to start your script in KUAL’s
+menu (here they are in the main menu). As the dashboard script (<code class="language-plaintext highlighter-rouge">start.sh</code>) goes into an infinite loop, requiring the kindle to 
 be restarted to stop it, for debugging/testing purposes there is also a version included that will run only one loop to
-test if everything is in order (<code class="highlighter-rouge">start_once.sh</code>).</p>
+test if everything is in order (<code class="language-plaintext highlighter-rouge">start_once.sh</code>).</p>
 
-<p><code class="highlighter-rouge">run.py</code> is a placeholder that will be discussed in the next post, this is the python script that will get the data 
+<p><code class="language-plaintext highlighter-rouge">run.py</code> is a placeholder that will be discussed in the next post, this is the python script that will get the data 
 online and turn it into something we can display on the Kindle.</p>
 
 <p><strong>config.xml</strong></p>
@@ -423,10 +423,10 @@ online and turn it into something we can display on the Kindle.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>For the actual dashboard all files are in the <code class="highlighter-rouge">bin</code> folder, where there is a shell script, <code class="highlighter-rouge">start.sh</code>, that will run the python
+<p>For the actual dashboard all files are in the <code class="language-plaintext highlighter-rouge">bin</code> folder, where there is a shell script, <code class="language-plaintext highlighter-rouge">start.sh</code>, that will run the python
 script, put the system into a deep sleep and repeat once it wakes up. Note that this script will run forever and the kindle
 needs to be restarted to kill it. While this is fine for a dashboard, for debugging/testing this is a little annoying,
-therefore a script <code class="highlighter-rouge">start_once.sh</code> is included, which will run the script once and stop.</p>
+therefore a script <code class="language-plaintext highlighter-rouge">start_once.sh</code> is included, which will run the script once and stop.</p>
 
 <p><strong>bin/start.sh</strong></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
@@ -896,7 +896,7 @@ Stay tuned as this will come up in the <a href="/diy/2020/10/04/PythonKindleDash
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: April 5, 2021</p>
+			<p class="text">Last update: April 6, 2021</p>
     </div>
 
   </div>

@@ -316,29 +316,29 @@ BusyBoard we can read from Home Assistant, so let’s implement this.</p>
 or even a framework designed specifically for APIs like <a href="https://fastapi.tiangolo.com/">FastAPI</a>! Here however we don’t need bells and whistles, we 
 simply need an endpoint for each users where we can see if they are busy or not. The first step is do add a function to the
 database model to export a user to a dictionary. To do this a little code needs to be added to the model 
-(in <code class="highlighter-rouge">./busyboard/models.py</code>) as shown below.</p>
+(in <code class="language-plaintext highlighter-rouge">./busyboard/models.py</code>) as shown below.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">'users'</span>
-    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
-    <span class="n">busy</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">)</span>
-    <span class="n">busy_with</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
-    <span class="n">can_be_disturbed</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">)</span>
-    <span class="n">notes</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Unicode</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span>
-    <span class="n">last_change</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">)</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">busy</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Boolean</span><span class="p">)</span>
+    <span class="n">busy_with</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">can_be_disturbed</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Boolean</span><span class="p">)</span>
+    <span class="n">notes</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Unicode</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span>
+    <span class="n">last_change</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="n">utcnow</span><span class="p">)</span>
 
     <span class="c1">### see repository for the full code, new function below
 </span>
     <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s">'id'</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="nb">id</span><span class="p">),</span>
-            <span class="s">'name'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
-            <span class="s">'busy'</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">busy</span><span class="p">),</span>
-            <span class="s">'busy_with'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">busy_with</span><span class="p">),</span>
-            <span class="s">'can_be_distrubed'</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">can_be_disturbed</span><span class="p">),</span>
-            <span class="s">'last_change'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last_change</span><span class="p">)</span>
+            <span class="s">'id'</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="nb">id</span><span class="p">),</span>
+            <span class="s">'name'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">),</span>
+            <span class="s">'busy'</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">busy</span><span class="p">),</span>
+            <span class="s">'busy_with'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">busy_with</span><span class="p">),</span>
+            <span class="s">'can_be_distrubed'</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">can_be_disturbed</span><span class="p">),</span>
+            <span class="s">'last_change'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">last_change</span><span class="p">)</span>
         <span class="p">}</span>
 </code></pre></div></div>
 
@@ -346,22 +346,22 @@ database model to export a user to a dictionary. To do this a little code needs 
 all fields are explicitly converted to integers, strings and bools. This isn’t strictly necessary for all fields, but it
 helps avoiding errors when converting them to JSON later on.</p>
 
-<p>Next, we’ll need to add the routes to <code class="highlighter-rouge">./busyboard/__init__.py</code>, again this is very simple. A few lines of code
+<p>Next, we’ll need to add the routes to <code class="language-plaintext highlighter-rouge">./busyboard/__init__.py</code>, again this is very simple. A few lines of code
 shown below will do the trick.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="o">@</span><span class="n">app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/api/users'</span><span class="p">)</span>
-    <span class="o">@</span><span class="n">app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/api/users/'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/api/users'</span><span class="p">)</span>
+    <span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/api/users/'</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">api_users</span><span class="p">():</span>
-        <span class="n">users</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="nb">all</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="nb">list</span><span class="p">([</span><span class="n">u</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">users</span><span class="p">]))</span>
+        <span class="n">users</span> <span class="o">=</span> <span class="n">User</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="nb">all</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="nb">list</span><span class="p">([</span><span class="n">u</span><span class="p">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">users</span><span class="p">]))</span>
 
-    <span class="o">@</span><span class="n">app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/api/users/&lt;int:user_id&gt;'</span><span class="p">)</span>
+    <span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/api/users/&lt;int:user_id&gt;'</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">api_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="n">to_dict</span><span class="p">())</span>
 </code></pre></div></div>
 
-<p>So now if we go to e.g. <code class="highlighter-rouge">\&lt;busyboard_url\&gt;/api/users/1</code> we’ll get a JSON response which looks like:</p>
+<p>So now if we go to e.g. <code class="language-plaintext highlighter-rouge">\&lt;busyboard_url\&gt;/api/users/1</code> we’ll get a JSON response which looks like:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"busy"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -379,7 +379,7 @@ shown below will do the trick.</p>
 
 <p>Home Assistant comes with support to read REST APIs, so also here there is very little configuration required. The
 only thing needed is to add a rest-sensor for each user that reads the field “busy”. In the Home Assistant settings
-folder open the file <code class="highlighter-rouge">configuration.yml</code> with a text editor and add the following part to the sensor section. Note that
+folder open the file <code class="language-plaintext highlighter-rouge">configuration.yml</code> with a text editor and add the following part to the sensor section. Note that
 the URL will have to be adjusted to the spot where your instance of BusyBoard is running.</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -391,11 +391,11 @@ the URL will have to be adjusted to the spot where your instance of BusyBoard is
 
 </code></pre></div></div>
 
-<p>After this you’ll have to restart Home Assistant and the sensor will be available as <code class="highlighter-rouge">sensor.user_name</code>. Now using the
-GUI or directly in the configuration file <code class="highlighter-rouge">automations.yaml</code> you can create a new automation that triggers another device, like a light. 
+<p>After this you’ll have to restart Home Assistant and the sensor will be available as <code class="language-plaintext highlighter-rouge">sensor.user_name</code>. Now using the
+GUI or directly in the configuration file <code class="language-plaintext highlighter-rouge">automations.yaml</code> you can create a new automation that triggers another device, like a light. 
 You’ll have to add a trigger that goes of once the sensor goes from <strong>False</strong> to <strong>True</strong> and the other way around, the action will 
 be a service, in this case a smart light, will be switched on or off. Details how to do this will depend a lot on the
-type of light you are using and how it is configured in HA. Though feel free to use the section from my <code class="highlighter-rouge">automations.yaml</code>
+type of light you are using and how it is configured in HA. Though feel free to use the section from my <code class="language-plaintext highlighter-rouge">automations.yaml</code>
 file as a reference (shown below).</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1597674094193'</span>
@@ -871,7 +871,7 @@ the real world. If you want to look at the full code, this can be found on <a hr
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: April 5, 2021</p>
+			<p class="text">Last update: April 6, 2021</p>
     </div>
 
   </div>

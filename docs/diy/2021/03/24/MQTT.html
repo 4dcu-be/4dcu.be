@@ -307,8 +307,8 @@ pressure in a small form factor.</p>
 <h2 id="pairing-new-zigbee-devices">Pairing new Zigbee devices</h2>
 
 <p>First we need to pair <a href="https://www.zigbee2mqtt.io">Zigbee2MQTT</a> to the new sensors, to do this we’ll have to log onto the Raspberry Pi and edit the 
-file <code class="highlighter-rouge">/opt/zigbee2mqtt/data/configuration.yaml</code>. Find the line that says <code class="highlighter-rouge">permit_join: false</code> and change this
-to <code class="highlighter-rouge">permit_join: true</code>. Then restart Zigbee2MQTT using the commands below.</p>
+file <code class="language-plaintext highlighter-rouge">/opt/zigbee2mqtt/data/configuration.yaml</code>. Find the line that says <code class="language-plaintext highlighter-rouge">permit_join: false</code> and change this
+to <code class="language-plaintext highlighter-rouge">permit_join: true</code>. Then restart Zigbee2MQTT using the commands below.</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>nano /opt/zigbee2mqtt/data/configuration.yaml
 <span class="nb">sudo </span>systemctl restart zigbee2mqtt
@@ -316,7 +316,7 @@ to <code class="highlighter-rouge">permit_join: true</code>. Then restart Zigbee
 
 <p>Now Zigbee2MQTT is ready to pair with new devices. To pair a sensor, press the button on top. Once you press 
 the button it will blink once indicating it is pairing and upon connecting it will blink twice. Now go back into
-<code class="highlighter-rouge">/opt/zigbee2mqtt/data/configuration.yaml</code> and give your device a name, this is done by adding a <code class="highlighter-rouge">friendly_name</code> tag
+<code class="language-plaintext highlighter-rouge">/opt/zigbee2mqtt/data/configuration.yaml</code> and give your device a name, this is done by adding a <code class="language-plaintext highlighter-rouge">friendly_name</code> tag
 to the device as shown below in my configuration file.</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">...</span>
@@ -330,7 +330,7 @@ to the device as shown below in my configuration file.</p>
 </code></pre></div></div>
 
 <p>While you could connect all devices in one go, I recommend adding them one by one and setting the name to something
-easy to remember. Once you have connected the last device set <code class="highlighter-rouge">permit_join</code> back to <code class="highlighter-rouge">false</code> and restart 
+easy to remember. Once you have connected the last device set <code class="language-plaintext highlighter-rouge">permit_join</code> back to <code class="language-plaintext highlighter-rouge">false</code> and restart 
 Zigbee2MQTT one last time.</p>
 
 <h2 id="creating-an-interface-for-our-sensors">Creating an interface for our sensors</h2>
@@ -834,7 +834,7 @@ start adding additional devices …</p>
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: April 5, 2021</p>
+			<p class="text">Last update: April 6, 2021</p>
     </div>
 
   </div>

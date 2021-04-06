@@ -337,9 +337,9 @@ If Simon wins, print “0” (without the quotes), otherwise print “1” (with
 <em>n</em> as described above. This is repeated (outer loop) until a player wins a game, in that case the winner is printed
 and the loop broken.</p>
 
-<p>There is some spice in how the input is read from standard input; <code class="highlighter-rouge">input().split()</code> will grab a line from STDIN and
-split it at whitespaces. the <code class="highlighter-rouge">map</code> function will apply the <code class="highlighter-rouge">int</code> on all parts turning the input from string into
-integer numbers. Using <code class="highlighter-rouge">*</code> a list can be passed as arguments to a function. As all challenges will get the data
+<p>There is some spice in how the input is read from standard input; <code class="language-plaintext highlighter-rouge">input().split()</code> will grab a line from STDIN and
+split it at whitespaces. the <code class="language-plaintext highlighter-rouge">map</code> function will apply the <code class="language-plaintext highlighter-rouge">int</code> on all parts turning the input from string into
+integer numbers. Using <code class="language-plaintext highlighter-rouge">*</code> a list can be passed as arguments to a function. As all challenges will get the data
 from STDIN, it pays off to know a few of these tricks to quickly and without too much code pull in that data.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
@@ -348,7 +348,7 @@ from STDIN, it pays off to know a few of these tricks to quickly and without too
 <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]):</span>
-            <span class="n">gdc</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+            <span class="n">gdc</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">gdc</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">n</span> <span class="o">-=</span> <span class="n">gdc</span>
             <span class="k">else</span><span class="p">:</span>
@@ -357,10 +357,10 @@ from STDIN, it pays off to know a few of these tricks to quickly and without too
 
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="n">solve</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+    <span class="n">solve</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">()))</span>
 </code></pre></div></div>
 
-<p>If you save this code to a <code class="highlighter-rouge">.py</code> file, you can submit it on the platform. As CodeForces supports solutions is a 
+<p>If you save this code to a <code class="language-plaintext highlighter-rouge">.py</code> file, you can submit it on the platform. As CodeForces supports solutions is a 
 number of programming languages you’ll have to specify that <strong>Python 3.7.2</strong> is used here. Or you can select 
 <strong>PyPy 3.6 (7.2.0)</strong>, <a href="https://www.pypy.org/">PyPy</a> is a faster version of Python, and as there is a limit to how long your code can run 
 before failing, this could be an advantage (though it really doesn’t matter much here).</p>
@@ -416,7 +416,7 @@ the time by five.</p>
             <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">count</span> <span class="o">+=</span> <span class="mi">5</span>
-            <span class="n">visited</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">new_x</span><span class="p">,</span> <span class="n">new_y</span><span class="p">))</span>
+            <span class="n">visited</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">new_x</span><span class="p">,</span> <span class="n">new_y</span><span class="p">))</span>
 
         <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">new_x</span><span class="p">,</span> <span class="n">new_y</span>
 
@@ -459,7 +459,7 @@ re-implement your solution.</p>
     <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="nb">input</span><span class="p">()))</span>
 </code></pre></div></div>
 
-<p>Here a <code class="highlighter-rouge">defaultdict</code> is used which will return a value of five each time an element is accessed which hasn’t been set 
+<p>Here a <code class="language-plaintext highlighter-rouge">defaultdict</code> is used which will return a value of five each time an element is accessed which hasn’t been set 
 yet. So, here we determine the current (x, y) and next (nx, ny) coordinates of the skier, grab the smallest value for that
 section and the reverse from the dictionary, increase the counter by that value. Set the value for that path in the 
 dictionary to one and update the current coordinates.</p>
@@ -486,7 +486,7 @@ is trivial and can be written in a few lines of code.</p>
     <span class="k">return</span> <span class="n">count</span>
 
 
-<span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())))</span>
 </code></pre></div></div>
 
 <h2 id="bonus-code-golf">Bonus: Code Golf</h2>
@@ -495,15 +495,15 @@ is trivial and can be written in a few lines of code.</p>
 shorten the code for <a href="https://codeforces.com/problemset/problem/119/A">Epic Game</a> here…</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
-<span class="n">s</span><span class="o">=</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">:</span><span class="n">s</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="k">if</span> <span class="n">n</span><span class="o">!=</span><span class="mi">0</span><span class="k">else</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()),</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">s</span><span class="o">=</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">:</span><span class="n">s</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="n">math</span><span class="p">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="k">if</span> <span class="n">n</span><span class="o">!=</span><span class="mi">0</span><span class="k">else</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">()),</span><span class="mi">1</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>… and here is an abridged version for <a href="https://codeforces.com/problemset/problem/520/B">Two Buttons</a>. While correct it fails on one of the tests because it hits the 
 recursion limit (the number of times a function can call itself, the limit is 1000).</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span><span class="o">=</span><span class="k">lambda</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">c</span><span class="p">:</span><span class="n">c</span> <span class="k">if</span> <span class="n">n</span><span class="o">==</span><span class="n">m</span> <span class="k">else</span> <span class="n">s</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">m</span><span class="o">&lt;</span><span class="n">n</span> <span class="ow">or</span> <span class="n">m</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="k">else</span> <span class="n">s</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()),</span> <span class="mi">0</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">()),</span> <span class="mi">0</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>This is very much against the Zen of Python that code should be readable, which this isn’t! So don’t use this when 
@@ -511,7 +511,7 @@ writing code for projects that need to be maintained, it will come back and haun
 
 <h2 id="conclusion">Conclusion</h2>
 
-<p>Apart from having a few excuses to play with recursion, use lambdas and the <code class="highlighter-rouge">map</code> function to write short (albeit not
+<p>Apart from having a few excuses to play with recursion, use lambdas and the <code class="language-plaintext highlighter-rouge">map</code> function to write short (albeit not
 very readable code), I’ve learned the most getting stuck! The common advice to approach a problem from a different
 angle here could quite literally be applied. This is a trick I will keep in mind when attempting to solve more 
 difficult code challenges.</p>
@@ -946,7 +946,7 @@ difficult code challenges.</p>
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: April 5, 2021</p>
+			<p class="text">Last update: April 6, 2021</p>
     </div>
 
   </div>

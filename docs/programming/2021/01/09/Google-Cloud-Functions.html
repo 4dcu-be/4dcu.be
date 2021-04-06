@@ -331,9 +331,9 @@ that works over the web, so it should trigger on <em>HTTP</em> requests and set 
 
 <p>If you click <em>Save</em> and <em>Next</em>, you will be able to add the code of your function through an online editor as shown 
 below. Though you’ll lack the features of a fully fledged IDE, for a small function it should suffice. Here
-we need to set the language to <em>Python 3.7</em>. Additional packages you wish to use can be added to <code class="highlighter-rouge">requirements.txt</code> while
-to main code resides in <code class="highlighter-rouge">main.py</code>. There also is an <em>entry point</em> to set, this should be the name of the function
-to run when the enpoint is requested, in the example this is <code class="highlighter-rouge">hello_world</code>.</p>
+we need to set the language to <em>Python 3.7</em>. Additional packages you wish to use can be added to <code class="language-plaintext highlighter-rouge">requirements.txt</code> while
+to main code resides in <code class="language-plaintext highlighter-rouge">main.py</code>. There also is an <em>entry point</em> to set, this should be the name of the function
+to run when the enpoint is requested, in the example this is <code class="language-plaintext highlighter-rouge">hello_world</code>.</p>
 
 <p><a href="/assets/posts/2021-01-09-Google-Cloud-Functions/cloud_editor.png" class="lightgallery-link" data-sub-html="You can implement your function through the online editor">
 <img src="/assets/posts/2021-01-09-Google-Cloud-Functions/cloud_editor.png" alt="You can implement your function through the online editor" data-src="/assets/posts/2021-01-09-Google-Cloud-Functions/cloud_editor.png" loading="lazy" />
@@ -345,7 +345,7 @@ to run when the enpoint is requested, in the example this is <code class="highli
 CPU usage per milli-second. Functions should be kept simple and sleek. A few lines to process the request (enable Cross 
 Origin Resource Sharing, CORS) so we can pull this data in from other websites using JS and get the arguments)
 , build the URL, use the <a href="https://requests.readthedocs.io/en/master/">requests</a> library to grab the HTML and a few lines to process it. Everything, is returned as
-as JSON. Below you can find the code in <code class="highlighter-rouge">main.py</code>.</p>
+as JSON. Below you can find the code in <code class="language-plaintext highlighter-rouge">main.py</code>.</p>
 
 <div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">re</span>
@@ -354,7 +354,7 @@ as JSON. Below you can find the code in <code class="highlighter-rouge">main.py<
 
 <span class="k">def</span> <span class="nf">parse_scholar</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="c1"># Code to handle CORS (from docs)
-</span>    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">'OPTIONS'</span><span class="p">:</span>
+</span>    <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">'OPTIONS'</span><span class="p">:</span>
         <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s">'Access-Control-Allow-Origin'</span><span class="p">:</span> <span class="s">'*'</span><span class="p">,</span>
             <span class="s">'Access-Control-Allow-Methods'</span><span class="p">:</span> <span class="s">'GET'</span><span class="p">,</span>
@@ -369,22 +369,22 @@ as JSON. Below you can find the code in <code class="highlighter-rouge">main.py<
         <span class="s">'Access-Control-Allow-Origin'</span><span class="p">:</span> <span class="s">'*'</span>
     <span class="p">}</span>
 
-    <span class="n">request_json</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+    <span class="n">request_json</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">get_json</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">request_json</span> <span class="ow">and</span> <span class="s">'user'</span> <span class="ow">in</span> <span class="n">request_json</span><span class="p">:</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s">'https://scholar.google.com/citations?user={request_json["user"]}'</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s">'https://scholar.google.com/citations?user=</span><span class="si">{</span><span class="n">request_json</span><span class="p">[</span><span class="s">"user"</span><span class="p">]</span><span class="si">}</span><span class="s">'</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'user'</span><span class="p">)</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s">'https://scholar.google.com/citations?user={user}'</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">args</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'user'</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s">'https://scholar.google.com/citations?user=</span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s">'</span>
 
-    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
-    <span class="n">hits</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">r'&lt;td class="gsc_rsb_std"&gt;(\d+)&lt;/td&gt;'</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">hits</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s">'&lt;td class="gsc_rsb_std"&gt;(\d+)&lt;/td&gt;'</span><span class="p">,</span> <span class="n">r</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
     <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">'citations'</span><span class="p">,</span> <span class="s">'citations_recent'</span><span class="p">,</span> <span class="s">'h_index'</span><span class="p">,</span> <span class="s">'h_index_recent'</span><span class="p">,</span> <span class="s">'i10_index'</span><span class="p">,</span> <span class="s">'i10_index_recent'</span><span class="p">]</span>
 
-    <span class="k">return</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">hits</span><span class="p">))),</span> <span class="mi">200</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">hits</span><span class="p">))),</span> <span class="mi">200</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
 </code></pre></div></div>
-<p>For Google Cloud functions this needs to be paired with <code class="highlighter-rouge">requirements.txt</code>, which you can find below and make sure
-to set the target to <code class="highlighter-rouge">parse_scholar</code>. That should do the trick !</p>
+<p>For Google Cloud functions this needs to be paired with <code class="language-plaintext highlighter-rouge">requirements.txt</code>, which you can find below and make sure
+to set the target to <code class="language-plaintext highlighter-rouge">parse_scholar</code>. That should do the trick !</p>
 
 <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># requirements.txt
 requests==2.25.1
@@ -409,7 +409,7 @@ get a response with the citation stats like this…</p>
 
 <p>While developing your function, locally testing it before deploying it on Google’s hardware is a good idea. The python
 package <a href="https://github.com/GoogleCloudPlatform/functions-framework-python">functions-framework</a> makes this easy. Simply pip install the package and run it using the commands below,
-note that the file containing your code needs to be called <code class="highlighter-rouge">main.py</code> and you specify the function as the target.</p>
+note that the file containing your code needs to be called <code class="language-plaintext highlighter-rouge">main.py</code> and you specify the function as the target.</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>functions-framework
 functions-framework <span class="nt">--target</span> parse_scholar <span class="nt">--debug</span>
@@ -859,7 +859,7 @@ would omit the need for me to update this regularly (which is why CORS is enable
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: April 5, 2021</p>
+			<p class="text">Last update: April 6, 2021</p>
     </div>
 
   </div>

@@ -301,7 +301,7 @@
 <article class="post-content">
   <p>Like the previous <a href="/tag/code-nugget/">Code Nugget</a>, this bit of code will add some often needed
 features to PCA plots done with Python. Here the loadings and variance explained will be added to the plot, this is
-something that is included by default in R’s <code class="highlighter-rouge">biplot()</code>, but in Python there is more too it. Like the last plot, the code
+something that is included by default in R’s <code class="language-plaintext highlighter-rouge">biplot()</code>, but in Python there is more too it. Like the last plot, the code
 isn’t difficult, but to get it to work it does require a fair bit of digging in the documentation to find out how to
 add this in.</p>
 
@@ -315,10 +315,10 @@ readily available it is a very good choice. A few lines of code are added to tur
 
 
 <span class="n">iris_obj</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
-<span class="n">iris_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">iris_obj</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">iris_obj</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="n">iris_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">iris_obj</span><span class="p">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">iris_obj</span><span class="p">.</span><span class="n">feature_names</span><span class="p">)</span>
 
-<span class="n">iris_df</span><span class="p">[</span><span class="s">"species"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">iris_obj</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">iris_obj</span><span class="o">.</span><span class="n">target</span><span class="p">]</span>
-<span class="n">iris_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">iris_df</span><span class="p">[</span><span class="s">"species"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">iris_obj</span><span class="p">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">iris_obj</span><span class="p">.</span><span class="n">target</span><span class="p">]</span>
+<span class="n">iris_df</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
 </code></pre></div></div>
 
 <table class="large-table">
@@ -377,7 +377,7 @@ readily available it is a very good choice. A few lines of code are added to tur
 </table>
 
 <p>Next, scikit-learn is used to do a PCA on all the leaf measurements (so the species column is dropped). As prior to
-running a PCA it is recommended to scale the data, a pipeline is used to apply the <code class="highlighter-rouge">StandardScaler</code> prior to the 
+running a PCA it is recommended to scale the data, a pipeline is used to apply the <code class="language-plaintext highlighter-rouge">StandardScaler</code> prior to the 
 PCA. While the pipeline isn’t strictly required here, for more complex analyses this is can save a lot of time and 
 potential mistakes, so I would recommend using it also for simple cases like this.</p>
 
@@ -387,18 +387,18 @@ potential mistakes, so I would recommend using it also for simple cases like thi
 
 <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s">"scaler"</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span> <span class="p">(</span><span class="s">"pca"</span><span class="p">,</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)),])</span>
 
-<span class="n">pca_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="n">pipeline</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">iris_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"species"</span><span class="p">])),</span>
+<span class="n">pca_data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">pipeline</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">iris_df</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"species"</span><span class="p">])),</span>
     <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"PC1"</span><span class="p">,</span> <span class="s">"PC2"</span><span class="p">],</span>
-    <span class="n">index</span><span class="o">=</span><span class="n">iris_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="n">iris_df</span><span class="p">.</span><span class="n">index</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">pca_data</span><span class="p">[</span><span class="s">"species"</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris_df</span><span class="p">[</span><span class="s">"species"</span><span class="p">]</span>
 
-<span class="n">pca_step</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">steps</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">loadings</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="n">pca_step</span><span class="o">.</span><span class="n">components_</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+<span class="n">pca_step</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">.</span><span class="n">steps</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">loadings</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">pca_step</span><span class="p">.</span><span class="n">components_</span><span class="p">.</span><span class="n">T</span><span class="p">,</span>
     <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"PC1"</span><span class="p">,</span> <span class="s">"PC2"</span><span class="p">],</span>
-    <span class="n">index</span><span class="o">=</span><span class="n">iris_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"species"</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="n">iris_df</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"species"</span><span class="p">]).</span><span class="n">columns</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div></div>
 
@@ -449,7 +449,7 @@ in scientific papers, so when presenting PCA data this is a must have.</p>
 <span class="p">):</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">visible</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">visible</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span>
+            <span class="n">ax</span><span class="p">.</span><span class="n">arrow</span><span class="p">(</span>
                 <span class="mi">0</span><span class="p">,</span>
                 <span class="mi">0</span><span class="p">,</span>
                 <span class="n">coeff</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">scale</span><span class="p">,</span>
@@ -458,7 +458,7 @@ in scientific papers, so when presenting PCA data this is a must have.</p>
                 <span class="n">head_length</span><span class="o">=</span><span class="n">arrow_size</span> <span class="o">*</span> <span class="n">scale</span><span class="p">,</span>
                 <span class="n">color</span><span class="o">=</span><span class="s">"#000"</span> <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
             <span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+            <span class="n">ax</span><span class="p">.</span><span class="n">text</span><span class="p">(</span>
                 <span class="n">coeff</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1.15</span> <span class="o">*</span> <span class="n">scale</span><span class="p">,</span>
                 <span class="n">coeff</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1.15</span> <span class="o">*</span> <span class="n">scale</span><span class="p">,</span>
                 <span class="n">label</span><span class="p">,</span>
@@ -468,21 +468,21 @@ in scientific papers, so when presenting PCA data this is a must have.</p>
             <span class="p">)</span>
 
 
-<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">pca_data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s">"PC1"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">"PC2"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s">"species"</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="p">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">pca_data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s">"PC1"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">"PC2"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s">"species"</span><span class="p">)</span>
 
 <span class="c1"># Add loadings
-</span><span class="n">loading_plot</span><span class="p">(</span><span class="n">loadings</span><span class="p">[[</span><span class="s">"PC1"</span><span class="p">,</span> <span class="s">"PC2"</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">loadings</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">arrow_size</span><span class="o">=</span><span class="mf">0.08</span><span class="p">)</span>
+</span><span class="n">loading_plot</span><span class="p">(</span><span class="n">loadings</span><span class="p">[[</span><span class="s">"PC1"</span><span class="p">,</span> <span class="s">"PC2"</span><span class="p">]].</span><span class="n">values</span><span class="p">,</span> <span class="n">loadings</span><span class="p">.</span><span class="n">index</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">arrow_size</span><span class="o">=</span><span class="mf">0.08</span><span class="p">)</span>
 
 
 <span class="c1"># Add variance explained by the
-</span><span class="n">g</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">f</span><span class="s">"PC1 ({pca_step.explained_variance_ratio_[0]*100:.2f} </span><span class="si">%</span><span class="s">)"</span><span class="p">)</span>
-<span class="n">g</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">f</span><span class="s">"PC2 ({pca_step.explained_variance_ratio_[1]*100:.2f} </span><span class="si">%</span><span class="s">)"</span><span class="p">)</span>
+</span><span class="n">g</span><span class="p">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s">"PC1 (</span><span class="si">{</span><span class="n">pca_step</span><span class="p">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">:.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s"> %)"</span><span class="p">)</span>
+<span class="n">g</span><span class="p">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s">"PC2 (</span><span class="si">{</span><span class="n">pca_step</span><span class="p">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">:.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s"> %)"</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">"PCA_with_loadings.png"</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">"PCA_with_loadings.png"</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p>In this final bit a function, <code class="highlighter-rouge">loading_plot()</code>, is added to draw the loadings on top of another plot (most likely a 
+<p>In this final bit a function, <code class="language-plaintext highlighter-rouge">loading_plot()</code>, is added to draw the loadings on top of another plot (most likely a 
 scatter plot). It provides enough flexibility you could also use this for plots between higher-order principal 
 components, add specific colors to plots and scale the lines and arrows to your liking. The result is shown below, 
 a PCA plot with all elements you would expect!</p>
@@ -924,7 +924,7 @@ analyses, hope others find them useful to !</p>
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: April 5, 2021</p>
+			<p class="text">Last update: April 6, 2021</p>
     </div>
 
   </div>

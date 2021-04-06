@@ -305,9 +305,9 @@ pieces of code, like this, that turn out to be quite useful. Though them being s
 isn’t very convenient when I actually need them. So I’ll start to add some documentation and put them here with the tag 
 <a href="/tag/code-nugget/">Code Nugget</a>, so they can easily be found by myself and others.</p>
 
-<p>Normally you can use <code class="highlighter-rouge">corr_df = df.corr()</code> to get a correlation matrix for numerical columns in a Pandas data frame.
-These in turn can be shown in a heatmap using <code class="highlighter-rouge">sns.clustermap(corr_df, cmap="vlag", vmin=-1, vmax=1)</code>, leveraging 
-SeaBorn’s <code class="highlighter-rouge">clustermap</code>. Easy, though the significance of those correlations isn’t reported. To get those you can’t
+<p>Normally you can use <code class="language-plaintext highlighter-rouge">corr_df = df.corr()</code> to get a correlation matrix for numerical columns in a Pandas data frame.
+These in turn can be shown in a heatmap using <code class="language-plaintext highlighter-rouge">sns.clustermap(corr_df, cmap="vlag", vmin=-1, vmax=1)</code>, leveraging 
+SeaBorn’s <code class="language-plaintext highlighter-rouge">clustermap</code>. Easy, though the significance of those correlations isn’t reported. To get those you can’t
 rely on built-in functions and a bit more effort is required.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
@@ -319,42 +319,42 @@ rely on built-in functions and a bit more effort is required.</p>
 <span class="kn">from</span> <span class="nn">statsmodels.stats.multitest</span> <span class="kn">import</span> <span class="n">multipletests</span>
 
 <span class="n">iris_obj</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
-<span class="n">iris_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">iris_obj</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">iris_obj</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="n">iris_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">iris_obj</span><span class="p">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">iris_obj</span><span class="p">.</span><span class="n">feature_names</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">get_correlations</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">_get_numeric_data</span><span class="p">()</span>
-    <span class="n">dfcols</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-    <span class="n">pvalues</span> <span class="o">=</span> <span class="n">dfcols</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dfcols</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s">"outer"</span><span class="p">)</span>
-    <span class="n">correlations</span> <span class="o">=</span> <span class="n">dfcols</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dfcols</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s">"outer"</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">jx</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">dropna</span><span class="p">().</span><span class="n">_get_numeric_data</span><span class="p">()</span>
+    <span class="n">dfcols</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span>
+    <span class="n">pvalues</span> <span class="o">=</span> <span class="n">dfcols</span><span class="p">.</span><span class="n">transpose</span><span class="p">().</span><span class="n">join</span><span class="p">(</span><span class="n">dfcols</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s">"outer"</span><span class="p">)</span>
+    <span class="n">correlations</span> <span class="o">=</span> <span class="n">dfcols</span><span class="p">.</span><span class="n">transpose</span><span class="p">().</span><span class="n">join</span><span class="p">(</span><span class="n">dfcols</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s">"outer"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">columns</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">jx</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">columns</span><span class="p">):</span>
             <span class="n">sp</span> <span class="o">=</span> <span class="n">spearmanr</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">r</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
             <span class="n">correlations</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">pvalues</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">ix</span> <span class="o">&gt;</span> <span class="n">jx</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>  <span class="c1"># Only store values below the diagonal
-</span>    <span class="k">return</span> <span class="n">correlations</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">"float"</span><span class="p">),</span> <span class="n">pvalues</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">"float"</span><span class="p">)</span>
+            <span class="n">pvalues</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">ix</span> <span class="o">&gt;</span> <span class="n">jx</span> <span class="k">else</span> <span class="n">np</span><span class="p">.</span><span class="n">nan</span>  <span class="c1"># Only store values below the diagonal
+</span>    <span class="k">return</span> <span class="n">correlations</span><span class="p">.</span><span class="n">astype</span><span class="p">(</span><span class="s">"float"</span><span class="p">),</span> <span class="n">pvalues</span><span class="p">.</span><span class="n">astype</span><span class="p">(</span><span class="s">"float"</span><span class="p">)</span>
 
 
 <span class="n">correlations</span><span class="p">,</span> <span class="n">uncorrected_p_values</span> <span class="o">=</span> <span class="n">get_correlations</span><span class="p">(</span><span class="n">iris_df</span><span class="p">)</span>
 
 <span class="c1"># Correct p-values for multiple testing and check significance (True if the corrected p-value &lt; 0.05)
-</span><span class="n">shape</span> <span class="o">=</span> <span class="n">uncorrected_p_values</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">shape</span>
-<span class="n">significant_matrix</span> <span class="o">=</span> <span class="n">multipletests</span><span class="p">(</span><span class="n">uncorrected_p_values</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
+</span><span class="n">shape</span> <span class="o">=</span> <span class="n">uncorrected_p_values</span><span class="p">.</span><span class="n">values</span><span class="p">.</span><span class="n">shape</span>
+<span class="n">significant_matrix</span> <span class="o">=</span> <span class="n">multipletests</span><span class="p">(</span><span class="n">uncorrected_p_values</span><span class="p">.</span><span class="n">values</span><span class="p">.</span><span class="n">flatten</span><span class="p">())[</span><span class="mi">0</span><span class="p">].</span><span class="n">reshape</span><span class="p">(</span>
     <span class="n">shape</span>
 <span class="p">)</span>
 
 <span class="c1"># Here we start plotting
-</span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">(</span><span class="n">correlations</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">"vlag"</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="p">.</span><span class="n">clustermap</span><span class="p">(</span><span class="n">correlations</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">"vlag"</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Here labels on the y-axis are rotated
-</span><span class="k">for</span> <span class="n">tick</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">ax_heatmap</span><span class="o">.</span><span class="n">get_yticklabels</span><span class="p">():</span>
-    <span class="n">tick</span><span class="o">.</span><span class="n">set_rotation</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span class="k">for</span> <span class="n">tick</span> <span class="ow">in</span> <span class="n">g</span><span class="p">.</span><span class="n">ax_heatmap</span><span class="p">.</span><span class="n">get_yticklabels</span><span class="p">():</span>
+    <span class="n">tick</span><span class="p">.</span><span class="n">set_rotation</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># Here we add asterisks onto cells with signficant correlations
-</span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ix</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">dendrogram_row</span><span class="o">.</span><span class="n">reordered_ind</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">jx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">dendrogram_row</span><span class="o">.</span><span class="n">reordered_ind</span><span class="p">):</span>
+</span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ix</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">g</span><span class="p">.</span><span class="n">dendrogram_row</span><span class="p">.</span><span class="n">reordered_ind</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">jx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">g</span><span class="p">.</span><span class="n">dendrogram_row</span><span class="p">.</span><span class="n">reordered_ind</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
-            <span class="n">text</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">ax_heatmap</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">g</span><span class="p">.</span><span class="n">ax_heatmap</span><span class="p">.</span><span class="n">text</span><span class="p">(</span>
                 <span class="n">j</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span>
                 <span class="n">i</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span>
                 <span class="s">"*"</span> <span class="k">if</span> <span class="n">significant_matrix</span><span class="p">[</span><span class="n">ix</span><span class="p">,</span> <span class="n">jx</span><span class="p">]</span> <span class="ow">or</span> <span class="n">significant_matrix</span><span class="p">[</span><span class="n">jx</span><span class="p">,</span> <span class="n">ix</span><span class="p">]</span> <span class="k">else</span> <span class="s">""</span><span class="p">,</span>
@@ -362,14 +362,14 @@ rely on built-in functions and a bit more effort is required.</p>
                 <span class="n">va</span><span class="o">=</span><span class="s">"center"</span><span class="p">,</span>
                 <span class="n">color</span><span class="o">=</span><span class="s">"black"</span><span class="p">,</span>
             <span class="p">)</span>
-            <span class="n">text</span><span class="o">.</span><span class="n">set_fontsize</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+            <span class="n">text</span><span class="p">.</span><span class="n">set_fontsize</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
 
 <span class="c1"># Save a high-res copy of the image to disk
-</span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">"clustermap.png"</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</span><span class="n">plt</span><span class="p">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">"clustermap.png"</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>In this example we’ll load the iris dataset and convert it to a Pandas data frame, next a new function <code class="highlighter-rouge">get_correlations</code>
+<p>In this example we’ll load the iris dataset and convert it to a Pandas data frame, next a new function <code class="language-plaintext highlighter-rouge">get_correlations</code>
 is defined that will return two new dataframes, one with the correlations (here spearman rank is used, see below) and 
 another one with the p-values for those correlations. Note we don’t store p-values for 
 combinations we don’t want to test (values on the diagonal) or don’t need to test (correlations are symmetrical, only
@@ -418,9 +418,9 @@ values below the diagonal are stored). Including these would make corrections fo
 </table>
 
 <p>While we have p-values for all those values, shown below, these are not corrected for multiple testing. The function
-<code class="highlighter-rouge">multipletests</code> from the statsmodels package can correct these for us and report which ones are significant 
+<code class="language-plaintext highlighter-rouge">multipletests</code> from the statsmodels package can correct these for us and report which ones are significant 
 (default cutoff &lt;0.05), but the function requires a flat list of values. So we convert the matrix to a one-dimensional 
-array, apply the function and transform it back to the original shape using <code class="highlighter-rouge">reshape</code>.</p>
+array, apply the function and transform it back to the original shape using <code class="language-plaintext highlighter-rouge">reshape</code>.</p>
 
 <table class="large-table">
   <thead>
@@ -464,9 +464,9 @@ array, apply the function and transform it back to the original shape using <cod
   </tbody>
 </table>
 
-<p>Finally, the correlations need to be drawn and the <code class="highlighter-rouge">clustermap</code> function is great here. Though we need a few
+<p>Finally, the correlations need to be drawn and the <code class="language-plaintext highlighter-rouge">clustermap</code> function is great here. Though we need a few
 extra lines of code to put an asterisk in the cells which are significant. While it isn’t exactly rocket science how
-this is done, it did require a fair bit of digging in the <code class="highlighter-rouge">clustermap</code> code to find exactly how to hook this in.
+this is done, it did require a fair bit of digging in the <code class="language-plaintext highlighter-rouge">clustermap</code> code to find exactly how to hook this in.
 There are a ton of tweaks that could still be done here, but this will depend on your personal style and preference. The
 hard part is done! Check out the result below!</p>
 
@@ -903,7 +903,7 @@ hard part is done! Check out the result below!</p>
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: April 5, 2021</p>
+			<p class="text">Last update: April 6, 2021</p>
     </div>
 
   </div>
