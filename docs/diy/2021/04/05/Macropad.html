@@ -380,6 +380,14 @@ ensure all LEDs can be controlled individually and switches can be read directly
 <img src="/assets/posts/2021-04-05-Macropad/switch_resistor.jpg" alt="One switch with LED and resistor installed" data-src="/assets/posts/2021-04-05-Macropad/switch_resistor.jpg" loading="lazy" />
 </a></p>
 
+<p>The picture above shows how each resistor was wired up to the ground of the LED and the switch. All grounds were then
+soldered together with a long wire and connected to the Pico’s GND pad. The other two pins (here shown with red wires) 
+were connected with GPIO pins, the full diagram is shown below.</p>
+
+<p><a href="/assets/posts/2021-04-05-Macropad/wiring_scheme.png" class="lightgallery-link" data-sub-html="Full wiring scheme">
+<img src="/assets/posts/2021-04-05-Macropad/wiring_scheme.png" alt="Full wiring scheme" data-src="/assets/posts/2021-04-05-Macropad/wiring_scheme.png" loading="lazy" />
+</a></p>
+
 <h2 id="preparing-the-raspberry-pi-pico">Preparing the Raspberry Pi Pico</h2>
 
 <p>Before any Python code can run, we need to install the correct firmware on the Pico. The <a href="https://github.com/adafruit/Adafruit_CircuitPython_HID">Adafruit HID</a> library 
@@ -950,7 +958,7 @@ buttons will have to suffice. Something more complex will be for a future post.<
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: April 15, 2021</p>
+			<p class="text">Last update: April 16, 2021</p>
     </div>
 
   </div>
