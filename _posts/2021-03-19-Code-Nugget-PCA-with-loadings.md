@@ -6,8 +6,8 @@ date:   2021-03-19 10:00:00
 author: Sebastian Proost
 categories: programming
 tags:	python pandas data-science seaborn code-nugget sklearn
-cover:  "/assets/images/headers/python_code.jpg"
-thumbnail: "/assets/images/thumbnails/python_code.jpg"
+cover:  "/assets/posts/2021-03-19-Code-Nugget-PCA-with-loadings/PCA_header.jpg"
+thumbnail: "/assets/images/thumbnails/pca_header.jpg"
 ---
 
 Like the previous [Code Nugget]({{site.baseurl}}/tag/code-nugget/), this bit of code will add some often needed

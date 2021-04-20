@@ -6,8 +6,8 @@ date:   2021-03-16 10:00:00
 author: Sebastian Proost
 categories: programming
 tags:	python pandas data-science seaborn code-nugget
-cover:  "/assets/images/headers/python_code.jpg"
-thumbnail: "/assets/images/thumbnails/python_code.jpg"
+cover:  "/assets/posts/2021-03-16-Code-Nugget-Correlation-Heatmaps/clustermap_header.jpg"
+thumbnail: "/assets/images/thumbnails/clustermap_header.jpg"
 ---
 
 While Pandas and Seaborn offer very quick ways to calculate correlations and show them in a heatmap. Whether those
