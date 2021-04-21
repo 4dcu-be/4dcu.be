@@ -5,9 +5,35 @@
     <description>A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</description>
     <link>https://blog.4dcu.be/</link>
     <atom:link href="https://blog.4dcu.be/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 20 Apr 2021 12:38:09 +0200</pubDate>
-    <lastBuildDate>Tue, 20 Apr 2021 12:38:09 +0200</lastBuildDate>
+    <pubDate>Wed, 21 Apr 2021 12:13:17 +0200</pubDate>
+    <lastBuildDate>Wed, 21 Apr 2021 12:13:17 +0200</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>Fighting Batch Effects with pyComBat</title>
+        <description>&lt;p&gt;Even high-end scientific equipment can have a bad day! Machine performance can be affected by ambient temperature, humidity, … so when samples are measured in different batches, this needs to...</description>
+        <pubDate>Wed, 21 Apr 2021 12:00:00 +0200</pubDate>
+        <link>https://blog.4dcu.be/programming/2021/04/21/Code-Nugget-Batch_Effects.html</link>
+        <guid isPermaLink="true">https://blog.4dcu.be/programming/2021/04/21/Code-Nugget-Batch_Effects.html</guid>
+        
+        <category>python</category>
+        
+        <category>pandas</category>
+        
+        <category>data-science</category>
+        
+        <category>seaborn</category>
+        
+        <category>code-nugget</category>
+        
+        <category>sklearn</category>
+        
+        <category>pycombat</category>
+        
+        
+        <category>programming</category>
+        
+      </item>
     
       <item>
         <title>A Python powered MacroPad/StreamDeck</title>
@@ -200,26 +226,6 @@
         
         
         <category>diy</category>
-        
-      </item>
-    
-      <item>
-        <title>Setting up a Google Cloud Function</title>
-        <description>&lt;p&gt;With Google’s &lt;a href=&quot;https://cloud.google.com/functions&quot;&gt;Cloud Functions&lt;/a&gt; you can make simple microservices that can perform a task on Google’s infrastructure. This allows some functionality of an app to be moved to the...</description>
-        <pubDate>Sat, 09 Jan 2021 14:00:00 +0100</pubDate>
-        <link>https://blog.4dcu.be/programming/2021/01/09/Google-Cloud-Functions.html</link>
-        <guid isPermaLink="true">https://blog.4dcu.be/programming/2021/01/09/Google-Cloud-Functions.html</guid>
-        
-        <category>python</category>
-        
-        <category>google</category>
-        
-        <category>cloud</category>
-        
-        <category>web</category>
-        
-        
-        <category>programming</category>
         
       </item>
     

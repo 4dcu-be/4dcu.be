@@ -21,7 +21,7 @@ With only a handful of measurements per batch it will not be possible to correct
 
 ## Creating a dataset
 
-To test what [pyComBat] can do a synthetic dataset can be generated with a set of measurements, and a set with a slight
+To test what [pyComBat] can do, a synthetic dataset can be generated with a set of measurements, and a set with a slight
 deviation that mimics things that can occur when measuring samples at different dates or with different equipment. Here
 we'll use a dataset with values pulled from a normal distribution, and a uniformly distributed set of values. One effect
 will introduce is a shift, where simply all values measured in that batch are off by a constant amount and one where
@@ -68,7 +68,7 @@ df = pd.DataFrame(
 ## Inspecting the artificial dataset
 
 With a few lines using Seaborn's ```FacetGrid``` and ```histplot``` a plot can be generated to have a quick glance at
-the syntethic data. For this the data needs to be converted into the, so called, long format with Pandas' ```melt```
+the syntethic data. For this the data needs to be converted into the long format with Pandas' ```melt```
 function. 
 
 ```python
@@ -125,8 +125,8 @@ The result is a dataframe with the corrected features as shown below.
 
 Let's have a look which changes pyComBat made to our data and if it makes sense! The dataframe with corrected values
 also needs to be converted to a long format (again using ```melt```), merged with the original data using ```merge```
-and plotted. Here ```scatterplot``` is used to compare the original value (x-axis) and the corrected value (y-axis) for
-values from different batches (color). If no corrections we're done all samples will be on the diagonal as their x- and
+and plotted. Here ```scatterplot``` is used to compare the original value (x-axis) with the corrected value (y-axis) for
+values from different batches (color). If no corrections were done all samples would be on the diagonal as their x- and
 y-values are identical, where corrections are applied there will be a shift.
 
 ```python
@@ -163,7 +163,7 @@ introduced rather than resolved, so be careful and don't apply this nilly-willy 
 
 [pyComBat] is a great addition to the Python data-science ecosystem! It is easy to apply and works exactly as you
 would expect with Pandas's dataframes. Whether it will be helpful for your projects will depend on (a) how many
-samples there are (you can play with the num_samples parameter in the code and see the correction fail once the
+samples there are (you can play with the ```num_samples``` parameter in the code and see the correction fail once the
 number of samples is too small), (b) if they were properly randomized across batches and, (c) if there are any batch
 effects present. 
 

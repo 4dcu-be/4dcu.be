@@ -261,6 +261,8 @@
 
 	
 
+	
+
 <li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
 
       </ul>
@@ -490,13 +492,13 @@ button’s LED to full brightness in <code class="language-plaintext highlighter
      
     <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">led</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">leds</span><span class="p">):</span>
         <span class="n">led</span><span class="p">.</span><span class="n">duty_cycle</span> <span class="o">=</span> <span class="n">duty_cycles</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span>
-        <span class="n">duty_cycles</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">duty_cycles</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">-</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">duty_cycles</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">duty_cycles</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">-</span> <span class="mi">900</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-    <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)</span>
+    <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>When using this code, the LED under each button will light up as soon as you press a button and then quickly fade out. 
-The fade out speed can be changed by changing 600 in <code class="language-plaintext highlighter-rouge">duty_cycles[ix] = max(duty_cycles[ix] - 600, 0)</code> to a higher
+The fade out speed can be changed by changing 900 in <code class="language-plaintext highlighter-rouge">duty_cycles[ix] = max(duty_cycles[ix] - 900, 0)</code> to a higher
 or lower value to fade quicker or slower respectively.</p>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/pzYr8GDnu-k" title="MacroPad LED test" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
@@ -507,7 +509,7 @@ desktop too. Though ultimately these could be anything, just modify the mapping 
 
 <h2 id="closing-the-case">Closing the case</h2>
 
-<p>Once you are sure everything works, put everything in the case carefully. Soldered joints can be fragile to be gentle with
+<p>Once you are sure everything works, put everything in the case carefully. Soldered joints can be fragile so be gentle with
 the wiring and make sure not to apply force as this could break connections. You’ll need a few dots of hot glue to keep the Pi Pico
 in place in the bottom half of the case. Use the M3 bolts to screw the case close. There is no thread, though it should work
 well enough as the bolt will grab the ridges in the 3D printed holes, just don’t open and close the case more than 
@@ -629,6 +631,14 @@ buttons will have to suffice. Something more complex will be for a future post.<
 			
 		</span>
 		<span class="next-post">
+			
+				<a href="/programming/2021/04/21/Code-Nugget-Batch_Effects.html">
+					<span class="page-number">Fighting Batch Effects with pyComBat</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
 			
 		</span>
 	</section>
@@ -903,6 +913,8 @@ buttons will have to suffice. Something more complex will be for a future post.<
 
 	
 
+	
+
 <li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
 
       </ul>
@@ -958,7 +970,7 @@ buttons will have to suffice. Something more complex will be for a future post.<
     <div class="site-signature">
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
       <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
-			<p class="text">Last update: April 20, 2021</p>
+			<p class="text">Last update: April 21, 2021</p>
     </div>
 
   </div>
