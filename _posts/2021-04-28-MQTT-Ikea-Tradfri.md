@@ -35,8 +35,8 @@ again, albeit without any devices, we can start to set up the Zigbee devices.
 First there are a few add-ons to install. In the new version this can all be done using the 
 admin interface (**Supervisor** --> **Add-ons Store**) and no tinkering with the command line is required.
 
-  * [Mosquitto-MQTT]: The broker for passing messages from devices to and from Home Assistant
-  * [Zigbee2MQTT]: Required to get the Zigbee antenna to work and pair with devices.
+  * [Mosquitto-MQTT] : The broker for passing messages from devices to and from Home Assistant
+  * [Zigbee2MQTT] : Required to get the Zigbee antenna to work and pair with devices.
   * [File Editor] and/or [Samba share] : To edit configuration files
 
 The main reason for switching to Home Assistant OS is that the [Zigbee2MQTT] add-on has a few advantages over manually
