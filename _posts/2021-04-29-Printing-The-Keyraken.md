@@ -192,6 +192,14 @@ printing).
 
 ![Keyraken card back](/assets/posts/2021-04-29-Printing-The-Keyraken/keyraken_back.jpg){:.small-image}
 
+## Printing the cards
+
+The correct size for KeyForge cards is *poker size* on Printer Studio, and *poker size (63.5 x 88.9 mm)* on Make Playing
+Cards. However, the exact same image dimensions can be printed as 63 x 88 mm (Printer Studio) and poker size (63 x 88 mm) (MPC),
+which matches the size of Magic: the Gathering cards. Since you will never mix these cards with official cards,
+it doesn't matter much. I'll opt for the 63 x 88 mm so I can fill the order with some M:tG proxies and tokens (which do
+need to have the exact size of the actual cards, but this is entirely up to you !)
+
 ## Conclusion
 
 Releasing these expansions, which give a unique twist to an already great game, is very generous from FFG. With the
