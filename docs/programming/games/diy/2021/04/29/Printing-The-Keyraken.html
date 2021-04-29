@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Printing Rise of the Keyraken with PrinterStudio/MPC</title>
+  <meta name="description" content="Do you want some professionally printed cards for Rise of the Keyraken? Here is how to prepare the Print-and-Play assets from Fantasy Flight Games for printi...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Do you want some professionally printed cards for Rise of the Keyraken? Here is how to prepare the Print-and-Play assets from Fantasy Flight Games for printi..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/games/diy/2021/04/29/Printing-The-Keyraken.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Printing <em>Rise of the Keyraken</em> with PrinterStudio/MPC" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2021-04-29-Printing-The-Keyraken/keyraken_header.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Printing <em>Rise of the Keyraken</em> with PrinterStudio/MPC">
+  <meta name="twitter:description" content="Do you want some professionally printed cards for Rise of the Keyraken? Here is how to prepare the Print-and-Play assets from Fantasy Flight Games for printi...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2021-04-29-Printing-The-Keyraken/keyraken_header.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/games/diy/2021/04/29/Printing-The-Keyraken.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/games/diy/2021/04/29/Printing-The-Keyraken.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2021-04-29-Printing-The-Keyraken/keyraken_header.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Printing <em>Rise of the Keyraken</em> with PrinterStudio/MPC</h1>
+			
+      <p class="info"><em>and FFG's other Print-and-Play assets</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted April 29, 2021 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>, 
+    
+  
+    
+    <a href="/category/games">Games</a>, 
+    
+  
+    
+    <a href="/category/diy">Diy</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>Do you want some professionally printed cards for <a href="https://www.fantasyflightgames.com/en/news/2021/4/23/available-now-april-23/">Rise of the Keyraken</a>? Here is how to prepare the Print-and-Play
+assets from <a href="https://www.fantasyflightgames.com/">Fantasy Flight Games</a> for printing through a service like <a href="https://www.printerstudio.de/">PrinterStudio</a> or <a href="https://www.makeplayingcards.com/">Make Playing Cards</a> (MPC).</p>
+
+<p>FFG has previously released Print-and-Play decks for KeyForge. The idea is that these PDFs can be printed with any home
+printer and with a bit of work cut into individual cards, pushed into a sleeve with an actual card and played. This
+is a very cool idea that allows potential players to check out the game before committing money. Though as printing
+37 cards through PrinterStudio or MPC costs about the same as an actual KeyForge deck it doesn’t make much sense to 
+go through a service to print those decks.</p>
+
+<p>For the KeyForge Adventures, <a href="https://www.fantasyflightgames.com/en/news/2021/4/23/available-now-april-23/">Rise of the Keyraken</a> being the first, this is different. This set of cards is unlike 
+any normal KeyForge deck and is intended to allow up to three players to fight an ancient horror, the Keyraken, 
+together. So there is no similar product in the store you can go out and buy, so if you don’t want to go full
+DIY, printing the cards through a service becomes interesting. Though there are a few steps to get the images in the
+right resolution and size and to make sure the cards look as good as possible!</p>
+
+<h2 id="download-the-data">Download the data</h2>
+
+<p>FFG releases their Print-and-Play content as PDFs available from 
+<a href="https://drafts.fantasyflightgames.com/en/products/keyforge/">here</a> (Scroll down to the <strong>Support</strong> section). You’ll
+need to download from the <strong>KeyForge Adventures Print-and-Play Materials</strong> a few files:</p>
+
+<ul>
+  <li><a href="https://images-cdn.fantasyflightgames.com/filer_public/23/6e/236ed2c4-de85-4e3f-82b1-908f2ed0f2f9/kf_adv_keyraken_keyraken.pdf">The Keyraken Card</a></li>
+  <li><a href="https://images-cdn.fantasyflightgames.com/filer_public/99/46/9946ea16-6525-4abe-9774-fba884420524/kf_adv_keyraken_tide.pdf">The Tide Card</a></li>
+  <li><a href="https://images-cdn.fantasyflightgames.com/filer_public/c5/0c/c50c2857-cdcd-4e82-9e3f-58cc2f39ba4d/kf_adv_keyraken_card_pool_compressed.pdf">The Card Pool</a></li>
+</ul>
+
+<p>Also make sure to grab <a href="https://images-cdn.fantasyflightgames.com/filer_public/09/6b/096bc01e-b9a2-4b73-82d7-a467fe5cc8bd/kf_adv_rulebook_kr_compressed.pdf">the rules</a> as there are a few things different from a normal game of KeyForge.</p>
+
+<h2 id="preparing-images-for-printing">Preparing images for printing</h2>
+
+<p>For printing through a service these PDFs are not directly usable, they need to converted to individual images first and
+there needs to be a bleed area around the card. The latter is a bit of extra border that is printed around each card so 
+that when they are cut there is no unprinted area around the card that can show when the cut is ever so slightly 
+off-center.</p>
+
+<p>Fortunately with a little Python code this can be done. Extracting the images is trivial using the <a href="https://github.com/pankajr141/pdf2jpg">pdf2jpg</a> package in
+a few lines of code. Note that I put the downloaded files in a <code class="language-plaintext highlighter-rouge">./data/</code> folder and created a directory <code class="language-plaintext highlighter-rouge">./output/</code>
+for the results to be stored.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pdf2jpg</span> <span class="kn">import</span> <span class="n">pdf2jpg</span>
+
+<span class="n">inputpaths</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">"./data/kf_adv_keyraken_tide.pdf"</span><span class="p">,</span>
+    <span class="s">"./data/kf_adv_keyraken_keyraken.pdf"</span><span class="p">,</span>
+    <span class="s">"./data/kf_adv_keyraken_card_pool_compressed.pdf"</span><span class="p">]</span>
+
+<span class="n">outputpath</span> <span class="o">=</span> <span class="s">"./output/"</span>
+
+<span class="k">for</span> <span class="n">inputpath</span> <span class="ow">in</span> <span class="n">inputpaths</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Converting </span><span class="si">{</span><span class="n">inputpath</span><span class="si">}</span><span class="s">...."</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">pdf2jpg</span><span class="p">.</span><span class="n">convert_pdf2jpg</span><span class="p">(</span><span class="n">inputpath</span><span class="p">,</span> <span class="n">outputpath</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">1200</span><span class="p">,</span> <span class="n">pages</span><span class="o">=</span><span class="s">"ALL"</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"Done !"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This will create a folder in the <code class="language-plaintext highlighter-rouge">./output/</code> directory for each of the files containing a jpg for each page of the
+PDFs. Here pages are exported as 1200 dpi which is plenty for printing (the cards are printed at 800 dpi), though the
+bleed area needs to be added and, the size needs to be exactly 3288 by 4488 pixels.</p>
+
+<p>Manipulating images in Python can be done using the library <a href="https://python-pillow.org/">Pillow</a>, so make sure that is installed before running the
+code below.</p>
+
+<p>The code below will look at all files in a list of <code class="language-plaintext highlighter-rouge">input_directories</code> and add the bleed area. It will start by
+creating a blank image with the <code class="language-plaintext highlighter-rouge">target_size</code>, and draw the image smack in the middle. Next the left border from the 
+image is copied, flipped horizontally and put it in the right spot. This is repeated for the right side. Now the area 
+for the top is copied (which includes the left and right bleed area already added), flipped vertically and placed above, 
+finally this step is repeated for the bottom. You can see the image being build step-by-step in the GIF below.</p>
+
+<p><a href="/assets/posts/2021-04-29-Printing-The-Keyraken/bleed_step_by_step.gif" class="lightgallery-link" data-sub-html="This is how the codes builds the image step by step">
+<img src="/assets/posts/2021-04-29-Printing-The-Keyraken/bleed_step_by_step.gif" alt="This is how the codes builds the image step by step" class="small-image" data-src="/assets/posts/2021-04-29-Printing-The-Keyraken/bleed_step_by_step.gif" loading="lazy" />
+</a></p>
+
+<p>Code wise this isn’t really hard, though it takes some thinking to make sure you grab the right portions of the image 
+and paste them in the right spot. There is a little trial-and-error involved to get the right coordinates to make 
+everything fit and, it is easy to be off by a single pixel. When writing code to manipulate images make sure to run it 
+and inspect the image when zoomed in, single pixel error might not be visible if the image is scaled down!</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageOps</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">input_directories</span> <span class="o">=</span> <span class="p">[</span><span class="s">"./data/kf_adv_keyraken_tide.pdf_dir"</span><span class="p">,</span>
+                     <span class="s">"./output/kf_adv_keyraken_card_pool_compressed.pdf_dir"</span><span class="p">]</span>
+<span class="n">output_directories</span> <span class="o">=</span> <span class="p">[</span><span class="s">"./data/kf_adv_keyraken_tide_eng"</span><span class="p">,</span>
+                      <span class="s">"./output/kf_adv_keyraken_card_pool_compressed_eng"</span><span class="p">]</span>
+
+<span class="n">target_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3288</span><span class="p">,</span> <span class="mi">4488</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">input_dir</span><span class="p">,</span> <span class="n">output_dir</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">input_directories</span><span class="p">,</span> <span class="n">output_directories</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">os</span><span class="p">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="k">for</span> <span class="n">card_image</span> <span class="ow">in</span> <span class="n">os</span><span class="p">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">input_dir</span><span class="p">):</span>
+        <span class="n">card_path</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="n">card_image</span><span class="p">)</span>
+        <span class="n">card_output_path</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">card_image</span><span class="p">)</span>
+
+        <span class="n">background</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="s">"RGB"</span><span class="p">,</span> <span class="n">target_size</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
+        <span class="n">background_w</span><span class="p">,</span> <span class="n">background_h</span> <span class="o">=</span> <span class="n">background</span><span class="p">.</span><span class="n">size</span>
+
+        <span class="n">card</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="nb">open</span><span class="p">(</span><span class="n">card_path</span><span class="p">)</span>
+        <span class="n">card_w</span><span class="p">,</span> <span class="n">card_h</span> <span class="o">=</span> <span class="n">card</span><span class="p">.</span><span class="n">size</span>
+
+        <span class="n">pos_x</span> <span class="o">=</span> <span class="p">(</span><span class="n">background_w</span> <span class="o">-</span> <span class="n">card_w</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">pos_y</span> <span class="o">=</span> <span class="p">(</span><span class="n">background_h</span> <span class="o">-</span> <span class="n">card_h</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+
+        <span class="n">offset</span> <span class="o">=</span> <span class="p">(</span><span class="n">pos_x</span><span class="p">,</span> <span class="n">pos_y</span><span class="p">)</span>
+
+        <span class="n">background</span><span class="p">.</span><span class="n">paste</span><span class="p">(</span><span class="n">card</span><span class="p">.</span><span class="n">crop</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">card_w</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">card_h</span><span class="p">)),</span> <span class="n">offset</span><span class="p">)</span>
+        <span class="n">background</span><span class="p">.</span><span class="n">paste</span><span class="p">(</span><span class="n">ImageOps</span><span class="p">.</span><span class="n">mirror</span><span class="p">(</span><span class="n">card</span><span class="p">.</span><span class="n">crop</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pos_x</span><span class="p">,</span> <span class="n">card_h</span><span class="p">))),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pos_y</span><span class="p">))</span>
+        <span class="n">background</span><span class="p">.</span><span class="n">paste</span><span class="p">(</span><span class="n">ImageOps</span><span class="p">.</span><span class="n">mirror</span><span class="p">(</span><span class="n">card</span><span class="p">.</span><span class="n">crop</span><span class="p">((</span><span class="n">card_w</span><span class="o">-</span><span class="n">pos_x</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">card_w</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">card_h</span><span class="p">))),</span> <span class="p">(</span><span class="n">pos_x</span><span class="o">+</span><span class="n">card_w</span><span class="p">,</span> <span class="n">pos_y</span><span class="p">))</span>
+
+        <span class="n">background</span><span class="p">.</span><span class="n">paste</span><span class="p">(</span><span class="n">ImageOps</span><span class="p">.</span><span class="n">flip</span><span class="p">(</span><span class="n">background</span><span class="p">.</span><span class="n">crop</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">pos_y</span><span class="p">,</span> <span class="n">background_w</span><span class="p">,</span> <span class="n">pos_y</span><span class="o">*</span><span class="mi">2</span><span class="p">))),</span>
+                         <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="n">background</span><span class="p">.</span><span class="n">paste</span><span class="p">(</span><span class="n">ImageOps</span><span class="p">.</span><span class="n">flip</span><span class="p">(</span><span class="n">background</span><span class="p">.</span><span class="n">crop</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">card_h</span><span class="p">,</span> <span class="n">background_w</span><span class="p">,</span> <span class="n">card_h</span><span class="o">+</span><span class="n">pos_y</span><span class="p">))),</span>
+                         <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">card_h</span><span class="o">+</span><span class="n">pos_y</span><span class="p">))</span>
+
+        <span class="n">background</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="n">card_output_path</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="handling-the-keyraken">Handling the Keyraken</h2>
+
+<p>As the Keyraken card is intended to be printed at a larger format it needs to be handled separately. As I’d rather keep
+all cards in a simple standard deckbox, I don’t want the single oversize card. So I opted to split the card across two
+normal sized cards, similar to the mega-creatures from Mass Mutation. This required its own little script, but the
+principle is the same as before.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageOps</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s">"./output/kf_adv_keyraken_keyraken"</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">os</span><span class="p">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'./output/kf_adv_keyraken_keyraken.pdf_dir/0_kf_adv_keyraken_keyraken.pdf.jpg'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+
+<span class="c1"># rotate and resize image
+</span>
+<span class="n">input_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2953</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4193</span><span class="p">)</span>
+<span class="n">resized_image</span> <span class="o">=</span> <span class="n">image</span><span class="p">.</span><span class="n">rotate</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="mi">1</span><span class="p">).</span><span class="n">resize</span><span class="p">(</span><span class="n">input_size</span><span class="p">)</span>
+
+<span class="c1"># add bleed area
+</span><span class="n">target_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3288</span><span class="p">,</span> <span class="mi">4488</span><span class="p">)</span>
+
+<span class="n">pos_x</span> <span class="o">=</span> <span class="p">(</span><span class="n">target_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">input_size</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">//</span> <span class="mi">4</span>
+<span class="n">pos_y</span> <span class="o">=</span> <span class="p">(</span><span class="n">target_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">input_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">//</span> <span class="mi">2</span>
+
+<span class="n">offset</span> <span class="o">=</span> <span class="p">(</span><span class="n">pos_x</span><span class="p">,</span> <span class="n">pos_y</span><span class="p">)</span>
+
+<span class="n">image_bleed</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="s">"RGB"</span><span class="p">,</span> <span class="p">(</span><span class="n">target_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">pos_x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">target_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
+<span class="n">image_w</span><span class="p">,</span> <span class="n">image_h</span> <span class="o">=</span> <span class="n">image_bleed</span><span class="p">.</span><span class="n">size</span>
+
+<span class="n">image_bleed</span><span class="p">.</span><span class="n">paste</span><span class="p">(</span><span class="n">resized_image</span><span class="p">,</span> <span class="n">offset</span><span class="p">)</span>
+
+<span class="n">image_bleed</span><span class="p">.</span><span class="n">paste</span><span class="p">(</span><span class="n">ImageOps</span><span class="p">.</span><span class="n">mirror</span><span class="p">(</span><span class="n">resized_image</span><span class="p">.</span><span class="n">crop</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pos_x</span><span class="p">,</span> <span class="n">input_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]))),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pos_y</span><span class="p">))</span>
+<span class="n">image_bleed</span><span class="p">.</span><span class="n">paste</span><span class="p">(</span><span class="n">ImageOps</span><span class="p">.</span><span class="n">mirror</span><span class="p">(</span><span class="n">resized_image</span><span class="p">.</span><span class="n">crop</span><span class="p">((</span><span class="n">input_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos_x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">input_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">input_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]))),</span> <span class="p">(</span><span class="n">pos_x</span> <span class="o">+</span> <span class="n">input_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos_y</span><span class="p">))</span>
+
+<span class="n">image_bleed</span><span class="p">.</span><span class="n">paste</span><span class="p">(</span><span class="n">ImageOps</span><span class="p">.</span><span class="n">flip</span><span class="p">(</span><span class="n">image_bleed</span><span class="p">.</span><span class="n">crop</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">pos_y</span><span class="p">,</span> <span class="n">image_w</span><span class="p">,</span> <span class="n">pos_y</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))),</span>
+                 <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="n">image_bleed</span><span class="p">.</span><span class="n">paste</span><span class="p">(</span><span class="n">ImageOps</span><span class="p">.</span><span class="n">flip</span><span class="p">(</span><span class="n">image_bleed</span><span class="p">.</span><span class="n">crop</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">input_size</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">image_w</span><span class="p">,</span> <span class="n">input_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">pos_y</span><span class="p">))),</span>
+                  <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">input_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">pos_y</span><span class="p">))</span>
+
+<span class="c1"># Save image (full image and left and right halves)
+</span><span class="n">image_bleed</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s">"keyraken.jpg"</span><span class="p">))</span>
+<span class="n">image_bleed</span><span class="p">.</span><span class="n">crop</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">target_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">target_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])).</span><span class="n">save</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s">"keyraken_left.jpg"</span><span class="p">))</span>
+<span class="n">image_bleed</span><span class="p">.</span><span class="n">crop</span><span class="p">((</span><span class="n">image_w</span> <span class="o">-</span> <span class="n">target_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">image_w</span><span class="p">,</span> <span class="n">target_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])).</span><span class="n">save</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s">"keyraken_right.jpg"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="creating-a-card-back">Creating a card back</h2>
+
+<p>No Python required here, I used a card list (from a Print-and-Play deck) and, the Keyraken card to come up with the 
+image below. Feel free to use this one if you are following along (it is the correct size and includes a bleed for 
+printing).</p>
+
+<p><a href="/assets/posts/2021-04-29-Printing-The-Keyraken/keyraken_back.jpg" class="lightgallery-link" data-sub-html="Keyraken card back">
+<img src="/assets/posts/2021-04-29-Printing-The-Keyraken/keyraken_back.jpg" alt="Keyraken card back" class="small-image" data-src="/assets/posts/2021-04-29-Printing-The-Keyraken/keyraken_back.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Releasing these expansions, which give a unique twist to an already great game, is very generous from FFG. With the
+code here these free assets can be converted into something you can get professionally printed for a reasonable price.
+This way you’ll have an awesome looking KeyForge Adventure deck that you can pull out every time you want to team up
+with friends instead of facing them.</p>
+
+<p>Personally, I’m waiting for the next adventure to be released and print both at the same time. If the new ones require
+additional code to process I’ll make sure to post it on this blog and when I finally get physical cards there will
+be some picture showing up!</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/keyforge">keyforge</a>,&nbsp;<a href="/tag/printing">printing</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Printing+%3Cem%3ERise+of+the+Keyraken%3C%2Fem%3E+with+PrinterStudio%2FMPC&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2Fdiy%2F2021%2F04%2F29%2FPrinting-The-Keyraken.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Printing+%3Cem%3ERise+of+the+Keyraken%3C%2Fem%3E+with+PrinterStudio%2FMPC&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2Fdiy%2F2021%2F04%2F29%2FPrinting-The-Keyraken.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2Fdiy%2F2021%2F04%2F29%2FPrinting-The-Keyraken.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/diy/2021/04/28/MQTT-Ikea-Tradfri.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Expanding Zigbee Range with Ikea Tradfri Repeaters</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '4dcube';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
+			<p class="text">Last update: April 29, 2021</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/programming/games/diy/2021/04/29/Printing-The-Keyraken.html',
+    'title': 'Printing <em>Rise of the Keyraken</em> with PrinterStudio/MPC'
+  });
+</script>
+
+
+  </body>
+
+</html>
