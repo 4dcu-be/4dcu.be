@@ -391,7 +391,7 @@ away, mission accomplished ! Only thing to do is 3D print a nice stand for it.
 
 
 
-[last post]: {% post_url 2020-09-27-PythonKindleDashboard_1 %}
+[last post]: {% post_url 2020/2020-09-27-PythonKindleDashboard_1 %}
 [KUAL]: https://www.mobileread.com/forums/showthread.php?t=203326
 [ETL pipeline]: https://en.wikipedia.org/wiki/Extract,_transform,_load
 [Google Scholar]: https://scholar.google.com/citations?user=4niBmJUAAAAJ&hl=en

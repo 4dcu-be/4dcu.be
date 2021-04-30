@@ -16,7 +16,7 @@ gallery_items:
 
 Since seeing a Bluetooth Speaker build by [The Smuggler's Room] I have been planning to do one my self,
 here I'll discuss the electronics. Putting everything in a 3D printed case and painting it will be for the
-[next]({% post_url 2021-02-22-Bluetooth-Speaker %}). My build will be a little different from theirs, so I'll include details here.
+[next]({% post_url 2021/2021-02-22-Bluetooth-Speaker %}). My build will be a little different from theirs, so I'll include details here.
 
 **Parts Needed**
 

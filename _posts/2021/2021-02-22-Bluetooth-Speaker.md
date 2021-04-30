@@ -44,6 +44,6 @@ is hardly noticable. Very cool thing to put on the table while playing some Star
 else in a futuristic settings like Star Realms or Gaslands.
 
 [The Smuggler's Room]: https://www.youtube.com/watch?v=2wUlkyUbZ-I
-[part 1]: {% post_url 2021-01-16-Bluetooth-Speaker %}
-[updated settings]: {% post_url 2020-02-25-3D-printing %}
-[how to edit STL files]: {% post_url 2020-12-15-Editing-STL %}
+[part 1]: {% post_url 2021/2021-01-16-Bluetooth-Speaker %}
+[updated settings]: {% post_url 2020/2020-02-25-3D-printing %}
+[how to edit STL files]: {% post_url 2020/2020-12-15-Editing-STL %}

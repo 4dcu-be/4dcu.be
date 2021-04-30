@@ -56,7 +56,7 @@ and running.
 
 Jekyll is based on Ruby, not a particularly popular programming language these days, so if you do want/need to extend it, 
 you'll have to learn that language. While this is just a small hurdle for minor changes, like the ones I describe in
-[this post]({% post_url 2020-03-13-Jekyll-Blog %}), adding in larger features (e.g. adding support for new filetypes) 
+[this post]({% post_url 2020/2020-03-13-Jekyll-Blog %}), adding in larger features (e.g. adding support for new filetypes) 
 would require you to study up on this programming language (which I personally don't have other use for). While there
 are great plugins available, the number of plugins is somewhat limited compared to other platforms.
 
@@ -192,7 +192,7 @@ Header image by [Jayphen Simpson] on [Unsplash]
 [Pelican]: https://docs.getpelican.com/en/latest/
 [JekyllThemes]: http://jekyllthemes.org/
 [Beyond the Known]: https://www.beyond-the-known.eu/
-[DeckLock]: {% post_url 2020-04-05-DeckLock %}
+[DeckLock]: {% post_url 2020/2020-04-05-DeckLock %}
 [Pelican Themes]: http://www.pelicanthemes.com/
 [wordpress.com]: https://wordpress.com/
 [Netlify]: https://www.netlify.com/

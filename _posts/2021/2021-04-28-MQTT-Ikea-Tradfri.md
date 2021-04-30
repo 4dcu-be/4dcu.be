@@ -76,7 +76,7 @@ if devices are paired correctly, by clicking **Map** --> **Load Map**.
 While more and more settings can be altered through the Admin interface, right now I did most of the configuration by
 editing YAML files based off my previous configuration. Using the [File Editor] you can start modifying 
 ```configuration.yaml```, ```automations.yaml```, ... for the Aqara cube
-the same configuration as described in [this post]({% post_url 2020-09-10-MQTT %}) still worked. Alternatively, if you 
+the same configuration as described in [this post]({% post_url 2020/2020-09-10-MQTT %}) still worked. Alternatively, if you 
 install the [Samba share] add-on, you can map the Raspberry Pi as a network drive in Windows. From
 that path all configuration files can be directly edited using your favorite text editor.
 
@@ -125,8 +125,8 @@ to install them more than make up for that.
 
 
 
-[Aqara Sensors]: {% post_url 2021-03-25-MQTT %}
-[previous post]: {% post_url 2021-03-25-MQTT %}
+[Aqara Sensors]: {% post_url 2021/2021-03-25-MQTT %}
+[previous post]: {% post_url 2021/2021-03-25-MQTT %}
 [Home Assistant]: https://www.home-assistant.io/
 [Home Assistant Operating System]: https://www.home-assistant.io/installation/
 [Mosquitto-MQTT]: https://github.com/home-assistant/addons/blob/master/mosquitto/DOCS.md

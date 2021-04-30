@@ -22,4 +22,4 @@ for more analyses of Gwent Pro Rank data later !
 
 
 [Team Bandit Gang]: https://teambanditgang.com/
-[Gwent Pro Rank]: {% post_url 2020-09-01-GwentProRankAnalysis %}
+[Gwent Pro Rank]: {% post_url 2020/2020-09-01-GwentProRankAnalysis %}

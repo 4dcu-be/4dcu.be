@@ -322,4 +322,4 @@ familiar pandas dataframe the actual analysis can begin. This however is reserve
 [Mesa]: https://mesa.readthedocs.io/en/stable/#
 [ELO]: https://en.wikipedia.org/wiki/Elo_rating_system
 [tqdm]: https://github.com/tqdm/tqdm
-[next post]: {% post_url 2020-11-11-Gwent-Pro-Rank-ABM_2 %}
+[next post]: {% post_url 2020/2020-11-11-Gwent-Pro-Rank-ABM_2 %}

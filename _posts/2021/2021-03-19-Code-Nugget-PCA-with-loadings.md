@@ -132,6 +132,6 @@ a PCA plot with all elements you would expect!
 
 ![PCA plot with loadings and explained variance included as is the norm form PCA plots in scientific literature](/assets/posts/2021-03-19-Code-Nugget-PCA-with-loadings/PCA_with_loadings.png)
 
-Like with the [previous post]({% post_url 2021-03-16-Code-Nugget-Correlation-Heatmaps %}) with some extra effort the
+Like with the [previous post]({% post_url 2021/2021-03-16-Code-Nugget-Correlation-Heatmaps %}) with some extra effort the
 plots are considerably better when interpreting data. I will certainly be copy-pasting these bits often for various
 analyses, hope others find them useful to !

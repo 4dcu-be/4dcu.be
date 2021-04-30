@@ -23,7 +23,7 @@ on [Team Bandit Gang]'s website.
 
 [Team Bandit Gang]: https://teambanditgang.com/
 [article]: https://teambanditgang.com/gwent-popularity/
-[here]: {% post_url 2021-01-24-GwentProPlayersAnalysis %}
+[here]: {% post_url 2021/2021-01-24-GwentProPlayersAnalysis %}
 [Babyjosus]: https://twitter.com/babyjosus
 [Whats in my Deckbuilder]: https://teambanditgang.com/articles/whats-in-my-deckbuilder/
 [me]: https://teambanditgang.com/sepro-whats-in-my-deckbuilder/

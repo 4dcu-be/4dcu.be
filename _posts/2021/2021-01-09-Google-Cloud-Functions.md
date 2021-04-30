@@ -145,7 +145,7 @@ Header by [Ian Battaglia](https://unsplash.com/@ianjbattaglia) on [Unsplash](htt
 
 [Cloud Functions]: https://cloud.google.com/functions
 [BeautifulSoup]: https://www.crummy.com/software/BeautifulSoup/bs4/doc/
-[previous post]: {% post_url 2020-10-04-PythonKindleDashboard_2 %}
+[previous post]: {% post_url 2020/2020-10-04-PythonKindleDashboard_2 %}
 [GitHub]: https://github.com/4dcu-be/ScholarJSON
 [requests]: https://requests.readthedocs.io/en/master/
 [sebastian.proost.science]: https://sebastian.proost.science

@@ -166,5 +166,5 @@ age where [digital wellbeing] is starting to show up on the agenda of companies 
 CDPR might need to have a look at sooner or later.
 
 
-[previous post]: {% post_url 2020-11-11-Gwent-Pro-Rank-ABM %}
+[previous post]: {% post_url 2020/2020-11-11-Gwent-Pro-Rank-ABM %}
 [digital wellbeing]: https://digitalwellbeing.org/

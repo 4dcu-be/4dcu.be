@@ -169,5 +169,5 @@ shows KUAL with our own freshly created buttons, that will soon run some Python 
 
 While not without issues, it was possible to jailbreak the Kindle Paperwhite 3, install Python and run custom code on
 it. This means everything is ready to start hacking together a few scripts to actually turn the kindle into a dashboard.
-Stay tuned as this will come up in the [next post]({% post_url 2020-10-04-PythonKindleDashboard_2 %}).
+Stay tuned as this will come up in the [next post]({% post_url 2020/2020-10-04-PythonKindleDashboard_2 %}).
 

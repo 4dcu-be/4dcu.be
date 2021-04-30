@@ -126,7 +126,7 @@ Benford's Law predicts they would be.
 ## More datasets: COVID-19 infections, bacteria in the human gut and Gwent scores
 
 So the altitudes of capital cities indeed seems to follow Benford's Law. Time to grab some other datasets and see if 
-Benford's Law holds there. I picked Gwent MMR scores from the [previous post]({% post_url 2020-09-01-GwentProRankAnalysis %}),
+Benford's Law holds there. I picked Gwent MMR scores from the [previous post]({% post_url 2020/2020-09-01-GwentProRankAnalysis %}),
 the number of daily COVID-19 infections in Belgian provinces, obtained from [Sciensano](https://www.sciensano.be/en/covid-19-data) and
 bacterial abundances in the human gut from the [Human Microbiome Project](https://www.hmpdacc.org/). 
 

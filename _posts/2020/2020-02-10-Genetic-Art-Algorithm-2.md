@@ -17,7 +17,7 @@ gallery_items:
 
 ---
 
-While the genetic algorithm in the [previous post]({% post_url 2020-01-12-Genetic-Art-Algorithm %})
+While the genetic algorithm in the [previous post]({% post_url 2020/2020-01-12-Genetic-Art-Algorithm %})
 worked very well, it didn't quite produce the style of minimalist artwork I was trying to achieve. Furthermore, it didn't allow
 the chromosomes to evolve using duplication and deletion of existing genes (which is very common in biology). So
 after mulling over these issues a few days, I found a solution using a [Voronoi diagram]. The final 
@@ -144,7 +144,7 @@ one. Both images have a comparable fitness (distance to the target painting).
 This approach generates a minimalist style I was initially aiming for, while allowing for duplication and loss events
 which mimic biology. Mission accomplished! 
 
-The code used here is mostly the same as the [previous post]({% post_url 2020-01-12-Genetic-Art-Algorithm %}), so I 
+The code used here is mostly the same as the [previous post]({% post_url 2020/2020-01-12-Genetic-Art-Algorithm %}), so I 
 didn't go over it in much depth. However, everything can be found on GitHub! Check the
 [repository](https://github.com/4dcu-be/Genetic-Art-Algorithm-part-2) for the full working code.
 
