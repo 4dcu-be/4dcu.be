@@ -228,7 +228,7 @@ syntax of an image, linking to another file. With the hook this is turned into t
 tag. This way in case we ever need to use the markdown file in another project, where Vega is not available the page
 will render the static image without issue and turn it into a link to the JSON data.</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">&lt;vegachart schema-url="{{ site.baseurl }}/assets/posts/2021-05-03-Interactive-Visualizations/cars2.json" style="width</span><span class="pi">:</span> <span class="s">100%"&gt;&lt;/vegachart&gt;</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="pi">[</span><span class="kt">![Number</span> <span class="nv">of cylinders vs different stats</span><span class="pi">]</span><span class="s">(/assets/posts/2021-05-03-Interactive-Visualizations/cars2.png)](/assets/posts/2021-05-03-Interactive-Visualizations/cars2.json)</span>
 </code></pre></div></div>
 
 <p>This custom plugin will detect this and convert it into the required <code class="language-plaintext highlighter-rouge">&lt;vegachart&gt;</code> tag. In case there is no plugin

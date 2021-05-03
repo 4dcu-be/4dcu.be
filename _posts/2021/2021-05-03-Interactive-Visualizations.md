@@ -118,7 +118,7 @@ will render the static image without issue and turn it into a link to the JSON d
 
 {% raw %}
 ```yaml
-[![Number of cylinders vs different stats](/assets/posts/2021-05-03-Interactive-Visualizations/cars2.png)](/assets/posts/2021-05-03-Interactive-Visualizations/cars2.json)
+ [![Number of cylinders vs different stats](/assets/posts/2021-05-03-Interactive-Visualizations/cars2.png)](/assets/posts/2021-05-03-Interactive-Visualizations/cars2.json)
 ```
 {% endraw %}
 
