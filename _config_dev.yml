@@ -15,6 +15,7 @@ exclude:
   - "circle.yml"
   - "LICENSE.md"
   - "README.md"
+  - "featured.json"
 
 # Build website in _site during development
 destination: "./_site"

@@ -578,3 +578,24 @@ code.highlighter-rouge {
     max-height: 400px;
     overflow-y: scroll;
 }
+
+vegachart {
+  text-align: center;
+}
+
+.vg-tooltip {
+  padding: 0px !important;
+}
+
+.vg-tooltip table {
+  margin: 0px;
+}
+
+
+.vg-tooltip tr {
+  border-bottom: 1px solid #ddd
+}
+
+.vg-tooltip td {
+  border-bottom: none
+}

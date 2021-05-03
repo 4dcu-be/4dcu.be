@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Language" content="en">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Altair + Vega + Justcharts = Interactive Visualisations in Static Websites</title>
+  <meta name="description" content="Despite being a huge proponent of using interactive plots when publishing data visualisations on the web, the plots  on this blog are all static. Using Altai...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Despite being a huge proponent of using interactive plots when publishing data visualisations on the web, the plots  on this blog are all static. Using Altai..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/2021/05/03/Interactive-Visualizations.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Altair + Vega + Justcharts = Interactive Visualisations in Static Websites" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/images/headers/python_code.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Altair + Vega + Justcharts = Interactive Visualisations in Static Websites">
+  <meta name="twitter:description" content="Despite being a huge proponent of using interactive plots when publishing data visualisations on the web, the plots  on this blog are all static. Using Altai...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/images/headers/python_code.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/2021/05/03/Interactive-Visualizations.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/2021/05/03/Interactive-Visualizations.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+	<div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/images/headers/python_code.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Altair + Vega + Justcharts = Interactive Visualisations in Static Websites</h1>
+			
+      <p class="info"><em></em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted May 3, 2021 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>Despite being a huge proponent of using interactive plots when publishing data visualisations on the web, the plots 
+on this blog are all static. Using <a href="https://altair-viz.github.io/">Altair</a>, <a href="https://vega.github.io/">Vega</a> and a little library <a href="https://github.com/koaning/justcharts">justcharts</a> all pieces finally fell into place to
+start practicing what I’ve been preaching on this blog as well!</p>
+
+<h2 id="the-problem-with-static-site-generators-and-interactive-charts">The problem with static site generators and interactive charts</h2>
+
+<p>Pandas, numpy, scikit-learn and <a href="https://seaborn.pydata.org/">seaborn</a> are commonly used when playing around with data and have been
+used in all data-related posts on this blog before. However, while seaborn produces very nice images, with relatively little effort,
+there isn’t a straightforward way to add some interactivity to them. You could, once you have results you want to show,
+write additional code to export the data in a format compatible with a javascript charting library (like <a href="https://www.chartjs.org/">Chart.js</a>).
+Apart from being extra work, this results into a second issue … How to include these in a blog generated using e.g. Jekyll? 
+Markdown supports images, but adding charts usually requires specific html tags and a few custom lines of javascript, 
+which should not be included in markdown files.</p>
+
+<h2 id="how-to-solve-this-in-a-nutshell">How to solve this in a nutshell</h2>
+
+<p><a href="https://altair-viz.github.io/">Altair</a>, a Python package to create charts, solves the first problem. While working in a notebook, Altair behaves the
+same as seaborn, the plots show up when they need to. However, under the hood these plots are drawn using <a href="https://vega.github.io/">Vega</a>, a 
+javascript library. Altair also allows the plot-data to be exported as a JSON file that can be rendered on any website,
+as long as you include the required javascript.</p>
+
+<p>Including the necessary javascript in a <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> file to include these plots in a e.g. a <a href="https://jekyllrb.com/">Jekyll</a> blog, is still an 
+anti-pattern. This is where <a href="https://github.com/koaning/justcharts">justcharts</a> comes in. Once this library is loaded, a JSON file with a Vega plot can be 
+included using a single line of HTML.</p>
+
+<h2 id="using-altair-to-prepare-the-plot">Using Altair to prepare the plot</h2>
+
+<p>This post isn’t supposed to be a comprehensive tutorial for Altair or Vega, so it is kept very simple. An example
+dataset is loaded and shown as a scatter-plot, however by including the <code class="language-plaintext highlighter-rouge">tooltip=</code> keyword additional information
+is shown when hovering over nodes. The <code class="language-plaintext highlighter-rouge">.interactive()</code> method allows basic panning and zooming, simple but 
+sufficient as a proof-of-concept.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="n">alt</span>
+<span class="kn">from</span> <span class="nn">vega_datasets</span> <span class="kn">import</span> <span class="n">data</span>
+
+<span class="n">source</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">cars</span><span class="p">()</span>
+<span class="n">source</span><span class="p">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s">"Miles_per_Gallon"</span><span class="p">:</span><span class="s">"Miles per Gallon"</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">chart</span> <span class="o">=</span> <span class="n">alt</span><span class="p">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">).</span><span class="n">mark_circle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">60</span><span class="p">).</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s">'Horsepower'</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s">'Miles per Gallon'</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s">'Origin'</span><span class="p">,</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s">'Name'</span><span class="p">,</span> <span class="s">'Origin'</span><span class="p">,</span> <span class="s">'Horsepower'</span><span class="p">,</span> <span class="s">'Miles per Gallon'</span><span class="p">]</span>
+<span class="p">).</span><span class="n">interactive</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Altair’s API feels a little like a hybrid between seaborn and ggplot2, and it will require some getting used to when
+coming from another library. However, in a few lines of code we have a plot with tooltips and zooming/panning. Next,
+the plot data needs to be exported, the <code class="language-plaintext highlighter-rouge">.to_dict()</code> function returns the data as a Python dictionary, so we can
+easily make a few adjustments to the data. Here, the width is set to container, so the plot will be the same width as
+the parent element of the page, making the plot immediately responsive as well.</p>
+
+<p>Finally, the dictionary is converted to JSON and written to disk.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="n">vega_dict</span> <span class="o">=</span> <span class="n">chart</span><span class="p">.</span><span class="n">to_dict</span><span class="p">()</span>
+<span class="n">vega_dict</span><span class="p">[</span><span class="s">"width"</span><span class="p">]</span> <span class="o">=</span> <span class="s">"container"</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"cars.json"</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">vega_dict</span><span class="p">),</span> <span class="nb">file</span><span class="o">=</span><span class="n">fout</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="including-everything-in-a-jekyll-template">Including everything in a Jekyll template</h2>
+
+<p>Fortunately, the <a href="https://github.com/4dcu-be/4dcu.be">Jekyll template</a> used for this blog already supports adding additional js libraries to specific posts.
+So after copying all .js files to the correct directory they can be enabled for a specific post by including the few
+lines below in the header.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">custom_js</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">vega.min</span>
+  <span class="pi">-</span> <span class="s">vega-lite.min</span>
+  <span class="pi">-</span> <span class="s">vega-embed.min</span>
+  <span class="pi">-</span> <span class="s">justcharts</span>
+</code></pre></div></div>
+
+<p>With these libraries loaded a <code class="language-plaintext highlighter-rouge">&lt;vegachart&gt;</code> html tag, with the attribute <code class="language-plaintext highlighter-rouge">schema-url</code> pointing to the JSON file
+made using Altair, can be included in a post. It will magically be converted into a graph, no additonal code required. 
+Note that the custom style <code class="language-plaintext highlighter-rouge">style="width: 100%"</code> is required when the width is set to container in the Vega JSON file.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;vegachart</span> <span class="na">schema-url=</span><span class="s">"{{ site.baseurl }}/assets/posts/2021-05-03-Interactive-Visualizations/cars.json"</span> <span class="na">style=</span><span class="s">"width: 100%"</span><span class="nt">&gt;&lt;/vegachart&gt;</span>
+</code></pre></div></div>
+
+<p>The result is shown below. A pan-able, zoom-able chart with tooltips showing additional data for each point. A small,
+but significant improvement over a static image! Vega can do much, much more, so this can be pushed a further still .</p>
+
+<vegachart schema-url="/assets/posts/2021-05-03-Interactive-Visualizations/cars.json" style="width: 100%"></vegachart>
+
+<h2 id="better-integration-with-markdown">Better integration with Markdown</h2>
+
+<p>While a few HTML tags in a markdown document in some cases cannot be avoided, there is a way to do this even better. 
+Using a Jekyll hook, we can create a custom plugin that scans for a pattern as shown below. This is a valid Markdown
+syntax of an image, linking to another file. With the hook this is turned into the <code class="language-plaintext highlighter-rouge">&lt;vegachart&gt;</code>
+tag. This way in case we ever need to use the markdown file in another project, where Vega is not available the page
+will render the static image without issue and turn it into a link to the JSON data.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">&lt;vegachart schema-url="{{ site.baseurl }}/assets/posts/2021-05-03-Interactive-Visualizations/cars2.json" style="width</span><span class="pi">:</span> <span class="s">100%"&gt;&lt;/vegachart&gt;</span>
+</code></pre></div></div>
+
+<p>This custom plugin will detect this and convert it into the required <code class="language-plaintext highlighter-rouge">&lt;vegachart&gt;</code> tag. In case there is no plugin
+it is perfectly valid Markdown and will show the PNG version of the image, which can be clicked to download the JSON
+file.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">Jekyll</span><span class="o">::</span><span class="no">Hooks</span><span class="p">.</span><span class="nf">register</span> <span class="ss">:posts</span><span class="p">,</span> <span class="ss">:pre_render</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="p">,</span> <span class="n">payload</span><span class="o">|</span>
+  <span class="n">post</span><span class="p">.</span><span class="nf">content</span><span class="p">.</span><span class="nf">gsub!</span><span class="p">(</span><span class="sr">/^\[!\[(.*)\]\(([^\)]+)\)\]\(([^\)]+)\)/</span><span class="p">,</span> <span class="s2">"&lt;vegachart schema-url=</span><span class="se">\"</span><span class="s2">{{ site.baseurl }}</span><span class="se">\\</span><span class="s2">3</span><span class="se">\"</span><span class="s2"> style=</span><span class="se">\"</span><span class="s2">width: 100%</span><span class="se">\"</span><span class="s2">&gt;&lt;/vegachart&gt;"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>And to show this works, here is the car dataset but shown as box-plots comparing different features based on the number
+of cylinders. (Okay, I’m lying the previous plot also was included using this syntax)</p>
+
+<vegachart schema-url="/assets/posts/2021-05-03-Interactive-Visualizations/cars2.json" style="width: 100%"></vegachart>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Your mileage may vary as the creator of <a href="https://github.com/koaning/justcharts">justcharts</a> describes his own library as 
+“<a href="https://twitter.com/fishnets88/status/1388753884236156931">very hacky</a>” and me adding another layer onto it probably
+isn’t making it any better. Regardless of the hacky-ness, this provides an extremely elegant way to include interactive plots in a Jekyll 
+template. The workflow as a whole is also smooth as data can be explored as before, with the exception Altair
+needs to be used instead of seaborn, exported and added with the same amount of code as before. It will take some work to get
+as proficient with Altair as I’m currently with seaborn, but the advantage of having interactive graphs in my blog is 
+absolutely worth putting in a little effort.</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/pandas">pandas</a>,&nbsp;<a href="/tag/data-science">data-science</a>,&nbsp;<a href="/tag/altair">altair</a>,&nbsp;<a href="/tag/vega">vega</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Altair+%2B+Vega+%2B+Justcharts+%3D+Interactive+Visualisations+in+Static+Websites&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2021%2F05%2F03%2FInteractive-Visualizations.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Altair+%2B+Vega+%2B+Justcharts+%3D+Interactive+Visualisations+in+Static+Websites&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2021%2F05%2F03%2FInteractive-Visualizations.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2021%2F05%2F03%2FInteractive-Visualizations.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/programming/games/diy/2021/04/29/Printing-The-Keyraken.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Printing <em>Rise of the Keyraken</em> with PrinterStudio/MPC</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '4dcube';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</p>
+			<p class="text">Last update: May 3, 2021</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+<!-- Custom page specific js files -->
+  
+    <script src='/js/vega.min.js' type="text/javascript"></script>
+  
+    <script src='/js/vega-lite.min.js' type="text/javascript"></script>
+  
+    <script src='/js/vega-embed.min.js' type="text/javascript"></script>
+  
+    <script src='/js/justcharts.js' type="text/javascript"></script>
+  
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/programming/2021/05/03/Interactive-Visualizations.html',
+    'title': 'Altair + Vega + Justcharts = Interactive Visualisations in Static Websites'
+  });
+</script>
+
+
+  </body>
+
+</html>
