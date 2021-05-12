@@ -45,10 +45,9 @@ explore the Zigbee network map those features are a boon. So let's start adding 
 
 ## Pair Zigbee devices
 
-**Unlike** what is mentioned on other websites, Zigbee devices **do not** manage the route to the central antenna through
-repeaters themselves (or at least not through the Tradfri ones). I wasted a fair amount of time on this before realizing 
-that the repeater simply remained unused. Therefore, it is imperative that you pair the 
-devices to the repeater correctly. Fortunately, using the Zigbee2MQTT interface this is relatively straightforward to do.
+While it seems Zigbee devices can find the best route to the main controller it might take some time for them to find 
+this path. The sensors initially didn't connect through te repeater, and lost the connection when moved to the final
+location. Fortunately, using the Zigbee2MQTT interface it is relatively straightforward to connect devices to a specific receiver.
 First, goto **Zigbee2mqtt** (in the sidebar) and click  **Permit join (All)**, this will give you a four-minute window
 to pair devices. I paired an [Aqara Cube] (open the battery lid, hold the button for 5 seconds until the blue LED blinks,
 make sure to move/shake the cube while waiting for it to pair, otherwise it will go into sleep mode which will cause the
