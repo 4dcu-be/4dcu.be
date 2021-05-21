@@ -581,6 +581,8 @@ code.highlighter-rouge {
 
 vegachart {
   text-align: center;
+  max-width: 100%;
+  overflow-x: scroll;
 }
 
 .vg-tooltip {

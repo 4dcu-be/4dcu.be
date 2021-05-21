@@ -1585,7 +1585,9 @@ code.highlighter-rouge {
   overflow-y: scroll; }
 
 vegachart {
-  text-align: center; }
+  text-align: center;
+  max-width: 100%;
+  overflow-x: scroll; }
 
 .vg-tooltip {
   padding: 0px !important; }
