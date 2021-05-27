@@ -46,7 +46,8 @@ included using a single line of HTML.
 This post isn't supposed to be a comprehensive tutorial for Altair or Vega, so it is kept very simple. An example
 dataset is loaded and shown as a scatter-plot, however by including the ```tooltip=``` keyword additional information
 is shown when hovering over nodes. The ```.interactive()``` method allows basic panning and zooming, simple but 
-sufficient as a proof-of-concept.
+sufficient as a proof-of-concept. Here, the width property set to container, so the plot will be the same width as
+the parent element of the page, making the plot immediately responsive as well.
 
 ```python
 import altair as alt
@@ -60,21 +61,19 @@ chart = alt.Chart(source).mark_circle(size=60).encode(
     y='Miles per Gallon',
     color='Origin',
     tooltip=['Name', 'Origin', 'Horsepower', 'Miles per Gallon']
-).interactive()
+).interactive().properties(width='container')
 ```
 
 Altair's API feels a little like a hybrid between seaborn and ggplot2, and it will require some getting used to when
 coming from another library. However, in a few lines of code we have a plot with tooltips and zooming/panning. Next,
 the plot data needs to be exported, the ```.to_dict()``` function returns the data as a Python dictionary, so we can
-easily make a few adjustments to the data. Here, the width is set to container, so the plot will be the same width as
-the parent element of the page, making the plot immediately responsive as well.
+easily make a few adjustments to the data if necessary. 
 
 Finally, the dictionary is converted to JSON and written to disk.
 
 ```python
 import json
 vega_dict = chart.to_dict()
-vega_dict["width"] = "container"
 with open("cars.json", mode="w") as fout:
   print(json.dumps(vega_dict), file=fout)
 ```
