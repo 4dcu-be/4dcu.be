@@ -5,7 +5,7 @@ byline: "... the electronics"
 date:   2021-01-16 10:00:00
 author: Sebastian Proost
 categories: diy
-tags:	bluetooth hardware speaker
+tags:	bluetooth hardware speaker star-wars rogue-one 3d-printing
 cover:  "/assets/posts/2021-01-16-Bluetooth-Speaker/modules.jpg"
 thumbnail: "/assets/images/thumbnails/bluetooth_speaker_modules.jpg"
 gallery_items:
