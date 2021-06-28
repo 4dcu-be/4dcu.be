@@ -1307,6 +1307,18 @@ pre code.hljs {
         display: block; }
         .page-content .category-wrapper:last-child {
           margin-right: 0; } }
+  .page-content .category-list .post-count {
+    color: #999;
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 48.821174201%;
+    text-align: left;
+    font-size: 0.9em;
+    float: none;
+    display: inline; }
+    .page-content .category-list .post-count:last-child {
+      margin-right: 0; }
   .page-content .pagination {
     padding-top: 2em;
     text-align: center;

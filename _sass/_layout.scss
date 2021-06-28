@@ -290,6 +290,15 @@ pre code.hljs {
 	}
 	.category-list {
 		@extend %default-ul;
+
+		.post-count {
+		  color: $medium-gray;
+			@include span-columns(6);
+			text-align: left;
+			font-size: 0.9em;
+			float: none;
+			display: inline;
+		}
 	}
 	.pagination {
 		padding-top: 2em;

@@ -74,6 +74,9 @@ disqus_shortname: 4dcube
 # Google analytics
 ga_tracking_id: "UA-47068418-5"
 
+# Buy me a Coffee username
+buy_me_a_coffee_username: "4dcube"
+
 # Category descriptions (for archive pages)
 descriptions:
   - cat: programming
@@ -84,6 +87,9 @@ descriptions:
 
   - cat: diy
     desc: "Not everything needs to be digital !"
+
+  - cat: general
+    desc: "Things about 4DCu.Be"
 
 # Social icons and sharing options
 social:

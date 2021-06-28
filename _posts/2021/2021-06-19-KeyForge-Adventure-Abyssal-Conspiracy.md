@@ -11,7 +11,7 @@ thumbnail: "/assets/images/thumbnails/abyssal_conspiracy.jpg"
 gallery_items:
   - image: "/assets/posts/2021-06-19-KeyForge-Adventure-Abyssal-Conspiracy/abyssal_conspiracy_header.jpg"
     gallery_image: "/assets/images/gallery/abyssal_conspiracy.jpg"
-    description: "Abyssal Conspiracy cards printed in 2D with the tableau token in 3D"
+    description: "Abyssal Conspiracy cards printed in 2D with the tableau token in 3D."
 ---
 
 Both KeyForge Adventures have been out for a while and as I've managed to defeat the Keyraken with all my decks it is

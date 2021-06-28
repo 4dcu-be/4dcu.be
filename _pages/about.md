@@ -17,3 +17,9 @@ If you want to find out more about my research head over to [sebastian.proost.sc
 ## Why 4DCu.be
 
 It should be read as 4D Cube! A 4D cube, also known as a hypercube or [tesseract](https://en.wikipedia.org/wiki/Tesseract), is the 4D equivalent of a cube, just as a cube is the 3D equivalent of a square. It appears very often in popular (and less popular) culture ranging from Marvel Blockbusters to cult-classics (e.g. [Cube²: Hypercube](https://en.wikipedia.org/wiki/Cube_2:_Hypercube)). Seemed like a suitable name  for a blog focusing on tech, programming and building things.
+
+
+## Like this blog ?
+
+If you do, great! Feel free to reach out and let me know what you'd like to see more off! If you want to show your
+appreciation you can contribute to my caffeine addiction and [Buy me a Coffee](https://buymeacoffee.com/{{site.buy_me_a_coffee_username}}).

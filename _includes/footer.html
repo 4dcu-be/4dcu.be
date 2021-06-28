@@ -13,7 +13,6 @@
     </div>
 
     <div class="site-contact">
-
       <p><strong>Contact</strong></p>
       <ul class="social-media-list">
         {% include social_media_links.html %}
@@ -21,8 +20,12 @@
     </div>
 
     <div class="site-signature">
+			{% if site.buy_me_a_coffee_username %}
+			<p><strong>Contribute</strong></p>
+			<p><i class="fa fa-coffee"></i> <a href="https://buymeacoffee.com/{{site.buy_me_a_coffee_username}}">Buy me a Coffee </a></p>
+			<br />
+			{% endif %}
       <p class="rss-subscribe text"><strong>Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></strong></p>
-      <p class="text">{{ site.description }}</p>
 			<p class="text">Last update: {{ site.time | date: "%B %-d, %Y" }}</p>
     </div>
 

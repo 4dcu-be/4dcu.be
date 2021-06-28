@@ -56,7 +56,7 @@ pagination:
 	<ul class="category-list">
 		{% for category in site.categories %}
 		{% capture cat %}{{ category | first }}{% endcapture %}
-		<li><a href="{{ site.baseurl }}/category/{{ cat }}">{{ cat | capitalize }}</a></li>
+		<li><a href="{{ site.baseurl }}/category/{{ cat }}">{{ cat | capitalize }}</a> <span class="post-count">({{ category[1].size }})</span></li>
 		{% endfor %}
 	</ul>
 	</div>
