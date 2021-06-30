@@ -163,8 +163,7 @@ included using a single line of HTML.</p>
 <p>This post isn’t supposed to be a comprehensive tutorial for Altair or Vega, so it is kept very simple. An example
 dataset is loaded and shown as a scatter-plot, however by including the <code class="language-plaintext highlighter-rouge">tooltip=</code> keyword additional information
 is shown when hovering over nodes. The <code class="language-plaintext highlighter-rouge">.interactive()</code> method allows basic panning and zooming, simple but 
-sufficient as a proof-of-concept. Here, the width property set to container, so the plot will be the same width as
-the parent element of the page, making the plot immediately responsive as well.</p>
+sufficient as a proof-of-concept.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="n">alt</span>
 <span class="kn">from</span> <span class="nn">vega_datasets</span> <span class="kn">import</span> <span class="n">data</span>
@@ -177,20 +176,18 @@ the parent element of the page, making the plot immediately responsive as well.<
     <span class="n">y</span><span class="o">=</span><span class="s">'Miles per Gallon'</span><span class="p">,</span>
     <span class="n">color</span><span class="o">=</span><span class="s">'Origin'</span><span class="p">,</span>
     <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s">'Name'</span><span class="p">,</span> <span class="s">'Origin'</span><span class="p">,</span> <span class="s">'Horsepower'</span><span class="p">,</span> <span class="s">'Miles per Gallon'</span><span class="p">]</span>
-<span class="p">).</span><span class="n">interactive</span><span class="p">().</span><span class="n">properties</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s">'container'</span><span class="p">)</span>
+<span class="p">).</span><span class="n">interactive</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>Altair’s API feels a little like a hybrid between seaborn and ggplot2, and it will require some getting used to when
-coming from another library. However, in a few lines of code we have a plot with tooltips and zooming/panning. Next,
-the plot data needs to be exported, the <code class="language-plaintext highlighter-rouge">.to_dict()</code> function returns the data as a Python dictionary, so we can
-easily make a few adjustments to the data if necessary.</p>
+coming from another library. However, in a few lines of code we have a plot with tooltips and zooming/panning.</p>
 
-<p>Finally, the dictionary is converted to JSON and written to disk.</p>
+<p>Finally, the chart can be written to disk as a JSON file compatible with Vega-Lite. Here,
+<code class="language-plaintext highlighter-rouge">.properties(width='container')</code> (which doesn’t work inside a Jupyter Notebook) is applied first to make sure 
+it will occupy the full width of the parent element once included in the website. This makes the plot responsive as 
+well in one go. Using <code class="language-plaintext highlighter-rouge">.save()</code> everything is stored in the specified file.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">json</span>
-<span class="n">vega_dict</span> <span class="o">=</span> <span class="n">chart</span><span class="p">.</span><span class="n">to_dict</span><span class="p">()</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"cars.json"</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">vega_dict</span><span class="p">),</span> <span class="nb">file</span><span class="o">=</span><span class="n">fout</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">chart</span><span class="p">.</span><span class="n">properties</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s">'container'</span><span class="p">).</span><span class="n">save</span><span class="p">(</span><span class="s">"cars.json"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="including-everything-in-a-jekyll-template">Including everything in a Jekyll template</h2>
@@ -526,7 +523,7 @@ absolutely worth putting in a little effort.</p>
 			<br />
 			
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
-			<p class="text">Last update: June 28, 2021</p>
+			<p class="text">Last update: June 30, 2021</p>
     </div>
 
   </div>

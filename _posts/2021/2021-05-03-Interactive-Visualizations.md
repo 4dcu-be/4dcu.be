@@ -46,8 +46,7 @@ included using a single line of HTML.
 This post isn't supposed to be a comprehensive tutorial for Altair or Vega, so it is kept very simple. An example
 dataset is loaded and shown as a scatter-plot, however by including the ```tooltip=``` keyword additional information
 is shown when hovering over nodes. The ```.interactive()``` method allows basic panning and zooming, simple but 
-sufficient as a proof-of-concept. Here, the width property set to container, so the plot will be the same width as
-the parent element of the page, making the plot immediately responsive as well.
+sufficient as a proof-of-concept. 
 
 ```python
 import altair as alt
@@ -61,21 +60,19 @@ chart = alt.Chart(source).mark_circle(size=60).encode(
     y='Miles per Gallon',
     color='Origin',
     tooltip=['Name', 'Origin', 'Horsepower', 'Miles per Gallon']
-).interactive().properties(width='container')
+).interactive()
 ```
 
 Altair's API feels a little like a hybrid between seaborn and ggplot2, and it will require some getting used to when
-coming from another library. However, in a few lines of code we have a plot with tooltips and zooming/panning. Next,
-the plot data needs to be exported, the ```.to_dict()``` function returns the data as a Python dictionary, so we can
-easily make a few adjustments to the data if necessary. 
+coming from another library. However, in a few lines of code we have a plot with tooltips and zooming/panning. 
 
-Finally, the dictionary is converted to JSON and written to disk.
+Finally, the chart can be written to disk as a JSON file compatible with Vega-Lite. Here, 
+```.properties(width='container')``` (which doesn't work inside a Jupyter Notebook) is applied first to make sure 
+it will occupy the full width of the parent element once included in the website. This makes the plot responsive as 
+well in one go. Using ```.save()``` everything is stored in the specified file.
 
 ```python
-import json
-vega_dict = chart.to_dict()
-with open("cars.json", mode="w") as fout:
-  print(json.dumps(vega_dict), file=fout)
+chart.properties(width='container').save("cars.json")
 ```
 
 ## Including everything in a Jekyll template
