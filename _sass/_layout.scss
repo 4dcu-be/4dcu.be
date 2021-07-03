@@ -433,6 +433,7 @@ pre code.hljs {
 				color: $medium-gray;
 			}
 		}
+	  min-height: 60vh;
 		.profile {
 			max-width: 320px;
 			margin: auto;
@@ -591,7 +592,8 @@ code.highlighter-rouge {
 vegachart {
   text-align: center;
   max-width: 100%;
-  overflow-x: scroll;
+  overflow-x: auto;
+  min-width:200px;
 }
 
 .vg-tooltip {
