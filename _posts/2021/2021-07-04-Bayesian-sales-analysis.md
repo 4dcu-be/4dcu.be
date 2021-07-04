@@ -17,17 +17,17 @@ custom_js:
 ---
 
 Bayesian analysis and probabilistic programming is fairly different from 'regular' analysis. So here I'll take 
-you through my first attempt at using PyMC3 to analyse sales data of [KeyForge] decks and explore the effects of 
+you through my first attempt at using [PyMC3] to analyse sales data of [KeyForge] decks and explore the effects of 
 COVID-19 restrictions and releasing new content. PyMC3 takes some getting used to, but at the end you'll see there are
 some clear advantages of this approach!
 
 In this post we are looking at KeyForge sales, a collectible card game from FFG, which is in many ways unique. However, for
 sake of this post there are just a few things that matter; the game is sold as individual decks or starter kits with
-two decks (and some tokens to play the game) and each deck is randomly generated and unique. Players are encouraged to 
-scan a QR code included with each deck using the companion app to register it online. The number of decks that has been
-registered since KeyForge's release in November 2018 can be found on their website. New sets are released every six to 
-eight months with new cards and new mechanics, prior to each release there is a period where new cards are spoiled and
-advertising increases.
+two decks (and some tokens to play the game). Each deck is randomly generated and unique, decks are supposed to be played
+as is, without changing the cards. Players are encouraged to scan a QR code included with each deck using the companion 
+app to register it online. The number of decks that has been registered since KeyForge's release in November 2018 can be 
+found on their website. New sets are released every six to eight months with new cards and new mechanics, prior to each 
+release there is a period where new cards are spoiled and advertising increases.
 
 So while the number of registered decks is not 100% of sold decks, players are encouraged to register their decks, so 
 we'll assume that the majority does. Overall trends in registered decks will also reflect trends in actual sales. As
@@ -49,7 +49,7 @@ install [PyMC3] through conda-forge. Additionally, pandas, numpy and a few other
 PyMC3.
 
 On *Windows* you'll also need the Visual Studio 2017 build tools, with C tools (note these are optional, check them in
-the components). The libpython package needs to be installed in the environment as well.
+the options during installation). The libpython package needs to be installed in the environment as well.
 
 ```bash
 conda create --name pymc3
@@ -60,7 +60,7 @@ jupyter notebook
 ```
 
 Alternatively, you can start from [this GitHub repository] and follow instructions in the README.md to set up the 
-environment.
+environment or launch it on [binder](https://mybinder.org/v2/gh/4dcu-be/BayesianSalesAnalysis/HEAD).
 
 ## Loading the data
 
@@ -75,7 +75,7 @@ data = pd.read_csv('./data/archon_arcana_weekly_20210619.csv', thousands=',')
 data['Week_nr'] = data.index
 data = data[data.Week_nr > 0] # ignore first line which is day 3, start with week 1
 model_data = data[["Week_nr", "Total"]].copy()
-model_data["Total_scaled"] = model_data["Total"]/10000 # PyMC3 doesn't seem to like very large numbers, so lets bring them down a few orders of magnitude
+model_data["Total_scaled"] = model_data["Total"]/10000
 model_data
 
 ```
@@ -108,7 +108,7 @@ as it should and give us an initial impression of the data. The equation is for 
 y = ax + b
 
 where x would be the weeks since release, and y the number of registered decks. The slope *a* would be the number of 
-decks registered per week. As on point zero there would not have been any decks sold, we don't need an intercept (b), 
+decks registered per week. As on point zero there would not have been any decks sold, we don't need an intercept (*b*), 
 we only have a single variable in the model, the slope. 
 
 For Bayesian models we do need to include some priors, we have to provide the model with some sensible values to start, 
@@ -136,8 +136,8 @@ with pm.Model() as model:
     trace = pm.sample(1000, cores=4, chains=4)
 ```
 
-In the full notebook (TODO add link) you'll find code to inspect and visualize the output. Here we'll just have a look
-at the fit. The actual number of registered decks is indicated by the blue line, while the model's mean value and range
+In the [GitHub repo] you'll find all code to inspect and visualize the output, this part is not included in this post. 
+The actual number of registered decks is indicated by the blue line, while the model's mean value and range
 are shown by a gray line and shaded area respectively.
 
 [![A linear model doesn't fit particularly well, but its a start](/assets/posts/2021-07-04-Bayesian-sales-analysis/model_1.svg)](/assets/posts/2021-07-04-Bayesian-sales-analysis/model_1.json)
@@ -151,7 +151,7 @@ While COVID-19 seems to be the biggest thing to account next in the model, befor
 model has to be implemented as a generative model. Rather than having an equation, in a generative model each value 
 is based on the one before. We are now a little wiser, so we can set the initial mu for the weekly registrations
 to 1.5 (about 15k decks are registered weekly). We also know decks cannot be un-registered, so this value can never be
-below zero.
+below zero (using ```pm.Bound()```).
 
 {:.large-code}
 ```python
@@ -191,7 +191,15 @@ with pm.Model() as model_2:
     trace_2 = pm.sample(1000, cores=4, chains=4)
 ```
 
+This change does make the sampling slower while the output is identical, however it is a much better base to wontinue to
+work on.
+
 ## Adding the effect of a global pandemic
+
+We'll have to add two components to the model, a starting point for COVID-19, we know this was around week 70 and allow
+for some flexibility as different countries took different measures at the start. We'll also define a new slope once
+the pandemic started. Using ```pm.math.switch()``` we can specify that before the start one slope is used and afterwards
+the second.
 
 {:.large-code}
 ```python
@@ -252,11 +260,15 @@ with pm.Model() as model_3:
 
 [![Combination of two linear models (pre-covid and during covid) is a much better fit](/assets/posts/2021-07-04-Bayesian-sales-analysis/model_3.svg)](/assets/posts/2021-07-04-Bayesian-sales-analysis/model_3.json)
 
+A much better fit indeed, the bend in the graph caused by COVID-19 restrictions is clearly captured by the model. With
+this in place we can continue to add additional complexity. There are these notches in the graph that coincide with
+releasing new sets, those are the next to include!
+
 ## Adding the effect of new releases
 
 To prevent card games from going stale, new sets are released ever so often. For KeyForge the release cycle is six to
 eight months. Prior to releasing the new set the advertisement for the game goes up significantly. So upon the actual
-release there typically is a renewed interest in the game increasing sales. This explains the knicks in the curve, upon
+release there typically is a renewed interest in the game increasing sales. This explains the nicks in the curve, upon
 each new release there is a sharp increase in registration, which fades over time. 
 
 To model this we'll include an interest factor for each set which decays with an unknown factor over time. The week a
@@ -264,10 +276,9 @@ new set is released we add that set's interest to the current overall interest (
 apply the decay on consecutive weeks. The base registration rate is multiplied by 1 + current interest. (Also note
 that I'm jumping from model 3 to 5 here, it took a while to figure out how to implement this and model 4 was very wrong)
 
-You can consider the interest not only as a factor how much they increase registration relatively to the
-expected registrations, but also as an absolute increase in registrations. To include this in the model, this
-is added using the ```pm.Deterministic()``` function. This allows you to include additional calculations in the model,
-without their own priors, to examine at the end.
+You can consider the interest not as a factor, but as an number of additional registrations upon release. To include 
+this in the model, this is added using the ```pm.Deterministic()``` function. This allows you to include additional 
+calculations in the model, without their own priors, to examine at the end.
 
 {:.large-code}
 ```python
@@ -422,8 +433,9 @@ the pandemic never happened. To do this, we need to tweak the model a little. We
 ```pm.Data()```, which can be altered after fitting the model. There also is a small change to the trace function to
 get the sampling to work with this fixed parameter, ```init="adapt_diag"``` is added to avoid errors.
 
+
+In the code below only changes from the previous are shown.
 ```python
-len_observed = len(model_data)
 with pm.Model() as model_5:
     # ...
     # here we set the start of covid manually (based on previous notebook)
@@ -475,12 +487,15 @@ with pm.Model() as model_7:
     cota_interest = pm.Normal("cota_interest", mu=4.11, sigma=0.19)
     aoa_interest = pm.Normal("aoa_interest", mu=1.7, sigma=0.16)
     wc_interest = pm.Normal("wc_interest", mu=0.95, sigma=0.13)
+    # Maybe people's buying behaviour responds differently to
+    # the release of a new set during COVID.
+    # Set the two most recent sets to a worst case scenario
     mm_interest = pm.Normal(
         "mm_interest", mu=0.95, sigma=0.13
-    )  # Maybe people's buying behaviour responds differently to
+    )  
     dt_interest = pm.Normal(
         "dt_interest", mu=0.95, sigma=0.13
-    )  # the release of a new set, worst case scenario is setting these very low
+    )  
 
     interest_decayed = [cota_interest]
 
@@ -521,9 +536,8 @@ with pm.Model() as model_7:
 [![Alternative way to change models](/assets/posts/2021-07-04-Bayesian-sales-analysis/combined_predictions.svg)](/assets/posts/2021-07-04-Bayesian-sales-analysis/combined_predictions.json)
 
 As you can see, in the pessimistic model the bumps caused by releasing the latest sets are far more modest and in 
-line with previous releases. This could indicate that purchasing behaviour is different during COVID-19 (which I full
-expect to be the case). Around here most shops were doing a "Buy 1 DT Deck, get and CotA deck for free", if this was
-a big enough phenomenon, this could also explain the steeper increase in registrations.
+line with previous releases. This could indicate that purchasing behaviour is different during COVID-19 (which I fully
+expect to be the case).
 
 ## Conclusion
 
@@ -533,6 +547,8 @@ with advantages: These models are very easy to inspect and
 understand what each parameter is doing and, we can change parameters to model scenarios for which we don't have any
 data. Unlike machine learning models which are often black boxes, with internals that are hard to understand and even
 harder to change, this is a huge advantage when predicting things.
+
+The interpretation of some of these results will come up soon in a new, non-technical, post, stay tuned ! 
 
 ## Resources
 
@@ -548,6 +564,7 @@ In case you want to get started with PyMC3 yourself, here are the resources I've
 [Anaconda]: https://anaconda.org/
 [PyMC3]: https://docs.pymc.io/
 [this GitHub repository]: https://github.com/4dcu-be/BayesianSalesAnalysis
+[GitHub repo]: https://github.com/4dcu-be/BayesianSalesAnalysis
 [KeyForge]: https://www.keyforgegame.com/
 [PyMC3 Workshop]: https://www.youtube.com/watch?v=ZxR3mw-Znzc
 [Thomas Wiecki]: https://twitter.com/twiecki

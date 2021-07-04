@@ -1425,20 +1425,22 @@ pre code.hljs {
       float: left;
       margin: 1em 0;
       text-align: right; }
-  .page-content .page .post-header {
-    padding: 0.5em 1em 1em 1em;
-    text-align: center; }
-  .page-content .page .posts-list li {
-    padding: 0.4822530864em;
-    padding-left: 0; }
-  .page-content .page .posts-list .desc {
-    font-size: 0.9em; }
-  .page-content .page .posts-list .post-date {
-    color: #999; }
-  .page-content .page .profile {
-    max-width: 320px;
-    margin: auto;
-    padding-bottom: 0.5em; }
+  .page-content .page {
+    min-height: 60vh; }
+    .page-content .page .post-header {
+      padding: 0.5em 1em 1em 1em;
+      text-align: center; }
+    .page-content .page .posts-list li {
+      padding: 0.4822530864em;
+      padding-left: 0; }
+    .page-content .page .posts-list .desc {
+      font-size: 0.9em; }
+    .page-content .page .posts-list .post-date {
+      color: #999; }
+    .page-content .page .profile {
+      max-width: 320px;
+      margin: auto;
+      padding-bottom: 0.5em; }
 
 /*
 *	Footer
@@ -1599,7 +1601,8 @@ code.highlighter-rouge {
 vegachart {
   text-align: center;
   max-width: 100%;
-  overflow-x: scroll; }
+  overflow-x: auto;
+  min-width: 200px; }
 
 .vg-tooltip {
   padding: 0px !important; }
