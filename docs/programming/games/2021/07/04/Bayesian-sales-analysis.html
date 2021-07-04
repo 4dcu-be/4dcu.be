@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Bayesian analysis of sales data, using PyMC3</title>
+  <meta name="description" content="Bayesian analysis and probabilistic programming is fairly different from ‘regular’ analysis. So here I’ll take  you through my first attempt at using PyMC3 t...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Bayesian analysis and probabilistic programming is fairly different from ‘regular’ analysis. So here I’ll take  you through my first attempt at using PyMC3 t..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/games/2021/07/04/Bayesian-sales-analysis.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Bayesian analysis of sales data, using PyMC3" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2021-07-04-Bayesian-sales-analysis/bayesian_sales.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Bayesian analysis of sales data, using PyMC3">
+  <meta name="twitter:description" content="Bayesian analysis and probabilistic programming is fairly different from ‘regular’ analysis. So here I’ll take  you through my first attempt at using PyMC3 t...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2021-07-04-Bayesian-sales-analysis/bayesian_sales.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/games/2021/07/04/Bayesian-sales-analysis.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/games/2021/07/04/Bayesian-sales-analysis.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+	<div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2021-07-04-Bayesian-sales-analysis/bayesian_sales.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Bayesian analysis of sales data, using PyMC3</h1>
+			
+      <p class="info"><em></em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted July 4, 2021 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>, 
+    
+  
+    
+    <a href="/category/games">Games</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>Bayesian analysis and probabilistic programming is fairly different from ‘regular’ analysis. So here I’ll take 
+you through my first attempt at using <a href="https://docs.pymc.io/">PyMC3</a> to analyse sales data of <a href="https://www.keyforgegame.com/">KeyForge</a> decks and explore the effects of 
+COVID-19 restrictions and releasing new content. PyMC3 takes some getting used to, but at the end you’ll see there are
+some clear advantages of this approach!</p>
+
+<p>In this post we are looking at KeyForge sales, a collectible card game from FFG, which is in many ways unique. However, for
+sake of this post there are just a few things that matter; the game is sold as individual decks or starter kits with
+two decks (and some tokens to play the game). Each deck is randomly generated and unique, decks are supposed to be played
+as is, without changing the cards. Players are encouraged to scan a QR code included with each deck using the companion 
+app to register it online. The number of decks that has been registered since KeyForge’s release in November 2018 can be 
+found on their website. New sets are released every six to eight months with new cards and new mechanics, prior to each 
+release there is a period where new cards are spoiled and advertising increases.</p>
+
+<p>So while the number of registered decks is not 100% of sold decks, players are encouraged to register their decks, so 
+we’ll assume that the majority does. Overall trends in registered decks will also reflect trends in actual sales. As
+the website only reports the number of decks currently registered, it is imperative to keep track of those data over 
+time. Fortunately, Duk from <a href="https://archonarcana.com/Main_Page">Archon Arcana</a> has collected these numbers from the very beginning and kindly shared 
+the raw data for us to play with (check out their page <a href="https://archonarcana.com/Master_Vault#Registered_decks">here</a>).</p>
+
+<p>Below you can see the number or registered decks over time (blue line), superimposed on the final model (gray line with
+min-max range shaded in light gray). For a model this is a very good fit, in this post I’ll take you through the steps
+it took to get to this point, starting from a simple linear model, to one that includes an impact of releasing new sets
+and an effect from COVID-19 regulations.</p>
+
+<vegachart schema-url="/assets/posts/2021-07-04-Bayesian-sales-analysis/model_5.json" style="width: 100%"></vegachart>
+
+<h2 id="installing-pymc3">Installing PyMC3</h2>
+
+<p>The easiest way to set up PyMC3 is to install <a href="https://anaconda.org/">Anaconda</a> and create a new environment, activate the environment and
+install <a href="https://docs.pymc.io/">PyMC3</a> through conda-forge. Additionally, pandas, numpy and a few other packages are useful when working with
+PyMC3.</p>
+
+<p>On <em>Windows</em> you’ll also need the Visual Studio 2017 build tools, with C tools (note these are optional, check them in
+the options during installation). The libpython package needs to be installed in the environment as well.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda create <span class="nt">--name</span> pymc3
+conda activate pymc3
+conda <span class="nb">install</span> <span class="nt">-c</span> conda-forge pymc3 pandas numpy  jupyterlab altair nb_black arviz
+
+jupyter notebook
+</code></pre></div></div>
+
+<p>Alternatively, you can start from <a href="https://github.com/4dcu-be/BayesianSalesAnalysis">this GitHub repository</a> and follow instructions in the README.md to set up the 
+environment or launch it on <a href="https://mybinder.org/v2/gh/4dcu-be/BayesianSalesAnalysis/HEAD">binder</a>.</p>
+
+<h2 id="loading-the-data">Loading the data</h2>
+
+<p>Loading the data provided by <a href="https://archonarcana.com/Main_Page">Archon Arcana</a> is straightforward, it is a csv file that can be loaded using pandas. It
+contains the number of registrations per week (collected on Sundays), though the first line is from the first few days
+as this isn’t a full week, we’ll discard that line. Also, depending on the model it could be beneficial to scale the
+total number of registrations down so parameters in the model are more managable in range. Here the total number is
+divided by 10 000.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'./data/archon_arcana_weekly_20210619.csv'</span><span class="p">,</span> <span class="n">thousands</span><span class="o">=</span><span class="s">','</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s">'Week_nr'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">index</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">.</span><span class="n">Week_nr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="c1"># ignore first line which is day 3, start with week 1
+</span><span class="n">model_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s">"Week_nr"</span><span class="p">,</span> <span class="s">"Total"</span><span class="p">]].</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">model_data</span><span class="p">[</span><span class="s">"Total_scaled"</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_data</span><span class="p">[</span><span class="s">"Total"</span><span class="p">]</span><span class="o">/</span><span class="mi">10000</span>
+<span class="n">model_data</span>
+
+</code></pre></div></div>
+
+<p>As we only need the week number, total number of decks and, the scaled total. The columns are selected from the 
+DataFrame, resulting in the table below.</p>
+
+<table class="narrow-rows">
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right">Week_nr</th>
+      <th style="text-align: right">Total</th>
+      <th style="text-align: right">Total_scaled</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">158016</td>
+      <td style="text-align: right">15.8016</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">2</td>
+      <td style="text-align: right">2</td>
+      <td style="text-align: right">218733</td>
+      <td style="text-align: right">21.8733</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">268026</td>
+      <td style="text-align: right">26.8026</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">4</td>
+      <td style="text-align: right">4</td>
+      <td style="text-align: right">311895</td>
+      <td style="text-align: right">31.1895</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">5</td>
+      <td style="text-align: right">5</td>
+      <td style="text-align: right">358098</td>
+      <td style="text-align: right">35.8098</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">130</td>
+      <td style="text-align: right">130</td>
+      <td style="text-align: right">2308213</td>
+      <td style="text-align: right">230.8213</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">131</td>
+      <td style="text-align: right">131</td>
+      <td style="text-align: right">2332833</td>
+      <td style="text-align: right">233.2833</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">132</td>
+      <td style="text-align: right">132</td>
+      <td style="text-align: right">2346868</td>
+      <td style="text-align: right">234.6868</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">133</td>
+      <td style="text-align: right">133</td>
+      <td style="text-align: right">2359112</td>
+      <td style="text-align: right">235.9112</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">134</td>
+      <td style="text-align: right">134</td>
+      <td style="text-align: right">2368328</td>
+      <td style="text-align: right">236.8328</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="a-humble-beginning---fitting-a-linear-model">A humble beginning - Fitting a linear model</h2>
+
+<p>Just to start let’s fit a simple linear model onto this curve. At first glance it looks like the number of registered
+decks is going up relatively stable over time. So starting with a simple model will make sure everything is working 
+as it should and give us an initial impression of the data. The equation is for a linear model is simple</p>
+
+<p>y = ax + b</p>
+
+<p>where x would be the weeks since release, and y the number of registered decks. The slope <em>a</em> would be the number of 
+decks registered per week. As on point zero there would not have been any decks sold, we don’t need an intercept (<em>b</em>), 
+we only have a single variable in the model, the slope.</p>
+
+<p>For Bayesian models we do need to include some priors, we have to provide the model with some sensible values to start, 
+which will be refined during sampling. In case we have prior knowledge we can incorporate this at this stage. However 
+here we’ll assume, like Jon Snow, we know nothing and, we’ll set our priors to very generic value with a large 
+uncertainty.</p>
+
+<p>To define the probability of seeing certain data given the model’s priors, we need to define the likelihood.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+    <span class="c1"># priors
+</span>    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Exponential</span><span class="p">(</span><span class="s">"sigma"</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">slope</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">"slope"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+    <span class="c1"># Likelihood
+</span>    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
+        <span class="s">"y"</span><span class="p">,</span>
+        <span class="n">mu</span><span class="o">=</span><span class="n">slope</span> <span class="o">*</span> <span class="n">model_data</span><span class="p">.</span><span class="n">Week_nr</span><span class="p">,</span>
+        <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span>
+        <span class="n">observed</span><span class="o">=</span><span class="n">model_data</span><span class="p">.</span><span class="n">Total_scaled</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># posterior
+</span>    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">cores</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In the <a href="https://github.com/4dcu-be/BayesianSalesAnalysis">GitHub repo</a> you’ll find all code to inspect and visualize the output, this part is not included in this post. 
+The actual number of registered decks is indicated by the blue line, while the model’s mean value and range
+are shown by a gray line and shaded area respectively.</p>
+
+<vegachart schema-url="/assets/posts/2021-07-04-Bayesian-sales-analysis/model_1.json" style="width: 100%"></vegachart>
+
+<p>This isn’t a particularly good fit, we undershoot the sales the first 80 weeks considerably, while overshooting more
+recent sales. The culprit here is COVID-19, the pandemic caused global restrictions on social gatherings 
+around week 70. As many shops had to close, tournaments were cancelled, borders closed, lockdowns prevented people going
+over to a friend’s house and play, … there were bound to be consequences on the number of decks being opened.</p>
+
+<p>While COVID-19 seems to be the biggest thing to account next in the model, before we can add this, the simple linear 
+model has to be implemented as a generative model. Rather than having an equation, in a generative model each value 
+is based on the one before. We are now a little wiser, so we can set the initial mu for the weekly registrations
+to 1.5 (about 15k decks are registered weekly). We also know decks cannot be un-registered, so this value can never be
+below zero (using <code class="language-plaintext highlighter-rouge">pm.Bound()</code>).</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">len_observed</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_data</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_2</span><span class="p">:</span>
+    <span class="c1"># priors
+</span>    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Exponential</span><span class="p">(</span><span class="s">"sigma"</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># Sigma for likelihood function
+</span>
+    <span class="c1"># We know from the previous analysis there are on average 15 000 decks registered per week
+</span>    <span class="c1"># this can be the baseline (mu) with a rather large deviation (sigma)
+</span>    <span class="c1"># as decks cannot be un-registered, this value can never go negative, so we'll put a limit on it preventing that
+</span>    <span class="n">BoundNormal_0</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Bound</span><span class="p">(</span><span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">weekly_registrations</span> <span class="o">=</span> <span class="n">BoundNormal_0</span><span class="p">(</span><span class="s">"weekly_registrations"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">len_observed</span><span class="p">)</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="n">set_subtensor</span><span class="p">(</span>
+        <span class="n">y0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">15</span>
+    <span class="p">)</span>  <span class="c1"># there were 150k decks registered the first week, that is the initial value (150 000/10 000)
+</span>
+    <span class="n">outputs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">theano</span><span class="p">.</span><span class="n">scan</span><span class="p">(</span>
+        <span class="n">fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ws</span><span class="p">:</span> <span class="n">tt</span><span class="p">.</span><span class="n">set_subtensor</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">ws</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]),</span>
+        <span class="n">sequences</span><span class="o">=</span><span class="p">[</span><span class="n">tt</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">len_observed</span><span class="p">)],</span>
+        <span class="n">outputs_info</span><span class="o">=</span><span class="n">y0</span><span class="p">,</span>
+        <span class="n">non_sequences</span><span class="o">=</span><span class="n">weekly_registrations</span><span class="p">,</span>
+        <span class="n">n_steps</span><span class="o">=</span><span class="n">len_observed</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">total_registrations</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s">"total_registrations"</span><span class="p">,</span> <span class="n">outputs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Likelihood
+</span>    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
+        <span class="s">"y"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">total_registrations</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">model_data</span><span class="p">.</span><span class="n">Total_scaled</span>
+    <span class="p">)</span>
+
+    <span class="c1"># posterior
+</span>    <span class="n">trace_2</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">cores</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This change does make the sampling slower while the output is identical, however it is a much better base to wontinue to
+work on.</p>
+
+<h2 id="adding-the-effect-of-a-global-pandemic">Adding the effect of a global pandemic</h2>
+
+<p>We’ll have to add two components to the model, a starting point for COVID-19, we know this was around week 70 and allow
+for some flexibility as different countries took different measures at the start. We’ll also define a new slope once
+the pandemic started. Using <code class="language-plaintext highlighter-rouge">pm.math.switch()</code> we can specify that before the start one slope is used and afterwards
+the second.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_3</span><span class="p">:</span>
+    <span class="c1"># priors
+</span>    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Exponential</span><span class="p">(</span><span class="s">"sigma"</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># Sigma for likelihood function
+</span>
+    <span class="n">covid_start</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">DiscreteUniform</span><span class="p">(</span>
+        <span class="s">"covid_start"</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">85</span>
+    <span class="p">)</span>  <span class="c1"># COVID started at different points in different countries lets start around week 70
+</span>
+    <span class="c1"># We know from the previous analysis there are on average 15 000 decks registered per week
+</span>    <span class="c1"># this can be the baseline (mu) with a rather large deviation (sigma)
+</span>    <span class="c1"># as decks cannot be un-registered, this value can never go negative, so we'll put a limit on it preventing that
+</span>    <span class="n">BoundNormal_0</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Bound</span><span class="p">(</span><span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="c1"># As the average is 15 000 (1.5 after scaling), and we assume COVID-19 had a negative impact on sales, we'll set the
+</span>    <span class="c1"># initial value for post-COVID to 1 (10 000 decks registered per week)
+</span>    <span class="n">weekly_registrations_covid</span> <span class="o">=</span> <span class="n">BoundNormal_0</span><span class="p">(</span>
+        <span class="s">"weekly_registrations_covid"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># As the average was affected by COVID, pre-COVID sales were likely better, this is reflected by setting the intial value
+</span>    <span class="c1"># of this prior to 2
+</span>    <span class="n">weekly_registrations_precovid</span> <span class="o">=</span> <span class="n">BoundNormal_0</span><span class="p">(</span>
+        <span class="s">"weekly_registrations_precovid"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span>
+    <span class="p">)</span>
+
+    <span class="n">weekly_registrations</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">math</span><span class="p">.</span><span class="n">switch</span><span class="p">(</span>
+        <span class="n">covid_start</span> <span class="o">&gt;=</span> <span class="n">model_data</span><span class="p">.</span><span class="n">Week_nr</span><span class="p">,</span>
+        <span class="n">weekly_registrations_precovid</span><span class="p">,</span>
+        <span class="n">weekly_registrations_covid</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">len_observed</span><span class="p">)</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="n">set_subtensor</span><span class="p">(</span>
+        <span class="n">y0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">15</span>
+    <span class="p">)</span>  <span class="c1"># there were 150k decks registered the first week, that is the initial value (15 after scaling)
+</span>
+    <span class="n">outputs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">theano</span><span class="p">.</span><span class="n">scan</span><span class="p">(</span>
+        <span class="n">fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ws</span><span class="p">:</span> <span class="n">tt</span><span class="p">.</span><span class="n">set_subtensor</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">ws</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]),</span>
+        <span class="n">sequences</span><span class="o">=</span><span class="p">[</span><span class="n">tt</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">len_observed</span><span class="p">)],</span>
+        <span class="n">outputs_info</span><span class="o">=</span><span class="n">y0</span><span class="p">,</span>
+        <span class="n">non_sequences</span><span class="o">=</span><span class="n">weekly_registrations</span><span class="p">,</span>
+        <span class="n">n_steps</span><span class="o">=</span><span class="n">len_observed</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">total_registrations</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s">"total_registrations"</span><span class="p">,</span> <span class="n">outputs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Likelihood
+</span>    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
+        <span class="s">"y"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">total_registrations</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">model_data</span><span class="p">.</span><span class="n">Total_scaled</span>
+    <span class="p">)</span>
+
+    <span class="c1"># posterior
+</span>    <span class="n">trace_3</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">cores</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<vegachart schema-url="/assets/posts/2021-07-04-Bayesian-sales-analysis/model_3.json" style="width: 100%"></vegachart>
+
+<p>A much better fit indeed, the bend in the graph caused by COVID-19 restrictions is clearly captured by the model. With
+this in place we can continue to add additional complexity. There are these notches in the graph that coincide with
+releasing new sets, those are the next to include!</p>
+
+<h2 id="adding-the-effect-of-new-releases">Adding the effect of new releases</h2>
+
+<p>To prevent card games from going stale, new sets are released ever so often. For KeyForge the release cycle is six to
+eight months. Prior to releasing the new set the advertisement for the game goes up significantly. So upon the actual
+release there typically is a renewed interest in the game increasing sales. This explains the nicks in the curve, upon
+each new release there is a sharp increase in registration, which fades over time.</p>
+
+<p>To model this we’ll include an interest factor for each set which decays with an unknown factor over time. The week a
+new set is released we add that set’s interest to the current overall interest (the spike in interest) and continue to 
+apply the decay on consecutive weeks. The base registration rate is multiplied by 1 + current interest. (Also note
+that I’m jumping from model 3 to 5 here, it took a while to figure out how to implement this and model 4 was very wrong)</p>
+
+<p>You can consider the interest not as a factor, but as an number of additional registrations upon release. To include 
+this in the model, this is added using the <code class="language-plaintext highlighter-rouge">pm.Deterministic()</code> function. This allows you to include additional 
+calculations in the model, without their own priors, to examine at the end.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_5</span><span class="p">:</span>
+    <span class="c1"># priors
+</span>    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Exponential</span><span class="p">(</span><span class="s">"sigma"</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># Sigma for likelihood function
+</span>
+    <span class="c1"># COVID started at different points in different countries, it should be around week 70 give or take a week or two
+</span>    <span class="n">covid_start</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">DiscreteUniform</span><span class="p">(</span><span class="s">"covid_start"</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">68</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">72</span><span class="p">)</span>
+
+    <span class="c1"># We know from the previous that mu before and during covid should be around 0.8 and 3.0 respectively
+</span>    <span class="c1"># Sigma is reduced here not to diverge to far from these values
+</span>    <span class="n">BoundNormal_0</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Bound</span><span class="p">(</span><span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">weekly_registrations_covid</span> <span class="o">=</span> <span class="n">BoundNormal_0</span><span class="p">(</span>
+        <span class="s">"weekly_registrations_covid"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.5</span>
+    <span class="p">)</span>
+    <span class="n">weekly_registrations_precovid</span> <span class="o">=</span> <span class="n">BoundNormal_0</span><span class="p">(</span>
+        <span class="s">"weekly_registrations_precovid"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.5</span>
+    <span class="p">)</span>
+
+    <span class="n">weekly_registrations_base</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">math</span><span class="p">.</span><span class="n">switch</span><span class="p">(</span>
+        <span class="n">covid_start</span> <span class="o">&gt;=</span> <span class="n">model_data</span><span class="p">.</span><span class="n">Week_nr</span><span class="p">,</span>
+        <span class="n">weekly_registrations_precovid</span><span class="p">,</span>
+        <span class="n">weekly_registrations_covid</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Model extra registrations due to shifting interest (like new sets being released)
+</span>    <span class="c1"># The interest factor is calculated on a weekly basis
+</span>    <span class="n">decay_factor</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Exponential</span><span class="p">(</span><span class="s">"decay_factor"</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+    <span class="n">cota_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s">"cota_interest"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">aoa_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s">"aoa_interest"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">wc_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s">"wc_interest"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">mm_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s">"mm_interest"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">dt_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s">"dt_interest"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Another way of defining interest is in extra registrations caused (not as a factor)
+</span>    <span class="n">cota_surplus</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Deterministic</span><span class="p">(</span>
+        <span class="s">"cota_surplus"</span><span class="p">,</span> <span class="n">cota_interest</span> <span class="o">*</span> <span class="n">weekly_registrations_base</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">aoa_surplus</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Deterministic</span><span class="p">(</span>
+        <span class="s">"aoa_surplus"</span><span class="p">,</span> <span class="n">aoa_interest</span> <span class="o">*</span> <span class="n">weekly_registrations_base</span><span class="p">[</span><span class="mi">27</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">wc_surplus</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Deterministic</span><span class="p">(</span>
+        <span class="s">"wc_surplus"</span><span class="p">,</span> <span class="n">wc_interest</span> <span class="o">*</span> <span class="n">weekly_registrations_base</span><span class="p">[</span><span class="mi">50</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">mm_surplus</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Deterministic</span><span class="p">(</span>
+        <span class="s">"mm_surplus"</span><span class="p">,</span> <span class="n">mm_interest</span> <span class="o">*</span> <span class="n">weekly_registrations_base</span><span class="p">[</span><span class="mi">85</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">dt_surplus</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Deterministic</span><span class="p">(</span>
+        <span class="s">"dt_surplus"</span><span class="p">,</span> <span class="n">dt_interest</span> <span class="o">*</span> <span class="n">weekly_registrations_base</span><span class="p">[</span><span class="mi">126</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="n">interest_decayed</span> <span class="o">=</span> <span class="p">[</span><span class="n">cota_interest</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">len_observed</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">new_element</span> <span class="o">=</span> <span class="n">interest_decayed</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">decay_factor</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">27</span><span class="p">:</span>
+            <span class="n">new_element</span> <span class="o">+=</span> <span class="n">aoa_interest</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">50</span><span class="p">:</span>
+            <span class="n">new_element</span> <span class="o">+=</span> <span class="n">wc_interest</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">85</span><span class="p">:</span>
+            <span class="n">new_element</span> <span class="o">+=</span> <span class="n">mm_interest</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">126</span><span class="p">:</span>
+            <span class="n">new_element</span> <span class="o">+=</span> <span class="n">dt_interest</span>
+        <span class="n">interest_decayed</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_element</span><span class="p">)</span>
+
+    <span class="c1"># there were 150k decks registered the first week, that is the initial value
+</span>    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">len_observed</span><span class="p">)</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="n">set_subtensor</span><span class="p">(</span><span class="n">y0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">15</span><span class="p">)</span>
+
+    <span class="n">outputs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">theano</span><span class="p">.</span><span class="n">scan</span><span class="p">(</span>
+        <span class="n">fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ws</span><span class="p">,</span> <span class="n">intfac</span><span class="p">:</span> <span class="n">tt</span><span class="p">.</span><span class="n">set_subtensor</span><span class="p">(</span>
+            <span class="n">y</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="p">(</span><span class="n">ws</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">intfac</span><span class="p">[</span><span class="n">t</span><span class="p">]))</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="p">),</span>
+        <span class="n">sequences</span><span class="o">=</span><span class="p">[</span><span class="n">tt</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">len_observed</span><span class="p">)],</span>
+        <span class="n">outputs_info</span><span class="o">=</span><span class="n">y0</span><span class="p">,</span>
+        <span class="n">non_sequences</span><span class="o">=</span><span class="p">[</span><span class="n">weekly_registrations_base</span><span class="p">,</span> <span class="n">interest_decayed</span><span class="p">],</span>
+        <span class="n">n_steps</span><span class="o">=</span><span class="n">len_observed</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">total_registrations</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s">"total_registrations"</span><span class="p">,</span> <span class="n">outputs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Likelihood
+</span>    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
+        <span class="s">"y"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">total_registrations</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">model_data</span><span class="p">.</span><span class="n">Total_scaled</span>
+    <span class="p">)</span>
+
+    <span class="c1"># posterior
+</span>    <span class="n">trace_5</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">cores</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</code></pre></div></div>
+<vegachart schema-url="/assets/posts/2021-07-04-Bayesian-sales-analysis/model_5.json" style="width: 100%"></vegachart>
+
+<p>This is the best model I was able to create to fit these data (with a reasonable number of parameters) and the one 
+shown in the beginning of the post. Here it is also interesting to peak at the posteriors, as they can shed some light
+on how big the impact of COVID-19 is on the base rate of registrations. We can also get an impression of how different 
+sets rank in terms of interest or popularity.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">model_5</span><span class="p">:</span>
+    <span class="n">stats</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">az</span><span class="p">.</span><span class="n">summary</span><span class="p">(</span><span class="n">trace_5</span><span class="p">,</span> <span class="n">round_to</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">stats</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span>
+    <span class="p">[</span>
+        <span class="s">"sigma"</span><span class="p">,</span>
+        <span class="s">"covid_start"</span><span class="p">,</span>
+        <span class="s">"weekly_registrations_covid"</span><span class="p">,</span>
+        <span class="s">"weekly_registrations_precovid"</span><span class="p">,</span>
+        <span class="s">"cota_interest"</span><span class="p">,</span>
+        <span class="s">"aoa_interest"</span><span class="p">,</span>
+        <span class="s">"wc_interest"</span><span class="p">,</span>
+        <span class="s">"mm_interest"</span><span class="p">,</span>
+        <span class="s">"dt_interest"</span><span class="p">,</span>
+        <span class="s">"decay_factor"</span><span class="p">,</span>
+        <span class="s">"cota_surplus"</span><span class="p">,</span>
+        <span class="s">"aoa_surplus"</span><span class="p">,</span>
+        <span class="s">"wc_surplus"</span><span class="p">,</span>
+        <span class="s">"mm_surplus"</span><span class="p">,</span>
+        <span class="s">"dt_surplus"</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">]</span>
+</code></pre></div></div>
+
+<table class="large-table narrow-rows">
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right">mean</th>
+      <th style="text-align: right">sd</th>
+      <th style="text-align: right">hdi_3%</th>
+      <th style="text-align: right">hdi_97%</th>
+      <th style="text-align: right">mcse_mean</th>
+      <th style="text-align: right">mcse_sd</th>
+      <th style="text-align: right">ess_bulk</th>
+      <th style="text-align: right">ess_tail</th>
+      <th style="text-align: right">r_hat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">sigma</td>
+      <td style="text-align: right">1.17</td>
+      <td style="text-align: right">0.07</td>
+      <td style="text-align: right">1.04</td>
+      <td style="text-align: right">1.30</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">354.50</td>
+      <td style="text-align: right">1420.02</td>
+      <td style="text-align: right">1.02</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">covid_start</td>
+      <td style="text-align: right">68.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">68.00</td>
+      <td style="text-align: right">68.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">4000.00</td>
+      <td style="text-align: right">4000.00</td>
+      <td style="text-align: right">NaN</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">weekly_registrations_covid</td>
+      <td style="text-align: right">0.62</td>
+      <td style="text-align: right">0.02</td>
+      <td style="text-align: right">0.59</td>
+      <td style="text-align: right">0.66</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">748.58</td>
+      <td style="text-align: right">425.34</td>
+      <td style="text-align: right">1.00</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">weekly_registrations_precovid</td>
+      <td style="text-align: right">1.55</td>
+      <td style="text-align: right">0.06</td>
+      <td style="text-align: right">1.44</td>
+      <td style="text-align: right">1.66</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">477.68</td>
+      <td style="text-align: right">859.12</td>
+      <td style="text-align: right">1.02</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">cota_interest</td>
+      <td style="text-align: right">4.10</td>
+      <td style="text-align: right">0.19</td>
+      <td style="text-align: right">3.76</td>
+      <td style="text-align: right">4.48</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">1135.77</td>
+      <td style="text-align: right">1891.67</td>
+      <td style="text-align: right">1.00</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">aoa_interest</td>
+      <td style="text-align: right">1.69</td>
+      <td style="text-align: right">0.16</td>
+      <td style="text-align: right">1.42</td>
+      <td style="text-align: right">2.01</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">902.16</td>
+      <td style="text-align: right">1161.44</td>
+      <td style="text-align: right">1.01</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">wc_interest</td>
+      <td style="text-align: right">0.94</td>
+      <td style="text-align: right">0.14</td>
+      <td style="text-align: right">0.69</td>
+      <td style="text-align: right">1.20</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">809.41</td>
+      <td style="text-align: right">928.24</td>
+      <td style="text-align: right">1.01</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">mm_interest</td>
+      <td style="text-align: right">3.21</td>
+      <td style="text-align: right">0.32</td>
+      <td style="text-align: right">2.61</td>
+      <td style="text-align: right">3.82</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">509.95</td>
+      <td style="text-align: right">368.48</td>
+      <td style="text-align: right">1.02</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">dt_interest</td>
+      <td style="text-align: right">3.05</td>
+      <td style="text-align: right">0.35</td>
+      <td style="text-align: right">2.39</td>
+      <td style="text-align: right">3.69</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">1135.77</td>
+      <td style="text-align: right">2001.47</td>
+      <td style="text-align: right">1.01</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">decay_factor</td>
+      <td style="text-align: right">0.83</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.82</td>
+      <td style="text-align: right">0.85</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">606.70</td>
+      <td style="text-align: right">1135.31</td>
+      <td style="text-align: right">1.02</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">cota_surplus</td>
+      <td style="text-align: right">6.37</td>
+      <td style="text-align: right">0.27</td>
+      <td style="text-align: right">5.86</td>
+      <td style="text-align: right">6.86</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">1188.87</td>
+      <td style="text-align: right">1594.54</td>
+      <td style="text-align: right">1.00</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">aoa_surplus</td>
+      <td style="text-align: right">2.62</td>
+      <td style="text-align: right">0.18</td>
+      <td style="text-align: right">2.28</td>
+      <td style="text-align: right">2.96</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">1161.85</td>
+      <td style="text-align: right">1279.62</td>
+      <td style="text-align: right">1.00</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">wc_surplus</td>
+      <td style="text-align: right">1.46</td>
+      <td style="text-align: right">0.16</td>
+      <td style="text-align: right">1.15</td>
+      <td style="text-align: right">1.76</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">911.29</td>
+      <td style="text-align: right">1074.73</td>
+      <td style="text-align: right">1.01</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">mm_surplus</td>
+      <td style="text-align: right">1.99</td>
+      <td style="text-align: right">0.15</td>
+      <td style="text-align: right">1.73</td>
+      <td style="text-align: right">2.31</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">536.09</td>
+      <td style="text-align: right">919.32</td>
+      <td style="text-align: right">1.02</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">dt_surplus</td>
+      <td style="text-align: right">1.89</td>
+      <td style="text-align: right">0.18</td>
+      <td style="text-align: right">1.54</td>
+      <td style="text-align: right">2.22</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">1315.52</td>
+      <td style="text-align: right">2202.98</td>
+      <td style="text-align: right">1.01</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Interest was modeled as a factor by which the base sales were increased upon release of the set. For instance 
+Dark Tidings increased the number of deck registrations +305% over the expected base rate. However, since Dark Tidings
+was released during COVID-19, while the base rate was low, the absolute number of extra registrations for this set was
+19k the first week.</p>
+
+<h2 id="what-if-covid-19-never-happened-">What if COVID-19 never happened ?</h2>
+
+<p>Now that we have a decent model at hand, we can get creative and model how many decks would have been registered in case
+the pandemic never happened. To do this, we need to tweak the model a little. We’ll have to define <code class="language-plaintext highlighter-rouge">covid_start</code> as
+<code class="language-plaintext highlighter-rouge">pm.Data()</code>, which can be altered after fitting the model. There also is a small change to the trace function to
+get the sampling to work with this fixed parameter, <code class="language-plaintext highlighter-rouge">init="adapt_diag"</code> is added to avoid errors.</p>
+
+<p>In the code below only changes from the previous are shown.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_5</span><span class="p">:</span>
+    <span class="c1"># ...
+</span>    <span class="c1"># here we set the start of covid manually (based on previous notebook)
+</span>    <span class="c1"># this way it can be changed after fitting the model
+</span>    <span class="n">covid_start</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Data</span><span class="p">(</span><span class="s">"covid_start"</span><span class="p">,</span> <span class="mi">68</span><span class="p">)</span>
+    
+    <span class="c1"># ...
+</span>    
+    <span class="c1"># posterior
+</span>    <span class="n">trace_5</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">cores</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s">"adapt_diag"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>After fitting the model we can change the point where we want COVID-19 to start to a point in the future, using the
+<code class="language-plaintext highlighter-rouge">pm.sample_posterior_predictive()</code> then will show the model, but without the effect of COVID-19.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">model_5</span><span class="p">:</span>
+    <span class="n">pm</span><span class="p">.</span><span class="n">set_data</span><span class="p">({</span><span class="s">"covid_start"</span><span class="p">:</span> <span class="mi">500</span><span class="p">})</span>
+
+<span class="n">chart_without_covid</span> <span class="o">=</span> <span class="n">plot_fit_altair</span><span class="p">(</span><span class="n">model_5</span><span class="p">,</span> <span class="n">trace_5</span><span class="p">,</span> <span class="n">model_data</span><span class="p">)</span>
+<span class="n">chart_without_covid</span>
+</code></pre></div></div>
+
+<vegachart schema-url="/assets/posts/2021-07-04-Bayesian-sales-analysis/covid_start_data.json" style="width: 100%"></vegachart>
+
+<p>While this is great, it doesn’t offer much flexibility to change the model. Here for instance the interest in 
+Mass Mutation and Dark Tidings might be overestimated as these were released during the pandemic. This might affect 
+how and when people buy new decks. So it would be interesting if we could build a ‘Pessimistic’ model, where the 
+interest in MM and DT is equal to the set with the least interest prior to the pandemic.</p>
+
+<p>Once option here is to create a new model, where all priors are set to the posteriors from model_5. Then we can change
+the values we want and run <code class="language-plaintext highlighter-rouge">pm.sample_prior_predictive()</code> to see how the model with our updated priors runs. In
+the notebook you’ll find the optimistic version (with the exact parameters from model_5) and a pessimistic version 
+where the interest in MM and DT is set to the interest in WC, only the latter is shown here. While this does increase 
+the uncertainty on the predictions it comes with far more flexibility to play with the model.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_7</span><span class="p">:</span>
+    <span class="c1"># priors
+</span>    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">"sigma"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">1.17</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.07</span><span class="p">)</span>  <span class="c1"># Sigma for likelihood function
+</span>
+    <span class="n">weekly_registrations</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">"weekly_registrations"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">1.55</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.06</span><span class="p">)</span>
+
+    <span class="c1"># Model extra registrations due to shifting interest (like new sets being released)
+</span>    <span class="c1"># The interest factor is calculated on a weekly basis
+</span>    <span class="n">decay_factor</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">"decay_factor"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.84</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+
+    <span class="n">cota_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">"cota_interest"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">4.11</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.19</span><span class="p">)</span>
+    <span class="n">aoa_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">"aoa_interest"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">1.7</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.16</span><span class="p">)</span>
+    <span class="n">wc_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">"wc_interest"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.13</span><span class="p">)</span>
+    <span class="c1"># Maybe people's buying behaviour responds differently to
+</span>    <span class="c1"># the release of a new set during COVID.
+</span>    <span class="c1"># Set the two most recent sets to a worst case scenario
+</span>    <span class="n">mm_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
+        <span class="s">"mm_interest"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.13</span>
+    <span class="p">)</span>  
+    <span class="n">dt_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
+        <span class="s">"dt_interest"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.13</span>
+    <span class="p">)</span>  
+
+    <span class="n">interest_decayed</span> <span class="o">=</span> <span class="p">[</span><span class="n">cota_interest</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">len_observed</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">new_element</span> <span class="o">=</span> <span class="n">interest_decayed</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">decay_factor</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">27</span><span class="p">:</span>
+            <span class="n">new_element</span> <span class="o">+=</span> <span class="n">aoa_interest</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">50</span><span class="p">:</span>
+            <span class="n">new_element</span> <span class="o">+=</span> <span class="n">wc_interest</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">85</span><span class="p">:</span>
+            <span class="n">new_element</span> <span class="o">+=</span> <span class="n">mm_interest</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">126</span><span class="p">:</span>
+            <span class="n">new_element</span> <span class="o">+=</span> <span class="n">dt_interest</span>
+        <span class="n">interest_decayed</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_element</span><span class="p">)</span>
+
+    <span class="c1"># there were 150k decks registered the first week, that is the initial value
+</span>    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">len_observed</span><span class="p">)</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="n">set_subtensor</span><span class="p">(</span><span class="n">y0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">15</span><span class="p">)</span>
+
+    <span class="n">outputs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">theano</span><span class="p">.</span><span class="n">scan</span><span class="p">(</span>
+        <span class="n">fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">intfac</span><span class="p">:</span> <span class="n">tt</span><span class="p">.</span><span class="n">set_subtensor</span><span class="p">(</span>
+            <span class="n">y</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="p">(</span><span class="n">weekly_registrations</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">intfac</span><span class="p">[</span><span class="n">t</span><span class="p">]))</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="p">),</span>
+        <span class="n">sequences</span><span class="o">=</span><span class="p">[</span><span class="n">tt</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">len_observed</span><span class="p">)],</span>
+        <span class="n">outputs_info</span><span class="o">=</span><span class="n">y0</span><span class="p">,</span>
+        <span class="n">non_sequences</span><span class="o">=</span><span class="p">[</span><span class="n">interest_decayed</span><span class="p">],</span>
+        <span class="n">n_steps</span><span class="o">=</span><span class="n">len_observed</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">total_registrations</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s">"total_registrations"</span><span class="p">,</span> <span class="n">outputs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Likelihood
+</span>    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
+        <span class="s">"y"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">total_registrations</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">model_data</span><span class="p">.</span><span class="n">Total_scaled</span>
+    <span class="p">)</span>
+</code></pre></div></div>
+
+<vegachart schema-url="/assets/posts/2021-07-04-Bayesian-sales-analysis/combined_predictions.json" style="width: 100%"></vegachart>
+
+<p>As you can see, in the pessimistic model the bumps caused by releasing the latest sets are far more modest and in 
+line with previous releases. This could indicate that purchasing behaviour is different during COVID-19 (which I fully
+expect to be the case).</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>While probabilistic programming is somewhat different from regular programming, though PyMC3 makes this transition 
+manageable! Creating these models however is far more involved than fitting a machine learning model, though this comes 
+with advantages: These models are very easy to inspect and 
+understand what each parameter is doing and, we can change parameters to model scenarios for which we don’t have any
+data. Unlike machine learning models which are often black boxes, with internals that are hard to understand and even
+harder to change, this is a huge advantage when predicting things.</p>
+
+<p>The interpretation of some of these results will come up soon in a new, non-technical, post, stay tuned !</p>
+
+<h2 id="resources">Resources</h2>
+
+<p>In case you want to get started with PyMC3 yourself, here are the resources I’ve been using.</p>
+
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=ZxR3mw-Znzc">PyMC3 Workshop</a> from <a href="https://twitter.com/twiecki">Thomas Wiecki</a> which taught me a lot of tricks that were applied here</li>
+  <li>The official <a href="https://docs.pymc.io/">PyMC3</a> documentation</li>
+  <li><a href="https://www.packtpub.com/product/bayesian-analysis-with-python-second-edition/9781789341652">Bayesian Analysis with Python</a></li>
+  <li><a href="https://www.youtube.com/c/PyMCDevelopers/videos">PyMC Developers</a> channel on YouTube</li>
+</ul>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/pymc3">pymc3</a>,&nbsp;<a href="/tag/keyforge">keyforge</a>,&nbsp;<a href="/tag/data-analysis">data-analysis</a>,&nbsp;<a href="/tag/data-science">data-science</a>,&nbsp;<a href="/tag/machine-learning">machine-learning</a>,&nbsp;<a href="/tag/altair">altair</a>,&nbsp;<a href="/tag/covid-19">covid-19</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa fa-coffee"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Bayesian+analysis+of+sales+data%2C+using+PyMC3&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2021%2F07%2F04%2FBayesian-sales-analysis.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Bayesian+analysis+of+sales+data%2C+using+PyMC3&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2021%2F07%2F04%2FBayesian-sales-analysis.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2021%2F07%2F04%2FBayesian-sales-analysis.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/general/2021/06/28/Buy-me-a-Coffee.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Like this blog? You can buy me a coffee now!</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '4dcube';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa fa-coffee"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+			
+			<p><strong>Contribute</strong></p>
+			<p><i class="fa fa-coffee"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+			<br />
+			
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+			<p class="text">Last update: July 4, 2021</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+<!-- Custom page specific js files -->
+  
+    <script src='/js/vega.min.js' type="text/javascript"></script>
+  
+    <script src='/js/vega-lite.min.js' type="text/javascript"></script>
+  
+    <script src='/js/vega-embed.min.js' type="text/javascript"></script>
+  
+    <script src='/js/justcharts.js' type="text/javascript"></script>
+  
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/programming/games/2021/07/04/Bayesian-sales-analysis.html',
+    'title': 'Bayesian analysis of sales data, using PyMC3'
+  });
+</script>
+
+
+  </body>
+
+</html>

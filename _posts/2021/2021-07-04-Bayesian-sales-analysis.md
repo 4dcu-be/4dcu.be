@@ -2,7 +2,7 @@
 layout: post
 title:  "Bayesian analysis of sales data, using PyMC3"
 byline: ""
-date:   2021-07-04 10:00:00
+date:   2021-07-04 08:00:00
 author: Sebastian Proost
 categories: programming games
 tags:	python pymc3 keyforge data-analysis data-science machine-learning altair covid-19
