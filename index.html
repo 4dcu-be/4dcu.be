@@ -59,6 +59,14 @@ pagination:
 		<li><a href="{{ site.baseurl }}/category/{{ cat }}">{{ cat | capitalize }}</a> <span class="post-count">({{ category[1].size }})</span></li>
 		{% endfor %}
 	</ul>
+	<br />
+	<h3>Posts from ...</h3>
+	<ul class="category-list">
+		{% assign postsByYear = site.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
+		{% for year in postsByYear %}
+			<li><a href="{{ site.baseurl }}/year/{{ year.name }}">{{ year.name }}</a> <span class="post-count">({{ year.items.size }})</span></li>
+		{% endfor %}
+	</ul>
 	</div>
   </div>
 

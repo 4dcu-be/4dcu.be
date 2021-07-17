@@ -56,10 +56,12 @@ jekyll-archives:
   enabled:
     - categories
     - tags
+    - year
   layout: 'archive'
   permalinks:
     category: '/category/:name/'
     tag: '/tag/:name/'
+    year: '/year/:year/'
   cover: "/assets/images/headers/gameboyzero.jpg"
 
 thumbnail:
@@ -69,6 +71,7 @@ thumbnail:
 gallery_items:
     resize_dimensions: '430x288^'
     crop_dimensions: '430x288+0+0'
+
 # Disqus comments
 disqus_shortname: 4dcube
 

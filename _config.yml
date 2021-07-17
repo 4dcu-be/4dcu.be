@@ -55,10 +55,12 @@ jekyll-archives:
   enabled:
     - categories
     - tags
+    - year
   layout: 'archive'
   permalinks:
     category: '/category/:name/'
     tag: '/tag/:name/'
+    year: '/year/:year/'
   cover: "/assets/images/headers/gameboyzero.jpg"
 
 thumbnail:
