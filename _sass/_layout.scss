@@ -98,7 +98,10 @@ pre code.hljs {
 		background-position: 50% 50%;
 		background-size: cover;
 		.title {
-			font-size: modular-scale(6);
+			font-size: 2em;
+			@include media($tablet) {
+				font-size: modular-scale(6);
+			}
 		}
 		.subtitle, .info {
 			font-size: modular-scale(1);
