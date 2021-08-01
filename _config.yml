@@ -90,6 +90,9 @@ descriptions:
   - cat: diy
     desc: "Not everything needs to be digital !"
 
+  - cat: biology
+    desc: "The world away from the computer screen"
+
   - cat: general
     desc: "Things about 4DCu.Be"
 

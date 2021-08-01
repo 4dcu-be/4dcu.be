@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Clustering the Palmer Station penguin data, using PyMC3</title>
+  <meta name="description" content="This post will be all about trying to infer the species various observations originated from, without actually having access  to the labels. This might sound...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="This post will be all about trying to infer the species various observations originated from, without actually having access  to the labels. This might sound..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/biology/2021/08/01/Clustering-penguins.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Clustering the Palmer Station penguin data, using PyMC3" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2021-08-01-Clustering-penguins/penguin_header.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Clustering the Palmer Station penguin data, using PyMC3">
+  <meta name="twitter:description" content="This post will be all about trying to infer the species various observations originated from, without actually having access  to the labels. This might sound...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2021-08-01-Clustering-penguins/penguin_header.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/biology/2021/08/01/Clustering-penguins.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/biology/2021/08/01/Clustering-penguins.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+	<div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2021-08-01-Clustering-penguins/penguin_header.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Clustering the Palmer Station penguin data, using PyMC3</h1>
+			
+      <p class="info"><em>Adelie, Chinstrap, Gentoo...</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted August 1, 2021 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>, 
+    
+  
+    
+    <a href="/category/biology">Biology</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>This post will be all about trying to infer the species various observations originated from, without actually having access 
+to the labels. This might sound like a far-fetched example, but it happens more often than you might expect in 
+biology! When studying large animals you can usually find clear differences between species, but when studying nematodes
+(tiny worms) in a soil sample those differences might be very hard to spot! You can also have a sub-population that
+slightly differs from the main community, for instance polyploid plants (with extra copies of their genome) might 
+grow in the same field as plants with normal ploidy. These are considered the same species and are similar in most ways,
+except a bit bigger or stronger or more tolerant, so while making initial measurements these might not stand out. Or 
+indirect measurements, some animals are rare and live in remote places, so biologists might use footprints to study
+those animals. If multiple species leave similar prints … they might have to resort to using their size, 
+distance between them, … to estimate which exact species a set of prints belongs to. So the solution is to measure
+as many subjects as possible and (hopefully) figure it out later on.</p>
+
+<p>It is particularly challenging to identify different groups if you don’t know even know how many groups there are. Here 
+the <a href="https://allisonhorst.github.io/palmerpenguins/">Palmer Station Penguin</a> dataset is used, to show the issue (we’ll hide the species labels from the models), and 
+we’ll try to identify how many species there are in the set, and which subjects belong to the same
+group using flipper, bill and body mass measurements from each subject.</p>
+
+<p>Notebooks with the data and full code for this post can be found in this <a href="https://github.com/4dcu-be/ClassifyingPenguins">GitHub repo</a>. There you’ll also find the
+code applied to other datasets like the <a href="https://archive.ics.uci.edu/ml/datasets/iris">Iris</a> and <a href="https://www.kaggle.com/aungpyaeap/fish-market">Fish Market</a> datasets (albeit with less documentation).</p>
+
+<h2 id="loading-the-data">Loading the data</h2>
+
+<p>The <a href="https://github.com/4dcu-be/ClassifyingPenguins">GitHub repo</a> contains the data in a .csv format that can be loaded directly using pandas. We don’t need the
+island where the observation was made or the sex of the animal, so these columns are dropped. Rows with remaining 
+missing values are omitted using <code class="language-plaintext highlighter-rouge">.dropna()</code>. We do keep the species label, so later on we can check if 
+our clustering is actually working, but it will not be used during the clustering.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">load_ext</span> <span class="n">nb_black</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+<span class="kn">import</span> <span class="nn">pymc3</span> <span class="k">as</span> <span class="n">pm</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="n">az</span>
+
+<span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="n">alt</span>
+
+<span class="n">penguin_df</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"./data/penguins_size.csv"</span><span class="p">).</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"island"</span><span class="p">,</span> <span class="s">"sex"</span><span class="p">]).</span><span class="n">dropna</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">penguin_df</span>
+</code></pre></div></div>
+
+<p>The data is best scaled, so the mean of each feature will be zero with a standard deviation of one. <code class="language-plaintext highlighter-rouge">StandardScaler</code>
+ makes this easy.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">scaled_penguin_df</span> <span class="o">=</span> <span class="n">scaler</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">penguin_df</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"species"</span><span class="p">]))</span>
+<span class="n">scaled_penguin_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">scaled_penguin_df</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">penguin_df</span><span class="p">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+<span class="n">scaled_penguin_df</span><span class="p">[</span><span class="s">"species"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">penguin_df</span><span class="p">[</span><span class="s">"species"</span><span class="p">])</span>
+<span class="n">scaled_penguin_df</span>
+</code></pre></div></div>
+
+<h2 id="the-first-model---using-a-single-feature">The first model - using a single feature</h2>
+
+<p>All models in this post have a <code class="language-plaintext highlighter-rouge">pm.Dirichlet</code> distribution at their core which defines the probabilities of observing
+a certain group, in this case species. For now, we’ll define the number of clusters we want using <code class="language-plaintext highlighter-rouge">n_clusters</code>,
+we’ll work around this later, don’t worry! Next, we assign categories to all observations based on those probabilities. 
+Explicitly including categories using <code class="language-plaintext highlighter-rouge">pm.Categorical</code> makes is really straightforward to extract groups later, note
+however that there are more efficient ways using <code class="language-plaintext highlighter-rouge">pm.NormalMixture</code> if we would just be interested in fitting a 
+model.</p>
+
+<p>Here we include a sigma and a mean for each category, and create a likelihood function using those to fit a normal
+distribution on the body mass observations of each species.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">n_observations</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="n">scaled_penguin_df</span><span class="p">.</span><span class="n">shape</span>
+
+<span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Dirichlet</span><span class="p">(</span><span class="s">"p"</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">))</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Categorical</span><span class="p">(</span><span class="s">"category"</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_observations</span><span class="p">)</span>
+    
+    <span class="n">bm_sigmas</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s">"bm_sigmas"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+    <span class="n">bm_means</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">"bm_means"</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+
+    <span class="n">y_bm</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
+        <span class="s">"y_bm"</span><span class="p">,</span>
+        <span class="n">mu</span><span class="o">=</span><span class="n">bm_means</span><span class="p">[</span><span class="n">category</span><span class="p">],</span>
+        <span class="n">sd</span><span class="o">=</span><span class="n">bm_sigmas</span><span class="p">[</span><span class="n">category</span><span class="p">],</span>
+        <span class="n">observed</span><span class="o">=</span><span class="n">scaled_penguin_df</span><span class="p">.</span><span class="n">body_mass_g</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>After sampling, we can pull out the categories from one of the traces and compare this to the actual species to see
+how well it worked. We’ll add the groups back to the original data, quickly reformat it to get counts, and visualize 
+using Altair.</p>
+
+<p><code class="language-plaintext highlighter-rouge">[2][200]</code> points to the chain at index two and the trace at index 200, when doing this exercise inspect
+multiple to get an impression of the overall performance.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">groups</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sa">f</span><span class="s">"Group </span><span class="si">{</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s">"</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">trace</span><span class="p">.</span><span class="n">get_values</span><span class="p">(</span><span class="s">"category"</span><span class="p">,</span> <span class="n">burn</span><span class="o">=</span><span class="mi">6000</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="bp">False</span><span class="p">)[</span><span class="mi">2</span><span class="p">][</span><span class="mi">20</span><span class="p">])</span>
+<span class="p">]</span>
+<span class="n">penguin_df</span><span class="p">[</span><span class="s">"group"</span><span class="p">]</span> <span class="o">=</span> <span class="n">groups</span>
+
+<span class="n">plot_df</span> <span class="o">=</span> <span class="n">penguin_df</span><span class="p">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">"species"</span><span class="p">,</span> <span class="s">"group"</span><span class="p">]).</span><span class="n">size</span><span class="p">().</span><span class="n">reset_index</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">"counts"</span><span class="p">)</span>
+
+<span class="n">alt</span><span class="p">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">plot_df</span><span class="p">).</span><span class="n">mark_bar</span><span class="p">().</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="p">.</span><span class="n">X</span><span class="p">(</span><span class="s">"group"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="bp">None</span><span class="p">),</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="p">.</span><span class="n">Y</span><span class="p">(</span><span class="s">"counts"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">"Count"</span><span class="p">),</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">alt</span><span class="p">.</span><span class="n">Color</span><span class="p">(</span><span class="s">"species"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">"Species"</span><span class="p">),</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s">"group"</span><span class="p">,</span> <span class="s">"counts"</span><span class="p">,</span> <span class="s">"species"</span><span class="p">],</span>
+<span class="p">).</span><span class="n">properties</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+</code></pre></div></div>
+
+<vegachart schema-url="/assets/posts/2021-08-01-Clustering-penguins/model_01.json" style="width: 100%"></vegachart>
+
+<p>Here you can see that Group 2 contains all Gentoo penguins (these are the largest and heaviest), but adds in a few
+of the others. The other two groups contain a mix of Adelie and Chinstrap penguins, not particularly impressive as
+a classifier. Let’s have a look the data we provided to the model before proceeding.</p>
+
+<vegachart schema-url="/assets/posts/2021-08-01-Clustering-penguins/body_mass_distribution.json" style="width: 100%"></vegachart>
+
+<p>As you can see, there is a ton of overlap between the species, not ideal for such a simple classifier to distinguish. So,
+we should include more measurements, like the flipper length and culmen (part of the beak) length and depth.</p>
+
+<h2 id="a-model-that-includes-all-features">A model that includes all features</h2>
+
+<p>The easiest way to expand this model is by simply adding more sigmas, means and likelihoods to it all sharing the
+categories.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">n_observations</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="n">scaled_penguin_df</span><span class="p">.</span><span class="n">shape</span>
+<span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Dirichlet</span><span class="p">(</span><span class="s">"p"</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">))</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Categorical</span><span class="p">(</span><span class="s">"category"</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_observations</span><span class="p">)</span>
+
+    <span class="n">cl_sigmas</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s">"cl_sigmas"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+    <span class="n">cd_sigmas</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s">"cd_sigmas"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+    <span class="n">fl_sigmas</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s">"fl_sigmas"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+    <span class="n">bm_sigmas</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s">"bm_sigmas"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+    
+    <span class="n">cl_means</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">"cl_means"</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+    <span class="n">cd_means</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">"cd_means"</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+    <span class="n">fl_means</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">"fl_means"</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+    <span class="n">bm_means</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">"bm_means"</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+
+    <span class="n">y_cl</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
+        <span class="s">"y_cl"</span><span class="p">,</span>
+        <span class="n">mu</span><span class="o">=</span><span class="n">cl_means</span><span class="p">[</span><span class="n">category</span><span class="p">],</span>
+        <span class="n">sd</span><span class="o">=</span><span class="n">cl_sigmas</span><span class="p">[</span><span class="n">category</span><span class="p">],</span>
+        <span class="n">observed</span><span class="o">=</span><span class="n">scaled_penguin_df</span><span class="p">.</span><span class="n">culmen_length_mm</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">y_cd</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
+        <span class="s">"y_cd"</span><span class="p">,</span>
+        <span class="n">mu</span><span class="o">=</span><span class="n">cd_means</span><span class="p">[</span><span class="n">category</span><span class="p">],</span>
+        <span class="n">sd</span><span class="o">=</span><span class="n">cd_sigmas</span><span class="p">[</span><span class="n">category</span><span class="p">],</span>
+        <span class="n">observed</span><span class="o">=</span><span class="n">scaled_penguin_df</span><span class="p">.</span><span class="n">culmen_depth_mm</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">y_fl</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
+        <span class="s">"y_fl"</span><span class="p">,</span>
+        <span class="n">mu</span><span class="o">=</span><span class="n">fl_means</span><span class="p">[</span><span class="n">category</span><span class="p">],</span>
+        <span class="n">sd</span><span class="o">=</span><span class="n">fl_sigmas</span><span class="p">[</span><span class="n">category</span><span class="p">],</span>
+        <span class="n">observed</span><span class="o">=</span><span class="n">scaled_penguin_df</span><span class="p">.</span><span class="n">flipper_length_mm</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">y_bm</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
+        <span class="s">"y_bm"</span><span class="p">,</span>
+        <span class="n">mu</span><span class="o">=</span><span class="n">bm_means</span><span class="p">[</span><span class="n">category</span><span class="p">],</span>
+        <span class="n">sd</span><span class="o">=</span><span class="n">bm_sigmas</span><span class="p">[</span><span class="n">category</span><span class="p">],</span>
+        <span class="n">observed</span><span class="o">=</span><span class="n">scaled_penguin_df</span><span class="p">.</span><span class="n">body_mass_g</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This certainly works, though this would benefit from a loop instead of repeating code for each feature. However,
+is it any better than the previous model. Let’s have a look at a randomly selected chain/trace.</p>
+
+<vegachart schema-url="/assets/posts/2021-08-01-Clustering-penguins/model_02.json" style="width: 100%"></vegachart>
+
+<p>This certainly is a much better classification, which is confirmed by looking at multiple traces. All Gentoos are huddled
+together in group one, group three contains mostly Adelies, though group two is a bit of a mixed batch.However, this 
+model has a big downside, multiple likelihoods. This makes it very hard to use PyMC3 and Arviz to compare the model with
+other models. It is not impossible, and in the <a href="https://github.com/4dcu-be/ClassifyingPenguins">GitHub repo</a> there is a notebook where some code is included to do this,
+but this was very convoluted and definitely something to avoid where possible.</p>
+
+<h2 id="switching-to-multivariate-normal-distributions">Switching to multivariate normal distributions</h2>
+
+<p>So to solve the issue with multiple likelihoods, <code class="language-plaintext highlighter-rouge">pm.MvNormal</code> can be used, this is a multivariate normal or 
+gaussian distribution which takes multiple input values and combines them into a single likelihood. It requires a mean 
+for each feature in the input and a Cholesky decomposition of covariance matrix… Jikes, I won’t pretend I know the 
+underlying mathematics, I don’t, but fortunately I found a bit of code that generates the required 
+matrix using <code class="language-plaintext highlighter-rouge">pm.LKJCholeskyCov</code>.</p>
+
+<p>Apart from that, this makes the code considerably cleaner and more generic than the previous model, so that is a 
+nice free little bonus too.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">scaled_penguin_df</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"species"</span><span class="p">]).</span><span class="n">values</span>
+<span class="n">n_observations</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">shape</span>
+<span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">chol</span><span class="p">,</span> <span class="n">corr</span><span class="p">,</span> <span class="n">stds</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">LKJCholeskyCov</span><span class="p">(</span>
+        <span class="s">"chol"</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="n">n_features</span><span class="p">,</span>
+        <span class="n">eta</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+        <span class="n">sd_dist</span><span class="o">=</span><span class="n">pm</span><span class="p">.</span><span class="n">Exponential</span><span class="p">.</span><span class="n">dist</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span>
+        <span class="n">compute_corr</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">cov</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s">"cov"</span><span class="p">,</span> <span class="n">chol</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">chol</span><span class="p">.</span><span class="n">T</span><span class="p">))</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
+        <span class="s">"mu"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">n_features</span><span class="p">),</span> <span class="n">testval</span><span class="o">=</span><span class="n">data</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">p</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Dirichlet</span><span class="p">(</span><span class="s">"p"</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">))</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Categorical</span><span class="p">(</span><span class="s">"category"</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_observations</span><span class="p">)</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">MvNormal</span><span class="p">(</span><span class="s">"y"</span><span class="p">,</span> <span class="n">mu</span><span class="p">[</span><span class="n">category</span><span class="p">],</span> <span class="n">chol</span><span class="o">=</span><span class="n">chol</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">8000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>As a multivariate gaussian looks at the likelihood of seeing combinations of features it is also a better suited method
+for these data. So we are rewarded with a better fitting model too, just look at the classification below, which is
+nearly perfect!</p>
+
+<vegachart schema-url="/assets/posts/2021-08-01-Clustering-penguins/multivariate_model_check.json" style="width: 100%"></vegachart>
+
+<h2 id="how-to-determine-the-number-of-clusters">How to determine the number of clusters</h2>
+
+<p>So far we hard, coded the number of clusters we wanted. Which is nice if you know this, but if you have no clue …
+In this case you need to build a model with 2, 3, 4, 5 … clusters and see which one gives the best fit, without 
+being to complex. We’ll first create a function that create a model with <em>n</em> clusters, samples this and returns the 
+model and traces. Then we’ll run and store this with multiple cluster sizes and use Arviz to compare these.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">run_model</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">n_clusters</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">4000</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Building model with </span><span class="si">{</span><span class="n">n_clusters</span><span class="si">}</span><span class="s"> cluster and </span><span class="si">{</span><span class="n">samples</span><span class="si">}</span><span class="s"> samples."</span><span class="p">)</span>
+
+    <span class="n">n_observations</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">shape</span>
+    <span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+        <span class="n">chol</span><span class="p">,</span> <span class="n">corr</span><span class="p">,</span> <span class="n">stds</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">LKJCholeskyCov</span><span class="p">(</span>
+            <span class="s">"chol"</span><span class="p">,</span>
+            <span class="n">n</span><span class="o">=</span><span class="n">n_features</span><span class="p">,</span>
+            <span class="n">eta</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+            <span class="n">sd_dist</span><span class="o">=</span><span class="n">pm</span><span class="p">.</span><span class="n">Exponential</span><span class="p">.</span><span class="n">dist</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span>
+            <span class="n">compute_corr</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
+            <span class="s">"mu"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">n_features</span><span class="p">),</span> <span class="n">testval</span><span class="o">=</span><span class="n">data</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">p</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Dirichlet</span><span class="p">(</span><span class="s">"p"</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">))</span>
+        <span class="n">category</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Categorical</span><span class="p">(</span><span class="s">"category"</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_observations</span><span class="p">)</span>
+
+        <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">MvNormal</span><span class="p">(</span><span class="s">"y"</span><span class="p">,</span> <span class="n">mu</span><span class="p">[</span><span class="n">category</span><span class="p">],</span> <span class="n">chol</span><span class="o">=</span><span class="n">chol</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span><span class="p">,</span> <span class="n">trace</span>
+</code></pre></div></div>
+
+<p>This is actually a very generic function that will accept any dataframe or matrix (it should be scaled though), and a 
+number of clusters, builds and samples a models which it then returns. With a few lines of code we can run this and
+capture the output in a dictionary. Then we use <code class="language-plaintext highlighter-rouge">az.compare</code> to compare the models with different numbers of
+clusters.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">scaled_penguin_df</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"species"</span><span class="p">]).</span><span class="n">values</span>
+<span class="n">model_traces</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sa">f</span><span class="s">"model_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s">_clusters"</span><span class="p">:</span> <span class="n">run_model</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">8000</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="n">comp</span> <span class="o">=</span> <span class="n">az</span><span class="p">.</span><span class="n">compare</span><span class="p">({</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model_traces</span><span class="p">.</span><span class="n">items</span><span class="p">()})</span>
+<span class="n">comp</span>
+</code></pre></div></div>
+
+<table class="large-table">
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right">rank</th>
+      <th style="text-align: right">loo</th>
+      <th style="text-align: right">p_loo</th>
+      <th style="text-align: right">d_loo</th>
+      <th style="text-align: right">weight</th>
+      <th style="text-align: right">se</th>
+      <th style="text-align: right">dse</th>
+      <th style="text-align: right">warning</th>
+      <th style="text-align: right">loo_scale</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">model_3_clusters</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">-905.740656</td>
+      <td style="text-align: right">68.837020</td>
+      <td style="text-align: right">0.000000</td>
+      <td style="text-align: right">4.808971e-01</td>
+      <td style="text-align: right">29.476505</td>
+      <td style="text-align: right">0.000000</td>
+      <td style="text-align: right">True</td>
+      <td style="text-align: right">log</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">model_5_clusters</td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">-905.837578</td>
+      <td style="text-align: right">197.606731</td>
+      <td style="text-align: right">0.096921</td>
+      <td style="text-align: right">5.191029e-01</td>
+      <td style="text-align: right">28.926480</td>
+      <td style="text-align: right">11.295538</td>
+      <td style="text-align: right">True</td>
+      <td style="text-align: right">log</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">model_4_clusters</td>
+      <td style="text-align: right">2</td>
+      <td style="text-align: right">-922.262126</td>
+      <td style="text-align: right">175.651671</td>
+      <td style="text-align: right">16.521469</td>
+      <td style="text-align: right">0.000000e+00</td>
+      <td style="text-align: right">29.039549</td>
+      <td style="text-align: right">10.030136</td>
+      <td style="text-align: right">True</td>
+      <td style="text-align: right">log</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">model_2_clusters</td>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">-1284.311894</td>
+      <td style="text-align: right">156.435489</td>
+      <td style="text-align: right">378.571238</td>
+      <td style="text-align: right">2.416753e-09</td>
+      <td style="text-align: right">28.624421</td>
+      <td style="text-align: right">16.756834</td>
+      <td style="text-align: right">True</td>
+      <td style="text-align: right">log</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>We can see that the model with three clusters actually performs the best here. As this isn’t the maximum number of 
+clusters tested we should accept this. However, often it is not that clear from these numbers which model should be 
+picked, two models might be very close, … So plotting this out using <code class="language-plaintext highlighter-rouge">az.plot_compare</code> can help us sort this out.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">az</span><span class="p">.</span><span class="n">plot_compare</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><a href="/assets/posts/2021-08-01-Clustering-penguins/cluster_selection.png" class="lightgallery-link" data-sub-html="Arviz model comparison plot">
+<img src="/assets/posts/2021-08-01-Clustering-penguins/cluster_selection.png" alt="Arviz model comparison plot" class="small-image" data-src="/assets/posts/2021-08-01-Clustering-penguins/cluster_selection.png" loading="lazy" />
+</a></p>
+
+<p>Here you can see the scores for all models, the vertical gray line marks the best score. Though you can probably consider
+all models where the black bar intersects with this line as equally good (in this case models with 3, 4 and 5 clusters). 
+So in that case pick the one with the least clusters, even if it isn’t the top ranked one.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>As I’ve only been working with PyMC3 and Bayesian Statistics for a month or two, some concepts here are beyond
+what I fully understand. Take everything here with a rather large pinch of salt! However, by going slow and taking 
+one step at the time, it was still possible to build a very performant classifier for this dataset. It also gives me a 
+push towards which theory to study up on (Multivariate Gaussians).</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><strong><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a>: Palmer Archipelago (Antarctica) penguin data.</strong> Allison Marie Horst and Alison Presmanes Hill and Kristen 
+B Gorman (2020).</li>
+</ul>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+
+<p>Header photo by <a href="https://unsplash.com/@goosegrease?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Derek Oyen</a> on <a href="https://unsplash.com/s/photos/penguin?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/pymc3">pymc3</a>,&nbsp;<a href="/tag/data-analysis">data-analysis</a>,&nbsp;<a href="/tag/data-science">data-science</a>,&nbsp;<a href="/tag/machine-learning">machine-learning</a>,&nbsp;<a href="/tag/altair">altair</a>,&nbsp;<a href="/tag/biology">biology</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa fa-coffee"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Clustering+the+Palmer+Station+penguin+data%2C+using+PyMC3&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fbiology%2F2021%2F08%2F01%2FClustering-penguins.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Clustering+the+Palmer+Station+penguin+data%2C+using+PyMC3&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fbiology%2F2021%2F08%2F01%2FClustering-penguins.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fbiology%2F2021%2F08%2F01%2FClustering-penguins.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/programming/games/2021/07/04/Bayesian-sales-analysis.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Bayesian analysis of sales data, using PyMC3</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '4dcube';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa fa-coffee"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+			
+			<p><strong>Contribute</strong></p>
+			<p><i class="fa fa-coffee"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+			<br />
+			
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+			<p class="text">Last update: August 1, 2021</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+<!-- Custom page specific js files -->
+  
+    <script src='/js/vega.min.js' type="text/javascript"></script>
+  
+    <script src='/js/vega-lite.min.js' type="text/javascript"></script>
+  
+    <script src='/js/vega-embed.min.js' type="text/javascript"></script>
+  
+    <script src='/js/justcharts.js' type="text/javascript"></script>
+  
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/programming/biology/2021/08/01/Clustering-penguins.html',
+    'title': 'Clustering the Palmer Station penguin data, using PyMC3'
+  });
+</script>
+
+
+  </body>
+
+</html>
