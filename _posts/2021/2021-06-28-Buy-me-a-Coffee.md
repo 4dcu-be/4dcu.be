@@ -10,7 +10,7 @@ cover:  "/assets/posts/2021-06-28-Buy-me-a-Coffee/coffee-header.jpg"
 thumbnail: "/assets/images/thumbnails/coffee-header.jpg"
 ---
 
-Recently a few people like the [MacroPad]({% post_url 2021/2021-04-05-Macropad %}) enough to give me a tip through
+Recently a few people liked the [MacroPad]({% post_url 2021/2021-04-05-Macropad %}) enough to give me a tip through
 Thingiverse. This is very much appreciated and now there is the option to contribute directly on this site as well! 
 If any of the posts here were helpful to you and you want to show your appreciation you can now 
 [Buy me a Coffee](https://www.buymeacoffee.com/4dcube). This website allows everyone to make a small contribution, 

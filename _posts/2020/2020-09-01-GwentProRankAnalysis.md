@@ -23,11 +23,13 @@ through [Binder](https://mybinder.org/v2/gh/4dcu-be/GwentRank/master?filepath=Gw
 anything. For those that want to check their own national rank or ladder efficiency index (and don't care about the 
 code). Download links for the full tables discussed here (in Excel-format) are available here:
 
-  * [Player Statistics](/assets/posts/2020-09-01-GwentProRankAnalysis/player_stats.xlsx) : Player data for each season, with ladder efficiency and national rank added.
-  * [Player Summaries](/assets/posts/2020-09-01-GwentProRankAnalysis/player_summaries.xlsx) : Summary data for each player that made an appearance in pro rank. Includes number of appearances on
+  * [Player Statistics](/assets/pages/gwent/player_stats.xlsx) : Player data for each season, with ladder efficiency and national rank added.
+  * [Player Summaries](/assets/pages/gwent/player_summaries.xlsx) : Summary data for each player that made an appearance in pro rank. Includes number of appearances on
   the leaderboards, min and max MMR, best rank, best national rank, ...
-  * [Seasonal summary](/assets/posts/2020-09-01-GwentProRankAnalysis/seasonal_stats.xlsx) : Number of games played each season in Masters 2, minimum and maximum MMR as well as top 500,200 and 64 cutoffs.
-  * [National Statistics](/assets/posts/2020-09-01-GwentProRankAnalysis/national_stats.xlsx) : Data per country, number of pro players per million inhabitants, ...
+  * [Seasonal summary](/assets/pages/gwent/seasonal_stats.xlsx) : Number of games played each season in Masters 2, minimum and maximum MMR as well as top 500,200 and 64 cutoffs.
+  * [National Statistics](/assets/pages/gwent/national_stats.xlsx) : Data per country, number of pro players per million inhabitants, ...
+
+**Update 04/08/2021:** Downloads are now linked to the [Gwent Pro Rank Data]({% link _pages/gwent_stats.md %}) page which will be updated more frequently.
 
 **Update 12/03/2021:** All files were updated and now contain Season of the Wolf and Season of Love from Masters 3 (2021). 
 
