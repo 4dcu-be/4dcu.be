@@ -84,6 +84,14 @@ incentives to buy more product between releases (sealed and competitive play or 
 in front of someone at the store and play) simply weren't there. Hopefully that is about to change soon again with life
 restrictions begin lifted and the [World Championship] coming up in 2022 !
 
+## Acknowledgements
+
+[Archon Arcana] has been tracking registered decks from the very beginning and kindly shared 
+the raw data for us to play with (check out their page [here](https://archonarcana.com/Master_Vault#Registered_decks)).
+
+This post is unofficial Fan Content. The literal and graphical information presented in this project related with 
+KeyForge is copyright of Fantasy Flight Games (FFG). 4DCu.be is not produced by, endorsed by, supported by, 
+or affiliated with FFG.
 
 [the master vault]: https://www.keyforgegame.com/
 [Richard Garfield, Ph.D.]: https://en.wikipedia.org/wiki/Richard_Garfield
@@ -91,3 +99,4 @@ restrictions begin lifted and the [World Championship] coming up in 2022 !
 [Fantasy Flight Games]: https://www.fantasyflightgames.com/
 [World Championship]: https://www.fantasyflightgames.com/en/news/2021/2/4/forging-ahead/
 [GitHub]: https://github.com/4dcu-be/BayesianSalesAnalysis
+[Archon Arcana]: https://archonarcana.com/Main_Page
