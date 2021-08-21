@@ -48,3 +48,8 @@ If you want more information or check how these graphs were generated, relevant 
   * An Agent Based Model to look at Gwent Pro Ladder. [Part 1]({% post_url 2020/2020-11-11-Gwent-Pro-Rank-ABM %}) and [part 2]({% post_url 2020/2020-11-11-Gwent-Pro-Rank-ABM_2 %})
   * [Climbing Pro Ladder: Grind vs Skill](https://teambanditgang.com/climbing-pro-ladder-grind-vs-skill/)
   * [Gwent: Pro Ladder Analysis and National Rankings]({% post_url 2020/2020-09-01-GwentProRankAnalysis %})
+
+There is also a ton of information in other places:
+
+  * [GwentData](https://www.gwentdata.com/): Win rates per faction during the season (near real-time)
+  * [Team Legacy](https://teamlegacy.org/tag/gwent/): Leroi2's analyses and articles

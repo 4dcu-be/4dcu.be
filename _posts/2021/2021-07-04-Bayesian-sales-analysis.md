@@ -472,6 +472,12 @@ the notebook you'll find the optimistic version (with the exact parameters from 
 where the interest in MM and DT is set to the interest in WC, only the latter is shown here. While this does increase 
 the uncertainty on the predictions it comes with far more flexibility to play with the model.
 
+**Update 20/08/2021:** In the [GitHub repo] you'll find a better model which calculates the interest based on the pre-COVID rate
+of registrations for all sets. This results in a far better prediction when using ```pm.Data``` to set the start of the
+pandemic beyond the current time, which can be seen in [this post]({% post_url 2021/2021-08-21-COVID_and_KeyForge %}). 
+The approach below still has merit in some cases, so I'll leave it in, just know there is a better solution available
+for this case.
+
 {:.large-code}
 ```python
 with pm.Model() as model_7:
@@ -538,6 +544,8 @@ with pm.Model() as model_7:
 As you can see, in the pessimistic model the bumps caused by releasing the latest sets are far more modest and in 
 line with previous releases. This could indicate that purchasing behaviour is different during COVID-19 (which I fully
 expect to be the case).
+
+
 
 ## Conclusion
 

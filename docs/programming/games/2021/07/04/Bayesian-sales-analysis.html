@@ -823,6 +823,12 @@ the notebook you’ll find the optimistic version (with the exact parameters fro
 where the interest in MM and DT is set to the interest in WC, only the latter is shown here. While this does increase 
 the uncertainty on the predictions it comes with far more flexibility to play with the model.</p>
 
+<p><strong>Update 20/08/2021:</strong> In the <a href="https://github.com/4dcu-be/BayesianSalesAnalysis">GitHub repo</a> you’ll find a better model which calculates the interest based on the pre-COVID rate
+of registrations for all sets. This results in a far better prediction when using <code class="language-plaintext highlighter-rouge">pm.Data</code> to set the start of the
+pandemic beyond the current time, which can be seen in <a href="/programming/games/2021/08/20/COVID_and_KeyForge.html">this post</a>. 
+The approach below still has merit in some cases, so I’ll leave it in, just know there is a better solution available
+for this case.</p>
+
 <div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_7</span><span class="p">:</span>
     <span class="c1"># priors
 </span>    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">"sigma"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">1.17</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.07</span><span class="p">)</span>  <span class="c1"># Sigma for likelihood function
@@ -1183,7 +1189,7 @@ harder to change, this is a huge advantage when predicting things.</p>
 			<br />
 			
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
-			<p class="text">Last update: August 6, 2021</p>
+			<p class="text">Last update: August 21, 2021</p>
     </div>
 
   </div>

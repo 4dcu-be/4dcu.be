@@ -1,3 +1,6 @@
+The license below applies to the code to create the website. Posts, pages and, assets are not considered part of the
+software but content that can have its own license and/or restrictions.
+
 The MIT License (MIT)
 
 Copyright (c) 2020 Sebastian Proost
