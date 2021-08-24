@@ -24,6 +24,15 @@ At the end of each season the website can be scraped to figure out how many Pro 
 [this post]({% post_url 2021/2021-01-24-GwentProPlayersAnalysis %}). Note that longer seasons typically have more
 players reaching Pro ladder than shorter seasons.
 
+## How many players are there on regular ladder ?
+
+We don't know, but **at least 100 000**.
+
+Recently I've played very little, dropping quite a bit in rank. After playing one game my position on regular ladder
+was 100 001st. A few more games and this was still the case, only when hitting 300+ MMR my position started to improve.
+Though this suggests the client shows position 100 001 for all players outside the top 100k. So we really don't know 
+how many players there are in total, but we can say at least 100 000 people play a few games a month.
+
 ## How popular is Gwent ?
 
 <vegachart schema-url="{{ site.baseurl }}/assets/pages/gwent/popularity_chart.json" style="width: 100%"></vegachart>
