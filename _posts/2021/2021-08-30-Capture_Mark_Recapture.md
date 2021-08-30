@@ -2,7 +2,7 @@
 layout: post
 title:  "Capture-Mark-Recapture model in PyMC3"
 byline: ""
-date:   2021-08-30 08:00:00
+date:   2021-08-30 06:00:00
 author: Sebastian Proost
 categories: programming biology
 tags:	python pymc3 data-analysis data-science machine-learning ecology biology
