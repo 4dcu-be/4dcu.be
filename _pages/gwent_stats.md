@@ -61,4 +61,4 @@ If you want more information or check how these graphs were generated, relevant 
 There is also a ton of information in other places:
 
   * [GwentData](https://www.gwentdata.com/): Win rates per faction during the season (near real-time)
-  * [Team Legacy](https://teamlegacy.org/tag/gwent/): Leroi2's analyses and articles
+  * [Team Legacy](https://teamlegacy.org/tag/gwent/): Lerio2's analyses and articles

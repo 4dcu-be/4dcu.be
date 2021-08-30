@@ -647,7 +647,22 @@ of a proper logo for DeckLock. But also under the hood there are a number of imp
 <script src="/js/lightgallery.min.js"></script>
 <script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
 <script>
 	AOS.init({
    once: true,
