@@ -85,7 +85,7 @@ KeyForge is copyright of Fantasy Flight Games (FFG). 4DCu.be is not produced by,
 or affiliated with FFG.
 
 [Fantasy Flight Games]: https://www.fantasyflightgames.com/en/index/
-[previous post]: {% post_url 2021/2021-09-04-KeyForge_Decks_Printed %}
+[previous post]: {% post_url 2021/2021-08-30-Capture_Mark_Recapture %}
 [Capture-Mark-Recapture]: https://www.bbc.co.uk/bitesize/guides/zmxbkqt/revision/3
 [the master vault]: https://www.keyforgegame.com/
 [GitHub repo]: https://github.com/4dcu-be/BayesianSalesAnalysis
