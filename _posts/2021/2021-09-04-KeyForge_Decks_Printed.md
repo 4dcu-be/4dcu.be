@@ -60,8 +60,8 @@ unless we accept this the article ends here), we get these estimates:
 *\* The number of decks registered three months after the release.*
 
 This seems to be in line with what scarce details are known, CotA received [multiple print runs], likely to keep up with 
-demand. MM and DT were rumored to have received a smaller print due to COVID and supply issues (can't find a good source
-on this though).
+demand. MM and DT were rumored to have received a smaller print due to COVID and supply issues (for those that speak
+italian, it is mentioned in [this podcast], so for Italian cards this is confirmed).
 
 ## Conclusion
 
@@ -91,3 +91,4 @@ or affiliated with FFG.
 [GitHub repo]: https://github.com/4dcu-be/BayesianSalesAnalysis
 [Archon Arcana]: https://archonarcana.com/Main_Page
 [multiple print runs]: https://www.reddit.com/r/KeyforgeGame/comments/bdwmk9/guide_for_distinguishing_print_runs/
+[this podcast]: https://open.spotify.com/episode/7sGXnTsNKfnBkQyDD7Yepr
