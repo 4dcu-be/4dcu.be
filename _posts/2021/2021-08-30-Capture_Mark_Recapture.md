@@ -136,6 +136,8 @@ in one go as well, easy! This is exactly the strength of Bayesian statistics. Th
 highlighted as it is very easy to play with the number to see how the uncertainty can be decreased, so the efforts of 
 catching and marking individuals can be done as efficient as possible.
 
+To see what I did with this formula, check out the [next post] where this is used to estimate how many KeyForge decks
+were printed.
 
 ## Acknowledgements
 
@@ -146,3 +148,4 @@ Header image by [Sebastian Pena Lambarri](https://unsplash.com/@sebaspenalambarr
 [Capture-Mark-Recapture]: https://www.bbc.co.uk/bitesize/guides/zmxbkqt/revision/3
 [confidence interval]: https://en.wikipedia.org/wiki/Mark_and_recapture#Confidence_interval
 [PyMC3]: https://docs.pymc.io/
+[next post]: {% post_url 2021/2021-09-04-KeyForge_Decks_Printed %}

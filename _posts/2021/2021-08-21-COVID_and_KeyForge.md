@@ -82,7 +82,10 @@ data that is clearly shown to be incorrect. People still pony up cash
 to buy new decks upon the release of a new set as before the pandemic. Which suggests the game is very much alive, but 
 incentives to buy more product between releases (sealed and competitive play or simply the ability to go out, sit 
 in front of someone at the store and play) simply weren't there. Hopefully that is about to change soon again with life
-restrictions begin lifted and the [World Championship] coming up in 2022 !
+restrictions being lifted and the [World Championship] coming up in 2022 !
+
+Note that this is all about the number of *registered* decks, if you are interested in the total number of *printed* 
+decks, have a look a [this post]({% post_url 2021/2021-09-04-KeyForge_Decks_Printed %}).
 
 ## Acknowledgements
 

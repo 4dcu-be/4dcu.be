@@ -556,7 +556,9 @@ understand what each parameter is doing and, we can change parameters to model s
 data. Unlike machine learning models which are often black boxes, with internals that are hard to understand and even
 harder to change, this is a huge advantage when predicting things.
 
-The interpretation of some of these results will come up soon in a new, non-technical, post, stay tuned ! 
+The interpretation of some of these results in a non-technical way can be found 
+[here]({% post_url 2021/2021-08-21-COVID_and_KeyForge %})! Note that this is all about the number of *registered* decks,
+if you are interested in the total number of *printed* decks, have a look a [this post]({% post_url 2021/2021-09-04-KeyForge_Decks_Printed %}).
 
 ## Resources
 
