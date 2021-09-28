@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>DeckLock part 4: Flesh and Blood</title>
+  <meta name="description" content="Flesh and Blood has been gaining a lot of traction as a Trading Card Game, and I recently picked up two preconstructed decks to check out the game. It also w...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Flesh and Blood has been gaining a lot of traction as a Trading Card Game, and I recently picked up two preconstructed decks to check out the game. It also w..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/games/2021/09/28/DeckLock4.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="DeckLock part 4: Flesh and Blood" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2021-09-28-DeckLock4/fab_header.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="DeckLock part 4: Flesh and Blood">
+  <meta name="twitter:description" content="Flesh and Blood has been gaining a lot of traction as a Trading Card Game, and I recently picked up two preconstructed decks to check out the game. It also w...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2021-09-28-DeckLock4/fab_header.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/games/2021/09/28/DeckLock4.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/games/2021/09/28/DeckLock4.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+	<div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2021-09-28-DeckLock4/fab_header.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">DeckLock part 4: Flesh and Blood</h1>
+			
+      <p class="info"><em>and other updates</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted September 28, 2021 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>, 
+    
+  
+    
+    <a href="/category/games">Games</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p><a href="https://fabtcg.com/">Flesh and Blood</a> has been gaining a lot of traction as a Trading Card Game, and I recently picked up two preconstructed
+decks to check out the game. It also would be great to add this new game to <a href="https://github.com/4dcu-be/DeckLock">DeckLock</a> as it seem interesting, and I’m
+pretty sure I’ll pick up some more cards sooner or later.</p>
+
+<p>For those unfamiliar with <a href="https://github.com/4dcu-be/DeckLock">DeckLock</a>, this is a framework build upon <a href="https://blog.getpelican.com/">Pelican</a> to generate an overview of decks you
+own across different games as a simple static website (check out the <a href="http://4dcu.be/DeckLock">demo</a>). This is covered in previous posts
+(<a href="/programming/games/2020/04/05/DeckLock.html">part 1</a>, <a href="/programming/games/2020/04/26/DeckLock2.html">part 2</a> and <a href="/programming/games/2020/05/25/DeckLock3.html">part 3</a>) and currently supports <a href="https://www.playgwent.com/en">Gwent</a>, <a href="https://www.keyforgegame.com/">KeyForge</a> and <a href="https://magic.wizards.com/en">Magic: the Gathering</a>. Given 
+that <a href="https://fabtcg.com/">Flesh and Blood</a> is growing quickly (and I picked up a few precon decks myself) it seems an update is due to 
+add support for this new game.</p>
+
+<p>On top off adding support for FaB, there were numerous small additions to the framework. As these don’t justify a post
+on their own I’ll highlight them at the end.</p>
+
+<h2 id="adding-flesh-and-blood">Adding Flesh and Blood</h2>
+
+<p>Similarly to <a href="https://magic.wizards.com/en">Magic: the Gathering</a>, Flesh and Blood is a TCG with physical cards, so adding decks will be done 
+similarly. There aren’t too many resources on FaB yet, fortunately <a href="https://fabdb.net/">FaBDB.net</a> allows you to create decklists online, 
+and has an API where card data can be obtained. The code is very similar to <a href="/programming/games/2020/04/26/DeckLock2.html">part 2</a> albeit structured better,
+as it can be found on <a href="https://github.com/4dcu-be/DeckLock">GitHub</a> there is little need to discuss it here in depth.</p>
+
+<p>The format for decklists is pretty straightforward in case you want to do this by hand :</p>
+
+<div class="language-text large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Deck build - via https://fabdb.net :
+
+Prism Blitz Precon
+
+Class: Illusionist
+Hero: Prism
+Weapons: Iris of Reality
+Equipment: Dream Weavers, Halo of Illumination, Heartened Cross Strap, Spell Fray Leggings
+
+(2) Herald of Protection (red)
+(2) Herald of Ravages (red)
+(2) Herald of Rebirth (red)
+(2) Herald of Tenacity (red)
+(2) Illuminate (red)
+(1) Phantasmify (red)
+(1) Prismatic Shield (red)
+(2) Seek Enlightenment (red)
+(2) Wartune Herald (red)
+(2) Enigma Chimera (yellow)
+(1) Herald of Judgment
+(1) Merciful Retribution
+(1) Ode to Wrath
+(2) Rising Solartide (yellow)
+(2) Enigma Chimera (blue)
+(2) Herald of Protection (blue)
+(2) Herald of Ravages (blue)
+(2) Herald of Rebirth (blue)
+(2) Herald of Tenacity (blue)
+(2) Illuminate (blue)
+(2) Spears of Surreality (blue)
+(2) Wartune Herald (blue)
+(1) The Librarian
+
+See the full deck at: https://fabdb.net/decks/GkNKXvRA/
+</code></pre></div></div>
+
+<p>These will need to be saved as a <code class="language-plaintext highlighter-rouge">.fab</code> file in the <code class="language-plaintext highlighter-rouge">content</code> folder and the new <code class="language-plaintext highlighter-rouge">FaBReader</code> class will 
+work its magic to add this to the website. While working with Pelican gives you a lot of flexibility, it also has a 
+steep learning curve, and I personally find it hard to structure the code well. Though while working on this, I noticed 
+when creating Pelican plugins it is important to keep functions simple with a single clear task and separate concerns. 
+This is in general solid advice when coding! I also noticed I did a poor job on this with other games … 
+so some refactoring needs to happen some time soon.</p>
+
+<p><a href="/assets/posts/2021-09-28-DeckLock4/decklock_fab_deck.png" class="lightgallery-link" data-sub-html="View of a Flesh and Blood deck page">
+<img src="/assets/posts/2021-09-28-DeckLock4/decklock_fab_deck.png" alt="View of a Flesh and Blood deck page" data-src="/assets/posts/2021-09-28-DeckLock4/decklock_fab_deck.png" loading="lazy" />
+</a></p>
+
+<p>Support for FaB is still basic as you can see in the image above, but it will be improved over time!</p>
+
+<h2 id="other-improvements">Other improvements</h2>
+
+<p>There were some aesthetic changes throughout DeckLock, with a few charts added here and there. The KeyForge deck
+pages start to look decent, though for other games there is still some work to be done.</p>
+
+<p><a href="/assets/posts/2021-09-28-DeckLock4/decklock_keyforge_deck.png" class="lightgallery-link" data-sub-html="View of a KeyForge deck page">
+<img src="/assets/posts/2021-09-28-DeckLock4/decklock_keyforge_deck.png" alt="View of a KeyForge deck page" data-src="/assets/posts/2021-09-28-DeckLock4/decklock_keyforge_deck.png" loading="lazy" />
+</a></p>
+
+<p>An important change is the addition of a GitHub Action to build the website upon committing changes. This makes it 
+easier to make changes (as you can do this directly on GitHub, no need to install anything locally) and should make
+the framework accessible for those without Python knowledge (though a solid understanding on how GitHub works will
+still be required). This needs more testing and the way to do this will be outlined in the documentation.</p>
+
+<h2 id="future-updates">Future updates</h2>
+
+<p>Refactoring and documenting code; this has been a learning project and there are a lot of points where the code could,
+and even should, be improved before moving forward. A lot of code is still at the stage where something was written to
+make things work, but it isn’t pretty. It should also be relatively easy to set things up now that GitHub actions are
+used to build the website, even for those that don’t know Python (fork the repo, add content, commit+push and 
+the action will take care of everything else). Though this isn’t outlined in the documentation yet.</p>
+
+<p>The layout needs a lot of work, right now it is mostly default bootstrap with a little custom CSS and apart from a few
+glyphs here and there very little artwork. This can be improved greatly by someone with better design skills, if you
+are such a person, see below how you can contribute !</p>
+
+<p>A visual overview of decks, rather than just having a written decklist it would be nice to lay all cards out on the 
+screen. This requires a bit of tinkering with CSS but this feature will make deck pages much more interesting to 
+look at.</p>
+
+<p>While I don’t want to replicate too much functionality of other websites, a few key graphs that can help to analyze a 
+deck here and there would be nice. Furthermore, some stats across decks could be nice to make the deck overviews more 
+interesting (which cards are popular, how many cards are used, …)</p>
+
+<h2 id="want-to-contribute-">Want to contribute ?</h2>
+
+<p>Unfortunately, I don’t have as much time to work on this as I would like, especially creating glyphs and designing pages is
+particularly time-consuming for me. So if someone is interested in seeing this project grow faster, there is certainly
+something you could do to help out!</p>
+
+<ul>
+  <li>There are plenty of other TCG out there, and I don’t have the time to include all. Though if you know a little Python and
+would like this for Yugioh, Pokemon, … , you can probably help to add support for a new game</li>
+  <li>If you know your way around logo design there are plenty of glyphs that could be added …</li>
+  <li>The layout is very basic, anyone with some web design skills could help improve that</li>
+  <li>Documentation can always be expanded</li>
+  <li>Simply providing feedback, this helps to figure out where priorities should be</li>
+</ul>
+
+<p>If you wish to contribute, reach out via email, twitter, … (check contact page). Or find the project on <a href="https://github.com/4dcu-be/DeckLock">GitHub</a> and 
+start coding, I’m happy to accept PRs no matter how small.</p>
+
+<h2 id="code">Code</h2>
+
+<p>All the code for <a href="https://github.com/4dcu-be/DeckLock">DeckLock</a> is up on GitHub <a href="https://github.com/4dcu-be/DeckLock">https://github.com/4dcu-be/DeckLock</a>
+and you can check out the <a href="http://4dcu.be/DeckLock">demo</a> with the Decks I have and enjoy playing across the different games.</p>
+
+<h2 id="legal">Legal</h2>
+
+<p>Decklock is unofficial Fan Content. The literal and graphical information presented in this project about Flesh and 
+Blood, Gwent, KeyForge and Magic: The Gathering, are copyright of Legend Story Studios, CDPR, Fantasy Flight Games and 
+Wizards of the Coast, LLC, a subsidiary of Hasbro, Inc. respectively. DeckLock and 4DCu.be are not produced by, 
+endorsed by, supported by, or affiliated with any of these entities.</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/pelican">pelican</a>,&nbsp;<a href="/tag/blog">blog</a>,&nbsp;<a href="/tag/games">games</a>,&nbsp;<a href="/tag/keyforge">keyforge</a>,&nbsp;<a href="/tag/mtg">mtg</a>,&nbsp;<a href="/tag/magic-the-gathering">magic-the-gathering</a>,&nbsp;<a href="/tag/gwent">gwent</a>,&nbsp;<a href="/tag/decklock">decklock</a>,&nbsp;<a href="/tag/flesh-and-blood">flesh-and-blood</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa fa-coffee"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=DeckLock+part+4%3A+Flesh+and+Blood&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2021%2F09%2F28%2FDeckLock4.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=DeckLock+part+4%3A+Flesh+and+Blood&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2021%2F09%2F28%2FDeckLock4.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2021%2F09%2F28%2FDeckLock4.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/programming/games/2021/09/04/KeyForge_Decks_Printed.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">KeyForge: How many decks were printed ?</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '4dcube';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa fa-coffee"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+			
+			<p><strong>Contribute</strong></p>
+			<p><i class="fa fa-coffee"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+			<br />
+			
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+			
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/programming/games/2021/09/28/DeckLock4.html',
+    'title': 'DeckLock part 4: Flesh and Blood'
+  });
+</script>
+
+
+  </body>
+
+</html>
