@@ -301,7 +301,7 @@ and use a Generator, that loads the data, builds a url for each deck and ships t
 <p>Here is a stub on how to create a function and register it to trigger on initialization and how to create a generator and
 register it with Pelican so it will produce our html files.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pelican</span> <span class="kn">import</span> <span class="n">signals</span><span class="p">,</span> <span class="n">generators</span>
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pelican</span> <span class="kn">import</span> <span class="n">signals</span><span class="p">,</span> <span class="n">generators</span>
 
 <span class="k">class</span> <span class="nc">KeyForgeGenerator</span><span class="p">(</span><span class="n">generators</span><span class="p">.</span><span class="n">Generator</span><span class="p">):</span>
     <span class="s">""" Generator Class to produce pages based on keyforge.cache.json """</span>

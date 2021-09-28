@@ -152,7 +152,7 @@ Though as there is no standard format to represent a similar one to M:tG was use
 extra information, most importantly the version of Gwent the deck is compatible with, followed by the actual 
 deck list.</p>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// NAME : Soldiers Ball
+<div class="language-text large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// NAME : Soldiers Ball
 // CREATOR : Team Leviathan Gaming
 // GWENT_VERSION : 6.2.0
 // FACTION : Nilfgard
@@ -181,14 +181,14 @@ deck list.</p>
 </code></pre></div></div>
 
 <p>This is the example of the Soldiers’ Ball deck from <a href="http://teamleviathangaming.com/meta">Team Leviathan Gaming</a>. This needs to be stored as a text file
-with a .gwent extention in the content folder and the Gwent <a href="https://blog.getpelican.com/">Pelican</a> plugin included in the new version of <a href="https://github.com/4dcu-be/DeckLock">DeckLock</a>
+with a <code class="language-plaintext highlighter-rouge">.gwent</code> extention in the <code class="language-plaintext highlighter-rouge">content</code> folder and the Gwent <a href="https://blog.getpelican.com/">Pelican</a> plugin included in the new version of <a href="https://github.com/4dcu-be/DeckLock">DeckLock</a>
 will process it. If you’ve read <a href="/programming/games/2020/04/05/DeckLock.html">part 1</a> and <a href="/programming/games/2020/04/26/DeckLock2.html">part 2</a> of the DeckLock posts, there is nothing remarkable about
 the implementation.</p>
 
 <h2 id="handling-images">Handling images</h2>
 
 <p>One consequence of having digital cards that can change over time is how they are stored on <a href="https://gwent.one/">The Voice of Gwent</a>. You
-can download the images of the cards, but as other properies (like the power, the abilities, …) can change from one
+can download the images of the cards, but as other properties (like the power, the abilities, …) can change from one
 version to another, additional information is cleverly added using CSS.</p>
 
 <p><a href="/assets/posts/2020-05-25-DeckLock3/card-composition.jpg" class="lightgallery-link" data-sub-html="The Voice of Gwent cleverly combines parts with CSS">

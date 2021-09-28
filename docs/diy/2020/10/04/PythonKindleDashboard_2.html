@@ -259,7 +259,7 @@ age and show that. It is better to show (slightly) out of date information than 
 <p>The decorator shown below elegantly combines both of these, note there is some boiler plate code for checking the last
 modification to a file. This part of the code is included in <code class="language-plaintext highlighter-rouge">./dashboard/bin/cache.py</code></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">json</span>
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
@@ -341,7 +341,7 @@ tokens are replaced by the values to display. Finally, the output is written to 
 will check if the operating system is windows and adjust the path accordingly. This is useful for debugging as I can
 execute the code on my main machine without issues.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bin/python3
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bin/python3
 # encoding: utf-8
 </span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
@@ -430,7 +430,7 @@ environmental variable <code class="language-plaintext highlighter-rouge">LD_LIB
 <p>To avoid flooding KUAL’s log over time (especially <code class="language-plaintext highlighter-rouge">fbink</code> is very verbose) all output from the tools is caught and
 piped to <code class="language-plaintext highlighter-rouge">/dev/null</code> (essentially the command line’s garbage bin) by appending <code class="language-plaintext highlighter-rouge">&gt; /dev/null 2&gt;&amp;1</code> to the command.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
+<div class="language-bash large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
 
 <span class="nb">cd</span> <span class="s2">"/mnt/base-us/extensions/dashboard/"</span>
 

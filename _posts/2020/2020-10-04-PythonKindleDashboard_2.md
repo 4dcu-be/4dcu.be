@@ -145,6 +145,7 @@ age and show that. It is better to show (slightly) out of date information than 
 The decorator shown below elegantly combines both of these, note there is some boiler plate code for checking the last
 modification to a file. This part of the code is included in `./dashboard/bin/cache.py`
 
+{:.large-code}
 ```python
 import json
 import os
@@ -229,6 +230,7 @@ tokens are replaced by the values to display. Finally, the output is written to 
 will check if the operating system is windows and adjust the path accordingly. This is useful for debugging as I can
 execute the code on my main machine without issues.
 
+{:.large-code}
 ```python
 # bin/python3
 # encoding: utf-8
@@ -319,6 +321,7 @@ environmental variable `LD_LIBRARY_PATH` and run the program from there.
 To avoid flooding KUAL's log over time (especially `fbink` is very verbose) all output from the tools is caught and
 piped to `/dev/null` (essentially the command line's garbage bin) by appending `> /dev/null 2>&1` to the command.
 
+{:.large-code}
 ```bash
 #!/bin/sh
 
