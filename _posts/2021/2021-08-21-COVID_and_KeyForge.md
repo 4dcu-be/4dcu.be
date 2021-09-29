@@ -48,8 +48,8 @@ Note that the number of lost sales is even higher, as not every deck sold is nec
 ## The interest in KeyForge didn't diminish
 
 Do you notice the little nicks in the graph above? Those bumps coincide with new sets being released. With every set
-being preceded with addition advertisement to create a bit of hype, and simply new cards coming out, this gets people
-to pick up new decks. The model includes the interest there is to pick up new decks upon release, and we can compare 
+being preceded with additional advertisement to create a bit of hype, and simply new cards coming out gets people excited
+to pick up new decks. The model includes the interest there is to buy new decks upon release, and we can compare 
 this between sets. (Technical details can be found in the 
 [previous post]({% post_url 2021/2021-07-04-Bayesian-sales-analysis %}), with the latest model available on [GitHub] )
 

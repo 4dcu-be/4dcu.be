@@ -208,7 +208,8 @@ So to solve the issue with multiple likelihoods, ```pm.MvNormal``` can be used, 
 gaussian distribution which takes multiple input values and combines them into a single likelihood. It requires a mean 
 for each feature in the input and a Cholesky decomposition of covariance matrix... Jikes, I won't pretend I know the 
 underlying mathematics, I don't, but fortunately I found a bit of code that generates the required 
-matrix using ```pm.LKJCholeskyCov```. 
+matrix using ```pm.LKJCholeskyCov```. In a nutshell this is required to take correlations between different features
+into account.
 
 Apart from that, this makes the code considerably cleaner and more generic than the previous model, so that is a 
 nice free little bonus too.
@@ -300,6 +301,13 @@ comp
 | model_5_clusters |    1 |  -905.837578 | 197.606731 |   0.096921 | 5.191029e-01 | 28.926480 | 11.295538 |    True |       log |
 | model_4_clusters |    2 |  -922.262126 | 175.651671 |  16.521469 | 0.000000e+00 | 29.039549 | 10.030136 |    True |       log |
 | model_2_clusters |    3 | -1284.311894 | 156.435489 | 378.571238 | 2.416753e-09 | 28.624421 | 16.756834 |    True |       log |
+
+Using ```az.compare``` there are a number of metrics applied to see which model is the best fit to our data. This
+uses by default Leave-one-out cross-validation, and ```loo```, ```p_loo``` and ```d_loo``` are the numbers coming out of 
+that analysis (loo is the metric to check, lower is better, p_loo is the estimated number of parameters and d_loo is 
+the difference with the best model). The weight can roughly be seen as the probability the model is correct given the 
+data, here closer to 1 is better. The standard error on the cross-validation, ```se``` in the table, is also included 
+as well the difference with between the models with the best model, ```dse```. 
 
 We can see that the model with three clusters actually performs the best here. As this isn't the maximum number of 
 clusters tested we should accept this. However, often it is not that clear from these numbers which model should be 

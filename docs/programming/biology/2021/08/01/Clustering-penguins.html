@@ -323,7 +323,8 @@ but this was very convoluted and definitely something to avoid where possible.</
 gaussian distribution which takes multiple input values and combines them into a single likelihood. It requires a mean 
 for each feature in the input and a Cholesky decomposition of covariance matrix… Jikes, I won’t pretend I know the 
 underlying mathematics, I don’t, but fortunately I found a bit of code that generates the required 
-matrix using <code class="language-plaintext highlighter-rouge">pm.LKJCholeskyCov</code>.</p>
+matrix using <code class="language-plaintext highlighter-rouge">pm.LKJCholeskyCov</code>. In a nutshell this is required to take correlations between different features
+into account.</p>
 
 <p>Apart from that, this makes the code considerably cleaner and more generic than the previous model, so that is a 
 nice free little bonus too.</p>
@@ -469,6 +470,13 @@ clusters.</p>
     </tr>
   </tbody>
 </table>
+
+<p>Using <code class="language-plaintext highlighter-rouge">az.compare</code> there are a number of metrics applied to see which model is the best fit to our data. This
+uses by default Leave-one-out cross-validation, and <code class="language-plaintext highlighter-rouge">loo</code>, <code class="language-plaintext highlighter-rouge">p_loo</code> and <code class="language-plaintext highlighter-rouge">d_loo</code> are the numbers coming out of 
+that analysis (loo is the metric to check, lower is better, p_loo is the estimated number of parameters and d_loo is 
+the difference with the best model). The weight can roughly be seen as the probability the model is correct given the 
+data, here closer to 1 is better. The standard error on the cross-validation, <code class="language-plaintext highlighter-rouge">se</code> in the table, is also included 
+as well the difference with between the models with the best model, <code class="language-plaintext highlighter-rouge">dse</code>.</p>
 
 <p>We can see that the model with three clusters actually performs the best here. As this isn’t the maximum number of 
 clusters tested we should accept this. However, often it is not that clear from these numbers which model should be 
