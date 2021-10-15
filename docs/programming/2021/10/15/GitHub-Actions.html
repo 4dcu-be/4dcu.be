@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Lights, Camera, GitHub, Actions: My Favorite GitHub Actions</title>
+  <meta name="description" content="GitHub Actions allow you to automate some workflows directly on GitHub when code is pushed, at regular intervals or triggered manually. While it takes a bit ...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="GitHub Actions allow you to automate some workflows directly on GitHub when code is pushed, at regular intervals or triggered manually. While it takes a bit ..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/2021/10/15/GitHub-Actions.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Lights, Camera, GitHub, Actions: My Favorite GitHub Actions" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2021-10-15-GitHub-Actions/github_logo.png" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Lights, Camera, GitHub, Actions: My Favorite GitHub Actions">
+  <meta name="twitter:description" content="GitHub Actions allow you to automate some workflows directly on GitHub when code is pushed, at regular intervals or triggered manually. While it takes a bit ...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2021-10-15-GitHub-Actions/github_logo.png">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/2021/10/15/GitHub-Actions.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/2021/10/15/GitHub-Actions.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+	<div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2021-10-15-GitHub-Actions/github_logo.png);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Lights, Camera, GitHub, Actions: My Favorite GitHub Actions</h1>
+			
+      <p class="info"><em></em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted October 15, 2021 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p><a href="https://github.com/features/actions">GitHub Actions</a> allow you to automate some workflows directly on GitHub when code is pushed, at regular intervals or
+triggered manually. While it takes a bit of setup, the advantages are well worth the time required to get
+acquainted with this advanced feature of GitHub.</p>
+
+<p>In this post I’ll outline a few of my favorite workflows to pull in new data periodically, format code, run unittests, 
+… Links to different repos will be included to see the actions in, …, well, action. These are not the most advanced
+ones, but a simple bit of automation can go a long way in saving some time and energy.</p>
+
+<h2 id="autoblack---python-code-formatting">Autoblack - Python code formatting</h2>
+
+<p>The package <a href="https://github.com/psf/black">black</a> is the de facto standard for formatting python code. Not only will it point out inconsistencies and 
+mistakes in the code-style, black will correct them. So before committing code in a repo, it is a good idea to run
+black to make sure the style is A-OK. However, I tend to forget to run it … and while you could set up a pre-commit
+hook (which needs to be configured on each developer’s system) it is even better to let GitHub run black on all 
+code, and if there are mistakes, fix them and re-commit. No need to install pre-commit hooks locally, or even to 
+remember to run black yourself.</p>
+
+<p>There are plenty of examples out on GitHub how to do this, for a comprehensive overview check out the collection
+of workflows from <a href="https://github.com/cclauss/autoblack">cclaus’ autoback repository</a>. The files I’m using (shown
+below) is based off this with little modification. This needs to be saved in a <code class="language-plaintext highlighter-rouge">.github/workflows</code> folder
+in the repository and will check all python code pushed to the repo. There are versions that handle pull requests as 
+well, make sure to check out all files in cclaus’ repo!</p>
+
+<div class="language-yaml large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># GitHub Action that uses Black to reformat the Python code in an incoming push request.</span>
+
+<span class="na">name</span><span class="pi">:</span> <span class="s">autoblack</span>
+<span class="na">on</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">push</span><span class="pi">]</span>
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+        <span class="na">with</span><span class="pi">:</span>  <span class="c1"># https://github.com/stefanzweifel/git-auto-commit-action#checkout-the-correct-branch</span>
+            <span class="na">ref</span><span class="pi">:</span> <span class="s">$</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Python </span><span class="m">3.8</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-python@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">python-version</span><span class="pi">:</span> <span class="m">3.8</span>
+          <span class="na">architecture</span><span class="pi">:</span> <span class="s1">'</span><span class="s">x64'</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">pip install black</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">black --check ./</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">If needed, commit black changes to a new pull request</span>
+        <span class="na">if</span><span class="pi">:</span> <span class="s">failure()</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">black ./</span>
+          <span class="s">git config --global user.name autoblack_push</span>
+          <span class="s">git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'</span>
+          <span class="s">git commit -am "fixup! Format Python code with psf/black push"</span>
+          <span class="s">git push</span>
+</code></pre></div></div>
+
+<p>The workflow here is pretty straightforward, but it takes some time to wrap your head around how this is included in
+the yaml file. Each instance of <code class="language-plaintext highlighter-rouge">uses:</code> or <code class="language-plaintext highlighter-rouge">run:</code> will either call an external script or run a specific command.
+ So this script will:</p>
+
+<ul>
+  <li>Check the repository out using an external action [actions/checkout@v2](https://github.com/stefanzweifel/git-auto-commit-action#checkout-the-correct-branch</li>
+  <li>Install Python 3.8 using <a href="https://github.com/actions/setup-python">actions/setup-python@v2</a></li>
+  <li>Install black as you would locally through pip</li>
+  <li>Run black to check if there are issues</li>
+  <li>If there are, black will throw an error, it will run black and correct the issues + commit the updated code</li>
+</ul>
+
+<p>This is, for me at least, essentially an auto-include for future Python project (except for notebooks, but
+for these there is <a href="https://github.com/dnanhkhoa/nb_black">nb_black</a>). Simply drop the file in the correct folder and
+done, easy and automatic formatting for all code.</p>
+
+<h2 id="unit-tests-and-code-coverage">Unit tests and code coverage</h2>
+
+<p>Having a continuous integration (CI) system run unit tests to check if new versions of code are still working as
+intended is nothing new, though with GitHub Actions you can run it all on GitHub. So
+use of a third-party solution (like <a href="https://www.travis-ci.com/">Travis CI</a>) is no longer necessary, and with fewer “moving” parts there is less 
+risk of a workflow breaking. Furthermore, while some external platforms didn’t allow (easily) for testing different
+parts of code-bases with multiple programming languages, this is now done simply by adding a yaml file for each language.</p>
+
+<p>My own go-to repo for testing new things, <a href="https://github.com/sepro/MemoBoard">MemoBoard</a> has a Python and JavaScript
+component and unit tests have been implemented for all components. So we can simply add two yaml files to create an
+environment (either python or node), install all dependencies and run the tests. This will run nicely on both the Python
+parts as the JavaScript section and if either fails it throws an error.</p>
+
+<p><a href="/assets/posts/2021-10-15-GitHub-Actions/memoboard.png" class="lightgallery-link" data-sub-html="Screenshot of MemoBoard,  it is hopelessly over-engineered but still my goto to tinker with new things">
+<img src="/assets/posts/2021-10-15-GitHub-Actions/memoboard.png" alt="Screenshot of MemoBoard,  it is hopelessly over-engineered but still my goto to tinker with new things" data-src="/assets/posts/2021-10-15-GitHub-Actions/memoboard.png" loading="lazy" />
+</a></p>
+
+<p>For the Python part code coverage is also included and reported to <a href="https://about.codecov.io/">codecov.io</a>, there are existing actions for this
+so including those is a breeze.</p>
+
+<div class="language-yaml large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># GitHub Action that uses Black to reformat the Python code in an incoming push request.</span>
+
+<span class="na">name</span><span class="pi">:</span> <span class="s">unittest python + codecov</span>
+<span class="na">on</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">push</span><span class="pi">,</span> <span class="nv">pull_request</span><span class="pi">]</span>
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+        <span class="na">with</span><span class="pi">:</span>  <span class="c1"># https://github.com/stefanzweifel/git-auto-commit-action#checkout-the-correct-branch</span>
+            <span class="na">ref</span><span class="pi">:</span> <span class="s">$</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Python </span><span class="m">3.8</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-python@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">python-version</span><span class="pi">:</span> <span class="m">3.8</span>
+          <span class="na">architecture</span><span class="pi">:</span> <span class="s1">'</span><span class="s">x64'</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install requirements</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">pip install -r requirements.txt</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Generate Report</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">pip install coverage</span>
+          <span class="s">coverage run run_tests.py</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Upload Coverage to Codecov</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">codecov/codecov-action@v1</span>
+</code></pre></div></div>
+
+<p>The steps to test the JavaScript (JSX and React to be specific) are similar.</p>
+
+<div class="language-yaml large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># GitHub Action that runs unittests on javascript portion of the code</span>
+
+<span class="na">name</span><span class="pi">:</span> <span class="s">unittest js</span>
+<span class="na">on</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">push</span><span class="pi">,</span> <span class="nv">pull_request</span><span class="pi">]</span>
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+        <span class="na">with</span><span class="pi">:</span>  <span class="c1"># https://github.com/stefanzweifel/git-auto-commit-action#checkout-the-correct-branch</span>
+            <span class="na">ref</span><span class="pi">:</span> <span class="s">$</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-node@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">node-version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">12'</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install dependencies</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">npm install</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Unit test</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">npm test</span>
+</code></pre></div></div>
+
+<h2 id="building-a-static-website">Building a static website</h2>
+
+<p>GitHub has supported Jekyll for docs for a while, you just put the template and data in your repo, and it can build
+the website from there. However, this is somewhat limited: you can only use a handful of plugins, you can run your
+own code, and you are limited to Jekyll. Now with a GitHub action you can use any static web generator you like, and
+rebuild the website and post it to a gh-pages branch from where it can be hosted.</p>
+
+<p>While you probably still would like to be able to build the website locally for testing and development, being able
+to build a version on GitHub has many advantages. For small changes you no longer need to have all build tools 
+installed. My <a href="https://sebastian.proost.science/">resume</a>, is a static website generated using <a href="https://www.gatsbyjs.com/">Gatsby</a>, and most changes are rather minor (increasing
+publication statistics or adding a course, publication, …). So by including an action that builds the website in 
+the repo that triggers when new content is pushed, GitHub’s interface can be used to make a small change to a
+file (e.g. updating the number of citations) and it will rebuild the website on its own. Given this can be done through
+any browser, this makes it trivial to do minor updates whenever necessary from whichever device available, the only 
+thing required is internet access.</p>
+
+<p>The script to do this can be found below, it will check the code out, install node, install gatsby, the dependencies 
+and dev dependencies, build the website and use an existing script to push the fresh build to the gh-pages branch (
+which can be used to host your website through GitHub).</p>
+
+<div class="language-yaml large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># GitHub Action that builds the website and commits again</span>
+
+<span class="na">name</span><span class="pi">:</span> <span class="s">autobuild</span>
+<span class="na">on</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">push</span><span class="pi">]</span>
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+        <span class="na">with</span><span class="pi">:</span>  <span class="c1"># https://github.com/stefanzweifel/git-auto-commit-action#checkout-the-correct-branch</span>
+            <span class="na">ref</span><span class="pi">:</span> <span class="s">$</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-node@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+            <span class="na">node-version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">12'</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">npm i -g gatsby-cli</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">npm install</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">npm install --only=dev</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">gatsby build</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Deploy to gh-pages</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">peaceiris/actions-gh-pages@v3</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">github_token</span><span class="pi">:</span> <span class="s">$</span>
+          <span class="na">publish_dir</span><span class="pi">:</span> <span class="s">./public</span>
+</code></pre></div></div>
+
+<p><a href="https://github.com/4dcu-be/DeckLock">DeckLock</a>, which can be build through a GitHub action, the goal is to allow everyone with a GitHub account to
+fork the repo, add their data through GitHub’s interface directly. With some minor configuration the build action
+will trigger when new data is added and create a personal platform. No need to install Python or mess with the command 
+line to run Pelican.</p>
+
+<div class="language-yaml large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># GitHub Action that builds the website and commits again</span>
+
+<span class="na">name</span><span class="pi">:</span> <span class="s">autobuild</span>
+<span class="na">on</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">push</span><span class="pi">,</span> <span class="nv">workflow_dispatch</span><span class="pi">]</span>
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+        <span class="na">with</span><span class="pi">:</span>  <span class="c1"># https://github.com/stefanzweifel/git-auto-commit-action#checkout-the-correct-branch</span>
+            <span class="na">ref</span><span class="pi">:</span> <span class="s">$</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Python </span><span class="m">3.8</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-python@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">python-version</span><span class="pi">:</span> <span class="m">3.8</span>
+          <span class="na">architecture</span><span class="pi">:</span> <span class="s1">'</span><span class="s">x64'</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">pip install -r requirements.txt</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">mkdir -p docs</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run Pelican (build website)</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">DOK_API_KEY</span><span class="pi">:</span> <span class="s">$</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">make github</span>
+</code></pre></div></div>
+
+<p>A GitHub Action will need to get and install all components to build the website each time it is triggered. This is actually a 
+good check if all those dependencies are still around. While for popular frameworks that might not be much of a concern,
+for many small generators with less support it is a risk! I recently inherited a website which was generated using a 
+deprecated framework… The tools to rebuild it were no longer around so all existing templates and data had to be converted to 
+something else. If the entire toolchain is reinstalled from scratch each time data is updated, those issue would have 
+been detected early and caught before the became urgent.</p>
+
+<h2 id="collecting-data">Collecting data</h2>
+
+<p>One last use case presented here is collecting data through a GitHub Action. As you can trigger an action every hour,
+day, week, … a script that collects data can be run periodically. There currently is one running hourly tracking
+the number of registered <a href="https://www.keyforgegame.com/">KeyForge</a> decks <a href="https://github.com/4dcu-be/GitHub-Actions-KeyForge">here</a>. Setting up the
+interval is similar to setting up a cron job, hardened linux enthusiasts will know immediately how to use it, others
+should check out the <a href="https://en.wikipedia.org/wiki/Cron">cron wikipedia page</a>.</p>
+
+<p>The Python script <code class="language-plaintext highlighter-rouge">get_keyforge.py</code> will load the current data, fetch the new number of registered decks from the
+website and write the output. This file with additional data will then be committed and pushed.</p>
+
+<div class="language-yaml large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># This is a basic workflow to help you get started with Actions</span>
+
+<span class="na">name</span><span class="pi">:</span> <span class="s">Update KeyForge Count Hourly</span>
+
+<span class="c1"># Controls when the action will run. </span>
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">schedule</span><span class="pi">:</span>
+    <span class="c1"># execute every hour</span>
+    <span class="pi">-</span> <span class="na">cron</span><span class="pi">:</span>  <span class="s1">'</span><span class="s">50</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*'</span>
+
+<span class="c1"># A workflow run is made up of one or more jobs that can run sequentially or in parallel</span>
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="c1"># This workflow contains a single job called "build"</span>
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="c1"># The type of runner that the job will run on</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+
+    <span class="c1"># Steps represent a sequence of tasks that will be executed as part of the job</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="c1"># Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Python </span><span class="m">3.8</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-python@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="c1"># Semantic version range syntax or exact version of a Python version</span>
+          <span class="na">python-version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.8'</span>
+          <span class="c1"># Optional - x64 or x86 architecture, defaults to x64</span>
+          <span class="na">architecture</span><span class="pi">:</span> <span class="s1">'</span><span class="s">x64'</span>
+
+      <span class="c1"># Runs the script</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Fetch KeyForge</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">python ./scripts/get_keyforge.py</span>
+
+      <span class="c1"># Commit and Push new data</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Commit and Push files</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">git config --local user.email '${GITHUB_ACTOR}@users.noreply.github.com'</span>
+          <span class="s">git config --local user.name "fetch-keyforge[bot]"</span>
+          <span class="s">git commit -m "Add changes" -a</span>
+          <span class="s">git push</span>
+</code></pre></div></div>
+
+<p>One thing to be aware of is that GitHub will run this <strong>more or less hourly</strong>, it can happen the action triggers later
+or if the load is high not at all. So for anything which has to trigger exactly every hour on the hour, this isn’t a
+good solution. For things where it doesn’t matter all that much, it can easily replace a raspberry pi doing this sort of
+stuff.</p>
+
+<p>Note that in combination with a static website generator this could be a way to have a self-updating dashboard … 
+Perhaps a good idea for a future post …</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>A few yaml files go a long way when it comes to GitHub actions. Being able to run unit-tests, build static websites, …
+directly on GitHub without relying on third-party solutions is great. As these are forked along with the code, it makes
+it trivial for others working on the code to activate them (though you do need to explicitly activate them after 
+forking a repo) and they’ll have everything up and running in seconds.</p>
+
+<p>The best part is that it is free for public repos. For private ones there is a free tier, but beyond that it becomes
+a paid service. However, for open-source projects it is great and totally worth setting up for your repos!</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/javascript">javascript</a>,&nbsp;<a href="/tag/github">github</a>,&nbsp;<a href="/tag/black">black</a>,&nbsp;<a href="/tag/unittest">unittest</a>,&nbsp;<a href="/tag/ci">ci</a>,&nbsp;<a href="/tag/automation">automation</a>,&nbsp;<a href="/tag/yaml">yaml</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa fa-coffee"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Lights%2C+Camera%2C+GitHub%2C+Actions%3A+My+Favorite+GitHub+Actions&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2021%2F10%2F15%2FGitHub-Actions.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Lights%2C+Camera%2C+GitHub%2C+Actions%3A+My+Favorite+GitHub+Actions&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2021%2F10%2F15%2FGitHub-Actions.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2021%2F10%2F15%2FGitHub-Actions.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/programming/games/2021/09/28/DeckLock4.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">DeckLock part 4: Flesh and Blood</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '4dcube';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa fa-coffee"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+			
+			<p><strong>Contribute</strong></p>
+			<p><i class="fa fa-coffee"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+			<br />
+			
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+			
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/programming/2021/10/15/GitHub-Actions.html',
+    'title': 'Lights, Camera, GitHub, Actions: My Favorite GitHub Actions'
+  });
+</script>
+
+
+  </body>
+
+</html>

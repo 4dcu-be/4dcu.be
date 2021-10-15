@@ -48,7 +48,7 @@ A very opinionated system like Jekyll can be a boon, there usually is one, and o
 might feel like a restriction, for others it allows them to just create the content they want without the hassle of 
 learning much about web development.
 
-From the three platforms discussed here, Jekyll is the most beginner friendly! Though all frameworks have some learning 
+From the three platforms discussed here, Jekyll is the most beginner-friendly! Though all frameworks have some learning 
 curve (if you don't like that head over to [wordpress.com]) but my impression is that Jekyll was the quickest to get up 
 and running.
 
