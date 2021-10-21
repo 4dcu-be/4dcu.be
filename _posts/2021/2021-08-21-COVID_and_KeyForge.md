@@ -17,7 +17,7 @@ custom_js:
 ---
 
 All our lives were impacted by COVID-19, but what was the impact on KeyForge sales? There was a
-[very technical post]({% post_url 2021/2021-07-04-Bayesian-sales-analysis %}) last month, this on is intended for 
+[very technical post]({% post_url 2021/2021-07-04-Bayesian-sales-analysis %}) last month, this one is intended for 
 everyone that cares about KeyForge, but not the details of how to create models.
 
 
