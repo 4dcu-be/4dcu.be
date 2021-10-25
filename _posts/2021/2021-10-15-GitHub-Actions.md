@@ -14,7 +14,7 @@ thumbnail: "/assets/images/thumbnails/github_actions_header.jpg"
 triggered manually. While it takes a bit of setup, the advantages are well worth the time required to get
 acquainted with this advanced feature of GitHub.
 
-In this post I'll outline a few of my favorite workflows to pull in new data periodically, format code, run unittests, 
+In this post I'll outline a few of my favorite workflows to pull in new data periodically, format code, run unit tests, 
 ... Links to different repos will be included to see the actions in, ..., well, action. These are not the most advanced
 ones, but a simple bit of automation can go a long way in saving some time and energy.
 
@@ -182,8 +182,8 @@ jobs:
             ref: ${{ github.head_ref }}
       - uses: actions/setup-node@v2
         with:
-            node-version: '12'
-      - run: npm i -g gatsby-cli
+            node-version: '14'
+      - run: npm i -g gatsby-cli@4.0.0
       - run: npm install
       - run: npm install --only=dev
       - run: gatsby build

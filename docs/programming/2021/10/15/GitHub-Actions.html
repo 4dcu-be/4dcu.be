@@ -137,7 +137,7 @@
 triggered manually. While it takes a bit of setup, the advantages are well worth the time required to get
 acquainted with this advanced feature of GitHub.</p>
 
-<p>In this post I’ll outline a few of my favorite workflows to pull in new data periodically, format code, run unittests, 
+<p>In this post I’ll outline a few of my favorite workflows to pull in new data periodically, format code, run unit tests, 
 … Links to different repos will be included to see the actions in, …, well, action. These are not the most advanced
 ones, but a simple bit of automation can go a long way in saving some time and energy.</p>
 
@@ -301,8 +301,8 @@ which can be used to host your website through GitHub).</p>
             <span class="na">ref</span><span class="pi">:</span> <span class="s">$</span>
       <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-node@v2</span>
         <span class="na">with</span><span class="pi">:</span>
-            <span class="na">node-version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">12'</span>
-      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">npm i -g gatsby-cli</span>
+            <span class="na">node-version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">14'</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">npm i -g gatsby-cli@4.0.0</span>
       <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">npm install</span>
       <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">npm install --only=dev</span>
       <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">gatsby build</span>
