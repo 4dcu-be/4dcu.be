@@ -1,0 +1,26 @@
+{
+  "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}},
+  "data": {"name": "data-8b49234a31ffeb045c0a773c2b07e85d"},
+  "mark": "bar",
+  "encoding": {
+    "color": {"type": "nominal", "field": "species", "title": "Species"},
+    "tooltip": [
+      {"type": "nominal", "field": "group"},
+      {"type": "quantitative", "field": "count"},
+      {"type": "nominal", "field": "species"}
+    ],
+    "x": {"type": "nominal", "field": "group", "title": null},
+    "y": {"type": "quantitative", "field": "count", "title": "Count"}
+  },
+  "width": 400,
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json",
+  "datasets": {
+    "data-8b49234a31ffeb045c0a773c2b07e85d": [
+      {"species": "Adelie", "group": "Group 1", "count": 2},
+      {"species": "Adelie", "group": "Group 3", "count": 149},
+      {"species": "Chinstrap", "group": "Group 1", "count": 66},
+      {"species": "Chinstrap", "group": "Group 3", "count": 2},
+      {"species": "Gentoo", "group": "Group 2", "count": 123}
+    ]
+  }
+}
