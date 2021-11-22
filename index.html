@@ -10,7 +10,9 @@ pagination:
 <div class="site-header-container {% if site.cover %}has-cover{% endif %}" {% if site.cover %}style="background-image: url({{ site.cover | prepend: site.baseurl }});"{% endif %}>
   <div class="scrim {% if site.cover %}has-cover{% endif %}">
     <header class="site-header">
-			{% if site.sticker %}<img src="{{site.sticker | prepend: site.baseurl }}" alt="sticker" class="sticker" width="300" height="300"/>{% endif %}
+			{% if site.sticker %}<img src="{{site.sticker | prepend: site.baseurl }}" srcset="{{site.sticker | prepend: site.baseurl }},
+						 {{site.sticker-1_5x | prepend: site.baseurl }} 1.5x,
+             {{site.sticker-2x | prepend: site.baseurl }} 2x" alt="sticker" class="sticker" width="300" height="300"/>{% endif %}
       <h1 class="title">{{ site.title }}</h1>
       {% if site.subtitle %}<p class="subtitle">{{ site.subtitle }}</p>{% endif %}
     </header>
@@ -28,7 +30,7 @@ pagination:
 				</h2>
 				<section class="post-excerpt" itemprop="description">
 					<a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
-						<img class="post-excerpt-image" src="{{ post.thumbnail | prepend: site.baseurl }}" alt="thumbnail for {{ post.title | strip_html }}"/>
+						<img class="post-excerpt-image" src="{{ post.thumbnail | prepend: site.baseurl }}" alt="thumbnail for {{ post.title | strip_html }}" loading=lazy/>
 					</a>
 					<p>{{ post.content | strip_html | truncatewords: 50 }}</p>
 					{% assign words = post.content | number_of_words %}

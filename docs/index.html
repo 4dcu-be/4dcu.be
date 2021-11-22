@@ -109,7 +109,9 @@
 <div class="site-header-container has-cover" style="background-image: url(/assets/header_image.webp);">
   <div class="scrim has-cover">
     <header class="site-header">
-			<img src="/assets/sticker_medium.webp" alt="sticker" class="sticker" width="300" height="300"/>
+			<img src="/assets/sticker_medium.webp" srcset="/assets/sticker_medium.webp,
+						 /assets/sticker_middle.webp 1.5x,
+             /assets/sticker_large.webp 2x" alt="sticker" class="sticker" width="300" height="300"/>
       <h1 class="title">4DCu.be</h1>
       <p class="subtitle">a blog about programming, gaming, technology, ...</p>
     </header>
@@ -127,7 +129,7 @@
 				</h2>
 				<section class="post-excerpt" itemprop="description">
 					<a class="post-link" href="/programming/biology/2021/11/11/Clustering-penguins_2.html">
-						<img class="post-excerpt-image" src="/assets/images/thumbnails/classifying_penguins_2_header.jpg" alt="thumbnail for Faster Mixture Models in PyMC3"/>
+						<img class="post-excerpt-image" src="/assets/images/thumbnails/classifying_penguins_2_header.jpg" alt="thumbnail for Faster Mixture Models in PyMC3" loading=lazy/>
 					</a>
 					<p>In a previous post about clustering the palmer penguins using PyMC3, the mixture model was implemented in the model itself. Though this is great for understanding what is going on, it isn’t very efficient when sampling the model. Furthermore, observations (here penguins) were assigned to groups (here the species of...</p>
 					
@@ -159,7 +161,7 @@
 				</h2>
 				<section class="post-excerpt" itemprop="description">
 					<a class="post-link" href="/programming/2021/10/15/GitHub-Actions.html">
-						<img class="post-excerpt-image" src="/assets/images/thumbnails/github_actions_header.jpg" alt="thumbnail for Lights, Camera, GitHub, Actions: My Favorite GitHub Actions"/>
+						<img class="post-excerpt-image" src="/assets/images/thumbnails/github_actions_header.jpg" alt="thumbnail for Lights, Camera, GitHub, Actions: My Favorite GitHub Actions" loading=lazy/>
 					</a>
 					<p>GitHub Actions allow you to automate some workflows directly on GitHub when code is pushed, at regular intervals or triggered manually. While it takes a bit of setup, the advantages are well worth the time required to get acquainted with this advanced feature of GitHub. In this post I’ll outline...</p>
 					
@@ -187,7 +189,7 @@
 				</h2>
 				<section class="post-excerpt" itemprop="description">
 					<a class="post-link" href="/programming/games/2021/09/28/DeckLock4.html">
-						<img class="post-excerpt-image" src="/assets/images/thumbnails/fab_header.jpg" alt="thumbnail for DeckLock part 4: Flesh and Blood"/>
+						<img class="post-excerpt-image" src="/assets/images/thumbnails/fab_header.jpg" alt="thumbnail for DeckLock part 4: Flesh and Blood" loading=lazy/>
 					</a>
 					<p>Flesh and Blood has been gaining a lot of traction as a Trading Card Game, and I recently picked up two preconstructed decks to check out the game. It also would be great to add this new game to DeckLock as it seem interesting, and I’m pretty sure I’ll pick...</p>
 					
@@ -219,7 +221,7 @@
 				</h2>
 				<section class="post-excerpt" itemprop="description">
 					<a class="post-link" href="/programming/games/2021/09/04/KeyForge_Decks_Printed.html">
-						<img class="post-excerpt-image" src="/assets/images/thumbnails/keyforge_deck_estimate.jpg" alt="thumbnail for KeyForge: How many decks were printed ?"/>
+						<img class="post-excerpt-image" src="/assets/images/thumbnails/keyforge_deck_estimate.jpg" alt="thumbnail for KeyForge: How many decks were printed ?" loading=lazy/>
 					</a>
 					<p>KeyForge is often advertised as having 104 septillion possible decks per set (that is 104 followed by 24 zeros), but how many of those decks actually exist? Fantasy Flight Games never released data on how many decks were printed per run. Though with Dark Tiding having Evil Twin decks (exact...</p>
 					
@@ -251,7 +253,7 @@
 				</h2>
 				<section class="post-excerpt" itemprop="description">
 					<a class="post-link" href="/programming/biology/2021/08/30/Capture_Mark_Recapture.html">
-						<img class="post-excerpt-image" src="/assets/images/thumbnails/fish_school.jpg" alt="thumbnail for Capture-Mark-Recapture model in PyMC3"/>
+						<img class="post-excerpt-image" src="/assets/images/thumbnails/fish_school.jpg" alt="thumbnail for Capture-Mark-Recapture model in PyMC3" loading=lazy/>
 					</a>
 					<p>Imagine you wish to know how many fish are in a rather large pond… The water is murky so forget about counting them easily… In ecology this is a common problem! The population size of a species often needs to be known, but it is either impractical or simply impossible...</p>
 					
@@ -283,7 +285,7 @@
 				</h2>
 				<section class="post-excerpt" itemprop="description">
 					<a class="post-link" href="/programming/games/2021/08/20/COVID_and_KeyForge.html">
-						<img class="post-excerpt-image" src="/assets/images/thumbnails/keyforge_covid.jpg" alt="thumbnail for COVID-19 impact on KeyForge"/>
+						<img class="post-excerpt-image" src="/assets/images/thumbnails/keyforge_covid.jpg" alt="thumbnail for COVID-19 impact on KeyForge" loading=lazy/>
 					</a>
 					<p>All our lives were impacted by COVID-19, but what was the impact on KeyForge sales? There was a very technical post last month, this one is intended for everyone that cares about KeyForge, but not the details of how to create models. 500 000 fewer decks registered during COVID This...</p>
 					
@@ -315,7 +317,7 @@
 				</h2>
 				<section class="post-excerpt" itemprop="description">
 					<a class="post-link" href="/programming/biology/2021/08/01/Clustering-penguins.html">
-						<img class="post-excerpt-image" src="/assets/images/thumbnails/classifying_penguins_header.jpg" alt="thumbnail for Clustering the Palmer Station penguin data, using PyMC3"/>
+						<img class="post-excerpt-image" src="/assets/images/thumbnails/classifying_penguins_header.jpg" alt="thumbnail for Clustering the Palmer Station penguin data, using PyMC3" loading=lazy/>
 					</a>
 					<p>This post will be all about trying to infer the species various observations originated from, without actually having access to the labels. This might sound like a far-fetched example, but it happens more often than you might expect in biology! When studying large animals you can usually find clear differences...</p>
 					

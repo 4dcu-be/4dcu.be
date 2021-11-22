@@ -36,6 +36,8 @@ url: "https://blog.4dcu.be" # the base hostname & protocol for your site
 cover: "/assets/header_image.webp"
 logo: "/assets/icons/apple-icon-76x76.png"
 sticker: "/assets/sticker_medium.webp"
+sticker-1_5x: "/assets/sticker_middle.webp"
+sticker-2x: "/assets/sticker_large.webp"
 
 # Build settings
 markdown: kramdown
