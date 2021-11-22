@@ -70,6 +70,10 @@ thumbnail:
 gallery_items:
     resize_dimensions: '430x288^'
     crop_dimensions: '430x288+0+0'
+
+sass:
+    style: compressed
+
 # Disqus comments
 disqus_shortname: 4dcube
 
