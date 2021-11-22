@@ -88,6 +88,7 @@ pre code.hljs {
 	img.sticker {
 		    width: 100%;
 		    max-width: 300px;
+		    height:auto;
 		    margin-top: -3em;
 		    margin-bottom: -7.5em;
 	}
@@ -159,10 +160,12 @@ pre code.hljs {
   .logo {
     float: left;
     height: 4em;
+    width: auto;
     @include media ($tablet) {
     	padding-left: $em-base;
     }
     img {
+      width: auto;
       max-height: 90%;
       margin-top: 0;
       padding-right: 1em;

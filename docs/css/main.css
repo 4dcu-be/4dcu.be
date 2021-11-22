@@ -1090,6 +1090,7 @@ pre code.hljs {
   .site-header-container img.sticker, .post-header-container img.sticker {
     width: 100%;
     max-width: 300px;
+    height: auto;
     margin-top: -3em;
     margin-bottom: -7.5em; }
   .site-header-container.has-cover, .post-header-container.has-cover {
@@ -1156,11 +1157,13 @@ pre code.hljs {
       display: table; }
   .navigation .logo {
     float: left;
-    height: 4em; }
+    height: 4em;
+    width: auto; }
     @media screen and (min-width: 768px) {
       .navigation .logo {
         padding-left: 16px; } }
     .navigation .logo img {
+      width: auto;
       max-height: 90%;
       margin-top: 0;
       padding-right: 1em; }
