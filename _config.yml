@@ -33,7 +33,7 @@ description: "A blog about Programming (mostly in Python), Machine Learning, Gam
 # root of your server.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://blog.4dcu.be" # the base hostname & protocol for your site
-cover: "/assets/header_image.jpg"
+cover: "/assets/header_image.webp"
 logo: "/assets/icons/apple-icon-76x76.png"
 sticker: "/assets/sticker_large.png"
 
