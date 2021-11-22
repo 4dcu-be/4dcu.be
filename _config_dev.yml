@@ -36,7 +36,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://localhost:4000" # the base hostname & protocol for your site
 cover: "/assets/header_image.webp"
 logo: "/assets/icons/apple-icon-76x76.png"
-sticker: "/assets/sticker_large.png"
+sticker: "/assets/sticker_large.webp"
 
 # Build settings
 markdown: kramdown
