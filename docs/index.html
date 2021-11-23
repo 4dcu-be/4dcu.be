@@ -14,7 +14,6 @@
   
 
   <!-- External libraries -->
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
   <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
@@ -71,6 +70,12 @@
 	<script type="text/javascript">
 		window.tooltips = []
 	</script>
+
+	<script type='text/javascript'>
+	//<![CDATA[
+	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css");
+	//]]>
+	</Script>
 </head>
 
 
@@ -542,7 +547,7 @@
 			
       <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
 			
-			<p class="text">Last update: November 22, 2021</p>
+			<p class="text">Last update: November 23, 2021</p>
 			
     </div>
 
