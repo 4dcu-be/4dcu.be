@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Better Raspberry Pi Pico MIDI controller"
-byline: "reprogramming the MacroPad"
+byline: "adding modifier keys and chord support"
 date:   2021-12-16 06:00:00
 author: Sebastian Proost
 categories: diy
