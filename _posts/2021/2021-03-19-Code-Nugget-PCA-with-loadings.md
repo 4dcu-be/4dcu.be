@@ -8,6 +8,7 @@ categories: programming
 tags:	python pandas data-science seaborn code-nugget sklearn
 cover:  "/assets/posts/2021-03-19-Code-Nugget-PCA-with-loadings/PCA_header.jpg"
 thumbnail: "/assets/images/thumbnails/pca_header.jpg"
+github: https://github.com/4dcu-be/CodeNuggets
 ---
 
 Like the previous [Code Nugget]({{site.baseurl}}/tag/code-nugget/), this bit of code will add some often needed

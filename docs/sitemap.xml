@@ -217,6 +217,10 @@
 <lastmod>2021-12-16T07:00:00+01:00</lastmod>
 </url>
 <url>
+<loc>https://blog.4dcu.be/programming/2021/12/30/Posthoc-Statannotations.html</loc>
+<lastmod>2021-12-30T07:00:00+01:00</lastmod>
+</url>
+<url>
 <loc>https://blog.4dcu.be/about/</loc>
 </url>
 <url>
@@ -485,6 +489,12 @@
 </url>
 <url>
 <loc>https://blog.4dcu.be/tag/automation/</loc>
+</url>
+<url>
+<loc>https://blog.4dcu.be/tag/scikit-posthocs/</loc>
+</url>
+<url>
+<loc>https://blog.4dcu.be/tag/statannotations/</loc>
 </url>
 <url>
 <loc>https://blog.4dcu.be/category/programming/</loc>

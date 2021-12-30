@@ -8,6 +8,7 @@ categories: programming
 tags:	python pandas data-science seaborn code-nugget sklearn pycombat
 cover:  "/assets/posts/2021-04-21-Code-Nugget-Batch_Effects/pycombat_header.jpg"
 thumbnail: "/assets/images/thumbnails/pycombat_header.jpg"
+github: https://github.com/4dcu-be/CodeNuggets
 ---
 
 Even high-end scientific equipment can have a bad day! Machine performance can be affected by ambient temperature,

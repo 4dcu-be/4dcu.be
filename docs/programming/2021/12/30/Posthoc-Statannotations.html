@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Plotting post hoc tests with Python</title>
+  <meta name="description" content="When three or more groups of samples are compared (e.g. Using ANOVA/Tukey HSD or Kruskal-Wallis/Dunn), you’ll often  see results shown as a boxplot, with lin...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2021">
+  
+
+  <!-- External libraries -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="When three or more groups of samples are compared (e.g. Using ANOVA/Tukey HSD or Kruskal-Wallis/Dunn), you’ll often  see results shown as a boxplot, with lin..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/2021/12/30/Posthoc-Statannotations.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Plotting post hoc tests with Python" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2021-12-30-Posthoc-Statannotations/posthoc_statannotations_header.png" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Plotting post hoc tests with Python">
+  <meta name="twitter:description" content="When three or more groups of samples are compared (e.g. Using ANOVA/Tukey HSD or Kruskal-Wallis/Dunn), you’ll often  see results shown as a boxplot, with lin...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2021-12-30-Posthoc-Statannotations/posthoc_statannotations_header.png">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/2021/12/30/Posthoc-Statannotations.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/2021/12/30/Posthoc-Statannotations.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+
+	<script type='text/javascript'>
+	//<![CDATA[
+	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css");
+	//]]>
+	</Script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+	<div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2021-12-30-Posthoc-Statannotations/posthoc_statannotations_header.png);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Plotting post hoc tests with Python</h1>
+			
+      <p class="info"><em>combining scikit-posthocs with statannotations</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted December 30, 2021 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>When three or more groups of samples are compared (e.g. Using ANOVA/Tukey HSD or Kruskal-Wallis/Dunn), you’ll often 
+see results shown as a boxplot, with lines highlighting which groups  are significantly different. In Python there is 
+no single package to do this quickly, though by combining <a href="https://scikit-posthocs.readthedocs.io/en/latest/">scikit-posthocs</a> with <a href="https://github.com/trevismd/statannotations">statannotations</a> similar plots can 
+be generated with relative ease. Here we’ll go over the code involved step by step.</p>
+
+<p><a href="/assets/posts/2021-12-30-Posthoc-Statannotations/kruskal-wallis-posthoc.png" class="lightgallery-link" data-sub-html="Results from Kruskal-Wallis with post hoc Dunn, this post will show how to make this plot">
+<img src="/assets/posts/2021-12-30-Posthoc-Statannotations/kruskal-wallis-posthoc.png" alt="Results from Kruskal-Wallis with post hoc Dunn, this post will show how to make this plot" data-src="/assets/posts/2021-12-30-Posthoc-Statannotations/kruskal-wallis-posthoc.png" loading="lazy" />
+</a></p>
+
+<p>Statistical tests comparing three or more groups are typically done in two steps. The first test will check if there
+are <em>any</em> statistical difference between the groups, the second test will then tell you <em>which</em> groups are different. 
+The second test is referred to as a post hoc test. While there are many combinations of tests to choose from,
+common combinations are <a href="https://en.wikipedia.org/wiki/Kruskal%E2%80%93Wallis_one-way_analysis_of_variance">Kruskal-Wallis</a> followed by a post hoc <a href="https://www.statisticshowto.com/dunns-test/">Dunn’s</a> test (non-parametric) and <a href="https://en.wikipedia.org/wiki/One-way_analysis_of_variance">ANOVA</a>
+with <a href="https://en.wikipedia.org/wiki/Tukey%27s_range_test">Tukey’s Honest Significant Differences</a> (parametric). Though note that the code below can easily be adapted for
+other tests.</p>
+
+<p>All code from this post can be found on <a href="https://github.com/4dcu-be/CodeNuggets/blob/main/Post%20hoc%20tests%20with%20statannotations.ipynb">GitHub</a> and <a href="https://mybinder.org/v2/gh/4dcu-be/CodeNuggets/HEAD">Binder</a>.</p>
+
+<h2 id="the-data">The data</h2>
+
+<p>The iris dataset, with measurements of petal and sepals of three species of flowers will be a nice way to 
+test some of these test. The code below will load all required libraries and load the iris data which is included in 
+scikit-learn.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">load_ext</span> <span class="n">nb_black</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="n">iris_obj</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="n">iris_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">iris_obj</span><span class="p">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">iris_obj</span><span class="p">.</span><span class="n">feature_names</span><span class="p">)</span>
+
+<span class="n">iris_df</span><span class="p">[</span><span class="s">"species"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">iris_obj</span><span class="p">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">iris_obj</span><span class="p">.</span><span class="n">target</span><span class="p">]</span>
+<span class="n">iris_df</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right">sepal length (cm)</th>
+      <th style="text-align: right">sepal width (cm)</th>
+      <th style="text-align: right">petal length (cm)</th>
+      <th style="text-align: right">petal width (cm)</th>
+      <th style="text-align: right">species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">5.1</td>
+      <td style="text-align: right">3.5</td>
+      <td style="text-align: right">1.4</td>
+      <td style="text-align: right">0.2</td>
+      <td style="text-align: right">setosa</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">4.9</td>
+      <td style="text-align: right">3.0</td>
+      <td style="text-align: right">1.4</td>
+      <td style="text-align: right">0.2</td>
+      <td style="text-align: right">setosa</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">2</td>
+      <td style="text-align: right">4.7</td>
+      <td style="text-align: right">3.2</td>
+      <td style="text-align: right">1.3</td>
+      <td style="text-align: right">0.2</td>
+      <td style="text-align: right">setosa</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">4.6</td>
+      <td style="text-align: right">3.1</td>
+      <td style="text-align: right">1.5</td>
+      <td style="text-align: right">0.2</td>
+      <td style="text-align: right">setosa</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">4</td>
+      <td style="text-align: right">5.0</td>
+      <td style="text-align: right">3.6</td>
+      <td style="text-align: right">1.4</td>
+      <td style="text-align: right">0.2</td>
+      <td style="text-align: right">setosa</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>For the first test (Kruskal-Wallis and ANOVA) we’ll use the implementations from <a href="https://scipy.org/">SciPy</a> and these require for each 
+group a list of values to be passed as a function parameter. The easiest way to do so is with the code below, a list of 
+lists is created with for each species the sepal lengths. This can then be unpacked to parameters using the asterisk (*).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">species</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">iris_df</span><span class="p">.</span><span class="n">species</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">species</span><span class="p">:</span>
+    <span class="n">data</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">iris_df</span><span class="p">[</span><span class="n">iris_df</span><span class="p">.</span><span class="n">species</span> <span class="o">==</span> <span class="n">s</span><span class="p">][</span><span class="s">"sepal length (cm)"</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h2 id="kruskal-wallis-with-dunns">Kruskal-Wallis with Dunn’s</h2>
+
+<p>The Kruskal-Wallis test is included in <a href="https://scipy.org/">SciPy</a> and can easily be applied to our data after it was properly structured
+in the previous step.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+
+<span class="n">stats</span><span class="p">.</span><span class="n">kruskal</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This will return a statistic (96.04) and a p-value (8.9e-22) so there is a significant difference between these species. 
+However, this test will not show us between which species there are difference. To know this we need to apply a post hoc 
+Dunn’s test, often used in combination with Kruskal-Wallis. The <code class="language-plaintext highlighter-rouge">posthoc_dunn()</code>function included in 
+<a href="https://scikit-posthocs.readthedocs.io/en/latest/">scikit-posthocs</a> can be used. (Note the difference in syntax with SciPy’s test)</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">scikit_posthocs</span> <span class="kn">import</span> <span class="n">posthoc_dunn</span>
+
+<span class="c1"># posthoc dunn test, with correction for multiple testing
+</span><span class="n">dunn_df</span> <span class="o">=</span> <span class="n">posthoc_dunn</span><span class="p">(</span>
+    <span class="n">iris_df</span><span class="p">,</span> <span class="n">val_col</span><span class="o">=</span><span class="s">"sepal length (cm)"</span><span class="p">,</span> <span class="n">group_col</span><span class="o">=</span><span class="s">"species"</span><span class="p">,</span> <span class="n">p_adjust</span><span class="o">=</span><span class="s">"fdr_bh"</span>
+<span class="p">)</span>
+<span class="n">dunn_df</span>
+</code></pre></div></div>
+
+<p>This will return a matrix with all pairwise combinations of species and the p-value of the test (with correction 
+applied if <code class="language-plaintext highlighter-rouge">p_adjust</code> is set to a valid method).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right">setosa</th>
+      <th style="text-align: right">versicolor</th>
+      <th style="text-align: right">virginica</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">setosa</td>
+      <td style="text-align: right">1.000000e+00</td>
+      <td style="text-align: right">1.529257e-09</td>
+      <td style="text-align: right">6.000296e-22</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">versicolor</td>
+      <td style="text-align: right">1.529257e-09</td>
+      <td style="text-align: right">1.000000e+00</td>
+      <td style="text-align: right">2.774866e-04</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">virginica</td>
+      <td style="text-align: right">6.000296e-22</td>
+      <td style="text-align: right">2.774866e-04</td>
+      <td style="text-align: right">1.000000e+00</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>So in this case each species is significantly different from the other two. We’ll have a look at ANOVA and Tukey HSD
+first before going into details how to visualize these results better.</p>
+
+<h2 id="anova-with-tukey-hsd">ANOVA with Tukey HSD</h2>
+
+<p>Similarly to the previous example, we can run an ANOVA. First we run the <code class="language-plaintext highlighter-rouge">f_oneway()</code>, which is the function in 
+<a href="https://scipy.org/">SciPy</a> to do an ANOVA, and finish with <code class="language-plaintext highlighter-rouge">posthoc_tukey()</code> from <a href="https://scikit-posthocs.readthedocs.io/en/latest/">scikit-posthocs</a>.</p>
+
+<p>The first test gives us a significant p-value (1.67e-31), so it is good to continue with the Tukey test.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">scikit_posthocs</span> <span class="kn">import</span> <span class="n">posthoc_tukey</span>
+
+<span class="c1"># First we do a oneway ANOVA as implemented in SciPy
+</span><span class="k">print</span><span class="p">(</span><span class="n">stats</span><span class="p">.</span><span class="n">f_oneway</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">))</span>
+
+<span class="n">tukey_df</span> <span class="o">=</span> <span class="n">posthoc_tukey</span><span class="p">(</span><span class="n">iris_df</span><span class="p">,</span> <span class="n">val_col</span><span class="o">=</span><span class="s">"sepal length (cm)"</span><span class="p">,</span> <span class="n">group_col</span><span class="o">=</span><span class="s">"species"</span><span class="p">)</span>
+<span class="n">tukey_df</span>
+</code></pre></div></div>
+<p>This gives us the finale table with all comparisons and p-values from those tests.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right">setosa</th>
+      <th style="text-align: right">versicolor</th>
+      <th style="text-align: right">virginica</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">setosa</td>
+      <td style="text-align: right">1.000</td>
+      <td style="text-align: right">0.001</td>
+      <td style="text-align: right">0.001</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">versicolor</td>
+      <td style="text-align: right">0.001</td>
+      <td style="text-align: right">1.000</td>
+      <td style="text-align: right">0.001</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">virginica</td>
+      <td style="text-align: right">0.001</td>
+      <td style="text-align: right">0.001</td>
+      <td style="text-align: right">1.000</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="visualizing-the-results">Visualizing the results</h2>
+
+<p>These matrices are hard to interpret, and most will prefer a simple visualization to highlight significant differences. 
+While showing the actual data using <a href="https://seaborn.pydata.org/">seaborn</a> is easy, adding in annotated lines with the p-values isn’t. This is where
+<a href="https://github.com/trevismd/statannotations">statannotations</a> comes in, this package allows you to add those in with a few lines of code. While the package comes
+with its own suite of statistical tests, post hoc tests unfortunately aren’t currently included. So here is how to do 
+this.</p>
+
+<p>First, the matrix needs to be converted to a non-redundant list of comparisons with the p-value. This is done by 
+removing the lower half and diagonal of the matrix and turning the matrix format into a long dataframe using
+<code class="language-plaintext highlighter-rouge">melt()</code>. The code and resulting dataframe are shown below.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">remove</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">tril</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">ones</span><span class="p">(</span><span class="n">tukey_df</span><span class="p">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="s">"bool"</span><span class="p">)</span>
+<span class="n">tukey_df</span><span class="p">[</span><span class="n">remove</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">nan</span>
+
+<span class="n">molten_df</span> <span class="o">=</span> <span class="n">tukey_df</span><span class="p">.</span><span class="n">melt</span><span class="p">(</span><span class="n">ignore_index</span><span class="o">=</span><span class="bp">False</span><span class="p">).</span><span class="n">reset_index</span><span class="p">().</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">molten_df</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right">index</th>
+      <th style="text-align: right">variable</th>
+      <th style="text-align: right">value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">setosa</td>
+      <td style="text-align: right">versicolor</td>
+      <td style="text-align: right">0.001</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">6</td>
+      <td style="text-align: right">setosa</td>
+      <td style="text-align: right">virginica</td>
+      <td style="text-align: right">0.001</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">7</td>
+      <td style="text-align: right">versicolor</td>
+      <td style="text-align: right">virginica</td>
+      <td style="text-align: right">0.001</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Next, we’ll have to draw the main plot using <a href="https://seaborn.pydata.org/">seaborn</a>’s <code class="language-plaintext highlighter-rouge">boxplot()</code> function and convert our dataframe into
+a list of pairs and list of matching p-values for <a href="https://github.com/trevismd/statannotations">statannotations</a>. The code below is a little cryptic due to the use
+of list comprehensions and <code class="language-plaintext highlighter-rouge">iterrows()</code>, though in a nutshell it will go over each row and create a tuple with the
+species that are being compared. Then p-values are converted to a list using the same functions.</p>
+
+<p>The list of pairs is passed to an <code class="language-plaintext highlighter-rouge">Annotator</code> object along with the data. By calling
+<code class="language-plaintext highlighter-rouge">configure()</code> the plot is set up as we would like. Finally p-values are added using <code class="language-plaintext highlighter-rouge">set_pvalues_and_annotate()</code> 
+which will also add the annotations to the plot.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+<span class="kn">from</span> <span class="nn">statannotations.Annotator</span> <span class="kn">import</span> <span class="n">Annotator</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="p">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">iris_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s">"species"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">"sepal length (cm)"</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">species</span><span class="p">)</span>
+
+<span class="n">pairs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s">"index"</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s">"variable"</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">molten_df</span><span class="p">.</span><span class="n">iterrows</span><span class="p">()]</span>
+<span class="n">p_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s">"value"</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">molten_df</span><span class="p">.</span><span class="n">iterrows</span><span class="p">()]</span>
+
+<span class="n">annotator</span> <span class="o">=</span> <span class="n">Annotator</span><span class="p">(</span>
+    <span class="n">ax</span><span class="p">,</span> <span class="n">pairs</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">iris_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s">"species"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">"sepal length (cm)"</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">species</span>
+<span class="p">)</span>
+<span class="n">annotator</span><span class="p">.</span><span class="n">configure</span><span class="p">(</span><span class="n">text_format</span><span class="o">=</span><span class="s">"star"</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s">"inside"</span><span class="p">)</span>
+<span class="n">annotator</span><span class="p">.</span><span class="n">set_pvalues_and_annotate</span><span class="p">(</span><span class="n">p_values</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><a href="/assets/posts/2021-12-30-Posthoc-Statannotations/ANOVA-posthoc.png" class="lightgallery-link" data-sub-html="Results from ANOVA with Tukey HSD on iris dataset">
+<img src="/assets/posts/2021-12-30-Posthoc-Statannotations/ANOVA-posthoc.png" alt="Results from ANOVA with Tukey HSD on iris dataset" data-src="/assets/posts/2021-12-30-Posthoc-Statannotations/ANOVA-posthoc.png" loading="lazy" />
+</a></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>While it is a shame there is no package out (yet) that makes these stats and visualization a one-liner (like the
+R package <a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a>), with these bits of code it is easy enough to do this ourselves.</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/pandas">pandas</a>,&nbsp;<a href="/tag/data-science">data-science</a>,&nbsp;<a href="/tag/seaborn">seaborn</a>,&nbsp;<a href="/tag/code-nugget">code-nugget</a>,&nbsp;<a href="/tag/sklearn">sklearn</a>,&nbsp;<a href="/tag/scikit-posthocs">scikit-posthocs</a>,&nbsp;<a href="/tag/statannotations">statannotations</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa fa-coffee"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Plotting+post+hoc+tests+with+Python&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2021%2F12%2F30%2FPosthoc-Statannotations.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Plotting+post+hoc+tests+with+Python&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2021%2F12%2F30%2FPosthoc-Statannotations.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2021%2F12%2F30%2FPosthoc-Statannotations.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/diy/2021/12/16/MIDIpad_update.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Better Raspberry Pi Pico MIDI controller</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '4dcube';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa fa-coffee"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+			
+			<p><strong>Contribute</strong></p>
+			<p><i class="fa fa-coffee"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+			<br />
+			
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+			
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="//unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47068418-5', 'auto');
+  ga('send', 'pageview', {
+    'page': '/programming/2021/12/30/Posthoc-Statannotations.html',
+    'title': 'Plotting post hoc tests with Python'
+  });
+</script>
+
+
+  </body>
+
+</html>
