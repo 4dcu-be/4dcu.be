@@ -221,6 +221,10 @@
 <lastmod>2021-12-30T07:00:00+01:00</lastmod>
 </url>
 <url>
+<loc>https://blog.4dcu.be/programming/games/2022/01/30/MTG_sales_map.html</loc>
+<lastmod>2022-01-30T11:00:00+01:00</lastmod>
+</url>
+<url>
 <loc>https://blog.4dcu.be/about/</loc>
 </url>
 <url>
@@ -497,6 +501,9 @@
 <loc>https://blog.4dcu.be/tag/statannotations/</loc>
 </url>
 <url>
+<loc>https://blog.4dcu.be/tag/geopandas/</loc>
+</url>
+<url>
 <loc>https://blog.4dcu.be/category/programming/</loc>
 </url>
 <url>
@@ -519,5 +526,8 @@
 </url>
 <url>
 <loc>https://blog.4dcu.be/year/2021/</loc>
+</url>
+<url>
+<loc>https://blog.4dcu.be/year/2022/</loc>
 </url>
 </urlset>
