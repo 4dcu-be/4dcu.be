@@ -215,9 +215,9 @@ there are still a few things to implement, as this model doesn’t provide a cat
 <h2 id="assigning-groups-to-observations">Assigning groups to observations</h2>
 
 <p>From this model it is far less obvious how to get cluster assignments for all observations. The previous model 
-explicitly assigned a category to each observation, that is not the case here. We’ll have to check with each of 
+explicitly assigned a category to each observation, which is not the case here. We’ll have to check with each of 
 the <code class="language-plaintext highlighter-rouge">MvNormals</code> in the Mixture which fits best with each observation. The code below does this for all sampled data
-and return the mean probability for each observation and each cluster.</p>
+and returns the mean probability for each observation and each cluster.</p>
 
 <p>Note that here we tackle multiple issues in one go as also new data can be passed in that was not used for 
 sampling. After scaling new data (look at <code class="language-plaintext highlighter-rouge">.fit()</code> and <code class="language-plaintext highlighter-rouge">.transform()</code> from <code class="language-plaintext highlighter-rouge">StandardScaler</code>) it can simply
@@ -746,17 +746,15 @@ $(document).ready(function() {
 
 
 
-<!-- Google Analytics -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-47068418-5"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-47068418-5', 'auto');
-  ga('send', 'pageview', {
-    'page': '/programming/biology/2021/11/11/Clustering-penguins_2.html',
-    'title': 'Faster Mixture Models in PyMC3'
-  });
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-47068418-5');
 </script>
 
 

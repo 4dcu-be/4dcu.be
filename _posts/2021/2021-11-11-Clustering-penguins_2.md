@@ -91,9 +91,9 @@ there are still a few things to implement, as this model doesn't provide a categ
 ## Assigning groups to observations
 
 From this model it is far less obvious how to get cluster assignments for all observations. The previous model 
-explicitly assigned a category to each observation, that is not the case here. We'll have to check with each of 
+explicitly assigned a category to each observation, which is not the case here. We'll have to check with each of 
 the ```MvNormals``` in the Mixture which fits best with each observation. The code below does this for all sampled data
-and return the mean probability for each observation and each cluster.
+and returns the mean probability for each observation and each cluster.
 
 Note that here we tackle multiple issues in one go as also new data can be passed in that was not used for 
 sampling. After scaling new data (look at ```.fit()``` and ```.transform()``` from ```StandardScaler```) it can simply
