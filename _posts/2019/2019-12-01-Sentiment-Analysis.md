@@ -21,7 +21,7 @@ found in a Jupyter notebook in [this repository](https://github.com/4dcu-be/Shap
 
 
 To understand what this post is about you should really have a look at this video. 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/oP3c1h8v2ZQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/oP3c1h8v2ZQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Sentiment analysis in Python
 
