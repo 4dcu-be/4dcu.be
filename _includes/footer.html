@@ -4,33 +4,37 @@
 
     <h3 class="footer-heading">{{ site.title }}</h3>
 
-    <div class="site-navigation">
+		<div>
+			<div class="site-navigation">
 
-      <p><strong>Site Map</strong></p>
-      <ul class="pages">
-				{% include nav_links.html %}
-      </ul>
-    </div>
+				<p><strong>Site Map</strong></p>
+				<ul class="pages">
+					{% include nav_links.html %}
+				</ul>
+				<br />
+				<p><strong>Legal</strong></p>
+				<p><a href="{{ "/policy/" | prepend: site.baseurl }}">Privacy policy</a></p>
+			</div>
 
-    <div class="site-contact">
-      <p><strong>Contact</strong></p>
-      <ul class="social-media-list">
-        {% include social_media_links.html %}
-      </ul>
-    </div>
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					{% include social_media_links.html %}
+				</ul>
+			</div>
 
-    <div class="site-signature">
-			{% if site.buy_me_a_coffee_username %}
-			<p><strong>Contribute</strong></p>
-			<p><i class="fa fa-coffee"></i> <a href="https://buymeacoffee.com/{{site.buy_me_a_coffee_username}}">Buy me a Coffee </a></p>
-			{% endif %}
-			<p><strong>Legal</strong></p>
-			<p><a href="{{ "/policy/" | prepend: site.baseurl }}">Privacy policy</a></p>
-      <p class="rss-subscribe text"><strong>Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></strong></p>
-			{% if page.show_updated %}
-			<p class="text">Last update: {{ site.time | date: "%B %-d, %Y" }}</p>
-			{% endif %}
-    </div>
+			<div class="site-signature">
+				{% if site.buy_me_a_coffee_username %}
+				<p><strong>Contribute</strong></p>
+				<p><i class="fa fa-coffee"></i> <a href="https://buymeacoffee.com/{{site.buy_me_a_coffee_username}}">Buy me a Coffee </a></p>
+				{% endif %}
+				<p class="rss-subscribe text"><strong>Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></strong></p>
+				{% if page.show_updated %}
+			    <p class="text">Last update: {{ site.time | date: "%B %-d, %Y" }}</p>
+			  {% endif %}
+			</div>
+		</div>
+
 
   </div>
 
