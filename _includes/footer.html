@@ -23,8 +23,9 @@
 			{% if site.buy_me_a_coffee_username %}
 			<p><strong>Contribute</strong></p>
 			<p><i class="fa fa-coffee"></i> <a href="https://buymeacoffee.com/{{site.buy_me_a_coffee_username}}">Buy me a Coffee </a></p>
-			<br />
 			{% endif %}
+			<p><strong>Legal</strong></p>
+			<p><a href="{{ "/policy/" | prepend: site.baseurl }}">Privacy policy</a></p>
       <p class="rss-subscribe text"><strong>Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></strong></p>
 			{% if page.show_updated %}
 			<p class="text">Last update: {{ site.time | date: "%B %-d, %Y" }}</p>
