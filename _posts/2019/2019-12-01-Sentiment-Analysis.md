@@ -20,8 +20,7 @@ here I'll show you the approach I came up with, and the application on
 found in a Jupyter notebook in [this repository](https://github.com/4dcu-be/ShapeOfStories-SentimentAnalysis).
 
 
-To understand what this post is about you should really have a look at this video. 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/oP3c1h8v2ZQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+To understand what this post is about you should really have a look at [this video](https://www.youtube.com/watch?v=oP3c1h8v2ZQ). 
 
 ## Sentiment analysis in Python
 
