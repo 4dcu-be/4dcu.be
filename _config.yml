@@ -76,8 +76,6 @@ gallery_items:
 sass:
     style: compressed
 
-# Disqus comments
-disqus_shortname: 4dcube
 
 # Google analytics
 ga_tracking_id: "UA-47068418-5"

@@ -13,7 +13,6 @@ This theme comes with a number of features, including:
 * Pagination enabled by default
 * Archiving of posts by categories and tags
 * Syntax highlighting for code snippets
-* Disqus integration for post comments
 * Lightgallery for viewing full-screen photos and albums
 * Google Analytics with custom page name tracking
 * Social media integration (Twitter, Facebook, LinkedIn, GitHub, and more)
@@ -119,14 +118,6 @@ jekyll-archives:
 
 A sitemap is also generated using [jekyll-sitemap][sitemap].
 
-
-### Disqus Settings
-
-You can enable [Disqus][disqus] comments for you site by including one config option:
-
-* __disqus_shortname:__ Your Disqus username. If the property is set, Disqus comments will be included with your blog posts.
-
-If you want to disable Disqus for only a specific page, add __disqus_disabled: true__ to the page's front matter.
 
 ### Google Analytics Settings
 
@@ -249,7 +240,6 @@ Which includes these awesome libraries:
 [fontawesome]: http://fortawesome.github.io/Font-Awesome/
 [Lightgallery]: https://sachinchoolur.github.io/lightgallery.js/
 [AOS]: https://michalsnik.github.io/aos/
-[disqus]: https://disqus.com/
 [ga]: http://www.google.com/analytics/
 [archives]: https://github.com/jekyll/jekyll-archives
 [sitemap]: https://github.com/jekyll/jekyll-sitemap

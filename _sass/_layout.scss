@@ -396,9 +396,6 @@ pre code.hljs {
 				text-decoration: none;
 			}
 		}
-		.disqus {
-			@include span-columns(12);
-		}
 		.post-navigation {
 			font-size: 0.9em;
 			display: block;
