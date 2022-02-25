@@ -14,7 +14,7 @@ custom_js:
 ---
 
 Want some up-to-date date from previous Gwent posts? Look no further, here the most important bits of data are
-collected! (*last update: 09/10/2021*)
+collected! (*last update: 25/02/2022*)
 
 ## How many Pro Rank players are there ?
 
