@@ -76,10 +76,6 @@ gallery_items:
 sass:
     style: compressed
 
-
-# Google analytics
-ga_tracking_id: "UA-47068418-5"
-
 # Buy me a Coffee username
 buy_me_a_coffee_username: "4dcube"
 

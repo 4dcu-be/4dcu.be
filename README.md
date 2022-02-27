@@ -119,12 +119,6 @@ jekyll-archives:
 A sitemap is also generated using [jekyll-sitemap][sitemap].
 
 
-### Google Analytics Settings
-
-You can enable basic [Google Analytics][ga] pageview tracking by including your site's tracking ID:
-
-* __ga_tracking_id__: The Tracking ID for your website. You can find it on your Google Analytics dashboard. If the property is set, Google Analytics will be added to the footer of each page.
-
 ### Social Settings
 
 Your personal social network settings are combined with the social sharing options. In the __social__ section of `_config.yml`, include an entry for each network you want to include. For example:
@@ -240,7 +234,6 @@ Which includes these awesome libraries:
 [fontawesome]: http://fortawesome.github.io/Font-Awesome/
 [Lightgallery]: https://sachinchoolur.github.io/lightgallery.js/
 [AOS]: https://michalsnik.github.io/aos/
-[ga]: http://www.google.com/analytics/
 [archives]: https://github.com/jekyll/jekyll-archives
 [sitemap]: https://github.com/jekyll/jekyll-sitemap
 [Ben Centra]: http://bencentra.github.io/centrarium/

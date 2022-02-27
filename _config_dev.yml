@@ -74,10 +74,6 @@ gallery_items:
     resize_dimensions: '430x288^'
     crop_dimensions: '430x288+0+0'
 
-# Google analytics
-# Disable for development
-# ga_tracking_id: "UA-47068418-5"
-
 # Buy me a Coffee username
 buy_me_a_coffee_username: "4dcube"
 
