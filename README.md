@@ -14,7 +14,6 @@ This theme comes with a number of features, including:
 * Archiving of posts by categories and tags
 * Syntax highlighting for code snippets
 * Lightgallery for viewing full-screen photos and albums
-* Google Analytics with custom page name tracking
 * Social media integration (Twitter, Facebook, LinkedIn, GitHub, and more)
 * Thumbnail generator
 * Gallery generator (to highlight the best images)
