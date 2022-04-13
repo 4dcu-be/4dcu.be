@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Where are my Magic: the Gathering cards ?</title>
-  <meta name="description" content="  ">
+  <title>The KeyForge hiatus: impact on deck registrations</title>
+  <meta name="description" content="Is has been a few months since FFG announced KeyForge would be paused, or in their words going on hiatus. Though as decks are  still being registered we can ...">
   
   <meta name="author" content="Sebastian Proost">
   <meta name="copyright" content="&copy; Sebastian Proost 2022">
@@ -39,12 +39,12 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="  " />
-  <meta property="og:url" content="https://blog.4dcu.be/programming/games/2022/01/30/MTG_sales_map.html">
+  <meta property="og:description" content="Is has been a few months since FFG announced KeyForge would be paused, or in their words going on hiatus. Though as decks are  still being registered we can ..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/games/2022/04/13/KeyForge_Hiatus.html">
   <meta property="og:site_name" content="4DCu.be" />
-  <meta property="og:title" content="Where are my Magic: the Gathering cards ?" />
+  <meta property="og:title" content="The KeyForge hiatus: impact on deck registrations" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2022-01-30-MTG_sales_map/mtg_map.png" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2022-04-13-KeyForge_Hiatus/david-kegg-ffg-keyforge-cover-final-small.jpg" />
   <meta property="og:image:type" content="image/jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -53,17 +53,17 @@
   
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Where are my Magic: the Gathering cards ?">
-  <meta name="twitter:description" content="  ">
-  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2022-01-30-MTG_sales_map/mtg_map.png">
-  <meta name="twitter:url" content="https://blog.4dcu.be/programming/games/2022/01/30/MTG_sales_map.html">
+  <meta name="twitter:title" content="The KeyForge hiatus: impact on deck registrations">
+  <meta name="twitter:description" content="Is has been a few months since FFG announced KeyForge would be paused, or in their words going on hiatus. Though as decks are  still being registered we can ...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2022-04-13-KeyForge_Hiatus/david-kegg-ffg-keyforge-cover-final-small.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/games/2022/04/13/KeyForge_Hiatus.html">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://blog.4dcu.be/programming/games/2022/01/30/MTG_sales_map.html">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/games/2022/04/13/KeyForge_Hiatus.html">
 	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
 	
 	<!-- Tooltips -->
@@ -111,12 +111,12 @@
     <div class="page-content">
         <div class="post">
 
-<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2022-01-30-MTG_sales_map/mtg_map.png);">
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2022-04-13-KeyForge_Hiatus/david-kegg-ffg-keyforge-cover-final-small.jpg);">
   <div class="scrim has-cover ">
     <header class="post-header">
-      <h1 class="title">Where are my Magic: the Gathering cards ?</h1>
+      <h1 class="title">The KeyForge hiatus: impact on deck registrations</h1>
 			
-      <p class="info"><em>plotting where my sold cards where shipped to</em></p>
+      <p class="info"><em></em></p>
 			
     </header>
   </div>
@@ -127,7 +127,7 @@
 
 
 <section class="post-meta">
-  <div class="post-date">Posted January 30, 2022 by Sebastian Proost</div>
+  <div class="post-date">Posted April 13, 2022 by Sebastian Proost</div>
   <div class="post-categories">
   in 
     
@@ -142,27 +142,60 @@
 </section>
 
 <article class="post-content">
-  <style>
-select {
-  display: inline;
-}
-</style>
+  <p>Is has been a few months since FFG announced KeyForge would be paused, or in their words going <a href="https://www.fantasyflightgames.com/en/news/2021/9/10/down-but-not-out/">on hiatus</a>. Though as decks are 
+still being registered we can get a glimpse of the effect of this announcement on the game. In a <a href="/programming/games/2021/07/04/Bayesian-sales-analysis.html">previous post</a>, a 
+model was made that can be used to infer the impact of each set’s release on deck registrations as well as provide 
+a realistic estimate of registrations lost due to <a href="/programming/games/2021/08/20/COVID_and_KeyForge.html">COVID-19</a>. By including another variable in the model, the
+number of weekly registrations after the announcement of FFG, the effects of this announcement can be evaluated.</p>
 
-<p>Since a few months I’ve been selling some <a href="https://magic.wizards.com/en">Magic: the Gathering</a> cards on <a href="https://www.cardmarket.com/">CardMarket</a>. Last week I realized I could 
-extract the address from buyers from eml files (exported emails) with orders. From those the (approximate*) location 
-using Google’s <a href="https://developers.google.com/maps/documentation/geocoding/overview">Geocoding API</a> can be found and plotted using <a href="https://altair-viz.github.io/">Altair</a>. This gives a visual overview where my cards are ending up !</p>
+<p>The code for this post is discussed in a <a href="/programming/games/2021/07/04/Bayesian-sales-analysis.html">previous post</a> and the updated version along with fresh data can be found on 
+<a href="https://github.com/4dcu-be/BayesianSalesAnalysis">GitHub</a>.</p>
 
-<p>Hovering over the map shows summary stats for each country or location. The color coding can be changed dynamically with
-the combo-box below the chart. Locations close to each other are combined and shown with a larger dot, 
-numbers inside the dots indicate how many orders were shipped to that municipality (or combination of municipalities).</p>
+<h2 id="drop-in-the-number-of-weekly-registrations">Drop in the number of weekly registrations</h2>
 
-<vegachart schema-url="/assets/posts/2022-01-30-MTG_sales_map/mtg_map.json" style="width: 100%"></vegachart>
+<p>Before the announcement, but well during the pandemic, there were between 5820 and 6470 decks being registered weekly. 
+With new sets (Mass Mutation and Dark Tidings) being released pushing this number up for a few weeks after release. A
+substantial difference with the situation before the pandemic, where 14980 to 16750 decks were scanned every week.</p>
 
-<p>As there are some cool bits of code used here (some <a href="https://geopandas.org/en/stable/">GeoPandas</a>, clustering on <a href="https://en.wikipedia.org/wiki/Haversine_formula">haversine</a> distance, …) there will
-be a full-length blog post, outlining those tricks in the future!</p>
+<p>The model estimates the number of deck registered weekly has dropped with <strong>3.6% to 17.5%</strong> (compared to the situation 
+during the pandemic) since the announcement the game was being put on hold. While this means every week 
+5200 to	5820 decks and opened and entered in the system.</p>
 
-<p>(*) to ensure buyers’ addresses aren’t made public, the center of their municipality is used instead of the exact 
-location.</p>
+<vegachart schema-url="/assets/posts/2022-04-13-KeyForge_Hiatus/model_6_hiatus_percent_drop.json" style="width: 100%"></vegachart>
+
+<p>The above image shows the probability density function of the percentage drop in registrations due to the hiatus. We
+can confidently say it is between <strong>3.6% to 17.5%</strong>, with the peak just over 10%. While the game isn’t exactly dead,
+missing 1 or 2 out of every 10 sales isn’t good for any business either.</p>
+
+<h2 id="model-without-a-pandemic-and-no-hiatus">Model without a pandemic and no hiatus</h2>
+
+<p>In the previous post the model was used to check how deck registrations would have evolved in case there was no pandemic,
+we’ll repeat that here with more data and removing the effect of the hiatus as well.</p>
+
+<vegachart schema-url="/assets/posts/2022-04-13-KeyForge_Hiatus/model_6_no_covid_no_hiatus.json" style="width: 100%"></vegachart>
+
+<p>In the aftermath of the pandemic and with the hiatus announced the number of decks registered each week is rather pale
+in comparison to two years ago. The difference between the actual number of registered decks (blue line) and mean 
+estimate (dark gray line) is getting larger. In <a href="/programming/games/2021/08/20/COVID_and_KeyForge.html">August 2021</a> (when I created the model), the difference was roughly 
+0.6 million decks, this has gone up to around <strong>1 million</strong> now.</p>
+
+<p>Also note that no new sets were released, which boosts deck registrations considerably for a few months once the cards become 
+available. So in reality the difference could have been even greater.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>It is clear that the number of deck registrations has gone down since the hiatus. While this is solely due to the 
+announcement or the add-on effects (e.g. stores clearing inventory and having no more KeyForge decks to sell) is
+impossible to assess. We do know that new releases and competitive play drive sales (and hence registrations), as 
+neither of those will happen for an undefined period, it isn’t looking good in the long run. However, all things
+considering, even an intermediate estimate of 10% fewer registrations weekly compared to the situation during the
+pandemic means over 5500 new decks are being opened, scanned and (hopefully) played with every week.</p>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+
+<p>This post is unofficial Fan Content. The literal and graphical information presented in this project related with 
+KeyForge is copyright of Fantasy Flight Games (FFG). 4DCu.be is not produced by, endorsed by, supported by, 
+or affiliated with FFG.</p>
 
 
 </article>
@@ -170,7 +203,7 @@ location.</p>
 
 
 <section class="tags">
-	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/pandas">pandas</a>,&nbsp;<a href="/tag/data-science">data-science</a>,&nbsp;<a href="/tag/altair">altair</a>,&nbsp;<a href="/tag/vega">vega</a>,&nbsp;<a href="/tag/mtg">mtg</a>,&nbsp;<a href="/tag/magic-the-gathering">magic-the-gathering</a>,&nbsp;<a href="/tag/geopandas">geopandas</a>,&nbsp;<a href="/tag/sklearn">sklearn</a>
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/pymc3">pymc3</a>,&nbsp;<a href="/tag/keyforge">keyforge</a>,&nbsp;<a href="/tag/data-analysis">data-analysis</a>,&nbsp;<a href="/tag/data-science">data-science</a>,&nbsp;<a href="/tag/machine-learning">machine-learning</a>,&nbsp;<a href="/tag/altair">altair</a>
 </section>
 
 
@@ -186,7 +219,7 @@ location.</p>
   
     
     
-      <a href="//twitter.com/share?text=Where+are+my+Magic%3A+the+Gathering+cards+%3F&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2022%2F01%2F30%2FMTG_sales_map.html&via=ProostSebastian"
+      <a href="//twitter.com/share?text=The+KeyForge+hiatus%3A+impact+on+deck+registrations&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2022%2F04%2F13%2FKeyForge_Hiatus.html&via=ProostSebastian"
         onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
         <i class="fa fa-twitter-square fa-lg"></i>
       </a>
@@ -219,7 +252,7 @@ location.</p>
     
     
     
-      <a href="//www.facebook.com/sharer.php?t=Where+are+my+Magic%3A+the+Gathering+cards+%3F&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2022%2F01%2F30%2FMTG_sales_map.html"
+      <a href="//www.facebook.com/sharer.php?t=The+KeyForge+hiatus%3A+impact+on+deck+registrations&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2022%2F04%2F13%2FKeyForge_Hiatus.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -235,7 +268,7 @@ location.</p>
     
     
     
-      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2022%2F01%2F30%2FMTG_sales_map.html"
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Fgames%2F2022%2F04%2F13%2FKeyForge_Hiatus.html"
         onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
         <i class="fa fa-linkedin-square fa-lg"></i>
       </a>
@@ -249,24 +282,16 @@ location.</p>
 	<section class="post-navigation">
 		<span class="prev-post">
 			
-				<a href="/programming/2021/12/30/Posthoc-Statannotations.html">
+				<a href="/programming/games/2022/01/30/MTG_sales_map.html">
 					<span class="fa-stack fa-lg">
 						<i class="fa fa-square fa-stack-2x"></i>
 						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
 					</span>
-					<span class="page-number">Plotting post hoc tests with Python</span>
+					<span class="page-number">Where are my Magic: the Gathering cards ?</span>
 				</a>
 			
 		</span>
 		<span class="next-post">
-			
-				<a href="/programming/games/2022/04/13/KeyForge_Hiatus.html">
-					<span class="page-number">The KeyForge hiatus: impact on deck registrations</span>
-					<span class="fa-stack fa-lg">
-						<i class="fa fa-square fa-stack-2x"></i>
-						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
-					</span>
-				</a>
 			
 		</span>
 	</section>

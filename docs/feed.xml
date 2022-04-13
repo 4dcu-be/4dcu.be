@@ -5,9 +5,37 @@
     <description>A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</description>
     <link>https://blog.4dcu.be/</link>
     <atom:link href="https://blog.4dcu.be/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 20 Mar 2022 10:35:32 +0100</pubDate>
-    <lastBuildDate>Sun, 20 Mar 2022 10:35:32 +0100</lastBuildDate>
+    <pubDate>Wed, 13 Apr 2022 18:56:02 +0200</pubDate>
+    <lastBuildDate>Wed, 13 Apr 2022 18:56:02 +0200</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>The KeyForge hiatus: impact on deck registrations</title>
+        <description>&lt;p&gt;Is has been a few months since FFG announced KeyForge would be paused, or in their words going &lt;a href=&quot;https://www.fantasyflightgames.com/en/news/2021/9/10/down-but-not-out/&quot;&gt;on hiatus&lt;/a&gt;. Though as decks are still being registered we can...</description>
+        <pubDate>Wed, 13 Apr 2022 10:00:00 +0200</pubDate>
+        <link>https://blog.4dcu.be/programming/games/2022/04/13/KeyForge_Hiatus.html</link>
+        <guid isPermaLink="true">https://blog.4dcu.be/programming/games/2022/04/13/KeyForge_Hiatus.html</guid>
+        
+        <category>python</category>
+        
+        <category>pymc3</category>
+        
+        <category>keyforge</category>
+        
+        <category>data-analysis</category>
+        
+        <category>data-science</category>
+        
+        <category>machine-learning</category>
+        
+        <category>altair</category>
+        
+        
+        <category>programming</category>
+        
+        <category>games</category>
+        
+      </item>
     
       <item>
         <title>Where are my Magic: the Gathering cards ?</title>
@@ -266,34 +294,6 @@
         <category>programming</category>
         
         <category>games</category>
-        
-      </item>
-    
-      <item>
-        <title>Clustering the Palmer Station penguin data, using PyMC3</title>
-        <description>&lt;p&gt;This post will be all about trying to infer the species various observations originated from, without actually having access to the labels. This might sound like a far-fetched example, but...</description>
-        <pubDate>Sun, 01 Aug 2021 10:00:00 +0200</pubDate>
-        <link>https://blog.4dcu.be/programming/biology/2021/08/01/Clustering-penguins.html</link>
-        <guid isPermaLink="true">https://blog.4dcu.be/programming/biology/2021/08/01/Clustering-penguins.html</guid>
-        
-        <category>python</category>
-        
-        <category>pymc3</category>
-        
-        <category>data-analysis</category>
-        
-        <category>data-science</category>
-        
-        <category>machine-learning</category>
-        
-        <category>altair</category>
-        
-        <category>biology</category>
-        
-        
-        <category>programming</category>
-        
-        <category>biology</category>
         
       </item>
     
