@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Better code for the MacroPad</title>
+  <meta name="description" content="A while ago I’ve made a MacroPad and I recently improved the code! In this post I’ll briefly show some advanced code to create a MacroPad class which allows ...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2022">
+  
+
+  <!-- External libraries -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="A while ago I’ve made a MacroPad and I recently improved the code! In this post I’ll briefly show some advanced code to create a MacroPad class which allows ..." />
+  <meta property="og:url" content="https://blog.4dcu.be/diy/2022/05/23/Macropad_update.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Better code for the MacroPad" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2021-04-05-Macropad/macropad_finished.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Better code for the MacroPad">
+  <meta name="twitter:description" content="A while ago I’ve made a MacroPad and I recently improved the code! In this post I’ll briefly show some advanced code to create a MacroPad class which allows ...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2021-04-05-Macropad/macropad_finished.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/diy/2022/05/23/Macropad_update.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/diy/2022/05/23/Macropad_update.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+
+	<script type='text/javascript'>
+	//<![CDATA[
+	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css");
+	//]]>
+	</Script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+	<div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2021-04-05-Macropad/macropad_finished.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Better code for the MacroPad</h1>
+			
+      <p class="info"><em>using decorators</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted May 23, 2022 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/diy">Diy</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>A while ago I’ve made a <a href="/diy/2021/04/05/Macropad.html">MacroPad</a> and I recently improved the code! In this post I’ll briefly show some advanced code
+to create a <code class="language-plaintext highlighter-rouge">MacroPad</code> class which allows custom functions to be added to key presses using a decorator. The
+original code as well as instructions how to build one yourself can be found in the original post.</p>
+
+<p><a href="/assets/posts/2021-04-05-Macropad/macropad_finished2.jpg" class="lightgallery-link" data-sub-html="Completed MacroPad">
+<img src="/assets/posts/2021-04-05-Macropad/macropad_finished2.jpg" alt="Completed MacroPad" data-src="/assets/posts/2021-04-05-Macropad/macropad_finished2.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="event-based-library">Event based library</h2>
+
+<p>I got the idea for implementing this library from the <a href="https://www.tomshardware.com/reviews/pimoroni-keybow-2040-review-programmable-keyboard-with-pi-silicon-inside">KeyBow 2040</a> that implements this specifically for their
+hardware. This makes the code to actually program their keypad a lot less complex. You can see in the example below, 
+that you simply write the function you want and add <code class="language-plaintext highlighter-rouge">@keybow.on_press(key)</code> above the function you want to run when
+the <code class="language-plaintext highlighter-rouge">key</code> is pressed. Let’s see if this can be ported to my <a href="/diy/2021/04/05/Macropad.html">MacroPad</a>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Example code from the KeyBow 2040 GitHub Repo
+</span>
+<span class="o">@</span><span class="n">keybow</span><span class="p">.</span><span class="n">on_press</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">press_handler</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="n">key</span><span class="p">.</span><span class="n">led_on</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>To achieve this a new library needs to be created that can set up the MacroPad, handle keystrokes and allow you to
+ attach new functions to each key pressed. This is an advanced bit of code, and I won’t go through each part step by
+ step, but it is a great example how you can create a library with a class that allows users to mix in their own 
+ functions that are triggered at specific point in the class’ code. It will also handle the light effects so this
+ doesn’t need to be handled by the user.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">board</span>
+<span class="kn">import</span> <span class="nn">digitalio</span>
+<span class="kn">import</span> <span class="nn">pwmio</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># Configuration, which LED pins are used, which buttons, how buttons map to macros
+</span><span class="n">led_pins</span> <span class="o">=</span> <span class="p">[</span><span class="n">board</span><span class="p">.</span><span class="n">GP18</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP17</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP16</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP21</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP20</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP19</span><span class="p">,</span> <span class="n">board</span><span class="p">.</span><span class="n">GP27</span><span class="p">,</span> <span class="n">board</span><span class="p">.</span><span class="n">GP26</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP22</span><span class="p">]</span>
+<span class="n">button_pins</span> <span class="o">=</span> <span class="p">[</span><span class="n">board</span><span class="p">.</span><span class="n">GP13</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP14</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP15</span><span class="p">,</span> <span class="n">board</span><span class="p">.</span><span class="n">GP10</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP11</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP12</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP7</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP8</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP9</span><span class="p">]</span>
+
+<span class="k">class</span> <span class="nc">Button</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">button_index</span><span class="p">,</span> <span class="n">button_pin</span><span class="p">,</span> <span class="n">led_pin</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">repeat_time</span><span class="o">=</span><span class="mf">0.075</span><span class="p">,</span> <span class="n">first_repeat_time</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">button_index</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">button</span> <span class="o">=</span> <span class="n">digitalio</span><span class="p">.</span><span class="n">DigitalInOut</span><span class="p">(</span><span class="n">button_pin</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">button</span><span class="p">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">digitalio</span><span class="p">.</span><span class="n">Direction</span><span class="p">.</span><span class="n">INPUT</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">button</span><span class="p">.</span><span class="n">pull</span> <span class="o">=</span> <span class="n">digitalio</span><span class="p">.</span><span class="n">Pull</span><span class="p">.</span><span class="n">UP</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">led</span> <span class="o">=</span> <span class="n">pwmio</span><span class="p">.</span><span class="n">PWMOut</span><span class="p">(</span><span class="n">led_pin</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">duty_cycle</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">last_pressed</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">triggered</span> <span class="o">=</span> <span class="bp">False</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">on_press</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">on_release</span> <span class="o">=</span> <span class="bp">None</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">repeat</span> <span class="o">=</span> <span class="n">repeat</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">repeat_time</span> <span class="o">=</span> <span class="n">repeat_time</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">first_repeat_time</span> <span class="o">=</span> <span class="n">first_repeat_time</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">first_repeat</span> <span class="o">=</span> <span class="bp">True</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">time_of_last_press</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">monotonic</span><span class="p">()</span>
+
+    
+    <span class="o">@</span><span class="nb">property</span>
+    <span class="k">def</span> <span class="nf">pressed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">button</span><span class="p">.</span><span class="n">value</span>
+    
+    <span class="k">def</span> <span class="nf">set_duty_cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">led</span><span class="p">.</span><span class="n">duty_cycle</span> <span class="o">=</span> <span class="n">value</span>
+    
+    <span class="k">def</span> <span class="nf">fade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">900</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">led</span><span class="p">.</span><span class="n">duty_cycle</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">led</span><span class="p">.</span><span class="n">duty_cycle</span> <span class="o">-</span> <span class="n">value</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">time_since_last_press</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">time_of_last_press</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">pressed</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">triggered</span> <span class="ow">or</span>
+                             <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">time_since_last_press</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">repeat_time</span> <span class="ow">and</span> <span class="bp">self</span><span class="p">.</span><span class="n">repeat</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">first_repeat</span><span class="p">)</span> <span class="ow">or</span>
+                             <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">time_since_last_press</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">first_repeat_time</span> <span class="ow">and</span> <span class="bp">self</span><span class="p">.</span><span class="n">first_repeat</span> <span class="ow">and</span> <span class="bp">self</span><span class="p">.</span><span class="n">repeat</span><span class="p">)):</span>
+             
+             <span class="bp">self</span><span class="p">.</span><span class="n">time_of_last_press</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">monotonic</span><span class="p">()</span>
+             
+             <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">time_since_last_press</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">first_repeat_time</span> <span class="ow">and</span> <span class="bp">self</span><span class="p">.</span><span class="n">first_repeat</span> <span class="ow">and</span> <span class="bp">self</span><span class="p">.</span><span class="n">triggered</span><span class="p">:</span>
+                 <span class="bp">self</span><span class="p">.</span><span class="n">first_repeat</span> <span class="o">=</span> <span class="bp">False</span>
+                 
+             <span class="bp">self</span><span class="p">.</span><span class="n">triggered</span> <span class="o">=</span> <span class="bp">True</span>
+            
+             <span class="bp">self</span><span class="p">.</span><span class="n">set_duty_cycle</span><span class="p">(</span><span class="mi">65025</span><span class="p">)</span>
+                 
+             <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">on_press</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                 <span class="bp">self</span><span class="p">.</span><span class="n">on_press</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+                
+        <span class="k">elif</span> <span class="bp">self</span><span class="p">.</span><span class="n">triggered</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">pressed</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">first_repeat</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">triggered</span> <span class="o">=</span> <span class="bp">False</span>
+            
+            <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">on_release</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">on_release</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+                
+        <span class="bp">self</span><span class="p">.</span><span class="n">fade</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">Macropad</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Init Macropad"</span><span class="p">)</span>
+        
+        <span class="c1"># Set up buttons
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">buttons</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="p">(</span><span class="n">bp</span><span class="p">,</span> <span class="n">lp</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">button_pins</span><span class="p">,</span> <span class="n">led_pins</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">buttons</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">Button</span><span class="p">(</span><span class="n">ix</span><span class="p">,</span> <span class="n">bp</span><span class="p">,</span> <span class="n">lp</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">on_press</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">button</span><span class="p">,</span> <span class="n">handler</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">button</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        
+        <span class="k">def</span> <span class="nf">attach_handler</span><span class="p">(</span><span class="n">handler</span><span class="p">):</span>
+            <span class="n">button</span><span class="p">.</span><span class="n">on_press</span> <span class="o">=</span> <span class="n">handler</span>
+
+        <span class="k">if</span> <span class="n">handler</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">attach_handler</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">attach_handler</span>
+    
+    <span class="k">def</span> <span class="nf">on_release</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">button</span><span class="p">,</span> <span class="n">handler</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">button</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        
+        <span class="k">def</span> <span class="nf">attach_handler</span><span class="p">(</span><span class="n">handler</span><span class="p">):</span>
+            <span class="n">button</span><span class="p">.</span><span class="n">on_release</span> <span class="o">=</span> <span class="n">handler</span>
+
+        <span class="k">if</span> <span class="n">handler</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">attach_handler</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">attach_handler</span>
+    
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">btn</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">buttons</span><span class="p">:</span>
+            <span class="n">btn</span><span class="p">.</span><span class="n">update</span><span class="p">()</span>
+            
+        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This file needs to be saved as <code class="language-plaintext highlighter-rouge">macropad.py</code> (download it <a href="/assets/posts/2022-05-23-Macropad_update/macropad.py">here</a>)
+and stored in the root directory of the Pi Pico powering the pad.</p>
+
+<h2 id="much-cleaner-code">Much cleaner code</h2>
+
+<p>With the library in place, we just need to create the <code class="language-plaintext highlighter-rouge">code.py</code> file that specifies what each button does. Like
+ in the previous version, we’ll emulate a keyboard and attach some shortcuts to each key.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">macropad</span> <span class="kn">import</span> <span class="n">Macropad</span>
+<span class="n">macropad</span> <span class="o">=</span> <span class="n">Macropad</span><span class="p">()</span>
+<span class="n">buttons</span> <span class="o">=</span> <span class="n">macropad</span><span class="p">.</span><span class="n">buttons</span>
+
+<span class="o">@</span><span class="n">macropad</span><span class="p">.</span><span class="n">on_press</span><span class="p">(</span><span class="n">buttons</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">press_first_button</span><span class="p">(</span><span class="n">button</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"pressed the first button"</span><span class="p">)</span>
+
+<span class="o">@</span><span class="n">macropad</span><span class="p">.</span><span class="n">on_press</span><span class="p">(</span><span class="n">buttons</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">press_second_button</span><span class="p">(</span><span class="n">button</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"pressed the second button"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Or in combination with the <a href="https://github.com/adafruit/Adafruit_CircuitPython_HID">Adafruit HID</a> library to emulate a keyboard. One caveat, using the decorator
+in a loop can be tricky.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">usb_hid</span>
+<span class="kn">from</span> <span class="nn">adafruit_hid.keyboard</span> <span class="kn">import</span> <span class="n">Keyboard</span>
+<span class="kn">from</span> <span class="nn">adafruit_hid.keycode</span> <span class="kn">import</span> <span class="n">Keycode</span>
+
+<span class="kn">from</span> <span class="nn">macropad</span> <span class="kn">import</span> <span class="n">Macropad</span>
+
+<span class="n">keyboard</span> <span class="o">=</span> <span class="n">Keyboard</span><span class="p">(</span><span class="n">usb_hid</span><span class="p">.</span><span class="n">devices</span><span class="p">)</span>
+
+<span class="n">macropad</span> <span class="o">=</span> <span class="n">Macropad</span><span class="p">()</span>
+<span class="n">buttons</span> <span class="o">=</span> <span class="n">macropad</span><span class="p">.</span><span class="n">buttons</span>
+
+<span class="n">button_mapping</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="n">Keycode</span><span class="p">.</span><span class="n">LEFT_CONTROL</span><span class="p">,</span> <span class="n">Keycode</span><span class="p">.</span><span class="n">WINDOWS</span><span class="p">,</span> <span class="n">Keycode</span><span class="p">.</span><span class="n">LEFT_ARROW</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">Keycode</span><span class="p">.</span><span class="n">WINDOWS</span><span class="p">,</span> <span class="n">Keycode</span><span class="p">.</span><span class="n">TAB</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">Keycode</span><span class="p">.</span><span class="n">LEFT_CONTROL</span><span class="p">,</span> <span class="n">Keycode</span><span class="p">.</span><span class="n">WINDOWS</span><span class="p">,</span> <span class="n">Keycode</span><span class="p">.</span><span class="n">RIGHT_ARROW</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">Keycode</span><span class="p">.</span><span class="n">LEFT_CONTROL</span><span class="p">,</span> <span class="n">Keycode</span><span class="p">.</span><span class="n">F4</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">Keycode</span><span class="p">.</span><span class="n">LEFT_CONTROL</span><span class="p">,</span> <span class="n">Keycode</span><span class="p">.</span><span class="n">F5</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">Keycode</span><span class="p">.</span><span class="n">LEFT_CONTROL</span><span class="p">,</span> <span class="n">Keycode</span><span class="p">.</span><span class="n">F6</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">Keycode</span><span class="p">.</span><span class="n">LEFT_CONTROL</span><span class="p">,</span> <span class="n">Keycode</span><span class="p">.</span><span class="n">F7</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">Keycode</span><span class="p">.</span><span class="n">LEFT_CONTROL</span><span class="p">,</span> <span class="n">Keycode</span><span class="p">.</span><span class="n">F8</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">Keycode</span><span class="p">.</span><span class="n">LEFT_CONTROL</span><span class="p">,</span> <span class="n">Keycode</span><span class="p">.</span><span class="n">F9</span><span class="p">]]</span>
+
+<span class="k">for</span> <span class="n">btn</span> <span class="ow">in</span> <span class="n">buttons</span><span class="p">:</span>
+    <span class="o">@</span><span class="n">macropad</span><span class="p">.</span><span class="n">on_press</span><span class="p">(</span><span class="n">btn</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">press_button</span><span class="p">(</span><span class="n">button</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"pressed </span><span class="si">{</span><span class="n">button</span><span class="p">.</span><span class="n">number</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="n">keyboard</span><span class="p">.</span><span class="n">press</span><span class="p">(</span><span class="o">*</span><span class="n">button_mapping</span><span class="p">[</span><span class="n">button</span><span class="p">.</span><span class="n">number</span><span class="p">])</span>
+
+    <span class="o">@</span><span class="n">macropad</span><span class="p">.</span><span class="n">on_release</span><span class="p">(</span><span class="n">btn</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">release_button</span><span class="p">(</span><span class="n">button</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"released </span><span class="si">{</span><span class="n">button</span><span class="p">.</span><span class="n">number</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="n">keyboard</span><span class="p">.</span><span class="n">release</span><span class="p">(</span><span class="o">*</span><span class="n">button_mapping</span><span class="p">[</span><span class="n">button</span><span class="p">.</span><span class="n">number</span><span class="p">])</span>
+    
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">macropad</span><span class="p">.</span><span class="n">update</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="my-shortcuts">My shortcuts</h2>
+
+<p>I assigned three buttons to shift between different virtual desktops and show the overview. As I currently have a 
+ single screen (albeit a rather big one), being able to flip to another desktop with a single button provides an
+ experience similar to having a dual-monitor setup. Potentially even better, as you can have distracting apps like your
+ mail open in another virtual desktop and only switch when you feel like it. Incoming mail isn’t screaming for 
+ attention from the secondary screen. Ctrl + F4 closes a browser tab, while ctrl + F5 is a hard refresh
+ of a web page (comes in useful when developing).</p>
+
+<p>The four other buttons I’m still trying to find a good purpose for, any suggestions ?</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>While you might have worked with libraries that use decorators (e.g. Flask), setting this up yourself takes a bit of
+thinking/tinkering. Though in this case going the extra mile to create a library that handles the key presses, so you
+can focus on the code that needs to run when a button is pressed pays off.</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/raspberry-pi">raspberry-pi</a>,&nbsp;<a href="/tag/python">python</a>,&nbsp;<a href="/tag/mechanical-keyboard">mechanical-keyboard</a>,&nbsp;<a href="/tag/soldering">soldering</a>,&nbsp;<a href="/tag/electronics">electronics</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa fa-coffee"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Better+code+for+the+MacroPad&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2022%2F05%2F23%2FMacropad_update.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Better+code+for+the+MacroPad&u=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2022%2F05%2F23%2FMacropad_update.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2022%2F05%2F23%2FMacropad_update.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/programming/games/2022/04/13/KeyForge_Hiatus.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">The KeyForge hiatus: impact on deck registrations</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa fa-coffee"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div>
+			<div class="site-navigation">
+
+				<p><strong>Site Map</strong></p>
+				<ul class="pages">
+					
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+				</ul>
+				<br />
+				<p><strong>Legal</strong></p>
+				<p><a href="/policy/">Privacy policy</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Contribute</strong></p>
+				<p><i class="fa fa-coffee"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+				
+				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
