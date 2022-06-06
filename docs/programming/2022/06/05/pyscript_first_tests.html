@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>PyScript: Python in the browser!</title>
+  <meta name="description" content="At PyCon 2022, PyScript was announced as a way to run Python in the browser and it has made waves in the community  since. While there are some really cool d...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2022">
+  
+
+  <!-- External libraries -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="At PyCon 2022, PyScript was announced as a way to run Python in the browser and it has made waves in the community  since. While there are some really cool d..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/2022/06/05/pyscript_first_tests.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="PyScript: Python in the browser!" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/images/headers/python_code.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="PyScript: Python in the browser!">
+  <meta name="twitter:description" content="At PyCon 2022, PyScript was announced as a way to run Python in the browser and it has made waves in the community  since. While there are some really cool d...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/images/headers/python_code.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/2022/06/05/pyscript_first_tests.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/2022/06/05/pyscript_first_tests.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+
+	<script type='text/javascript'>
+	//<![CDATA[
+	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css");
+	//]]>
+	</Script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+	<div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/images/headers/python_code.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">PyScript: Python in the browser!</h1>
+			
+      <p class="info"><em>Can it really replace JavaScript?</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted June 5, 2022 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>At PyCon 2022, <a href="https://pyscript.net/">PyScript</a> was announced as a way to run Python in the browser and it has made waves in the community 
+since. While there are some really cool demos included in the project,  the project is still in early stages of 
+development and the documentation is lagging a bit behind. So let’s have a look at some common things JavaScript
+is used for, and how to do the, in PyScript.</p>
+
+<p>All code from this post can be found on <a href="https://github.com/4dcu-be/PyScript-Basics">GitHub</a>. To see the code in action, head over to <a href="http://4dcu.be/PyScript-Basics/">http://4dcu.be/PyScript-Basics/</a>.</p>
+
+<h2 id="getting-started">Getting started</h2>
+
+<p>We’ll create three files, <code class="language-plaintext highlighter-rouge">index.html</code>, <code class="language-plaintext highlighter-rouge">style.css</code> and <code class="language-plaintext highlighter-rouge">main.py</code>, the former two  will be the html page 
+with a css file for some styling while the latter contains our custom code that will run through PyScript.</p>
+
+<p>Let’s start with <code class="language-plaintext highlighter-rouge">index.html</code>, we’ll define the bare minimum here to load PyScript, our css and Python code.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>PyScript Test<span class="nt">&lt;/title&gt;</span>
+
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"./style.css"</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"https://pyscript.net/alpha/pyscript.css"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;script </span><span class="na">defer</span> <span class="na">src=</span><span class="s">"https://pyscript.net/alpha/pyscript.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;p&gt;</span>PyScript status: <span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">"pyscript_status"</span><span class="nt">&gt;</span>Not Loaded<span class="nt">&lt;/span&gt;&lt;/p&gt;</span>
+
+        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"clicks"</span> <span class="na">pys-onClick=</span><span class="s">"increase_counter"</span> <span class="na">class=</span><span class="s">"btn"</span><span class="nt">&gt;</span>Count 0<span class="nt">&lt;/button&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"toggle"</span> <span class="na">pys-onClick=</span><span class="s">"toggle_text"</span> <span class="na">class=</span><span class="s">"btn"</span><span class="nt">&gt;</span>Show Text<span class="nt">&lt;/button&gt;</span>
+
+        <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"toggle_text"</span> <span class="na">class=</span><span class="s">"hidden"</span><span class="nt">&gt;</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus cursus 
+          mauris mauris, vel fermentum risus hendrerit tincidunt. Aliquam pulvinar tellus et iaculis vestibulum. In 
+          pharetra diam eu lectus dignissim tristique. Phasellus laoreet vulputate urna. Fusce vitae elit sodales, 
+          tempus dui in, scelerisque magna.<span class="nt">&lt;/p&gt;</span>
+
+        <span class="nt">&lt;py-script</span> <span class="na">src=</span><span class="s">'./main.py'</span><span class="nt">&gt;&lt;/py-script&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>And a little css to be able to hide the text field, and a bit I grabbed from <a href="https://www.w3schools.com/css/css3_buttons.asp">w3schools</a> to make the buttons look 
+like actual buttons.</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">body</span> <span class="p">{</span>
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">15px</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="nc">.hidden</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.btn</span> <span class="p">{</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#4CAF50</span><span class="p">;</span>
+    <span class="nl">border</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">white</span><span class="p">;</span>
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">15px</span> <span class="m">32px</span><span class="p">;</span>
+    <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+    <span class="nl">text-decoration</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">inline-block</span><span class="p">;</span>
+    <span class="nl">font-size</span><span class="p">:</span> <span class="m">16px</span><span class="p">;</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="connecting-it-to-python">Connecting it to Python</h2>
+
+<p>There are two hooks in the code that PyScript will use to run the code in <code class="language-plaintext highlighter-rouge">main.py</code>. At the bottom of the body there
+is the tag <code class="language-plaintext highlighter-rouge">&lt;py-script src='./main.py'&gt;&lt;/py-script&gt;</code> which will specify there is an external file that needs to
+be run once the page is loaded. This concept is identical to how you would include a bit of JavaScript code with
+<code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> tags.</p>
+
+<p>In the button code you can specify which function needs to be run when the button is clicked. Adding an attribute
+<code class="language-plaintext highlighter-rouge">pys-onClick="increase_counter"</code> to the element you want to be clickable. In the code above on button will run the function
+<code class="language-plaintext highlighter-rouge">increase_counter</code> (which is included in <code class="language-plaintext highlighter-rouge">main.py</code>) every time it is clicked and the other <code class="language-plaintext highlighter-rouge">toggle_text</code>.</p>
+
+<p>Apart from that it is important to make sure elements you want the Python code to interact with have an identifier. 
+Though this would be the case for adding vanilla JavaScript to a webpage as well.</p>
+
+<h2 id="the-python-code">The Python Code</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">pyscript</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'pyscript_status'</span><span class="p">,</span> <span class="s">'PyScript Loaded Successfully'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">increase_counter</span><span class="p">(</span><span class="o">*</span><span class="n">ags</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">counter</span>
+    <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">button</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span><span class="s">'clicks'</span><span class="p">)</span>
+    <span class="n">button</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"Count </span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="s">"</span>
+
+<span class="k">def</span> <span class="nf">toggle_text</span><span class="p">(</span><span class="o">*</span><span class="n">ags</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span><span class="s">'toggle_text'</span><span class="p">)</span>
+    <span class="n">button</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span><span class="s">'toggle'</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s">"hidden"</span> <span class="ow">in</span> <span class="n">text</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">classList</span><span class="p">:</span>
+        <span class="n">text</span><span class="p">.</span><span class="n">remove_class</span><span class="p">(</span><span class="s">"hidden"</span><span class="p">)</span>
+        <span class="n">button</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="s">"Hide Text"</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">text</span><span class="p">.</span><span class="n">add_class</span><span class="p">(</span><span class="s">"hidden"</span><span class="p">)</span>
+        <span class="n">button</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="s">"Show Text"</span>
+</code></pre></div></div>
+
+<p>Once our html page is loaded, the script above will be run. And the first way to interact with the elements on the
+webpage is using <code class="language-plaintext highlighter-rouge">pyscript.write()</code>, the first argument specifies to which element (by id) you want to write a bit of
+text, defined in the second argument. In this case we’ll update the pyscript_status element to read 
+ “PyScript Loaded Successfully”. This is not only a good example to show the easiest way to interect with the DOM, but
+also provides a visual confirmation our code is being executed.</p>
+
+<p>The next bit defines what happens when the count buttons is pressed. Two things are important here, the use of a
+<code class="language-plaintext highlighter-rouge">global</code> variable to keep track of the count and how the text is set here. Since we have to keep track of the count
+in a variable outside of the function, the global variable <code class="language-plaintext highlighter-rouge">button = Element('clicks')</code> will
+create a Python object that links with the DOM element with id “clicks”. Now we can change the innerHTML of that element
+to read what we want. This has one advantage over <code class="language-plaintext highlighter-rouge">pyscript.write()</code>, you can include html into an element this way.
+If for instance we wanted to make the number bold we could simpy use the line below:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">button</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"Count &lt;strong&gt;</span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="s">&lt;/strong&gt;"</span>
+</code></pre></div></div>
+
+<h2 id="interacting-with-class-attributes">Interacting with Class Attributes</h2>
+
+<p>The last function in the example is to show how you can interact with the classes assigned to an element. This is
+useful to change the appearance of elements on the fly by switching to a class with a different style defined in the 
+CSS file or simply hide/show an element as shown here.</p>
+
+<p>Using <code class="language-plaintext highlighter-rouge">Element()</code> the button and text field are selected, next, to check if the text is hidden or not the
+<code class="language-plaintext highlighter-rouge">classList</code> of the text is accessed. This list contains all the classes currently linked with the DOM element, to
+check if the element has a certain class, a simple check if that class occurs in the list is enough. Here we check if
+the element is hidden or not, if it is that class is removed using <code class="language-plaintext highlighter-rouge">text.remove_class("hidden")</code> otherwise we add 
+the hidden-class with <code class="language-plaintext highlighter-rouge">text.add_class("hidden")</code>. In both cases the button’s text is set accordingly.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>From the examples here it is clear that also common things vanilla JavaScript is often used for can be done using 
+PyScript. It takes a bit of tinkering due to the lack of documentation, but a quick glance at the source code was often
+enough to figure things out. However, the requirement of the Python runtime to be fetched add a substantial loading time
+to a webpage, so this could be a deal-breaker in a few cases.</p>
+
+<p>Though where you have some logic implemented in Python already, this could speed up turning that code into an app
+substantially. A current goto project to test new packages, tools, … <a href="https://github.com/4dcu-be/WinstonCubeSim">WinstonCubeSim</a> I was able to turn into a working
+web app, including a few cool extra features (like fetching data from an external API) in an evening or two. Porting
+everything to JavaScript would have taken me longer, and now there is only one codebase to maintain for the CLI and
+web version. The app is quite niche, but check out <a href="https://github.com/4dcu-be/WinstonCubeSimPyScript">WinstonCubeSimPyScript</a> if you want to see the results</p>
+
+<h1 id="to-downside-of-pyscript">To Downside of PyScript</h1>
+
+<p>Despite these being rather simple examples, as PyScript still lacks documentation, I had to dive into the source-code
+once or twice to figure things out. This is to be expected at this stage, and will improve over time. Given this project
+is in alpha, things are likely to change anyway, so writing docs which will need to be re-written later anyway isn’t
+very productive for the team. No judgement there, but if you want to dive in prepare to do some extra work.</p>
+
+<p>There are some nice examples included in the PyScript package, though these are somewhat focused on data science. While
+I can’t wait to test that out further, people hoping to replace some vanilla JavaScript with Python might struggle to
+find what they need.</p>
+
+<p>The loading time is substantial. Efficient caching of a website could alleviate this issue, though on first load the
+entire Python runtime in WASM needs to be fetched. Unfortunately, the only way to avoid this is if PyScript would be
+baked into the browser like JavaScript is. It is a little early, but some day, maybe …</p>
+
+<h1 id="further-reading">Further Reading</h1>
+
+<ul>
+  <li><a href="https://github.com/4dcu-be/WinstonCubeSimPyScript">WinstonCubeSimPyScript</a> : WebApp using PyScript that implements these bits of code to create a UI for an existing library</li>
+  <li><a href="https://pyscript.net/">PyScript</a> : Official website</li>
+  <li><a href="https://www.youtube.com/watch?v=lC2jUeDKv-s">Python + pyscript + WebAssembly: Python Web Apps, Running Locally with pyscript</a> : Tutorial how to get started with PyScript and turn your code into Progressive Web App</li>
+</ul>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/web-development">web-development</a>,&nbsp;<a href="/tag/pyscript">pyscript</a>,&nbsp;<a href="/tag/javascript">javascript</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa fa-coffee"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=PyScript%3A+Python+in+the+browser%21&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2022%2F06%2F05%2Fpyscript_first_tests.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=PyScript%3A+Python+in+the+browser%21&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2022%2F06%2F05%2Fpyscript_first_tests.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2022%2F06%2F05%2Fpyscript_first_tests.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/diy/2022/05/23/Macropad_update.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Better code for the MacroPad</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa fa-coffee"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div>
+			<div class="site-navigation">
+
+				<p><strong>Site Map</strong></p>
+				<ul class="pages">
+					
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+				</ul>
+				<br />
+				<p><strong>Legal</strong></p>
+				<p><a href="/policy/">Privacy policy</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Contribute</strong></p>
+				<p><i class="fa fa-coffee"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+				
+				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+});
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
