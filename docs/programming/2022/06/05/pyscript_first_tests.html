@@ -289,7 +289,10 @@ button click. Using a class we can avoid this! With a test class, you can create
 the elements you want to interact with. Next, we add an <code class="language-plaintext highlighter-rouge">inc</code> function to increase the counter, have a look at how
 the arguments are structured, first self, than the args and kwargs PyScript needs. At the end of <code class="language-plaintext highlighter-rouge">main.py</code> we create
 an instance of this class called <code class="language-plaintext highlighter-rouge">test_class</code>. In the html code we can link the inc function within that instance 
-using e.g. <code class="language-plaintext highlighter-rouge">pys-onClick="test_class.inc"</code>.</p>
+using <code class="language-plaintext highlighter-rouge">pys-onClick="test_class.inc"</code>.</p>
+
+<p>While in a small example that doesn’t seem to make things easier (it actually is one line of code mode), for more
+complex apps this is a much better way to manage the app’s state.</p>
 
 <h1 id="conclusion">Conclusion</h1>
 
