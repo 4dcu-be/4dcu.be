@@ -172,6 +172,9 @@ with a css file for some styling while the latter contains our custom code that 
           mauris mauris, vel fermentum risus hendrerit tincidunt. Aliquam pulvinar tellus et iaculis vestibulum. In 
           pharetra diam eu lectus dignissim tristique. Phasellus laoreet vulputate urna. Fusce vitae elit sodales, 
           tempus dui in, scelerisque magna.<span class="nt">&lt;/p&gt;</span>
+        
+        <span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"clicks_class"</span> <span class="na">pys-onClick=</span><span class="s">"test_class.inc"</span> <span class="na">class=</span><span class="s">"btn"</span><span class="nt">&gt;</span>Count <span class="nt">&lt;strong&gt;</span>0<span class="nt">&lt;/strong&gt;&lt;/button&gt;</span>
 
         <span class="nt">&lt;py-script</span> <span class="na">src=</span><span class="s">'./main.py'</span><span class="nt">&gt;&lt;/py-script&gt;</span>
     <span class="nt">&lt;/body&gt;</span>
@@ -238,6 +241,17 @@ Though this would be the case for adding vanilla JavaScript to a webpage as well
     <span class="k">else</span><span class="p">:</span>
         <span class="n">text</span><span class="p">.</span><span class="n">add_class</span><span class="p">(</span><span class="s">"hidden"</span><span class="p">)</span>
         <span class="n">button</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="s">"Show Text"</span>
+
+<span class="k">class</span> <span class="nc">Test</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">text_element</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span><span class="s">'clicks_class'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">inc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">ags</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">text_element</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"Count &lt;strong&gt;</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">counter</span><span class="si">}</span><span class="s">&lt;/strong&gt;"</span>
+
+<span class="n">test_class</span> <span class="o">=</span> <span class="n">Test</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>Once our html page is loaded, the script above will be run. And the first way to interact with the elements on the
@@ -268,6 +282,15 @@ check if the element has a certain class, a simple check if that class occurs in
 the element is hidden or not, if it is that class is removed using <code class="language-plaintext highlighter-rouge">text.remove_class("hidden")</code> otherwise we add 
 the hidden-class with <code class="language-plaintext highlighter-rouge">text.add_class("hidden")</code>. In both cases the button’s text is set accordingly.</p>
 
+<h2 id="using-a-python-class">Using a Python Class</h2>
+
+<p>The global variable in the first example isn’t very elegant. Neither is running the <code class="language-plaintext highlighter-rouge">Element()</code> function on each
+button click. Using a class we can avoid this! With a test class, you can create a property for the current count and
+the elements you want to interact with. Next, we add an <code class="language-plaintext highlighter-rouge">inc</code> function to increase the counter, have a look at how
+the arguments are structured, first self, than the args and kwargs PyScript needs. At the end of <code class="language-plaintext highlighter-rouge">main.py</code> we create
+an instance of this class called <code class="language-plaintext highlighter-rouge">test_class</code>. In the html code we can link the inc function within that instance 
+using e.g. <code class="language-plaintext highlighter-rouge">pys-onClick="test_class.inc"</code>.</p>
+
 <h1 id="conclusion">Conclusion</h1>
 
 <p>From the examples here it is clear that also common things vanilla JavaScript is often used for can be done using 
@@ -279,7 +302,7 @@ to a webpage, so this could be a deal-breaker in a few cases.</p>
 substantially. A current goto project to test new packages, tools, … <a href="https://github.com/4dcu-be/WinstonCubeSim">WinstonCubeSim</a> I was able to turn into a working
 web app, including a few cool extra features (like fetching data from an external API) in an evening or two. Porting
 everything to JavaScript would have taken me longer, and now there is only one codebase to maintain for the CLI and
-web version. The app is quite niche, but check out <a href="https://github.com/4dcu-be/WinstonCubeSimPyScript">WinstonCubeSimPyScript</a> if you want to see the results</p>
+web version. The app is quite niche, but check out <a href="https://github.com/4dcu-be/WinstonCubeSimPyScript">WinstonCubeSimPyScript</a> if you want to see the results.</p>
 
 <h1 id="to-downside-of-pyscript">To Downside of PyScript</h1>
 

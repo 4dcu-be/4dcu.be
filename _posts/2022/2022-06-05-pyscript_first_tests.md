@@ -46,6 +46,9 @@ Let's start with ```index.html```, we'll define the bare minimum here to load Py
           mauris mauris, vel fermentum risus hendrerit tincidunt. Aliquam pulvinar tellus et iaculis vestibulum. In 
           pharetra diam eu lectus dignissim tristique. Phasellus laoreet vulputate urna. Fusce vitae elit sodales, 
           tempus dui in, scelerisque magna.</p>
+        
+        <br />
+        <button id="clicks_class" pys-onClick="test_class.inc" class="btn">Count <strong>0</strong></button>
 
         <py-script src='./main.py'></py-script>
     </body>
@@ -114,6 +117,17 @@ def toggle_text(*ags, **kws):
     else:
         text.add_class("hidden")
         button.element.innerHTML = "Show Text"
+
+class Test():
+    def __init__(self) -> None:
+        self.counter = 0
+        self.text_element = Element('clicks_class')
+
+    def inc(self, *ags, **kws):
+        self.counter += 1
+        self.text_element.element.innerHTML = f"Count <strong>{self.counter}</strong>"
+
+test_class = Test()
 ```
 
 Once our html page is loaded, the script above will be run. And the first way to interact with the elements on the
@@ -145,6 +159,14 @@ check if the element has a certain class, a simple check if that class occurs in
 the element is hidden or not, if it is that class is removed using ```text.remove_class("hidden")``` otherwise we add 
 the hidden-class with ```text.add_class("hidden")```. In both cases the button's text is set accordingly.
 
+## Using a Python Class
+
+The global variable in the first example isn't very elegant. Neither is running the ```Element()``` function on each
+button click. Using a class we can avoid this! With a test class, you can create a property for the current count and
+the elements you want to interact with. Next, we add an ```inc``` function to increase the counter, have a look at how
+the arguments are structured, first self, than the args and kwargs PyScript needs. At the end of ```main.py``` we create
+an instance of this class called ```test_class```. In the html code we can link the inc function within that instance 
+using e.g. ```pys-onClick="test_class.inc"```.
 
 # Conclusion
 
@@ -157,7 +179,7 @@ Though where you have some logic implemented in Python already, this could speed
 substantially. A current goto project to test new packages, tools, ... [WinstonCubeSim] I was able to turn into a working
 web app, including a few cool extra features (like fetching data from an external API) in an evening or two. Porting
 everything to JavaScript would have taken me longer, and now there is only one codebase to maintain for the CLI and
-web version. The app is quite niche, but check out [WinstonCubeSimPyScript] if you want to see the results
+web version. The app is quite niche, but check out [WinstonCubeSimPyScript] if you want to see the results.
 
 # To Downside of PyScript
 
