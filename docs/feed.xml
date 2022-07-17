@@ -5,9 +5,23 @@
     <description>A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</description>
     <link>https://blog.4dcu.be/</link>
     <atom:link href="https://blog.4dcu.be/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 06 Jun 2022 21:12:08 +0200</pubDate>
-    <lastBuildDate>Mon, 06 Jun 2022 21:12:08 +0200</lastBuildDate>
+    <pubDate>Sun, 17 Jul 2022 15:18:32 +0200</pubDate>
+    <lastBuildDate>Sun, 17 Jul 2022 15:18:32 +0200</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>Getting a script's path in R</title>
+        <description>&lt;p&gt;Recently I found myself using &lt;a href=&quot;https://www.r-project.org/&quot;&gt;R&lt;/a&gt; scripts from others and having to deploy my own R code on other machines. The majority of these had a hard coded path...</description>
+        <pubDate>Sun, 17 Jul 2022 12:00:00 +0200</pubDate>
+        <link>https://blog.4dcu.be/programming/2022/07/17/path_in_R.html</link>
+        <guid isPermaLink="true">https://blog.4dcu.be/programming/2022/07/17/path_in_R.html</guid>
+        
+        <category>R</category>
+        
+        
+        <category>programming</category>
+        
+      </item>
     
       <item>
         <title>PyScript: Python in the browser!</title>
@@ -245,34 +259,6 @@
         <category>decklock</category>
         
         <category>flesh-and-blood</category>
-        
-        
-        <category>programming</category>
-        
-        <category>games</category>
-        
-      </item>
-    
-      <item>
-        <title>KeyForge: How many decks were printed ?</title>
-        <description>&lt;p&gt;KeyForge is often advertised as having 104 septillion possible decks per set (that is 104 followed by 24 zeros), but how many of those decks actually exist? &lt;a href=&quot;https://www.fantasyflightgames.com/en/index/&quot;&gt;Fantasy Flight...</description>
-        <pubDate>Sat, 04 Sep 2021 08:00:00 +0200</pubDate>
-        <link>https://blog.4dcu.be/programming/games/2021/09/04/KeyForge_Decks_Printed.html</link>
-        <guid isPermaLink="true">https://blog.4dcu.be/programming/games/2021/09/04/KeyForge_Decks_Printed.html</guid>
-        
-        <category>python</category>
-        
-        <category>pymc3</category>
-        
-        <category>keyforge</category>
-        
-        <category>data-analysis</category>
-        
-        <category>data-science</category>
-        
-        <category>machine-learning</category>
-        
-        <category>covid-19</category>
         
         
         <category>programming</category>

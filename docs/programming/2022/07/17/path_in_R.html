@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>4DCu.be - programming, gaming, technology, ... - page 9</title>
-  <meta name="description" content="A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.">
+  <title>Getting a script's path in R</title>
+  <meta name="description" content="Recently I found myself using R scripts from others and having to deploy my own R code on other machines. The majority of these had a hard coded path to eith...">
   
   <meta name="author" content="Sebastian Proost">
   <meta name="copyright" content="&copy; Sebastian Proost 2022">
@@ -39,12 +39,12 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more." />
-  <meta property="og:url" content="https://blog.4dcu.be/page/9/index.html">
+  <meta property="og:description" content="Recently I found myself using R scripts from others and having to deploy my own R code on other machines. The majority of these had a hard coded path to eith..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/2022/07/17/path_in_R.html">
   <meta property="og:site_name" content="4DCu.be" />
-  <meta property="og:title" content="4DCu.be - programming, gaming, technology, ... - page 9" />
+  <meta property="og:title" content="Getting a script's path in R" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://blog.4dcu.be/assets/social_fb.jpg" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/images/headers/R_header.png" />
   <meta property="og:image:type" content="image/jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -53,17 +53,17 @@
   
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="4DCu.be - programming, gaming, technology, ... - page 9">
-  <meta name="twitter:description" content="A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.">
-  <meta name="twitter:image" content="https://blog.4dcu.be/assets/social_fb.jpg">
-  <meta name="twitter:url" content="https://blog.4dcu.be/page/9/index.html">
+  <meta name="twitter:title" content="Getting a script's path in R">
+  <meta name="twitter:description" content="Recently I found myself using R scripts from others and having to deploy my own R code on other machines. The majority of these had a hard coded path to eith...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/images/headers/R_header.png">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/2022/07/17/path_in_R.html">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://blog.4dcu.be/page/9/">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/2022/07/17/path_in_R.html">
 	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
 	
 	<!-- Tooltips -->
@@ -109,203 +109,160 @@
 
 
     <div class="page-content">
-        <div class="home">
+        <div class="post">
 
-<div class="site-header-container has-cover" style="background-image: url(/assets/header_image.webp);">
-  <div class="scrim has-cover">
-    <header class="site-header">
-			<img src="/assets/sticker_medium.webp" srcset="/assets/sticker_medium.webp,
-						 /assets/sticker_middle.webp 1.5x,
-             /assets/sticker_large.webp 2x" alt="sticker" class="sticker" width="300" height="300"/>
-      <h1 class="title">4DCu.be</h1>
-      <p class="subtitle">a blog about programming, gaming, technology, ...</p>
+<div class="post-header-container has-cover" style="background-image: url(/assets/images/headers/R_header.png);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Getting a script's path in R</h1>
+			
+      <p class="info"><em>using this.path</em></p>
+			
     </header>
   </div>
 </div>
 
 <div class="wrapper">
-	<div class="wrapper">
-	<ul class="post-list">
-		
-		<li>
-			<div data-aos="fade-in">
-				<h2>
-					<a class="post-link" href="/programming/2020/01/12/Genetic-Art-Algorithm.html">Genetic Art Algorithm</a>
-				</h2>
-				<section class="post-excerpt" itemprop="description">
-					<a class="post-link" href="/programming/2020/01/12/Genetic-Art-Algorithm.html">
-						<img class="post-excerpt-image" src="/assets/images/thumbnails/starry_night_generation_5000.jpg" alt="thumbnail for Genetic Art Algorithm" loading=lazy/>
-					</a>
-					<p>Genetic algorithms are fun, they require a different way of thinking. Here I’ll guide you through my process of building an algorithm that evolves 150 random triangles into a famous piece of art. The work I picked to re-draw: Van Gogh’s The Starry Night. The original and the version the...</p>
-					
-				</section>
-				<section class="post-meta">
-					<div class="post-date">Reading time: <strong> 20 minutes </strong></div>
-					<div class="post-categories">Posted January 12, 2020
-					in 
-						
-						<a href="/category/programming">Programming</a>
-						
-					
-					</div>
-				</section>
-			</div>
-		</li>
-		
-		<hr>
-		
-		
-		<li>
-			<div data-aos="fade-in">
-				<h2>
-					<a class="post-link" href="/programming/games/2019/12/29/Magic-the-Gathering.html">Machine Learning: the Gathering</a>
-				</h2>
-				<section class="post-excerpt" itemprop="description">
-					<a class="post-link" href="/programming/games/2019/12/29/Magic-the-Gathering.html">
-						<img class="post-excerpt-image" src="/assets/images/thumbnails/machine_learning.jpg" alt="thumbnail for Machine Learning: the Gathering" loading=lazy/>
-					</a>
-					<p>In Magic: the Gathering, a collectible card game, competitive players tend to gravitate towards a few dozen of the best decks made up out of a subset of all available cards. For instance in the Legacy format nearly all 18000 cards can be played, yet you’ll only see about 500...</p>
-					
-				</section>
-				<section class="post-meta">
-					<div class="post-date">Reading time: <strong> 10 minutes </strong></div>
-					<div class="post-categories">Posted December 29, 2019
-					in 
-						
-						<a href="/category/programming">Programming</a>, 
-						
-					
-						
-						<a href="/category/games">Games</a>
-						
-					
-					</div>
-				</section>
-			</div>
-		</li>
-		
-		<hr>
-		
-		
-		<li>
-			<div data-aos="fade-in">
-				<h2>
-					<a class="post-link" href="/programming/games/diy/2019/12/04/25-Fortnights.html">25 Fortnights of Code</a>
-				</h2>
-				<section class="post-excerpt" itemprop="description">
-					<a class="post-link" href="/programming/games/diy/2019/12/04/25-Fortnights.html">
-						<img class="post-excerpt-image" src="/assets/images/thumbnails/python_code.jpg" alt="thumbnail for 25 Fortnights of Code" loading=lazy/>
-					</a>
-					<p>I have a lot of projects sitting on my hard drive, most of them are half-finished and poorly documented. My resolution for 2020 is to improve this! The 100 Days of Code challenge has been popular for some time now and many people have done their own version of this....</p>
-					
-				</section>
-				<section class="post-meta">
-					<div class="post-date">Reading time: <strong> 1 minute </strong></div>
-					<div class="post-categories">Posted December 4, 2019
-					in 
-						
-						<a href="/category/programming">Programming</a>, 
-						
-					
-						
-						<a href="/category/games">Games</a>, 
-						
-					
-						
-						<a href="/category/diy">Diy</a>
-						
-					
-					</div>
-				</section>
-			</div>
-		</li>
-		
-		<hr>
-		
-		
-		<li>
-			<div data-aos="fade-in">
-				<h2>
-					<a class="post-link" href="/programming/2019/12/01/Sentiment-Analysis.html">Sentiment Analysis and the Shape of Stories</a>
-				</h2>
-				<section class="post-excerpt" itemprop="description">
-					<a class="post-link" href="/programming/2019/12/01/Sentiment-Analysis.html">
-						<img class="post-excerpt-image" src="/assets/images/thumbnails/sentiment_analysis.jpg" alt="thumbnail for Sentiment Analysis and the Shape of Stories" loading=lazy/>
-					</a>
-					<p>When I accidentally stumbled upon a presentation from Kurt Vonnegut on how stories have a shape I started thinking… “Would you be able to use natural language processing (NLP) to pick up these shapes based on sentiment analysis of the actual text?” So here I’ll show you the approach I...</p>
-					
-				</section>
-				<section class="post-meta">
-					<div class="post-date">Reading time: <strong> 11 minutes </strong></div>
-					<div class="post-categories">Posted December 1, 2019
-					in 
-						
-						<a href="/category/programming">Programming</a>
-						
-					
-					</div>
-				</section>
-			</div>
-		</li>
-		
-		
-	</ul>
-	<div class="category-wrapper">
-	<h3>Categories</h3>
-	<ul class="category-list">
-		
-		
-		<li><a href="/category/programming">Programming</a> <span class="post-count">(42)</span></li>
-		
-		
-		<li><a href="/category/games">Games</a> <span class="post-count">(21)</span></li>
-		
-		
-		<li><a href="/category/diy">Diy</a> <span class="post-count">(21)</span></li>
-		
-		
-		<li><a href="/category/general">General</a> <span class="post-count">(1)</span></li>
-		
-		
-		<li><a href="/category/biology">Biology</a> <span class="post-count">(3)</span></li>
-		
-	</ul>
-	<br />
-	<h3>Posts from ...</h3>
-	<ul class="category-list">
-		
-		
-			<li><a href="/year/2022">2022</a> <span class="post-count">(5)</span></li>
-		
-			<li><a href="/year/2021">2021</a> <span class="post-count">(29)</span></li>
-		
-			<li><a href="/year/2020">2020</a> <span class="post-count">(23)</span></li>
-		
-			<li><a href="/year/2019">2019</a> <span class="post-count">(3)</span></li>
-		
-	</ul>
-	</div>
-  </div>
 
-<nav class="pagination" role="navigation">
-	<p>
+
+
+<section class="post-meta">
+  <div class="post-date">Posted July 17, 2022 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
     
-			<a class="newer-posts" href="/page/8/">
-        <span class="fa-stack fa-lg">
-          <i class="fa fa-square fa-stack-2x"></i>
-          <i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
-        </span>
+    <a href="/category/programming">Programming</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>Recently I found myself using <a href="https://www.r-project.org/">R</a> scripts from others and having to deploy my own R code on other machines. The majority
+of these had a hard coded path to either the script or the input data somewhere in the code. This becomes an issue
+when code needs to run on different machines, so here is a quick solution to this issue.</p>
+
+<p>While I prefer Python over R, I do need to use R from time to time as some packages have no equivalent in Python (yet). 
+One issue with R I seem to be running into quite often is that depending on how you run a script, the working directory 
+may or may not be set to that script’s directory. Especially
+those that like to open their .R files in <a href="https://www.rstudio.com/">RStudio</a> without creating a proper project (like me) are likely to run into 
+issues where the working directory isn’t necessarily the folder the script is in. A quick-and-dirty solution is to
+use <code class="language-plaintext highlighter-rouge">setwd()</code> to set the working directory in the beginning of the script to your local folder. However, if that
+script needs to be run by someone else on their machine, that path needs to be changed. The little snippet of code 
+below using the package <a href="https://github.com/ArcadeAntics/this.path">this.path</a> solves this issue. Though first make sure to install this package using <code class="language-plaintext highlighter-rouge">install.packages("this.path")</code> .</p>
+
+<p>Once this package is available, setting the working directory to the location of the script you are running is easily
+achieved using the two lines of code below. Just for good measure we can verify the path is correct by adding <code class="language-plaintext highlighter-rouge">print(getwd())</code>.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">library</span><span class="p">(</span><span class="n">this</span><span class="mf">.</span><span class="n">path</span><span class="p">)</span>
+
+<span class="nf">setwd</span><span class="p">(</span><span class="n">this</span><span class="mf">.</span><span class="nb">dir</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>Within that script you need to make sure to define all paths relative to the script’s location, and you are good to go
+on any system! At least what the paths to input, output and other code is concerned. To make sure all libraries are
+available on each system, and the versions match <a href="https://github.com/rstudio/renv">renv</a> is needed. This is something I will dig into in a future post as
+it solves my other issues with R.</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/r">R</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa fa-coffee"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Getting+a+script%27s+path+in+R&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2022%2F07%2F17%2Fpath_in_R.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
       </a>
-		
-		<span class="page-number">Page 9 of 9</span>
-		
-		<span class="fa-stack fa-lg">
-      <i class="fa fa-square fa-stack-2x"></i>
-      <i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
-    </span>
-		
-	</p>
-</nav>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Getting+a+script%27s+path+in+R&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2022%2F07%2F17%2Fpath_in_R.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2022%2F07%2F17%2Fpath_in_R.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/programming/2022/06/05/pyscript_first_tests.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">PyScript: Python in the browser!</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
 
 </div>
 </div>
@@ -456,8 +413,6 @@
 				
 				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
 				
-			    <p class="text">Last update: July 17, 2022</p>
-			  
 			</div>
 		</div>
 
