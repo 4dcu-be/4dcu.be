@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Where are my Magic: the Gathering cards ?"
-byline: "plotting where my sold cards where shipped to"
+byline: "plotting where my sold cards were shipped to"
 date:   2022-01-30 10:00:00
 author: Sebastian Proost
 categories: programming games
