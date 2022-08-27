@@ -65,13 +65,13 @@
   {% endif %}
 
   <!-- Site styles -->
-  <link rel="stylesheet" href="{{ "/_pagefind/pagefind-ui.css" | prepend: site.baseurl }}">
+  <link rel="stylesheet" href="{{ "/pagefind/pagefind-ui.css" | prepend: site.baseurl }}">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 	<link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
 	<link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
 
 	<!-- PageFind -->
-	<script src="{{ "/_pagefind/pagefind-ui.js" | prepend: site.baseurl }}" type="text/javascript"></script>
+	<script src="{{ "/pagefind/pagefind-ui.js" | prepend: site.baseurl }}" type="text/javascript"></script>
 
 
 	<!-- Tooltips -->
