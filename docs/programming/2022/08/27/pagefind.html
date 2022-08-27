@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Pagefind: Search in a static website</title>
+  <meta name="description" content="Adding a good search to a website is hard in any case, but with static website good options are few and far between.  Pagefind is a game-changer and makes th...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2022">
+  
+
+  <!-- External libraries -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Adding a good search to a website is hard in any case, but with static website good options are few and far between.  Pagefind is a game-changer and makes th..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/2022/08/27/pagefind.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Pagefind: Search in a static website" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2022-08-27-pagefind/header.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Pagefind: Search in a static website">
+  <meta name="twitter:description" content="Adding a good search to a website is hard in any case, but with static website good options are few and far between.  Pagefind is a game-changer and makes th...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2022-08-27-pagefind/header.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/2022/08/27/pagefind.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/2022/08/27/pagefind.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	<link rel="stylesheet" href="/css/main.css">
+
+	<!-- PageFind -->
+	<script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+
+	<script type='text/javascript'>
+	//<![CDATA[
+	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css");
+	//]]>
+	</Script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+	<div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+<li class="nav-link"><a href="#" class="nav-link-search"><i class="fa fa-search"></i></a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/search_header.png" style="display:none" />
+<div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2022-08-27-pagefind/header.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Pagefind: Search in a static website</h1>
+			
+      <p class="info"><em></em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted August 27, 2022 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>Adding a good search to a website is hard in any case, but with static website good options are few and far between. 
+<a href="https://pagefind.app/">Pagefind</a> is a game-changer and makes this very simple! It already has been added to this site, so for a quick demo 
+click the search icon in the navbar at the top of this page. If you are interested in adding a similar search 
+to a website yourself, keep on reading.</p>
+
+<p>The idea behind Pagefind is remarkably simple. You include a bit of CSS and javascript provided on their site and
+generate it per usual. Before uploading however you run <a href="https://pagefind.app/">Pagefind</a>, which will crawl over your generated pages and 
+create an index that the bit of javascript code you need to include will use to find relevant pages base on the 
+provided search terms. The static pages, along with the index Pagefind created need to be deployed, and you are good 
+to go.</p>
+
+<h2 id="installing-pagefind-and-getting-started">Installing Pagefind and getting started</h2>
+
+<p>There are a few options available which can be found in the <a href="https://pagefind.app/">Pagefind</a> documentation. On my system (Windows 10) 
+running it through [npx] didn’t work, so I opted to go with the binary version.</p>
+
+<p>For this website, the release version of the website is generated in the <code class="language-plaintext highlighter-rouge">./docs</code> folder (the source folder), which you can easily 
+turn into a website on GitHub. So a .yaml file <code class="language-plaintext highlighter-rouge">pagefind.yaml</code> needed to be added to point Pagefind to the right
+directory and specify where the output should go. I opted to store the output in a folder <code class="language-plaintext highlighter-rouge">pagefind</code> (note: this
+folder will be a sub-folder of your source folder). The yaml file is shown below.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># pagefind.yaml</span>
+<span class="na">source</span><span class="pi">:</span> <span class="s">docs</span>
+<span class="na">bundle_dir</span><span class="pi">:</span> <span class="s">pagefind</span>
+</code></pre></div></div>
+
+<p>Next, a line was added to the batch script which is used to (re-)build this website. Pagefind should be run after the
+website is generated, so it can index the most recent version of the files. (Note: the pagefind binary is located in
+the same folder as this script, which is also the root of the repository)</p>
+
+<pre><code class="language-commandline">bundle exec jekyll build --config _config.yml &amp;&amp; ^
+.\pagefind.exe
+</code></pre>
+
+<p>Now every time the batch file runs to generate the website, the search index will be updated along with it.</p>
+
+<h2 id="updating-the-template">Updating the template</h2>
+
+<p>Here the official docs are excellent! You need to add a single CSS script and a JS script in the head of your site. This
+will need to be adjusted to the path where pagefind stores the index and how you handle css (e.g. here the base url is
+added)</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/pagefind/pagefind-ui.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/pagefind/pagefind-ui.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<h2 id="adding-the-search-bar">Adding the search bar</h2>
+
+<p>Here you’ll find this site differs from the official docs as clicking the search button will pop up a modal where
+the search bar is located. Models are essentially hidden divs at the bottom of each page, which are brought to the
+front using javascript. The bit below is the html code for the modal used here, this is included at the bottom of each
+page and can be shown using <a href="https://github.com/Ghosh/micromodal">Micromodal</a>.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"modal micromodal-slide"</span> <span class="na">id=</span><span class="s">"modal-2"</span> <span class="na">aria-hidden=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"modal__overlay"</span> <span class="na">tabindex=</span><span class="s">"-1"</span> <span class="na">data-micromodal-close</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"modal__container"</span> <span class="na">role=</span><span class="s">"dialog"</span> <span class="na">aria-modal=</span><span class="s">"true"</span> <span class="na">aria-labelledby=</span><span class="s">"modal-2-title"</span><span class="nt">&gt;</span>
+			<span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"modal__header"</span><span class="nt">&gt;</span>
+				<span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"modal__title"</span> <span class="na">id=</span><span class="s">"modal-2-title"</span><span class="nt">&gt;</span>
+					Search
+				<span class="nt">&lt;/h2&gt;</span>
+			<span class="nt">&lt;/header&gt;</span>
+			<span class="nt">&lt;main</span> <span class="na">class=</span><span class="s">"modal__content"</span> <span class="na">id=</span><span class="s">"modal-2-content"</span><span class="nt">&gt;</span>
+				<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"search"</span><span class="nt">&gt;&lt;/div&gt;</span>
+			<span class="nt">&lt;/main&gt;</span>
+			<span class="nt">&lt;footer</span> <span class="na">class=</span><span class="s">"modal__footer"</span><span class="nt">&gt;</span>
+					<span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"modal__btn modal__btn-primary"</span> <span class="na">data-micromodal-close=</span><span class="s">""</span> <span class="na">aria-label=</span><span class="s">"Close this dialog window"</span><span class="nt">&gt;</span>Close<span class="nt">&lt;/button&gt;</span>
+			<span class="nt">&lt;/footer&gt;</span>
+		<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+</code></pre></div></div>
+
+<p>Just a little bit of javascript code that needs to show the modal when the search icon is clicked and put the focus on 
+the search box. This is relatively easy as you can see below. The hardest thing here is figuring out which classes 
+Pagefind assigns to the elements it adds (e.g. .pagefind-ui__search-input is the textbox where the search-term is 
+entered)</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">MicroModal</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+
+	<span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">.nav-link-search</span><span class="dl">'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+	  <span class="nx">ev</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+
+	  <span class="nx">MicroModal</span><span class="p">.</span><span class="nx">show</span><span class="p">(</span><span class="dl">'</span><span class="s1">modal-2</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+	  		<span class="na">onClose</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">.nav-link-contact</span><span class="dl">'</span><span class="p">).</span><span class="nx">blur</span><span class="p">();</span> <span class="p">},</span>
+	  		<span class="na">disableFocus</span><span class="p">:</span> <span class="kc">true</span>
+	  <span class="p">});</span>
+
+	  <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.pagefind-ui__search-input</span><span class="dl">'</span><span class="p">).</span><span class="nx">focus</span><span class="p">();</span>
+	<span class="p">});</span>
+
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>Now everything should work! Some CSS was required to tie everything together nicely and the results are awesome!</p>
+
+<p><a href="/assets/posts/2022-08-27-pagefind/search_results.jpg" class="lightgallery-link" data-sub-html="Search results on this website. The search function is made using Pagefind and shown in a Micromodal">
+<img src="/assets/posts/2022-08-27-pagefind/search_results.jpg" alt="Search results on this website. The search function is made using Pagefind and shown in a Micromodal" data-src="/assets/posts/2022-08-27-pagefind/search_results.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="fixing-the-images">Fixing the images</h2>
+
+<p>As thumbnails are available for each post, showing these in the results makes sense. To achieve this a little hack was
+used. On each post page, in the very beginning, the thumbnail image is included but not shown. By adding the appropriate
+attribute, Pagefind will use that image in the results.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">data-pagefind-meta=</span><span class="s">"image[src]"</span> <span class="na">src=</span><span class="s">"/assets/images/thumbnails/search_header.png"</span> <span class="na">style=</span><span class="s">"display:none"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<h2 id="excluding-some-sections">Excluding some sections</h2>
+
+<p>Some pages aren’t relevant as a search result, e.g. pages with a list of posts containing a certain tag, just clutter
+the results. Also, links to previous and next posts need to be excluded from the index. This is fortunately
+very straightforward, simply find the sections that need to be omitted from indexing by adding the attribute
+<code class="language-plaintext highlighter-rouge">data-pagefind-ignore</code>. It might take a few rounds of testing to find all spots that need to be excluded, but the
+search results will be better for it, so well worth the effort.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Adding search to a static website in the past was tedious and required a significant time-investment to develop. Though,
+as this website is growing, it was getting harder and harder to find specific posts using the overview and tags. So a
+proper search function became a must-have. With Pagefind this was a relatively easy process and 
+completed in an evening. There really is no excuse not to include a search on your static websites anymore these days!</p>
+
+<p>Header by <a href="https://unsplash.com/@markuswinkler">Markus Winkler</a> on <a href="https://unsplash.com/s/photos/search">Unsplash</a></p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/web">web</a>,&nbsp;<a href="/tag/web-development">web-development</a>,&nbsp;<a href="/tag/javascript">javascript</a>,&nbsp;<a href="/tag/html">html</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa fa-coffee"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Pagefind%3A+Search+in+a+static+website&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2022%2F08%2F27%2Fpagefind.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Pagefind%3A+Search+in+a+static+website&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2022%2F08%2F27%2Fpagefind.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2022%2F08%2F27%2Fpagefind.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation" data-pagefind-ignore>
+		<span class="prev-post">
+			
+				<a href="/programming/2022/07/17/path_in_R.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Getting a script's path in R</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa fa-coffee"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+		<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div>
+			<div class="site-navigation">
+
+				<p><strong>Site Map</strong></p>
+				<ul class="pages">
+					
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+<li class="nav-link"><a href="#" class="nav-link-search"><i class="fa fa-search"></i></a></li>
+
+				</ul>
+				<br />
+				<p><strong>Legal</strong></p>
+				<p><a href="/policy/">Privacy policy</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Contribute</strong></p>
+				<p><i class="fa fa-coffee"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+				
+				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
