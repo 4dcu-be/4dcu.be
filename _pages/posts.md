@@ -6,6 +6,7 @@ main_nav: true
 cover:  "/assets/images/headers/gameboyzero.jpg"
 include_sticker: true
 ---
+<div data-pagefind-ignore>
 {% for category in site.categories %}
   {% capture cat %}{{ category | first }}{% endcapture %}
   <h2 id="{{cat}}">{{ cat | capitalize }}</h2>
@@ -26,5 +27,5 @@ include_sticker: true
   </ul>
   {% if forloop.last == false %}<hr>{% endif %}
 {% endfor %}
-
+</div>
 ![Box with things](/assets/box_medium.png){:.small}

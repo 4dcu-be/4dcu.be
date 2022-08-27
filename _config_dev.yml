@@ -16,6 +16,8 @@ exclude:
   - "LICENSE.md"
   - "README.md"
   - "featured.json"
+  - "pagefind.exe"
+  - "pagefind.yaml"
 
 # Build website in _site during development
 destination: "./_site"

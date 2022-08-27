@@ -15,6 +15,8 @@ exclude:
   - "circle.yml"
   - "LICENSE.md"
   - "README.md"
+  - "pagefind.exe"
+  - "pagefind.yaml"
 
 # Build website in docs folder so I can use github to host it
 destination: "./docs"

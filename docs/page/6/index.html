@@ -62,10 +62,15 @@
   
 
   <!-- Site styles -->
-  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/_pagefind/pagefind-ui.css">
   <link rel="canonical" href="https://blog.4dcu.be/page/6/">
 	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
-	
+	<link rel="stylesheet" href="/css/main.css">
+
+	<!-- PageFind -->
+	<script src="/_pagefind/pagefind-ui.js" type="text/javascript"></script>
+
+
 	<!-- Tooltips -->
 	<script type="text/javascript">
 		window.tooltips = []
@@ -101,6 +106,7 @@
 				<li class="nav-link"><a href="/posts/">Posts</a>
 	
 				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+<li class="nav-link"><a href="#" class="nav-link-search"><i class="fa fa-search"></i></a></li>
 
       </ul>
     </nav>
@@ -125,7 +131,7 @@
 
 <div class="wrapper">
 	<div class="wrapper">
-	<ul class="post-list">
+	<ul class="post-list" data-pagefind-ignore>
 		
 		<li>
 			<div data-aos="fade-in">
@@ -462,6 +468,24 @@
 	</div>
 </div>
 
+		<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
 
     <footer class="site-footer">
 
@@ -482,6 +506,7 @@
 				<li class="nav-link"><a href="/posts/">Posts</a>
 	
 				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+<li class="nav-link"><a href="#" class="nav-link-search"><i class="fa fa-search"></i></a></li>
 
 				</ul>
 				<br />
@@ -542,7 +567,7 @@
 				
 				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
 				
-			    <p class="text">Last update: July 17, 2022</p>
+			    <p class="text">Last update: August 27, 2022</p>
 			  
 			</div>
 		</div>
@@ -621,7 +646,23 @@ $(document).ready(function() {
 	  });
 	});
 
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
 });
+</script>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
 </script>
 
 
