@@ -96,7 +96,7 @@ marked or re-captured in our thought experiment.
 
 ### Update 30/08/2022 - HyperGeometric likelihood
 
-As in this case draws from the population aren't independant, a HyperGeometric distribution is better for this model. The
+As in this case draws from the population aren't independent, a HyperGeometric distribution is better for this model. The
 last two parts can be switched for the lines below to implement this. While this wouldn't be a big difference in case
 the number of marked individuals is large enough, here it does affect the mean estimate and 94% HDI.
 

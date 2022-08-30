@@ -250,6 +250,47 @@ marked or re-captured in our thought experiment.</p>
   </tbody>
 </table>
 
+<h3 id="update-30082022---hypergeometric-likelihood">Update 30/08/2022 - HyperGeometric likelihood</h3>
+
+<p>As in this case draws from the population aren’t independent, a HyperGeometric distribution is better for this model. The
+last two parts can be switched for the lines below to implement this. While this wouldn’t be a big difference in case
+the number of marked individuals is large enough, here it does affect the mean estimate and 94% HDI.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">recapture_obs</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">HyperGeometric</span><span class="p">(</span>
+        <span class="s">"recapture_obs"</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">population_size</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">n_marked</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">captured_round_2</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">n_recaptured</span>
+    <span class="p">)</span>
+
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">4000</span><span class="p">,</span> <span class="n">tune</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">return_inferencedata</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">target_accept</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right">mean</th>
+      <th style="text-align: right">sd</th>
+      <th style="text-align: right">hdi_3%</th>
+      <th style="text-align: right">hdi_97%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">population_size</td>
+      <td style="text-align: right">748.737</td>
+      <td style="text-align: right">372.363</td>
+      <td style="text-align: right">273.785</td>
+      <td style="text-align: right">1396.472</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">p_marked</td>
+      <td style="text-align: right">0.040</td>
+      <td style="text-align: right">0.015</td>
+      <td style="text-align: right">0.012</td>
+      <td style="text-align: right">0.067</td>
+    </tr>
+  </tbody>
+</table>
+
 <h2 id="can-we-improve-without-catching-more-animals-">Can we improve without catching more animals ?</h2>
 
 <p>So without catching more animals overall, is it better to mark more animals, and catch fewer the next visit? Or capture more
