@@ -94,6 +94,25 @@ marked or re-captured in our thought experiment.
 | population_size | 620.067 | 220.926 | 293.750 | 1034.423 |
 |        p_marked |   0.090 |   0.028 |   0.039 |    0.142 |
 
+### Update 30/08/2022 - HyperGeometric likelihood
+
+As in this case draws from the population aren't independant, a HyperGeometric distribution is better for this model. The
+last two parts can be switched for the lines below to implement this. While this wouldn't be a big difference in case
+the number of marked individuals is large enough, here it does affect the mean estimate and 94% HDI.
+
+```python
+    recapture_obs = pm.HyperGeometric(
+        "recapture_obs", N=population_size, k=n_marked, n=captured_round_2, observed=n_recaptured
+    )
+
+    trace = pm.sample(4000, tune=1000, return_inferencedata=False, target_accept=0.9)
+```
+
+|                 |    mean |      sd |  hdi_3% |  hdi_97% |
+|----------------:|--------:|--------:|--------:|---------:|
+| population_size | 748.737 | 372.363 | 273.785 | 1396.472 |
+|        p_marked |   0.040 |   0.015 |   0.012 |    0.067 |
+
 ## Can we improve without catching more animals ?
 
 So without catching more animals overall, is it better to mark more animals, and catch fewer the next visit? Or capture more
