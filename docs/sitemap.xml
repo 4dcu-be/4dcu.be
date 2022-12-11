@@ -245,6 +245,10 @@
 <lastmod>2022-08-27T12:00:00+02:00</lastmod>
 </url>
 <url>
+<loc>https://blog.4dcu.be/programming/2022/12/12/tiny-rp2040.html</loc>
+<lastmod>2022-12-12T11:00:00+01:00</lastmod>
+</url>
+<url>
 <loc>https://blog.4dcu.be/about/</loc>
 </url>
 <url>
@@ -537,6 +541,12 @@
 </url>
 <url>
 <loc>https://blog.4dcu.be/tag/html/</loc>
+</url>
+<url>
+<loc>https://blog.4dcu.be/tag/adafruit/</loc>
+</url>
+<url>
+<loc>https://blog.4dcu.be/tag/neopixel/</loc>
 </url>
 <url>
 <loc>https://blog.4dcu.be/category/programming/</loc>

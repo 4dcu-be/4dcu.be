@@ -208,6 +208,8 @@ opponent is playing without having to know each competitive deck in the format.
 
 **Update 21/02/2020: Imblearn deprecated the return_indices parameter. The code has been updated**
 
+**Update 01/11/2022: The code has been updated to match mtgtop8's change in layout**
+
 ## Legal
 
 Parts of this post are unofficial Fan Content permitted under the Wizards of the Coast Fan Content Policy. The literal 
