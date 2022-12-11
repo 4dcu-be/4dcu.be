@@ -21,7 +21,7 @@ exclude:
 # Build website in docs folder so I can use github to host it
 destination: "./docs"
 
-future: false
+future: true
 
 # Site settings
 title: 4DCu.be
