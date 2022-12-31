@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Get the most out of Stable Diffusion 2.1: Tips and Tricks</title>
+  <meta name="description" content="The latest version of Stable Diffusion, with its increased support for larger 768px images, is a significant improvement over previous models that only suppo...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2022">
+  
+
+  <!-- External libraries -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="The latest version of Stable Diffusion, with its increased support for larger 768px images, is a significant improvement over previous models that only suppo..." />
+  <meta property="og:url" content="https://blog.4dcu.be/aiart/2022/12/31/Stable-Diffusion-Workflow.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Get the most out of Stable Diffusion 2.1: Tips and Tricks" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2022-12-31-Stable-Diffusion-Workflow/header.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Get the most out of Stable Diffusion 2.1: Tips and Tricks">
+  <meta name="twitter:description" content="The latest version of Stable Diffusion, with its increased support for larger 768px images, is a significant improvement over previous models that only suppo...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2022-12-31-Stable-Diffusion-Workflow/header.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/aiart/2022/12/31/Stable-Diffusion-Workflow.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="canonical" href="https://blog.4dcu.be/aiart/2022/12/31/Stable-Diffusion-Workflow.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	<link rel="stylesheet" href="/css/main.css">
+
+	<!-- PageFind -->
+	<script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+
+	<script type='text/javascript'>
+	//<![CDATA[
+	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css");
+	//]]>
+	</Script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+	<div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+<li class="nav-link"><a href="#" class="nav-link-search"><i class="fa fa-search"></i></a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/stable_diffusion_part_1.jpg" style="display:none" />
+<div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2022-12-31-Stable-Diffusion-Workflow/header.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Get the most out of Stable Diffusion 2.1: Tips and Tricks</h1>
+			
+      <p class="info"><em></em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted December 31, 2022 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/aiart">Aiart</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>The latest version of Stable Diffusion, with its increased support for larger 768px images, is a significant improvement
+over previous models that only supported 512px images. While it may require some adjustment as it was trained on a more
+limited dataset and prompts in a different way, this new model has the potential to create stunning AI-generated 
+artwork. In this series, we will provide some helpful tips and techniques for utilizing the
+capabilities of the Stable Diffusion 2.1 model to its full potential.</p>
+
+<h2 id="requirements">Requirements</h2>
+
+<p>To get started with Stable Diffusion, you’ll need to install a few tools. As each of these tools comes with its own
+installation instructions, be sure to refer to the manuals for specific installation instructions for each tool. Here,
+we’ll just highlight settings specifically required in this workflow. As <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">Stable Diffusion web UI</a> needs to be installed
+though Git, make sure you have that available. For Windows, I prefer to install <a href="https://git-scm.com/">Git SCM</a> over the official client.</p>
+
+<ul>
+  <li><a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">Stable Diffusion web UI</a> from AUTOMATIC1111. The UI we’ll use to generate images, train models, …</li>
+  <li><a href="https://github.com/d8ahazard/sd_dreambooth_extension">Dreambooth Extension</a> for Stable Diffusion web UI. Can be installed through the UI (Extensions tab)</li>
+  <li>Stable Diffusion 2.1 768 model. Get <code class="language-plaintext highlighter-rouge">v2-1_768-ema-pruned.ckpt</code> from <a href="https://huggingface.co/stabilityai/stable-diffusion-2-1">huggingface.co</a> and put this file in the
+  correct folder</li>
+  <li><a href="https://github.com/Sanster/lama-cleaner">Lama Cleaner</a> AI based in-painting tool, useful for removing parts of an image (optional)</li>
+  <li><a href="https://github.com/chaiNNer-org/chaiNNer">ChaiNNer</a> workflow editor to create image editing workflows for e.g. up-scaling (optional)</li>
+  <li><a href="https://www.gimp.org/">GIMP</a> Image editing tool, free and open source (optional)</li>
+  <li>You’ll need up-to-date drivers for your NVIDIA GPU along with <a href="https://developer.nvidia.com/cudnn">cuDNN</a></li>
+</ul>
+
+<p>To get the most out of the techniques in this series, you’ll want to make sure you have a top-notch GPU.
+If you don’t have one with at least 16GB VRAM at your disposal, you can make use of <a href="https://www.runpod.io/">Runpod.io</a> to rent a machine
+in the cloud with a powerful GPU for less than half a dollar per hour. Specs of my machine, used throughout this series
+are:</p>
+
+<ul>
+  <li>NVIDIA 4080 RTX (16 Gb VRAM)</li>
+  <li>RAM: 32 Gb</li>
+  <li>CPU: Ryzen 7 3700X</li>
+  <li>100 Gb of free space</li>
+  <li>Windows 10</li>
+</ul>
+
+<p>Though for this first post a more modest GPU will suffice, any NVIDIA GPU with 6Gb VRAM should work. Only when 
+training new styles or adding persons/objects, which will be covered later, more VRAM is required.</p>
+
+<h2 id="configuring-stable-diffusion-web-ui">Configuring Stable Diffusion web UI</h2>
+
+<p>After installing <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">Stable Diffusion web UI</a>, you’ll need to make a few adjustments to the file <code class="language-plaintext highlighter-rouge">webui-user.bat</code>.
+The program needs to be started with two additional arguments <code class="language-plaintext highlighter-rouge">--xformers</code> and <code class="language-plaintext highlighter-rouge">--no-half</code>, to do this add these
+to the line which starts with <code class="language-plaintext highlighter-rouge">set COMMANDLINE_ARGS=</code>. It should be <code class="language-plaintext highlighter-rouge">set COMMANDLINE_ARGS=--xformers --no-half</code>.
+<code class="language-plaintext highlighter-rouge">--xformers</code> is an optimization that shaves off some VRAM usage. <code class="language-plaintext highlighter-rouge">--no-half</code> is required by SD2.1.
+Now save the file and run it to start Stable Diffusion (note that the first time it will install some additional
+dependencies).</p>
+
+<p>Once started go to Stable Diffusion web UI with your browser (default address is http://localhost:7860/) and go to the
+<code class="language-plaintext highlighter-rouge">Settings</code> tab. Find the option <code class="language-plaintext highlighter-rouge">Use cross attention optimizations while training</code> and make sure it is
+<strong>checked</strong>. This enables xformers to be used while training an embedding or hypernetwork as well, this will be covered
+in a future post.</p>
+
+<h2 id="creating-art-with-ai">Creating art with AI</h2>
+
+<p>Personally I don’t think of myself as an artist, when working with AI generated art you assume the role of an art
+director. You provide instructions, aka. a prompt, to the neural network and hopefully tickle the right neurons to
+get an output you like, using a few rounds of revisions to get closer and closer to an image that meets your
+expectations. The workflow that works for me starts with prompt engineering, generating a large set of images,
+selecting the best one, generating some variations, picking the best one, use in-painting/img2img/compositing to get to
+the details right and finally up-scaling the image.</p>
+
+<h3 id="step-1-prompt-engineering">Step 1: Prompt Engineering</h3>
+
+<p>Writing a prompt is giving the neural network an indication what you need.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>an steam engine leaving the trainstation, fall, sunset, painting, fine-art, detailed
+</code></pre></div></div>
+
+<p>For SD2.1 negative prompts are quite important, below is a set of terms I start with. In case I want a more painterly
+style I’ll add <em>photo</em>, <em>photorealistic</em> here (as that is what I don’t want). In case certain objects start popping up that
+are not wanted this would be the place to write that down and push the AI away from generating images containing
+those objects.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>disfigured, kitsch, ugly, oversaturated, grain, low-res, Deformed, blurry, bad anatomy, disfigured, poorly drawn face,
+mutation, mutated, extra limb, ugly, poorly drawn hands, missing limb, blurry, floating limbs, disconnected limbs,
+malformed hands, blur, out of focus, long neck, long body, ugly, disgusting, poorly drawn, childish, mutilated,
+mangled, old, surreal
+</code></pre></div></div>
+
+<p>After a few tries I got this image, I like the style and the locomotive reminds me of a model train I had as a kid. So
+let’s continue with this one.</p>
+
+<p><a href="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v1_prompt_only.png" class="lightgallery-link" data-sub-html="AI generated image of a steam engine leave the trainstation at sunset">
+<img src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v1_prompt_only.png" alt="AI generated image of a steam engine leave the trainstation at sunset" data-src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v1_prompt_only.png" loading="lazy" />
+</a></p>
+
+<p>Stable Diffusion also give you the prompts and settings used:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>an steam engine leaving the trainstation, fall, sunset, painting, fine-art, detailed
+Negative prompt: photo, photorealistic, disfigured, kitsch, ugly, oversaturated, grain, low-res, Deformed, blurry, bad anatomy, disfigured, poorly drawn face, mutation, mutated, extra limb, ugly, poorly drawn hands, missing limb, blurry, floating limbs, disconnected limbs, malformed hands, blur, out of focus, long neck, long body, ugly, disgusting, poorly drawn, childish, mutilated, mangled, old, surreal
+Steps: 30, Sampler: Euler a, CFG scale: 7, Seed: 3331645590, Size: 768x768, Model hash: 4bdfc29c, Batch size: 4, Batch pos: 3
+</code></pre></div></div>
+
+<p>It will take some back-and-forth changing settings to find a good prompt with setting that yield a good initial image.
+You can also go brute-force here and generate a dozens, or even hundreds, of images and pick the best one.</p>
+
+<h3 id="step-2-generating-variations">Step 2: Generating Variations</h3>
+
+<p>Next, we’ll generate some variations of this image to see if we can tease out a better version. To do this copy the
+seed to the corresponding box and check <code class="language-plaintext highlighter-rouge">Extra</code> this will show the variation options. Set variation strength to
+0.05 - 0.1 (relatively low as we don’t want to change the image too much) and start generating more images. Don’t change
+the prompt or the settings.</p>
+
+<p><a href="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/prompt_variation_settings.jpg" class="lightgallery-link" data-sub-html="Stable Diffusion web UI settings to start generating variations of an image">
+<img src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/prompt_variation_settings.jpg" alt="Stable Diffusion web UI settings to start generating variations of an image" class="small-image" data-src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/prompt_variation_settings.jpg" loading="lazy" />
+</a></p>
+
+<p>After generating a few batches the following image appeared. The building here is much closer to a train station.
+While it is far from perfect it is a step in the good direction. So let’s go with this one!</p>
+
+<p><a href="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v2_prompt_variation.png" class="lightgallery-link" data-sub-html="AI generated image of a steam engine leave the trainstation at sunset version 2 after generating variations">
+<img src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v2_prompt_variation.png" alt="AI generated image of a steam engine leave the trainstation at sunset version 2 after generating variations" data-src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v2_prompt_variation.png" loading="lazy" />
+</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>an steam engine leaving the trainstation, fall, sunset, painting, fine-art, detailed
+Negative prompt: photo, photorealistic, disfigured, kitsch, ugly, oversaturated, grain, low-res, Deformed, blurry, bad anatomy, disfigured, poorly drawn face, mutation, mutated, extra limb, ugly, poorly drawn hands, missing limb, blurry, floating limbs, disconnected limbs, malformed hands, blur, out of focus, long neck, long body, ugly, disgusting, poorly drawn, childish, mutilated, mangled, old, surreal
+Steps: 30, Sampler: Euler a, CFG scale: 7, Seed: 3331645590, Size: 768x768, Model hash: 4bdfc29c, Batch size: 8, Batch pos: 1, Variation seed: 2387469322, Variation seed strength: 0.05
+</code></pre></div></div>
+
+<p>Note that this doesn’t work with all samplers, with <em>Euler a</em> it seems to work quite well, however, some have
+issues reproducing an image from the same seed when not generating an entire batch of images. (A solution here is to
+build several batches of one image) Efficient samplers, which converge
+after few steps, also generate wildly different images even with low variation (&lt; 0.1). Hence, your milage might vary! 
+Another way to get different versions of the initial image is to vary the <code class="language-plaintext highlighter-rouge">CFG Scale</code> and the number of
+<code class="language-plaintext highlighter-rouge">Sampling Steps</code>. Using the X/Y Plot script (which can be enabled at the very bottom of the text2img settings), 
+all combinations can be generated. Alternatively, you can skip through to step 4 and use img2img with high denoising 
+setting to generate variations.</p>
+
+<h3 id="step-3-in-painting-to-correct-mistakes">Step 3: In-painting to correct mistakes</h3>
+
+<p>The rails in the above image are obviously incorrect, there is an extra rail we’ll need to instruct the AI to remove.
+This is exactly what in-painting is designed to do, you paint over a specific part, provide a new prompt to cover that
+up. Playing with the settings and being patient is important here. I masked the rail I didn’t want, and entered the
+prompt <code class="language-plaintext highlighter-rouge">ballast, pebbles, painting, fine-art, detailed</code> as this is what I wanted to replace the rail with.</p>
+
+<p>I tried with and without <code class="language-plaintext highlighter-rouge">Inpaint at full resolution</code> and ultimately landed on <code class="language-plaintext highlighter-rouge">0.9</code> for the <code class="language-plaintext highlighter-rouge">Denoising 
+strength</code> giving the AI a lot of freedom to change the image. For adding completely new content or removing something
+setting <code class="language-plaintext highlighter-rouge">Masked content</code> to <code class="language-plaintext highlighter-rouge">Latent noise</code> or <code class="language-plaintext highlighter-rouge">Latent nothing</code> might help generating something not based
+on the underlying image. In case you wish to remove something you can also move over to <a href="https://github.com/Sanster/lama-cleaner">Lama Cleaner</a> which is 
+excellent to quickly get rid of some unwanted items quickly.</p>
+
+<p>Now our image looks like this:</p>
+
+<p><a href="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v3_inpainted.png" class="lightgallery-link" data-sub-html="AI generated image of a steam engine leave the trainstation at sunset version 3 in-painted the extra rail">
+<img src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v3_inpainted.png" alt="AI generated image of a steam engine leave the trainstation at sunset version 3 in-painted the extra rail" data-src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v3_inpainted.png" loading="lazy" />
+</a></p>
+
+<p>Removing the rail in the bottom corner using in-painting turned out to be much more cumbersome. Here I loaded the
+image in <a href="https://www.gimp.org/">GIMP</a> and used the clone tool to copy over some grass. Next, using in-painting with a low <code class="language-plaintext highlighter-rouge">Denoising 
+strength</code> of 0.2 with a prompt of grass and dirt, some more variation in texture was added in again in this part of
+the image.</p>
+
+<p><a href="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v3-2_inpainted.png" class="lightgallery-link" data-sub-html="AI generated image of a steam engine leave the trainstation at sunset version 3-2 in-painted the extra rail">
+<img src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v3-2_inpainted.png" alt="AI generated image of a steam engine leave the trainstation at sunset version 3-2 in-painted the extra rail" data-src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v3-2_inpainted.png" loading="lazy" />
+</a></p>
+
+<h3 id="step-4-img2img-to-fine-tune-the-details">Step 4: Img2Img to fine-tune the details</h3>
+
+<p>Now we move our image over to img2img to fine tune the details. Enter the original prompt again, set the <code class="language-plaintext highlighter-rouge">Denoising 
+strength</code> to a low value e.g. 0.1 to 0.4 to prevent the AI from changing too much and generate a few more images.
+You’ll see that different iterations will have different aspects changed, some versions have better wheels, others
+have better rails, more detail in the building, …</p>
+
+<p>The tick here is to pick each image that has the best something (you can quickly drag and drop images to your Desktop).
+Load the images as different layers in <a href="https://www.gimp.org/">GIMP</a>, add a layer mask and paint in the parts of the image you wish to keep.
+Since there is very little difference between the images this should be very easy, and you don’t have to be super 
+precise while painting.</p>
+
+<p><a href="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/gimp_composite_layers.jpg" class="lightgallery-link" data-sub-html="GIMP three variations generated with img2img as different layers, with a mask combining the best of each">
+<img src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/gimp_composite_layers.jpg" alt="GIMP three variations generated with img2img as different layers, with a mask combining the best of each" class="small-image" data-src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/gimp_composite_layers.jpg" loading="lazy" />
+</a></p>
+
+<p>We’ll export the image from GIMP as we are getting close to the final version!</p>
+
+<p><a href="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v4_img2img_composite.png" class="lightgallery-link" data-sub-html="Composite image of a steam engine leaving the trainstation at sunset">
+<img src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v4_img2img_composite.png" alt="Composite image of a steam engine leaving the trainstation at sunset" data-src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v4_img2img_composite.png" loading="lazy" />
+</a></p>
+
+<p>Step 3 and 4 can be repeated if needed.</p>
+
+<h3 id="step-5-up-scaling">Step 5: Up-scaling</h3>
+
+<p>SD2.1 allows us to start with an image that is 768x768 or larger, and hence has twice as many pixels as the 512x512 
+models, so up-scaling is considerably easier. Probably, sending the image over to Extras and selecting two methods will
+work nicely to bump the image size up 2x - 4x.</p>
+
+<p><a href="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v5_upscaled.jpg" class="lightgallery-link" data-sub-html="Final up-scaled image of a steam engine leaving the trainstation at sunset">
+<img src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v5_upscaled.jpg" alt="Final up-scaled image of a steam engine leaving the trainstation at sunset" data-src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v5_upscaled.jpg" loading="lazy" />
+</a></p>
+
+<p><a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">Stable Diffusion web UI</a> also supports SD up-scaling in the img2img tab. This will chop up the image in smaller parts,
+enlarge each, fill in details using img2img and combine them again. Make sure the <code class="language-plaintext highlighter-rouge">Denoising strength</code> is set to
+a small value. Result here vary as img2img will also alter parts, even at low denoising values, and might undo our 
+earlier work in-painting and compositing.</p>
+
+<p>Another option is to use <a href="https://github.com/chaiNNer-org/chaiNNer">ChaiNNer</a> and create an up-scale workflow, this supports additional models for up-scaling
+which can be combined with other filters to improve the clarity or sharpness of the image.  <a href="https://github.com/n00mkrad/cupscale">CupScale</a> which also
+supports various neural up-scalers can be used here as well.</p>
+
+<h3 id="step-6-final-cleanup">Step 6: Final cleanup</h3>
+
+<p>There are still a few spot where the image has items I don’t like, for instance the ornaments in front, the antenna
+in the back, … As I don’t want to replace them, simple remove them <a href="https://github.com/Sanster/lama-cleaner">Lama Cleaner</a> is easier and faster than SD 
+in-painting (using the lama model).</p>
+
+<p><a href="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v5_upscaled_cleanup.jpg" class="lightgallery-link" data-sub-html="Up-scaled version of a steam engine leaving the trainstation at sunset with last manual touches">
+<img src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v5_upscaled_cleanup.jpg" alt="Up-scaled version of a steam engine leaving the trainstation at sunset with last manual touches" data-src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v5_upscaled_cleanup.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>AI-generated art has the power to transform the way we create and view art. Our final image, reminiscent of the vintage 
+box-art of model kits, is a testament to this. Without the help of AI tools, generating an image like this would have
+been impossible for me. However, while simply writing a prompt can lead to great results, it usually takes a bit more 
+effort to get the image you desire. That’s why it’s important to keep experimenting withs setting and refining your 
+images. Don’t be afraid to generate and re-generate your image multiple times until you’re satisfied with the outcome.</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/aiart">aiart</a>,&nbsp;<a href="/tag/python">python</a>,&nbsp;<a href="/tag/stable-diffusion">stable-diffusion</a>,&nbsp;<a href="/tag/dreambooth">dreambooth</a>,&nbsp;<a href="/tag/art">art</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa fa-coffee"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Get+the+most+out+of+Stable+Diffusion+2.1%3A+Tips+and+Tricks&url=https%3A%2F%2Fblog.4dcu.be%2Faiart%2F2022%2F12%2F31%2FStable-Diffusion-Workflow.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Get+the+most+out+of+Stable+Diffusion+2.1%3A+Tips+and+Tricks&u=https%3A%2F%2Fblog.4dcu.be%2Faiart%2F2022%2F12%2F31%2FStable-Diffusion-Workflow.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Faiart%2F2022%2F12%2F31%2FStable-Diffusion-Workflow.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation" data-pagefind-ignore>
+		<span class="prev-post">
+			
+				<a href="/programming/2022/12/12/tiny-rp2040.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">XIAO-RP2040: A tiny RPi Pico alternative</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa fa-coffee"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+		<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div>
+			<div class="site-navigation">
+
+				<p><strong>Site Map</strong></p>
+				<ul class="pages">
+					
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+<li class="nav-link"><a href="#" class="nav-link-search"><i class="fa fa-search"></i></a></li>
+
+				</ul>
+				<br />
+				<p><strong>Legal</strong></p>
+				<p><a href="/policy/">Privacy policy</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Contribute</strong></p>
+				<p><i class="fa fa-coffee"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+				
+				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
