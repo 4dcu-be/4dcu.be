@@ -17,6 +17,7 @@ exclude:
   - "README.md"
   - "pagefind.exe"
   - "pagefind.yaml"
+  - "/docs/"
 
 # Build website in docs folder so I can use github to host it
 destination: "./docs"

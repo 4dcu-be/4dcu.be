@@ -18,6 +18,7 @@ exclude:
   - "featured.json"
   - "pagefind.exe"
   - "pagefind.yaml"
+  - "/docs/"
 
 # Build website in _site during development
 destination: "./_site"

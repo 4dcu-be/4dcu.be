@@ -21,3 +21,5 @@ _drafts/*
 _site/
 
 pagefind.exe
+
+.jekyll-metadata
