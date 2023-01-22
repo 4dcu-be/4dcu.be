@@ -96,7 +96,7 @@ let's continue with this one.
 ![AI generated image of a steam engine leave the trainstation at sunset](/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v1_prompt_only.png)
 
 Stable Diffusion also give you the prompts and settings used:
-
+ 
 ```
 an steam engine leaving the trainstation, fall, sunset, painting, fine-art, detailed
 Negative prompt: photo, photorealistic, disfigured, kitsch, ugly, oversaturated, grain, low-res, Deformed, blurry, bad anatomy, disfigured, poorly drawn face, mutation, mutated, extra limb, ugly, poorly drawn hands, missing limb, blurry, floating limbs, disconnected limbs, malformed hands, blur, out of focus, long neck, long body, ugly, disgusting, poorly drawn, childish, mutilated, mangled, old, surreal
