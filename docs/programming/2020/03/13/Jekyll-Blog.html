@@ -189,9 +189,9 @@ Jekyll parses them, here we’ll include a hook that converts everything for us 
 code below needs to be added.</p>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">Jekyll</span><span class="o">::</span><span class="no">Hooks</span><span class="p">.</span><span class="nf">register</span> <span class="ss">:posts</span><span class="p">,</span> <span class="ss">:pre_render</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="p">,</span> <span class="n">payload</span><span class="o">|</span>
-  <span class="n">post</span><span class="p">.</span><span class="nf">content</span><span class="p">.</span><span class="nf">gsub!</span><span class="p">(</span><span class="sr">/^!\[(.*)\]\(([^\)]+)\)((?:{:[^}]+})*)/</span><span class="p">,</span> <span class="s2">"&lt;a href=</span><span class="se">\"</span><span class="s2">{{ site.baseurl }}</span><span class="se">\\</span><span class="s2">2</span><span class="se">\"</span><span class="s2"> class=</span><span class="se">\"</span><span class="s2">lightgallery-link</span><span class="se">\"</span><span class="s2"> data-sub-html=</span><span class="se">\"\\</span><span class="s2">1</span><span class="se">\"</span><span class="s2">&gt;</span><span class="se">\n</span><span class="s2">![</span><span class="se">\\</span><span class="s2">1]({{ site.baseurl }}</span><span class="se">\\</span><span class="s2">2){: style="</span><span class="n">aspect</span><span class="o">-</span><span class="ss">ratio: </span><span class="sr">/"}\\3{:data-src=\"{{ site.baseurl }}\\2\"}\n&lt;/</span><span class="n">a</span><span class="o">&gt;</span><span class="s2">")
-end
-</span></code></pre></div></div>
+  <span class="n">post</span><span class="p">.</span><span class="nf">content</span><span class="p">.</span><span class="nf">gsub!</span><span class="p">(</span><span class="sr">/^!\[(.*)\]\(([^\)]+)\)((?:{:[^}]+})*)/</span><span class="p">,</span> <span class="s2">"&lt;a href=</span><span class="se">\"</span><span class="s2">{{ site.baseurl }}</span><span class="se">\\</span><span class="s2">2</span><span class="se">\"</span><span class="s2"> class=</span><span class="se">\"</span><span class="s2">lightgallery-link</span><span class="se">\"</span><span class="s2"> data-sub-html=</span><span class="se">\"\\</span><span class="s2">1</span><span class="se">\"</span><span class="s2">&gt;</span><span class="se">\n</span><span class="s2">![</span><span class="se">\\</span><span class="s2">1]({{ site.baseurl }}</span><span class="se">\\</span><span class="s2">2){: height="" width=""}</span><span class="se">\\</span><span class="s2">3{:data-src=</span><span class="se">\"</span><span class="s2">{{ site.baseurl }}</span><span class="se">\\</span><span class="s2">2</span><span class="se">\"</span><span class="s2">}</span><span class="se">\n</span><span class="s2">&lt;/a&gt;"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
 
 <p>The cryptic line is a regular expression that will detect image tags in standard markdown syntax, wrap them with the html
 link tags and add a section to set the data-src of the image correctly. This will only be applied to images that are
@@ -405,7 +405,7 @@ to match your site’s design. It is important to define a height and width, oth
 </code></pre></div></div>
 
 <p><a href="/assets/posts/2020-03-13-Jekyll-Blog/map_extension.png" class="lightgallery-link" data-sub-html="Map page from Beyond-the-Known, with pins that can be clicked to jump to the relevant post">
-<img src="/assets/posts/2020-03-13-Jekyll-Blog/map_extension.png" alt="Map page from Beyond-the-Known, with pins that can be clicked to jump to the relevant post" style="aspect-ratio: 1920/1080" data-src="/assets/posts/2020-03-13-Jekyll-Blog/map_extension.png" loading="lazy" />
+<img src="/assets/posts/2020-03-13-Jekyll-Blog/map_extension.png" alt="Map page from Beyond-the-Known, with pins that can be clicked to jump to the relevant post" height="1080" width="1920" data-src="/assets/posts/2020-03-13-Jekyll-Blog/map_extension.png" loading="lazy" />
 </a></p>
 
 <p>The final result on <a href="http://beyond-the-known.eu/">Beyond the Known</a>. Note that I also included a custom style (have a look at the Google Maps Javascript API documentation

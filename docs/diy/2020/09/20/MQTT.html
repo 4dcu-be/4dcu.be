@@ -171,7 +171,7 @@ MQTT broker … which Home Assistant can listen to.</p>
 <p>This is a little abstract and hard to grok, so I sketched up an overview how all these fit together.</p>
 
 <p><a href="/assets/posts/2020-09-10-MQTT/network_layout.png" class="lightgallery-link" data-sub-html="Overview of how different software and devices are connected">
-<img src="/assets/posts/2020-09-10-MQTT/network_layout.png" alt="Overview of how different software and devices are connected" style="aspect-ratio: 533/594" class="small-image" data-src="/assets/posts/2020-09-10-MQTT/network_layout.png" loading="lazy" />
+<img src="/assets/posts/2020-09-10-MQTT/network_layout.png" alt="Overview of how different software and devices are connected" height="594" width="533" class="small-image" data-src="/assets/posts/2020-09-10-MQTT/network_layout.png" loading="lazy" />
 </a></p>
 
 <p><strong>Update 27/03/2021:</strong> I recently added a few Aqara Sensors (Temperature, humidity and pressure) which connect to Home 
@@ -200,7 +200,7 @@ might need a soldering iron with solder, heat-shrink tubing, some pin headers an
 found on <a href="https://www.thingiverse.com/thing:2803664">Thingiverse</a>. An overview of all parts I used is shown below.</p>
 
 <p><a href="/assets/posts/2020-09-10-MQTT/web_P9161030.jpg" class="lightgallery-link" data-sub-html="All parts needed (apart from the Raspberry Pi running HA) in one picture">
-<img src="/assets/posts/2020-09-10-MQTT/web_P9161030.jpg" alt="All parts needed (apart from the Raspberry Pi running HA) in one picture" style="aspect-ratio: 1200/800" data-src="/assets/posts/2020-09-10-MQTT/web_P9161030.jpg" loading="lazy" />
+<img src="/assets/posts/2020-09-10-MQTT/web_P9161030.jpg" alt="All parts needed (apart from the Raspberry Pi running HA) in one picture" height="800" width="1200" data-src="/assets/posts/2020-09-10-MQTT/web_P9161030.jpg" loading="lazy" />
 </a></p>
 
 <p>On the software side there are quite a few packages you’ll need :</p>
@@ -245,10 +245,10 @@ useless for other applications, but these dongles are cheap enough that if I eve
 
 <div class="gallery-2-col">
   <p><a href="/assets/posts/2020-09-10-MQTT/web_P9161035.jpg" class="lightgallery-link" data-sub-html="Debug pins on the Zigbee dongle with wires attached">
-<img src="/assets/posts/2020-09-10-MQTT/web_P9161035.jpg" alt="Debug pins on the Zigbee dongle with wires attached" style="aspect-ratio: 1200/801" data-src="/assets/posts/2020-09-10-MQTT/web_P9161035.jpg" loading="lazy" />
+<img src="/assets/posts/2020-09-10-MQTT/web_P9161035.jpg" alt="Debug pins on the Zigbee dongle with wires attached" height="801" width="1200" data-src="/assets/posts/2020-09-10-MQTT/web_P9161035.jpg" loading="lazy" />
 </a>
 <a href="/assets/posts/2020-09-10-MQTT/web_P9161039.jpg" class="lightgallery-link" data-sub-html="Zigbee dongle with cables attached">
-<img src="/assets/posts/2020-09-10-MQTT/web_P9161039.jpg" alt="Zigbee dongle with cables attached" style="aspect-ratio: 1200/801" data-src="/assets/posts/2020-09-10-MQTT/web_P9161039.jpg" loading="lazy" />
+<img src="/assets/posts/2020-09-10-MQTT/web_P9161039.jpg" alt="Zigbee dongle with cables attached" height="801" width="1200" data-src="/assets/posts/2020-09-10-MQTT/web_P9161039.jpg" loading="lazy" />
 </a></p>
 </div>
 
@@ -269,14 +269,14 @@ connecting the Zigbee dongle using four wires, it needs to be powered through it
 is plugged into.</p>
 
 <p><a href="/assets/posts/2020-09-10-MQTT/firmware_upload_success.png" class="lightgallery-link" data-sub-html="Flashing the firmware to the stick was a success !">
-<img src="/assets/posts/2020-09-10-MQTT/firmware_upload_success.png" alt="Flashing the firmware to the stick was a success !" style="aspect-ratio: 1902/1122" data-src="/assets/posts/2020-09-10-MQTT/firmware_upload_success.png" loading="lazy" />
+<img src="/assets/posts/2020-09-10-MQTT/firmware_upload_success.png" alt="Flashing the firmware to the stick was a success !" height="1122" width="1902" data-src="/assets/posts/2020-09-10-MQTT/firmware_upload_success.png" loading="lazy" />
 </a></p>
 
 <p>You can double check flashing the Z-Stack firmware was successful by opening the device manager (windows), now the 
 Zigbee Dongle should appear as a USB Serial Device.</p>
 
 <p><a href="/assets/posts/2020-09-10-MQTT/mqtt_com6.png" class="lightgallery-link" data-sub-html="The new firmware is working, the device now is recognized as a USB Serial Device">
-<img src="/assets/posts/2020-09-10-MQTT/mqtt_com6.png" alt="The new firmware is working, the device now is recognized as a USB Serial Device" style="aspect-ratio: 588/715" class="small-image" data-src="/assets/posts/2020-09-10-MQTT/mqtt_com6.png" loading="lazy" />
+<img src="/assets/posts/2020-09-10-MQTT/mqtt_com6.png" alt="The new firmware is working, the device now is recognized as a USB Serial Device" height="715" width="588" class="small-image" data-src="/assets/posts/2020-09-10-MQTT/mqtt_com6.png" loading="lazy" />
 </a></p>
 
 <h2 id="step-4-installing-mosquitto-and-zigbee2mqtt">Step 4: Installing Mosquitto and Zigbee2MQTT</h2>
@@ -332,13 +332,13 @@ sudo journalctl -u zigbee2mqtt.service -f
 <p>When running Zigbee2MQTT you can see all devices that are connected and which message they are passing along.</p>
 
 <p><a href="/assets/posts/2020-09-10-MQTT/paired_registered.png" class="lightgallery-link" data-sub-html="Zigbee2MQTT picking up the Aqara Cube">
-<img src="/assets/posts/2020-09-10-MQTT/paired_registered.png" alt="Zigbee2MQTT picking up the Aqara Cube" style="aspect-ratio: 1985/1262" data-src="/assets/posts/2020-09-10-MQTT/paired_registered.png" loading="lazy" />
+<img src="/assets/posts/2020-09-10-MQTT/paired_registered.png" alt="Zigbee2MQTT picking up the Aqara Cube" height="1262" width="1985" data-src="/assets/posts/2020-09-10-MQTT/paired_registered.png" loading="lazy" />
 </a></p>
 
 <p>Now everything works, the 3D printed case can be snapped on the Zigbee stick and we can move onto the final phase.</p>
 
 <p><a href="/assets/posts/2020-09-10-MQTT/web_P9171041.jpg" class="lightgallery-link" data-sub-html="Zigbee Stick with 3D printed case">
-<img src="/assets/posts/2020-09-10-MQTT/web_P9171041.jpg" alt="Zigbee Stick with 3D printed case" style="aspect-ratio: 1200/801" data-src="/assets/posts/2020-09-10-MQTT/web_P9171041.jpg" loading="lazy" />
+<img src="/assets/posts/2020-09-10-MQTT/web_P9171041.jpg" alt="Zigbee Stick with 3D printed case" height="801" width="1200" data-src="/assets/posts/2020-09-10-MQTT/web_P9171041.jpg" loading="lazy" />
 </a></p>
 
 <h2 id="step-5-configuring-home-assistant">Step 5: Configuring Home Assistant</h2>
