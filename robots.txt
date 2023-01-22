@@ -1,0 +1,10 @@
+---
+layout: null
+sitemap: false
+---
+User-agent: *
+Disallow: /tag/
+Disallow: /year/
+Disallow: /category/
+
+Sitemap: {{ site.url }}/sitemap.xml

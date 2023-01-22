@@ -1,594 +1,528 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url>
-<loc>https://blog.4dcu.be/programming/2019/12/01/Sentiment-Analysis.html</loc>
-<lastmod>2019-12-01T13:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/games/diy/2019/12/04/25-Fortnights.html</loc>
-<lastmod>2019-12-04T11:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/games/2019/12/29/Magic-the-Gathering.html</loc>
-<lastmod>2019-12-29T13:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/2020/01/12/Genetic-Art-Algorithm.html</loc>
-<lastmod>2020-01-12T13:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/2020/02/10/Genetic-Art-Algorithm-2.html</loc>
-<lastmod>2020-02-10T13:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/diy/2020/02/25/3D-printing.html</loc>
-<lastmod>2020-02-25T13:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/2020/03/13/Jekyll-Blog.html</loc>
-<lastmod>2020-03-13T13:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/games/2020/04/05/DeckLock.html</loc>
-<lastmod>2020-04-05T14:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/games/2020/04/26/DeckLock2.html</loc>
-<lastmod>2020-04-26T14:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/diy/2020/05/01/Mechanical-Keyboard.html</loc>
-<lastmod>2020-05-01T14:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/games/2020/05/25/DeckLock3.html</loc>
-<lastmod>2020-05-25T14:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/2020/07/26/BusyBoard.html</loc>
-<lastmod>2020-07-26T14:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/2020/08/25/BusyBoard2.html</loc>
-<lastmod>2020-08-25T14:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/games/2020/09/01/GwentProRankAnalysis.html</loc>
-<lastmod>2020-09-01T14:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/2020/09/05/Testing-Benfords-Law.html</loc>
-<lastmod>2020-09-05T14:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/diy/2020/09/20/MQTT.html</loc>
-<lastmod>2020-09-20T14:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/diy/2020/09/27/PythonKindleDashboard_1.html</loc>
-<lastmod>2020-09-27T14:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/diy/2020/10/04/PythonKindleDashboard_2.html</loc>
-<lastmod>2020-10-04T14:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/diy/2020/10/17/3D-printing_2.html</loc>
-<lastmod>2020-10-17T14:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/2020/11/02/Steganography.html</loc>
-<lastmod>2020-11-02T13:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/games/2020/11/03/Team_Bandid_Gang.html</loc>
-<lastmod>2020-11-03T13:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/games/2020/11/11/Gwent-Pro-Rank-ABM.html</loc>
-<lastmod>2020-11-11T13:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/games/2020/11/11/Gwent-Pro-Rank-ABM_2.html</loc>
-<lastmod>2020-11-11T14:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/2020/11/22/Static-Web-Generators.html</loc>
-<lastmod>2020-11-22T14:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/2020/12/03/CodeForces.html</loc>
-<lastmod>2020-12-03T14:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/diy/2020/12/15/Editing-STL.html</loc>
-<lastmod>2020-12-15T14:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/games/diy/2021/01/03/One-Year.html</loc>
-<lastmod>2021-01-03T14:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/2021/01/09/Google-Cloud-Functions.html</loc>
-<lastmod>2021-01-09T14:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/diy/2021/01/16/Bluetooth-Speaker.html</loc>
-<lastmod>2021-01-16T11:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/games/2021/01/24/GwentProPlayersAnalysis.html</loc>
-<lastmod>2021-01-24T13:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/diy/games/2021/01/31/Gameboy-Zero.html</loc>
-<lastmod>2021-01-31T13:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/diy/2021/02/22/Bluetooth-Speaker.html</loc>
-<lastmod>2021-02-22T11:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/2021/03/16/Code-Nugget-Correlation-Heatmaps.html</loc>
-<lastmod>2021-03-16T11:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/2021/03/19/Code-Nugget-PCA-with-loadings.html</loc>
-<lastmod>2021-03-19T11:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/games/2021/03/20/Team_Bandid_Gang.html</loc>
-<lastmod>2021-03-20T13:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/diy/2021/03/24/MQTT.html</loc>
-<lastmod>2021-03-24T13:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/diy/2021/04/05/Macropad.html</loc>
-<lastmod>2021-04-05T12:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/2021/04/21/Code-Nugget-Batch_Effects.html</loc>
-<lastmod>2021-04-21T12:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/diy/2021/04/28/MQTT-Ikea-Tradfri.html</loc>
-<lastmod>2021-04-28T10:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/games/diy/2021/04/29/Printing-The-Keyraken.html</loc>
-<lastmod>2021-04-29T08:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/2021/05/03/Interactive-Visualizations.html</loc>
-<lastmod>2021-05-03T12:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/diy/2021/05/20/MIDIpad.html</loc>
-<lastmod>2021-05-20T12:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/diy/2021/06/14/Stickers.html</loc>
-<lastmod>2021-06-14T12:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/diy/games/programming/2021/06/19/KeyForge-Adventure-Abyssal-Conspiracy.html</loc>
-<lastmod>2021-06-19T12:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/general/2021/06/28/Buy-me-a-Coffee.html</loc>
-<lastmod>2021-06-28T12:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/games/2021/07/04/Bayesian-sales-analysis.html</loc>
-<lastmod>2021-07-04T10:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/biology/2021/08/01/Clustering-penguins.html</loc>
-<lastmod>2021-08-01T10:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/games/2021/08/20/COVID_and_KeyForge.html</loc>
-<lastmod>2021-08-20T10:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/biology/2021/08/30/Capture_Mark_Recapture.html</loc>
-<lastmod>2021-08-30T08:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/games/2021/09/04/KeyForge_Decks_Printed.html</loc>
-<lastmod>2021-09-04T08:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/games/2021/09/28/DeckLock4.html</loc>
-<lastmod>2021-09-28T08:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/2021/10/15/GitHub-Actions.html</loc>
-<lastmod>2021-10-15T08:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/biology/2021/11/11/Clustering-penguins_2.html</loc>
-<lastmod>2021-11-11T09:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/diy/2021/12/16/MIDIpad_update.html</loc>
-<lastmod>2021-12-16T07:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/2021/12/30/Posthoc-Statannotations.html</loc>
-<lastmod>2021-12-30T07:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/games/2022/01/30/MTG_sales_map.html</loc>
-<lastmod>2022-01-30T11:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/games/2022/04/13/KeyForge_Hiatus.html</loc>
-<lastmod>2022-04-13T10:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/diy/2022/05/23/Macropad_update.html</loc>
-<lastmod>2022-05-23T12:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/2022/06/05/pyscript_first_tests.html</loc>
-<lastmod>2022-06-05T12:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/2022/07/17/path_in_R.html</loc>
-<lastmod>2022-07-17T12:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/2022/08/27/pagefind.html</loc>
-<lastmod>2022-08-27T12:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/programming/2022/12/12/tiny-rp2040.html</loc>
-<lastmod>2022-12-12T11:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/aiart/2022/12/31/Stable-Diffusion-Workflow.html</loc>
-<lastmod>2022-12-31T11:00:00+01:00</lastmod>
-</url>
-<url>
-<loc>https://blog.4dcu.be/about/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/gallery/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/gwent/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/policy/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/posts/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/python/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/nlp/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/nltk/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/pandas/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/matplotlib/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/lotr/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/data-science/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/intro/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/sklearn/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/machine-learning/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/mtg/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/magic-the-gathering/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/evolution/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/genetic-algorithm/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/algorithm/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/art/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/3d-printing/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/creality/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/cr10s/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/ruby/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/jekyll/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/blog/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/pelican/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/games/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/keyforge/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/decklock/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/mechanical-keyboard/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/soldering/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/electronics/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/gwent/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/flask/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/sqlalchemy/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/home-assistant/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/jupyter/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/arduino/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/mqtt/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/zigbee/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/aqara/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/yaml/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/kindle/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/dashboard/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/tv/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/fusion360/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/numpy/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/steganography/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/mesa/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/abm/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/agent-based-modeling/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/seaborn/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/javascript/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/gatsby/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/meshmixer/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/blender/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/review/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/google/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/cloud/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/web/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/bluetooth/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/hardware/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/speaker/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/star-wars/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/rogue-one/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/gameboy/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/retrogaming/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/raspberry-pi/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/code-nugget/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/pycombat/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/ikea/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/printing/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/altair/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/vega/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/midi/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/stickers/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/coffee/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/contribute/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/pymc3/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/data-analysis/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/covid-19/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/biology/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/ecology/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/flesh-and-blood/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/github/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/black/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/unittest/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/ci/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/automation/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/scikit-posthocs/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/statannotations/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/geopandas/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/web-development/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/pyscript/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/r/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/html/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/adafruit/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/neopixel/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/aiart/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/stable-diffusion/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/tag/dreambooth/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/category/programming/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/category/games/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/category/diy/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/category/general/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/category/biology/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/category/aiart/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/year/2019/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/year/2020/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/year/2021/</loc>
-</url>
-<url>
-<loc>https://blog.4dcu.be/year/2022/</loc>
-</url>
+    <url>
+      <loc>https://blog.4dcu.be</loc>
+      <lastmod>2023-01-22T20:04:34+01:00</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/aiart/2022/12/31/Stable-Diffusion-Workflow.html</loc>
+      <lastmod>2022-12-31T11:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2022/12/12/tiny-rp2040.html</loc>
+      <lastmod>2022-12-12T11:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2022/08/27/pagefind.html</loc>
+      <lastmod>2022-08-27T12:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2022/07/17/path_in_R.html</loc>
+      <lastmod>2022-07-17T12:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2022/06/05/pyscript_first_tests.html</loc>
+      <lastmod>2022-06-05T12:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/diy/2022/05/23/Macropad_update.html</loc>
+      <lastmod>2022-05-23T12:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/games/2022/04/13/KeyForge_Hiatus.html</loc>
+      <lastmod>2022-04-13T10:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/games/2022/01/30/MTG_sales_map.html</loc>
+      <lastmod>2022-01-30T11:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2021/12/30/Posthoc-Statannotations.html</loc>
+      <lastmod>2021-12-30T07:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/diy/2021/12/16/MIDIpad_update.html</loc>
+      <lastmod>2021-12-16T07:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/biology/2021/11/11/Clustering-penguins_2.html</loc>
+      <lastmod>2021-11-11T09:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2021/10/15/GitHub-Actions.html</loc>
+      <lastmod>2021-10-15T08:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/games/2021/09/28/DeckLock4.html</loc>
+      <lastmod>2021-09-28T08:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/games/2021/09/04/KeyForge_Decks_Printed.html</loc>
+      <lastmod>2021-09-04T08:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/biology/2021/08/30/Capture_Mark_Recapture.html</loc>
+      <lastmod>2021-08-30T08:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/games/2021/08/20/COVID_and_KeyForge.html</loc>
+      <lastmod>2021-08-20T10:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/biology/2021/08/01/Clustering-penguins.html</loc>
+      <lastmod>2021-08-01T10:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/games/2021/07/04/Bayesian-sales-analysis.html</loc>
+      <lastmod>2021-07-04T10:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/general/2021/06/28/Buy-me-a-Coffee.html</loc>
+      <lastmod>2021-06-28T12:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/diy/games/programming/2021/06/19/KeyForge-Adventure-Abyssal-Conspiracy.html</loc>
+      <lastmod>2021-06-19T12:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/diy/2021/06/14/Stickers.html</loc>
+      <lastmod>2021-06-14T12:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/diy/2021/05/20/MIDIpad.html</loc>
+      <lastmod>2021-05-20T12:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2021/05/03/Interactive-Visualizations.html</loc>
+      <lastmod>2021-05-03T12:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/games/diy/2021/04/29/Printing-The-Keyraken.html</loc>
+      <lastmod>2021-04-29T08:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/diy/2021/04/28/MQTT-Ikea-Tradfri.html</loc>
+      <lastmod>2021-04-28T10:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2021/04/21/Code-Nugget-Batch_Effects.html</loc>
+      <lastmod>2021-04-21T12:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/diy/2021/04/05/Macropad.html</loc>
+      <lastmod>2021-04-05T12:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/diy/2021/03/24/MQTT.html</loc>
+      <lastmod>2021-03-24T13:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/games/2021/03/20/Team_Bandid_Gang.html</loc>
+      <lastmod>2021-03-20T13:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2021/03/19/Code-Nugget-PCA-with-loadings.html</loc>
+      <lastmod>2021-03-19T11:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2021/03/16/Code-Nugget-Correlation-Heatmaps.html</loc>
+      <lastmod>2021-03-16T11:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/diy/2021/02/22/Bluetooth-Speaker.html</loc>
+      <lastmod>2021-02-22T11:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/diy/games/2021/01/31/Gameboy-Zero.html</loc>
+      <lastmod>2021-01-31T13:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/games/2021/01/24/GwentProPlayersAnalysis.html</loc>
+      <lastmod>2021-01-24T13:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/diy/2021/01/16/Bluetooth-Speaker.html</loc>
+      <lastmod>2021-01-16T11:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2021/01/09/Google-Cloud-Functions.html</loc>
+      <lastmod>2021-01-09T14:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/games/diy/2021/01/03/One-Year.html</loc>
+      <lastmod>2021-01-03T14:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/diy/2020/12/15/Editing-STL.html</loc>
+      <lastmod>2020-12-15T14:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2020/12/03/CodeForces.html</loc>
+      <lastmod>2020-12-03T14:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2020/11/22/Static-Web-Generators.html</loc>
+      <lastmod>2020-11-22T14:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/games/2020/11/11/Gwent-Pro-Rank-ABM_2.html</loc>
+      <lastmod>2020-11-11T14:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/games/2020/11/11/Gwent-Pro-Rank-ABM.html</loc>
+      <lastmod>2020-11-11T13:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/games/2020/11/03/Team_Bandid_Gang.html</loc>
+      <lastmod>2020-11-03T13:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2020/11/02/Steganography.html</loc>
+      <lastmod>2020-11-02T13:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/diy/2020/10/17/3D-printing_2.html</loc>
+      <lastmod>2020-10-17T14:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/diy/2020/10/04/PythonKindleDashboard_2.html</loc>
+      <lastmod>2020-10-04T14:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/diy/2020/09/27/PythonKindleDashboard_1.html</loc>
+      <lastmod>2020-09-27T14:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/diy/2020/09/20/MQTT.html</loc>
+      <lastmod>2020-09-20T14:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2020/09/05/Testing-Benfords-Law.html</loc>
+      <lastmod>2020-09-05T14:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/games/2020/09/01/GwentProRankAnalysis.html</loc>
+      <lastmod>2020-09-01T14:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2020/08/25/BusyBoard2.html</loc>
+      <lastmod>2020-08-25T14:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2020/07/26/BusyBoard.html</loc>
+      <lastmod>2020-07-26T14:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/games/2020/05/25/DeckLock3.html</loc>
+      <lastmod>2020-05-25T14:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/diy/2020/05/01/Mechanical-Keyboard.html</loc>
+      <lastmod>2020-05-01T14:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/games/2020/04/26/DeckLock2.html</loc>
+      <lastmod>2020-04-26T14:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/games/2020/04/05/DeckLock.html</loc>
+      <lastmod>2020-04-05T14:00:00+02:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2020/03/13/Jekyll-Blog.html</loc>
+      <lastmod>2020-03-13T13:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/diy/2020/02/25/3D-printing.html</loc>
+      <lastmod>2020-02-25T13:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2020/02/10/Genetic-Art-Algorithm-2.html</loc>
+      <lastmod>2020-02-10T13:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2020/01/12/Genetic-Art-Algorithm.html</loc>
+      <lastmod>2020-01-12T13:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/games/2019/12/29/Magic-the-Gathering.html</loc>
+      <lastmod>2019-12-29T13:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/games/diy/2019/12/04/25-Fortnights.html</loc>
+      <lastmod>2019-12-04T11:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/programming/2019/12/01/Sentiment-Analysis.html</loc>
+      <lastmod>2019-12-01T13:00:00+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://blog.4dcu.be/about/</loc>
+      <lastmod>2023-01-22T20:04:34+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    
+    <url>
+      <loc>https://blog.4dcu.be/gallery/</loc>
+      <lastmod>2023-01-22T20:04:34+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    
+    <url>
+      <loc>https://blog.4dcu.be/index.html</loc>
+      <lastmod>2023-01-22T20:04:34+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    
+    <url>
+      <loc>https://blog.4dcu.be/page/2/index.html</loc>
+      <lastmod>2023-01-22T20:04:34+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    
+    <url>
+      <loc>https://blog.4dcu.be/page/3/index.html</loc>
+      <lastmod>2023-01-22T20:04:34+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    
+    <url>
+      <loc>https://blog.4dcu.be/page/4/index.html</loc>
+      <lastmod>2023-01-22T20:04:34+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    
+    <url>
+      <loc>https://blog.4dcu.be/page/5/index.html</loc>
+      <lastmod>2023-01-22T20:04:34+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    
+    <url>
+      <loc>https://blog.4dcu.be/page/6/index.html</loc>
+      <lastmod>2023-01-22T20:04:34+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    
+    <url>
+      <loc>https://blog.4dcu.be/page/7/index.html</loc>
+      <lastmod>2023-01-22T20:04:34+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    
+    <url>
+      <loc>https://blog.4dcu.be/page/8/index.html</loc>
+      <lastmod>2023-01-22T20:04:34+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    
+    <url>
+      <loc>https://blog.4dcu.be/page/9/index.html</loc>
+      <lastmod>2023-01-22T20:04:34+01:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    
 </urlset>

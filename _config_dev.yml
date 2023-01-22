@@ -2,7 +2,6 @@
 # See http://ixti.net/software/2013/01/28/using-jekyll-plugins-on-github-pages.html for making `jekyll archives` work.
 plugins:
   - jekyll-archives
-  - jekyll-sitemap
   - jekyll-paginate-v2
   - mini_magick
 
@@ -72,6 +71,8 @@ jekyll-archives:
 thumbnail:
     resize_dimensions: '430x288^'
     crop_dimensions: '430x288+0+0'
+    width: '430'
+    height: '288'
 
 gallery_items:
     resize_dimensions: '430x288^'

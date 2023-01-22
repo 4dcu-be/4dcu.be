@@ -5,6 +5,7 @@ permalink: /gallery/
 main_nav: true
 cover:  "/assets/images/headers/gameboyzero.jpg"
 cover_options: narrow
+sitemap: true
 ---
 <div class="gallery-items">
 {% for post in site.posts %}

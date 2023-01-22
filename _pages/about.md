@@ -5,6 +5,7 @@ permalink: /about/
 main_nav: true
 cover:  "/assets/images/headers/hard_disk.jpg"
 cover_options: narrow
+sitemap: true
 ---
 
 I'm Sebastian, I was born in 1980-something, I have a PhD in Bio-informatics, I know a lot about computers and a bit about biology, I like movies, (retro-)games, sports and travelling. This blog is about some projects I'm working on in my spare time. Mostly to hone my programming skills, have some fun or try new technology. There will be some posts about games, machine learning, hardware, programming and web development, ...
