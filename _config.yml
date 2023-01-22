@@ -70,6 +70,8 @@ jekyll-archives:
 thumbnail:
     resize_dimensions: '430x288^'
     crop_dimensions: '430x288+0+0'
+    width: '430'
+    height: '288'
 
 gallery_items:
     resize_dimensions: '430x288^'
