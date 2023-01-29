@@ -8,6 +8,10 @@ categories: aiart
 tags:	aiart python stable-diffusion dreambooth art
 cover:  "/assets/posts/2022-12-31-Stable-Diffusion-Workflow/header.jpg"
 thumbnail: "/assets/images/thumbnails/stable_diffusion_part_1.jpg"
+gallery_items:
+  - image: "/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v5_upscaled_cleanup.jpg"
+    gallery_image: "/assets/images/gallery/stable_diffusion_tips.jpg"
+    description: "A train leaving a trainstation at sunset, AI generated image using Stable Diffusion 2.1."
 ---
 
 The latest version of Stable Diffusion, with its increased support for larger 768px images, is a significant improvement
