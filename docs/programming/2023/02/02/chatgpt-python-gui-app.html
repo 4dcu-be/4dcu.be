@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Can ChatGPT write a Python GUI app for me?</title>
+  <meta name="description" content="Imagine being able to create a fully functioning Python GUI application with just providing instructions. No need to spend  hours writing and debugging code,...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2023">
+  
+
+  <!-- External libraries -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Imagine being able to create a fully functioning Python GUI application with just providing instructions. No need to spend  hours writing and debugging code,..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/2023/02/02/chatgpt-python-gui-app.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Can ChatGPT write a Python GUI app for me?" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2023-02-02-chatgpt-python-gui-app/header_chatgpt.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Can ChatGPT write a Python GUI app for me?">
+  <meta name="twitter:description" content="Imagine being able to create a fully functioning Python GUI application with just providing instructions. No need to spend  hours writing and debugging code,...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2023-02-02-chatgpt-python-gui-app/header_chatgpt.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/2023/02/02/chatgpt-python-gui-app.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/2023/02/02/chatgpt-python-gui-app.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	<link rel="stylesheet" href="/css/main.css">
+
+	<!-- PageFind -->
+	<script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+
+	<script type='text/javascript'>
+	//<![CDATA[
+	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css");
+	//]]>
+	</Script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+	<div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+<li class="nav-link"><a href="#" class="nav-link-search"><i class="fa fa-search" style="width:16px;height:16px"></i></a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/chatgpt_gui_app.jpg" style="display:none" />
+<div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2023-02-02-chatgpt-python-gui-app/header_chatgpt.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Can ChatGPT write a Python GUI app for me?</h1>
+			
+      <p class="info"><em></em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted February 2, 2023 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>Imagine being able to create a fully functioning Python GUI application with just providing instructions. No need to spend 
+hours writing and debugging code, you’d just let AI do the heavy lifting for you. In this post, we’ll explore the capabilities 
+of <a href="https://chat.openai.com/">ChatGPT</a> in developing a Python GUI app and discover just how easy it can be to bring your ideas to life.</p>
+
+<p>In this post, we will be creating a simple yet powerful Python GUI application that helps users generate captions for 
+images quickly and efficiently. The app will display an image and provide a user interface for the user to write a 
+caption for that image, which will then be saved in a corresponding text file. This can greatly speed up the process 
+of creating captions for images, which is an essential step in training other AI systems like <a href="https://stability.ai/">Stable Diffusion</a>.</p>
+
+<p>When working on larger projects with an AI like ChatGPT, it’s essential to take a <strong>step-by-step</strong> approach. This allows 
+the AI to improve on relatively small parts of the project in each iteration, rather than trying to tackle the 
+entire project at once. By breaking the project down into smaller, manageable tasks, you can ensure that the AI is 
+working on the most important and relevant parts of the project, and you can also more easily identify and correct any e
+rrors or issues that may arise. Additionally, this approach allows for more efficient use of resources, as the AI can 
+focus on specific tasks rather than trying to handle everything at once.</p>
+
+<p><a href="/assets/posts/2023-02-02-chatgpt-python-gui-app/UI.jpg" class="lightgallery-link" data-sub-html="Final UI showing an image of a woman with a red shirt and dark curly hair">
+<img src="/assets/posts/2023-02-02-chatgpt-python-gui-app/UI.jpg" alt="Final UI showing an image of a woman with a red shirt and dark curly hair" height="1002" width="770" class="medium-image" data-src="/assets/posts/2023-02-02-chatgpt-python-gui-app/UI.jpg" loading="lazy" />
+</a></p>
+
+<p>In this post, we’ll be using this step-by-step approach to build our Python GUI application. We’ll start by 
+understanding the different GUI libraries available, and then we’ll proceed to create the app in stages, focusing on 
+one task at a time. This approach will not only make the development process more manageable but also will allow us to 
+test and improve each part of the app before moving on to the next. By following this approach, we’ll be able to create 
+a more robust and polished application that meets our needs.</p>
+
+<p><a href="/chatgpt_clipapp/">The full conversation</a> is available, as only key points
+are highlighted here. The final code resulting from this experiment can be found on the <a href="https://github.com/sepro/ClipApp">ClipApp GitHub page</a>.</p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>Before we dive into creating our Python GUI application, it’s important to first understand the different options 
+available for building a GUI in Python. There are several popular libraries for building a GUI in Python, such as 
+Tkinter, PyQt, wxPython, and Kivy, to name a few. Each of these libraries has its own set of features and capabilities, 
+and it’s important to choose the right one for your specific needs. Furthermore, by prompting ChatGPT to describe to us
+which libraries exist, we get a glimpse of which libraries the AI has seen often during training and will have knowledge
+about.</p>
+
+<p>So we’ll start general and ask : “I’m making a GUI application in python, can you pick a good library for a small program and show me code to start off with?”</p>
+
+<div style="height:250px;overflow-y:scroll;padding: 5px;padding-right:15px;margin-left:15px;background-color:rgb(247,247,247)">
+
+  <p><strong>ChatGPT</strong>: There are several libraries you can use to create a GUI application in Python, but some of the most popular ones are Tkinter, PyQt, and wxPython.</p>
+
+  <p>Tkinter is a built-in library in Python for creating simple GUI applications. It is a good choice for small programs and beginners. Here is an example of creating a simple window using Tkinter:</p>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="n">tk</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Tk</span><span class="p">()</span>
+<span class="n">root</span><span class="p">.</span><span class="n">mainloop</span><span class="p">()</span>
+</code></pre></div>  </div>
+
+  <p>PyQt is another popular library that is widely used for creating more advanced GUI applications. It is a set of Python bindings for the Qt library. Here is an example of creating a simple window using PyQt:</p>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">PyQt5.QtWidgets</span> <span class="kn">import</span> <span class="n">QApplication</span><span class="p">,</span> <span class="n">QWidget</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span>
+<span class="n">window</span> <span class="o">=</span> <span class="n">QWidget</span><span class="p">()</span>
+<span class="n">window</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">sys</span><span class="p">.</span><span class="nb">exit</span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">exec_</span><span class="p">())</span>
+</code></pre></div>  </div>
+
+  <p>wxPython is another popular library for creating GUI applications in Python. It is a set of Python bindings for the wxWidgets library. Here is an example of creating a simple window using wxPython:</p>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">wx</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">wx</span><span class="p">.</span><span class="n">App</span><span class="p">()</span>
+<span class="n">frame</span> <span class="o">=</span> <span class="n">wx</span><span class="p">.</span><span class="n">Frame</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">'Hello World'</span><span class="p">)</span>
+<span class="n">frame</span><span class="p">.</span><span class="n">Show</span><span class="p">()</span>
+<span class="n">app</span><span class="p">.</span><span class="n">MainLoop</span><span class="p">()</span>
+</code></pre></div>  </div>
+
+  <p>It’s worth noting that PyQt and wxPython are larger libraries and more complex than Tkinter.
+You can choose the one that best fits your needs based on your skills and the requirements of your project.</p>
+
+</div>
+
+<p>So this shows ChatGPT knows a bit about Tkinter, PyQt and wxPython. Given that Tkinter is a built-in library we’ll
+continue with that one, as I hope to build a standalone app at the end eliminating additional libraries will make that 
+final step a little easier.</p>
+
+<h3 id="first-let-chatgpt-write-code-for-the-layout">First let ChatGPT write code for the layout</h3>
+
+<p>Step one will be to get some code that puts the necessary elements on the screen. What they’ll do can be added later.
+So first describe the desired layout and see if ChatGPT can generate something using the Tkinter library.</p>
+
+<div style="height:250px;overflow-y:scroll;padding: 5px;padding-right:15px;margin-left:15px;background-color:rgb(247,247,247)">
+
+  <p><strong>You</strong>: Let’s continue with Tkinter, I need in the middle of the screen a widget that can display an image with an editable text box underneath. Right of the text box an ‘Ok’ and ‘Cancel’ button. Left and right of the image buttons to navigate.</p>
+
+  <p><strong>ChatGPT</strong>: You can accomplish this layout using a combination of Tkinter’s built-in widgets such as the <code class="language-plaintext highlighter-rouge">Label</code>, <code class="language-plaintext highlighter-rouge">Entry</code>, <code class="language-plaintext highlighter-rouge">Button</code>, and <code class="language-plaintext highlighter-rouge">Frame</code> widgets.</p>
+
+  <p>Here is an example of how you can create this layout:</p>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="n">tk</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">PhotoImage</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Tk</span><span class="p">()</span>
+<span class="n">root</span><span class="p">.</span><span class="n">geometry</span><span class="p">(</span><span class="s">"500x500"</span><span class="p">)</span>
+
+<span class="c1"># Creating Frame
+</span><span class="n">middle_frame</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+<span class="n">middle_frame</span><span class="p">.</span><span class="n">pack</span><span class="p">(</span><span class="n">pady</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="c1">#Creating Image
+</span><span class="n">image</span> <span class="o">=</span> <span class="n">PhotoImage</span><span class="p">(</span><span class="nb">file</span> <span class="o">=</span> <span class="s">"path_to_image"</span><span class="p">)</span>
+<span class="n">image_label</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="p">)</span>
+<span class="n">image_label</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="c1">#Creating Text Box
+</span><span class="n">text_box</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">)</span>
+<span class="n">text_box</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="c1">#Creating Ok button
+</span><span class="n">ok_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"OK"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span><span class="k">print</span><span class="p">(</span><span class="s">"OK button pressed"</span><span class="p">))</span>
+<span class="n">ok_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#Creating Cancel button
+</span><span class="n">cancel_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Cancel"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span><span class="k">print</span><span class="p">(</span><span class="s">"Cancel button pressed"</span><span class="p">))</span>
+<span class="n">cancel_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1">#Creating navigate button
+</span><span class="n">previous_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Previous"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span><span class="k">print</span><span class="p">(</span><span class="s">"previous button pressed"</span><span class="p">))</span>
+<span class="n">previous_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">next_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Next"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span><span class="k">print</span><span class="p">(</span><span class="s">"next button pressed"</span><span class="p">))</span>
+<span class="n">next_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">root</span><span class="p">.</span><span class="n">mainloop</span><span class="p">()</span>
+</code></pre></div>  </div>
+
+  <p>In this example, the <code class="language-plaintext highlighter-rouge">middle_frame</code> is created and added to the root window. The <code class="language-plaintext highlighter-rouge">image_label</code> is created to display the image, and it’s added to the <code class="language-plaintext highlighter-rouge">middle_frame</code>. The <code class="language-plaintext highlighter-rouge">text_box</code> is created to allow the user to enter text, and it’s added to the <code class="language-plaintext highlighter-rouge">middle_frame</code>. The <code class="language-plaintext highlighter-rouge">ok_button</code> and <code class="language-plaintext highlighter-rouge">cancel_button</code> are created and added to the <code class="language-plaintext highlighter-rouge">middle_frame</code>.
+The <code class="language-plaintext highlighter-rouge">previous_button</code> and <code class="language-plaintext highlighter-rouge">next_button</code> are created and added to the <code class="language-plaintext highlighter-rouge">middle_frame</code>.
+The <code class="language-plaintext highlighter-rouge">grid</code> method is used to position the widgets within the frame.
+The <code class="language-plaintext highlighter-rouge">padx</code> and <code class="language-plaintext highlighter-rouge">pady</code> options are used to add some padding around the widgets.</p>
+
+  <p>The <code class="language-plaintext highlighter-rouge">file = "path_to_image"</code> should be replaced with the path of the image you want to display.</p>
+
+  <p>The <code class="language-plaintext highlighter-rouge">lambda:print("OK button pressed")</code> and <code class="language-plaintext highlighter-rouge">lambda:print("Cancel button pressed")</code> is a simple callback function to check if the button is pressed.</p>
+
+  <p>You can customize the layout and functionality to suit your needs.</p>
+
+</div>
+
+<p>While the initial code may serve as a starting point, there are a few elements that need to be adjusted to better suit 
+the needs of our application. For example, the image may be too small to effectively display the images the app is 
+intended for. Additionally, a menu bar is not currently included in the code, which would be a useful feature for 
+navigation and organization. To address these issues, we will make a few quick adjustments to the code and then provide 
+the updated version to ChatGPT. Specifically, we’ll ask ChatGPT to add a menu bar with a “File” item, which includes 
+two options: “Open” and “Exit”.</p>
+
+<div style="height:250px;overflow-y:scroll;padding: 5px;padding-right:15px;margin-left:15px;background-color:rgb(247,247,247)">
+
+  <p><strong>You</strong>: I updated the code, can you add a menu bar with a button file and a dropdown with an Open button and Exit button. The exit button needs to close the app</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="n">tk</span>
+    <span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">PhotoImage</span>
+
+    <span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Tk</span><span class="p">()</span>
+    <span class="n">root</span><span class="p">.</span><span class="n">geometry</span><span class="p">(</span><span class="s">"1000x900"</span><span class="p">)</span>
+
+    <span class="c1"># Creating Frame
+</span>    <span class="n">middle_frame</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+    <span class="n">middle_frame</span><span class="p">.</span><span class="n">pack</span><span class="p">(</span><span class="n">pady</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+    <span class="c1"># Creating Image
+</span>    <span class="n">image</span> <span class="o">=</span> <span class="n">PhotoImage</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s">"./img/empty_file.png"</span><span class="p">)</span>
+    <span class="n">image_label</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">image_label</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+    <span class="c1"># Creating Text Box
+</span>    <span class="n">text_box</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">)</span>
+    <span class="n">text_box</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+    <span class="c1"># Creating Ok button
+</span>    <span class="n">ok_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"OK"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">"OK button pressed"</span><span class="p">))</span>
+    <span class="n">ok_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Creating Cancel button
+</span>    <span class="n">cancel_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Cancel"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">"Cancel button pressed"</span><span class="p">))</span>
+    <span class="n">cancel_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Creating navigate button
+</span>    <span class="n">previous_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Previous"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">"previous button pressed"</span><span class="p">))</span>
+    <span class="n">previous_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">next_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Next"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">"next button pressed"</span><span class="p">))</span>
+    <span class="n">next_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">root</span><span class="p">.</span><span class="n">mainloop</span><span class="p">()</span>
+</code></pre></div>  </div>
+
+  <p><strong>ChatGPT</strong>: You can add a menu bar in Tkinter by creating an instance of the <code class="language-plaintext highlighter-rouge">Menu</code> widget and adding it to the 
+root window. You can then create instances of the <code class="language-plaintext highlighter-rouge">Menu</code> widget for each menu option and add them to the main menu. 
+To create a dropdown menu, you can create instances of the <code class="language-plaintext highlighter-rouge">Menu</code> widget and add them to the main menu using the
+<code class="language-plaintext highlighter-rouge">add_cascade</code> method. Here is an example of how you can add a menu bar with a “File” menu that has an “Open” 
+button and an “Exit” button:</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="n">tk</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">PhotoImage</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Tk</span><span class="p">()</span>
+<span class="n">root</span><span class="p">.</span><span class="n">geometry</span><span class="p">(</span><span class="s">"1000x900"</span><span class="p">)</span>
+
+<span class="c1"># Creating Frame
+</span><span class="n">middle_frame</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+<span class="n">middle_frame</span><span class="p">.</span><span class="n">pack</span><span class="p">(</span><span class="n">pady</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Creating Image
+</span><span class="n">image</span> <span class="o">=</span> <span class="n">PhotoImage</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s">"./img/empty_file.png"</span><span class="p">)</span>
+<span class="n">image_label</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="p">)</span>
+<span class="n">image_label</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Creating Text Box
+</span><span class="n">text_box</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">)</span>
+<span class="n">text_box</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Creating Ok button
+</span><span class="n">ok_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"OK"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">"OK button pressed"</span><span class="p">))</span>
+<span class="n">ok_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Creating Cancel button
+</span><span class="n">cancel_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Cancel"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">"Cancel button pressed"</span><span class="p">))</span>
+<span class="n">cancel_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Creating navigate button
+</span><span class="n">previous_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Previous"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">"previous button pressed"</span><span class="p">))</span>
+<span class="n">previous_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">next_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Next"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">"next button pressed"</span><span class="p">))</span>
+<span class="n">next_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Creating main menu
+</span><span class="n">menubar</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+<span class="n">root</span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="n">menu</span><span class="o">=</span><span class="n">menubar</span><span class="p">)</span>
+
+<span class="c1"># Creating File menu
+</span><span class="n">file_menu</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">menubar</span><span class="p">,</span> <span class="n">tearoff</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">menubar</span><span class="p">.</span><span class="n">add_cascade</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">"File"</span><span class="p">,</span> <span class="n">menu</span><span class="o">=</span><span class="n">file_menu</span><span class="p">)</span>
+<span class="n">file_menu</span><span class="p">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">"Open"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">"Open button pressed"</span><span class="p">))</span>
+<span class="n">file_menu</span><span class="p">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">"Exit"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">root</span><span class="p">.</span><span class="n">destroy</span><span class="p">)</span>
+
+<span class="n">root</span><span class="p">.</span><span class="n">mainloop</span><span class="p">()</span>
+</code></pre></div>  </div>
+
+  <p>In this example, the <code class="language-plaintext highlighter-rouge">menubar</code> is created and added to the root window. The <code class="language-plaintext highlighter-rouge">file_menu</code> is created and added to the main menu using the <code class="language-plaintext highlighter-rouge">add_cascade</code> method. The <code class="language-plaintext highlighter-rouge">Open</code> button and <code class="language-plaintext highlighter-rouge">Exit</code> button are created and added to the <code class="language-plaintext highlighter-rouge">file_menu</code> using the <code class="language-plaintext highlighter-rouge">add_command</code> method. The <code class="language-plaintext highlighter-rouge">command</code> option is used to specify the function that should be called when the button is pressed. In this case, when the <code class="language-plaintext highlighter-rouge">Exit</code> button is pressed the <code class="language-plaintext highlighter-rouge">root.destroy()</code> function is called which will close the app.</p>
+
+  <p>You can customize the menu and the functionality to suit your needs.</p>
+
+</div>
+
+<p>With a little back and forth you can specify the behaviour of each element. Using a single prompt to get code for a
+single element works best, then iterate until all items work as intended.</p>
+
+<h2 id="refactoring-the-code">Refactoring the code</h2>
+
+<p>After completing the Open folder functionality, it became apparent the code was growing too large and needed 
+refactoring. ChatGPT actually seems up to that task when prompted to do so. Using a simple instruction to refactor the
+code into a Class and make it more modular it did so, providing a much better base to continue development of the app.</p>
+
+<div style="height:250px;overflow-y:scroll;padding: 5px;padding-right:15px;margin-left:15px;background-color:rgb(247,247,247)">
+
+  <p><strong>You</strong>: can you refactor the code as a Class, ClipApp, to avoid the use of global variables and allow the app to become more modular?</p>
+
+  <p><strong>ChatGPT</strong>: Yes, you can refactor the code as a class to avoid the use of global variables and make the app more modular. Here is an example of how you can refactor the code to a class, <code class="language-plaintext highlighter-rouge">ClipApp</code>:</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="n">tk</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">PhotoImage</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">filedialog</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">class</span> <span class="nc">ClipApp</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Tk</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">.</span><span class="n">geometry</span><span class="p">(</span><span class="s">"1000x900"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">image_files</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Creating Frame
+</span>        <span class="n">middle_frame</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Frame</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+        <span class="n">middle_frame</span><span class="p">.</span><span class="n">pack</span><span class="p">(</span><span class="n">pady</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+        <span class="c1"># Creating Image
+</span>        <span class="n">image</span> <span class="o">=</span> <span class="n">PhotoImage</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s">"./img/empty_file.png"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">image_label</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">image_label</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+        <span class="c1"># Creating navigate button
+</span>        <span class="n">previous_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Previous"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">"previous button pressed"</span><span class="p">))</span>
+        <span class="n">previous_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">next_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Next"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">"next button pressed"</span><span class="p">))</span>
+        <span class="n">next_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># Creating Text Box
+</span>        <span class="n">text_box</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">)</span>
+        <span class="n">text_box</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+        <span class="c1"># Creating Ok button
+</span>        <span class="n">ok_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"OK"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">"OK button pressed"</span><span class="p">))</span>
+        <span class="n">ok_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Creating Cancel button
+</span>        <span class="n">cancel_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Cancel"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">"Cancel button pressed"</span><span class="p">))</span>
+        <span class="n">cancel_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># Creating main menu
+</span>        <span class="n">menubar</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Menu</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="n">menu</span><span class="o">=</span><span class="n">menubar</span><span class="p">)</span>
+
+        <span class="c1"># Creating File menu
+</span>        <span class="n">file_menu</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">menubar</span><span class="p">,</span> <span class="n">tearoff</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">menubar</span>
+</code></pre></div>  </div>
+
+  <p><strong>You</strong>: continue</p>
+
+  <p><strong>ChatGPT</strong>: continue
+menubar.add_cascade(label=”File”, menu=file_menu)
+file_menu.add_command(label=”Open”, command=self.select_folder)
+file_menu.add_command(label=”Exit”, command=self.root.destroy)</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">select_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">folder_path</span> <span class="o">=</span> <span class="n">filedialog</span><span class="p">.</span><span class="n">askdirectory</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Selected folder: </span><span class="si">{</span><span class="n">folder_path</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">image_files</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">get_image_files</span><span class="p">(</span><span class="n">folder_path</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">image_files</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_image_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder_path</span><span class="p">):</span>
+    <span class="n">image_files</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">os</span><span class="p">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">folder_path</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">file</span><span class="p">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">".jpg"</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">file</span><span class="p">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">".jpeg"</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">file</span><span class="p">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">".png"</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">file</span><span class="p">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">".gif"</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">file</span><span class="p">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">".bmp"</span><span class="p">):</span>
+            <span class="n">image_files</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder_path</span><span class="p">,</span> <span class="nb">file</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">image_files</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">ClipApp</span><span class="p">()</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">root</span><span class="p">.</span><span class="n">mainloop</span><span class="p">()</span>
+</code></pre></div>  </div>
+
+  <p>In this refactored code, I’ve created a class <code class="language-plaintext highlighter-rouge">ClipApp</code> that contains all the code for the application. The <code class="language-plaintext highlighter-rouge">__init__</code> method initializes the Tkinter root, sets the default geometry and creates the GUI layout, including the image label, text box, buttons, and menu bar. The <code class="language-plaintext highlighter-rouge">select_folder()</code> method is now a method of the <code class="language-plaintext highlighter-rouge">ClipApp</code> class and it no longer uses global variables. Instead, it updates the <code class="language-plaintext highlighter-rouge">image_files</code> attribute of the <code class="language-plaintext highlighter-rouge">ClipApp</code> instance. The <code class="language-plaintext highlighter-rouge">get_image_files()</code> method is also now a method of the <code class="language-plaintext highlighter-rouge">ClipApp</code> class and it takes the folder path as an argument.
+This way, by creating an instance of the ClipApp class you can use the same code in different parts of your program, it also allows for a more organized and readable code.</p>
+
+</div>
+
+<p>Again, the majority of the work was carried out by ChatGPT, though before proceeding a few tweaks would be nice. So 
+again, the updated code was fed back along with a question how modularity could be improved. ChatGPT provided some 
+reasonable suggestions, and when asked to implement them it did so marvelously. It happens ChatGPT stops in the middle
+of a block of code, simply asking to continue will make ChatGPT complete the code.</p>
+
+<div style="height:250px;overflow-y:scroll;padding: 5px;padding-right:15px;margin-left:15px;background-color:rgb(247,247,247)">
+
+  <p><strong>You</strong>: Here is the code with your changes and a few tweaks. Can you suggest further improvements to make it more modular?</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="n">tk</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">PhotoImage</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">filedialog</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+
+<span class="k">def</span> <span class="nf">get_image_files</span><span class="p">(</span><span class="n">folder_path</span><span class="p">):</span>
+    <span class="n">image_files</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">os</span><span class="p">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">folder_path</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">file</span><span class="p">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">".jpg"</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">file</span><span class="p">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">".jpeg"</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">file</span><span class="p">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">".png"</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">file</span><span class="p">.</span><span class="n">endswith</span><span class="p">(</span>
+                <span class="s">".gif"</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">file</span><span class="p">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">".bmp"</span><span class="p">):</span>
+            <span class="n">image_files</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder_path</span><span class="p">,</span> <span class="nb">file</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">image_files</span>
+
+
+<span class="k">class</span> <span class="nc">ClipApp</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Tk</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">.</span><span class="n">geometry</span><span class="p">(</span><span class="s">"1000x900"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">image_files</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Creating Frame
+</span>        <span class="n">middle_frame</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Frame</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+        <span class="n">middle_frame</span><span class="p">.</span><span class="n">pack</span><span class="p">(</span><span class="n">pady</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+        <span class="c1"># Creating Image
+</span>        <span class="n">image</span> <span class="o">=</span> <span class="n">PhotoImage</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s">"./img/empty_file.png"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">image_label</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">image_label</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+        <span class="c1"># Creating navigate button
+</span>        <span class="n">previous_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Previous"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">"previous button pressed"</span><span class="p">))</span>
+        <span class="n">previous_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">next_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Next"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">"next button pressed"</span><span class="p">))</span>
+        <span class="n">next_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># Creating Text Box
+</span>        <span class="n">text_box</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">)</span>
+        <span class="n">text_box</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+        <span class="c1"># Creating Ok button
+</span>        <span class="n">ok_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"OK"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">"OK button pressed"</span><span class="p">))</span>
+        <span class="n">ok_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Creating Cancel button
+</span>        <span class="n">cancel_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Cancel"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">"Cancel button pressed"</span><span class="p">))</span>
+        <span class="n">cancel_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># Creating main menu
+</span>        <span class="n">menubar</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Menu</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="n">menu</span><span class="o">=</span><span class="n">menubar</span><span class="p">)</span>
+
+        <span class="c1"># Creating File menu
+</span>        <span class="n">file_menu</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">menubar</span><span class="p">,</span> <span class="n">tearoff</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">menubar</span><span class="p">.</span><span class="n">add_cascade</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">"File"</span><span class="p">,</span> <span class="n">menu</span><span class="o">=</span><span class="n">file_menu</span><span class="p">)</span>
+        <span class="n">file_menu</span><span class="p">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">"Open"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">select_folder</span><span class="p">)</span>
+        <span class="n">file_menu</span><span class="p">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">"Exit"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">.</span><span class="n">destroy</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">select_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">folder_path</span> <span class="o">=</span> <span class="n">filedialog</span><span class="p">.</span><span class="n">askdirectory</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Selected folder: </span><span class="si">{</span><span class="n">folder_path</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">image_files</span> <span class="o">=</span> <span class="n">get_image_files</span><span class="p">(</span><span class="n">folder_path</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">image_files</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">ClipApp</span><span class="p">()</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">root</span><span class="p">.</span><span class="n">mainloop</span><span class="p">()</span>
+</code></pre></div>  </div>
+
+  <p><strong>ChatGPT</strong>: Here are a few suggestions for further improvements to make the code more modular:You can extract the GUI layout code into its own method, such as <code class="language-plaintext highlighter-rouge">create_layout()</code>, to make the <code class="language-plaintext highlighter-rouge">__init__</code> method less cluttered and easier to read.You can create methods to handle the behavior of the buttons, such as <code class="language-plaintext highlighter-rouge">previous_button_handler()</code>, <code class="language-plaintext highlighter-rouge">next_button_handler()</code>, <code class="language-plaintext highlighter-rouge">ok_button_handler()</code>, and <code class="language-plaintext highlighter-rouge">cancel_button_handler()</code>, instead of using lambda functions in the button creation. This way you can more easily modify the behavior of the buttons in the future.You can create a method to handle the navigation of the images, such as <code class="language-plaintext highlighter-rouge">navigate_images(direction)</code>, and call this method from the button handlers. This way you can easily add new navigation functionality without modifying the button handlers.You can move the functionality of the ‘Open’ button to a separate class that manage the images, this way you can further improve the modularity of the code.</p>
+
+  <p>Overall, by breaking down the code into smaller, more specific methods and classes, you can make the code more modular and easier to understand and maintain.</p>
+
+  <p><strong>You</strong>: make those changes to the code provided</p>
+
+  <p><strong>ChatGPT</strong>: Here is an example of how you can make the changes I suggested to the code you provided:</p>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="n">tk</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">PhotoImage</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">filedialog</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+
+<span class="k">class</span> <span class="nc">ImagesHandler</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">image_files</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">current_image_index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">get_image_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder_path</span><span class="p">):</span>
+        <span class="n">image_files</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">os</span><span class="p">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">folder_path</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">file</span><span class="p">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">".jpg"</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">file</span><span class="p">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">".jpeg"</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">file</span><span class="p">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">".png"</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">file</span><span class="p">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">".gif"</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">file</span><span class="p">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">".bmp"</span><span class="p">):</span>
+                <span class="n">image_files</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder_path</span><span class="p">,</span> <span class="nb">file</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">image_files</span>
+
+    <span class="k">def</span> <span class="nf">select_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">folder_path</span> <span class="o">=</span> <span class="n">filedialog</span><span class="p">.</span><span class="n">askdirectory</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Selected folder: </span><span class="si">{</span><span class="n">folder_path</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">image_files</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">get_image_files</span><span class="p">(</span><span class="n">folder_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">current_image_index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">image_files</span>
+
+    <span class="k">def</span> <span class="nf">navigate_images</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s">"previous"</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">current_image_index</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">direction</span> <span class="o">==</span> <span class="s">"next"</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">current_image_index</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">current_image_index</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">current_image_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">image_files</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="p">.</span><span class="n">current_image_</span>
+</code></pre></div>  </div>
+
+  <p><strong>You</strong>: continue</p>
+
+  <p><strong>ChatGPT</strong>: Sure, here is the continuation of the code:</p>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">navigate_images</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s">"previous"</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">current_image_index</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">direction</span> <span class="o">==</span> <span class="s">"next"</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">current_image_index</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">current_image_index</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">current_image_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">image_files</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="p">.</span><span class="n">current_image_index</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">image_files</span><span class="p">):</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">current_image_index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">image_files</span><span class="p">[</span><span class="bp">self</span><span class="p">.</span><span class="n">current_image_index</span><span class="p">]</span>
+
+<span class="k">class</span> <span class="nc">ClipApp</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Tk</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">.</span><span class="n">geometry</span><span class="p">(</span><span class="s">"1000x900"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">image_handler</span> <span class="o">=</span> <span class="n">ImagesHandler</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="p">.</span><span class="n">create_layout</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">create_menu</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">create_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Creating Frame
+</span>        <span class="n">middle_frame</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Frame</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+        <span class="n">middle_frame</span><span class="p">.</span><span class="n">pack</span><span class="p">(</span><span class="n">pady</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+        <span class="c1"># Creating Image
+</span>        <span class="n">image</span> <span class="o">=</span> <span class="n">PhotoImage</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s">"./img/empty_file.png"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">image_label</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">image_label</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+        <span class="c1"># Creating navigate button
+</span>        <span class="n">previous_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Previous"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">previous_button_handler</span><span class="p">)</span>
+        <span class="n">previous_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">next_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Next"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">next_button_handler</span><span class="p">)</span>
+        <span class="n">next_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># Creating Text Box
+</span>        <span class="n">text_box</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">)</span>
+        <span class="n">text_box</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+        <span class="c1"># Creating Ok button
+</span>        <span class="n">ok_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"OK"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">ok_button_handler</span><span class="p">)</span>
+        <span class="n">ok_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Creating Cancel button
+</span>        <span class="n">cancel_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">middle_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Cancel"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">cancel_button_handler</span><span class="p">)</span>
+        <span class="n">cancel_button</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">create_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Creating main menu
+</span>        <span class="n">menubar</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Menu</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="n">menu</span><span class="o">=</span><span class="n">menubar</span><span class="p">)</span>
+
+        <span class="c1"># Creating File menu
+</span>        <span class="n">file_menu</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">menubar</span><span class="p">,</span> <span class="n">tearoff</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">menubar</span><span class="p">.</span><span class="n">add_cascade</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">"File"</span><span class="p">,</span> <span class="n">menu</span><span class="o">=</span><span class="n">file_menu</span><span class="p">)</span>
+        <span class="n">file_menu</span><span class="p">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">"Open"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">image_handler</span><span class="p">.</span><span class="n">select_folder</span><span class="p">)</span>
+        <span class="n">file_menu</span><span class="p">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">"Exit"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">.</span><span class="n">destroy</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">previous</span>
+</code></pre></div>  </div>
+
+  <p><strong>You</strong>: continue</p>
+
+  <p><strong>ChatGPT</strong>: Sure, here is the continuation of the code:</p>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">previous_button_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">previous_image</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">image_handler</span><span class="p">.</span><span class="n">navigate_images</span><span class="p">(</span><span class="s">"previous"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">update_image</span><span class="p">(</span><span class="n">previous_image</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"previous button pressed"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">next_button_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">next_image</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">image_handler</span><span class="p">.</span><span class="n">navigate_images</span><span class="p">(</span><span class="s">"next"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">update_image</span><span class="p">(</span><span class="n">next_image</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"next button pressed"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">ok_button_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"OK button pressed"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">cancel_button_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Cancel button pressed"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">update_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_path</span><span class="p">):</span>
+        <span class="c1"># code to update the image in the GUI
+</span>        <span class="k">pass</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">ClipApp</span><span class="p">()</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">root</span><span class="p">.</span><span class="n">mainloop</span><span class="p">()</span>
+</code></pre></div>  </div>
+
+  <p>In the update_image method you can add the code to update the image to the one passed as a parameter.
+In this way, you can use the same method to update the image when navigating between images and when changing the folder.</p>
+
+  <p>This way you can keep the code more readable, and if you need to change the way the images are handled you can simply 
+modify the ImagesHandler class without affecting the rest of the code.</p>
+
+</div>
+
+<p>The implementation of that <code class="language-plaintext highlighter-rouge">ImagesHandler</code> class is quite elegant. This also allows the code to be split in multiple
+files, which was done manually. Now, we iterate more on the functionality, adding a <code class="language-plaintext highlighter-rouge">TextHandler</code> class and getting
+all buttons to function. In case you aren’t satisfied with the output, simply ask for another response, or indicate
+what is wrong with the answer and ask ChatGPT to correct itself.</p>
+
+<h2 id="adding-docstrings-and-type-annotations">Adding docstrings and type annotations</h2>
+
+<p>Once the app was functional, I wanted to see if ChatGPT could be used to add documentation and type annotation to the
+functions it had produced. It worked like a charm! While AI writing code is impressive, that is the part of the job
+I don’t mind doing, writing documentation however is far less satisfying, being able to (partially) delegate this to
+AI is an incredible time-saver.</p>
+
+<div style="height:250px;overflow-y:scroll;padding: 5px;padding-right:15px;margin-left:15px;background-color:rgb(247,247,247)">
+
+  <p><strong>You</strong>: Take the first function and add type annotation and a docstring</p>
+
+  <p><strong>ChatGPT</strong>: Here is the updated function with type annotations and a docstring:</p>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">image_to_text_path</span><span class="p">(</span><span class="n">image_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="s">"""
+    Given an image path, return the corresponding text file path by replacing the extension with '.txt'
+    :param image_path: The file path of the image
+    :return: The file path of the text file with the same name
+    """</span>
+    <span class="n">path</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">path</span> <span class="o">+</span> <span class="s">".txt"</span>
+</code></pre></div>  </div>
+
+  <p>The type annotations indicate that the function takes a single argument, <code class="language-plaintext highlighter-rouge">image_path</code> which is a string, and it returns a string.
+The docstring gives a brief explanation of what the function does, the inputs and the expected output.
+It is a good practice to add docstring and type annotations to your functions, it will help you and other developers to understand the code better and avoid errors.</p>
+
+</div>
+
+<p>Similarly, I had ChatGPT write a first draft for the README.md, this was a little rough around the edges, but a solid
+start to get the ball rolling for a human.</p>
+
+<h2 id="compiling-the-app">Compiling the app</h2>
+
+<p>Python code can be a little tricky to deploy, though the Nuitka project aims to compile Python code into stand-alone
+executables. This project would be a great candidate as the final program could more easily be shared with others
+annotating images for fine-tuning Stable Diffusion. Here ChatGPT provided correct instructions how to get Nuitka up and
+running. However, it did omit the argument <code class="language-plaintext highlighter-rouge">--enable-plugin=tk-inter</code> for compiling the app correctly.</p>
+
+<pre><code class="language-commandline">nuitka --standalone --windows-disable-console --enable-plugin=tk-inter --onefile app.py
+</code></pre>
+
+<h2 id="adding-unit-tests">Adding unit-tests</h2>
+
+<p>The last challenge for ChatGPT is to create a small test suite for the <code class="language-plaintext highlighter-rouge">ImagesHandler</code> and <code class="language-plaintext highlighter-rouge">TextHandler</code> 
+classes. So the code for these classes is simply copied in along with the question to add unit-tests using the Pytest
+library. It took a few re-rolls, and you might need to explicitly mention ChatGPT should include fixtures to be less 
+redundant, but for simple functions with a well-defined single purpose (which you really should be aiming for when
+writing code) ChatGPT can come up with a reasonable set of tests.</p>
+
+<div style="height:250px;overflow-y:scroll;padding: 5px;padding-right:15px;margin-left:15px;background-color:rgb(247,247,247)">
+
+  <p><strong>You</strong>: write unit tests for the code below</p>
+
+  <p>import os</p>
+
+  <p>class TextHandler:
+    def <strong>init</strong>(self, text_path:str):
+        “””
+        Initialize a TextHandler instance with a text file path
+        :param text_path: the path to the text file
+        “””
+        self.text_path = text_path
+        self.original_text: str = “”
+        self.load_text()</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def load_text(self) -&gt; None:
+    """
+    Load the text from the file, if the file doesn't exist, it will create an empty one.
+    """
+    if os.path.exists(self.text_path):
+        with open(self.text_path, "r") as f:
+            self.original_text = f.read()
+    else:
+        with open(self.text_path, "w") as f:
+            pass
+
+def save_text(self, new_text: str) -&gt; None:
+    """
+    Save a new text to the file
+    :param new_text: the text to be written to the file
+    """
+    self.original_text = new_text
+    with open(self.text_path, "w") as f:
+        f.write(new_text)
+</code></pre></div>  </div>
+
+  <p><strong>ChatGPT</strong>: Sure, here are some example unit tests for the TextHandler class using the <code class="language-plaintext highlighter-rouge">pytest</code> library:python</p>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">text_handler</span> <span class="kn">import</span> <span class="n">TextHandler</span>
+
+<span class="k">def</span> <span class="nf">test_init</span><span class="p">():</span>
+    <span class="n">text_path</span> <span class="o">=</span> <span class="s">'tests/test_text.txt'</span>
+    <span class="n">text_handler</span> <span class="o">=</span> <span class="n">TextHandler</span><span class="p">(</span><span class="n">text_path</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">text_handler</span><span class="p">.</span><span class="n">text_path</span> <span class="o">==</span> <span class="n">text_path</span>
+    <span class="k">assert</span> <span class="n">text_handler</span><span class="p">.</span><span class="n">original_text</span> <span class="o">==</span> <span class="s">""</span>
+
+<span class="k">def</span> <span class="nf">test_load_text</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">):</span>
+    <span class="n">text_path</span> <span class="o">=</span> <span class="n">tmpdir</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="s">'test_text.txt'</span><span class="p">)</span>
+    <span class="n">text_path</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"test text"</span><span class="p">)</span>
+    <span class="n">text_handler</span> <span class="o">=</span> <span class="n">TextHandler</span><span class="p">(</span><span class="n">text_path</span><span class="p">)</span>
+    <span class="n">text_handler</span><span class="p">.</span><span class="n">load_text</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">text_handler</span><span class="p">.</span><span class="n">original_text</span> <span class="o">==</span> <span class="s">"test text"</span>
+
+<span class="k">def</span> <span class="nf">test_save_text</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">):</span>
+    <span class="n">text_path</span> <span class="o">=</span> <span class="n">tmpdir</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="s">'test_text.txt'</span><span class="p">)</span>
+    <span class="n">text_handler</span> <span class="o">=</span> <span class="n">TextHandler</span><span class="p">(</span><span class="n">text_path</span><span class="p">)</span>
+    <span class="n">text_handler</span><span class="p">.</span><span class="n">save_text</span><span class="p">(</span><span class="s">"new text"</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">text_path</span><span class="p">.</span><span class="n">read</span><span class="p">()</span> <span class="o">==</span> <span class="s">"new text"</span>
+    <span class="k">assert</span> <span class="n">text_handler</span><span class="p">.</span><span class="n">original_text</span> <span class="o">==</span> <span class="s">"new text"</span>
+</code></pre></div>  </div>
+
+  <p>In the above example, I’ve used <code class="language-plaintext highlighter-rouge">tmpdir</code> fixture from pytest to create temporary files. This allows to create test 
+files without polluting the file system and also cleaning them up automatically after the test.</p>
+
+  <p>In the <code class="language-plaintext highlighter-rouge">test_init</code> function, we test that the instance is correctly initialized with the text_path and the 
+original_text is empty string.</p>
+
+  <p>In the <code class="language-plaintext highlighter-rouge">test_load_text</code> function, we create a temporary text file, write some text to it, create a TextHandler 
+instance and load the text. Then we assert that the original_text attribute is the same as the text written to the file.</p>
+
+  <p>In the <code class="language-plaintext highlighter-rouge">test_save_text</code> function, we create a temporary text file, create a TextHandler instance, save a new 
+text to the file and assert that the text in the file is the same as the new text and the original_text attribute is 
+also the same as the new text.</p>
+
+</div>
+
+<h2 id="final-thoughts">Final Thoughts</h2>
+
+<p>Overall, including ChatGPT in the workflow for building a Python GUI application has proven to be a highly effective and 
+efficient strategy. However, it’s important to keep in mind that a step-by-step approach is necessary in order to 
+create larger applications. Having a human in the loop to make sure the structure is solid and the code works is still
+necessary. Though having an AI co-pilot that can do simple tasks this quickly is a huge boon. Simply let ChatGPT take 
+care of the tedious tasks, so you can focus on the big picture.</p>
+
+<p>The ability to use ChatGPT to add documentation in the form 
+of docstrings and type annotations is an amazing feature that can save a lot of time and effort. It makes the process 
+of documenting code much faster, more efficient, and more pleasant.</p>
+
+<p>Given it is still early days, and ChatGPT has just been released a few weeks ago, this is a technology to keep track of.
+This has the potential to transform many jobs across various fields. Being able to work with it can be a great asset in
+the near future!</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/chatgpt">chatgpt</a>,&nbsp;<a href="/tag/ai">ai</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa fa-coffee"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Can+ChatGPT+write+a+Python+GUI+app+for+me%3F&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2023%2F02%2F02%2Fchatgpt-python-gui-app.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Can+ChatGPT+write+a+Python+GUI+app+for+me%3F&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2023%2F02%2F02%2Fchatgpt-python-gui-app.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2F2023%2F02%2F02%2Fchatgpt-python-gui-app.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation" data-pagefind-ignore>
+		<span class="prev-post">
+			
+				<a href="/aiart/2022/12/31/Stable-Diffusion-Workflow.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Get the most out of Stable Diffusion 2.1: Tips and Tricks</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa fa-coffee"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+		<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div>
+			<div class="site-navigation">
+
+				<p><strong>Site Map</strong></p>
+				<ul class="pages">
+					
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+				</ul>
+				<br />
+				<p><strong>Legal</strong></p>
+				<p><a href="/policy/">Privacy policy</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Contribute</strong></p>
+				<p><i class="fa fa-coffee"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+				
+				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

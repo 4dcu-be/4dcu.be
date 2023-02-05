@@ -179,13 +179,13 @@ Assistant using <a href="https://www.zigbee2mqtt.io">Zigbee2MQTT</a> and the sti
 check out <a href="/diy/2021/03/24/MQTT.html">this post</a> for more details on those.</p>
 
 <p><strong>Update 03/12/2020:</strong> This post was written for Home Assistant 0.92.3, though as I recently switched to version 0.118.4
-I can confirm this is still up to date, except the <code class="language-plaintext highlighter-rouge">light.toggle</code> in one of the automations, which no longer switches on 
+I can confirm this is still up-to-date, except the <code class="language-plaintext highlighter-rouge">light.toggle</code> in one of the automations, which no longer switches on 
 all lights, individual devices need to be specified. This section has been updated, though it will be different for 
 every setup. Also note that when configuring MQTT devices there are now user-friendly options through the interface to do so.</p>
 
 <h2 id="parts-list">Parts List</h2>
 
-<p>So for this I bought a couple things off Amazon :</p>
+<p>So for this I bought a couple of things on Amazon :</p>
 
 <ul>
   <li>A (third party) Arduino Uno, with USB cable (USB-A, the old, bulky connector)</li>
@@ -193,7 +193,7 @@ every setup. Also note that when configuring MQTT devices there are now user-fri
   <li>An Aqara Cube</li>
 </ul>
 
-<p>Furthermore you’ll need some cables to connect the Arduino with Zigbee stick. Depending on how you wish to do this you
+<p>Furthermore, you’ll need some cables to connect the Arduino with Zigbee stick. Depending on how you wish to do this you
 might need a soldering iron with solder, heat-shrink tubing, some pin headers and connectors you can put on the cables.</p>
 
 <p>Since the Zigbee dongle is a bare PCB, I 3D printed a case desgined by hansaya for this type of dongle which can be 
@@ -272,7 +272,7 @@ is plugged into.</p>
 <img src="/assets/posts/2020-09-10-MQTT/firmware_upload_success.png" alt="Flashing the firmware to the stick was a success !" height="1122" width="1902" data-src="/assets/posts/2020-09-10-MQTT/firmware_upload_success.png" loading="lazy" />
 </a></p>
 
-<p>You can double check flashing the Z-Stack firmware was successful by opening the device manager (windows), now the 
+<p>You can double-check flashing the Z-Stack firmware was successful by opening the device manager (windows), now the 
 Zigbee Dongle should appear as a USB Serial Device.</p>
 
 <p><a href="/assets/posts/2020-09-10-MQTT/mqtt_com6.png" class="lightgallery-link" data-sub-html="The new firmware is working, the device now is recognized as a USB Serial Device">
