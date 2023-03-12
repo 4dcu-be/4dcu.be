@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Using a Smart Motion Sensor with Home Assistant</title>
+  <meta name="description" content="If you’re looking for a straightforward yet powerful method to safeguard your home or office, a smart motion sensor  linked to Home Assistant might be the pe...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2023">
+  
+
+  <!-- External libraries -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="If you’re looking for a straightforward yet powerful method to safeguard your home or office, a smart motion sensor  linked to Home Assistant might be the pe..." />
+  <meta property="og:url" content="https://blog.4dcu.be/diy/2023/03/12/smart-motion-sensor.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Using a Smart Motion Sensor with Home Assistant" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2023-03-12-smart-motion-sensor/header.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Using a Smart Motion Sensor with Home Assistant">
+  <meta name="twitter:description" content="If you’re looking for a straightforward yet powerful method to safeguard your home or office, a smart motion sensor  linked to Home Assistant might be the pe...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2023-03-12-smart-motion-sensor/header.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/diy/2023/03/12/smart-motion-sensor.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="canonical" href="https://blog.4dcu.be/diy/2023/03/12/smart-motion-sensor.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	<link rel="stylesheet" href="/css/main.css">
+
+	<!-- PageFind -->
+	<script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+
+	<script type='text/javascript'>
+	//<![CDATA[
+	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css");
+	//]]>
+	</Script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+	<div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+<li class="nav-link"><a href="#" class="nav-link-search"><i class="fa fa-search" style="width:16px;height:16px"></i></a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/motion_sensor.jpg" style="display:none" />
+<div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2023-03-12-smart-motion-sensor/header.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Using a Smart Motion Sensor with Home Assistant</h1>
+			
+      <p class="info"><em></em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted March 12, 2023 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/diy">Diy</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>If you’re looking for a straightforward yet powerful method to safeguard your home or office, a smart motion sensor 
+linked to <a href="https://www.home-assistant.io/">Home Assistant</a> might be the perfect solution for you. This way, you can establish a basic alarm 
+system that can recognize and inform you of any unanticipated movements in your area. Regardless of whether you’re 
+present or not, you can rest easy knowing that your property is being watched over around the clock. This article will 
+demonstrate how to create this setup. Also for those wanting to use the sensor to switch on/off a light this post can
+be of value.</p>
+
+<p><a href="/assets/posts/2023-03-12-smart-motion-sensor/sensor_front.jpg" class="lightgallery-link" data-sub-html="Picture of the motion sensor we'll be adding to Home Assistant">
+<img src="/assets/posts/2023-03-12-smart-motion-sensor/sensor_front.jpg" alt="Picture of the motion sensor we'll be adding to Home Assistant" height="800" width="1200" data-src="/assets/posts/2023-03-12-smart-motion-sensor/sensor_front.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="getting-started">Getting started</h2>
+
+<p>Before you dive in, it’s important to check out our previous posts on “<a href="/diy/2020/09/20/MQTT.html">getting Home Assistant up and running with MQTT and ZigBee</a>” as a starting point. Once you’ve got that set up, you can follow along with our working installation of 
+<a href="https://www.home-assistant.io/">Home Assistant</a> with <a href="https://www.home-assistant.io/integrations/mqtt/">MQTT</a> and <a href="https://www.zigbee2mqtt.io/guide/usage/integrations/home_assistant.html">ZigBee2MQTT</a> already up and running. To get started, all you need are some 
+ZigBee-compatible motion sensors. I opted for one from SilverCrest that I found on discount at the 
+local grocery store, but other options should work just as well.</p>
+
+<p>To begin, simply follow the instructions that come with your sensor to <a href="/diy/2021/04/28/MQTT-Ikea-Tradfri.html">pair it with HA</a> Once you’re connected, 
+give your sensor an appropriate name (I went with <code class="language-plaintext highlighter-rouge">Motion Sensor Test</code>). Then, head to
+<code class="language-plaintext highlighter-rouge">Settings</code> &gt; <code class="language-plaintext highlighter-rouge">Devices &amp; Services</code> and click <code class="language-plaintext highlighter-rouge">Configure</code> in the <code class="language-plaintext highlighter-rouge">Mosquitto broker</code> panel. Here, you 
+can listen in on MQTT messages to verify that your device is working properly. To start listening, 
+simply enter the name of your device (<code class="language-plaintext highlighter-rouge">zigbee2mqtt/&lt;your sensor name&gt;</code>) and click <code class="language-plaintext highlighter-rouge">Start Listening</code>. Now, try 
+triggering the sensor by moving in front of it. If a message pops up on the screen, you know your sensor is correctly 
+connected to Home Assistant, and you’re ready to start automating your home.</p>
+
+<p><a href="/assets/posts/2023-03-12-smart-motion-sensor/001_sensor_working.png" class="lightgallery-link" data-sub-html="The motion sensor works correctly as the message is passed to the MQTT broker successfully">
+<img src="/assets/posts/2023-03-12-smart-motion-sensor/001_sensor_working.png" alt="The motion sensor works correctly as the message is passed to the MQTT broker successfully" height="483" width="624" class="small-image" data-src="/assets/posts/2023-03-12-smart-motion-sensor/001_sensor_working.png" loading="lazy" />
+</a></p>
+
+<h2 id="mqtt-messages-the-sensors-send">MQTT messages the sensors send</h2>
+
+<p>Here’s an example of a message that a motion sensor sends to MQTT. However, keep in mind that there are several
+different scenarios that can cause the sensor to broadcast a message:</p>
+
+<ul>
+  <li>If the sensor has been tripped, it will send an MQTT message that includes <code class="language-plaintext highlighter-rouge">"occupancy": true</code>. This will also 
+deactivate the sensor for a certain amount of time (three minutes for the model I’m using).</li>
+  <li>When the sensor reactivates after being tripped, it will send another MQTT message that includes <code class="language-plaintext highlighter-rouge">"occupancy": false</code>.</li>
+  <li>If someone tampers with the sensor by removing it from its socket, it will broadcast a message that includes
+<code class="language-plaintext highlighter-rouge">"tamper": true</code> as soon as the tamper button on the back of the sensor is released. (See the tamper button at the 
+back of the sensor below, this will trigger once it is no longer pressed)</li>
+  <li>As long as the tamper button remains unpressed, the sensor will repeat the message that includes <code class="language-plaintext highlighter-rouge">"tamper": true</code> every half hour.</li>
+</ul>
+
+<p><a href="/assets/posts/2023-03-12-smart-motion-sensor/sensor_back.jpg" class="lightgallery-link" data-sub-html="Backside of the sensor, shows the tamper button. As long as this is pressed the sensor is in it's holder and things are good. It will start sending message once this button is not pressed">
+<img src="/assets/posts/2023-03-12-smart-motion-sensor/sensor_back.jpg" alt="Backside of the sensor, shows the tamper button. As long as this is pressed the sensor is in it's holder and things are good. It will start sending message once this button is not pressed" height="800" width="1200" data-src="/assets/posts/2023-03-12-smart-motion-sensor/sensor_back.jpg" loading="lazy" />
+</a></p>
+
+<p>To trigger automations when motion is detected, we need a filter that only responds to messages that include 
+“occupancy”: true. By doing this, we can be sure that our automations are only triggered when the motion 
+sensor is actually detecting motion, rather than being activated by a tamper message or a reactivation message.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"battery"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"battery_low"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"linkquality"</span><span class="p">:</span><span class="w"> </span><span class="mi">63</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"occupancy"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tamper"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"voltage"</span><span class="p">:</span><span class="w"> </span><span class="mi">3000</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="creating-automations">Creating automations</h2>
+
+<p>Now that we have an understanding of the information that the sensor(s) will be transmitting and when, we can create 
+an automation. However, before setting this up as an alarm, I suggest doing some additional testing by simply counting 
+how many times the sensor is triggered each day. To do this, we will set up a counter in Home Assistant’s <code class="language-plaintext highlighter-rouge">configuration.yaml</code> 
+by adding the following code:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>counter:
+  motion_triggers:
+    initial: 0
+    step: 1
+
+</code></pre></div></div>
+
+<p>Once the file is saved and HA has been restarted, the counter will be enabled. Next, we’ll add two automations: 
+one that triggers each time an MQTT message from the sensor appears with <code class="language-plaintext highlighter-rouge">"occupancy": true</code> and increases our counter, 
+and a timer that resets the count every day at midnight. In recent versions of HA, this can easily be done from the 
+interface. Go to <code class="language-plaintext highlighter-rouge">Settings</code> &gt; <code class="language-plaintext highlighter-rouge">Automations &amp; Scenes</code> and click <code class="language-plaintext highlighter-rouge">Create Automation</code>.</p>
+
+<p><a href="/assets/posts/2023-03-12-smart-motion-sensor/002_sensor_automation.png" class="lightgallery-link" data-sub-html="Screenshot of Home Assistant UI to create the automation">
+<img src="/assets/posts/2023-03-12-smart-motion-sensor/002_sensor_automation.png" alt="Screenshot of Home Assistant UI to create the automation" height="1031" width="1081" data-src="/assets/posts/2023-03-12-smart-motion-sensor/002_sensor_automation.png" loading="lazy" />
+</a></p>
+
+<p>The trigger should be set to <strong>When an MQTT message has been received</strong>, and the topic should be set to 
+<code class="language-plaintext highlighter-rouge">zigbee2mqtt/&lt;your sensor name&gt;</code>. To avoid triggering on each message, we need a <strong>Template condition</strong> under 
+conditions, with <code class="language-plaintext highlighter-rouge">{{ trigger.payload_json.occupancy }}</code> as the <strong>Value template</strong>. This will filter the messages 
+from the sensor and only execute the actions on relevant messages. Finally, we add an action with a Service 
+<strong>Counter:Increment</strong>, which points to the counter we created in the previous step.</p>
+
+<p>To reset the counter, a second automation needs to be set up, as shown below:</p>
+
+<p><a href="/assets/posts/2023-03-12-smart-motion-sensor/003_reset_counter.png" class="lightgallery-link" data-sub-html="Automation to reset counter">
+<img src="/assets/posts/2023-03-12-smart-motion-sensor/003_reset_counter.png" alt="Automation to reset counter" height="951" width="1072" data-src="/assets/posts/2023-03-12-smart-motion-sensor/003_reset_counter.png" loading="lazy" />
+</a></p>
+
+<p>Let this run for a few days to check how well it works and if there are any false positives. A false positive could 
+cause unnecessary worry or actions if you are away from home. However, after testing, there were no unexpected triggers 
+during times when no one was at home or when we were sleeping.</p>
+
+<h2 id="setting-up-ha-as-an-alarm-system">Setting up HA as an alarm system</h2>
+
+<p>Now that we know how to increase a counter, we can also send a notification to a mobile device that has the
+Home Assistant app. The trigger and condition for this automation are the same as before, but we’ll change the action 
+to send a notification to my phone. If you have an audio output device that can start playing a noise,
+you could trigger that along with the notification.</p>
+
+<p><a href="/assets/posts/2023-03-12-smart-motion-sensor/004_notification.png" class="lightgallery-link" data-sub-html="Automation to send a notification to a cell phone when the sensor is triggered">
+<img src="/assets/posts/2023-03-12-smart-motion-sensor/004_notification.png" alt="Automation to send a notification to a cell phone when the sensor is triggered" height="1044" width="1075" data-src="/assets/posts/2023-03-12-smart-motion-sensor/004_notification.png" loading="lazy" />
+</a></p>
+
+<p>However, I don’t want to receive notifications every time I pass by the sensor myself. To avoid this, I added a few 
+items to the dashboard, so I can easily turn notifications on and off and keep an eye on the counter.</p>
+
+<p><a href="/assets/posts/2023-03-12-smart-motion-sensor/005_dashboard.png" class="lightgallery-link" data-sub-html="HA UI with graph for the counter and a button to arm the alarm">
+<img src="/assets/posts/2023-03-12-smart-motion-sensor/005_dashboard.png" alt="HA UI with graph for the counter and a button to arm the alarm" height="234" width="1016" data-src="/assets/posts/2023-03-12-smart-motion-sensor/005_dashboard.png" loading="lazy" />
+</a></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In conclusion, motion sensors are an affordable and effective way to emulate a security system with Home Assistant. We 
+can easily integrate these sensors into our system and use them to trigger various automations such as sending 
+notifications to our mobile devices, activating alarms, and tracking occupancy. This can provide some peace of mind 
+knowing that no unexpected visitors showed up during your holidays without breaking the bank.</p>
+
+<p>In addition to the benefits mentioned above, motion sensors have other practical uses in home automation. For example, 
+they can be used to turn on lights when someone enters a room and turn them off after a certain amount of time without 
+motion, which can save energy and money. They can also be used to adjust the thermostat based on whether a room is 
+occupied or not, which can lead to further energy savings.</p>
+
+<p>Overall, motion sensors are a versatile and affordable tool that can enhance the functionality of your home 
+automation system, while also providing added security and peace of mind. Whether you are a DIY enthusiast or a 
+seasoned home automation user, integrating motion sensors into your system is definitely worth considering.</p>
+
+<h2 id="disclaimer">Disclaimer</h2>
+
+<p>Although a smart motion sensor connected to Home Assistant can provide an easy and effective way to enhance your home or 
+office security, it’s important to note that these systems may have their limitations. While they can alert you to 
+unexpected movements, they may not be up to the same standards as professionally installed, dedicated alarm systems. 
+As such, it’s always wise to assess your security needs and consider consulting with a security expert to determine the 
+best solution for your specific circumstances.</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/home-assistant">home-assistant</a>,&nbsp;<a href="/tag/mqtt">MQTT</a>,&nbsp;<a href="/tag/zigbee">Zigbee</a>,&nbsp;<a href="/tag/yaml">yaml</a>,&nbsp;<a href="/tag/security">security</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa fa-coffee"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Using+a+Smart+Motion+Sensor+with+Home+Assistant&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2023%2F03%2F12%2Fsmart-motion-sensor.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Using+a+Smart+Motion+Sensor+with+Home+Assistant&u=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2023%2F03%2F12%2Fsmart-motion-sensor.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2023%2F03%2F12%2Fsmart-motion-sensor.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation" data-pagefind-ignore>
+		<span class="prev-post">
+			
+				<a href="/programming/2023/02/02/chatgpt-python-gui-app.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Can ChatGPT write a Python GUI app for me?</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa fa-coffee"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+		<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div>
+			<div class="site-navigation">
+
+				<p><strong>Site Map</strong></p>
+				<ul class="pages">
+					
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+				</ul>
+				<br />
+				<p><strong>Legal</strong></p>
+				<p><a href="/policy/">Privacy policy</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Contribute</strong></p>
+				<p><i class="fa fa-coffee"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+				
+				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
