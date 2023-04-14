@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>The Sound of Silence: Building a Quiet Mechanical Keyboard</title>
+  <meta name="description" content="Are you still typing away on a cheap rubber dome keyboard? If so, you might be missing out on the satisfying and  efficient experience of using a mechanical ...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2023">
+  
+
+  <!-- External libraries -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Are you still typing away on a cheap rubber dome keyboard? If so, you might be missing out on the satisfying and  efficient experience of using a mechanical ..." />
+  <meta property="og:url" content="https://blog.4dcu.be/diy/2023/04/14/silent-mechanical-keyboard.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="The Sound of Silence: Building a Quiet Mechanical Keyboard" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2023-04-14-silent-mechanical-keyboard/header.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="The Sound of Silence: Building a Quiet Mechanical Keyboard">
+  <meta name="twitter:description" content="Are you still typing away on a cheap rubber dome keyboard? If so, you might be missing out on the satisfying and  efficient experience of using a mechanical ...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2023-04-14-silent-mechanical-keyboard/header.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/diy/2023/04/14/silent-mechanical-keyboard.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="canonical" href="https://blog.4dcu.be/diy/2023/04/14/silent-mechanical-keyboard.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	<link rel="stylesheet" href="/css/main.css">
+
+	<!-- PageFind -->
+	<script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+
+	<script type='text/javascript'>
+	//<![CDATA[
+	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css");
+	//]]>
+	</Script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+	<div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+<li class="nav-link"><a href="#" class="nav-link-search"><i class="fa fa-search" style="width:16px;height:16px"></i></a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/id75_keyboard.jpg" style="display:none" />
+<div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2023-04-14-silent-mechanical-keyboard/header.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">The Sound of Silence: Building a Quiet Mechanical Keyboard</h1>
+			
+      <p class="info"><em></em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted April 14, 2023 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/diy">Diy</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>Are you still typing away on a cheap rubber dome keyboard? If so, you might be missing out on the satisfying and 
+efficient experience of using a mechanical keyboard. I’ve been using my <a href="/diy/2020/05/01/Mechanical-Keyboard.html">own homemade mechanical keyboard</a> for 
+years now, and I can’t imagine going back. Furthermore, the 60% size is perfect for keeping my mouse close 
+and reducing unnecessary hand movements, but the sound can be a drawback. That’s why I’ve spent some time exploring 
+quieter options that still deliver the tactile response I love. Keep reading to learn more about how I build a much
+quieter mechanical keyboard.</p>
+
+<p><a href="/assets/posts/2023-04-14-silent-mechanical-keyboard/completed.jpg" class="lightgallery-link" data-sub-html="A silent mechanical keyboard based on the id75 board">
+<img src="/assets/posts/2023-04-14-silent-mechanical-keyboard/completed.jpg" alt="A silent mechanical keyboard based on the id75 board" height="800" width="1200" data-src="/assets/posts/2023-04-14-silent-mechanical-keyboard/completed.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="what-makes-mechanical-keyboards-loud">What makes mechanical keyboards loud?</h2>
+
+<p>What sets mechanical keyboards apart from their rubber dome counterparts is the use of individual switches for each key. 
+These switches consist of a spring and a stem that, when pressed, complete an electrical circuit and register the 
+keystroke. The result is a tactile and audible response that helps you know when a key has been successfully pressed.
+Additionally, extra is noise created by the stabilizers under larger keys such as the spacebar and the shift key. These 
+stabilizers are necessary to ensure that these keys depress evenly from all sides, but they add extra 
+components that can rattle.</p>
+
+<h2 id="picking-the-right-components-to-avoid-noise">Picking the right components to avoid noise</h2>
+
+<p>Silent switches can significantly reduce the sound of key presses without sacrificing the tactile feedback. Another 
+option is to switch to an ortholinear keyboard, which uses a grid layout that eliminates the need for stabilizers 
+as there are no large keys. This design also allows for a more ergonomic typing experience, as your fingers move 
+less to reach different keys. Adding O-rings to the keycaps or foam padding to the case can further dampen the sound 
+of the switches and stabilizers. By combining these methods, you can achieve a nearly silent typing experience 
+that won’t disturb your coworkers or housemates.</p>
+
+<h2 id="the-parts">The Parts</h2>
+
+<ul>
+  <li><strong>ID75</strong> Hot Swappable PCB with aluminum backplate</li>
+  <li>Outemu <strong>Silent</strong> Lemon Tactile <strong>Switches</strong> (You’ll need 75 + a few spare ones just in case)</li>
+  <li><strong>Foam padding</strong> to add between backplate and pcb</li>
+  <li>A set of <strong>XDA profile</strong> keycaps</li>
+  <li>Rubber <strong>O-rings</strong> to put on the keycaps (75, one for each keycap)</li>
+  <li>A <strong>case</strong> you like (most 60% cases will work with the ID75 but might need some modification)</li>
+  <li>A keycap puller and a switch puller (usually included with a keycaps and switches respectively)</li>
+</ul>
+
+<p>All parts (except the rubber O-rings) are shown above, the foam padding intended to be used below the pcb however wasn’t 
+a good fit with the case and ultimately wasn’t used. The standard 60% case did require some standoffs to be 
+removed and a bit of plastic that was pushing the ID75’s reset button to be trimmed.</p>
+
+<p><a href="/assets/posts/2023-04-14-silent-mechanical-keyboard/parts.jpg" class="lightgallery-link" data-sub-html="An overview of all compontens needed to build a quiet mechanical keyboard">
+<img src="/assets/posts/2023-04-14-silent-mechanical-keyboard/parts.jpg" alt="An overview of all compontens needed to build a quiet mechanical keyboard" height="800" width="1200" data-src="/assets/posts/2023-04-14-silent-mechanical-keyboard/parts.jpg" loading="lazy" />
+</a></p>
+
+<p>Note that with XDA profile switches there are no differences between keys on different rows of the keyboard. They are 
+all identical in shape. Having all caps in the same shape allows you to get a bit creative where you put which keys, 
+without having to worry about the keys being the right shape.</p>
+
+<h2 id="the-build">The build</h2>
+
+<p>As this board is hot swappable, switches can simply be pushed in, no soldering required. Simply put a few switches in 
+the correct orientation in the corners of the backplate, put the foam in the right position, snap this into the pcb and
+start pushing in more switches. Do make sure that the pins of the switches are nice and straight! If they are misaligned
+you will bend them beyond repair and the switch will be unusable with hot swappable pcb. Or worse, you might damage the
+socket on the pcb. Be careful and make sure you have a few spare switches.</p>
+
+<p><a href="/assets/posts/2023-04-14-silent-mechanical-keyboard/installing_switches.jpg" class="lightgallery-link" data-sub-html="the backplate held in place on the pcb by a few initial switches">
+<img src="/assets/posts/2023-04-14-silent-mechanical-keyboard/installing_switches.jpg" alt="the backplate held in place on the pcb by a few initial switches" height="800" width="1200" data-src="/assets/posts/2023-04-14-silent-mechanical-keyboard/installing_switches.jpg" loading="lazy" />
+</a></p>
+
+<p>Once all switches are in place, connect the board and test if all switches are functioning. If not, use the switch puller
+to pull that switch from the keyboard and install another one.</p>
+
+<p><a href="/assets/posts/2023-04-14-silent-mechanical-keyboard/more_switches.jpg" class="lightgallery-link" data-sub-html="More switches being added to the mechanical keyboard">
+<img src="/assets/posts/2023-04-14-silent-mechanical-keyboard/more_switches.jpg" alt="More switches being added to the mechanical keyboard" height="800" width="1200" data-src="/assets/posts/2023-04-14-silent-mechanical-keyboard/more_switches.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="the-layout">The layout</h2>
+
+<p>The combination of XDA profile keycaps and an ortholinear board allow you to put any key anywhere on the board. So any
+layout can be achieved. While it seems most adhere to a layout similar to qwerty (which I would recommend not to unlearn
+typing on a normal keyboard and run into issues when using a laptop), even there you have multiple options. Once you 
+have decided which layout to try, you can map the keys using the <a href="https://usevia.app/">VIA software</a>. This is a straightforward process that 
+won’t pose much of a challenge if you made it up to this point. Use <a href="/assets/posts/2023-04-14-silent-mechanical-keyboard/idobao_id75.layout2.json">this json file</a>
+if you want to have the same layout I’ve landed on.</p>
+
+<p><a href="/assets/posts/2023-04-14-silent-mechanical-keyboard/layout.png" class="lightgallery-link" data-sub-html="screenshot of the VIA app with a qwerty style layout for the id75 board">
+<img src="/assets/posts/2023-04-14-silent-mechanical-keyboard/layout.png" alt="screenshot of the VIA app with a qwerty style layout for the id75 board" height="333" width="856" data-src="/assets/posts/2023-04-14-silent-mechanical-keyboard/layout.png" loading="lazy" />
+</a></p>
+
+<h2 id="how-loud-is-it">How loud is it?</h2>
+
+<p>In the absence of a proper decibel meter, I had to rely on an app on my cell phone to make an objective measurement of 
+the sound level. Although I do not expect it to be highly accurate, the measurements should be comparable and 
+indicative of the relative loudness of different keyboards. To conduct the test, I simply placed the phone running the app next 
+to the keyboard and typed on <a href="https://www.keybr.com/">keybr.com</a> at a moderate speed for a minute. This ensured 
+that I would be typing at roughly the same speed on each keyboard. The results were astounding - the difference 
+in sound level between the keyboards was remarkable!</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Keyboard</th>
+      <th>Average</th>
+      <th>Peak</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>My old mechanical keyboard</td>
+      <td>30.4 dB</td>
+      <td>56.9 dB</td>
+    </tr>
+    <tr>
+      <td>Cheap rubber dome keyboard</td>
+      <td>25.0 dB</td>
+      <td>42.7 dB</td>
+    </tr>
+    <tr>
+      <td>Logitech K400</td>
+      <td>21.5 dB</td>
+      <td>39.5 dB</td>
+    </tr>
+    <tr>
+      <td>Silent mechanical keyboard</td>
+      <td>20.3 dB</td>
+      <td>32.0 dB</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This keyboard build is impressively quiet, emitting 10 decibels less noise than the average keyboard. Compared to a 
+typical mechanical keyboard that emits over 20 decibels, the difference is quite significant. It’s the ideal solution 
+for those who want to type away without disturbing their coworkers or loved ones, or for those who simply prefer a 
+quieter typing experience.</p>
+
+<p><a href="/assets/posts/2023-04-14-silent-mechanical-keyboard/top.jpg" class="lightgallery-link" data-sub-html="A silent mechanical keyboard based on the id75 board">
+<img src="/assets/posts/2023-04-14-silent-mechanical-keyboard/top.jpg" alt="A silent mechanical keyboard based on the id75 board" height="800" width="1200" data-src="/assets/posts/2023-04-14-silent-mechanical-keyboard/top.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Building a quiet mechanical keyboard is absolutely doable and the results speak for themselves. The tactile 
+feedback of a mechanical keyboard remain, but the sound is drastically reduced. When done right, 
+it’s even possible to build a keyboard that’s quieter than rubber dome keyboards while providing a much more satisfying 
+typing experience.</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/mechanical-keyboard">mechanical-keyboard</a>,&nbsp;<a href="/tag/soldering">soldering</a>,&nbsp;<a href="/tag/electronics">electronics</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa fa-coffee"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=The+Sound+of+Silence%3A+Building+a+Quiet+Mechanical+Keyboard&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2023%2F04%2F14%2Fsilent-mechanical-keyboard.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=The+Sound+of+Silence%3A+Building+a+Quiet+Mechanical+Keyboard&u=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2023%2F04%2F14%2Fsilent-mechanical-keyboard.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2023%2F04%2F14%2Fsilent-mechanical-keyboard.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation" data-pagefind-ignore>
+		<span class="prev-post">
+			
+				<a href="/diy/2023/03/12/smart-motion-sensor.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Using a Smart Motion Sensor with Home Assistant</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa fa-coffee"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+		<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div>
+			<div class="site-navigation">
+
+				<p><strong>Site Map</strong></p>
+				<ul class="pages">
+					
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+				</ul>
+				<br />
+				<p><strong>Legal</strong></p>
+				<p><a href="/policy/">Privacy policy</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Contribute</strong></p>
+				<p><i class="fa fa-coffee"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+				
+				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
