@@ -7,7 +7,7 @@ author: Sebastian Proost
 categories: diy
 tags:	mechanical-keyboard soldering electronics
 cover:  "/assets/posts/2023-04-14-silent-mechanical-keyboard/completed.jpg"
-thumbnail: "/assets/images/thumbnails/id75_keyboard.jpg"
+thumbnail: "/assets/images/thumbnails/id75_keyboard2.jpg"
 gallery_items:
   - image: "/assets/posts/2023-04-14-silent-mechanical-keyboard/closeup.jpg"
     gallery_image: "/assets/images/gallery/silent_mechanical_keyboard.jpg"
