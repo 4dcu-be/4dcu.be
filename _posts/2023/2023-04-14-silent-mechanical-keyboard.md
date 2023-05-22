@@ -118,5 +118,8 @@ feedback of a mechanical keyboard remain, but the sound is drastically reduced. 
 it's even possible to build a keyboard that's quieter than rubber dome keyboards while providing a much more satisfying 
 typing experience.
 
+**Update**: Changed the layout a little, using my thumb for backspace wasn't working and the RGB controls are now 
+better. The [updated json file](/assets/posts/2023-04-14-silent-mechanical-keyboard/idobao_id75.layout3.json) is available for download.
+
 [own homemade mechanical keyboard]: {% post_url 2020/2020-05-01-Mechanical-Keyboard %}
 [keybr.com]: https://www.keybr.com/
