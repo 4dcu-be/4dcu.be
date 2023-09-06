@@ -1,3 +1,5 @@
+[![pages-build-deployment](https://github.com/4dcu-be/4dcu.be/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/4dcu-be/4dcu.be/actions/workflows/pages/pages-build-deployment)
+
 # 4DCu.be
 
 ![sticker](./assets/sticker_medium.png)
