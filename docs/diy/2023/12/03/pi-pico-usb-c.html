@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Simple USB Type-C Upgrade for the Raspberry Pi Pico</title>
+  <meta name="description" content="With USB type C ports now commonplace, keeping micro-USB cables around for some devices can be a bit of a nuisance.The  convenience of a single, reversible c...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2023">
+  
+
+  <!-- External libraries -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="With USB type C ports now commonplace, keeping micro-USB cables around for some devices can be a bit of a nuisance.The  convenience of a single, reversible c..." />
+  <meta property="og:url" content="https://blog.4dcu.be/diy/2023/12/03/pi-pico-usb-c.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Simple USB Type-C Upgrade for the Raspberry Pi Pico" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2023-12-03-pi-pico-usb-c/pico_close.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Simple USB Type-C Upgrade for the Raspberry Pi Pico">
+  <meta name="twitter:description" content="With USB type C ports now commonplace, keeping micro-USB cables around for some devices can be a bit of a nuisance.The  convenience of a single, reversible c...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2023-12-03-pi-pico-usb-c/pico_close.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/diy/2023/12/03/pi-pico-usb-c.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="canonical" href="https://blog.4dcu.be/diy/2023/12/03/pi-pico-usb-c.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	<link rel="stylesheet" href="/css/main.css">
+
+	<!-- PageFind -->
+	<script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+
+	<script type='text/javascript'>
+	//<![CDATA[
+	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css");
+	//]]>
+	</Script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+	<div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+<li class="nav-link"><a href="#" class="nav-link-search"><i class="fa fa-search" style="width:16px;height:16px"></i></a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/pico_usbc_header.jpg" style="display:none" />
+<div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2023-12-03-pi-pico-usb-c/pico_close.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Simple USB Type-C Upgrade for the Raspberry Pi Pico</h1>
+			
+      <p class="info"><em>DIY Today - Future-Proof Tomorrow</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted December 3, 2023 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/diy">Diy</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>With USB type C ports now commonplace, keeping micro-USB cables around for some devices can be a bit of a nuisance.The 
+convenience of a single, reversible cable for nearly all your devices is undeniable, and in some devices the micro-USB 
+port can actually be replaced with a USB type C one… given you aren’t afraid of a little soldering. Before tackling 
+more intricate electronics, let’s start small — a simple mod for the Raspberry Pi Pico the perfect way to get started.</p>
+
+<h2 id="requirements">Requirements</h2>
+
+<p>This project calls for some essential soldering tools. A soldering iron, sponge, and solder should be enough to get you started. Along with these tools, you’ll need a few additional components:</p>
+
+<ul>
+  <li>a Raspberry Pi Pico</li>
+  <li>four pieces of electrical wire (which I salvaged from an old USB cable)</li>
+  <li>a female USB Type-C breakout board that exposes the ground (GND), voltage (V), data plus (D+), and data minus (D-) pins (Note: If you plan to use a USB-C to USB-C cable, it should support power delivery.)</li>
+</ul>
+
+<p>Selecting the right breakout board is crucial, as not all boards are suitable for this project. For this modification, search for a board that exposes the GND, V, D+, and D- pins from the female USB Type-C connector. While USB Type-C connectors have many additional pins, only these four are necessary for connecting to a legacy USB device.</p>
+
+<p>If you’re using a USB-A to USB-C cable to connect your device, any board exposing the pertinent pins should suffice. However, if a USB-C to USB-C cable is utilized, the two connected devices must perform a digital “handshake” before the power is delivered from the source device to the sink device. In such cases, two resistors are needed on the breakout board to signal to the source device that our Pi Pico requires the standard 5V.</p>
+
+<p>Initially, I acquired breakout boards without the necessary resistors, which could be an issue for those intending to use USB-C to USB-C connections. Fortunately, since I’m using a USB-A to USB-C cable for development on this Pi Pico, the boards I have will suffice. Nonetheless, I recommend obtaining a breakout board that is properly configured for power delivery. This way, it will be compatible with any USB-C cable or device in the foreseeable future. (I’ve ordered new ones for future projects already)</p>
+
+<p><a href="/assets/posts/2023-12-03-pi-pico-usb-c/usbc_close.jpg" class="lightgallery-link" data-sub-html="A female USB type C breakout board exposing the ground, voltage and data pins. All wired up and ready to be used.">
+<img src="/assets/posts/2023-12-03-pi-pico-usb-c/usbc_close.jpg" alt="A female USB type C breakout board exposing the ground, voltage and data pins. All wired up and ready to be used." height="800" width="1200" data-src="/assets/posts/2023-12-03-pi-pico-usb-c/usbc_close.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="connecting-the-usb-type-c-breakout-board-to-the-raspberry-pi-pico">Connecting the USB Type-C Breakout Board to the Raspberry Pi Pico</h2>
+
+<p>When adapting most gadgets, you will need to desolder the existing micro-USB connector to attach the new USB Type-C breakout board. Luckily, with the Raspberry Pi Pico, there’s a more straightforward route.</p>
+
+<p>The Pi Pico conveniently provides Test Pads on its underside, labeled TP1 through TP6. These accessible pads grant direct connections to essential lines; ground (TP1), data minus (TP2), and data plus (TP3). The voltage we can provide by soldering to the VBUS pin on the Pi Pico’s GPIO. This hassle-free approach allows us to integrate the USB Type-C breakout board effortlessly, without the need to remove the original micro-USB port.</p>
+
+<p><a href="/assets/posts/2023-12-03-pi-pico-usb-c/pico_close.jpg" class="lightgallery-link" data-sub-html="Raspberry Pi Pico with the wires soldered onto the testpads connecting it to the USB C breakout board">
+<img src="/assets/posts/2023-12-03-pi-pico-usb-c/pico_close.jpg" alt="Raspberry Pi Pico with the wires soldered onto the testpads connecting it to the USB C breakout board" height="800" width="1200" data-src="/assets/posts/2023-12-03-pi-pico-usb-c/pico_close.jpg" loading="lazy" />
+</a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Breakout Board Pin</th>
+      <th>Raspberry Pi Pico Connection</th>
+      <th>USB Wire Color</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GND</td>
+      <td>TP1 (Ground)</td>
+      <td>Black</td>
+    </tr>
+    <tr>
+      <td>V</td>
+      <td>VBUS (PIN 40)</td>
+      <td>Red</td>
+    </tr>
+    <tr>
+      <td>D+</td>
+      <td>TP3 (Data Plus)</td>
+      <td>Green</td>
+    </tr>
+    <tr>
+      <td>D-</td>
+      <td>TP2 (Data Minus)</td>
+      <td>White</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>And there you have it! With a few simple connections the Raspberry Pi Pico is transformed into a device with modern 
+USB Type-C compatibility. It’s a straightforward upgrade that adds functionality and convenience with just a few 
+simple soldering steps. Make sure to double-check your connections before testing!</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Upgrading a Raspberry Pi Pico to sport a USB Type-C port is a clear example of how a little know-how and soldering can 
+modernize even the simplest of devices. It’s an accessible project that not only enhances connectivity but also serves 
+as a foundation for those looking to delve deeper into the world of DIY electronics. While our example with the Pi Pico 
+was relatively easy, due to the test pad providing easy-access to solder on, other devices might present more of a 
+challenge. Each gadget will have its own set of intricacies and might require additional steps or precautions. This 
+project is a perfect starting point to build your confidence and skills before you graduate to tackling more complex 
+hardware upgrades. Remember to always research thoroughly, take safety precautions, and most importantly, enjoy the 
+process of giving your tech a personal touch. Happy modding!</p>
+
+<p><a href="/assets/posts/2023-12-03-pi-pico-usb-c/full_view.jpg" class="lightgallery-link" data-sub-html="Both boards connected together">
+<img src="/assets/posts/2023-12-03-pi-pico-usb-c/full_view.jpg" alt="Both boards connected together" height="800" width="1200" data-src="/assets/posts/2023-12-03-pi-pico-usb-c/full_view.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="disclaimer">Disclaimer</h2>
+
+<p>Please note that while we strive to provide detailed and clear instructions, we are not responsible for any damage that may occur to your electronics during the modification process. Attempting such modifications requires careful handling and a certain level of proficiency with electronic components and soldering. If you choose to undertake this project, you do so at your own risk. Always ensure you are fully informed and equipped to carry out the task safely before proceeding.</p>
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/raspberry-pi">raspberry-pi</a>,&nbsp;<a href="/tag/soldering">soldering</a>,&nbsp;<a href="/tag/electronics">electronics</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa fa-coffee"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Simple+USB+Type-C+Upgrade+for+the+Raspberry+Pi+Pico&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2023%2F12%2F03%2Fpi-pico-usb-c.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Simple+USB+Type-C+Upgrade+for+the+Raspberry+Pi+Pico&u=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2023%2F12%2F03%2Fpi-pico-usb-c.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2023%2F12%2F03%2Fpi-pico-usb-c.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation" data-pagefind-ignore>
+		<span class="prev-post">
+			
+				<a href="/aiart/2023/09/03/comfyui-sdxl-workflows.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">ComfyUI and SDXL: New Workflows</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa fa-coffee"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+		<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div>
+			<div class="site-navigation">
+
+				<p><strong>Site Map</strong></p>
+				<ul class="pages">
+					
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+				</ul>
+				<br />
+				<p><strong>Legal</strong></p>
+				<p><a href="/policy/">Privacy policy</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Contribute</strong></p>
+				<p><i class="fa fa-coffee"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+				
+				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
