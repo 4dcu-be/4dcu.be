@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Smart Air Quality Monitoring using an IKEA Vindriktning with ESP8266 & BME680</title>
+  <meta name="description" content="Effective insulation is key in modern homes, offering comfort and energy efficiency. However, it often comes with a  need for better ventilation to maintain ...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2024">
+  
+
+  <!-- External libraries -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Effective insulation is key in modern homes, offering comfort and energy efficiency. However, it often comes with a  need for better ventilation to maintain ..." />
+  <meta property="og:url" content="https://blog.4dcu.be/diy/2024/01/21/diy-smart-air-quality-monitor-ikea-vindriktning-esp8266-bme680.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Smart Air Quality Monitoring using an IKEA Vindriktning with ESP8266 & BME680" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2024-01-21-air-quality-sensor/ikea_vindriktning_with_esp8266_bme680.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Smart Air Quality Monitoring using an IKEA Vindriktning with ESP8266 & BME680">
+  <meta name="twitter:description" content="Effective insulation is key in modern homes, offering comfort and energy efficiency. However, it often comes with a  need for better ventilation to maintain ...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2024-01-21-air-quality-sensor/ikea_vindriktning_with_esp8266_bme680.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/diy/2024/01/21/diy-smart-air-quality-monitor-ikea-vindriktning-esp8266-bme680.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="canonical" href="https://blog.4dcu.be/diy/2024/01/21/diy-smart-air-quality-monitor-ikea-vindriktning-esp8266-bme680.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	<link rel="stylesheet" href="/css/main.css">
+
+	<!-- PageFind -->
+	<script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+
+	<script type='text/javascript'>
+	//<![CDATA[
+	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css");
+	//]]>
+	</Script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+	<div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+<li class="nav-link"><a href="#" class="nav-link-search"><i class="fa fa-search" style="width:16px;height:16px"></i></a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/ikea_vindriktning_hack.jpg" style="display:none" />
+<div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2024-01-21-air-quality-sensor/ikea_vindriktning_with_esp8266_bme680.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Smart Air Quality Monitoring using an IKEA Vindriktning with ESP8266 & BME680</h1>
+			
+      <p class="info"><em>A Step-by-Step Guide</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted January 21, 2024 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/diy">Diy</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>Effective insulation is key in modern homes, offering comfort and energy efficiency. However, it often comes with a 
+need for better ventilation to maintain a healthy air quality. In this guide, we’re focusing on an innovative, 
+cost-effective way to enhance your home’s air quality using some clever technology. We’ll show you how to combine the 
+<a href="https://www.ikea.com/be/en/p/vindriktning-air-quality-sensor-70498242/">IKEA Vindriktning</a> air quality monitor with an ESP8266 microcontroller and a BME680 Volatile Organic Compounds (VOC) sensor (which includes CO<sub>2</sub>). With this IKEA-hack, 
+you’ll be able to make informed decisions about when to open windows, increase ventilation, or change filters, all 
+based on accurate data. Plus, it integrates smoothly with smart home systems like <a href="https://www.home-assistant.io/">Home Assistant</a> using <a href="https://esphome.io/">ESPHome</a>.</p>
+
+<p>In this guide, we’re diving deep into every nook and cranny of this project. We’ll start from the ground up with the 
+electronics, smoothly sail through the integration with Home Assistant (HA), and even sprinkle in some savvy tips 
+on how to interpret the results.</p>
+
+<h2 id="what-you-need">What you need?</h2>
+
+<p>While this concept of enhancing the IKEA Vindriktning isn’t exactly breaking new ground – there’s already a plethora 
+of information and various hacks out there – the advantage of being late to the party is that I can cherry-pick the best 
+solution for me. After some digging, I settled on the Wemos D1 Mini Pro. It’s a nifty little microcontroller based on the 
+ESP8266. What makes it a gem for this project is its compact size, perfect for fitting snugly inside the Vindriktning 
+case, not to mention its wallet-friendly price. Then there’s the Bosch BME680. This nifty little sensor brings you 
+temperature, barometric pressure, and moisture readings in a very small package, but its real star feature is the 
+VOC sensor. And the best part? It seamlessly connects to the ESP8266 using a simple four-wire I2C setup, making 
+integration a breeze.</p>
+
+<ol>
+  <li>
+    <p><strong>IKEA Vindriktning Air Quality Monitor</strong>: Don’t forget, it needs its own power supply. So, grab a USB-C cable and a compatible power adapter (these aren’t included with the Vindriktning, so make sure you have these handy).</p>
+  </li>
+  <li>
+    <p><strong>Wemos D1 Mini Pro Microcontroller Board</strong>: This is the brains of the operation. It’s compact, efficient, and just what you need for this project.</p>
+  </li>
+  <li>
+    <p><strong>Bosch BME680 Sensor Board</strong>: This is your go-to for monitoring temperature, pressure, humidity, and VOC levels. It’s a crucial component for getting those detailed air quality readings.</p>
+  </li>
+  <li>
+    <p><strong>Wires</strong>: I repurposed some from an old USB cable. It’s a great way to recycle and save a few bucks!</p>
+  </li>
+  <li>
+    <p><strong>USB Cable for the D1 Mini Pro</strong>: Now, this depends on the version of your D1 Mini Pro. Some use micro-USB, others USB-C. Make sure to check which one you need!</p>
+  </li>
+  <li>
+    <p><strong>Soldering Gear</strong>: Arm yourself with a soldering iron that has temperature control. Don’t forget the solder, flux, and other essentials for a smooth soldering experience.</p>
+  </li>
+</ol>
+
+<p>The overall cost of this project can vary quite a bit depending on where you pick up your components. For me, a bit of 
+savvy shopping on AliExpress paid off – I scored the microcontroller and sensor for about $3 and $5, respectively. Toss 
+in the IKEA Vindriktning at $12, and you’re looking at a total spend of roughly $20-25. Now, here’s the kicker: 
+that’s about half the price of the most affordable smart air quality sensor I could find on the market!</p>
+
+<h2 id="connecting-the-esp8266-to-the-bme680">Connecting the ESP8266 to the BME680</h2>
+
+<p>Hooking up the BME680 sensor board to our microcontroller is a pretty straightforward task, thanks to the I2C interface. 
+This nifty little protocol means we only need four wires to make the connection. Here’s how I set it up:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>D1 Mini Pin</th>
+      <th>BME680 Pin</th>
+      <th>Cable Color</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3V3</td>
+      <td>VCC</td>
+      <td>Red</td>
+    </tr>
+    <tr>
+      <td>G</td>
+      <td>GND</td>
+      <td>Black</td>
+    </tr>
+    <tr>
+      <td>D1</td>
+      <td>SDA</td>
+      <td>Green</td>
+    </tr>
+    <tr>
+      <td>D2</td>
+      <td>SCL</td>
+      <td>White</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>A piece of advice: aim for short and tidy wiring. In fact, I ended up revising my initial setup to shorten the wires 
+after taking the photo below. It’s all about keeping things organized and efficient inside the case to avoid 
+restricting airflow.</p>
+
+<p><a href="/assets/posts/2024-01-21-air-quality-sensor/esp8266_bme680_wired_up.jpg" class="lightgallery-link" data-sub-html="An D1 Mini Pro (ESP8266) board connected to the BME680 board">
+<img src="/assets/posts/2024-01-21-air-quality-sensor/esp8266_bme680_wired_up.jpg" alt="An D1 Mini Pro (ESP8266) board connected to the BME680 board" height="853" width="1280" data-src="/assets/posts/2024-01-21-air-quality-sensor/esp8266_bme680_wired_up.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="flashing-esphome">Flashing ESPHOME</h2>
+
+<p>Now’s the perfect time, while your ESP8266 is still accessible, to get 
+<a href="https://esphome.io/">ESPHome</a> up and running on your Wemos D1 Mini Pro. Setting this up is a breeze, especially if you’re using
+<a href="https://www.home-assistant.io/">Home Assistant</a>. Just hop over to their <a href="https://esphome.io/guides/getting_started_hassio">getting started guide</a>, 
+and hit the <strong>Show Add-on in My HA</strong> button. You’ll be prompted to confirm your HA instance’s URL before clicking 
+<strong>Open link</strong>. Once there, installing and configuring ESPHome is straightforward. Oh, and don’t forget to check the 
+<strong>Start on Boot</strong> and <strong>Watchdog</strong> options. They’re lifesavers for making sure ESPHome reboots as needed.</p>
+
+<p>Now, connect that D1 Mini to your computer using a USB cable. Then, make your way over to Home Assistant and look for 
+ESPHome in the sidebar. Click on <strong>NEW DEVICE</strong>, and give your device a name that makes sense for you; I went with 
+‘Living Room Sensor’. From there, just follow the on-screen instructions. When it asks, select the COM port that 
+matches your device (for me, it was COM6). This is going to flash a basic firmware onto your ESP8266. No hiccups? 
+Perfect! If all went smoothly here, feel free to skip the next section.</p>
+
+<h3 id="manual-setting-up-and-flashing-the-esp8266">Manual setting up and flashing the ESP8266</h3>
+
+<p>This didn’t work for me though (maybe because my Home Assistant is running on an ancient Raspberry Pi). 
+If you hit a snag like I did, it’s likely that the firmware isn’t compiling right on your Home Assistant device. 
+Fortunately, this can be done manually. Proceed with a <a href="https://esphome.io/guides/installing_esphome">manual installation of ESPHome</a>. 
+This got the command line version of ESPHome up and running on my computer.</p>
+
+<p>Now, to flash your device, create a configuration file (or use the one below), and get ready to use the two 
+commands below. These will compile new firmware with your configuration and send it straight to your device. 
+Heads up: the first upload has to be done via USB. But once you’ve done that, Over-the-Air updates can be used!</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>esphome compile living-room-sensor.yaml
+esphome upload living-room-sensor.yaml
+</code></pre></div></div>
+
+<p><strong>Note:</strong> In case you wish to add certain items, like the WiFi network and password as a secret, make sure to define those
+in a file <code class="language-plaintext highlighter-rouge">secrets.yaml</code> in the same folder as the configuration file you are compiling and uploading.</p>
+
+<p>Once your device is successfully running the new firmware, the next step is to add it to Home Assistant. In the ESPHome 
+section, click NEW DEVICE and enter the name you assigned in the yaml file. When asked, connect using the COM port. A 
+quick heads-up: you can skip the steps involving firmware compilation and uploading, as these aren’t necessary now.</p>
+
+<p>There’s just one more detail to attend to. It’s important to ensure that the yaml file on your device matches the one 
+in Home Assistant’s ESPHome add-on. To do this, go to the ESPHome section, select <strong>Edit</strong> on the device you just worked 
+on, replace the yaml file content with your updated version, and then hit <strong>Save</strong>. This step is required each time you 
+update the configuration, ensuring everything stays in sync.</p>
+
+<h2 id="connecting-the-ikea-vindriktning-to-the-d1-mini">Connecting the IKEA Vindriktning to the D1 Mini</h2>
+
+<p>The IKEA Vindriktning seems like it was almost made with DIY enthusiasts in mind. One look at the PCB, and you’ll 
+notice the clearly labeled test pads, which are a hacker’s dream. For our project, we need to focus on three critical 
+connections: +5V, GND, and REST. These will not only power up the ESP8266 but also transfer readings from the 
+Vindriktning’s PM1006 sensor to our microcontroller.</p>
+
+<p><a href="/assets/posts/2024-01-21-air-quality-sensor/ikea_vindriktning_pcb_test_pads.jpg" class="lightgallery-link" data-sub-html="Close-up of the test pads on the IKEA Vindriktning">
+<img src="/assets/posts/2024-01-21-air-quality-sensor/ikea_vindriktning_pcb_test_pads.jpg" alt="Close-up of the test pads on the IKEA Vindriktning" height="853" width="1280" data-src="/assets/posts/2024-01-21-air-quality-sensor/ikea_vindriktning_pcb_test_pads.jpg" loading="lazy" />
+</a></p>
+
+<p>Here is how I wired things up:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>D1 Mini Pin</th>
+      <th>IKEA Vindriktning</th>
+      <th>Cable Color</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>5V</td>
+      <td>+5V</td>
+      <td>Red</td>
+    </tr>
+    <tr>
+      <td>G</td>
+      <td>GND</td>
+      <td>Black</td>
+    </tr>
+    <tr>
+      <td>D7</td>
+      <td>REST</td>
+      <td>Green</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="/assets/posts/2024-01-21-air-quality-sensor/esp8266_connected_to_ikea_vindriktning.jpg" class="lightgallery-link" data-sub-html="IKEA Vindriktning, BME680 and D1 Mini Pro (ESP8266) ">
+<img src="/assets/posts/2024-01-21-air-quality-sensor/esp8266_connected_to_ikea_vindriktning.jpg" alt="IKEA Vindriktning, BME680 and D1 Mini Pro (ESP8266) " height="853" width="1280" data-src="/assets/posts/2024-01-21-air-quality-sensor/esp8266_connected_to_ikea_vindriktning.jpg" loading="lazy" />
+</a></p>
+
+<p>Consider using a bit of hot glue to secure the wires to the PCBs. It’s a simple step that can save you a lot of trouble 
+by relieving stress on the solder joints. It should also be noted that the Vindriktning uses 5V while the ESP8266 
+typically needs 3.3V, though as the ESP8266 is 5V resistant you can wire them up directly, however a voltage 
+divider or level shifter can be used to send the correct voltage to the ESP8266.</p>
+
+<h2 id="configuring-the-device">Configuring the device</h2>
+
+<p>Below, you’ll find my current configuration. If your wiring mirrors mine, feel free to use this as your template. But 
+hey, if you decided to march to the beat of your own drum and used different pins on the D1 Mini, make sure to adjust 
+the connections to the sensors accordingly. It’s also a smart move to personalize the <code class="language-plaintext highlighter-rouge">name</code> and <code class="language-plaintext highlighter-rouge">friendly_name</code> 
+settings. And while you’re at it, consider changing up the encryption key and OTA password for that extra layer of 
+security.</p>
+
+<p>Now, let’s talk about a crucial setting for the BME680: the <code class="language-plaintext highlighter-rouge">temperature_offset</code>. See, relative humidity readings are 
+closely tied to air temperature. But here’s the catch – if your BME680 is snuggled up next to devices that emit heat, 
+its sensor might read temperatures a tad higher than the actual room temperature. This can throw your readings 
+off-kilter. My advice? Keep an eye on the temperature readings for a bit. Compare them to another reliable thermometer – 
+maybe your home’s thermostat or another sensor. If you notice the BME680 consistently overshooting the mark, nudge that 
+<code class="language-plaintext highlighter-rouge">temperature_offset</code> value up. On my desk, with all components exposed, an offset of 2 or 3 degrees did the trick. 
+But once I packed everything into the case, I had to crank it up to 6 degrees to sync up with another sensor in the 
+same room.</p>
+
+<div class="language-yaml large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">esphome</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">living-room-sensor</span>
+  <span class="na">friendly_name</span><span class="pi">:</span> <span class="s">Living Room Sensor</span>
+
+<span class="na">esp8266</span><span class="pi">:</span>
+  <span class="na">board</span><span class="pi">:</span> <span class="s">d1_mini</span>
+
+<span class="c1"># Enable logging</span>
+<span class="na">logger</span><span class="pi">:</span>
+
+<span class="c1"># Enable Home Assistant API</span>
+<span class="na">api</span><span class="pi">:</span>
+  <span class="na">encryption</span><span class="pi">:</span>
+    <span class="na">key</span><span class="pi">:</span> <span class="s2">"</span><span class="s">r5e+0e+eigBjFpfNo+r/TIykX9lK40oG7+2NZ3RiG08="</span>
+
+<span class="na">ota</span><span class="pi">:</span>
+  <span class="na">password</span><span class="pi">:</span> <span class="s2">"</span><span class="s">eb24ad75972211d1fea73e45f5b90661"</span>
+
+<span class="na">wifi</span><span class="pi">:</span>
+  <span class="na">ssid</span><span class="pi">:</span> <span class="kt">!secret</span> <span class="s">wifi_ssid</span>
+  <span class="na">password</span><span class="pi">:</span> <span class="kt">!secret</span> <span class="s">wifi_password</span>
+
+  <span class="c1"># Enable fallback hotspot (captive portal) in case wifi connection fails</span>
+  <span class="na">ap</span><span class="pi">:</span>
+    <span class="na">ssid</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Living-Room-Sensor"</span>
+    <span class="na">password</span><span class="pi">:</span> <span class="kt">!secret</span> <span class="s">wifi_password</span>
+
+<span class="na">captive_portal</span><span class="pi">:</span>
+    
+    
+<span class="c1">## Serial Port for the IKEA Sensor</span>
+<span class="na">uart</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">rx_pin</span><span class="pi">:</span> <span class="s">D7</span>
+    <span class="c1"># tx_pin: D8</span>
+    <span class="na">baud_rate</span><span class="pi">:</span> <span class="m">9600</span>
+
+<span class="na">i2c</span><span class="pi">:</span>
+  <span class="c1">## I²C Port - For Temp/Humidity/Pressure &amp; CO²/VOC Sensors</span>
+  <span class="na">sda</span><span class="pi">:</span> <span class="s">D1</span>
+  <span class="na">scl</span><span class="pi">:</span> <span class="s">D2</span>
+  <span class="na">scan</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">bus_a</span>
+
+<span class="na">bme680_bsec</span><span class="pi">:</span>
+    <span class="c1"># id</span>
+    <span class="c1"># -----------</span>
+    <span class="c1"># Identifier for this component, useful when working with multiple devices.</span>
+    <span class="c1"># Must be unique, and can be used in the sensor sections to refer to the correct device.</span>
+    <span class="c1"># Default: auto-computed</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">bme680_internal</span>
+
+    <span class="c1"># i2c address</span>
+    <span class="c1"># -----------</span>
+    <span class="c1"># Common values are:</span>
+    <span class="c1"># - 0x76</span>
+    <span class="c1"># - 0x77</span>
+    <span class="c1"># Default: 0x76</span>
+    <span class="na">address</span><span class="pi">:</span> <span class="s">0x77</span>
+
+    <span class="c1"># Temperature offset</span>
+    <span class="c1"># ------------------</span>
+    <span class="c1"># Useful if device is in enclosure and reads too high</span>
+    <span class="c1"># For example, if it reads 5C too high, set this to 5</span>
+    <span class="c1"># This also corrects the relative humidity readings</span>
+    <span class="c1"># Default: 0</span>
+    <span class="na">temperature_offset</span><span class="pi">:</span> <span class="m">6</span>
+
+    <span class="c1"># IAQ calculation mode</span>
+    <span class="c1"># --------------------</span>
+    <span class="c1"># Available options:</span>
+    <span class="c1"># - static (for fixed position devices)</span>
+    <span class="c1"># - mobile (for on a person or other moveable devices)</span>
+    <span class="c1"># Default: static</span>
+    <span class="na">iaq_mode</span><span class="pi">:</span> <span class="s">static</span>
+
+    <span class="c1"># Sample rate</span>
+    <span class="c1"># -----------</span>
+    <span class="c1"># Available options:</span>
+    <span class="c1"># - lp (low power - samples every 3 seconds)</span>
+    <span class="c1"># - ulp (ultra-low power - samples every 5 minutes)</span>
+    <span class="c1"># Default: lp</span>
+    <span class="na">sample_rate</span><span class="pi">:</span> <span class="s">lp</span>
+
+    <span class="c1"># Interval at which to save BSEC state</span>
+    <span class="c1"># ------------------------------------</span>
+    <span class="c1"># Default: 6h</span>
+    <span class="na">state_save_interval</span><span class="pi">:</span> <span class="s">6h</span>
+
+<span class="na">sensor</span><span class="pi">:</span>
+  <span class="c1">## IKEA PMS 2.5um Sensor</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">pm1006</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">aq_sensor</span>
+    <span class="na">pm_2_5</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">IKEA</span><span class="nv"> </span><span class="s">2.5µg"</span>
+      
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">bme680_bsec</span>
+    <span class="c1"># ID of the bme680_bsec component to use for the next sensors.</span>
+    <span class="c1"># Useful when working with multiple devices</span>
+    <span class="na">bme680_bsec_id</span><span class="pi">:</span> <span class="s">bme680_internal</span>
+
+    <span class="na">temperature</span><span class="pi">:</span>
+      <span class="c1"># Temperature in °C</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">Temperature"</span>
+      <span class="na">sample_rate</span><span class="pi">:</span> <span class="s">lp</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+    <span class="na">pressure</span><span class="pi">:</span>
+      <span class="c1"># Pressure in hPa</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">Pressure"</span>
+      <span class="na">sample_rate</span><span class="pi">:</span> <span class="s">lp</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+    <span class="na">humidity</span><span class="pi">:</span>
+      <span class="c1"># Relative humidity %</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">Humidity"</span>
+      <span class="na">sample_rate</span><span class="pi">:</span> <span class="s">lp</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+    <span class="na">gas_resistance</span><span class="pi">:</span>
+      <span class="c1"># Gas resistance in Ω</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">Gas</span><span class="nv"> </span><span class="s">Resistance"</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+    <span class="na">iaq</span><span class="pi">:</span>
+      <span class="c1"># Indoor air quality value</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">IAQ"</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+    <span class="na">iaq_accuracy</span><span class="pi">:</span>
+      <span class="c1"># IAQ accuracy as a numeric value of 0, 1, 2, 3</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">Numeric</span><span class="nv"> </span><span class="s">IAQ</span><span class="nv"> </span><span class="s">Accuracy"</span>
+    <span class="na">co2_equivalent</span><span class="pi">:</span>
+      <span class="c1"># CO2 equivalent estimate in ppm</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">CO2</span><span class="nv"> </span><span class="s">Equivalent"</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+    <span class="na">breath_voc_equivalent</span><span class="pi">:</span>
+      <span class="c1"># Volatile organic compounds equivalent estimate in ppm</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">Breath</span><span class="nv"> </span><span class="s">VOC</span><span class="nv"> </span><span class="s">Equivalent"</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+
+<span class="na">text_sensor</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">bme680_bsec</span>
+    <span class="na">iaq_accuracy</span><span class="pi">:</span>
+      <span class="c1"># IAQ accuracy as a text value of Stabilizing, Uncertain, Calibrating, Calibrated</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">IAQ</span><span class="nv"> </span><span class="s">Accuracy"</span>
+
+</code></pre></div></div>
+
+<p>Once everything is working, you can put everything back into the Vindriktning’s case, holding the new sensor 
+and esp8266 in place with a bit of hot glue.</p>
+
+<h2 id="setting-up-home-assistant">Setting up Home Assistant</h2>
+
+<p>With all the previous steps completed, ESPHome should now be successfully sharing sensor data with Home Assistant. 
+The next step is setting up a dashboard card to display this data. Below is a screenshot of my setup as an example. 
+It features temperature and humidity trends over the last two days, as well as particulate matter (PM2.5) and CO<sub>2</sub> 
+readings spanning the last two hours. I’ve included the yaml code for this card below, but remember to adjust the device 
+names to fit your own configuration.</p>
+
+<p><a href="/assets/posts/2024-01-21-air-quality-sensor/HA_screenshot.png" class="lightgallery-link" data-sub-html="Screenshot of the card in Home Assistant showing all data from the upgraded Vindriktning sensor">
+<img src="/assets/posts/2024-01-21-air-quality-sensor/HA_screenshot.png" alt="Screenshot of the card in Home Assistant showing all data from the upgraded Vindriktning sensor" height="748" width="496" class="small-image" data-src="/assets/posts/2024-01-21-air-quality-sensor/HA_screenshot.png" loading="lazy" />
+</a></p>
+
+<p>By clicking on a sensor’s graph, you can access a more detailed view that allows you to examine air quality trends over 
+a variety of time ranges. If you’re interested in tracking changes over longer time periods, just a simple click on the 
+graph and a popup will show an expanded plot.</p>
+
+<div class="language-yaml large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">type</span><span class="pi">:</span> <span class="s">vertical-stack</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">Living Room</span>
+<span class="na">cards</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">glance</span>
+    <span class="na">entities</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">entity</span><span class="pi">:</span> <span class="s">sensor.living_room_sensor_bme680_temperature</span>
+      <span class="pi">-</span> <span class="na">entity</span><span class="pi">:</span> <span class="s">sensor.living_room_sensor_bme680_humidity</span>
+      <span class="pi">-</span> <span class="na">entity</span><span class="pi">:</span> <span class="s">sensor.living_room_sensor_bme680_pressure</span>
+    <span class="na">show_name</span><span class="pi">:</span> <span class="no">false</span>
+  <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">horizontal-stack</span>
+    <span class="na">cards</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">graph</span><span class="pi">:</span> <span class="s">line</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">sensor</span>
+        <span class="na">entity</span><span class="pi">:</span> <span class="s">sensor.living_room_sensor_bme680_temperature</span>
+        <span class="na">hours_to_show</span><span class="pi">:</span> <span class="m">48</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">Temperature</span>
+        <span class="na">detail</span><span class="pi">:</span> <span class="m">2</span>
+      <span class="pi">-</span> <span class="na">graph</span><span class="pi">:</span> <span class="s">line</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">sensor</span>
+        <span class="na">entity</span><span class="pi">:</span> <span class="s">sensor.living_room_sensor_bme680_humidity</span>
+        <span class="na">hours_to_show</span><span class="pi">:</span> <span class="m">48</span>
+        <span class="na">detail</span><span class="pi">:</span> <span class="m">2</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">Humidity</span>
+  <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">glance</span>
+    <span class="na">entities</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">entity</span><span class="pi">:</span> <span class="s">sensor.living_room_sensor_ikea_2_5_g</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">PM2.5</span>
+      <span class="pi">-</span> <span class="na">entity</span><span class="pi">:</span> <span class="s">sensor.living_room_sensor_bme680_co2_equivalent</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">CO2 Level</span>
+      <span class="pi">-</span> <span class="na">entity</span><span class="pi">:</span> <span class="s">sensor.living_room_sensor_bme680_iaq</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">Air Quality</span>
+    <span class="na">show_name</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">horizontal-stack</span>
+    <span class="na">cards</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">graph</span><span class="pi">:</span> <span class="s">line</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">sensor</span>
+        <span class="na">entity</span><span class="pi">:</span> <span class="s">sensor.living_room_sensor_ikea_2_5_g</span>
+        <span class="na">hours_to_show</span><span class="pi">:</span> <span class="m">2</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">PM 2.5 (2 hours)</span>
+        <span class="na">detail</span><span class="pi">:</span> <span class="m">2</span>
+      <span class="pi">-</span> <span class="na">graph</span><span class="pi">:</span> <span class="s">line</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">sensor</span>
+        <span class="na">entity</span><span class="pi">:</span> <span class="s">sensor.living_room_sensor_bme680_co2_equivalent</span>
+        <span class="na">hours_to_show</span><span class="pi">:</span> <span class="m">2</span>
+        <span class="na">detail</span><span class="pi">:</span> <span class="m">2</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">CO2 levels (2 hours)</span>
+  <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">glance</span>
+    <span class="na">entities</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">entity</span><span class="pi">:</span> <span class="s">sensor.living_room_sensor_bme680_gas_resistance</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">Gas Resistance</span>
+      <span class="pi">-</span> <span class="na">entity</span><span class="pi">:</span> <span class="s">sensor.living_room_sensor_bme680_breath_voc_equivalent</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">bVOCe</span>
+      <span class="pi">-</span> <span class="na">entity</span><span class="pi">:</span> <span class="s">sensor.living_room_sensor_bme680_iaq_accuracy</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">Status</span>
+    <span class="na">show_name</span><span class="pi">:</span> <span class="no">true</span>
+
+</code></pre></div></div>
+
+<h2 id="how-to-interpret-the-pm25-and-co2-readings-">How to interpret the PM2.5 and CO<sub>2</sub> readings ?</h2>
+
+<p>It’s crucial to remember that this is a DIY solution, not precision-calibrated laboratory equipment. Therefore, while 
+absolute values should be considered with a degree of skepticism, relative trends can provide valuable insights into 
+changes in your home’s air quality and the effectiveness of your ventilation. Also, it’s worth noting that the BME680 
+sensor measures the total amount of volatile organic compounds (VOCs) in the air, not specifically CO<sub>2</sub>. It estimates 
+CO<sub>2</sub> levels based on the overall VOC readings and various assumptions.</p>
+
+<p>For PM2.5, the generally recommended levels shouldn’t exceed 35 μg/m<sup>3</sup> over a 24-hour period, with ideal values being below 12 μg/m<sup>3</sup>. Normal indoor CO<sub>2</sub> levels range between 400 and 1000 ppm. It’s advisable to increase ventilation when these levels are surpassed.</p>
+
+<p>When analyzing the plots, here’s what to look out for:</p>
+
+<ul>
+  <li><strong>Identifying Sharp Peaks:</strong> Cooking, for example, releases a variety of VOCs, which the sensor can detect. Keep an eye out for activities that might pollute your air and respond by enhancing ventilation or opening windows.</li>
+  <li><strong>Duration of Peak Levels:</strong> If the VOCs from cooking linger for extended periods, it indicates that your ventilation may be inadequate.</li>
+  <li><strong>Gradual Increases to Unsafe Levels:</strong> This often occurs during events like parties or in smaller rooms like bedrooms, where CO<sub>2</sub> can build up over time, potentially impacting sleep quality.</li>
+  <li><strong>Unusually High Baseline Levels:</strong> Normally, if you record CO2 levels around 600-700 ppm in your living room, and they suddenly rise consistently, it might be time to inspect your ventilation system or replace the filters.</li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>If you followed along this far you succeeded in creating a cost-effective DIY solution to 
+monitor and enhance your home’s air quality. We combined the IKEA Vindriktning air quality monitor with a 
+Wemos D1 Mini Pro microcontroller and a Bosch BME680 VOC sensor, resulting in a smart and efficient air monitoring system. This 
+system not only provides real-time data but also integrates seamlessly with smart home systems like Home Assistant 
+and ESPHome.</p>
+
+<p>We covered everything from selecting and connecting the right hardware to configuring the device and interpreting the 
+data it provides. By following this guide, you now have a tool that helps you make informed decisions about when to 
+open windows, increase ventilation, or change filters, ensuring your home’s air quality is always at its best.</p>
+
+<p>Remember, this is a DIY project and not a substitute for professional equipment, if you are concerned for the health 
+of you and your family, or worry about being exposed to specific harmful gases like carbon-monoxide, … do get help 
+from a professional.</p>
+
+<h2 id="further-reading">Further reading</h2>
+
+<p>There are a lot of different variations to this project, check out some links below for more information!</p>
+
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=YmqtMTO5NVc">Transform Your IKEA Air Quality Sensor into a Smart Home Essential with This DIY Upgrade</a> : <a href="https://www.youtube.com/@3ATIVE">3ATIVE VFX Studio</a> shows how to include a BME280 and a CSS811 sensor, as well as use read sensors from the Vindriktning (the light sensor and fan status)</li>
+  <li><a href="https://www.youtube.com/watch?v=QRke2ww2VTw">Hacking The IKEA VINDRIKTNING PM2.5 Sensor With Tasmota</a> : Tutorial by <a href="https://www.youtube.com/@voltlog">VoltLog</a> including a BME680, though here Tasmota is used instead of ESPHome</li>
+  <li></li>
+</ul>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/ikea">ikea</a>,&nbsp;<a href="/tag/soldering">soldering</a>,&nbsp;<a href="/tag/electronics">electronics</a>,&nbsp;<a href="/tag/home-assistant">home-assistant</a>,&nbsp;<a href="/tag/yaml">yaml</a>,&nbsp;<a href="/tag/esphome">esphome</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa fa-coffee"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Smart+Air+Quality+Monitoring+using+an+IKEA+Vindriktning+with+ESP8266+%26+BME680&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2024%2F01%2F21%2Fdiy-smart-air-quality-monitor-ikea-vindriktning-esp8266-bme680.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Smart+Air+Quality+Monitoring+using+an+IKEA+Vindriktning+with+ESP8266+%26+BME680&u=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2024%2F01%2F21%2Fdiy-smart-air-quality-monitor-ikea-vindriktning-esp8266-bme680.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2024%2F01%2F21%2Fdiy-smart-air-quality-monitor-ikea-vindriktning-esp8266-bme680.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation" data-pagefind-ignore>
+		<span class="prev-post">
+			
+				<a href="/diy/games/2024/01/07/3ds-usb-c.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">How to Upgrade Your Nintendo 3DS with USB-C Charging</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa fa-coffee"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+		<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div>
+			<div class="site-navigation">
+
+				<p><strong>Site Map</strong></p>
+				<ul class="pages">
+					
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+				</ul>
+				<br />
+				<p><strong>Legal</strong></p>
+				<p><a href="/policy/">Privacy policy</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Contribute</strong></p>
+				<p><i class="fa fa-coffee"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+				
+				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
