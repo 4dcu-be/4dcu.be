@@ -6,7 +6,7 @@ date:   2024-01-21 08:00:00
 author: Sebastian Proost
 slug: diy-smart-air-quality-monitor-ikea-vindriktning-esp8266-bme680
 categories: diy
-tags:	ikea soldering electronics home-assistant yaml esphome 
+tags:	ikea soldering electronics home-assistant yaml esphome esp8266
 cover:  "/assets/posts/2024-01-21-air-quality-sensor/ikea_vindriktning_with_esp8266_bme680.jpg"
 thumbnail: "/assets/images/thumbnails/ikea_vindriktning_hack.jpg"
 ---
@@ -84,6 +84,7 @@ ESPHome in the sidebar. Click on **NEW DEVICE**, and give your device a name tha
 matches your device (for me, it was COM6). This is going to flash a basic firmware onto your ESP8266. No hiccups? 
 Perfect! If all went smoothly here, feel free to skip the next section.
 
+{: #manual-setup-flash-esp8266 }
 ### Manual setting up and flashing the ESP8266
 
 This didn't work for me though (maybe because my Home Assistant is running on an ancient Raspberry Pi). 

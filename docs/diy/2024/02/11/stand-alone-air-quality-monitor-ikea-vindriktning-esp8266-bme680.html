@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Making a stand-alone air quality monitor from our upgraded IKEA Vindriktning</title>
+  <meta name="description" content="Monitoring the air quality in spaces where you spend a lot of time can be a game-changer for your well-being and  productivity. However, the air quality moni...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2024">
+  
+
+  <!-- External libraries -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Monitoring the air quality in spaces where you spend a lot of time can be a game-changer for your well-being and  productivity. However, the air quality moni..." />
+  <meta property="og:url" content="https://blog.4dcu.be/diy/2024/02/11/stand-alone-air-quality-monitor-ikea-vindriktning-esp8266-bme680.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Making a stand-alone air quality monitor from our upgraded IKEA Vindriktning" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2024-04-04-air-quality-sensor-part-two/completed_project.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Making a stand-alone air quality monitor from our upgraded IKEA Vindriktning">
+  <meta name="twitter:description" content="Monitoring the air quality in spaces where you spend a lot of time can be a game-changer for your well-being and  productivity. However, the air quality moni...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2024-04-04-air-quality-sensor-part-two/completed_project.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/diy/2024/02/11/stand-alone-air-quality-monitor-ikea-vindriktning-esp8266-bme680.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="canonical" href="https://blog.4dcu.be/diy/2024/02/11/stand-alone-air-quality-monitor-ikea-vindriktning-esp8266-bme680.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	<link rel="stylesheet" href="/css/main.css">
+
+	<!-- PageFind -->
+	<script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+
+	<script type='text/javascript'>
+	//<![CDATA[
+	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css");
+	//]]>
+	</Script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+	<div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+<li class="nav-link"><a href="#" class="nav-link-search"><i class="fa fa-search" style="width:16px;height:16px"></i></a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/ikea_vindriktning_hack_2.jpg" style="display:none" />
+<div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2024-04-04-air-quality-sensor-part-two/completed_project.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Making a stand-alone air quality monitor from our upgraded IKEA Vindriktning</h1>
+			
+      <p class="info"><em>untethering esphome from home assistant</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted February 11, 2024 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/diy">Diy</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>Monitoring the air quality in spaces where you spend a lot of time can be a game-changer for your well-being and 
+productivity. However, the <a href="/diy/2024/01/21/diy-smart-air-quality-monitor-ikea-vindriktning-esp8266-bme680.html">air quality monitor</a> built-in a previous post is tightly linked with <a href="https://www.home-assistant.io/">Home Assistant</a> (HA), 
+which might limit its use in environments like offices, workshops, garages, and more. The good news? We can easily add
+additional LEDs and link them to the new sensor values directly in ESPHome, so those will work even when not connected 
+to HA. Furthermore, the esp8266 is just powerful enough to function as a WiFi access point while hosting a 
+web page that displays all sensor readings. This guide will walk you through adding additional status LEDs and 
+reconfiguring <a href="https://esphome.io/">ESPHome</a> to unlock this stand-alone functionality, turning your air quality monitor into a 
+tool that can be used anywhere!</p>
+
+<p><a href="/assets/posts/2024-04-04-air-quality-sensor-part-two/completed_project.jpg" class="lightgallery-link" data-sub-html="Completed IKEA Vindriktning with extra status LEDs">
+<img src="/assets/posts/2024-04-04-air-quality-sensor-part-two/completed_project.jpg" alt="Completed IKEA Vindriktning with extra status LEDs" height="853" width="1280" data-src="/assets/posts/2024-04-04-air-quality-sensor-part-two/completed_project.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="what-you-need">What you need?</h2>
+
+<p>This post will start from the <a href="/diy/2024/01/21/diy-smart-air-quality-monitor-ikea-vindriktning-esp8266-bme680.html">DIY smart air quality sensor</a> which you can build from an IKEA Vindriktning Air Quality
+Sensor, an ESP8266 and Bosch BME680 (humidity, pressure, temperature and volatile organic compound (VOC) sensor). Though
+we can additionally add two white LEDs, that can be programmed to give a visual cue to the BME680 readings and hence
+make it better suited for stand-alone operation. This will require small LEDs (e.g. 1.8mm) which operate at 2 V and one
+82 Ohm resistor per LED (I used two, but you can easily add a few more if needed).</p>
+
+<p>The full list of components:</p>
+
+<ul>
+  <li><strong>IKEA Vindriktning Air Quality Monitor</strong></li>
+  <li><strong>Wemos D1 Mini Pro Microcontroller Board</strong> or another small ESP8266 board that fits in the Vindriktning’s case</li>
+  <li><strong>Bosch BME680 Sensor Board</strong></li>
+  <li>2x <strong>1.8mm LEDs</strong></li>
+  <li>2x <strong>82 Ohm resistors</strong></li>
+  <li>UV Resin (to glue LEDs)</li>
+  <li>Wire (scavenged from a USB cable)</li>
+  <li>Soldering tools (iron, solder, flux, …)</li>
+</ul>
+
+<p>If you landed on this page first, start with building the <a href="/diy/2024/01/21/diy-smart-air-quality-monitor-ikea-vindriktning-esp8266-bme680.html">DIY smart air quality sensor</a> described in a previous post.
+This will help you get ESPHome set up and wire all sensors correctly to the microcontroller board.</p>
+
+<h2 id="upgrading-the-sensor-optional">Upgrading the sensor (optional)</h2>
+
+<p>If you don’t wish to install extra status LEDs, feel free to skip this section.</p>
+
+<p>After removing the Vindriktning PCB, I used UV-resin to glue two 1.8mm white LEDs to the front of the PCB in between
+the SMD LEDs. Be careful when bending the pins, I broke a few LEDs in the process! 
+Make sure to align the LEDs with the existing ones. I failed to do this, and it becomes incredibly visible once the 
+LEDs were on.</p>
+
+<p><a href="/assets/posts/2024-04-04-air-quality-sensor-part-two/leds_mounted.jpg" class="lightgallery-link" data-sub-html="PCB with two additional 1.8mm LEDs held in place by UV-resin">
+<img src="/assets/posts/2024-04-04-air-quality-sensor-part-two/leds_mounted.jpg" alt="PCB with two additional 1.8mm LEDs held in place by UV-resin" height="853" width="1280" data-src="/assets/posts/2024-04-04-air-quality-sensor-part-two/leds_mounted.jpg" loading="lazy" />
+</a></p>
+
+<p>The ground pins were connected to the 
+ground pad of an unpopulated connector on the Vindriktning board.</p>
+
+<p><a href="/assets/posts/2024-04-04-air-quality-sensor-part-two/leds_ground.jpg" class="lightgallery-link" data-sub-html="Ground pins connected to an unpopulated pads for a connector header">
+<img src="/assets/posts/2024-04-04-air-quality-sensor-part-two/leds_ground.jpg" alt="Ground pins connected to an unpopulated pads for a connector header" height="853" width="1280" data-src="/assets/posts/2024-04-04-air-quality-sensor-part-two/leds_ground.jpg" loading="lazy" />
+</a></p>
+
+<p>The pictures below show how the anode of the LEDs (aka positive leads), are connected to pins D5 and D6 of the D1 
+mini. The required 82 Ohm resistors to connect 2V LEDs to the board’s 3.3V output, were directly soldered to the 
+board, and wires connecting to the LEDs’ anodes to the other end of the resistors.</p>
+
+<p><a href="/assets/posts/2024-04-04-air-quality-sensor-part-two/leds_positive.jpg" class="lightgallery-link" data-sub-html="Positive pins of the LEDs can be connected on the side of the PCB">
+<img src="/assets/posts/2024-04-04-air-quality-sensor-part-two/leds_positive.jpg" alt="Positive pins of the LEDs can be connected on the side of the PCB" height="853" width="1280" data-src="/assets/posts/2024-04-04-air-quality-sensor-part-two/leds_positive.jpg" loading="lazy" />
+</a></p>
+
+<p><a href="/assets/posts/2024-04-04-air-quality-sensor-part-two/resistors_in_place.jpg" class="lightgallery-link" data-sub-html="Resistors in between the LEDs and microcontroller">
+<img src="/assets/posts/2024-04-04-air-quality-sensor-part-two/resistors_in_place.jpg" alt="Resistors in between the LEDs and microcontroller" height="853" width="1280" data-src="/assets/posts/2024-04-04-air-quality-sensor-part-two/resistors_in_place.jpg" loading="lazy" />
+</a></p>
+
+<p>Now let’s configure the D1 Mini to use the new LEDs, and switch them on automatically based on the Indoor Air Quality 
+(IAQ) reported by the BME680. The bulk of the configuration is identical to the previous post, but we do need to specify
+where our LEDs are connected to, adding the code below sets these up.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">light</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">monochromatic</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Bottom</span><span class="nv"> </span><span class="s">Light"</span>
+    <span class="na">output</span><span class="pi">:</span> <span class="s">output_led_one</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">bottom_light</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">monochromatic</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Top</span><span class="nv"> </span><span class="s">Light"</span>
+    <span class="na">output</span><span class="pi">:</span> <span class="s">output_led_two</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">top_light</span>
+    
+<span class="na">output</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">esp8266_pwm</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">output_led_one</span>
+    <span class="na">pin</span><span class="pi">:</span> <span class="s">D5</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">esp8266_pwm</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">output_led_two</span>
+    <span class="na">pin</span><span class="pi">:</span> <span class="s">D6</span>
+</code></pre></div></div>
+
+<p>Next, a template was added that maps the BME680 IAQ values to human-readable labels. Here, we’ll hook the automation in 
+esphome directly, so the LEDs will switch on or off based on those values.</p>
+
+<div class="language-yaml large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">text_sensor</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">template</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">IAQ</span><span class="nv"> </span><span class="s">Classification"</span>
+    <span class="na">icon</span><span class="pi">:</span> <span class="s2">"</span><span class="s">mdi:checkbox-marked-circle-outline"</span>
+    <span class="na">lambda</span><span class="pi">:</span> <span class="pi">|-</span>
+      <span class="s">auto label = "error";</span>
+      <span class="s">auto call1 = id(bottom_light).turn_off();</span>
+      <span class="s">auto call2 = id(top_light).turn_off();</span>
+      <span class="s">if ( int(id(iaq).state) &lt;= 50) {</span>
+        <span class="s">label = "Excellent";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 51 &amp;&amp; int(id(iaq).state) &lt;= 100) {</span>
+        <span class="s">label = "Good";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 101 &amp;&amp; int(id(iaq).state) &lt;= 150) {</span>
+        <span class="s">call1 = id(bottom_light).turn_on();</span>
+        <span class="s">label = "Lightly polluted";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 151 &amp;&amp; int(id(iaq).state) &lt;= 200) {</span>
+        <span class="s">call1 = id(bottom_light).turn_on();</span>
+        <span class="s">label = "Moderately polluted";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 201 &amp;&amp; int(id(iaq).state) &lt;= 250) {</span>
+        <span class="s">call2 = id(top_light).turn_on();</span>
+        <span class="s">label = "Heavily polluted";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 251 &amp;&amp; int(id(iaq).state) &lt;= 350) {</span>
+        <span class="s">call2 = id(top_light).turn_on();</span>
+        <span class="s">label = "Severely polluted";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 351) {</span>
+        <span class="s">call1 = id(bottom_light).turn_on();</span>
+        <span class="s">call2 = id(top_light).turn_on();</span>
+        <span class="s">label = "Extremely polluted";</span>
+      <span class="s">}</span>
+      <span class="s">call1.set_brightness(0.5);</span>
+      <span class="s">call2.set_brightness(0.5);</span>
+      <span class="s">call1.perform();</span>
+      <span class="s">call2.perform();</span>
+      <span class="s">return {label};</span>
+</code></pre></div></div>
+
+<p>The full configuration is included below (do note you need a file <code class="language-plaintext highlighter-rouge">secrets.yaml</code> with your WiFi ssid and password). 
+If you need help flashing this to your device, look at the previous post for details.</p>
+
+<div class="language-yaml large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">esphome</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">upgraded-sensor</span>
+  <span class="na">friendly_name</span><span class="pi">:</span> <span class="s">Upgraded sensor</span>
+
+<span class="na">esp8266</span><span class="pi">:</span>
+  <span class="na">board</span><span class="pi">:</span> <span class="s">d1_mini</span>
+
+<span class="c1"># Enable logging</span>
+<span class="na">logger</span><span class="pi">:</span>
+
+<span class="c1"># Enable Home Assistant API</span>
+<span class="na">api</span><span class="pi">:</span>
+  <span class="na">encryption</span><span class="pi">:</span>
+    <span class="na">key</span><span class="pi">:</span> <span class="s2">"</span><span class="s">r5e+0e+eigBjFpfNo+r/TIykX9lK40oG7+2NZ3RiG08="</span>
+
+<span class="na">ota</span><span class="pi">:</span>
+  <span class="na">password</span><span class="pi">:</span> <span class="s2">"</span><span class="s">eb24ad75972211d1fea73e45f5b90661"</span>
+
+<span class="na">wifi</span><span class="pi">:</span>
+  <span class="na">ssid</span><span class="pi">:</span> <span class="kt">!secret</span> <span class="s">wifi_ssid</span>
+  <span class="na">password</span><span class="pi">:</span> <span class="kt">!secret</span> <span class="s">wifi_password</span>
+
+  <span class="c1"># Enable fallback hotspot (captive portal) in case wifi connection fails</span>
+  <span class="na">ap</span><span class="pi">:</span>
+    <span class="na">ssid</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Upgraded</span><span class="nv"> </span><span class="s">sensor"</span>
+    <span class="na">password</span><span class="pi">:</span> <span class="kt">!secret</span> <span class="s">wifi_password</span>
+
+<span class="na">captive_portal</span><span class="pi">:</span>
+    
+    
+<span class="c1">## Serial Port for the IKEA Sensor</span>
+<span class="na">uart</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">rx_pin</span><span class="pi">:</span> <span class="s">D7</span>
+    <span class="c1"># tx_pin: D8</span>
+    <span class="na">baud_rate</span><span class="pi">:</span> <span class="m">9600</span>
+
+<span class="na">i2c</span><span class="pi">:</span>
+  <span class="c1">## I²C Port - For Temp/Humidity/Pressure &amp; CO²/VOC Sensors</span>
+  <span class="na">sda</span><span class="pi">:</span> <span class="s">D1</span>
+  <span class="na">scl</span><span class="pi">:</span> <span class="s">D2</span>
+  <span class="na">scan</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">bus_a</span>
+
+<span class="na">bme680_bsec</span><span class="pi">:</span>
+    <span class="c1"># id</span>
+    <span class="c1"># -----------</span>
+    <span class="c1"># Identifier for this component, useful when working with multiple devices.</span>
+    <span class="c1"># Must be unique, and can be used in the sensor sections to refer to the correct device.</span>
+    <span class="c1"># Default: auto-computed</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">bme680_internal</span>
+
+    <span class="c1"># i2c address</span>
+    <span class="c1"># -----------</span>
+    <span class="c1"># Common values are:</span>
+    <span class="c1"># - 0x76</span>
+    <span class="c1"># - 0x77</span>
+    <span class="c1"># Default: 0x76</span>
+    <span class="na">address</span><span class="pi">:</span> <span class="s">0x77</span>
+
+    <span class="c1"># Temperature offset</span>
+    <span class="c1"># ------------------</span>
+    <span class="c1"># Useful if device is in enclosure and reads too high</span>
+    <span class="c1"># For example, if it reads 5C too high, set this to 5</span>
+    <span class="c1"># This also corrects the relative humidity readings</span>
+    <span class="c1"># Default: 0</span>
+    <span class="na">temperature_offset</span><span class="pi">:</span> <span class="m">4.4</span>
+
+    <span class="c1"># IAQ calculation mode</span>
+    <span class="c1"># --------------------</span>
+    <span class="c1"># Available options:</span>
+    <span class="c1"># - static (for fixed position devices)</span>
+    <span class="c1"># - mobile (for on a person or other moveable devices)</span>
+    <span class="c1"># Default: static</span>
+    <span class="na">iaq_mode</span><span class="pi">:</span> <span class="s">mobile</span>
+
+    <span class="c1"># Sample rate</span>
+    <span class="c1"># -----------</span>
+    <span class="c1"># Available options:</span>
+    <span class="c1"># - lp (low power - samples every 3 seconds)</span>
+    <span class="c1"># - ulp (ultra-low power - samples every 5 minutes)</span>
+    <span class="c1"># Default: lp</span>
+    <span class="na">sample_rate</span><span class="pi">:</span> <span class="s">lp</span>
+
+    <span class="c1"># Interval at which to save BSEC state</span>
+    <span class="c1"># ------------------------------------</span>
+    <span class="c1"># Default: 6h</span>
+    <span class="na">state_save_interval</span><span class="pi">:</span> <span class="s">6h</span>
+
+<span class="na">sensor</span><span class="pi">:</span>
+  <span class="c1">## IKEA PMS 2.5um Sensor</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">pm1006</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">aq_sensor</span>
+    <span class="na">pm_2_5</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">IKEA</span><span class="nv"> </span><span class="s">2.5µg"</span>
+      
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">bme680_bsec</span>
+    <span class="c1"># ID of the bme680_bsec component to use for the next sensors.</span>
+    <span class="c1"># Useful when working with multiple devices</span>
+    <span class="na">bme680_bsec_id</span><span class="pi">:</span> <span class="s">bme680_internal</span>
+
+    <span class="na">temperature</span><span class="pi">:</span>
+      <span class="c1"># Temperature in °C</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">Temperature"</span>
+      <span class="na">sample_rate</span><span class="pi">:</span> <span class="s">lp</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+    <span class="na">pressure</span><span class="pi">:</span>
+      <span class="c1"># Pressure in hPa</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">Pressure"</span>
+      <span class="na">sample_rate</span><span class="pi">:</span> <span class="s">lp</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+    <span class="na">humidity</span><span class="pi">:</span>
+      <span class="c1"># Relative humidity %</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">Humidity"</span>
+      <span class="na">sample_rate</span><span class="pi">:</span> <span class="s">lp</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+    <span class="na">gas_resistance</span><span class="pi">:</span>
+      <span class="c1"># Gas resistance in Ω</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">Gas</span><span class="nv"> </span><span class="s">Resistance"</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+    <span class="na">iaq</span><span class="pi">:</span>
+      <span class="c1"># Indoor air quality value</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">IAQ"</span>
+      <span class="na">id</span><span class="pi">:</span> <span class="s">iaq</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+        <span class="c1"># - calibrate_linear:</span>
+          <span class="c1"># - 137.0 -&gt; 27.0</span>
+          <span class="c1"># - 181.0 -&gt; 189.0</span>
+          <span class="c1"># - 430.0 -&gt; 436</span>
+    <span class="na">iaq_accuracy</span><span class="pi">:</span>
+      <span class="c1"># IAQ accuracy as a numeric value of 0, 1, 2, 3</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">Numeric</span><span class="nv"> </span><span class="s">IAQ</span><span class="nv"> </span><span class="s">Accuracy"</span>
+    <span class="na">co2_equivalent</span><span class="pi">:</span>
+      <span class="c1"># CO2 equivalent estimate in ppm</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">CO2</span><span class="nv"> </span><span class="s">Equivalent"</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+    <span class="na">breath_voc_equivalent</span><span class="pi">:</span>
+      <span class="c1"># Volatile organic compounds equivalent estimate in ppm</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">Breath</span><span class="nv"> </span><span class="s">VOC</span><span class="nv"> </span><span class="s">Equivalent"</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+
+<span class="na">text_sensor</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">bme680_bsec</span>
+    <span class="na">iaq_accuracy</span><span class="pi">:</span>
+      <span class="c1"># IAQ accuracy as a text value of Stabilizing, Uncertain, Calibrating, Calibrated</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">IAQ</span><span class="nv"> </span><span class="s">Accuracy"</span>
+      
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">template</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">IAQ</span><span class="nv"> </span><span class="s">Classification"</span>
+    <span class="na">icon</span><span class="pi">:</span> <span class="s2">"</span><span class="s">mdi:checkbox-marked-circle-outline"</span>
+    <span class="na">lambda</span><span class="pi">:</span> <span class="pi">|-</span>
+      <span class="s">auto label = "error";</span>
+      <span class="s">auto call1 = id(bottom_light).turn_off();</span>
+      <span class="s">auto call2 = id(top_light).turn_off();</span>
+      <span class="s">if ( int(id(iaq).state) &lt;= 50) {</span>
+        <span class="s">label = "Excellent";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 51 &amp;&amp; int(id(iaq).state) &lt;= 100) {</span>
+        <span class="s">label = "Good";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 101 &amp;&amp; int(id(iaq).state) &lt;= 150) {</span>
+        <span class="s">call1 = id(bottom_light).turn_on();</span>
+        <span class="s">label = "Lightly polluted";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 151 &amp;&amp; int(id(iaq).state) &lt;= 200) {</span>
+        <span class="s">call1 = id(bottom_light).turn_on();</span>
+        <span class="s">label = "Moderately polluted";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 201 &amp;&amp; int(id(iaq).state) &lt;= 250) {</span>
+        <span class="s">call2 = id(top_light).turn_on();</span>
+        <span class="s">label = "Heavily polluted";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 251 &amp;&amp; int(id(iaq).state) &lt;= 350) {</span>
+        <span class="s">call2 = id(top_light).turn_on();</span>
+        <span class="s">label = "Severely polluted";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 351) {</span>
+        <span class="s">call1 = id(bottom_light).turn_on();</span>
+        <span class="s">call2 = id(top_light).turn_on();</span>
+        <span class="s">label = "Extremely polluted";</span>
+      <span class="s">}</span>
+      <span class="s">call1.set_brightness(0.5);</span>
+      <span class="s">call2.set_brightness(0.5);</span>
+      <span class="s">call1.perform();</span>
+      <span class="s">call2.perform();</span>
+      <span class="s">return {label};</span>
+      
+<span class="na">light</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">monochromatic</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Bottom</span><span class="nv"> </span><span class="s">Light"</span>
+    <span class="na">output</span><span class="pi">:</span> <span class="s">output_led_one</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">bottom_light</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">monochromatic</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Top</span><span class="nv"> </span><span class="s">Light"</span>
+    <span class="na">output</span><span class="pi">:</span> <span class="s">output_led_two</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">top_light</span>
+    
+<span class="na">output</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">esp8266_pwm</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">output_led_one</span>
+    <span class="na">pin</span><span class="pi">:</span> <span class="s">D5</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">esp8266_pwm</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">output_led_two</span>
+    <span class="na">pin</span><span class="pi">:</span> <span class="s">D6</span>
+</code></pre></div></div>
+
+<p>If you wish to let HA control the new LEDs, you can! Simply replace the lambda function that generates the IAQ with the
+one below (which doesn’t switch the LEDs on and off based on the new sensor readings, leaving them free to be controlled by
+HA)</p>
+
+<div class="language-yaml large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">template</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">IAQ</span><span class="nv"> </span><span class="s">Classification"</span>
+    <span class="na">icon</span><span class="pi">:</span> <span class="s2">"</span><span class="s">mdi:checkbox-marked-circle-outline"</span>
+    <span class="na">lambda</span><span class="pi">:</span> <span class="pi">|-</span>
+      <span class="s">auto label = "error";</span>
+      <span class="s">if ( int(id(iaq).state) &lt;= 50) {</span>
+        <span class="s">label = "Excellent";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 51 &amp;&amp; int(id(iaq).state) &lt;= 100) {</span>
+        <span class="s">label = "Good";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 101 &amp;&amp; int(id(iaq).state) &lt;= 150) {</span>
+        <span class="s">label = "Lightly polluted";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 151 &amp;&amp; int(id(iaq).state) &lt;= 200) {</span>
+        <span class="s">label = "Moderately polluted";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 201 &amp;&amp; int(id(iaq).state) &lt;= 250) {</span>
+        <span class="s">label = "Heavily polluted";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 251 &amp;&amp; int(id(iaq).state) &lt;= 350) {</span>
+        <span class="s">label = "Severely polluted";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 351) {</span>
+        <span class="s">label = "Extremely polluted";</span>
+      <span class="s">}</span>
+      <span class="s">return {label};</span>
+</code></pre></div></div>
+
+<h2 id="setting-up-esphome-as-an-access-point-and-running-the-web-server">Setting up ESPHome as an access point and running the web server</h2>
+
+<p>Adding extra status LEDs offers a quick snapshot of the air quality as measured by the BME680, but this method lacks 
+detailed resolution. If relying on Home Assistant for precise readings isn’t feasible, configuring the device as 
+a standalone WiFi access point and hosting a webpage to display these values presents a robust solution.</p>
+
+<p>The full configuration below mirrors our previous setup but with a key difference in the <code class="language-plaintext highlighter-rouge">wifi</code> 
+configuration and the introduction of the <code class="language-plaintext highlighter-rouge">web_server</code> section. The adjustments in the <code class="language-plaintext highlighter-rouge">wifi</code> settings activate the 
+ESP8266’s access point functionality. By including the 
+<code class="language-plaintext highlighter-rouge">web_server</code>, we incorporate the <a href="https://esphome.io/components/web_server.html">ESPHome Web Server Component</a>, effectively launching a local web server. This server 
+hosts a webpage which includes a read-out of all connected sensors’ values, exposing them to all devices connected to 
+the access point.</p>
+
+<p><strong>Important Note</strong>: When configured as a WiFi access point, the device cannot connect to HA or receive 
+firmware updates over the air via the <code class="language-plaintext highlighter-rouge">esphome</code> command. To install new firmware, you must access the device’s webpage 
+and upload the firmware from there. If you disable <code class="language-plaintext highlighter-rouge">ota</code> in the <code class="language-plaintext highlighter-rouge">web_server</code> component, the only way to update the 
+firmware will be by directly flashing it through a cable.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##### Stand-alone Access Point Config #####</span>
+<span class="na">api</span><span class="pi">:</span>
+  <span class="na">reboot_timeout</span><span class="pi">:</span> <span class="s">24h</span>
+
+<span class="na">ota</span><span class="pi">:</span>
+  <span class="na">password</span><span class="pi">:</span> <span class="s2">"</span><span class="s">eb24ad75972211d1fea73e45f5b90661"</span>
+
+<span class="na">wifi</span><span class="pi">:</span>
+  <span class="na">ap</span><span class="pi">:</span>
+    <span class="na">ssid</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Upgraded</span><span class="nv"> </span><span class="s">sensor"</span>
+    <span class="na">password</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BadAir2024"</span>
+
+<span class="na">web_server</span><span class="pi">:</span>
+  <span class="na">port</span><span class="pi">:</span> <span class="m">80</span>
+  <span class="na">local</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">ota</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<p>The full configuration, including the configuration of all connected sensors, is shown below.</p>
+
+<div class="language-yaml large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">esphome</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">upgraded-sensor</span>
+  <span class="na">friendly_name</span><span class="pi">:</span> <span class="s">Upgraded sensor</span>
+
+<span class="na">esp8266</span><span class="pi">:</span>
+  <span class="na">board</span><span class="pi">:</span> <span class="s">d1_mini</span>
+
+<span class="c1"># Enable logging</span>
+<span class="na">logger</span><span class="pi">:</span>
+
+<span class="c1">##### Stand-alone Access Point Config #####</span>
+<span class="na">api</span><span class="pi">:</span>
+  <span class="c1"># ESPHome will reboot if Home Assistant or any other client won't access it within the indicated</span>
+  <span class="c1"># timeout in reboot_timeout, as a "watchdog" condition.</span>
+  <span class="c1"># If you need to use ESPHome standalone, set reboot_timeout to something greater than the default</span>
+  <span class="c1"># 15min</span>
+  <span class="na">reboot_timeout</span><span class="pi">:</span> <span class="s">24h</span>
+
+<span class="na">ota</span><span class="pi">:</span>
+  <span class="na">password</span><span class="pi">:</span> <span class="s2">"</span><span class="s">eb24ad75972211d1fea73e45f5b90661"</span>
+
+<span class="na">wifi</span><span class="pi">:</span>
+  <span class="na">ap</span><span class="pi">:</span>
+    <span class="na">ssid</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Upgraded</span><span class="nv"> </span><span class="s">sensor"</span>
+    <span class="na">password</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BadAir2024"</span>
+
+<span class="na">web_server</span><span class="pi">:</span>
+  <span class="na">port</span><span class="pi">:</span> <span class="m">80</span>
+  <span class="na">local</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">ota</span><span class="pi">:</span> <span class="no">true</span>
+    
+    
+<span class="c1">## Serial Port for the IKEA Sensor</span>
+<span class="na">uart</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">rx_pin</span><span class="pi">:</span> <span class="s">D7</span>
+    <span class="c1"># tx_pin: D8</span>
+    <span class="na">baud_rate</span><span class="pi">:</span> <span class="m">9600</span>
+
+<span class="na">i2c</span><span class="pi">:</span>
+  <span class="c1">## I²C Port - For Temp/Humidity/Pressure &amp; CO²/VOC Sensors</span>
+  <span class="na">sda</span><span class="pi">:</span> <span class="s">D1</span>
+  <span class="na">scl</span><span class="pi">:</span> <span class="s">D2</span>
+  <span class="na">scan</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">bus_a</span>
+
+<span class="na">bme680_bsec</span><span class="pi">:</span>
+    <span class="c1"># id</span>
+    <span class="c1"># -----------</span>
+    <span class="c1"># Identifier for this component, useful when working with multiple devices.</span>
+    <span class="c1"># Must be unique, and can be used in the sensor sections to refer to the correct device.</span>
+    <span class="c1"># Default: auto-computed</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">bme680_internal</span>
+
+    <span class="c1"># i2c address</span>
+    <span class="c1"># -----------</span>
+    <span class="c1"># Common values are:</span>
+    <span class="c1"># - 0x76</span>
+    <span class="c1"># - 0x77</span>
+    <span class="c1"># Default: 0x76</span>
+    <span class="na">address</span><span class="pi">:</span> <span class="s">0x77</span>
+
+    <span class="c1"># Temperature offset</span>
+    <span class="c1"># ------------------</span>
+    <span class="c1"># Useful if device is in enclosure and reads too high</span>
+    <span class="c1"># For example, if it reads 5C too high, set this to 5</span>
+    <span class="c1"># This also corrects the relative humidity readings</span>
+    <span class="c1"># Default: 0</span>
+    <span class="na">temperature_offset</span><span class="pi">:</span> <span class="m">4.4</span>
+
+    <span class="c1"># IAQ calculation mode</span>
+    <span class="c1"># --------------------</span>
+    <span class="c1"># Available options:</span>
+    <span class="c1"># - static (for fixed position devices)</span>
+    <span class="c1"># - mobile (for on a person or other moveable devices)</span>
+    <span class="c1"># Default: static</span>
+    <span class="na">iaq_mode</span><span class="pi">:</span> <span class="s">mobile</span>
+
+    <span class="c1"># Sample rate</span>
+    <span class="c1"># -----------</span>
+    <span class="c1"># Available options:</span>
+    <span class="c1"># - lp (low power - samples every 3 seconds)</span>
+    <span class="c1"># - ulp (ultra-low power - samples every 5 minutes)</span>
+    <span class="c1"># Default: lp</span>
+    <span class="na">sample_rate</span><span class="pi">:</span> <span class="s">lp</span>
+
+    <span class="c1"># Interval at which to save BSEC state</span>
+    <span class="c1"># ------------------------------------</span>
+    <span class="c1"># Default: 6h</span>
+    <span class="na">state_save_interval</span><span class="pi">:</span> <span class="s">6h</span>
+
+<span class="na">sensor</span><span class="pi">:</span>
+  <span class="c1">## IKEA PMS 2.5um Sensor</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">pm1006</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">aq_sensor</span>
+    <span class="na">pm_2_5</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">IKEA</span><span class="nv"> </span><span class="s">2.5µg"</span>
+      
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">bme680_bsec</span>
+    <span class="c1"># ID of the bme680_bsec component to use for the next sensors.</span>
+    <span class="c1"># Useful when working with multiple devices</span>
+    <span class="na">bme680_bsec_id</span><span class="pi">:</span> <span class="s">bme680_internal</span>
+
+    <span class="na">temperature</span><span class="pi">:</span>
+      <span class="c1"># Temperature in °C</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">Temperature"</span>
+      <span class="na">sample_rate</span><span class="pi">:</span> <span class="s">lp</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+    <span class="na">pressure</span><span class="pi">:</span>
+      <span class="c1"># Pressure in hPa</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">Pressure"</span>
+      <span class="na">sample_rate</span><span class="pi">:</span> <span class="s">lp</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+    <span class="na">humidity</span><span class="pi">:</span>
+      <span class="c1"># Relative humidity %</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">Humidity"</span>
+      <span class="na">sample_rate</span><span class="pi">:</span> <span class="s">lp</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+    <span class="na">gas_resistance</span><span class="pi">:</span>
+      <span class="c1"># Gas resistance in Ω</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">Gas</span><span class="nv"> </span><span class="s">Resistance"</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+    <span class="na">iaq</span><span class="pi">:</span>
+      <span class="c1"># Indoor air quality value</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">IAQ"</span>
+      <span class="na">id</span><span class="pi">:</span> <span class="s">iaq</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+        <span class="c1"># - calibrate_linear:</span>
+          <span class="c1"># - 137.0 -&gt; 27.0</span>
+          <span class="c1"># - 181.0 -&gt; 189.0</span>
+          <span class="c1"># - 430.0 -&gt; 436</span>
+    <span class="na">iaq_accuracy</span><span class="pi">:</span>
+      <span class="c1"># IAQ accuracy as a numeric value of 0, 1, 2, 3</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">Numeric</span><span class="nv"> </span><span class="s">IAQ</span><span class="nv"> </span><span class="s">Accuracy"</span>
+    <span class="na">co2_equivalent</span><span class="pi">:</span>
+      <span class="c1"># CO2 equivalent estimate in ppm</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">CO2</span><span class="nv"> </span><span class="s">Equivalent"</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+    <span class="na">breath_voc_equivalent</span><span class="pi">:</span>
+      <span class="c1"># Volatile organic compounds equivalent estimate in ppm</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">Breath</span><span class="nv"> </span><span class="s">VOC</span><span class="nv"> </span><span class="s">Equivalent"</span>
+      <span class="na">filters</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">median</span>
+
+<span class="na">text_sensor</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">bme680_bsec</span>
+    <span class="na">iaq_accuracy</span><span class="pi">:</span>
+      <span class="c1"># IAQ accuracy as a text value of Stabilizing, Uncertain, Calibrating, Calibrated</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">IAQ</span><span class="nv"> </span><span class="s">Accuracy"</span>
+      
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">template</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BME680</span><span class="nv"> </span><span class="s">IAQ</span><span class="nv"> </span><span class="s">Classification"</span>
+    <span class="na">icon</span><span class="pi">:</span> <span class="s2">"</span><span class="s">mdi:checkbox-marked-circle-outline"</span>
+    <span class="na">lambda</span><span class="pi">:</span> <span class="pi">|-</span>
+      <span class="s">auto label = "error";</span>
+      <span class="s">auto call1 = id(bottom_light).turn_off();</span>
+      <span class="s">auto call2 = id(top_light).turn_off();</span>
+      <span class="s">if ( int(id(iaq).state) &lt;= 50) {</span>
+        <span class="s">label = "Excellent";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 51 &amp;&amp; int(id(iaq).state) &lt;= 100) {</span>
+        <span class="s">label = "Good";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 101 &amp;&amp; int(id(iaq).state) &lt;= 150) {</span>
+        <span class="s">call1 = id(bottom_light).turn_on();</span>
+        <span class="s">label = "Lightly polluted";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 151 &amp;&amp; int(id(iaq).state) &lt;= 200) {</span>
+        <span class="s">call1 = id(bottom_light).turn_on();</span>
+        <span class="s">label = "Moderately polluted";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 201 &amp;&amp; int(id(iaq).state) &lt;= 250) {</span>
+        <span class="s">call2 = id(top_light).turn_on();</span>
+        <span class="s">label = "Heavily polluted";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 251 &amp;&amp; int(id(iaq).state) &lt;= 350) {</span>
+        <span class="s">call2 = id(top_light).turn_on();</span>
+        <span class="s">label = "Severely polluted";</span>
+      <span class="s">}</span>
+      <span class="s">else if (int(id(iaq).state) &gt;= 351) {</span>
+        <span class="s">call1 = id(bottom_light).turn_on();</span>
+        <span class="s">call2 = id(top_light).turn_on();</span>
+        <span class="s">label = "Extremely polluted";</span>
+      <span class="s">}</span>
+      <span class="s">call1.set_brightness(0.5);</span>
+      <span class="s">call2.set_brightness(0.5);</span>
+      <span class="s">call1.perform();</span>
+      <span class="s">call2.perform();</span>
+      <span class="s">return {label};</span>
+      
+<span class="na">light</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">monochromatic</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Bottom</span><span class="nv"> </span><span class="s">Light"</span>
+    <span class="na">output</span><span class="pi">:</span> <span class="s">output_led_one</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">bottom_light</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">monochromatic</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Top</span><span class="nv"> </span><span class="s">Light"</span>
+    <span class="na">output</span><span class="pi">:</span> <span class="s">output_led_two</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">top_light</span>
+    
+<span class="na">output</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">esp8266_pwm</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">output_led_one</span>
+    <span class="na">pin</span><span class="pi">:</span> <span class="s">D5</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">esp8266_pwm</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">output_led_two</span>
+    <span class="na">pin</span><span class="pi">:</span> <span class="s">D6</span>
+</code></pre></div></div>
+
+<h2 id="connecting-to-the-device">Connecting to the device</h2>
+
+<p>Connecting to your newly independent air quality monitor is straightforward. Power up the device, give it a moment to 
+initialize, and then use a pc/laptop/phone to connect to its WiFi network using the password you’ve set in the ESPHome configuration. 
+A heads-up: you might get an alert about the absence of an internet connection. No worries, 
+this is expected. Simply launch your web browser, navigate to <strong>192.168.4.1</strong>, and a web page displaying the current 
+air quality readings will greet you.</p>
+
+<p><a href="/assets/posts/2024-04-04-air-quality-sensor-part-two/esphome_screenshot.png" class="lightgallery-link" data-sub-html="Screenshot of the ESPHome built in website showing all sensor values and LED controls">
+<img src="/assets/posts/2024-04-04-air-quality-sensor-part-two/esphome_screenshot.png" alt="Screenshot of the ESPHome built in website showing all sensor values and LED controls" height="2300" width="1080" class="small-image" data-src="/assets/posts/2024-04-04-air-quality-sensor-part-two/esphome_screenshot.png" loading="lazy" />
+</a></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This project showcases two really cool features. The first is how to implement simple automations directly in ESPHome, 
+making them much more resilient. Should the WiFi go down or the server running Home Assistant (HA) crash, they will 
+continue to work. The second feature is configuring an ESP8266 to function as a WiFi access point while hosting a 
+simple website. This provides an interface that can be incorporated without the need to add extra components to 
+your project!</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa fa-tags"></i> Tags:</strong> <a href="/tag/ikea">ikea</a>,&nbsp;<a href="/tag/soldering">soldering</a>,&nbsp;<a href="/tag/electronics">electronics</a>,&nbsp;<a href="/tag/home-assistant">home-assistant</a>,&nbsp;<a href="/tag/yaml">yaml</a>,&nbsp;<a href="/tag/esphome">esphome</a>,&nbsp;<a href="/tag/esp8266">esp8266</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa fa-coffee"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Making+a+stand-alone+air+quality+monitor+from+our+upgraded+IKEA+Vindriktning&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2024%2F02%2F11%2Fstand-alone-air-quality-monitor-ikea-vindriktning-esp8266-bme680.html&via=ProostSebastian"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Making+a+stand-alone+air+quality+monitor+from+our+upgraded+IKEA+Vindriktning&u=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2024%2F02%2F11%2Fstand-alone-air-quality-monitor-ikea-vindriktning-esp8266-bme680.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2024%2F02%2F11%2Fstand-alone-air-quality-monitor-ikea-vindriktning-esp8266-bme680.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation" data-pagefind-ignore>
+		<span class="prev-post">
+			
+				<a href="/diy/2024/01/21/diy-smart-air-quality-monitor-ikea-vindriktning-esp8266-bme680.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Smart Air Quality Monitoring using an IKEA Vindriktning with ESP8266 & BME680</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, your are welcome to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa fa-coffee"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+		<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div>
+			<div class="site-navigation">
+
+				<p><strong>Site Map</strong></p>
+				<ul class="pages">
+					
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+				</ul>
+				<br />
+				<p><strong>Legal</strong></p>
+				<p><a href="/policy/">Privacy policy</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa fa-envelope-o"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa fa-twitter"></i>
+		<a href="https://twitter.com/ProostSebastian" title="Follow me on Twitter">
+			<span class="username">ProostSebastian</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa fa-github"></i>
+		<a href="https://github.com/sepro" title="Fork me on GitHub">
+			<span class="username">sepro</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Contribute</strong></p>
+				<p><i class="fa fa-coffee"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+				
+				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+
+<!-- Contact Modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
