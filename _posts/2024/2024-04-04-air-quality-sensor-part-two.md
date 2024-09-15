@@ -564,10 +564,6 @@ sensor:
       id: iaq
       filters:
         - median
-        # - calibrate_linear:
-          # - 137.0 -> 27.0
-          # - 181.0 -> 189.0
-          # - 430.0 -> 436
     iaq_accuracy:
       # IAQ accuracy as a numeric value of 0, 1, 2, 3
       name: "BME680 Numeric IAQ Accuracy"

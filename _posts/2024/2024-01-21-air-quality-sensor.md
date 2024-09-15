@@ -422,8 +422,9 @@ There are a lot of different variations to this project, check out some links be
 
   * [Transform Your IKEA Air Quality Sensor into a Smart Home Essential with This DIY Upgrade] : [3ATIVE VFX Studio] shows how to include a BME280 and a CSS811 sensor, as well as use read sensors from the Vindriktning (the light sensor and fan status)
   * [Hacking The IKEA VINDRIKTNING PM2.5 Sensor With Tasmota] : Tutorial by [VoltLog] including a BME680, though here Tasmota is used instead of ESPHome
-  * [Ikea VINDRIKTNING Smart Home Assistant integration with ESP8266 + HLK-LD2410 + BME280 + bh1750]: Guide by [Salvamipc] that adds human presence detection (using the HLK-LD2410) and ambient light sensor (bh1750) to the Vindriktning
+  * [This guide](https://www.youtube.com/watch?v=swz7h40PMgs) by [Salvamipc] that adds human presence detection (using the HLK-LD2410) and ambient light sensor (bh1750) to the Vindriktning
 
+Or check out the [next post]({% post_url 2024/2024-04-04-air-quality-sensor-part-two %}), where we untether the sensor from Home Assistant and turn it into a stand-alone device.
 
 [IKEA Vindriktning]: https://www.ikea.com/be/en/p/vindriktning-air-quality-sensor-70498242/
 [Home Assistant]: https://www.home-assistant.io/
@@ -432,5 +433,4 @@ There are a lot of different variations to this project, check out some links be
 [3ATIVE VFX Studio]: https://www.youtube.com/@3ATIVE
 [Hacking The IKEA VINDRIKTNING PM2.5 Sensor With Tasmota]: https://www.youtube.com/watch?v=QRke2ww2VTw
 [VoltLog]: https://www.youtube.com/@voltlog
-[Ikea VINDRIKTNING Smart Home Assistant integration with ESP8266 + HLK-LD2410 + BME280 + bh1750]: https://www.youtube.com/watch?v=swz7h40PMgs
 [Salvamipc]: https://www.youtube.com/@salvamipc
