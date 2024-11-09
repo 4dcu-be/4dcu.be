@@ -10,6 +10,7 @@
     background: #000;
     overflow: hidden;
     display: inline-grid;
+    border: white 2px solid;
 
 			@include media($tablet) {
 				width: 32%;
@@ -23,14 +24,14 @@
       height: auto;
       max-width: 100%;
       width: 100%;
-      -webkit-transform: scale(1);
-      transform: scale(1);
+      -webkit-transform: scale(1.05);
+      transform: scale(1.05);
       -webkit-transition: .3s ease-in-out;
       transition: .3s ease-in-out;
     }
 
     img:hover {
-      transform: scale(1.3);
+      transform: scale(1.19);
       opacity: .5;
     }
   }
