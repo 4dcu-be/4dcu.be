@@ -1,5 +1,5 @@
 <li>
-	<i class="fa fa-envelope-o"></i>
+	<i class="fa-solid fa-envelope"></i>
 	<a href="mailto:{{ site.email }}">
 		<span class="username">{{ site.email }}</span>
 	</a>
@@ -8,7 +8,7 @@
 {% for social in site.social %}
 	{% if social.url %}
 	<li>
-		<i class="fa fa-{{ social.icon }}"></i>
+		<i class="fa-brands fa-{{ social.icon }}"></i>
 		<a href="{{ social.url }}" title="{{ social.desc }}">
 			<span class="username">{% if social.username %}{{ social.username }}{% else %}{{ social.name }}{% endif %}</span>
 		</a>

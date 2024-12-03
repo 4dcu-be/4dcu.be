@@ -100,13 +100,6 @@ descriptions:
 
 # Social icons and sharing options
 social:
-  - name: Twitter
-    icon: twitter
-    username: ProostSebastian
-    url: https://twitter.com/ProostSebastian
-    desc: Follow me on Twitter
-    share: true
-
   - name: GitHub
     icon: github
     username: 4dcu-be
@@ -114,11 +107,11 @@ social:
     desc: Fork me on GitHub
     share: false
 
-  - name: GitHub
-    icon: github
-    username: sepro
-    url: https://github.com/sepro
-    desc: Fork me on GitHub
+  - name: BlueSky
+    icon: bluesky
+    username: blog.4dcu.be
+    url: https://bsky.app/profile/blog.4dcu.be
+    desc: Follow me on BlueSky
     share: false
 
   - name: Facebook
