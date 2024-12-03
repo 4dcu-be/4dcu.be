@@ -8,19 +8,25 @@ cover_options: narrow
 sitemap: true
 ---
 
-I'm Sebastian, I was born in 1980-something, I have a PhD in Bio-informatics, I know a lot about computers and a bit about biology, I like movies, (retro-)games, sports and travelling. This blog is about some projects I'm working on in my spare time. Mostly to hone my programming skills, have some fun or try new technology. There will be some posts about games, machine learning, hardware, programming and web development, ...
-
-If you want to find out more about my research head over to [sebastian.proost.science](https://sebastian.proost.science) for details on what I'm doing at work. About where I was travelling to lately you can find posts on another blog [Beyond the Known](https://www.beyond-the-known.eu/) go and check it out.
+# About me ...
 
 
-![Box with things](/assets/mascot.no_shadow.png)
+Hi, I’m Sebastian! I was born in the 1980s, hold a PhD in Bioinformatics, and am passionate about blending my knowledge of computers with biology. Outside of work, I enjoy movies, (retro) gaming, sports, and traveling.  
 
-## Why 4DCu.be
+This blog is a space where I share projects I’m working on during my spare time—mainly to sharpen my programming skills, explore new technology, and have fun. Expect posts about games, machine learning, hardware tinkering, programming, and web development, among other tech-centric topics.  
 
-It should be read as 4D Cube! A 4D cube, also known as a hypercube or [tesseract](https://en.wikipedia.org/wiki/Tesseract), is the 4D equivalent of a cube, just as a cube is the 3D equivalent of a square. It appears very often in popular (and less popular) culture ranging from Marvel Blockbusters to cult-classics (e.g. [Cube²: Hypercube](https://en.wikipedia.org/wiki/Cube_2:_Hypercube)). Seemed like a suitable name  for a blog focusing on tech, programming and building things.
+If you’re curious about my research, visit [sebastian.proost.science](https://sebastian.proost.science) to dive into what I’m working on professionally. For travel stories, check out [Beyond the Known](https://www.beyond-the-known.eu/).  
 
+![Box with things](/assets/mascot.no_shadow.png)  
 
-## Like this blog ?
+---
 
-If you do, great! Feel free to reach out and let me know what you'd like to see more off! If you want to show your
-appreciation you can contribute to my caffeine addiction and [Buy me a Coffee](https://buymeacoffee.com/{{site.buy_me_a_coffee_username}}).
+### Why *4DCu.be*?  
+
+It’s pronounced *4D Cube*! A 4D cube, also known as a hypercube or [tesseract](https://en.wikipedia.org/wiki/Tesseract), is the four-dimensional equivalent of a cube, just as a cube is the 3D equivalent of a square. The concept pops up in everything from Marvel blockbusters to cult classics like [Cube²: Hypercube](https://en.wikipedia.org/wiki/Cube_2:_Hypercube). It felt like the perfect name for a blog focused on tech, programming, and creative projects.  
+
+---
+
+### Enjoying the Blog?  
+
+That’s awesome! I’d love to hear your thoughts or suggestions for future posts. If you’d like to show your support, consider fueling my caffeine-powered creativity and [buy me a coffee](https://buymeacoffee.com/{{site.buy_me_a_coffee_username}}).  
