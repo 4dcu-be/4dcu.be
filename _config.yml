@@ -114,7 +114,7 @@ social:
     username: blog.4dcu.be
     url: https://bsky.app/profile/blog.4dcu.be
     desc: Follow me on BlueSky
-    share: false
+    share: true
 
   - name: Facebook
     icon: facebook
@@ -124,6 +124,11 @@ social:
   - name: LinkedIn
     icon: linkedin
     desc: Share on LinkedIn
+    share: true
+
+  - name: X
+    icon: x-twitter
+    desc: Share on X
     share: true
 
 # Social sharing protocols
