@@ -33,7 +33,7 @@ layout: default
   </div>
 </section>
 
-<article class="post-content">
+<article class="post-content" data-pagefind-body>
   {{ content }}
 </article>
 
@@ -84,7 +84,7 @@ layout: default
   {% endfor %}
 </section>
 {% if site.inter_post_navigation == true %}
-	<section class="post-navigation" data-pagefind-ignore>
+	<section class="post-navigation" data-pagefind-ignore="all">
 		<span class="prev-post">
 			{% if page.previous.url %}
 				<a href="{{page.previous.url | prepend: site.baseurl}}">
