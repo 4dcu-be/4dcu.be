@@ -84,7 +84,7 @@ layout: default
   {% endfor %}
 </section>
 {% if site.inter_post_navigation == true %}
-	<section class="post-navigation" data-pagefind-ignore="all">
+	<section class="post-navigation">
 		<span class="prev-post">
 			{% if page.previous.url %}
 				<a href="{{page.previous.url | prepend: site.baseurl}}">

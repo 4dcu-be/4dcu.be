@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+<img data-pagefind-meta="image[src]" src="{{ page.cover | prepend: site.baseurl }}" style="display:none" />
 <div class="post-header-container {% if page.cover %}has-cover{% endif %}" {% if page.cover %}style="background-image: url({{ page.cover | prepend: site.baseurl }});"{% endif %}>
 	<div class="scrim {% if page.cover %}has-cover{% endif %} {% if page.cover_options %}{{ page.cover_options }}{% endif %}">
 		<header class="post-header">
