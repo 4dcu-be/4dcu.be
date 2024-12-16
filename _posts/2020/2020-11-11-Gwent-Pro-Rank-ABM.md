@@ -11,10 +11,10 @@ thumbnail: "/assets/images/thumbnails/crowd_header.png"
 github: "https://github.com/4dcu-be/GwentAgentBasedModeling"
 ---
 
-In an article I contributed to [Team Bandit Gang]'s website, data is shown about the number of games Pro Ranked players
-play at different ranks. Tough with the data that can be pulled from [Gwent Masters] assessing whether or not playing
-more will result in a higher ranking is difficult. So answering the question posed in the article, whether it is skill
-vs grinding games that will help you further, no definitive conclusions could be drawn. 
+With the data that can be pulled from [Gwent Masters] assessing whether playing
+more will result in a higher ranking is difficult. So answering whether it is skill
+vs grinding games that will help you further, is challenging from the data alone. However, with agent based models,
+where we can simulate players playing games, and control their skill level, there are options to address this properly.
 
 The main issue with the data released at the end of the season is that there is no good way to judge a player's 
 actual skill. You could use the number of games played and peak MMR as a metric for efficiency, but that isn't

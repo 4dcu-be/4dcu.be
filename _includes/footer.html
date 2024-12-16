@@ -98,8 +98,7 @@ $(document).ready(function() {
 		});
 });
 </script>
-{% if site.email %}
-<!-- Contact Modal -->
+<!-- Contact Modal and search modal-->
 <script type="text/javascript">
 $(document).ready(function() {
 	MicroModal.init();
@@ -125,12 +124,12 @@ $(document).ready(function() {
 
 });
 </script>
+
 <script>
     window.addEventListener('DOMContentLoaded', (event) => {
         new PagefindUI({ element: "#search" });
     });
 </script>
-{% endif %}
 
 {% if page.custom_js %}
 <!-- Custom page specific js files -->

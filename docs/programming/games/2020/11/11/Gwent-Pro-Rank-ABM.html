@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>An Agent Based Model to look at Gwent Pro Ladder (code)</title>
-  <meta name="description" content="In an article I contributed to Team Bandit Gang’s website, data is shown about the number of games Pro Ranked players play at different ranks. Tough with the...">
+  <meta name="description" content="With the data that can be pulled from Gwent Masters assessing whether playing more will result in a higher ranking is difficult. So answering whether it is s...">
   
   <meta name="author" content="Sebastian Proost">
   <meta name="copyright" content="&copy; Sebastian Proost 2024">
@@ -39,7 +39,7 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="In an article I contributed to Team Bandit Gang’s website, data is shown about the number of games Pro Ranked players play at different ranks. Tough with the..." />
+  <meta property="og:description" content="With the data that can be pulled from Gwent Masters assessing whether playing more will result in a higher ranking is difficult. So answering whether it is s..." />
   <meta property="og:url" content="https://blog.4dcu.be/programming/games/2020/11/11/Gwent-Pro-Rank-ABM.html">
   <meta property="og:site_name" content="4DCu.be" />
   <meta property="og:title" content="An Agent Based Model to look at Gwent Pro Ladder (code)" />
@@ -54,7 +54,7 @@
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="An Agent Based Model to look at Gwent Pro Ladder (code)">
-  <meta name="twitter:description" content="In an article I contributed to Team Bandit Gang’s website, data is shown about the number of games Pro Ranked players play at different ranks. Tough with the...">
+  <meta name="twitter:description" content="With the data that can be pulled from Gwent Masters assessing whether playing more will result in a higher ranking is difficult. So answering whether it is s...">
   <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/crowd_header.jpg">
   <meta name="twitter:url" content="https://blog.4dcu.be/programming/games/2020/11/11/Gwent-Pro-Rank-ABM.html">
   
@@ -149,10 +149,10 @@
 </section>
 
 <article class="post-content" data-pagefind-body>
-  <p>In an article I contributed to <a href="https://teambanditgang.com/climbing-pro-ladder-grind-vs-skill/">Team Bandit Gang</a>’s website, data is shown about the number of games Pro Ranked players
-play at different ranks. Tough with the data that can be pulled from <a href="https://masters.playgwent.com/en/">Gwent Masters</a> assessing whether or not playing
-more will result in a higher ranking is difficult. So answering the question posed in the article, whether it is skill
-vs grinding games that will help you further, no definitive conclusions could be drawn.</p>
+  <p>With the data that can be pulled from <a href="https://masters.playgwent.com/en/">Gwent Masters</a> assessing whether playing
+more will result in a higher ranking is difficult. So answering whether it is skill
+vs grinding games that will help you further, is challenging from the data alone. However, with agent based models,
+where we can simulate players playing games, and control their skill level, there are options to address this properly.</p>
 
 <p>The main issue with the data released at the end of the season is that there is no good way to judge a player’s 
 actual skill. You could use the number of games played and peak MMR as a metric for efficiency, but that isn’t
@@ -746,12 +746,12 @@ familiar pandas dataframe the actual analysis can begin. This however is reserve
 	<section class="post-navigation">
 		<span class="prev-post">
 			
-				<a href="/programming/games/2020/11/03/Team_Bandid_Gang.html">
+				<a href="/programming/2020/11/02/Steganography.html">
 					<span class="fa-stack fa-lg">
 						<i class="fa-solid fa-square fa-stack-2x"></i>
 						<i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i>
 					</span>
-					<span class="page-number">Guest Author for TBG!</span>
+					<span class="page-number">Steganography using PIL and NumPy</span>
 				</a>
 			
 		</span>
@@ -988,8 +988,7 @@ $(document).ready(function() {
 		});
 });
 </script>
-
-<!-- Contact Modal -->
+<!-- Contact Modal and search modal-->
 <script type="text/javascript">
 $(document).ready(function() {
 	MicroModal.init();
@@ -1015,12 +1014,12 @@ $(document).ready(function() {
 
 });
 </script>
+
 <script>
     window.addEventListener('DOMContentLoaded', (event) => {
         new PagefindUI({ element: "#search" });
     });
 </script>
-
 
 
 
