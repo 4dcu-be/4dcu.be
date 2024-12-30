@@ -113,7 +113,7 @@ If you’re considering embarking on your own watch-building adventure, don’t 
 </div>
 
 
-## Further Reading
+## More Information
 
 - [Elliot Coll’s YouTube channel](https://www.youtube.com/@elliotcoll): A great resource for watch enthusiasts and DIYers.
   - [Getting started](https://www.youtube.com/watch?v=g89vt-bN_Po): A simple NH35 build, good starting point
