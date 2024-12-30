@@ -113,4 +113,14 @@ If you’re considering embarking on your own watch-building adventure, don’t 
 </div>
 
 
+## Further Reading
+
+- [Elliot Coll’s YouTube channel](https://www.youtube.com/@elliotcoll): A great resource for watch enthusiasts and DIYers.
+  - [Getting started](https://www.youtube.com/watch?v=g89vt-bN_Po): A simple NH35 build, good starting point
+  - [An NH34 based submariner](https://www.youtube.com/watch?v=NSy5qoxqP0k): This one is a bit more advanced, with a GMT movement and a custom bezel
+- [Another good start](https://www.youtube.com/watch?v=EaOXeDo1y6A): Another NH35 build, by [Marcus O'Brien](https://www.youtube.com/@MarcusCreates)
+- [Building a VK63 Chronograph in a Royal Oak style case](https://www.youtube.com/watch?v=hf0V4pA0k9w) by [jbwatchmods](https://www.youtube.com/@jbwatchmods)
+
+
+
 [Elliot Coll]: https://www.youtube.com/@elliotcoll
