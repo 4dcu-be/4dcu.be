@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Building a custom GMT watch</title>
+  <meta name="description" content="With several custom watches under my belt, I felt ready to tackle a more advanced build. This project combines three modifications: building a GMT watch usin...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2025">
+  
+
+  <!-- External libraries -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="With several custom watches under my belt, I felt ready to tackle a more advanced build. This project combines three modifications: building a GMT watch usin..." />
+  <meta property="og:url" content="https://blog.4dcu.be/diy/2025/01/19/diy-mechanical-watch-2.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Building a custom GMT watch" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2025-01-19-diy-mechanical-watches-2/explorer_2_header.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Building a custom GMT watch">
+  <meta name="twitter:description" content="With several custom watches under my belt, I felt ready to tackle a more advanced build. This project combines three modifications: building a GMT watch usin...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2025-01-19-diy-mechanical-watches-2/explorer_2_header.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/diy/2025/01/19/diy-mechanical-watch-2.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="canonical" href="https://blog.4dcu.be/diy/2025/01/19/diy-mechanical-watch-2.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	<link rel="stylesheet" href="/css/main.css">
+
+	<!-- PageFind -->
+	<script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+
+	<script type='text/javascript'>
+	//<![CDATA[
+	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+	//]]>
+	</Script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+	<div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa-solid fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+<li class="nav-link"><a href="#" class="nav-link-search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/explorer_2_header.jpg" style="display:none" />
+<div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2025-01-19-diy-mechanical-watches-2/explorer_2_header.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Building a custom GMT watch</h1>
+			
+      <p class="info"><em>and swapping the crystal and date-wheel</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted January 19, 2025 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/diy">Diy</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content" data-pagefind-body>
+  <p>With several <a href="/diy/2024/11/11/diy-mechanical-watch.html">custom watches</a> under my belt, I felt ready to tackle a more advanced build. This project combines three modifications: building a GMT watch using the NH34 movement, upgrading the crystal, and customizing the date wheel. While these modifications require a few additional tools and introduce some new techniques, they’re excellent next steps for anyone comfortable with basic watch assembly.</p>
+
+<p>The NH34 movement, a reliable Seiko clone that typically costs around $35-50, has become increasingly popular among DIY watchmakers for good reason. At its heart is the GMT complication - a fourth hand that rotates once every 24 hours to track a second time zone. Unlike basic three-hand watches, GMT watches can simultaneously display both local time (say, New York at 2:00 PM) and another time zone (like London at 7:00 PM) using this additional hand. This functionality made GMT watches essential tools for pilots since the 1950s, and they remain valuable for international business and travel today.</p>
+
+<p>Beyond the GMT function, this build will introduce two key modifications: replacing the stock crystal with a double-domed version (which creates a subtle vintage effect), and swapping the date wheel to match our color scheme. The latter requires working directly with the movement’s components - a step up in difficulty from basic assembly - but manageable with patience and the right tools.</p>
+
+<p><a href="/assets/posts/2025-01-19-diy-mechanical-watches-2/explorer_shot_01.jpg" class="lightgallery-link" data-sub-html="Rolex Explorer 2 style watch with a light blue lumed dial">
+<img src="/assets/posts/2025-01-19-diy-mechanical-watches-2/explorer_shot_01.jpg" alt="Rolex Explorer 2 style watch with a light blue lumed dial" height="2574" width="2574" class="small-image" data-src="/assets/posts/2025-01-19-diy-mechanical-watches-2/explorer_shot_01.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="tools-required">Tools Required</h2>
+
+<p>To build this watch, we’ll need the same tools <a href="/diy/2024/11/11/diy-mechanical-watch.html">as before</a>, but also a few new ones. Here is a list of what I used:</p>
+
+<p>Tools from the previous build:</p>
+
+<ul>
+  <li><strong>Hand Setting Tools</strong></li>
+  <li><strong>Movement Holder</strong> and/or <strong>Case Cushion</strong></li>
+  <li><strong>Rodico</strong></li>
+  <li><strong>Tweezers</strong></li>
+  <li><strong>Case Back Opener</strong></li>
+  <li><strong>Spring Bar Tool</strong></li>
+  <li><strong>Loctite</strong></li>
+  <li><strong>Gasket Grease</strong></li>
+  <li><strong>Loupe or Magnifying Glass</strong> (Optional)</li>
+</ul>
+
+<p>New tools for this build:</p>
+
+<ul>
+  <li><strong>Crystal Press</strong>: Used to remove the old crystal and press in the new one.</li>
+  <li><strong>Precision Screwdriver Set</strong>: Used to open the movement remove the date wheel.</li>
+  <li><strong>800 Grit Sandpaper</strong>: Used to dress the screwdriver to fit the screws.</li>
+  <li><strong>Calipers</strong>: Used to measure the crystal.</li>
+</ul>
+
+<p>All these can easily be sourced from AliExpress or Amazon for relatively low cost. Even a simple crystal press can be had for around $10-20. For dipping your toes in the water, these tools are more than enough, but if you plan to do more builds, investing in higher quality tools could be worth it.</p>
+
+<h2 id="parts-needed">Parts Needed</h2>
+
+<ul>
+  <li><strong>NH34 Movement</strong>: A Seiko clone with a GMT complication.</li>
+  <li><strong>Case</strong>: I opted for an Explorer II style case compatible with the NH34, which has a fixed bezel with the GMT markers. But any case that fits the NH34 movement will do.</li>
+  <li><strong>Bracelet/strap</strong>: A bracelet or strap that fits the case (My case came with a bracelet).</li>
+  <li><strong>Dial</strong>: A dial suited for the NH34 movement. You can use any dial that works with the NH35 movement, but you might need to drill or file the hole to fit the GMT pinion. For this build I opted for a light blue sunburst dial, which an icy loom applied on the face of the dial itself. It has submariner style markers and a date window at 3 o’clock.</li>
+  <li><strong>Hands</strong>: A set of hands that fit the NH34 movement. The hour/minute/second hands are the same as for the NH35, but you will need a GMT hand. (I got a set of Mercedes hands with a matching GMT hand).</li>
+  <li><strong>Date Wheel</strong>: A date wheel that fits the NH34/NH35/NH36 movement. I used a white date wheel with blue lettering to match the dial.</li>
+  <li><strong>Crystal</strong>: A crystal that fits the case. I used a double domed mineral glass with a blue AR coating. (for my case it was 30.5 mm diameter with a 1.5 mm thickness) While sapphire crystals are more scratch-resistant, they are also considerably more expensive.</li>
+  <li><strong>Crown stems</strong>: A set of crown stems that fit the NH34 movement, it is good to have a few spares. While these should be the same as for the NH35, the ones I had from previous builds did not work. Make sure to order some that explicitly mention they are compatible with the NH34 movement.</li>
+</ul>
+
+<h2 id="replacing-the-crystal">Replacing the Crystal</h2>
+
+<p>The first step is to remove the old crystal. This is done by pressing the crystal out of the case. The crystal press comes with dies (nylon disks that will hold the case in place and push the crystal out), and you need to find the right size for your case. Put the case bottom up in the press, ensure the die size is correct and press the crystal out. Be careful not to press too hard, as you might damage the case. It doesn’t require that much force, so if it doesn’t move, check if the die is correctly sized and placed.</p>
+
+<p>Once the crystal is out, take your calipers and measure the diameter and thickness of the crystal. You will need this information to order a new crystal. I ordered a double domed mineral crystal with a blue AR coating. The AR coating will give the crystal a blue tint, and it will reduce reflections.</p>
+
+<p>Note: Always round measurements to the nearest 0.1mm when ordering. For example, if you measure 30.52mm, order a 30.5mm crystal.</p>
+
+<p>To install the new crystal, put the case bottom down in the press, put the new crystal in ensure the die is correctly sized, and press the crystal in. Again, be careful not to press too hard, as you might damage the crystal, the case or the press itself. You might need to turn the case a bit and press multiple times to ensure even pressure so the crystal is properly seated in the case.  Before finalizing the press, carefully inspect the crystal and case for any trapped dust or smudges. Use a blower or lint-free cloth to remove any debris, as this will help achieve a cleaner result.</p>
+
+<p>If you have the equipment to test if the case is still waterproof, you can do that now. I don’t have that equipment, so I put the case (with crown screwed in and back closed) submerged in a glass of water for a few hours to see if any water would get in. Which would make the watch water-resistant enough for my everyday use (I don’t take showers with a watch, nor do I wear one when swimming). If you do this, make sure to dry the case thoroughly before proceeding.</p>
+
+<h2 id="swapping-the-date-wheel">Swapping the Date Wheel</h2>
+
+<p>To remove the date wheel, the movement needs to be opened, which is done by unscrewing four small screws on the front of the movement. These screws are tiny, so you need a precision screwdriver set to remove them. The screws are also very tight, so you might need to dress the screwdriver to fit the screws. This is done by sanding the tip of the screwdriver with 800 grit sandpaper until it fits the screw.</p>
+
+<p>Once the screws are removed, the top plate (the date indicator plate) can be removed carefully (I picked it up using some Rodico). Once this plate is removed, the date wheel can be removed by carefully lifting it out of the movement. Be careful as with this plate removed, other parts like the 24-hour wheel, date jumper can easily fall out of the movement. The new date wheel can be installed by carefully placing it in the movement. Ensure that the lever from the date jumper is set correctly and put the top plate back on. Screw the four screws back in, tighten them carefully until they are snug, but don’t over-tighten them. Now test the date function (and other complications) to ensure it works correctly.</p>
+
+<p>Here it really pays off to look at the <a href="https://www.timemodule.com/uploads/attachments/download/Technical%20Guide/NH34_TG.pdf">NH34 technical documentation</a>, which can be found online. It will show you which parts are where, and how they should be placed. It will also show you how the date wheel is installed.</p>
+
+<h2 id="building-the-watch">Building the Watch</h2>
+
+<p>With the case and movement now ready, it is time to build the watch. Which at this point is similar to previous builds. The dial is placed on the movement after removing the feet which aren’t needed, and the hands are installed (note that the NH34 requires a dial spacer that should come with the movement, the technical docs show the correct orientation). The GMT hand is installed first on the GMT pinion. This requires some precision, as the hand needs to be installed without touching the dial or the other hands. The hour/minute/second hands are installed as before, and the date is set. The movement is then put in the case, and the case back is closed. Finally, the bracelet/strap can be attached to complete the build.</p>
+
+<p><a href="/assets/posts/2025-01-19-diy-mechanical-watches-2/explorer_shot_02.jpg" class="lightgallery-link" data-sub-html="Rolex Explorer 2 style watch with a light blue lumed dial">
+<img src="/assets/posts/2025-01-19-diy-mechanical-watches-2/explorer_shot_02.jpg" alt="Rolex Explorer 2 style watch with a light blue lumed dial" height="2071" width="2070" class="small-image" data-src="/assets/posts/2025-01-19-diy-mechanical-watches-2/explorer_shot_02.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Building a GMT watch is a bit more challenging than building a regular three-hand watch, and requires a bit more precision installing the hands. The custom crystal and date-wheel do push the difficulty of this build to add subtle personal touches to the watch, and make it unique. I’m also increasingly impressed with how robust the NH-series movements are! There were a few points during the build process I was scared I might have damaged the movement, but it kept on ticking. So don’t be afraid to try new things with these movements, they are quite forgiving, just take it slow and be careful.</p>
+
+<p>For me, this GMT watch now completes my collection of custom watches, and I’m quite happy with the results. I would like to try swapping the rotor on one of them, and learn how to properly regulate these movements, but that will be for another time. I hope this post has inspired you to try building your own custom watch, and you’ll have fun doing it!</p>
+
+<h2 id="bonus-updated-my-other-watches">Bonus: Updated my Other Watches</h2>
+
+<p>As I initially planned to build this watch with a <a href="https://www.watch-wiki.net/doku.php?id=bracelet#jubilee">jubilee bracelet</a>. However, once things started to come together, I found this watch too
+sporty for that bracelet. So I swapped it with the <a href="https://www.watch-wiki.net/doku.php?id=bracelet#oyster">oyster bracelet</a> from my previous build! Now that watch has a more formal look, and I think it suits it better. I also updated the strap on my NH72 build for a rougher leather strap, which is a saturated brown that complements the red second hand. Have a look at the results below, I’m very pleased with how they turned out!</p>
+
+<p><a href="/assets/posts/2025-01-19-diy-mechanical-watches-2/jubilee_bracelet.jpg" class="lightgallery-link" data-sub-html="An explorer style watch with a blue dial, glowing lume and jubilee bracelet on a soft pad">
+<img src="/assets/posts/2025-01-19-diy-mechanical-watches-2/jubilee_bracelet.jpg" alt="An explorer style watch with a blue dial, glowing lume and jubilee bracelet on a soft pad" height="2183" width="2182" class="small-image" data-src="/assets/posts/2025-01-19-diy-mechanical-watches-2/jubilee_bracelet.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="further-reading">Further Reading</h2>
+
+<ul>
+  <li><a href="/diy/2024/11/11/diy-mechanical-watch.html">Building a custom mechanical watch</a>: Details on my previous builds</li>
+  <li><a href="https://www.youtube.com/watch?v=BsLNnYiB_V0">Replacing the date wheel on an NH35</a></li>
+  <li><a href="https://www.youtube.com/watch?v=9Z3Ni89E4xg">Builing an NH34 Two Tone Watch</a> by <a href="https://www.youtube.com/@jbwatchmods">jbwatchmods</a></li>
+  <li><a href="https://www.youtube.com/watch?v=JM7Do8RU90c">Explorer II GMT build</a> by <a href="https://www.youtube.com/@elliotcoll">Elliot Coll</a></li>
+  <li><a href="https://www.youtube.com/watch?v=5UEjFZutgU8">NH36 Samurai style build</a> which includes a crystal swap by <a href="https://www.youtube.com/@LumeShot">LumeShot</a></li>
+  <li><a href="https://www.youtube.com/watch?v=KayliCyDOKo">How to dress a screwdriver</a> by [WelwynWatches]https://www.youtube.com/@welwynwatches5976</li>
+</ul>
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/tag/mechanical">mechanical</a>,&nbsp;<a href="/tag/watch">watch</a>,&nbsp;<a href="/tag/watchmaking">watchmaking</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+	    
+    
+    
+  
+    
+    
+	    
+      <a href="//bsky.app/intent/compose?text=Building+a+custom+GMT+watch%20https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2025%2F01%2F19%2Fdiy-mechanical-watch-2.html"
+        target="_blank">
+        <i class="fa-brands fa-bluesky"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+	    
+    
+      <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2025%2F01%2F19%2Fdiy-mechanical-watch-2.html"
+        target="_blank">
+        <i class="fa-brands fa-square-facebook fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+	    
+    
+    
+      <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2025%2F01%2F19%2Fdiy-mechanical-watch-2.html"
+        target="_blank">
+        <i class="fa-brands fa-linkedin fa-lg"></i>
+      </a>
+    
+  
+    
+    
+      <a href="//x.com/share?text=Building+a+custom+GMT+watch&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2025%2F01%2F19%2Fdiy-mechanical-watch-2.html&via="
+        target="_blank">
+        <i class="fa-brands fa-x-twitter fa-lg"></i>
+      </a>
+    
+	    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/diy/2024/11/11/diy-mechanical-watch.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa-solid fa-square fa-stack-2x"></i>
+						<i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">DIY mechanical watches on a budget</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+		<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div>
+			<div class="site-navigation">
+
+				<p><strong>Site Map</strong></p>
+				<ul class="pages">
+					
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+				</ul>
+				<br />
+				<p><strong>Legal</strong></p>
+				<p><a href="/policy/">Privacy policy</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Contribute</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+				
+				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+
+
+
+
+  </body>
+
+</html>

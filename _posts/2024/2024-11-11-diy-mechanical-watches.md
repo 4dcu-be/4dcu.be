@@ -17,7 +17,7 @@ gallery_items:
 
 I recently embarked on a watch-building journey, inspired by a YouTube video from [Elliot Coll], where he demonstrated how to [build custom watches using affordable parts](https://www.youtube.com/watch?v=g89vt-bN_Po). With the rise of accessible components from platforms like AliExpress, it’s now easier than ever to create unique, high-quality timepieces without breaking the bank. In this post, I’ll show off three watches I built using budget-friendly parts: a classic dress watch, a rugged titanium pilot, and a sleek chronograph. If you’ve ever considered building your own watch, this guide will walk you through the essentials, starting with movements like the NH35, NH72, and VK63. Each of these can be built for around €100 in parts, making it an affordable way to create custom timepieces.
 
-## Tools needed
+## Tools Needed
 
 Before diving into the build process, it’s essential to have the right tools on hand to ensure a smooth assembly. While complete watchmaking kits are available, they often include tools you might never use. Here’s a curated list of what you’ll need:
 
@@ -35,7 +35,7 @@ Before diving into the build process, it’s essential to have the right tools o
 
 All of these tools are easily sourced from AliX and should cost around €30-40.
 
-## First Build: An Explorer-style watch
+## First Build: An Explorer-style Watch
 
 For my first custom watch, I wanted a worthy replacement for my old digital-analog G-Shock, which had a striking deep blue dial but an overly bulky case. After the G-Shock was damaged beyond repair, I saw the chance to design something that maintained the same rich color scheme in a more refined package. Drawing inspiration from the Rolex Explorer and Seiko Prospex Alpinist, I chose the NH35 movement for its reliability and ease of use—a perfect choice for a first build. The result is a slim, elegant watch that channels the essence of my old G-Shock with a timeless, sophisticated look.
 
@@ -43,7 +43,7 @@ For my first custom watch, I wanted a worthy replacement for my old digital-anal
 
 - **NH35A Movement**: Equipped with a sleek black date wheel, to blend in with the dark dial.
 - **Blue "Seiko" Dial**: A deep, rich blue to capture the look of my old G-Shock.
-- **36mm Stainless Steel Case**: Features an exhibition back, paired with an oyster bracelet for a classic finish.
+- **36 mm Stainless Steel Case**: Features an exhibition back, paired with an oyster bracelet for a classic finish.
 - **Simple Set of Hands**: Clean and minimal, allowing the blue dial to take center stage.
 
 ![DIY Explorer/Alpinist style watch with deep blue dial](/assets/posts/2024-11-11-diy-mechanical-watches/explorer_03.jpg){:.small-image}
@@ -58,13 +58,13 @@ While my first watch features an exhibition case back to showcase the movement, 
 
 ### Parts List
 
-Here are the key components chosen for this titanium pilot watch:
+Here are the key parts chosen for this titanium pilot watch:
 
 - **NH72 Movement**: A skeletonized movement, with some of the intricate details of the mechanical movement visible.
 - **Open Dial for NH72**: Designed specifically for the NH72, this dial exposes the movement.
 - **Simple Hands with Red Second Hand**: Clean, minimal hands with a touch of color from the red second hand.
 - **36mm Titanium Pilot Case**: A lightweight yet durable case with a sleek, matte finish for a subtle look.
-- **Plastic Movement Ring**: Required when using a NH72 movement with a dial.
+- **Plastic Movement Ring**: Required when using a NH72 movement with a dial in a case that fits the NH3X-family movements. When using an NH7X specific case without the dial, you might not need this and use the movement ring that comes with the movement instead.
 - **Leather Strap**: To create some contrast with the metal.
 
 ![My titanium pilot watch on my wrist](/assets/posts/2024-11-11-diy-mechanical-watches/pilot_03.jpg)
@@ -98,7 +98,7 @@ Once you complete a basic build, there are plenty of ways to further customize y
 - **Customize the Rotor**: Swap out the rotor for a different design, or simply add a decal to give it a unique look.
 - **Add Custom Logos to the Dial**: Personalize the dial with your own logo to make the watch truly one-of-a-kind. 
 
-For me personally, I'd like to do a build with a light dial and a GMT hand, probably in an Explorer II style case but with a jubilee bracelet. 
+For me personally, I'd like to do a build with a light dial and a GMT hand, probably in an Explorer II style case but with a jubilee bracelet. (**Update:** I built one, and it turned out great! Read about it [here]({% post_url 2025/2025-01-19-diy-mechanical-watches-2%})) 
 
 ## Conclusion
 
