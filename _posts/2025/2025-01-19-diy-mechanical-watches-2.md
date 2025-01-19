@@ -106,4 +106,4 @@ sporty for that bracelet. So I swapped it with the [oyster bracelet](https://www
 - [Builing an NH34 Two Tone Watch](https://www.youtube.com/watch?v=9Z3Ni89E4xg) by [jbwatchmods](https://www.youtube.com/@jbwatchmods)
 - [Explorer II GMT build](https://www.youtube.com/watch?v=JM7Do8RU90c) by [Elliot Coll](https://www.youtube.com/@elliotcoll)
 - [NH36 Samurai style build](https://www.youtube.com/watch?v=5UEjFZutgU8) which includes a crystal swap by [LumeShot](https://www.youtube.com/@LumeShot)
-- [How to dress a screwdriver](https://www.youtube.com/watch?v=KayliCyDOKo) by [WelwynWatches]https://www.youtube.com/@welwynwatches5976
+- [How to dress a screwdriver](https://www.youtube.com/watch?v=KayliCyDOKo) by [WelwynWatches](https://www.youtube.com/@welwynwatches5976)
