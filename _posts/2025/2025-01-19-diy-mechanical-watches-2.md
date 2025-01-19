@@ -74,7 +74,7 @@ If you have the equipment to test if the case is still waterproof, you can do th
 
 ## Swapping the Date Wheel
 
-To remove the date wheel, the movement needs to be opened, which is done by unscrewing four small screws on the front of the movement. These screws are tiny, so you need a precision screwdriver set to remove them. The screws are also very tight, so you might need to dress the screwdriver to fit the screws. This is done by sanding the tip of the screwdriver with 800 grit sandpaper until it fits the screw. 
+To remove the date wheel, the movement needs to be opened, which is done by unscrewing four small screws on the front of the movement. These screws are tiny, so you need a precision screwdriver set to remove them. The screws are also very tight, so you might need to [dress the screwdriver](https://www.youtube.com/watch?v=KayliCyDOKo) to fit the screws. This is done by sanding the tip of the screwdriver with 800 grit sandpaper until it fits the screw. 
 
 Once the screws are removed, the top plate (the date indicator plate) can be removed carefully (I picked it up using some Rodico). Once this plate is removed, the date wheel can be removed by carefully lifting it out of the movement. Be careful as with this plate removed, other parts like the 24-hour wheel, date jumper can easily fall out of the movement. The new date wheel can be installed by carefully placing it in the movement. Ensure that the lever from the date jumper is set correctly and put the top plate back on. Screw the four screws back in, tighten them carefully until they are snug, but don't over-tighten them. Now test the date function (and other complications) to ensure it works correctly.
 
