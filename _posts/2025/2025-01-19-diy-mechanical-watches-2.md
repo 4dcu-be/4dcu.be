@@ -15,7 +15,7 @@ gallery_items:
     description: "Another watch made from AliExpress parts, this time with a GMT complication."
 ---
 
-With several [custom watches]({% post_url 2024/2024-11-11-diy-mechanical-watches %}) under my belt, I felt ready to tackle a more advanced build. This project combines three modifications: building a GMT watch using the NH34 movement, upgrading the crystal, and customizing the date wheel. While these modifications require a few additional tools and introduce some new techniques, they're excellent next steps for anyone comfortable with basic watch assembly.
+With several [custom watches]({% post_url 2024/2024-11-11-diy-mechanical-watches %}) under my belt, I felt ready to tackle a more advanced build. This project combines three new elements: building a GMT watch using the NH34 movement, upgrading the crystal, and customizing the date wheel. While these modifications require a few additional tools and introduce some new techniques, they're excellent next steps for anyone comfortable with basic watch assembly.
 
 The NH34 movement, a reliable Seiko clone that typically costs around $35-50, has become increasingly popular among DIY watchmakers for good reason. At its heart is the GMT complication - a fourth hand that rotates once every 24 hours to track a second time zone. Unlike basic three-hand watches, GMT watches can simultaneously display both local time (say, New York at 2:00 PM) and another time zone (like London at 7:00 PM) using this additional hand. This functionality made GMT watches essential tools for pilots since the 1950s, and they remain valuable for international business and travel today.
 
