@@ -21,8 +21,7 @@ The NH34 movement, a reliable Seiko clone that typically costs around $35-50, ha
 
 Beyond the GMT function, this build will introduce two key modifications: replacing the stock crystal with a double-domed version (which creates a subtle vintage effect), and swapping the date wheel to match our color scheme. The latter requires working directly with the movement's components - a step up in difficulty from basic assembly - but manageable with patience and the right tools.
 
-
-![Rolex Explorer 2 style watch with a light blue lumed dial](/assets/posts/2025-01-19-diy-mechanical-watches-2/explorer_shot_01.jpg){:.small-image}
+![My custom GMT watch with crystal and date wheel replaced, displayed on a brown suede cushion against a textured wooden background.](/assets/posts/2025-01-19-diy-mechanical-watches-2/explorer_2_03.jpg)
 
 ## Tools Required
 
@@ -68,7 +67,8 @@ Once the crystal is out, take your calipers and measure the diameter and thickne
 
 Note: Always round measurements to the nearest 0.1mm when ordering. For example, if you measure 30.52mm, order a 30.5mm crystal.
 
-![My custom GMT watch with crystal and date wheel replaced, displayed on a brown suede cushion against a textured wooden background.](/assets/posts/2025-01-19-diy-mechanical-watches-2/explorer_2_03.jpg)
+![Rolex Explorer 2 style watch with a light blue lumed dial](/assets/posts/2025-01-19-diy-mechanical-watches-2/explorer_shot_01.jpg){:.small-image}
+
 
 To install the new crystal, put the case bottom down in the press, put the new crystal in ensure the die is correctly sized, and press the crystal in. Again, be careful not to press too hard, as you might damage the crystal, the case or the press itself. You might need to turn the case a bit and press multiple times to ensure even pressure so the crystal is properly seated in the case.  Before finalizing the press, carefully inspect the crystal and case for any trapped dust or smudges. Use a blower or lint-free cloth to remove any debris, as this will help achieve a cleaner result.
 
