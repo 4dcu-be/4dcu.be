@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Building a Custom Deej Volume Mixer with an RP2040 Pro Micro</title>
+  <meta name="description" content="Looking for a DIY hardware volume mixer to control individual app volumes effortlessly? Whether you’re a gamer, streamer, or audio enthusiast, manually adjus...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2025">
+  
+
+  <!-- External libraries -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Looking for a DIY hardware volume mixer to control individual app volumes effortlessly? Whether you’re a gamer, streamer, or audio enthusiast, manually adjus..." />
+  <meta property="og:url" content="https://blog.4dcu.be/diy/programming/2025/02/03/deej-open-hardware-volume-controller.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Building a Custom Deej Volume Mixer with an RP2040 Pro Micro" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2025-02-03-deej-open-hardware-volume-controller/deej_02.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Building a Custom Deej Volume Mixer with an RP2040 Pro Micro">
+  <meta name="twitter:description" content="Looking for a DIY hardware volume mixer to control individual app volumes effortlessly? Whether you’re a gamer, streamer, or audio enthusiast, manually adjus...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2025-02-03-deej-open-hardware-volume-controller/deej_02.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/diy/programming/2025/02/03/deej-open-hardware-volume-controller.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="canonical" href="https://blog.4dcu.be/diy/programming/2025/02/03/deej-open-hardware-volume-controller.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	<link rel="stylesheet" href="/css/main.css">
+
+	<!-- PageFind -->
+	<script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+
+	<script type='text/javascript'>
+	//<![CDATA[
+	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+	//]]>
+	</Script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+	<div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa-solid fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+<li class="nav-link"><a href="#" class="nav-link-search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/deej_header.jpg" style="display:none" />
+<div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2025-02-03-deej-open-hardware-volume-controller/deej_02.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Building a Custom Deej Volume Mixer with an RP2040 Pro Micro</h1>
+			
+      <p class="info"><em>using CircuitPython</em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted February 3, 2025 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/diy">Diy</a>, 
+    
+  
+    
+    <a href="/category/programming">Programming</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content" data-pagefind-body>
+  <p>Looking for a DIY hardware volume mixer to control individual app volumes effortlessly? Whether you’re a gamer, streamer, or audio enthusiast, manually adjusting software volume sliders can be frustrating. That’s where <a href="https://github.com/omriharel/deej">Deej</a>, an open-source USB volume mixer, comes in.</p>
+
+<p>This guide will show you how I’ve built a Deej volume mixer using an RP2040 Pro Micro, a Raspberry Pi Pico-based microcontroller with native USB support, better performance, and a USB-C port. Unlike the more common Arduino-based builds, this setup takes advantage of <a href="https://circuitpython.org/">CircuitPython</a> for an easy-to-code, powerful alternative.</p>
+
+<p>As there are many ways to build a Deej, I’ll show you my build, and then we’ll cover writing the code and configuring Deej. Hopes this gives you a good starting point for your own custom volume mixer.</p>
+
+<h2 id="what-you-need">What You Need</h2>
+
+<p>Before you start, gather the following components and tools:</p>
+
+<ul>
+  <li><strong>RP2040 Pro Micro</strong> – An RP2040-based microcontroller which will do the heavy lifting.</li>
+  <li><strong>Potentiometers</strong> – Three 10K Ohm potentiometers for adjusting volume levels.</li>
+  <li><strong>Knobs</strong> – Three knobs to attach to the potentiometers.</li>
+  <li><strong>Perfboard</strong> – A small piece of perfboard for soldering components.</li>
+  <li><strong>Jumper wires</strong> – To connect components on the perfboard.</li>
+  <li><strong>Case</strong> – A custom enclosure to house the components.</li>
+  <li>
+    <p><strong>Soldering gear</strong> – A soldering iron, solder, and flux for assembling the hardware.</p>
+  </li>
+  <li>Optional parts if you want to add a <strong>power indicator</strong>:
+    <ul>
+      <li><strong>3 mm LED</strong> - An LED to indicate when the device is powered on.</li>
+      <li><strong>82 Ohm resistor</strong> – To limit the current to the LED.</li>
+      <li><strong>LED holder</strong> - To secure the LED in place and make it look nice.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="assembling-the-hardware">Assembling the Hardware</h2>
+
+<p>I first started preparing the case, I mocked up the front panel in <a href="https://inkscape.org/">Inkscape</a> and placed all components until I was
+happy with the layout. I printed this design on sticker paper, which I then applied to the front panel. This way I could
+drill holes for the potentiometers and LED holder in exactly the right spots.</p>
+
+<p><a href="/assets/posts/2025-02-03-deej-open-hardware-volume-controller/front_panel_design.png" class="lightgallery-link" data-sub-html="Front panel design for the deej volume mixer">
+<img src="/assets/posts/2025-02-03-deej-open-hardware-volume-controller/front_panel_design.png" alt="Front panel design for the deej volume mixer" height="209" width="664" data-src="/assets/posts/2025-02-03-deej-open-hardware-volume-controller/front_panel_design.png" loading="lazy" />
+</a></p>
+
+<p>Next, I soldered the RP2040 Pro Micro to the perfboard, connecting the potentiometers and LED to the microcontroller. The LED’s cathode needs to be connected to the ground, the anode to the RP2040’s <strong>GP8</strong> (though this can be nearly any other GPIO pin) pin through the <strong>82 Ohm</strong> resistor. The potentiometers’ <strong>middle pins</strong> connect to the RP2040’s <strong>GP26, GP27, and GP28</strong> pins, respectively. For the potentiometers, only these pins can be used as they are the only ones supporting Analog-to-Digital Conversion (ADC), which is needed to get the potentiometers’ values. The other pins of the pot-meters go to ground and 3.3V.</p>
+
+<p>Then I mounted the perfboard in my case, which required drilling two screw-holes in the board. In the case, which had a few spots intented to screw a pcb down, I added threaded-inserts to make sure the screws would hold the board in place. I also added a hole for the USB-C port of the RP2040 Pro Micro to be accessible on the back panel. Finally, I attached the knobs to the potentiometers and secured the LED holder in place.</p>
+
+<p><a href="/assets/posts/2025-02-03-deej-open-hardware-volume-controller/deej_03.jpg" class="lightgallery-link" data-sub-html="A DIY audio volume mixer with a minimalist design, featuring a vintage-looking enclosure, three black rotary knobs with white indicators, and a glowing white LED light on the front panel. The device is placed on a wooden surface.">
+<img src="/assets/posts/2025-02-03-deej-open-hardware-volume-controller/deej_03.jpg" alt="A DIY audio volume mixer with a minimalist design, featuring a vintage-looking enclosure, three black rotary knobs with white indicators, and a glowing white LED light on the front panel. The device is placed on a wooden surface." height="675" width="1080" data-src="/assets/posts/2025-02-03-deej-open-hardware-volume-controller/deej_03.jpg" loading="lazy" />
+</a></p>
+
+<p>The case I picked must have been in my parts bin for 20 something years, the DIY electronics kit I initially bought it for, despite it being the recommended enclosure, didn’t fit well. Given the retro-vibe of the case, I decided to go with equally retro knobs, the single white LED being the sole hint this project didn’t originate in the 80s or 90s.</p>
+
+<h2 id="preparing-the-rp2040">Preparing the RP2040</h2>
+
+<p>In case you haven’t already, you’ll need to set up the RP2040 Pro Micro for use with CircuitPython. Follow the steps in the <a href="https://learn.adafruit.com/getting-started-with-raspberry-pi-pico-circuitpython/circuitpython">Adafruit guide</a> to install CircuitPython on the RP2040. Once you’ve done that, you can proceed with the next steps.</p>
+
+<h2 id="writing-the-code">Writing the Code</h2>
+
+<p>To interact with Deej, you need a device that mimics a serial device and sends the desired volume levels as messages on that serial connection. Values need to be between 0 and 1023, with 0 being muted and 1023 being the maximum volume, separated by pipes (<code class="language-plaintext highlighter-rouge">|</code>). CircuitPython makes this trivial as it will open a serial connection by default and print statements will be sent over this connection. For instance, printing <code class="language-plaintext highlighter-rouge">0|512|1023</code>, when picked up by Deej, will set the first channel to 0, the second to 50%, and the last one to 100%.</p>
+
+<p>The code I’m using for reading the potentiometers and sending the values over the serial connection looks like this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">board</span>
+<span class="kn">import</span> <span class="nn">analogio</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">pwmio</span>
+
+<span class="c1"># Constants
+</span><span class="n">MIN_VALUE</span> <span class="o">=</span> <span class="mi">340</span>
+<span class="n">MAX_VALUE</span> <span class="o">=</span> <span class="mi">65535</span>
+<span class="n">RANGE</span> <span class="o">=</span> <span class="n">MAX_VALUE</span> <span class="o">-</span> <span class="n">MIN_VALUE</span>
+<span class="n">ADC_PINS</span> <span class="o">=</span> <span class="p">[</span><span class="n">board</span><span class="p">.</span><span class="n">GP26</span><span class="p">,</span> <span class="n">board</span><span class="p">.</span><span class="n">GP28</span><span class="p">,</span> <span class="n">board</span><span class="p">.</span><span class="n">GP27</span><span class="p">]</span>
+<span class="n">SAMPLES</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">SLEEP_TIME</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># 100ms delay
+</span>
+<span class="c1"># Set up ADC inputs
+</span><span class="n">ADCs</span> <span class="o">=</span> <span class="p">[</span><span class="n">analogio</span><span class="p">.</span><span class="n">AnalogIn</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span> <span class="k">for</span> <span class="n">pin</span> <span class="ow">in</span> <span class="n">ADC_PINS</span><span class="p">]</span>
+
+<span class="c1"># Set up LED, use PWM otherwise it is too bright
+</span><span class="n">pwm</span> <span class="o">=</span> <span class="n">pwmio</span><span class="p">.</span><span class="n">PWMOut</span><span class="p">(</span><span class="n">board</span><span class="p">.</span><span class="n">GP8</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">duty_cycle</span><span class="o">=</span><span class="mi">32768</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_smoothed_adc_value</span><span class="p">(</span><span class="n">adc</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="n">SAMPLES</span><span class="p">):</span>
+    <span class="s">"""Reads and averages multiple ADC samples for noise reduction."""</span>
+    <span class="n">smooth_value</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">adc</span><span class="p">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">samples</span><span class="p">))</span> <span class="o">//</span> <span class="n">samples</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">smooth_value</span> <span class="o">-</span> <span class="n">MIN_VALUE</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1023</span><span class="p">)</span> <span class="o">//</span> <span class="n">RANGE</span>
+
+<span class="k">def</span> <span class="nf">read_pot_values</span><span class="p">():</span>
+    <span class="s">"""Reads and returns smoothed values from all ADCs."""</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">get_smoothed_adc_value</span><span class="p">(</span><span class="n">adc</span><span class="p">)</span> <span class="k">for</span> <span class="n">adc</span> <span class="ow">in</span> <span class="n">ADCs</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">send_pot_values</span><span class="p">(</span><span class="n">pot_values</span><span class="p">):</span>
+    <span class="s">"""Formats and prints potentiometer values."""</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'|'</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pot_values</span><span class="p">)))</span>
+
+<span class="c1"># Main loop
+</span><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">pot_values</span> <span class="o">=</span> <span class="n">read_pot_values</span><span class="p">()</span>
+    <span class="n">send_pot_values</span><span class="p">(</span><span class="n">pot_values</span><span class="p">)</span>
+    <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">SLEEP_TIME</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This code reads the values for the potentiometers, smooths them out (by averaging multiple measurements), and sends them over the serial connection. The <code class="language-plaintext highlighter-rouge">MIN_VALUE</code> and <code class="language-plaintext highlighter-rouge">MAX_VALUE</code> constants are used to scale the ADC values to the desired range (and might need to be adjusted for other devices). The <code class="language-plaintext highlighter-rouge">RANGE</code> constant is the difference between the maximum and minimum values. The <code class="language-plaintext highlighter-rouge">SAMPLES</code> constant determines how many samples are taken to smooth out the ADC values. The <code class="language-plaintext highlighter-rouge">SLEEP_TIME</code> constant sets the delay between each reading, you’ll want this to trigger often enough so Deej responds quickly to changes, but not too often to flood the serial connection. I found 100 ms to be a good balance, but I’ve seen implementations with delays as low as 10 ms. If you want to use this, just save it as <code class="language-plaintext highlighter-rouge">code.py</code> on the RP2040 Pro Micro.</p>
+
+<h2 id="configuring-deej">Configuring Deej</h2>
+
+<p>On the host computer, download Deej from the <a href="https://github.com/omriharel/deej">official GitHub repository</a>, the executable simply needs to be stored somewhere and in the same folder a <code class="language-plaintext highlighter-rouge">config.yaml</code> file needs to be created, which will specify which serial port to use and which channel controls which app. The <code class="language-plaintext highlighter-rouge">config.yaml</code> file should look something like this:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">slider_mapping</span><span class="pi">:</span>
+  <span class="na">0</span><span class="pi">:</span> <span class="s">master</span>
+  <span class="na">1</span><span class="pi">:</span> <span class="s">chrome.exe</span>
+  <span class="na">2</span><span class="pi">:</span> <span class="s">mic</span>
+
+
+<span class="c1"># set this to true if you want the controls inverted (i.e. top is 0%, bottom is 100%)</span>
+<span class="na">invert_sliders</span><span class="pi">:</span> <span class="no">false</span>
+
+<span class="c1"># settings for connecting to the RP2040 Pro Micro</span>
+<span class="na">com_port</span><span class="pi">:</span> <span class="s">COM4</span>
+<span class="na">baud_rate</span><span class="pi">:</span> <span class="m">9600</span>
+
+<span class="c1"># adjust the amount of signal noise reduction depending on your hardware quality</span>
+<span class="c1"># supported values are "low" (excellent hardware), "default" (regular hardware) or "high" (bad, noisy hardware)</span>
+<span class="na">noise_reduction</span><span class="pi">:</span> <span class="s">default</span>
+</code></pre></div></div>
+
+<p>I’ve set things up so the knobs from left to right control the master volume, chrome (useful for YouTube, …), and the microphone. The <code class="language-plaintext highlighter-rouge">com_port</code> should be set to the port the RP2040 Pro Micro is assigned to (tip: you can find this using Windows’ device manager).  Now you can start Deej and enjoy your new hardware volume mixer!</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Building a custom Deej volume mixer with an RP2040 Pro Micro is a fun and rewarding project that offers a tactile way to control your system audio. Using an RP2040 based microcontroller running CircuitPython is a great alternative to the Arduino-based solutions when you are familiar with Python and want to leverage the RP2040’s capabilities. With a few components and some basic soldering skills, you can create a custom volume mixer that enhances your audio experience. Happy tinkering!</p>
+
+<p><a href="/assets/posts/2025-02-03-deej-open-hardware-volume-controller/deej_01.jpg" class="lightgallery-link" data-sub-html="A DIY volume mixer with a sleek retro enclosure and a black front panel, featuring three black rotary knobs with white indicators and a small metal LED holder. The device sits on a wooden surface, showcasing its clean and minimalist design.">
+<img src="/assets/posts/2025-02-03-deej-open-hardware-volume-controller/deej_01.jpg" alt="A DIY volume mixer with a sleek retro enclosure and a black front panel, featuring three black rotary knobs with white indicators and a small metal LED holder. The device sits on a wooden surface, showcasing its clean and minimalist design." height="675" width="1080" data-src="/assets/posts/2025-02-03-deej-open-hardware-volume-controller/deej_01.jpg" loading="lazy" />
+</a></p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/tag/deej">deej</a>,&nbsp;<a href="/tag/python">python</a>,&nbsp;<a href="/tag/raspberry-pi">raspberry-pi</a>,&nbsp;<a href="/tag/soldering">soldering</a>,&nbsp;<a href="/tag/electronics">electronics</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+	    
+    
+    
+  
+    
+    
+	    
+      <a href="//bsky.app/intent/compose?text=Building+a+Custom+Deej+Volume+Mixer+with+an+RP2040+Pro+Micro%20https%3A%2F%2Fblog.4dcu.be%2Fdiy%2Fprogramming%2F2025%2F02%2F03%2Fdeej-open-hardware-volume-controller.html"
+        target="_blank">
+        <i class="fa-brands fa-bluesky"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+	    
+    
+      <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2Fprogramming%2F2025%2F02%2F03%2Fdeej-open-hardware-volume-controller.html"
+        target="_blank">
+        <i class="fa-brands fa-square-facebook fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+	    
+    
+    
+      <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2Fprogramming%2F2025%2F02%2F03%2Fdeej-open-hardware-volume-controller.html"
+        target="_blank">
+        <i class="fa-brands fa-linkedin fa-lg"></i>
+      </a>
+    
+  
+    
+    
+      <a href="//x.com/share?text=Building+a+Custom+Deej+Volume+Mixer+with+an+RP2040+Pro+Micro&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2Fprogramming%2F2025%2F02%2F03%2Fdeej-open-hardware-volume-controller.html&via="
+        target="_blank">
+        <i class="fa-brands fa-x-twitter fa-lg"></i>
+      </a>
+    
+	    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/diy/2025/01/19/diy-mechanical-watch-2.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa-solid fa-square fa-stack-2x"></i>
+						<i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Building a custom GMT watch</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+		<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div>
+			<div class="site-navigation">
+
+				<p><strong>Site Map</strong></p>
+				<ul class="pages">
+					
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+				</ul>
+				<br />
+				<p><strong>Legal</strong></p>
+				<p><a href="/policy/">Privacy policy</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Contribute</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+				
+				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+
+
+
+
+  </body>
+
+</html>

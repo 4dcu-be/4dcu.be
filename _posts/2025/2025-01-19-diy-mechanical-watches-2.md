@@ -95,7 +95,7 @@ For me, this GMT watch now completes my collection of custom watches, and I'm qu
 ## Bonus: Updated my Other Watches
 
 As I initially planned to build this watch with a [jubilee bracelet](https://www.watch-wiki.net/doku.php?id=bracelet#jubilee). However, once things started to come together, I found this watch too
-sporty for that bracelet. So I swapped it with the [oyster bracelet](https://www.watch-wiki.net/doku.php?id=bracelet#oyster) from my previous build! Now that watch has a more formal look, and I think it suits it better. I also updated the strap on my NH72 build for a rougher leather strap, which is a saturated brown that complements the red second hand. Have a look at the results below, I'm very pleased with how they turned out!
+sporty for that bracelet. So I swapped it with the [oyster bracelet](https://www.watch-wiki.net/doku.php?id=bracelet#oyster) from my previous build! Now that watch has a more formal look, and I think it suits it better. I also updated the strap on my NH72 build for a rougher leather strap, which is a saturated brown that complements the red second hand. As a final touch, I swapped that strap's clasp for a titanium one with the same finish as the case. Have a look at the results below, I'm very pleased with how they turned out!
 
 <div class="gallery-2-col" markdown="1">
 ![An explorer style watch with a blue dial, glowing lume and jubilee bracelet on a soft pad](/assets/posts/2025-01-19-diy-mechanical-watches-2/jubilee_bracelet.jpg){:.small-image}
