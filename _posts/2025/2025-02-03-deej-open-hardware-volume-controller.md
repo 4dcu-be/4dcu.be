@@ -8,6 +8,10 @@ categories: diy programming
 tags:	deej python raspberry-pi soldering electronics
 cover:  "/assets/posts/2025-02-03-deej-open-hardware-volume-controller/deej_02.jpg"
 thumbnail: "/assets/images/thumbnails/deej_header.jpg"
+gallery_items:
+  - image: "/assets/posts/2025-02-03-deej-open-hardware-volume-controller/deej_03.jpg"
+    gallery_image: "/assets/images/gallery/deej.jpg"
+    description: "A physical volume mixer with a minimalist design, featuring a vintage-looking enclosure, this is my Deej."
 ---
 
 Looking for a DIY hardware volume mixer to control individual app volumes effortlessly? Whether you’re a gamer, streamer, or audio enthusiast, manually adjusting software volume sliders can be frustrating. That’s where [Deej], an open-source USB volume mixer, comes in.
