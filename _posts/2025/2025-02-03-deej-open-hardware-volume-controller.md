@@ -16,7 +16,7 @@ gallery_items:
 
 Looking for a DIY hardware volume mixer to control individual app volumes effortlessly? Whether you’re a gamer, streamer, or audio enthusiast, manually adjusting software volume sliders can be frustrating. That’s where [Deej], an open-source USB volume mixer, comes in.
 
-This guide will show you how I've built a Deej volume mixer using an RP2040 Pro Micro, a Raspberry Pi Pico-based microcontroller with native USB support, better performance, and a USB-C port. Unlike the more common Arduino-based builds, this setup takes advantage of [CircuitPython] for an easy-to-code, powerful alternative.
+This guide will show you how I've built a Deej volume mixer using an RP2040 Pro Micro, a Raspberry Pi Pico-clone in a smaller form-factor, with a few quality-of-life improvements and a USB-C port. Unlike the more common Arduino-based builds, this setup takes advantage of [CircuitPython] for an easy-to-code, powerful alternative.
 
 As there are many ways to build a Deej, I'll show you my build, and then we’ll cover writing the code and configuring Deej. Hopes this gives you a good starting point for your own custom volume mixer.
 
