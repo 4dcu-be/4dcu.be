@@ -10,7 +10,7 @@ cover:  "/assets/posts/2023-12-03-pi-pico-usb-c/pico_close.jpg"
 thumbnail: "/assets/images/thumbnails/pico_usbc_header.jpg"
 ---
 
-With USB type C ports now commonplace, keeping micro-USB cables around for some devices can be a bit of a nuisance.The 
+With USB type C ports now commonplace, keeping micro-USB cables around for some devices can be a bit of a nuisance. The 
 convenience of a single, reversible cable for nearly all your devices is undeniable, and in some devices the micro-USB 
 port can actually be replaced with a USB type C one... given you aren't afraid of a little soldering. Before tackling 
 more intricate electronics, let's start small — a simple mod for the Raspberry Pi Pico the perfect way to get started.

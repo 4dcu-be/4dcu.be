@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Using my Kindle PW3 as a Dashboard for Home Assistant</title>
+  <meta name="description" content="An old Kindle, once jailbroken and running KUAL, can be repurposed as a dashboard for just about anything. I’ve actually done this before - though at the tim...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2025">
+  
+
+  <!-- External libraries -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="An old Kindle, once jailbroken and running KUAL, can be repurposed as a dashboard for just about anything. I’ve actually done this before - though at the tim..." />
+  <meta property="og:url" content="https://blog.4dcu.be/diy/programming/2025/07/21/dashboard-for-home-assisant.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Using my Kindle PW3 as a Dashboard for Home Assistant" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2025-07-21-dashboard-for-home-assisant/kindle_dashboard_update.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Using my Kindle PW3 as a Dashboard for Home Assistant">
+  <meta name="twitter:description" content="An old Kindle, once jailbroken and running KUAL, can be repurposed as a dashboard for just about anything. I’ve actually done this before - though at the tim...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2025-07-21-dashboard-for-home-assisant/kindle_dashboard_update.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/diy/programming/2025/07/21/dashboard-for-home-assisant.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="canonical" href="https://blog.4dcu.be/diy/programming/2025/07/21/dashboard-for-home-assisant.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	<link rel="stylesheet" href="/css/main.css">
+
+	<!-- PageFind -->
+	<script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+
+	<script type='text/javascript'>
+	//<![CDATA[
+	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+	//]]>
+	</Script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+	<div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa-solid fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+<li class="nav-link"><a href="#" class="nav-link-search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/kindle_update_header.jpg" style="display:none" />
+<div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2025-07-21-dashboard-for-home-assisant/kindle_dashboard_update.jpg);">
+  <div class="scrim has-cover ">
+    <header class="post-header">
+      <h1 class="title">Using my Kindle PW3 as a Dashboard for Home Assistant</h1>
+			
+      <p class="info"><em></em></p>
+			
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted July 21, 2025 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/diy">Diy</a>, 
+    
+  
+    
+    <a href="/category/programming">Programming</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content" data-pagefind-body>
+  <p>An old Kindle, once <strong><a href="/diy/2020/09/27/PythonKindleDashboard_1.html">jailbroken</a></strong> and running KUAL, can be repurposed as a dashboard for just about anything. I’ve actually <a href="/diy/2020/10/04/PythonKindleDashboard_2.html">done this before</a> - though at the time, I didn’t really need those stats anymore.</p>
+
+<p>It <em>would</em> be nice, however, to show some real-time data from my <strong>Home Assistant</strong> setup on a low-power e-ink screen like the Kindle. That shouldn’t be too difficult, so let’s jump right in.</p>
+
+<p>The full code for this project, as well as more detailed instructions how to get this running, is available on GitHub: <a href="https://github.com/4dcu-be/kual-dashboard-ha/">https://github.com/4dcu-be/kual-dashboard-ha/</a>.</p>
+
+<p><a href="/assets/posts/2025-07-21-dashboard-for-home-assisant/kindle_dashboard_update.jpg" class="lightgallery-link" data-sub-html="Kindle Paperwhite 3 running a custom dashboard displaying data from Home Assistant">
+<img src="/assets/posts/2025-07-21-dashboard-for-home-assisant/kindle_dashboard_update.jpg" alt="Kindle Paperwhite 3 running a custom dashboard displaying data from Home Assistant" height="3072" width="4096" data-src="/assets/posts/2025-07-21-dashboard-for-home-assisant/kindle_dashboard_update.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="configuring-home-assistant">Configuring Home Assistant</h2>
+
+<p>Before setting up the Kindle, we need to ensure that <strong>Home Assistant</strong> exposes the required information through its <strong>API</strong>. This involves updating the configuration file and creating an API token for our application.</p>
+
+<p>In your config file at <code class="language-plaintext highlighter-rouge">/homeassistant/configuration.yaml</code>, add the following line to enable the API. I used the <a href="https://github.com/home-assistant/addons/tree/master/configurator">File Editor</a> add-on, which makes it easy to edit configuration files directly through the Home Assistant interface:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">api</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<p>Next, we’ll generate an access token to securely authenticate our Kindle app with Home Assistant.</p>
+
+<p>To do this, click your <em>profile name</em> in the lower-left corner. On the profile page, go to the <em>Security</em> tab at the top, scroll down to <em>Long-Lived Access Tokens</em>, and click <strong>Create Token</strong>. In the pop-up window, enter a name for your token and click <strong>OK</strong>.</p>
+
+<p>You’ll now see your newly generated token - <strong>make sure to save it</strong> somewhere safe, as you’ll only see it once and we’ll need it later.</p>
+
+<h2 id="the-python-code-for-the-kindle">The Python Code for the Kindle</h2>
+
+<p>As before, we’ll package our code as a <strong>KUAL extension</strong>, allowing it to run on a jailbroken Kindle with <strong>KUAL</strong> installed. The Python scripts will fetch the necessary data, convert it to <strong>SVG</strong> using a template, and then use <code class="language-plaintext highlighter-rouge">rsvg-convert</code> to generate a <strong>PNG</strong> that the Kindle can display.</p>
+
+<p>First, we need a function to retrieve data from Home Assistant using the access token. The snippet below handles the request and returns the result as a Python dictionary:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">ssl</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="k">def</span> <span class="nf">get_ha_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">access_token</span><span class="p">):</span>
+    <span class="n">ssl_context</span> <span class="o">=</span> <span class="n">ssl</span><span class="p">.</span><span class="n">_create_unverified_context</span><span class="p">()</span>
+
+    <span class="n">request</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">Request</span><span class="p">(</span>
+        <span class="n">url</span><span class="p">,</span>
+        <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+            <span class="s">'Authorization'</span><span class="p">:</span> <span class="sa">f</span><span class="s">'Bearer </span><span class="si">{</span><span class="n">access_token</span><span class="si">}</span><span class="s">'</span><span class="p">,</span>
+            <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">ssl_context</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">html</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>When calling a Home Assistant API endpoint with valid credentials, you’ll receive a JSON response like the example below. For most sensors, we’re mainly interested in the <code class="language-plaintext highlighter-rouge">state</code> and <code class="language-plaintext highlighter-rouge">unit_of_measurement</code> fields.</p>
+
+<p>Note that the structure may vary depending on the specific entity you’re querying.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sensor.upgraded_sensor_bme680_temperature"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"state_class"</span><span class="p">:</span><span class="w"> </span><span class="s2">"measurement"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"unit_of_measurement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"°C"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"device_class"</span><span class="p">:</span><span class="w"> </span><span class="s2">"temperature"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"friendly_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Upgraded sensor BME680 Temperature"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"last_changed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-07-21T11:45:18.879717+00:00"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"last_reported"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-07-21T11:45:18.879717+00:00"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"last_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-07-21T11:45:18.879717+00:00"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01K0PCTX0ZYZ2TT9VXTQ1D6RDW"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"parent_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Next, we need a script that defines which entities to fetch from Home Assistant, processes the data, and generates an 
+SVG. This part is quite straightforward and builds on what we did in a previous post - only this time, we’re pulling 
+data from Home Assistant instead of public APIs.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bin/python3
+# encoding: utf-8
+</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
+<span class="kn">from</span> <span class="nn">extract</span> <span class="kn">import</span> <span class="n">get_ha_data</span>
+<span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="n">HA_URL</span><span class="p">,</span> <span class="n">HA_TOKEN</span>
+
+
+<span class="n">svg_path</span> <span class="o">=</span> <span class="s">'/mnt/base-us/extensions/dashboard/svg/'</span> <span class="k">if</span> <span class="n">os</span><span class="p">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s">'nt'</span> <span class="k">else</span> <span class="s">'../svg'</span>
+
+
+<span class="k">def</span> <span class="nf">create_svg</span><span class="p">(</span><span class="n">svg_data</span><span class="p">,</span> <span class="n">svg_template</span><span class="p">,</span> <span class="n">svg_output</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">svg_template</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">fin</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">svg_data</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">template</span> <span class="o">=</span> <span class="n">template</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">svg_output</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+            <span class="n">fout</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">fmt_date</span><span class="p">(</span><span class="n">date_input</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date_input</span><span class="p">,</span> <span class="s">'%Y-%m-%d'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">d</span><span class="p">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">'%d/%m/%Y'</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">is_today</span><span class="p">(</span><span class="n">date_input</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s">"%Y-%m-%d"</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">date_input</span> <span class="o">==</span> <span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">strftime</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">ha_urls</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.sensor_bedroom_temperature"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.sensor_bedroom_humidity"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.sensor_nursery_temperature"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.sensor_nursery_humidity"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.upgraded_sensor_bme680_temperature"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.upgraded_sensor_bme680_humidity"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.herenthumidity"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.herenttemperature"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.herentpressure"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.herentuv"</span><span class="p">]</span>
+
+    <span class="n">all_data</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">ha_url</span> <span class="ow">in</span> <span class="n">ha_urls</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ha_data</span> <span class="o">=</span> <span class="n">get_ha_data</span><span class="p">(</span><span class="n">ha_url</span><span class="p">,</span> <span class="n">HA_TOKEN</span><span class="p">)</span>
+            <span class="n">all_data</span><span class="p">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s">'sensor'</span><span class="p">:</span> <span class="n">ha_data</span><span class="p">[</span><span class="s">'attributes'</span><span class="p">][</span><span class="s">'friendly_name'</span><span class="p">],</span>
+                <span class="s">'readout'</span><span class="p">:</span> <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">ha_data</span><span class="p">[</span><span class="s">'state'</span><span class="p">]</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">ha_data</span><span class="p">[</span><span class="s">'attributes'</span><span class="p">][</span><span class="s">'unit_of_measurement'</span><span class="p">]</span><span class="si">}</span><span class="s">"</span>
+            <span class="p">})</span>
+
+            <span class="k">print</span><span class="p">(</span><span class="n">ha_data</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">_</span><span class="p">:</span>
+            <span class="n">all_data</span><span class="p">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s">'sensor'</span><span class="p">:</span> <span class="s">"Failed read"</span><span class="p">,</span>
+                <span class="s">'readout'</span><span class="p">:</span> <span class="s">"Failed Update"</span>
+            <span class="p">})</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">all_data</span><span class="p">)</span>
+
+    <span class="c1"># Combine into dict
+</span>    <span class="n">svg_data</span> <span class="o">=</span> <span class="p">{</span><span class="s">"LASTUPDATE"</span><span class="p">:</span> <span class="s">"Last Update: "</span> <span class="o">+</span> <span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">strftime</span><span class="p">(</span><span class="s">"%d/%m/%Y - %H:%M:%S"</span><span class="p">),</span>
+                <span class="s">"R1_TEMP"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="s">'readout'</span><span class="p">].</span><span class="n">replace</span><span class="p">(</span><span class="s">"°"</span><span class="p">,</span> <span class="s">""</span><span class="p">),</span>
+                <span class="s">"R1_HUM"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="s">'readout'</span><span class="p">],</span>
+                <span class="s">"R2_TEMP"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">'readout'</span><span class="p">].</span><span class="n">replace</span><span class="p">(</span><span class="s">"°"</span><span class="p">,</span> <span class="s">""</span><span class="p">),</span>
+                <span class="s">"R2_HUM"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s">'readout'</span><span class="p">],</span>
+                <span class="s">"R3_TEMP"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s">'readout'</span><span class="p">].</span><span class="n">replace</span><span class="p">(</span><span class="s">"°"</span><span class="p">,</span> <span class="s">""</span><span class="p">),</span>
+                <span class="s">"R3_HUM"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="s">'readout'</span><span class="p">],</span>
+                <span class="s">"OUT_TEMP"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">7</span><span class="p">][</span><span class="s">'readout'</span><span class="p">].</span><span class="n">replace</span><span class="p">(</span><span class="s">"°"</span><span class="p">,</span> <span class="s">""</span><span class="p">),</span>
+                <span class="s">"OUT_HUM"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="s">'readout'</span><span class="p">],</span>
+                <span class="s">"OUT_PRES"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">8</span><span class="p">][</span><span class="s">'readout'</span><span class="p">],</span>
+                <span class="s">"OUT_UV"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">9</span><span class="p">][</span><span class="s">'readout'</span><span class="p">],}</span>
+
+    <span class="c1"># Load Data into SVG
+</span>    <span class="n">create_svg</span><span class="p">(</span><span class="n">svg_data</span><span class="p">,</span> <span class="n">join</span><span class="p">(</span><span class="n">svg_path</span><span class="p">,</span> <span class="s">"template.svg"</span><span class="p">),</span> <span class="n">join</span><span class="p">(</span><span class="n">svg_path</span><span class="p">,</span> <span class="s">"tmp.svg"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>If you want to use this script in your own setup, create a <code class="language-plaintext highlighter-rouge">config.py</code> file that defines <code class="language-plaintext highlighter-rouge">HA_URL</code> and <code class="language-plaintext highlighter-rouge">HA_TOKEN</code>.
+You’ll also need to update the list of entity URLs to match the sensors in your own Home Assistant configuration.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">template.svg</code> file contains placeholders (like <code class="language-plaintext highlighter-rouge">R1_TEMP</code>) that are replaced with real sensor values by the <code class="language-plaintext highlighter-rouge">create_svg()</code> function.
+Finally, a shell script - triggered via <strong>KUAL</strong> - converts the generated SVG into a PNG image suitable for display on the Kindle.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Repurposing an old Kindle Paperwhite as a low-power, always-on Home Assistant dashboard is not only practical but also a great way to breathe new life into unused hardware. With just a bit of scripting and customization, you can turn your Kindle into a clean, glanceable display for key sensor data - perfect for a nightstand, hallway, or workspace.</p>
+
+<p>While this setup does require a <a href="https://kindlemodding.org/jailbreaking/">jailbroken Kindle</a> and some Python familiarity, the end result is a highly customizable, elegant display that integrates seamlessly with your smart home.</p>
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li><a href="https://kindlemodding.org/jailbreaking/">https://kindlemodding.org/jailbreaking/</a>: A recent guide how to jailbreak a Kindle</li>
+  <li><a href="/diy/2020/09/27/PythonKindleDashboard_1.html">Kindle DashBoard part 1</a>: Older post how to jailbreak a Kindle and create KUAL extensions</li>
+  <li><a href="/diy/2020/10/04/PythonKindleDashboard_2.html">Kindle DashBoard part 2</a>: Post from 2020 outlining the first dashboard I made using this Kindle</li>
+</ul>
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/tag/home-assistant">home-assistant</a>,&nbsp;<a href="/tag/yaml">yaml</a>,&nbsp;<a href="/tag/python">python</a>,&nbsp;<a href="/tag/kindle">kindle</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+	    
+    
+    
+  
+    
+    
+	    
+      <a href="//bsky.app/intent/compose?text=Using+my+Kindle+PW3+as+a+Dashboard+for+Home+Assistant%20https%3A%2F%2Fblog.4dcu.be%2Fdiy%2Fprogramming%2F2025%2F07%2F21%2Fdashboard-for-home-assisant.html"
+        target="_blank">
+        <i class="fa-brands fa-bluesky"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+	    
+    
+      <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2Fprogramming%2F2025%2F07%2F21%2Fdashboard-for-home-assisant.html"
+        target="_blank">
+        <i class="fa-brands fa-square-facebook fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+	    
+    
+    
+      <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2Fprogramming%2F2025%2F07%2F21%2Fdashboard-for-home-assisant.html"
+        target="_blank">
+        <i class="fa-brands fa-linkedin fa-lg"></i>
+      </a>
+    
+  
+    
+    
+      <a href="//x.com/share?text=Using+my+Kindle+PW3+as+a+Dashboard+for+Home+Assistant&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2Fprogramming%2F2025%2F07%2F21%2Fdashboard-for-home-assisant.html&via="
+        target="_blank">
+        <i class="fa-brands fa-x-twitter fa-lg"></i>
+      </a>
+    
+	    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/diy/programming/2025/02/03/deej-open-hardware-volume-controller.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa-solid fa-square fa-stack-2x"></i>
+						<i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Building a Custom Deej Volume Mixer with an RP2040 Pro Micro</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+		<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div>
+			<div class="site-navigation">
+
+				<p><strong>Site Map</strong></p>
+				<ul class="pages">
+					
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+				</ul>
+				<br />
+				<p><strong>Legal</strong></p>
+				<p><a href="/policy/">Privacy policy</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Contribute</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+				
+				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+
+
+
+
+  </body>
+
+</html>
