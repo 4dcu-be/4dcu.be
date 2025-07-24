@@ -11,7 +11,7 @@ thumbnail: "/assets/images/thumbnails/kindle_update_header.jpg"
 ---
 
 
-An old Kindle, once **[jailbroken]({% post_url 2020/2020-09-27-PythonKindleDashboard_1 %})** and running KUAL, can be repurposed as a dashboard for just about anything. I've actually [done this before]({% post_url 2020/2020-10-04-PythonKindleDashboard_2 %}) - though at the time, I didn't really need those stats anymore.
+An old Kindle, once **[jailbroken]({% post_url 2020/2020-09-27-PythonKindleDashboard_1 %})** and running KUAL, can be repurposed as a dashboard for just about anything. I've actually [done this before]({% post_url 2020/2020-10-04-PythonKindleDashboard_2 %}) - though right now, I don't really need those stats anymore.
 
 It *would* be nice, however, to show some real-time data from my **Home Assistant** setup on a low-power e-ink screen like the Kindle. That shouldn’t be too difficult, so let’s jump right in.
 
