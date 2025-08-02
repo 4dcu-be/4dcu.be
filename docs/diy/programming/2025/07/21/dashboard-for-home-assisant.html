@@ -253,16 +253,6 @@ data from Home Assistant instead of public APIs.</p>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">svg_output</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
             <span class="n">fout</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
 
-
-<span class="k">def</span> <span class="nf">fmt_date</span><span class="p">(</span><span class="n">date_input</span><span class="p">):</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date_input</span><span class="p">,</span> <span class="s">'%Y-%m-%d'</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">d</span><span class="p">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">'%d/%m/%Y'</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">is_today</span><span class="p">(</span><span class="n">date_input</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s">"%Y-%m-%d"</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">date_input</span> <span class="o">==</span> <span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">strftime</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
-
-
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
     <span class="n">ha_urls</span> <span class="o">=</span> <span class="p">[</span>
         <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.sensor_bedroom_temperature"</span><span class="p">,</span>

@@ -119,16 +119,6 @@ def create_svg(svg_data, svg_template, svg_output):
         with open(svg_output, 'w') as fout:
             fout.write(template)
 
-
-def fmt_date(date_input):
-    d = datetime.strptime(date_input, '%Y-%m-%d')
-    return d.strftime('%d/%m/%Y')
-
-
-def is_today(date_input, fmt="%Y-%m-%d"):
-    return date_input == datetime.now().strftime(fmt)
-
-
 if __name__ == "__main__":
     ha_urls = [
         f"{HA_URL}sensor.sensor_bedroom_temperature",
