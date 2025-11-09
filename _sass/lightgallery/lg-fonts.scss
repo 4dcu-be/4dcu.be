@@ -1,4 +1,6 @@
 // font icons support
+@use "lg-variables" as *;
+
 @font-face {
     font-family: 'lg';
     src: url("#{$lg-path-fonts}/lg.eot?n1z373");

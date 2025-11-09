@@ -9,7 +9,18 @@
       "Bash(jekyll:*)",
       "Bash(bundle list:*)",
       "Bash(bundle exec jekyll build:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(find:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:thoughtbot.com)",
+      "Bash(ruby -e:*)",
+      "Bash(1)",
+      "Bash(xargs:*)",
+      "Bash(for file in lg-animations.scss lg-autoplay.scss lg-core.scss lg-pager.scss lg-share.scss lg-thumbnail.scss lg-transitions.scss lg-zoom.scss)",
+      "Bash(do if ! grep -q '@use \"\"lg-mixins\"\"' \"/workspaces/4dcu.be/_sass/lightgallery/$file\")",
+      "Bash(then echo \"$file\")",
+      "Bash(fi)",
+      "Bash(done)"
     ],
     "deny": [],
     "ask": []

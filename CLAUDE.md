@@ -44,11 +44,35 @@ bundle install
 - `_pages/`: Static pages
 - `_layouts/`: Jekyll layout templates (default, post, page, archive)
 - `_includes/`: Reusable template components (header, footer, nav_links, etc.)
-- `_sass/`: SCSS stylesheets
+- `_sass/`: SCSS stylesheets (modernized - see SCSS Architecture below)
 - `_plugins/`: Custom Jekyll plugins for image processing and functionality
 - `assets/`: Static assets (images, icons, etc.)
 - `docs/`: Production build output (for GitHub Pages hosting)
 - `js/`: JavaScript files for individual pages
+
+### SCSS Architecture (Modernized 2025-01)
+The stylesheets have been modernized to eliminate deprecated Bourbon & Neat libraries:
+
+**Modern Utilities** (`_sass/utilities/`):
+- `_breakpoints.scss`: Responsive breakpoint system (replaces Neat media queries)
+- `_typography.scss`: Modular scale typography (replaces Bourbon modular-scale)
+- `_grid.scss`: CSS Grid mixins (replaces Neat float-based grid)
+- `_bourbon-compat.scss`: Minimal compatibility layer for Bitters base styles
+- `_utilities.scss`: Main utilities index
+
+**Benefits of modernization:**
+- ✅ Eliminated 99 deprecated library files (78 Bourbon + 21 Neat)
+- ✅ Zero Bourbon/Neat deprecation warnings
+- ✅ Uses modern Dart Sass modules (math, color, list, map, meta)
+- ✅ Native CSS Grid instead of float-based layouts
+- ✅ Future-proof for Dart Sass 2.0/3.0
+- ✅ Smaller CSS bundle size
+
+**Migration notes:**
+- `@include media()` now accepts both named breakpoints (`medium`, `large`) and raw values (`768px`)
+- `modular-scale()` function works identically to Bourbon version (1.2 minor-third ratio)
+- Grid system maintains same column counts but uses CSS Grid internally
+- Bitters base styles (`_sass/base/`) remain unchanged, using compatibility layer
 
 ### Custom Jekyll Plugins
 Located in `_plugins/`:

@@ -1,3 +1,7 @@
+@use "sass:color";
+@use "../utilities/bourbon-compat" as *;
+@use "variables" as *;
+
 body {
   @include font-feature-settings("kern", "liga", "pnum");
   -webkit-font-smoothing: antialiased;

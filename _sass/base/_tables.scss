@@ -1,3 +1,7 @@
+@use "sass:color";
+@use "../utilities/bourbon-compat" as *;
+@use "variables" as *;
+
 table {
   @include font-feature-settings("kern", "liga", "tnum");
   border-collapse: collapse;

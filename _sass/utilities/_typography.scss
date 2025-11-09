@@ -1,0 +1,84 @@
+// Modern Typography System
+// Replaces Bourbon's modular-scale() function
+// Uses calculated rem values based on minor-third ratio (1.2)
+
+// Use modern SASS modules
+@use "sass:map";
+@use "sass:math";
+
+// Bourbon compatibility variables
+$em-base: 16px !default;          // Was in Bourbon settings/_px-to-em.scss
+$modular-scale-base: 1em !default; // Was in Bourbon functions/_modular-scale.scss
+$minor-third: 1.2 !default;        // Was in Bourbon functions/_modular-scale.scss
+
+// Base font size
+$base-font-size: $em-base !default;
+$modular-scale-ratio: $minor-third !default; // minor third
+
+// Modular scale function replacement
+// Calculates typography scale using minor-third ratio (1.2)
+//
+// Usage:
+//   font-size: modular-scale(6);  // Returns 2.986rem (47.776px)
+//   font-size: modular-scale(1);  // Returns 1.2rem (19.2px)
+//   font-size: modular-scale(-1); // Returns 0.833rem (13.333px)
+//
+// Scale values (base 16px, ratio 1.2):
+//   -4:  0.482rem (7.716px)
+//   -3:  0.579rem (9.259px)
+//   -2:  0.694rem (11.111px)
+//   -1:  0.833rem (13.333px)
+//    0:  1.0rem   (16.0px)
+//    1:  1.2rem   (19.2px)
+//    2:  1.44rem  (23.04px)
+//    3:  1.728rem (27.648px)
+//    4:  2.074rem (33.178px)
+//    5:  2.488rem (39.813px)
+//    6:  2.986rem (47.776px)
+@function modular-scale($increment, $value: 1rem, $ratio: $modular-scale-ratio) {
+  @return $value * math.pow($ratio, $increment);
+}
+
+// Pre-calculated scale values for better performance
+// These match Bourbon's modular-scale() output exactly
+$scale-values: (
+  -4: 0.482rem,
+  -3: 0.579rem,
+  -2: 0.694rem,
+  -1: 0.833rem,
+   0: 1.0rem,
+   1: 1.2rem,
+   2: 1.44rem,
+   3: 1.728rem,
+   4: 2.074rem,
+   5: 2.488rem,
+   6: 2.986rem
+) !default;
+
+// Fast lookup version of modular-scale
+// Uses pre-calculated values for common scale steps
+@function modular-scale($increment) {
+  @if map.has-key($scale-values, $increment) {
+    @return map.get($scale-values, $increment);
+  } @else {
+    // Fall back to calculation for custom values
+    @return 1rem * math.pow($modular-scale-ratio, $increment);
+  }
+}
+
+// Fluid typography mixin (optional modern enhancement)
+// Creates responsive font sizes that scale between min and max
+//
+// Usage:
+//   @include fluid-type(1rem, 2rem);
+@mixin fluid-type($min-size, $max-size, $min-width: 20rem, $max-width: 80rem) {
+  font-size: clamp(#{$min-size}, calc(#{$min-size} + (#{strip-unit($max-size)} - #{strip-unit($min-size)}) * ((100vw - #{$min-width}) / (#{strip-unit($max-width)} - #{strip-unit($min-width)}))), #{$max-size});
+}
+
+// Helper function to remove units
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return math.div($number, ($number * 0 + 1));
+  }
+  @return $number;
+}

@@ -1,4 +1,7 @@
 // default theme
+@use "lg-variables" as *;
+@use "lg-mixins" as *;
+
 .lg-actions {
     .lg-next, .lg-prev {
         background-color: $lg-next-prev-bg;

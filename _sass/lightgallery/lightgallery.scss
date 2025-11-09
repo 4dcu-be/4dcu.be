@@ -1,15 +1,14 @@
 // Core variables and mixins
-@import "lg-variables";
-@import "lg-mixins";
-@import "lg-fonts";
-@import "lg-theme-default";
-@import "lg-thumbnail";
-@import "lg-video";
-@import "lg-autoplay";
-@import "lg-zoom";
-@import "lg-pager";
-@import "lg-fullscreen";
-@import "lg-share";
-
-// Core
-@import "lg-core";
+// Modern Sass: Using @forward to re-export all lightgallery modules
+@forward "lg-variables";
+@forward "lg-mixins";
+@forward "lg-fonts";
+@forward "lg-theme-default";
+@forward "lg-thumbnail";
+@forward "lg-video";
+@forward "lg-autoplay";
+@forward "lg-zoom";
+@forward "lg-pager";
+@forward "lg-fullscreen";
+@forward "lg-share";
+@forward "lg-core";

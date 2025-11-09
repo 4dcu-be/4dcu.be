@@ -1,3 +1,11 @@
+// Import utilities and modern SASS modules
+// @use must come before any other rules
+@use "sass:math";
+@use "sass:color";
+// Forward typography utilities so they're available to modules that @use variables
+@forward "../utilities/typography";
+@use "../utilities/typography" as *;
+
 // Google Fonts
 @import url(//fonts.googleapis.com/css?family=Roboto+Slab:400,700,300|Roboto:400,700,300|Open+Sans:300italic,400italic,600italic,700italic,800italic,400,800,700,600,300&display=swap);
 

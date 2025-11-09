@@ -1,3 +1,7 @@
+@use "sass:color";
+@use "../utilities/bourbon-compat" as *;
+@use "variables" as *;
+
 #{$all-button-inputs},
 button {
   @include appearance(none);

@@ -1,3 +1,6 @@
+@use "lg-variables" as *;
+@use "lg-mixins" as *;
+
 .lg-outer {
     .lg-pager-outer {
         bottom: 60px;

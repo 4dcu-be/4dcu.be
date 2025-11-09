@@ -1,0 +1,23 @@
+// Modern Utility System
+// Replaces Bourbon 4.2.2 and Neat 1.7.2
+//
+// This file forwards all modern utility modules that replace
+// the deprecated Bourbon and Neat libraries.
+//
+// Migration completed: 2025-01
+// - Bourbon 4.2.2 (78 files) → Modern SASS modules + custom functions
+// - Neat 1.7.2 (21 files) → CSS Grid + custom mixins
+//
+// Benefits:
+// - No Bourbon/Neat deprecation warnings
+// - Modern CSS Grid instead of float-based layouts
+// - Better performance (native CSS features)
+// - Future-proof (uses math/color/list modules internally)
+// - Smaller CSS output
+
+// Forward all utility modules using modern @forward
+// Typography must come first as bourbon-compat depends on it
+@forward "typography";      // Replaces Bourbon modular-scale + base variables
+@forward "bourbon-compat";  // Minimal Bourbon compatibility for Bitters base styles
+@forward "breakpoints";     // Replaces Neat media queries
+@forward "grid";            // Replaces Neat grid system

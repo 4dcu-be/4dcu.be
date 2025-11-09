@@ -1,0 +1,57 @@
+// Modern Breakpoint System
+// Replaces Neat's new-breakpoint() and media() functions
+// Uses native @media queries with custom mixins
+
+// Use modern SASS modules
+@use "sass:map";
+@use "sass:meta";
+
+// Breakpoint definitions (matching original Neat breakpoints)
+$breakpoints: (
+  medium: 40em,     // 640px - was $medium-screen
+  large: 53.75em    // 860px - was $large-screen
+) !default;
+
+// Media query mixin
+// Replaces @include media($breakpoint)
+//
+// Usage:
+//   @include media(medium) { ... }
+//   @include media(large) { ... }
+//   @include media(768px) { ... }  // Also accepts raw values
+//
+// Original Neat usage:
+//   @include media($medium-screen-up) { ... }
+//   @include media($large-screen-up) { ... }
+//   @include media(768px) { ... }
+@mixin media($breakpoint) {
+  // Check if it's a named breakpoint
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (min-width: map.get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+  // Check if it's a raw value (number with unit)
+  @else if meta.type-of($breakpoint) == 'number' {
+    @media (min-width: $breakpoint) {
+      @content;
+    }
+  }
+  // Unknown breakpoint
+  @else {
+    @warn "Unknown breakpoint: #{$breakpoint}. Available: #{map.keys($breakpoints)} or use a raw value like 768px";
+  }
+}
+
+// Convenience mixins for specific breakpoints
+@mixin medium-up {
+  @include media(medium) {
+    @content;
+  }
+}
+
+@mixin large-up {
+  @include media(large) {
+    @content;
+  }
+}

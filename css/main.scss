@@ -1,24 +1,29 @@
 ---
-# Only the main Sass file needs front matter (the dashes are enough)
 ---
 @charset "utf-8";
 
 // Import modern SASS modules for namespaced functions
-// These allow us to use color.adjust() and math.div() in custom code
 @use "sass:math";
 @use "sass:color";
+@use "sass:list";
 
-// Import partials from `sass_dir` (defaults to `_sass`)
-// Includes Bourbon, Neat, and Bitters (thanks, thoughtbot!)
-// Note: Bourbon 4.2.2 & Neat 1.7.2 are archived/abandoned libraries
-// They produce deprecation warnings but remain functional
-@import
-  "bourbon/bourbon",
-  "base/base",
-  "neat/neat",
-  "lightgallery/lightgallery",
-  "layout",
-  "gallery",
-  "modal",
-  "default.css"
-;
+// Modern Sass: Using @use with wildcard (*) to make everything globally available
+// This is the recommended approach for entry point files
+// The `as *` makes all variables, mixins, and functions available without namespace prefix
+
+// Modern utilities (replaces Bourbon 4.2.2 & Neat 1.7.2)
+@use "utilities/utilities" as *;
+
+// Base styles (Bitters base modules loaded individually to avoid circular dependencies)
+@use "base/buttons" as *;
+@use "base/forms" as *;
+@use "base/lists" as *;
+@use "base/tables" as *;
+@use "base/typography" as *;
+
+// Other components
+@use "lightgallery/lightgallery" as *;
+@use "layout" as *;
+@use "gallery" as *;
+@use "modal" as *;
+@use "default.css" as *;

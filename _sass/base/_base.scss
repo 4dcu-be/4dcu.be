@@ -3,13 +3,10 @@
 // Copyright 2013-2015 thoughtbot, inc.
 // MIT License
 
-@import "variables";
-
-// Neat Settings -- uncomment if using Neat -- must be imported before Neat
-// @import "grid-settings";
-
-@import "buttons";
-@import "forms";
-@import "lists";
-@import "tables";
-@import "typography";
+// Modern Sass: Using @forward to re-export all base modules
+// Note: variables is imported by each child module, so we only forward the style modules
+@forward "buttons";
+@forward "forms";
+@forward "lists";
+@forward "tables";
+@forward "typography";

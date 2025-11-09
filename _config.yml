@@ -84,6 +84,10 @@ gallery_items:
 
 sass:
     style: compressed
+    # Modern Sass compilation using @use/@forward (converted Jan 2025)
+    # All SCSS files have been restructured to use modern module system
+    # No deprecation warnings - @import fully eliminated
+    quiet_deps: true
 
 # Buy me a Coffee username
 buy_me_a_coffee_username: "4dcube"

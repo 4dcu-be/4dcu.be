@@ -1,3 +1,6 @@
+@use "lg-variables" as *;
+@use "lg-mixins" as *;
+
 .lg-outer {
     .lg-thumb-outer {
         background-color: $lg-thumb-bg;

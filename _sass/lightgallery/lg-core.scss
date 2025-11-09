@@ -1,4 +1,7 @@
 // Clearfix
+@use "lg-variables" as *;
+@use "lg-mixins" as *;
+
 .lg-group:after {
     content: "";
     display: table;

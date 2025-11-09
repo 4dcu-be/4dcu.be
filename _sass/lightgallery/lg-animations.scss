@@ -1,3 +1,5 @@
+@use "lg-mixins" as *;
+
 .lg-css3 {
     // Remove all transition effects
     &.lg-no-trans {

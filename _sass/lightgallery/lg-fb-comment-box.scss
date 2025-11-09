@@ -1,5 +1,5 @@
-@import "lg-variables";
-@import "lg-mixins";
+@use "lg-variables" as *;
+@use "lg-mixins" as *;
 .lg-outer.fb-comments{
     .lg-img-wrap, .lg-video-cont {
         padding-right: 400px !important;
