@@ -6,7 +6,7 @@ date:   2024-02-11 08:00:00
 author: Sebastian Proost
 slug: stand-alone-air-quality-monitor-ikea-vindriktning-esp8266-bme680
 categories: diy
-tags:	ikea soldering electronics home-assistant yaml esphome esp8266
+tags:	Ikea soldering electronics home-assistant yaml esphome esp8266
 cover:  "/assets/posts/2024-04-04-air-quality-sensor-part-two/completed_project.jpg"
 thumbnail: "/assets/images/thumbnails/ikea_vindriktning_hack_2.jpg"
 ---
