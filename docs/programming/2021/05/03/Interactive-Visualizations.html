@@ -177,18 +177,18 @@ dataset is loaded and shown as a scatter-plot, however by including the <code cl
 is shown when hovering over nodes. The <code class="language-plaintext highlighter-rouge">.interactive()</code> method allows basic panning and zooming, simple but 
 sufficient as a proof-of-concept.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="n">alt</span>
-<span class="kn">from</span> <span class="nn">vega_datasets</span> <span class="kn">import</span> <span class="n">data</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">altair</span> <span class="k">as</span> <span class="n">alt</span>
+<span class="kn">from</span> <span class="n">vega_datasets</span> <span class="kn">import</span> <span class="n">data</span>
 
-<span class="n">source</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">cars</span><span class="p">()</span>
-<span class="n">source</span><span class="p">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s">"Miles_per_Gallon"</span><span class="p">:</span><span class="s">"Miles per Gallon"</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">source</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">cars</span><span class="p">()</span>
+<span class="n">source</span><span class="p">.</span><span class="nf">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">Miles_per_Gallon</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">Miles per Gallon</span><span class="sh">"</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-<span class="n">chart</span> <span class="o">=</span> <span class="n">alt</span><span class="p">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">).</span><span class="n">mark_circle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">60</span><span class="p">).</span><span class="n">encode</span><span class="p">(</span>
-    <span class="n">x</span><span class="o">=</span><span class="s">'Horsepower'</span><span class="p">,</span>
-    <span class="n">y</span><span class="o">=</span><span class="s">'Miles per Gallon'</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s">'Origin'</span><span class="p">,</span>
-    <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s">'Name'</span><span class="p">,</span> <span class="s">'Origin'</span><span class="p">,</span> <span class="s">'Horsepower'</span><span class="p">,</span> <span class="s">'Miles per Gallon'</span><span class="p">]</span>
-<span class="p">).</span><span class="n">interactive</span><span class="p">()</span>
+<span class="n">chart</span> <span class="o">=</span> <span class="n">alt</span><span class="p">.</span><span class="nc">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">).</span><span class="nf">mark_circle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">60</span><span class="p">).</span><span class="nf">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="sh">'</span><span class="s">Horsepower</span><span class="sh">'</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="sh">'</span><span class="s">Miles per Gallon</span><span class="sh">'</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">Origin</span><span class="sh">'</span><span class="p">,</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">Name</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Origin</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Horsepower</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Miles per Gallon</span><span class="sh">'</span><span class="p">]</span>
+<span class="p">).</span><span class="nf">interactive</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>Altair’s API feels a little like a hybrid between seaborn and ggplot2, and it will require some getting used to when
@@ -199,7 +199,7 @@ coming from another library. However, in a few lines of code we have a plot with
 it will occupy the full width of the parent element once included in the website. This makes the plot responsive as 
 well in one go. Using <code class="language-plaintext highlighter-rouge">.save()</code> everything is stored in the specified file.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">chart</span><span class="p">.</span><span class="n">properties</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s">'container'</span><span class="p">).</span><span class="n">save</span><span class="p">(</span><span class="s">"cars.json"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">chart</span><span class="p">.</span><span class="nf">properties</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="sh">'</span><span class="s">container</span><span class="sh">'</span><span class="p">).</span><span class="nf">save</span><span class="p">(</span><span class="sh">"</span><span class="s">cars.json</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="including-everything-in-a-jekyll-template">Including everything in a Jekyll template</h2>

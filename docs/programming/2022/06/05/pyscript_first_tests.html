@@ -201,13 +201,13 @@ like actual buttons.</p>
 <span class="p">}</span>
 
 <span class="nc">.btn</span> <span class="p">{</span>
-    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#4CAF50</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="nx">#4CAF50</span><span class="p">;</span>
     <span class="nl">border</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
-    <span class="nl">color</span><span class="p">:</span> <span class="no">white</span><span class="p">;</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="nx">white</span><span class="p">;</span>
     <span class="nl">padding</span><span class="p">:</span> <span class="m">15px</span> <span class="m">32px</span><span class="p">;</span>
     <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
     <span class="nl">text-decoration</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
-    <span class="nl">display</span><span class="p">:</span> <span class="n">inline-block</span><span class="p">;</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="nb">inline-block</span><span class="p">;</span>
     <span class="nl">font-size</span><span class="p">:</span> <span class="m">16px</span><span class="p">;</span>
   <span class="p">}</span>
 </code></pre></div></div>
@@ -230,35 +230,35 @@ Though this would be the case for adding vanilla JavaScript to a webpage as well
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="n">pyscript</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'pyscript_status'</span><span class="p">,</span> <span class="s">'PyScript Loaded Successfully'</span><span class="p">)</span>
+<span class="n">pyscript</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">pyscript_status</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">PyScript Loaded Successfully</span><span class="sh">'</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">increase_counter</span><span class="p">(</span><span class="o">*</span><span class="n">ags</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">):</span>
     <span class="k">global</span> <span class="n">counter</span>
     <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="n">button</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span><span class="s">'clicks'</span><span class="p">)</span>
-    <span class="n">button</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"Count </span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="s">"</span>
+    <span class="n">button</span> <span class="o">=</span> <span class="nc">Element</span><span class="p">(</span><span class="sh">'</span><span class="s">clicks</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">button</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Count </span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="sh">"</span>
 
 <span class="k">def</span> <span class="nf">toggle_text</span><span class="p">(</span><span class="o">*</span><span class="n">ags</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">):</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span><span class="s">'toggle_text'</span><span class="p">)</span>
-    <span class="n">button</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span><span class="s">'toggle'</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="nc">Element</span><span class="p">(</span><span class="sh">'</span><span class="s">toggle_text</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">button</span> <span class="o">=</span> <span class="nc">Element</span><span class="p">(</span><span class="sh">'</span><span class="s">toggle</span><span class="sh">'</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="s">"hidden"</span> <span class="ow">in</span> <span class="n">text</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">classList</span><span class="p">:</span>
-        <span class="n">text</span><span class="p">.</span><span class="n">remove_class</span><span class="p">(</span><span class="s">"hidden"</span><span class="p">)</span>
-        <span class="n">button</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="s">"Hide Text"</span>
+    <span class="k">if</span> <span class="sh">"</span><span class="s">hidden</span><span class="sh">"</span> <span class="ow">in</span> <span class="n">text</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">classList</span><span class="p">:</span>
+        <span class="n">text</span><span class="p">.</span><span class="nf">remove_class</span><span class="p">(</span><span class="sh">"</span><span class="s">hidden</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">button</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Hide Text</span><span class="sh">"</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">text</span><span class="p">.</span><span class="n">add_class</span><span class="p">(</span><span class="s">"hidden"</span><span class="p">)</span>
-        <span class="n">button</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="s">"Show Text"</span>
+        <span class="n">text</span><span class="p">.</span><span class="nf">add_class</span><span class="p">(</span><span class="sh">"</span><span class="s">hidden</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">button</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Show Text</span><span class="sh">"</span>
 
 <span class="k">class</span> <span class="nc">Test</span><span class="p">():</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">text_element</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span><span class="s">'clicks_class'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">text_element</span> <span class="o">=</span> <span class="nc">Element</span><span class="p">(</span><span class="sh">'</span><span class="s">clicks_class</span><span class="sh">'</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">inc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">ags</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">):</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">text_element</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"Count &lt;strong&gt;</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">counter</span><span class="si">}</span><span class="s">&lt;/strong&gt;"</span>
+    <span class="k">def</span> <span class="nf">inc</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="o">*</span><span class="n">ags</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">text_element</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Count &lt;strong&gt;</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">counter</span><span class="si">}</span><span class="s">&lt;/strong&gt;</span><span class="sh">"</span>
 
-<span class="n">test_class</span> <span class="o">=</span> <span class="n">Test</span><span class="p">()</span>
+<span class="n">test_class</span> <span class="o">=</span> <span class="nc">Test</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>Once our html page is loaded, the script above will be run. And the first way to interact with the elements on the
@@ -274,7 +274,7 @@ create a Python object that links with the DOM element with id “clicks”. Now
 to read what we want. This has one advantage over <code class="language-plaintext highlighter-rouge">pyscript.write()</code>, you can include html into an element this way.
 If for instance we wanted to make the number bold we could simpy use the line below:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">button</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"Count &lt;strong&gt;</span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="s">&lt;/strong&gt;"</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">button</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Count &lt;strong&gt;</span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="s">&lt;/strong&gt;</span><span class="sh">"</span>
 </code></pre></div></div>
 
 <h2 id="interacting-with-class-attributes">Interacting with Class Attributes</h2>

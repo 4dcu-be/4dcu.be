@@ -154,17 +154,17 @@ add this in.</p>
 <p>First, the Iris dataset is loaded, some example data is required for these bits of code and as this dataset is
 readily available it is a very good choice. A few lines of code are added to turn the dataset into a Pandas dataframe.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="n">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 
 
-<span class="n">iris_obj</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
-<span class="n">iris_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">iris_obj</span><span class="p">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">iris_obj</span><span class="p">.</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="n">iris_obj</span> <span class="o">=</span> <span class="nf">load_iris</span><span class="p">()</span>
+<span class="n">iris_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">iris_obj</span><span class="p">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">iris_obj</span><span class="p">.</span><span class="n">feature_names</span><span class="p">)</span>
 
-<span class="n">iris_df</span><span class="p">[</span><span class="s">"species"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">iris_obj</span><span class="p">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">iris_obj</span><span class="p">.</span><span class="n">target</span><span class="p">]</span>
-<span class="n">iris_df</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">iris_df</span><span class="p">[</span><span class="sh">"</span><span class="s">species</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">iris_obj</span><span class="p">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">iris_obj</span><span class="p">.</span><span class="n">target</span><span class="p">]</span>
+<span class="n">iris_df</span><span class="p">.</span><span class="nf">head</span><span class="p">()</span>
 </code></pre></div></div>
 
 <table class="large-table">
@@ -227,24 +227,24 @@ running a PCA it is recommended to scale the data, a pipeline is used to apply t
 PCA. While the pipeline isn’t strictly required here, for more complex analyses this is can save a lot of time and 
 potential mistakes, so I would recommend using it also for simple cases like this.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
-<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">from</span> <span class="n">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="n">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
 
-<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s">"scaler"</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span> <span class="p">(</span><span class="s">"pca"</span><span class="p">,</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)),])</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="nc">Pipeline</span><span class="p">([(</span><span class="sh">"</span><span class="s">scaler</span><span class="sh">"</span><span class="p">,</span> <span class="nc">StandardScaler</span><span class="p">()),</span> <span class="p">(</span><span class="sh">"</span><span class="s">pca</span><span class="sh">"</span><span class="p">,</span> <span class="nc">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)),])</span>
 
-<span class="n">pca_data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="n">pipeline</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">iris_df</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"species"</span><span class="p">])),</span>
-    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"PC1"</span><span class="p">,</span> <span class="s">"PC2"</span><span class="p">],</span>
+<span class="n">pca_data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span>
+    <span class="n">pipeline</span><span class="p">.</span><span class="nf">fit_transform</span><span class="p">(</span><span class="n">iris_df</span><span class="p">.</span><span class="nf">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">species</span><span class="sh">"</span><span class="p">])),</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">PC1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">PC2</span><span class="sh">"</span><span class="p">],</span>
     <span class="n">index</span><span class="o">=</span><span class="n">iris_df</span><span class="p">.</span><span class="n">index</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">pca_data</span><span class="p">[</span><span class="s">"species"</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris_df</span><span class="p">[</span><span class="s">"species"</span><span class="p">]</span>
+<span class="n">pca_data</span><span class="p">[</span><span class="sh">"</span><span class="s">species</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris_df</span><span class="p">[</span><span class="sh">"</span><span class="s">species</span><span class="sh">"</span><span class="p">]</span>
 
 <span class="n">pca_step</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">.</span><span class="n">steps</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">loadings</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="n">loadings</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span>
     <span class="n">pca_step</span><span class="p">.</span><span class="n">components_</span><span class="p">.</span><span class="n">T</span><span class="p">,</span>
-    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"PC1"</span><span class="p">,</span> <span class="s">"PC2"</span><span class="p">],</span>
-    <span class="n">index</span><span class="o">=</span><span class="n">iris_df</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"species"</span><span class="p">]).</span><span class="n">columns</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">PC1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">PC2</span><span class="sh">"</span><span class="p">],</span>
+    <span class="n">index</span><span class="o">=</span><span class="n">iris_df</span><span class="p">.</span><span class="nf">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">species</span><span class="sh">"</span><span class="p">]).</span><span class="n">columns</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div></div>
 
@@ -293,39 +293,39 @@ in scientific papers, so when presenting PCA data this is a must have.</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">loading_plot</span><span class="p">(</span>
     <span class="n">coeff</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">visible</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="p">,</span> <span class="n">arrow_size</span><span class="o">=</span><span class="mf">0.5</span>
 <span class="p">):</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">labels</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">visible</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">visible</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-            <span class="n">ax</span><span class="p">.</span><span class="n">arrow</span><span class="p">(</span>
+            <span class="n">ax</span><span class="p">.</span><span class="nf">arrow</span><span class="p">(</span>
                 <span class="mi">0</span><span class="p">,</span>
                 <span class="mi">0</span><span class="p">,</span>
                 <span class="n">coeff</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">scale</span><span class="p">,</span>
                 <span class="n">coeff</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">scale</span><span class="p">,</span>
                 <span class="n">head_width</span><span class="o">=</span><span class="n">arrow_size</span> <span class="o">*</span> <span class="n">scale</span><span class="p">,</span>
                 <span class="n">head_length</span><span class="o">=</span><span class="n">arrow_size</span> <span class="o">*</span> <span class="n">scale</span><span class="p">,</span>
-                <span class="n">color</span><span class="o">=</span><span class="s">"#000"</span> <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                <span class="n">color</span><span class="o">=</span><span class="sh">"</span><span class="s">#000</span><span class="sh">"</span> <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
             <span class="p">)</span>
-            <span class="n">ax</span><span class="p">.</span><span class="n">text</span><span class="p">(</span>
+            <span class="n">ax</span><span class="p">.</span><span class="nf">text</span><span class="p">(</span>
                 <span class="n">coeff</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1.15</span> <span class="o">*</span> <span class="n">scale</span><span class="p">,</span>
                 <span class="n">coeff</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1.15</span> <span class="o">*</span> <span class="n">scale</span><span class="p">,</span>
                 <span class="n">label</span><span class="p">,</span>
-                <span class="n">color</span><span class="o">=</span><span class="s">"#000"</span> <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
-                <span class="n">ha</span><span class="o">=</span><span class="s">"center"</span><span class="p">,</span>
-                <span class="n">va</span><span class="o">=</span><span class="s">"center"</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="sh">"</span><span class="s">#000</span><span class="sh">"</span> <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                <span class="n">ha</span><span class="o">=</span><span class="sh">"</span><span class="s">center</span><span class="sh">"</span><span class="p">,</span>
+                <span class="n">va</span><span class="o">=</span><span class="sh">"</span><span class="s">center</span><span class="sh">"</span><span class="p">,</span>
             <span class="p">)</span>
 
 
-<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="p">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">pca_data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s">"PC1"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">"PC2"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s">"species"</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="p">.</span><span class="nf">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">pca_data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="sh">"</span><span class="s">PC1</span><span class="sh">"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="sh">"</span><span class="s">PC2</span><span class="sh">"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="sh">"</span><span class="s">species</span><span class="sh">"</span><span class="p">)</span>
 
 <span class="c1"># Add loadings
-</span><span class="n">loading_plot</span><span class="p">(</span><span class="n">loadings</span><span class="p">[[</span><span class="s">"PC1"</span><span class="p">,</span> <span class="s">"PC2"</span><span class="p">]].</span><span class="n">values</span><span class="p">,</span> <span class="n">loadings</span><span class="p">.</span><span class="n">index</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">arrow_size</span><span class="o">=</span><span class="mf">0.08</span><span class="p">)</span>
+</span><span class="nf">loading_plot</span><span class="p">(</span><span class="n">loadings</span><span class="p">[[</span><span class="sh">"</span><span class="s">PC1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">PC2</span><span class="sh">"</span><span class="p">]].</span><span class="n">values</span><span class="p">,</span> <span class="n">loadings</span><span class="p">.</span><span class="n">index</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">arrow_size</span><span class="o">=</span><span class="mf">0.08</span><span class="p">)</span>
 
 
 <span class="c1"># Add variance explained by the
-</span><span class="n">g</span><span class="p">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s">"PC1 (</span><span class="si">{</span><span class="n">pca_step</span><span class="p">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s"> %)"</span><span class="p">)</span>
-<span class="n">g</span><span class="p">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s">"PC2 (</span><span class="si">{</span><span class="n">pca_step</span><span class="p">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s"> %)"</span><span class="p">)</span>
+</span><span class="n">g</span><span class="p">.</span><span class="nf">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">PC1 (</span><span class="si">{</span><span class="n">pca_step</span><span class="p">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s"> %)</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">g</span><span class="p">.</span><span class="nf">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">PC2 (</span><span class="si">{</span><span class="n">pca_step</span><span class="p">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s"> %)</span><span class="sh">"</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="p">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">"PCA_with_loadings.png"</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="sh">"</span><span class="s">PCA_with_loadings.png</span><span class="sh">"</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>In this final bit a function, <code class="language-plaintext highlighter-rouge">loading_plot()</code>, is added to draw the loadings on top of another plot (most likely a 

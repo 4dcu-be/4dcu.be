@@ -303,8 +303,8 @@ homeassistant (and not the default user pi). This is easy, just replace the word
 looked like. I enabled support for Home Assistant and disabled new devices joining (make sure to do this after all devices are paired). 
 As Mosquitto is running on the same device, the MQTT server is located at localhost.</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">homeassistant</span><span class="pi">:</span> <span class="no">true</span>
-<span class="na">permit_join</span><span class="pi">:</span> <span class="no">false</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">homeassistant</span><span class="pi">:</span> <span class="kc">true</span>
+<span class="na">permit_join</span><span class="pi">:</span> <span class="kc">false</span>
 <span class="na">mqtt</span><span class="pi">:</span>
   <span class="na">base_topic</span><span class="pi">:</span> <span class="s">zigbee2mqtt</span>
   <span class="na">server</span><span class="pi">:</span> <span class="s1">'</span><span class="s">mqtt://localhost'</span>
@@ -348,7 +348,7 @@ sudo journalctl -u zigbee2mqtt.service -f
 broker it should be listening too, to do so we’ll add these lines to <code class="language-plaintext highlighter-rouge">configuration.yaml</code>.</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">mqtt</span><span class="pi">:</span>
-  <span class="na">discovery</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">discovery</span><span class="pi">:</span> <span class="kc">true</span>
   <span class="na">broker</span><span class="pi">:</span> <span class="s">localhost</span>
   <span class="na">birth_message</span><span class="pi">:</span>
     <span class="na">topic</span><span class="pi">:</span> <span class="s1">'</span><span class="s">hass/status'</span>

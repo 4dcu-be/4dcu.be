@@ -189,12 +189,12 @@ peak MMR. So for all those properties fields are included in the <code class="la
 decorated with <code class="language-plaintext highlighter-rouge">@property</code> to calculate the win rate and the ELO score with experience correction, which is the base
 ELO level + an experience score based on the number of games played.</p>
 
-<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">mesa</span> <span class="kn">import</span> <span class="n">Agent</span><span class="p">,</span> <span class="n">Model</span>
-<span class="kn">from</span> <span class="nn">mesa.time</span> <span class="kn">import</span> <span class="n">RandomActivation</span>
-<span class="kn">from</span> <span class="nn">mesa.datacollection</span> <span class="kn">import</span> <span class="n">DataCollector</span>
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">mesa</span> <span class="kn">import</span> <span class="n">Agent</span><span class="p">,</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="n">mesa.time</span> <span class="kn">import</span> <span class="n">RandomActivation</span>
+<span class="kn">from</span> <span class="n">mesa.datacollection</span> <span class="kn">import</span> <span class="n">DataCollector</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="n">numpy</span> <span class="kn">import</span> <span class="n">random</span>
 
 <span class="n">max_playrate</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">experience_factor</span> <span class="o">=</span> <span class="mi">20</span>
@@ -206,71 +206,71 @@ ELO level + an experience score based on the number of games played.</p>
 
 
 <span class="k">def</span> <span class="nf">elo_change</span><span class="p">(</span><span class="n">elo_difference</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">14</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">K</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">win_probability</span><span class="p">(</span><span class="n">elo_difference</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">K</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="nf">win_probability</span><span class="p">(</span><span class="n">elo_difference</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">pick_elo</span><span class="p">():</span>
-    <span class="s">"""
+    <span class="sh">"""</span><span class="s">
     Generate a random elo value from a distribution that mimicks the distribution
     of chess elo scores on Lichess Blitz.
-    """</span>
-    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span>
-        <span class="mi">1200</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1500</span> <span class="o">/</span> <span class="mi">14</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="nb">abs</span><span class="p">(</span><span class="mi">51</span> <span class="o">-</span> <span class="n">random</span><span class="p">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)),</span> <span class="mi">2700</span>
-    <span class="p">)</span> <span class="o">-</span> <span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    </span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="nf">min</span><span class="p">(</span>
+        <span class="mi">1200</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1500</span> <span class="o">/</span> <span class="mi">14</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="nf">abs</span><span class="p">(</span><span class="mi">51</span> <span class="o">-</span> <span class="n">random</span><span class="p">.</span><span class="nf">binomial</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)),</span> <span class="mi">2700</span>
+    <span class="p">)</span> <span class="o">-</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">GwentAgent</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unique_id</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">(</span><span class="n">unique_id</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">peak_mmr</span> <span class="o">=</span> <span class="mi">2400</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">=</span> <span class="mi">2400</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">games_played</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">wins</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">unique_id</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">(</span><span class="n">unique_id</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">peak_mmr</span> <span class="o">=</span> <span class="mi">2400</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">=</span> <span class="mi">2400</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">games_played</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">wins</span> <span class="o">=</span> <span class="mi">0</span>
 
-        <span class="bp">self</span><span class="p">.</span><span class="n">elo_level</span> <span class="o">=</span> <span class="n">pick_elo</span><span class="p">()</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">playrate</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_playrate</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">elo_level</span> <span class="o">=</span> <span class="nf">pick_elo</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">playrate</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_playrate</span><span class="p">)</span>
 
-    <span class="o">@</span><span class="nb">property</span>
-    <span class="k">def</span> <span class="nf">win_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">games_played</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">wins</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="p">.</span><span class="n">games_played</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">win_rate</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">games_played</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nf">return </span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">wins</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="n">self</span><span class="p">.</span><span class="n">games_played</span>
         <span class="k">return</span> <span class="bp">None</span>
 
-    <span class="o">@</span><span class="nb">property</span>
-    <span class="k">def</span> <span class="nf">elo_experience</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">"""
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">elo_experience</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
         Take the ELO increased with an experience score based on the number of 
         games played and the experience factor.
-        """</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">elo_level</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">games_played</span><span class="p">)</span> <span class="o">*</span> <span class="n">experience_factor</span>
+        </span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">elo_level</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">games_played</span><span class="p">)</span> <span class="o">*</span> <span class="n">experience_factor</span>
 
-    <span class="k">def</span> <span class="nf">win</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other_player</span><span class="p">):</span>
-        <span class="n">mmr_change</span> <span class="o">=</span> <span class="n">elo_change</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">-</span> <span class="n">other_player</span><span class="p">.</span><span class="n">current_mmr</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">+=</span> <span class="n">mmr_change</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">peak_mmr</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">current_mmr</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">peak_mmr</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">games_played</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">wins</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">def</span> <span class="nf">win</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other_player</span><span class="p">):</span>
+        <span class="n">mmr_change</span> <span class="o">=</span> <span class="nf">elo_change</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">-</span> <span class="n">other_player</span><span class="p">.</span><span class="n">current_mmr</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">+=</span> <span class="n">mmr_change</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">peak_mmr</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">current_mmr</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">peak_mmr</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">games_played</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">wins</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other_player</span><span class="p">):</span>
-        <span class="n">mmr_change</span> <span class="o">=</span> <span class="n">elo_change</span><span class="p">(</span><span class="n">other_player</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">current_mmr</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">-=</span> <span class="n">mmr_change</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">games_played</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other_player</span><span class="p">):</span>
+        <span class="n">mmr_change</span> <span class="o">=</span> <span class="nf">elo_change</span><span class="p">(</span><span class="n">other_player</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">-</span> <span class="n">self</span><span class="p">.</span><span class="n">current_mmr</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">-=</span> <span class="n">mmr_change</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">games_played</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="k">def</span> <span class="nf">find_opponent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_number</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
-        <span class="s">"""
+    <span class="k">def</span> <span class="nf">find_opponent</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">min_number</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
         Pick a random other agent to play against. This agent should have a 
         comparable current mmr. So we will grow the mmr range until there 
         are at least
-        """</span>
+        </span><span class="sh">"""</span>
         <span class="n">mmr_range</span> <span class="o">=</span> <span class="mi">10</span>
 
-        <span class="k">while</span> <span class="p">(</span>
-            <span class="nb">len</span><span class="p">(</span>
+        <span class="nf">while </span><span class="p">(</span>
+            <span class="nf">len</span><span class="p">(</span>
                 <span class="p">[</span>
                     <span class="n">a</span>
-                    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span>
-                    <span class="k">if</span> <span class="n">a</span><span class="p">.</span><span class="n">unique_id</span> <span class="o">!=</span> <span class="bp">self</span><span class="p">.</span><span class="n">unique_id</span>
-                    <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">-</span> <span class="n">a</span><span class="p">.</span><span class="n">current_mmr</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">mmr_range</span>
+                    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span>
+                    <span class="k">if</span> <span class="n">a</span><span class="p">.</span><span class="n">unique_id</span> <span class="o">!=</span> <span class="n">self</span><span class="p">.</span><span class="n">unique_id</span>
+                    <span class="ow">and</span> <span class="nf">abs</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">-</span> <span class="n">a</span><span class="p">.</span><span class="n">current_mmr</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">mmr_range</span>
                 <span class="p">]</span>
             <span class="p">)</span>
             <span class="o">&lt;</span> <span class="n">min_number</span>
@@ -279,12 +279,12 @@ ELO level + an experience score based on the number of games played.</p>
 
         <span class="n">possible_opponents</span> <span class="o">=</span> <span class="p">[</span>
             <span class="n">a</span>
-            <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span>
-            <span class="k">if</span> <span class="n">a</span><span class="p">.</span><span class="n">unique_id</span> <span class="o">!=</span> <span class="bp">self</span><span class="p">.</span><span class="n">unique_id</span>
-            <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">-</span> <span class="n">a</span><span class="p">.</span><span class="n">current_mmr</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">mmr_range</span>
+            <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span>
+            <span class="k">if</span> <span class="n">a</span><span class="p">.</span><span class="n">unique_id</span> <span class="o">!=</span> <span class="n">self</span><span class="p">.</span><span class="n">unique_id</span>
+            <span class="ow">and</span> <span class="nf">abs</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">-</span> <span class="n">a</span><span class="p">.</span><span class="n">current_mmr</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">mmr_range</span>
         <span class="p">]</span>
 
-        <span class="n">opponent</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span>
+        <span class="n">opponent</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span>
             <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">possible_opponents</span><span class="p">],</span>
             <span class="mi">1</span><span class="p">,</span>
             <span class="p">[</span><span class="n">a</span><span class="p">.</span><span class="n">playrate</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">possible_opponents</span><span class="p">],</span>
@@ -292,30 +292,30 @@ ELO level + an experience score based on the number of games played.</p>
 
         <span class="k">return</span> <span class="n">opponent</span>
 
-    <span class="k">def</span> <span class="nf">play_against</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other_agent</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">play_against</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other_agent</span><span class="p">):</span>
         <span class="c1"># Calculate win probability, check if player won, adjust scores accordingly
-</span>        <span class="n">wp</span> <span class="o">=</span> <span class="n">win_probability</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">elo_experience</span> <span class="o">-</span> <span class="n">other_agent</span><span class="p">.</span><span class="n">elo_experience</span><span class="p">)</span>
-        <span class="n">rp</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">random</span><span class="p">()</span>
+</span>        <span class="n">wp</span> <span class="o">=</span> <span class="nf">win_probability</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">elo_experience</span> <span class="o">-</span> <span class="n">other_agent</span><span class="p">.</span><span class="n">elo_experience</span><span class="p">)</span>
+        <span class="n">rp</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span>
         <span class="n">won</span> <span class="o">=</span> <span class="n">rp</span> <span class="o">&lt;</span> <span class="n">wp</span>
 
         <span class="k">if</span> <span class="n">won</span><span class="p">:</span>
-            <span class="bp">self</span><span class="p">.</span><span class="n">win</span><span class="p">(</span><span class="n">other_agent</span><span class="p">)</span>
-            <span class="n">other_agent</span><span class="p">.</span><span class="n">loss</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">self</span><span class="p">.</span><span class="nf">win</span><span class="p">(</span><span class="n">other_agent</span><span class="p">)</span>
+            <span class="n">other_agent</span><span class="p">.</span><span class="nf">loss</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">other_agent</span><span class="p">.</span><span class="n">win</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-            <span class="bp">self</span><span class="p">.</span><span class="n">loss</span><span class="p">(</span><span class="n">other_agent</span><span class="p">)</span>
+            <span class="n">other_agent</span><span class="p">.</span><span class="nf">win</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+            <span class="n">self</span><span class="p">.</span><span class="nf">loss</span><span class="p">(</span><span class="n">other_agent</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
         <span class="c1"># Check if this agent will play a round
-</span>        <span class="n">rp</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="n">max_playrate</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">rp</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="p">.</span><span class="n">playrate</span><span class="p">:</span>
+</span>        <span class="n">rp</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="n">max_playrate</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rp</span> <span class="o">&gt;=</span> <span class="n">self</span><span class="p">.</span><span class="n">playrate</span><span class="p">:</span>
             <span class="k">return</span>
 
         <span class="c1"># Find an opponent
-</span>        <span class="n">other_agent</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">find_opponent</span><span class="p">()</span>
+</span>        <span class="n">other_agent</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">find_opponent</span><span class="p">()</span>
 
         <span class="c1"># Play against opponent and adjust score
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">play_against</span><span class="p">(</span><span class="n">other_agent</span><span class="p">)</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">play_against</span><span class="p">(</span><span class="n">other_agent</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Furthermore, there are a few functions required, the <code class="language-plaintext highlighter-rouge">win</code> and <code class="language-plaintext highlighter-rouge">loss</code> functions to handle the MMR scores after
@@ -344,29 +344,29 @@ in random order and a <code class="language-plaintext highlighter-rouge">DataCol
 history of those properties during the simulation can be stored and analysed later on.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">GwentModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">num_agents</span> <span class="o">=</span> <span class="n">N</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">schedule</span> <span class="o">=</span> <span class="n">RandomActivation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">num_agents</span> <span class="o">=</span> <span class="n">N</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">schedule</span> <span class="o">=</span> <span class="nc">RandomActivation</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
 
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">num_agents</span><span class="p">):</span>
-            <span class="n">a</span> <span class="o">=</span> <span class="n">GwentAgent</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-            <span class="bp">self</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">num_agents</span><span class="p">):</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="nc">GwentAgent</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">self</span><span class="p">)</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 
-            <span class="bp">self</span><span class="p">.</span><span class="n">datacollector</span> <span class="o">=</span> <span class="n">DataCollector</span><span class="p">(</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">datacollector</span> <span class="o">=</span> <span class="nc">DataCollector</span><span class="p">(</span>
                 <span class="n">agent_reporters</span><span class="o">=</span><span class="p">{</span>
-                    <span class="s">"Peak MMR"</span><span class="p">:</span> <span class="s">"peak_mmr"</span><span class="p">,</span>
-                    <span class="s">"Current MMR"</span><span class="p">:</span> <span class="s">"current_mmr"</span><span class="p">,</span>
-                    <span class="s">"Win Rate"</span><span class="p">:</span> <span class="s">"win_rate"</span><span class="p">,</span>
-                    <span class="s">"Games Played"</span><span class="p">:</span> <span class="s">"games_played"</span><span class="p">,</span>
-                    <span class="s">"Games Won"</span><span class="p">:</span> <span class="s">"wins"</span><span class="p">,</span>
-                    <span class="s">"elo"</span><span class="p">:</span> <span class="s">"elo_level"</span><span class="p">,</span>
-                    <span class="s">"elo_xp"</span><span class="p">:</span> <span class="s">"elo_experience"</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">Peak MMR</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">peak_mmr</span><span class="sh">"</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">Current MMR</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">current_mmr</span><span class="sh">"</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">Win Rate</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">win_rate</span><span class="sh">"</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">Games Played</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">games_played</span><span class="sh">"</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">Games Won</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">wins</span><span class="sh">"</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">elo</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">elo_level</span><span class="sh">"</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">elo_xp</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">elo_experience</span><span class="sh">"</span><span class="p">,</span>
                 <span class="p">}</span>
             <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">datacollector</span><span class="p">.</span><span class="n">collect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">step</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">datacollector</span><span class="p">.</span><span class="nf">collect</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="nf">step</span><span class="p">()</span>
 </code></pre></div></div>
 
 <h2 id="running-the-model">Running the Model</h2>
@@ -376,11 +376,11 @@ used to create a progress bar for our simulation and estimated time. On a single
 minutes to go through the entire simulation (finding opponents in the correct range being the slowest step). So if you
 start this, grab a coffee or a snack, it will take some time !</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">GwentModel</span><span class="p">(</span><span class="mi">8000</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)):</span>
-    <span class="n">model</span><span class="p">.</span><span class="n">step</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="nc">GwentModel</span><span class="p">(</span><span class="mi">8000</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">tqdm</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)):</span>
+    <span class="n">model</span><span class="p">.</span><span class="nf">step</span><span class="p">()</span>
 </code></pre></div></div>
 
 <h2 id="getting-data-from-the-gwentmodel">Getting Data from the GwentModel</h2>
@@ -389,9 +389,9 @@ start this, grab a coffee or a snack, it will take some time !</p>
 are two ways to do this, one is to grab data from the <code class="language-plaintext highlighter-rouge">DataCollector</code> included in the model. Which contains the
 state of all agents at all steps.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">time_df</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">datacollector</span><span class="p">.</span><span class="n">get_agent_vars_dataframe</span><span class="p">()</span>
-<span class="n">time_df</span><span class="p">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s">"./data/simulation_steps_experience_factor_</span><span class="si">{</span><span class="n">experience_factor</span><span class="si">}</span><span class="s">.csv"</span><span class="p">)</span>
-<span class="n">time_df</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">time_df</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">datacollector</span><span class="p">.</span><span class="nf">get_agent_vars_dataframe</span><span class="p">()</span>
+<span class="n">time_df</span><span class="p">.</span><span class="nf">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">./data/simulation_steps_experience_factor_</span><span class="si">{</span><span class="n">experience_factor</span><span class="si">}</span><span class="s">.csv</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">time_df</span><span class="p">.</span><span class="nf">head</span><span class="p">()</span>
 </code></pre></div></div>
 
 <table class="large-table">
@@ -483,22 +483,22 @@ examine the final state (or didn’t include the <code class="language-plaintext
 certain properties and put them in a pandas dataframe. It will also put players in different bins based on skill and the
 number of games played.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span>
     <span class="p">{</span>
-        <span class="s">"player"</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s">"Player </span><span class="si">{</span><span class="n">agent</span><span class="p">.</span><span class="n">unique_id</span><span class="si">}</span><span class="s">"</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
-        <span class="s">"elo"</span><span class="p">:</span> <span class="p">[</span><span class="n">agent</span><span class="p">.</span><span class="n">elo_level</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
-        <span class="s">"playrate"</span><span class="p">:</span> <span class="p">[</span><span class="n">agent</span><span class="p">.</span><span class="n">playrate</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
-        <span class="s">"games played"</span><span class="p">:</span> <span class="p">[</span><span class="n">agent</span><span class="p">.</span><span class="n">games_played</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
-        <span class="s">"current MMR"</span><span class="p">:</span> <span class="p">[</span><span class="n">agent</span><span class="p">.</span><span class="n">current_mmr</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
-        <span class="s">"peak MMR"</span><span class="p">:</span> <span class="p">[</span><span class="n">agent</span><span class="p">.</span><span class="n">peak_mmr</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
-        <span class="s">"win rate"</span><span class="p">:</span> <span class="p">[</span><span class="n">agent</span><span class="p">.</span><span class="n">win_rate</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
+        <span class="sh">"</span><span class="s">player</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="sh">"</span><span class="s">Player </span><span class="si">{</span><span class="n">agent</span><span class="p">.</span><span class="n">unique_id</span><span class="si">}</span><span class="sh">"</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
+        <span class="sh">"</span><span class="s">elo</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="n">agent</span><span class="p">.</span><span class="n">elo_level</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
+        <span class="sh">"</span><span class="s">playrate</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="n">agent</span><span class="p">.</span><span class="n">playrate</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
+        <span class="sh">"</span><span class="s">games played</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="n">agent</span><span class="p">.</span><span class="n">games_played</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
+        <span class="sh">"</span><span class="s">current MMR</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="n">agent</span><span class="p">.</span><span class="n">current_mmr</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
+        <span class="sh">"</span><span class="s">peak MMR</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="n">agent</span><span class="p">.</span><span class="n">peak_mmr</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
+        <span class="sh">"</span><span class="s">win rate</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="n">agent</span><span class="p">.</span><span class="n">win_rate</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
     <span class="p">}</span>
 <span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s">"rank"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">"peak MMR"</span><span class="p">].</span><span class="n">rank</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s">"elo bin"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">cut</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">"elo"</span><span class="p">],</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1100</span><span class="p">,</span> <span class="mi">2800</span><span class="p">,</span> <span class="mi">200</span><span class="p">)))</span>
-<span class="n">df</span><span class="p">[</span><span class="s">"games played percentile"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">"games played"</span><span class="p">].</span><span class="n">rank</span><span class="p">(</span><span class="n">pct</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s">"games played bin"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">cut</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">"games played percentile"</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="n">df</span><span class="p">.</span><span class="n">to_excel</span><span class="p">(</span><span class="sa">f</span><span class="s">"./data/final_data_experience_factor_</span><span class="si">{</span><span class="n">experience_factor</span><span class="si">}</span><span class="s">.xlsx"</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">rank</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">peak MMR</span><span class="sh">"</span><span class="p">].</span><span class="nf">rank</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">elo bin</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">cut</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">elo</span><span class="sh">"</span><span class="p">],</span> <span class="nf">list</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">1100</span><span class="p">,</span> <span class="mi">2800</span><span class="p">,</span> <span class="mi">200</span><span class="p">)))</span>
+<span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">games played percentile</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">games played</span><span class="sh">"</span><span class="p">].</span><span class="nf">rank</span><span class="p">(</span><span class="n">pct</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">games played bin</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">cut</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">games played percentile</span><span class="sh">"</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">df</span><span class="p">.</span><span class="nf">to_excel</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">./data/final_data_experience_factor_</span><span class="si">{</span><span class="n">experience_factor</span><span class="si">}</span><span class="s">.xlsx</span><span class="sh">"</span><span class="p">)</span>
 <span class="n">df</span>
 </code></pre></div></div>
 

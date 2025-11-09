@@ -12,7 +12,7 @@ module Jekyll
        posts.each do |post|
          input_path = ".#{post['cover']}"
          output_path = ".#{post['thumbnail']}"
-         if !File.exists?(output_path) || File.mtime(output_path) <= File.mtime(input_path)
+         if !File.exist?(output_path) || File.mtime(output_path) <= File.mtime(input_path)
             puts("Generating thumbnail", input_path, output_path)
             image = MiniMagick::Image.open(input_path)
             image.strip

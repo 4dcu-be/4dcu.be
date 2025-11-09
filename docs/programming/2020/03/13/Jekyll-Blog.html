@@ -345,14 +345,14 @@ added to the div with <code class="language-plaintext highlighter-rouge">id="map
 <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://code.jquery.com/jquery-3.4.1.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script&gt;</span>
 	<span class="kd">var</span> <span class="nx">map</span><span class="p">;</span>
-	<span class="kd">function</span> <span class="nx">initMap</span><span class="p">()</span> <span class="p">{</span>
-		<span class="nx">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">google</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nb">Map</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">map</span><span class="dl">'</span><span class="p">),</span> <span class="p">{</span>
+	<span class="kd">function</span> <span class="nf">initMap</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">google</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nc">Map</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">map</span><span class="dl">'</span><span class="p">),</span> <span class="p">{</span>
 			<span class="na">center</span><span class="p">:</span> <span class="p">{</span><span class="na">lat</span><span class="p">:</span> <span class="mf">50.8798</span><span class="p">,</span> <span class="na">lng</span><span class="p">:</span> <span class="mf">4.7005</span><span class="p">},</span>
 			<span class="na">zoom</span><span class="p">:</span> <span class="mi">2</span>
 		<span class="p">});</span>
 
-		<span class="kd">function</span> <span class="nx">addMarker</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
-			<span class="kd">var</span> <span class="nx">marker</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">google</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">Marker</span><span class="p">({</span>
+		<span class="kd">function</span> <span class="nf">addMarker</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">marker</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">google</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nc">Marker</span><span class="p">({</span>
 				<span class="na">position</span><span class="p">:</span> <span class="nx">props</span><span class="p">.</span><span class="nx">coords</span><span class="p">,</span>
 				<span class="na">map</span><span class="p">:</span> <span class="nx">map</span>
 			<span class="p">});</span>
@@ -361,17 +361,17 @@ added to the div with <code class="language-plaintext highlighter-rouge">id="map
 				<span class="na">content</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;h2&gt;&lt;a href="</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">props</span><span class="p">.</span><span class="nx">url</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">"&gt;</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">props</span><span class="p">.</span><span class="nx">title</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">&lt;/a&gt;&lt;/h2&gt;&lt;p class="map_info_window"&gt;</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">props</span><span class="p">.</span><span class="nx">content</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">&lt;/p&gt;</span><span class="dl">'</span>
 			<span class="p">});</span>
 
-			<span class="nx">marker</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-				<span class="nx">infoWindow</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">map</span><span class="p">,</span> <span class="nx">marker</span><span class="p">);</span>
+			<span class="nx">marker</span><span class="p">.</span><span class="nf">addListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+				<span class="nx">infoWindow</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="nx">map</span><span class="p">,</span> <span class="nx">marker</span><span class="p">);</span>
 			<span class="p">});</span>
 
 		<span class="p">}</span>
 
-		<span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/map_data.json</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">data</span> <span class="p">)</span> <span class="p">{</span>
-			<span class="nx">data</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">el</span><span class="p">){</span>
-			  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">el</span><span class="p">.</span><span class="nx">coords</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">undefined</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
-			    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
-				  <span class="nx">addMarker</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
+		<span class="nx">$</span><span class="p">.</span><span class="nf">getJSON</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/map_data.json</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">data</span> <span class="p">)</span> <span class="p">{</span>
+			<span class="nx">data</span><span class="p">.</span><span class="nf">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">el</span><span class="p">){</span>
+			  <span class="k">if </span><span class="p">(</span><span class="k">typeof</span> <span class="nx">el</span><span class="p">.</span><span class="nx">coords</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">undefined</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+			    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
+				  <span class="nf">addMarker</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
 				<span class="p">}</span>
 			<span class="p">})</span>
 		<span class="p">});</span>

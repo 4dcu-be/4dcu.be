@@ -184,7 +184,7 @@ the heavy lifting here, we just need a few functions to initialize everything an
 <p>Initializing the board requires a few lines of setup code. These lines will set pin 11 as an output and set it high so
 the NeoPixel is powered on.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">neop</span> <span class="o">=</span> <span class="n">digitalio</span><span class="p">.</span><span class="n">DigitalInOut</span><span class="p">(</span><span class="n">board</span><span class="p">.</span><span class="n">GP11</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">neop</span> <span class="o">=</span> <span class="n">digitalio</span><span class="p">.</span><span class="nc">DigitalInOut</span><span class="p">(</span><span class="n">board</span><span class="p">.</span><span class="n">GP11</span><span class="p">)</span>
 <span class="n">neop</span><span class="p">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">digitalio</span><span class="p">.</span><span class="n">Direction</span><span class="p">.</span><span class="n">OUTPUT</span>
 <span class="n">neop</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
 </code></pre></div></div>
@@ -195,7 +195,7 @@ more than enough.</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pixel_pin</span> <span class="o">=</span> <span class="n">board</span><span class="p">.</span><span class="n">GP12</span>
 <span class="n">num_pixels</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="n">pixels</span> <span class="o">=</span> <span class="n">neopixel</span><span class="p">.</span><span class="n">NeoPixel</span><span class="p">(</span><span class="n">pixel_pin</span><span class="p">,</span> <span class="n">num_pixels</span><span class="p">,</span> <span class="n">brightness</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">auto_write</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">pixels</span> <span class="o">=</span> <span class="n">neopixel</span><span class="p">.</span><span class="nc">NeoPixel</span><span class="p">(</span><span class="n">pixel_pin</span><span class="p">,</span> <span class="n">num_pixels</span><span class="p">,</span> <span class="n">brightness</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">auto_write</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Setting the LED to a specific color is easy using <code class="language-plaintext highlighter-rouge">pixels.fill((255, 0, 0))</code> followed by <code class="language-plaintext highlighter-rouge">pixels.show()</code>.
@@ -206,33 +206,33 @@ is bright red.</p>
 a range of colors. The full code is shown below, this can be copy-pasted into <code class="language-plaintext highlighter-rouge">code.py</code> on the device and after a 
 quick reset the onboard RGB LED will start cycling slowly through the rainbow’s colors.</p>
 
-<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">board</span>
-<span class="kn">import</span> <span class="nn">digitalio</span>
-<span class="kn">import</span> <span class="nn">neopixel</span>
-<span class="kn">from</span> <span class="nn">rainbowio</span> <span class="kn">import</span> <span class="n">colorwheel</span>
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">time</span>
+<span class="kn">import</span> <span class="n">board</span>
+<span class="kn">import</span> <span class="n">digitalio</span>
+<span class="kn">import</span> <span class="n">neopixel</span>
+<span class="kn">from</span> <span class="n">rainbowio</span> <span class="kn">import</span> <span class="n">colorwheel</span>
  
-<span class="k">print</span><span class="p">(</span><span class="s">"Starting Neopixel"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Starting Neopixel</span><span class="sh">"</span><span class="p">)</span>
 
-<span class="n">neop</span> <span class="o">=</span> <span class="n">digitalio</span><span class="p">.</span><span class="n">DigitalInOut</span><span class="p">(</span><span class="n">board</span><span class="p">.</span><span class="n">GP11</span><span class="p">)</span>
+<span class="n">neop</span> <span class="o">=</span> <span class="n">digitalio</span><span class="p">.</span><span class="nc">DigitalInOut</span><span class="p">(</span><span class="n">board</span><span class="p">.</span><span class="n">GP11</span><span class="p">)</span>
 <span class="n">neop</span><span class="p">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">digitalio</span><span class="p">.</span><span class="n">Direction</span><span class="p">.</span><span class="n">OUTPUT</span>
 <span class="n">neop</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
 
 <span class="n">pixel_pin</span> <span class="o">=</span> <span class="n">board</span><span class="p">.</span><span class="n">GP12</span>
 <span class="n">num_pixels</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="n">pixels</span> <span class="o">=</span> <span class="n">neopixel</span><span class="p">.</span><span class="n">NeoPixel</span><span class="p">(</span><span class="n">pixel_pin</span><span class="p">,</span> <span class="n">num_pixels</span><span class="p">,</span> <span class="n">brightness</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">auto_write</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">pixels</span> <span class="o">=</span> <span class="n">neopixel</span><span class="p">.</span><span class="nc">NeoPixel</span><span class="p">(</span><span class="n">pixel_pin</span><span class="p">,</span> <span class="n">num_pixels</span><span class="p">,</span> <span class="n">brightness</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">auto_write</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">rainbow_cycle</span><span class="p">(</span><span class="n">wait</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">255</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_pixels</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">255</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">num_pixels</span><span class="p">):</span>
             <span class="n">rc_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="mi">256</span> <span class="o">//</span> <span class="n">num_pixels</span><span class="p">)</span> <span class="o">+</span> <span class="n">j</span>
-            <span class="n">pixels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">colorwheel</span><span class="p">(</span><span class="n">rc_index</span> <span class="o">&amp;</span> <span class="mi">255</span><span class="p">)</span>
-        <span class="n">pixels</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
-        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">wait</span><span class="p">)</span>
+            <span class="n">pixels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nf">colorwheel</span><span class="p">(</span><span class="n">rc_index</span> <span class="o">&amp;</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="n">pixels</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+        <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="n">wait</span><span class="p">)</span>
 
 <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-    <span class="n">rainbow_cycle</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># Increase the number to slow down the rainbow
+    <span class="nf">rainbow_cycle</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># Increase the number to slow down the rainbow
 </span></code></pre></div></div>
 
 <h2 id="conclusion">Conclusion</h2>

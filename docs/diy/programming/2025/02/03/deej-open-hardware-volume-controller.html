@@ -208,10 +208,10 @@ drill holes for the potentiometers and LED holder in exactly the right spots.</p
 
 <p>The code I’m using for reading the potentiometers and sending the values over the serial connection looks like this:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">board</span>
-<span class="kn">import</span> <span class="nn">analogio</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">pwmio</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">board</span>
+<span class="kn">import</span> <span class="n">analogio</span>
+<span class="kn">import</span> <span class="n">time</span>
+<span class="kn">import</span> <span class="n">pwmio</span>
 
 <span class="c1"># Constants
 </span><span class="n">MIN_VALUE</span> <span class="o">=</span> <span class="mi">340</span>
@@ -222,29 +222,29 @@ drill holes for the potentiometers and LED holder in exactly the right spots.</p
 <span class="n">SLEEP_TIME</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># 100ms delay
 </span>
 <span class="c1"># Set up ADC inputs
-</span><span class="n">ADCs</span> <span class="o">=</span> <span class="p">[</span><span class="n">analogio</span><span class="p">.</span><span class="n">AnalogIn</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span> <span class="k">for</span> <span class="n">pin</span> <span class="ow">in</span> <span class="n">ADC_PINS</span><span class="p">]</span>
+</span><span class="n">ADCs</span> <span class="o">=</span> <span class="p">[</span><span class="n">analogio</span><span class="p">.</span><span class="nc">AnalogIn</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span> <span class="k">for</span> <span class="n">pin</span> <span class="ow">in</span> <span class="n">ADC_PINS</span><span class="p">]</span>
 
 <span class="c1"># Set up LED, use PWM otherwise it is too bright
-</span><span class="n">pwm</span> <span class="o">=</span> <span class="n">pwmio</span><span class="p">.</span><span class="n">PWMOut</span><span class="p">(</span><span class="n">board</span><span class="p">.</span><span class="n">GP8</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">duty_cycle</span><span class="o">=</span><span class="mi">32768</span><span class="p">)</span>
+</span><span class="n">pwm</span> <span class="o">=</span> <span class="n">pwmio</span><span class="p">.</span><span class="nc">PWMOut</span><span class="p">(</span><span class="n">board</span><span class="p">.</span><span class="n">GP8</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">duty_cycle</span><span class="o">=</span><span class="mi">32768</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">get_smoothed_adc_value</span><span class="p">(</span><span class="n">adc</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="n">SAMPLES</span><span class="p">):</span>
-    <span class="s">"""Reads and averages multiple ADC samples for noise reduction."""</span>
-    <span class="n">smooth_value</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">adc</span><span class="p">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">samples</span><span class="p">))</span> <span class="o">//</span> <span class="n">samples</span>
-    <span class="k">return</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">smooth_value</span> <span class="o">-</span> <span class="n">MIN_VALUE</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1023</span><span class="p">)</span> <span class="o">//</span> <span class="n">RANGE</span>
+    <span class="sh">"""</span><span class="s">Reads and averages multiple ADC samples for noise reduction.</span><span class="sh">"""</span>
+    <span class="n">smooth_value</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">adc</span><span class="p">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">samples</span><span class="p">))</span> <span class="o">//</span> <span class="n">samples</span>
+    <span class="nf">return </span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">smooth_value</span> <span class="o">-</span> <span class="n">MIN_VALUE</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1023</span><span class="p">)</span> <span class="o">//</span> <span class="n">RANGE</span>
 
 <span class="k">def</span> <span class="nf">read_pot_values</span><span class="p">():</span>
-    <span class="s">"""Reads and returns smoothed values from all ADCs."""</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">get_smoothed_adc_value</span><span class="p">(</span><span class="n">adc</span><span class="p">)</span> <span class="k">for</span> <span class="n">adc</span> <span class="ow">in</span> <span class="n">ADCs</span><span class="p">]</span>
+    <span class="sh">"""</span><span class="s">Reads and returns smoothed values from all ADCs.</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nf">get_smoothed_adc_value</span><span class="p">(</span><span class="n">adc</span><span class="p">)</span> <span class="k">for</span> <span class="n">adc</span> <span class="ow">in</span> <span class="n">ADCs</span><span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">send_pot_values</span><span class="p">(</span><span class="n">pot_values</span><span class="p">):</span>
-    <span class="s">"""Formats and prints potentiometer values."""</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'|'</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pot_values</span><span class="p">)))</span>
+    <span class="sh">"""</span><span class="s">Formats and prints potentiometer values.</span><span class="sh">"""</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">|</span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pot_values</span><span class="p">)))</span>
 
 <span class="c1"># Main loop
 </span><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-    <span class="n">pot_values</span> <span class="o">=</span> <span class="n">read_pot_values</span><span class="p">()</span>
-    <span class="n">send_pot_values</span><span class="p">(</span><span class="n">pot_values</span><span class="p">)</span>
-    <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">SLEEP_TIME</span><span class="p">)</span>
+    <span class="n">pot_values</span> <span class="o">=</span> <span class="nf">read_pot_values</span><span class="p">()</span>
+    <span class="nf">send_pot_values</span><span class="p">(</span><span class="n">pot_values</span><span class="p">)</span>
+    <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="n">SLEEP_TIME</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>This code reads the values for the potentiometers, smooths them out (by averaging multiple measurements), and sends them over the serial connection. The <code class="language-plaintext highlighter-rouge">MIN_VALUE</code> and <code class="language-plaintext highlighter-rouge">MAX_VALUE</code> constants are used to scale the ADC values to the desired range (and might need to be adjusted for other devices). The <code class="language-plaintext highlighter-rouge">RANGE</code> constant is the difference between the maximum and minimum values. The <code class="language-plaintext highlighter-rouge">SAMPLES</code> constant determines how many samples are taken to smooth out the ADC values. The <code class="language-plaintext highlighter-rouge">SLEEP_TIME</code> constant sets the delay between each reading, you’ll want this to trigger often enough so Deej responds quickly to changes, but not too often to flood the serial connection. I found 100 ms to be a good balance, but I’ve seen implementations with delays as low as 10 ms. If you want to use this, just save it as <code class="language-plaintext highlighter-rouge">code.py</code> on the RP2040 Pro Micro.</p>
@@ -260,7 +260,7 @@ drill holes for the potentiometers and LED holder in exactly the right spots.</p
 
 
 <span class="c1"># set this to true if you want the controls inverted (i.e. top is 0%, bottom is 100%)</span>
-<span class="na">invert_sliders</span><span class="pi">:</span> <span class="no">false</span>
+<span class="na">invert_sliders</span><span class="pi">:</span> <span class="kc">false</span>
 
 <span class="c1"># settings for connecting to the RP2040 Pro Micro</span>
 <span class="na">com_port</span><span class="pi">:</span> <span class="s">COM4</span>

@@ -25,3 +25,5 @@ pagefind.exe
 .jekyll-metadata
 
 plan.md
+
+gemfile.lock.backup

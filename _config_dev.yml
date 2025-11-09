@@ -82,6 +82,9 @@ gallery_items:
     resize_dimensions: '430x288^'
     crop_dimensions: '430x288+0+0'
 
+sass:
+    style: compressed
+
 # Buy me a Coffee username
 buy_me_a_coffee_username: "4dcube"
 

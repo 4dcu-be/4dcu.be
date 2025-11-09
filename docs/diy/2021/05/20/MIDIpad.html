@@ -181,45 +181,45 @@ in case you aren’t using an exact replica of my <a href="/diy/2021/04/05/Macro
 
 <p>The full code is shown here, and we’ll go over it step by step below.</p>
 
-<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">board</span>
-<span class="kn">import</span> <span class="nn">digitalio</span>
-<span class="kn">import</span> <span class="nn">pwmio</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">usb_midi</span>
-<span class="kn">import</span> <span class="nn">adafruit_midi</span>
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">board</span>
+<span class="kn">import</span> <span class="n">digitalio</span>
+<span class="kn">import</span> <span class="n">pwmio</span>
+<span class="kn">import</span> <span class="n">time</span>
+<span class="kn">import</span> <span class="n">usb_midi</span>
+<span class="kn">import</span> <span class="n">adafruit_midi</span>
 
-<span class="kn">from</span> <span class="nn">adafruit_midi.note_on</span> <span class="kn">import</span> <span class="n">NoteOn</span>
-<span class="kn">from</span> <span class="nn">adafruit_midi.note_off</span> <span class="kn">import</span> <span class="n">NoteOff</span>
+<span class="kn">from</span> <span class="n">adafruit_midi.note_on</span> <span class="kn">import</span> <span class="n">NoteOn</span>
+<span class="kn">from</span> <span class="n">adafruit_midi.note_off</span> <span class="kn">import</span> <span class="n">NoteOff</span>
 
-<span class="n">midi</span> <span class="o">=</span> <span class="n">adafruit_midi</span><span class="p">.</span><span class="n">MIDI</span><span class="p">(</span><span class="n">midi_out</span><span class="o">=</span><span class="n">usb_midi</span><span class="p">.</span><span class="n">ports</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">out_channel</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">midi</span> <span class="o">=</span> <span class="n">adafruit_midi</span><span class="p">.</span><span class="nc">MIDI</span><span class="p">(</span><span class="n">midi_out</span><span class="o">=</span><span class="n">usb_midi</span><span class="p">.</span><span class="n">ports</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">out_channel</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s">"MacroPad MIDI Board"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">MacroPad MIDI Board</span><span class="sh">"</span><span class="p">)</span>
 
 <span class="c1"># Configuration, which LED pins are used, which buttons, how buttons map to notes
 </span><span class="n">led_pins</span> <span class="o">=</span> <span class="p">[</span><span class="n">board</span><span class="p">.</span><span class="n">GP18</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP17</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP16</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP21</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP20</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP19</span><span class="p">,</span> <span class="n">board</span><span class="p">.</span><span class="n">GP27</span><span class="p">,</span> <span class="n">board</span><span class="p">.</span><span class="n">GP26</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP22</span><span class="p">]</span>
 <span class="n">button_pins</span> <span class="o">=</span> <span class="p">[</span><span class="n">board</span><span class="p">.</span><span class="n">GP13</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP14</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP15</span><span class="p">,</span> <span class="n">board</span><span class="p">.</span><span class="n">GP10</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP11</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP12</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP7</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP8</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP9</span><span class="p">]</span>
 
 <span class="n">note_mapping</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">[</span><span class="s">"C3"</span><span class="p">,</span> <span class="s">"C2"</span><span class="p">],</span>
-        <span class="p">[</span><span class="s">"D3"</span><span class="p">,</span> <span class="s">"D2"</span><span class="p">],</span>
-        <span class="p">[</span><span class="s">"E3"</span><span class="p">,</span> <span class="s">"E2"</span><span class="p">],</span>
-        <span class="p">[</span><span class="s">"F3"</span><span class="p">,</span> <span class="s">"F2"</span><span class="p">],</span>
-        <span class="p">[</span><span class="s">"G3"</span><span class="p">,</span> <span class="s">"G2"</span><span class="p">],</span>
-        <span class="p">[</span><span class="s">"A3"</span><span class="p">,</span> <span class="s">"A2"</span><span class="p">],</span>
-        <span class="p">[</span><span class="s">"B3"</span><span class="p">,</span> <span class="s">"B2"</span><span class="p">],</span>
-        <span class="p">[</span><span class="s">"C4"</span><span class="p">,</span> <span class="s">"C3"</span><span class="p">],</span>
-        <span class="p">[</span><span class="s">"G2"</span><span class="p">,</span> <span class="s">"G1"</span><span class="p">]</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">C3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C2</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">D3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">D2</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">E3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">E2</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">F3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">F2</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">G2</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">A2</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">B2</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">C4</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">G2</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">G1</span><span class="sh">"</span><span class="p">]</span>
     <span class="p">]</span>
 
 <span class="c1"># Set up buttons
-</span><span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span><span class="n">digitalio</span><span class="p">.</span><span class="n">DigitalInOut</span><span class="p">(</span><span class="n">bp</span><span class="p">)</span> <span class="k">for</span> <span class="n">bp</span> <span class="ow">in</span> <span class="n">button_pins</span><span class="p">]</span>
+</span><span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span><span class="n">digitalio</span><span class="p">.</span><span class="nc">DigitalInOut</span><span class="p">(</span><span class="n">bp</span><span class="p">)</span> <span class="k">for</span> <span class="n">bp</span> <span class="ow">in</span> <span class="n">button_pins</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">btn</span> <span class="ow">in</span> <span class="n">buttons</span><span class="p">:</span>
     <span class="n">btn</span><span class="p">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">digitalio</span><span class="p">.</span><span class="n">Direction</span><span class="p">.</span><span class="n">INPUT</span>
     <span class="n">btn</span><span class="p">.</span><span class="n">pull</span> <span class="o">=</span> <span class="n">digitalio</span><span class="p">.</span><span class="n">Pull</span><span class="p">.</span><span class="n">UP</span>
 
 <span class="c1"># Set up LEDs
-</span><span class="n">leds</span> <span class="o">=</span> <span class="p">[</span><span class="n">pwmio</span><span class="p">.</span><span class="n">PWMOut</span><span class="p">(</span><span class="n">lp</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">duty_cycle</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">lp</span> <span class="ow">in</span> <span class="n">led_pins</span><span class="p">]</span>
+</span><span class="n">leds</span> <span class="o">=</span> <span class="p">[</span><span class="n">pwmio</span><span class="p">.</span><span class="nc">PWMOut</span><span class="p">(</span><span class="n">lp</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">duty_cycle</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">lp</span> <span class="ow">in</span> <span class="n">led_pins</span><span class="p">]</span>
 
 <span class="c1"># Set Initial Duty Cycles to 0 for each LED
 </span><span class="n">duty_cycles</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">led_pins</span><span class="p">]</span>
@@ -229,27 +229,27 @@ in case you aren’t using an exact replica of my <a href="/diy/2021/04/05/Macro
 <span class="n">triggered_keys</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">button_pins</span><span class="p">]</span>
 
 <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">btn</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">buttons</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">btn</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">buttons</span><span class="p">):</span>
         <span class="n">pressed_keys</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">btn</span><span class="p">.</span><span class="n">value</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">btn</span><span class="p">.</span><span class="n">value</span><span class="p">:</span>
             <span class="n">duty_cycles</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65025</span>
             
     
-    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="p">(</span><span class="n">pk</span><span class="p">,</span> <span class="n">tk</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">pressed_keys</span><span class="p">,</span> <span class="n">triggered_keys</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="p">(</span><span class="n">pk</span><span class="p">,</span> <span class="n">tk</span><span class="p">)</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">pressed_keys</span><span class="p">,</span> <span class="n">triggered_keys</span><span class="p">)):</span>
         <span class="k">if</span> <span class="n">pk</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">tk</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">"note %d started"</span> <span class="o">%</span> <span class="n">ix</span><span class="p">)</span>
-            <span class="n">midi</span><span class="p">.</span><span class="n">send</span><span class="p">([</span><span class="n">NoteOn</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">note_mapping</span><span class="p">[</span><span class="n">ix</span><span class="p">]])</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">note %d started</span><span class="sh">"</span> <span class="o">%</span> <span class="n">ix</span><span class="p">)</span>
+            <span class="n">midi</span><span class="p">.</span><span class="nf">send</span><span class="p">([</span><span class="nc">NoteOn</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">note_mapping</span><span class="p">[</span><span class="n">ix</span><span class="p">]])</span>
             <span class="n">triggered_keys</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="n">pk</span> <span class="ow">and</span> <span class="n">tk</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">"note %d stopped"</span> <span class="o">%</span> <span class="n">ix</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">note %d stopped</span><span class="sh">"</span> <span class="o">%</span> <span class="n">ix</span><span class="p">)</span>
             <span class="n">triggered_keys</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
-            <span class="n">midi</span><span class="p">.</span><span class="n">send</span><span class="p">([</span><span class="n">NoteOff</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">note_mapping</span><span class="p">[</span><span class="n">ix</span><span class="p">]])</span>
+            <span class="n">midi</span><span class="p">.</span><span class="nf">send</span><span class="p">([</span><span class="nc">NoteOff</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">note_mapping</span><span class="p">[</span><span class="n">ix</span><span class="p">]])</span>
      
-    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">led</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">leds</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">led</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">leds</span><span class="p">):</span>
         <span class="n">led</span><span class="p">.</span><span class="n">duty_cycle</span> <span class="o">=</span> <span class="n">duty_cycles</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span>
-        <span class="n">duty_cycles</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">duty_cycles</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">-</span> <span class="mi">900</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">duty_cycles</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">duty_cycles</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">-</span> <span class="mi">900</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-    <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+    <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>After loading all libraries a midi object is created with <code class="language-plaintext highlighter-rouge">adafruit_midi.MIDI</code>, this one liner will also turn the
@@ -267,15 +267,15 @@ chord at the time.</p>
 <span class="n">button_pins</span> <span class="o">=</span> <span class="p">[</span><span class="n">board</span><span class="p">.</span><span class="n">GP13</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP14</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP15</span><span class="p">,</span> <span class="n">board</span><span class="p">.</span><span class="n">GP10</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP11</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP12</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP7</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP8</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP9</span><span class="p">]</span>
 
 <span class="n">note_mapping</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">[</span><span class="s">"C3"</span><span class="p">,</span> <span class="s">"C2"</span><span class="p">],</span>
-        <span class="p">[</span><span class="s">"D3"</span><span class="p">,</span> <span class="s">"D2"</span><span class="p">],</span>
-        <span class="p">[</span><span class="s">"E3"</span><span class="p">,</span> <span class="s">"E2"</span><span class="p">],</span>
-        <span class="p">[</span><span class="s">"F3"</span><span class="p">,</span> <span class="s">"F2"</span><span class="p">],</span>
-        <span class="p">[</span><span class="s">"G3"</span><span class="p">,</span> <span class="s">"G2"</span><span class="p">],</span>
-        <span class="p">[</span><span class="s">"A3"</span><span class="p">,</span> <span class="s">"A2"</span><span class="p">],</span>
-        <span class="p">[</span><span class="s">"B3"</span><span class="p">,</span> <span class="s">"B2"</span><span class="p">],</span>
-        <span class="p">[</span><span class="s">"C4"</span><span class="p">,</span> <span class="s">"C3"</span><span class="p">],</span>
-        <span class="p">[</span><span class="s">"G2"</span><span class="p">,</span> <span class="s">"G1"</span><span class="p">]</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">C3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C2</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">D3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">D2</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">E3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">E2</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">F3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">F2</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">G2</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">A2</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">B2</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">C4</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">G2</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">G1</span><span class="sh">"</span><span class="p">]</span>
     <span class="p">]</span>
 </code></pre></div></div>
 
@@ -310,20 +310,20 @@ Here <code class="language-plaintext highlighter-rouge">triggered_keys</code> is
 a brief moment with <code class="language-plaintext highlighter-rouge">time.sleep(0.01)</code> before the loop repeats the entire block.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">btn</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">buttons</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">btn</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">buttons</span><span class="p">):</span>
         <span class="n">pressed_keys</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">btn</span><span class="p">.</span><span class="n">value</span>
 
-    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="p">(</span><span class="n">pk</span><span class="p">,</span> <span class="n">tk</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">pressed_keys</span><span class="p">,</span> <span class="n">triggered_keys</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="p">(</span><span class="n">pk</span><span class="p">,</span> <span class="n">tk</span><span class="p">)</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">pressed_keys</span><span class="p">,</span> <span class="n">triggered_keys</span><span class="p">)):</span>
         <span class="k">if</span> <span class="n">pk</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">tk</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">"note %d started"</span> <span class="o">%</span> <span class="n">ix</span><span class="p">)</span>
-            <span class="n">midi</span><span class="p">.</span><span class="n">send</span><span class="p">([</span><span class="n">NoteOn</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">note_mapping</span><span class="p">[</span><span class="n">ix</span><span class="p">]])</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">note %d started</span><span class="sh">"</span> <span class="o">%</span> <span class="n">ix</span><span class="p">)</span>
+            <span class="n">midi</span><span class="p">.</span><span class="nf">send</span><span class="p">([</span><span class="nc">NoteOn</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">note_mapping</span><span class="p">[</span><span class="n">ix</span><span class="p">]])</span>
             <span class="n">triggered_keys</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="n">pk</span> <span class="ow">and</span> <span class="n">tk</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">"note %d stopped"</span> <span class="o">%</span> <span class="n">ix</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">note %d stopped</span><span class="sh">"</span> <span class="o">%</span> <span class="n">ix</span><span class="p">)</span>
             <span class="n">triggered_keys</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
-            <span class="n">midi</span><span class="p">.</span><span class="n">send</span><span class="p">([</span><span class="n">NoteOff</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">note_mapping</span><span class="p">[</span><span class="n">ix</span><span class="p">]])</span>
+            <span class="n">midi</span><span class="p">.</span><span class="nf">send</span><span class="p">([</span><span class="nc">NoteOff</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">note_mapping</span><span class="p">[</span><span class="n">ix</span><span class="p">]])</span>
 
-    <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+    <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
 </code></pre></div></div>
 <h2 id="connecting-with-midi-software">Connecting with MIDI software</h2>
 

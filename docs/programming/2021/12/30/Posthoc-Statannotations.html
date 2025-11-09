@@ -170,17 +170,17 @@ test some of these test. The code below will load all required libraries and loa
 scikit-learn.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">load_ext</span> <span class="n">nb_black</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="n">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="n">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
 
-<span class="n">iris_obj</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
-<span class="n">iris_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">iris_obj</span><span class="p">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">iris_obj</span><span class="p">.</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="n">iris_obj</span> <span class="o">=</span> <span class="nf">load_iris</span><span class="p">()</span>
+<span class="n">iris_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">iris_obj</span><span class="p">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">iris_obj</span><span class="p">.</span><span class="n">feature_names</span><span class="p">)</span>
 
-<span class="n">iris_df</span><span class="p">[</span><span class="s">"species"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">iris_obj</span><span class="p">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">iris_obj</span><span class="p">.</span><span class="n">target</span><span class="p">]</span>
-<span class="n">iris_df</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">iris_df</span><span class="p">[</span><span class="sh">"</span><span class="s">species</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">iris_obj</span><span class="p">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">iris_obj</span><span class="p">.</span><span class="n">target</span><span class="p">]</span>
+<span class="n">iris_df</span><span class="p">.</span><span class="nf">head</span><span class="p">()</span>
 </code></pre></div></div>
 
 <table>
@@ -242,12 +242,12 @@ scikit-learn.</p>
 group a list of values to be passed as a function parameter. The easiest way to do so is with the code below, a list of 
 lists is created with for each species the sepal lengths. This can then be unpacked to parameters using the asterisk (*).</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">species</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">iris_df</span><span class="p">.</span><span class="n">species</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">species</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">unique</span><span class="p">(</span><span class="n">iris_df</span><span class="p">.</span><span class="n">species</span><span class="p">)</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">species</span><span class="p">:</span>
-    <span class="n">data</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">iris_df</span><span class="p">[</span><span class="n">iris_df</span><span class="p">.</span><span class="n">species</span> <span class="o">==</span> <span class="n">s</span><span class="p">][</span><span class="s">"sepal length (cm)"</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">iris_df</span><span class="p">[</span><span class="n">iris_df</span><span class="p">.</span><span class="n">species</span> <span class="o">==</span> <span class="n">s</span><span class="p">][</span><span class="sh">"</span><span class="s">sepal length (cm)</span><span class="sh">"</span><span class="p">])</span>
 </code></pre></div></div>
 
 <h2 id="kruskal-wallis-with-dunns">Kruskal-Wallis with Dunn’s</h2>
@@ -255,9 +255,9 @@ lists is created with for each species the sepal lengths. This can then be unpac
 <p>The Kruskal-Wallis test is included in <a href="https://scipy.org/">SciPy</a> and can easily be applied to our data after it was properly structured
 in the previous step.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
 
-<span class="n">stats</span><span class="p">.</span><span class="n">kruskal</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
+<span class="n">stats</span><span class="p">.</span><span class="nf">kruskal</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>This will return a statistic (96.04) and a p-value (8.9e-22) so there is a significant difference between these species. 
@@ -265,11 +265,11 @@ However, this test will not show us between which species there are difference. 
 Dunn’s test, often used in combination with Kruskal-Wallis. The <code class="language-plaintext highlighter-rouge">posthoc_dunn()</code>function included in 
 <a href="https://scikit-posthocs.readthedocs.io/en/latest/">scikit-posthocs</a> can be used. (Note the difference in syntax with SciPy’s test)</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">scikit_posthocs</span> <span class="kn">import</span> <span class="n">posthoc_dunn</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">scikit_posthocs</span> <span class="kn">import</span> <span class="n">posthoc_dunn</span>
 
 <span class="c1"># posthoc dunn test, with correction for multiple testing
-</span><span class="n">dunn_df</span> <span class="o">=</span> <span class="n">posthoc_dunn</span><span class="p">(</span>
-    <span class="n">iris_df</span><span class="p">,</span> <span class="n">val_col</span><span class="o">=</span><span class="s">"sepal length (cm)"</span><span class="p">,</span> <span class="n">group_col</span><span class="o">=</span><span class="s">"species"</span><span class="p">,</span> <span class="n">p_adjust</span><span class="o">=</span><span class="s">"fdr_bh"</span>
+</span><span class="n">dunn_df</span> <span class="o">=</span> <span class="nf">posthoc_dunn</span><span class="p">(</span>
+    <span class="n">iris_df</span><span class="p">,</span> <span class="n">val_col</span><span class="o">=</span><span class="sh">"</span><span class="s">sepal length (cm)</span><span class="sh">"</span><span class="p">,</span> <span class="n">group_col</span><span class="o">=</span><span class="sh">"</span><span class="s">species</span><span class="sh">"</span><span class="p">,</span> <span class="n">p_adjust</span><span class="o">=</span><span class="sh">"</span><span class="s">fdr_bh</span><span class="sh">"</span>
 <span class="p">)</span>
 <span class="n">dunn_df</span>
 </code></pre></div></div>
@@ -318,12 +318,12 @@ first before going into details how to visualize these results better.</p>
 
 <p>The first test gives us a significant p-value (1.67e-31), so it is good to continue with the Tukey test.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">scikit_posthocs</span> <span class="kn">import</span> <span class="n">posthoc_tukey</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">scikit_posthocs</span> <span class="kn">import</span> <span class="n">posthoc_tukey</span>
 
 <span class="c1"># First we do a oneway ANOVA as implemented in SciPy
-</span><span class="k">print</span><span class="p">(</span><span class="n">stats</span><span class="p">.</span><span class="n">f_oneway</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">))</span>
+</span><span class="nf">print</span><span class="p">(</span><span class="n">stats</span><span class="p">.</span><span class="nf">f_oneway</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">))</span>
 
-<span class="n">tukey_df</span> <span class="o">=</span> <span class="n">posthoc_tukey</span><span class="p">(</span><span class="n">iris_df</span><span class="p">,</span> <span class="n">val_col</span><span class="o">=</span><span class="s">"sepal length (cm)"</span><span class="p">,</span> <span class="n">group_col</span><span class="o">=</span><span class="s">"species"</span><span class="p">)</span>
+<span class="n">tukey_df</span> <span class="o">=</span> <span class="nf">posthoc_tukey</span><span class="p">(</span><span class="n">iris_df</span><span class="p">,</span> <span class="n">val_col</span><span class="o">=</span><span class="sh">"</span><span class="s">sepal length (cm)</span><span class="sh">"</span><span class="p">,</span> <span class="n">group_col</span><span class="o">=</span><span class="sh">"</span><span class="s">species</span><span class="sh">"</span><span class="p">)</span>
 <span class="n">tukey_df</span>
 </code></pre></div></div>
 <p>This gives us the finale table with all comparisons and p-values from those tests.</p>
@@ -371,10 +371,10 @@ this.</p>
 removing the lower half and diagonal of the matrix and turning the matrix format into a long dataframe using
 <code class="language-plaintext highlighter-rouge">melt()</code>. The code and resulting dataframe are shown below.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">remove</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">tril</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">ones</span><span class="p">(</span><span class="n">tukey_df</span><span class="p">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="s">"bool"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">remove</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">tril</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">(</span><span class="n">tukey_df</span><span class="p">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">).</span><span class="nf">astype</span><span class="p">(</span><span class="sh">"</span><span class="s">bool</span><span class="sh">"</span><span class="p">)</span>
 <span class="n">tukey_df</span><span class="p">[</span><span class="n">remove</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">nan</span>
 
-<span class="n">molten_df</span> <span class="o">=</span> <span class="n">tukey_df</span><span class="p">.</span><span class="n">melt</span><span class="p">(</span><span class="n">ignore_index</span><span class="o">=</span><span class="bp">False</span><span class="p">).</span><span class="n">reset_index</span><span class="p">().</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">molten_df</span> <span class="o">=</span> <span class="n">tukey_df</span><span class="p">.</span><span class="nf">melt</span><span class="p">(</span><span class="n">ignore_index</span><span class="o">=</span><span class="bp">False</span><span class="p">).</span><span class="nf">reset_index</span><span class="p">().</span><span class="nf">dropna</span><span class="p">()</span>
 <span class="n">molten_df</span>
 </code></pre></div></div>
 
@@ -418,21 +418,21 @@ species that are being compared. Then p-values are converted to a list using the
 <code class="language-plaintext highlighter-rouge">configure()</code> the plot is set up as we would like. Finally p-values are added using <code class="language-plaintext highlighter-rouge">set_pvalues_and_annotate()</code> 
 which will also add the annotations to the plot.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
-<span class="kn">from</span> <span class="nn">statannotations.Annotator</span> <span class="kn">import</span> <span class="n">Annotator</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+<span class="kn">from</span> <span class="n">statannotations.Annotator</span> <span class="kn">import</span> <span class="n">Annotator</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="p">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">iris_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s">"species"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">"sepal length (cm)"</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">species</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="p">.</span><span class="nf">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">iris_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="sh">"</span><span class="s">species</span><span class="sh">"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="sh">"</span><span class="s">sepal length (cm)</span><span class="sh">"</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">species</span><span class="p">)</span>
 
-<span class="n">pairs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s">"index"</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s">"variable"</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">molten_df</span><span class="p">.</span><span class="n">iterrows</span><span class="p">()]</span>
-<span class="n">p_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s">"value"</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">molten_df</span><span class="p">.</span><span class="n">iterrows</span><span class="p">()]</span>
+<span class="n">pairs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="sh">"</span><span class="s">index</span><span class="sh">"</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="sh">"</span><span class="s">variable</span><span class="sh">"</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">molten_df</span><span class="p">.</span><span class="nf">iterrows</span><span class="p">()]</span>
+<span class="n">p_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">molten_df</span><span class="p">.</span><span class="nf">iterrows</span><span class="p">()]</span>
 
-<span class="n">annotator</span> <span class="o">=</span> <span class="n">Annotator</span><span class="p">(</span>
-    <span class="n">ax</span><span class="p">,</span> <span class="n">pairs</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">iris_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s">"species"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">"sepal length (cm)"</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">species</span>
+<span class="n">annotator</span> <span class="o">=</span> <span class="nc">Annotator</span><span class="p">(</span>
+    <span class="n">ax</span><span class="p">,</span> <span class="n">pairs</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">iris_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="sh">"</span><span class="s">species</span><span class="sh">"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="sh">"</span><span class="s">sepal length (cm)</span><span class="sh">"</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">species</span>
 <span class="p">)</span>
-<span class="n">annotator</span><span class="p">.</span><span class="n">configure</span><span class="p">(</span><span class="n">text_format</span><span class="o">=</span><span class="s">"star"</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s">"inside"</span><span class="p">)</span>
-<span class="n">annotator</span><span class="p">.</span><span class="n">set_pvalues_and_annotate</span><span class="p">(</span><span class="n">p_values</span><span class="p">)</span>
+<span class="n">annotator</span><span class="p">.</span><span class="nf">configure</span><span class="p">(</span><span class="n">text_format</span><span class="o">=</span><span class="sh">"</span><span class="s">star</span><span class="sh">"</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="sh">"</span><span class="s">inside</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">annotator</span><span class="p">.</span><span class="nf">set_pvalues_and_annotate</span><span class="p">(</span><span class="n">p_values</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="p">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">tight_layout</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p><a href="/assets/posts/2021-12-30-Posthoc-Statannotations/ANOVA-posthoc.png" class="lightgallery-link" data-sub-html="Results from ANOVA with Tukey HSD on iris dataset">

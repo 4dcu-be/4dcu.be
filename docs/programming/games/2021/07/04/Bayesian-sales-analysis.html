@@ -202,11 +202,11 @@ as this isn’t a full week, we’ll discard that line. Also, depending on the m
 total number of registrations down so parameters in the model are more managable in range. Here the total number is
 divided by 10 000.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'./data/archon_arcana_weekly_20210619.csv'</span><span class="p">,</span> <span class="n">thousands</span><span class="o">=</span><span class="s">','</span><span class="p">)</span>
-<span class="n">data</span><span class="p">[</span><span class="s">'Week_nr'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">index</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="sh">'</span><span class="s">./data/archon_arcana_weekly_20210619.csv</span><span class="sh">'</span><span class="p">,</span> <span class="n">thousands</span><span class="o">=</span><span class="sh">'</span><span class="s">,</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="sh">'</span><span class="s">Week_nr</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">index</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">.</span><span class="n">Week_nr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="c1"># ignore first line which is day 3, start with week 1
-</span><span class="n">model_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s">"Week_nr"</span><span class="p">,</span> <span class="s">"Total"</span><span class="p">]].</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">model_data</span><span class="p">[</span><span class="s">"Total_scaled"</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_data</span><span class="p">[</span><span class="s">"Total"</span><span class="p">]</span><span class="o">/</span><span class="mi">10000</span>
+</span><span class="n">model_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="sh">"</span><span class="s">Week_nr</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Total</span><span class="sh">"</span><span class="p">]].</span><span class="nf">copy</span><span class="p">()</span>
+<span class="n">model_data</span><span class="p">[</span><span class="sh">"</span><span class="s">Total_scaled</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_data</span><span class="p">[</span><span class="sh">"</span><span class="s">Total</span><span class="sh">"</span><span class="p">]</span><span class="o">/</span><span class="mi">10000</span>
 <span class="n">model_data</span>
 
 </code></pre></div></div>
@@ -312,21 +312,21 @@ uncertainty.</p>
 
 <p>To define the probability of seeing certain data given the model’s priors, we need to define the likelihood.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
     <span class="c1"># priors
-</span>    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Exponential</span><span class="p">(</span><span class="s">"sigma"</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
-    <span class="n">slope</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">"slope"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</span>    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Exponential</span><span class="p">(</span><span class="sh">"</span><span class="s">sigma</span><span class="sh">"</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">slope</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span><span class="sh">"</span><span class="s">slope</span><span class="sh">"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 
     <span class="c1"># Likelihood
-</span>    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
-        <span class="s">"y"</span><span class="p">,</span>
+</span>    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">y</span><span class="sh">"</span><span class="p">,</span>
         <span class="n">mu</span><span class="o">=</span><span class="n">slope</span> <span class="o">*</span> <span class="n">model_data</span><span class="p">.</span><span class="n">Week_nr</span><span class="p">,</span>
         <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span>
         <span class="n">observed</span><span class="o">=</span><span class="n">model_data</span><span class="p">.</span><span class="n">Total_scaled</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># posterior
-</span>    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">cores</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</span>    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nf">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">cores</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>In the <a href="https://github.com/4dcu-be/BayesianSalesAnalysis">GitHub repo</a> you’ll find all code to inspect and visualize the output, this part is not included in this post. 
@@ -346,40 +346,40 @@ is based on the one before. We are now a little wiser, so we can set the initial
 to 1.5 (about 15k decks are registered weekly). We also know decks cannot be un-registered, so this value can never be
 below zero (using <code class="language-plaintext highlighter-rouge">pm.Bound()</code>).</p>
 
-<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">len_observed</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_data</span><span class="p">)</span>
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">len_observed</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">model_data</span><span class="p">)</span>
 
-<span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_2</span><span class="p">:</span>
+<span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_2</span><span class="p">:</span>
     <span class="c1"># priors
-</span>    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Exponential</span><span class="p">(</span><span class="s">"sigma"</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># Sigma for likelihood function
+</span>    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Exponential</span><span class="p">(</span><span class="sh">"</span><span class="s">sigma</span><span class="sh">"</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># Sigma for likelihood function
 </span>
     <span class="c1"># We know from the previous analysis there are on average 15 000 decks registered per week
 </span>    <span class="c1"># this can be the baseline (mu) with a rather large deviation (sigma)
 </span>    <span class="c1"># as decks cannot be un-registered, this value can never go negative, so we'll put a limit on it preventing that
-</span>    <span class="n">BoundNormal_0</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Bound</span><span class="p">(</span><span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">weekly_registrations</span> <span class="o">=</span> <span class="n">BoundNormal_0</span><span class="p">(</span><span class="s">"weekly_registrations"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</span>    <span class="n">BoundNormal_0</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Bound</span><span class="p">(</span><span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">weekly_registrations</span> <span class="o">=</span> <span class="nc">BoundNormal_0</span><span class="p">(</span><span class="sh">"</span><span class="s">weekly_registrations</span><span class="sh">"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">len_observed</span><span class="p">)</span>
-    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="n">set_subtensor</span><span class="p">(</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="nf">zeros</span><span class="p">(</span><span class="n">len_observed</span><span class="p">)</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="nf">set_subtensor</span><span class="p">(</span>
         <span class="n">y0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">15</span>
     <span class="p">)</span>  <span class="c1"># there were 150k decks registered the first week, that is the initial value (150 000/10 000)
 </span>
-    <span class="n">outputs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">theano</span><span class="p">.</span><span class="n">scan</span><span class="p">(</span>
-        <span class="n">fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ws</span><span class="p">:</span> <span class="n">tt</span><span class="p">.</span><span class="n">set_subtensor</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">ws</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]),</span>
-        <span class="n">sequences</span><span class="o">=</span><span class="p">[</span><span class="n">tt</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">len_observed</span><span class="p">)],</span>
+    <span class="n">outputs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">theano</span><span class="p">.</span><span class="nf">scan</span><span class="p">(</span>
+        <span class="n">fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ws</span><span class="p">:</span> <span class="n">tt</span><span class="p">.</span><span class="nf">set_subtensor</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">ws</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]),</span>
+        <span class="n">sequences</span><span class="o">=</span><span class="p">[</span><span class="n">tt</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">len_observed</span><span class="p">)],</span>
         <span class="n">outputs_info</span><span class="o">=</span><span class="n">y0</span><span class="p">,</span>
         <span class="n">non_sequences</span><span class="o">=</span><span class="n">weekly_registrations</span><span class="p">,</span>
         <span class="n">n_steps</span><span class="o">=</span><span class="n">len_observed</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="n">total_registrations</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s">"total_registrations"</span><span class="p">,</span> <span class="n">outputs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">total_registrations</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Deterministic</span><span class="p">(</span><span class="sh">"</span><span class="s">total_registrations</span><span class="sh">"</span><span class="p">,</span> <span class="n">outputs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="c1"># Likelihood
-</span>    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
-        <span class="s">"y"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">total_registrations</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">model_data</span><span class="p">.</span><span class="n">Total_scaled</span>
+</span>    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">y</span><span class="sh">"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">total_registrations</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">model_data</span><span class="p">.</span><span class="n">Total_scaled</span>
     <span class="p">)</span>
 
     <span class="c1"># posterior
-</span>    <span class="n">trace_2</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">cores</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</span>    <span class="n">trace_2</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nf">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">cores</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>This change does make the sampling slower while the output is identical, however it is a much better base to wontinue to
@@ -392,59 +392,59 @@ for some flexibility as different countries took different measures at the start
 the pandemic started. Using <code class="language-plaintext highlighter-rouge">pm.math.switch()</code> we can specify that before the start one slope is used and afterwards
 the second.</p>
 
-<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_3</span><span class="p">:</span>
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_3</span><span class="p">:</span>
     <span class="c1"># priors
-</span>    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Exponential</span><span class="p">(</span><span class="s">"sigma"</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># Sigma for likelihood function
+</span>    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Exponential</span><span class="p">(</span><span class="sh">"</span><span class="s">sigma</span><span class="sh">"</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># Sigma for likelihood function
 </span>
-    <span class="n">covid_start</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">DiscreteUniform</span><span class="p">(</span>
-        <span class="s">"covid_start"</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">85</span>
+    <span class="n">covid_start</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">DiscreteUniform</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">covid_start</span><span class="sh">"</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">85</span>
     <span class="p">)</span>  <span class="c1"># COVID started at different points in different countries lets start around week 70
 </span>
     <span class="c1"># We know from the previous analysis there are on average 15 000 decks registered per week
 </span>    <span class="c1"># this can be the baseline (mu) with a rather large deviation (sigma)
 </span>    <span class="c1"># as decks cannot be un-registered, this value can never go negative, so we'll put a limit on it preventing that
-</span>    <span class="n">BoundNormal_0</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Bound</span><span class="p">(</span><span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span>    <span class="n">BoundNormal_0</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Bound</span><span class="p">(</span><span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     
     <span class="c1"># As the average is 15 000 (1.5 after scaling), and we assume COVID-19 had a negative impact on sales, we'll set the
 </span>    <span class="c1"># initial value for post-COVID to 1 (10 000 decks registered per week)
-</span>    <span class="n">weekly_registrations_covid</span> <span class="o">=</span> <span class="n">BoundNormal_0</span><span class="p">(</span>
-        <span class="s">"weekly_registrations_covid"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span>
+</span>    <span class="n">weekly_registrations_covid</span> <span class="o">=</span> <span class="nc">BoundNormal_0</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">weekly_registrations_covid</span><span class="sh">"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span>
     <span class="p">)</span>
     
     <span class="c1"># As the average was affected by COVID, pre-COVID sales were likely better, this is reflected by setting the intial value
 </span>    <span class="c1"># of this prior to 2
-</span>    <span class="n">weekly_registrations_precovid</span> <span class="o">=</span> <span class="n">BoundNormal_0</span><span class="p">(</span>
-        <span class="s">"weekly_registrations_precovid"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span>
+</span>    <span class="n">weekly_registrations_precovid</span> <span class="o">=</span> <span class="nc">BoundNormal_0</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">weekly_registrations_precovid</span><span class="sh">"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span>
     <span class="p">)</span>
 
-    <span class="n">weekly_registrations</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">math</span><span class="p">.</span><span class="n">switch</span><span class="p">(</span>
+    <span class="n">weekly_registrations</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">math</span><span class="p">.</span><span class="nf">switch</span><span class="p">(</span>
         <span class="n">covid_start</span> <span class="o">&gt;=</span> <span class="n">model_data</span><span class="p">.</span><span class="n">Week_nr</span><span class="p">,</span>
         <span class="n">weekly_registrations_precovid</span><span class="p">,</span>
         <span class="n">weekly_registrations_covid</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">len_observed</span><span class="p">)</span>
-    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="n">set_subtensor</span><span class="p">(</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="nf">zeros</span><span class="p">(</span><span class="n">len_observed</span><span class="p">)</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="nf">set_subtensor</span><span class="p">(</span>
         <span class="n">y0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">15</span>
     <span class="p">)</span>  <span class="c1"># there were 150k decks registered the first week, that is the initial value (15 after scaling)
 </span>
-    <span class="n">outputs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">theano</span><span class="p">.</span><span class="n">scan</span><span class="p">(</span>
-        <span class="n">fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ws</span><span class="p">:</span> <span class="n">tt</span><span class="p">.</span><span class="n">set_subtensor</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">ws</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]),</span>
-        <span class="n">sequences</span><span class="o">=</span><span class="p">[</span><span class="n">tt</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">len_observed</span><span class="p">)],</span>
+    <span class="n">outputs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">theano</span><span class="p">.</span><span class="nf">scan</span><span class="p">(</span>
+        <span class="n">fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ws</span><span class="p">:</span> <span class="n">tt</span><span class="p">.</span><span class="nf">set_subtensor</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">ws</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]),</span>
+        <span class="n">sequences</span><span class="o">=</span><span class="p">[</span><span class="n">tt</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">len_observed</span><span class="p">)],</span>
         <span class="n">outputs_info</span><span class="o">=</span><span class="n">y0</span><span class="p">,</span>
         <span class="n">non_sequences</span><span class="o">=</span><span class="n">weekly_registrations</span><span class="p">,</span>
         <span class="n">n_steps</span><span class="o">=</span><span class="n">len_observed</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="n">total_registrations</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s">"total_registrations"</span><span class="p">,</span> <span class="n">outputs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">total_registrations</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Deterministic</span><span class="p">(</span><span class="sh">"</span><span class="s">total_registrations</span><span class="sh">"</span><span class="p">,</span> <span class="n">outputs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="c1"># Likelihood
-</span>    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
-        <span class="s">"y"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">total_registrations</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">model_data</span><span class="p">.</span><span class="n">Total_scaled</span>
+</span>    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">y</span><span class="sh">"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">total_registrations</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">model_data</span><span class="p">.</span><span class="n">Total_scaled</span>
     <span class="p">)</span>
 
     <span class="c1"># posterior
-</span>    <span class="n">trace_3</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">cores</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</span>    <span class="n">trace_3</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nf">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">cores</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </code></pre></div></div>
 
 <vegachart schema-url="/assets/posts/2021-07-04-Bayesian-sales-analysis/model_3.json" style="width: 100%"></vegachart>
@@ -469,24 +469,24 @@ that I’m jumping from model 3 to 5 here, it took a while to figure out how to 
 this in the model, this is added using the <code class="language-plaintext highlighter-rouge">pm.Deterministic()</code> function. This allows you to include additional 
 calculations in the model, without their own priors, to examine at the end.</p>
 
-<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_5</span><span class="p">:</span>
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_5</span><span class="p">:</span>
     <span class="c1"># priors
-</span>    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Exponential</span><span class="p">(</span><span class="s">"sigma"</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># Sigma for likelihood function
+</span>    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Exponential</span><span class="p">(</span><span class="sh">"</span><span class="s">sigma</span><span class="sh">"</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># Sigma for likelihood function
 </span>
     <span class="c1"># COVID started at different points in different countries, it should be around week 70 give or take a week or two
-</span>    <span class="n">covid_start</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">DiscreteUniform</span><span class="p">(</span><span class="s">"covid_start"</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">68</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">72</span><span class="p">)</span>
+</span>    <span class="n">covid_start</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">DiscreteUniform</span><span class="p">(</span><span class="sh">"</span><span class="s">covid_start</span><span class="sh">"</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">68</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">72</span><span class="p">)</span>
 
     <span class="c1"># We know from the previous that mu before and during covid should be around 0.8 and 3.0 respectively
 </span>    <span class="c1"># Sigma is reduced here not to diverge to far from these values
-</span>    <span class="n">BoundNormal_0</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Bound</span><span class="p">(</span><span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">weekly_registrations_covid</span> <span class="o">=</span> <span class="n">BoundNormal_0</span><span class="p">(</span>
-        <span class="s">"weekly_registrations_covid"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.5</span>
+</span>    <span class="n">BoundNormal_0</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Bound</span><span class="p">(</span><span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">weekly_registrations_covid</span> <span class="o">=</span> <span class="nc">BoundNormal_0</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">weekly_registrations_covid</span><span class="sh">"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.5</span>
     <span class="p">)</span>
-    <span class="n">weekly_registrations_precovid</span> <span class="o">=</span> <span class="n">BoundNormal_0</span><span class="p">(</span>
-        <span class="s">"weekly_registrations_precovid"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.5</span>
+    <span class="n">weekly_registrations_precovid</span> <span class="o">=</span> <span class="nc">BoundNormal_0</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">weekly_registrations_precovid</span><span class="sh">"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.5</span>
     <span class="p">)</span>
 
-    <span class="n">weekly_registrations_base</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">math</span><span class="p">.</span><span class="n">switch</span><span class="p">(</span>
+    <span class="n">weekly_registrations_base</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">math</span><span class="p">.</span><span class="nf">switch</span><span class="p">(</span>
         <span class="n">covid_start</span> <span class="o">&gt;=</span> <span class="n">model_data</span><span class="p">.</span><span class="n">Week_nr</span><span class="p">,</span>
         <span class="n">weekly_registrations_precovid</span><span class="p">,</span>
         <span class="n">weekly_registrations_covid</span><span class="p">,</span>
@@ -494,34 +494,34 @@ calculations in the model, without their own priors, to examine at the end.</p>
 
     <span class="c1"># Model extra registrations due to shifting interest (like new sets being released)
 </span>    <span class="c1"># The interest factor is calculated on a weekly basis
-</span>    <span class="n">decay_factor</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Exponential</span><span class="p">(</span><span class="s">"decay_factor"</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</span>    <span class="n">decay_factor</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Exponential</span><span class="p">(</span><span class="sh">"</span><span class="s">decay_factor</span><span class="sh">"</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 
-    <span class="n">cota_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s">"cota_interest"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">aoa_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s">"aoa_interest"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">wc_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s">"wc_interest"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">mm_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s">"mm_interest"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">dt_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s">"dt_interest"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">cota_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">HalfNormal</span><span class="p">(</span><span class="sh">"</span><span class="s">cota_interest</span><span class="sh">"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">aoa_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">HalfNormal</span><span class="p">(</span><span class="sh">"</span><span class="s">aoa_interest</span><span class="sh">"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">wc_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">HalfNormal</span><span class="p">(</span><span class="sh">"</span><span class="s">wc_interest</span><span class="sh">"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">mm_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">HalfNormal</span><span class="p">(</span><span class="sh">"</span><span class="s">mm_interest</span><span class="sh">"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">dt_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">HalfNormal</span><span class="p">(</span><span class="sh">"</span><span class="s">dt_interest</span><span class="sh">"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
     <span class="c1"># Another way of defining interest is in extra registrations caused (not as a factor)
-</span>    <span class="n">cota_surplus</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Deterministic</span><span class="p">(</span>
-        <span class="s">"cota_surplus"</span><span class="p">,</span> <span class="n">cota_interest</span> <span class="o">*</span> <span class="n">weekly_registrations_base</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span>    <span class="n">cota_surplus</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Deterministic</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">cota_surplus</span><span class="sh">"</span><span class="p">,</span> <span class="n">cota_interest</span> <span class="o">*</span> <span class="n">weekly_registrations_base</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="p">)</span>
-    <span class="n">aoa_surplus</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Deterministic</span><span class="p">(</span>
-        <span class="s">"aoa_surplus"</span><span class="p">,</span> <span class="n">aoa_interest</span> <span class="o">*</span> <span class="n">weekly_registrations_base</span><span class="p">[</span><span class="mi">27</span><span class="p">]</span>
+    <span class="n">aoa_surplus</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Deterministic</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">aoa_surplus</span><span class="sh">"</span><span class="p">,</span> <span class="n">aoa_interest</span> <span class="o">*</span> <span class="n">weekly_registrations_base</span><span class="p">[</span><span class="mi">27</span><span class="p">]</span>
     <span class="p">)</span>
-    <span class="n">wc_surplus</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Deterministic</span><span class="p">(</span>
-        <span class="s">"wc_surplus"</span><span class="p">,</span> <span class="n">wc_interest</span> <span class="o">*</span> <span class="n">weekly_registrations_base</span><span class="p">[</span><span class="mi">50</span><span class="p">]</span>
+    <span class="n">wc_surplus</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Deterministic</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">wc_surplus</span><span class="sh">"</span><span class="p">,</span> <span class="n">wc_interest</span> <span class="o">*</span> <span class="n">weekly_registrations_base</span><span class="p">[</span><span class="mi">50</span><span class="p">]</span>
     <span class="p">)</span>
-    <span class="n">mm_surplus</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Deterministic</span><span class="p">(</span>
-        <span class="s">"mm_surplus"</span><span class="p">,</span> <span class="n">mm_interest</span> <span class="o">*</span> <span class="n">weekly_registrations_base</span><span class="p">[</span><span class="mi">85</span><span class="p">]</span>
+    <span class="n">mm_surplus</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Deterministic</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">mm_surplus</span><span class="sh">"</span><span class="p">,</span> <span class="n">mm_interest</span> <span class="o">*</span> <span class="n">weekly_registrations_base</span><span class="p">[</span><span class="mi">85</span><span class="p">]</span>
     <span class="p">)</span>
-    <span class="n">dt_surplus</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Deterministic</span><span class="p">(</span>
-        <span class="s">"dt_surplus"</span><span class="p">,</span> <span class="n">dt_interest</span> <span class="o">*</span> <span class="n">weekly_registrations_base</span><span class="p">[</span><span class="mi">126</span><span class="p">]</span>
+    <span class="n">dt_surplus</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Deterministic</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">dt_surplus</span><span class="sh">"</span><span class="p">,</span> <span class="n">dt_interest</span> <span class="o">*</span> <span class="n">weekly_registrations_base</span><span class="p">[</span><span class="mi">126</span><span class="p">]</span>
     <span class="p">)</span>
 
     <span class="n">interest_decayed</span> <span class="o">=</span> <span class="p">[</span><span class="n">cota_interest</span><span class="p">]</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">len_observed</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">len_observed</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">new_element</span> <span class="o">=</span> <span class="n">interest_decayed</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">decay_factor</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">27</span><span class="p">:</span>
             <span class="n">new_element</span> <span class="o">+=</span> <span class="n">aoa_interest</span>
@@ -531,31 +531,31 @@ calculations in the model, without their own priors, to examine at the end.</p>
             <span class="n">new_element</span> <span class="o">+=</span> <span class="n">mm_interest</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">126</span><span class="p">:</span>
             <span class="n">new_element</span> <span class="o">+=</span> <span class="n">dt_interest</span>
-        <span class="n">interest_decayed</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_element</span><span class="p">)</span>
+        <span class="n">interest_decayed</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">new_element</span><span class="p">)</span>
 
     <span class="c1"># there were 150k decks registered the first week, that is the initial value
-</span>    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">len_observed</span><span class="p">)</span>
-    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="n">set_subtensor</span><span class="p">(</span><span class="n">y0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">15</span><span class="p">)</span>
+</span>    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="nf">zeros</span><span class="p">(</span><span class="n">len_observed</span><span class="p">)</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="nf">set_subtensor</span><span class="p">(</span><span class="n">y0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">15</span><span class="p">)</span>
 
-    <span class="n">outputs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">theano</span><span class="p">.</span><span class="n">scan</span><span class="p">(</span>
-        <span class="n">fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ws</span><span class="p">,</span> <span class="n">intfac</span><span class="p">:</span> <span class="n">tt</span><span class="p">.</span><span class="n">set_subtensor</span><span class="p">(</span>
+    <span class="n">outputs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">theano</span><span class="p">.</span><span class="nf">scan</span><span class="p">(</span>
+        <span class="n">fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ws</span><span class="p">,</span> <span class="n">intfac</span><span class="p">:</span> <span class="n">tt</span><span class="p">.</span><span class="nf">set_subtensor</span><span class="p">(</span>
             <span class="n">y</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="p">(</span><span class="n">ws</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">intfac</span><span class="p">[</span><span class="n">t</span><span class="p">]))</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
         <span class="p">),</span>
-        <span class="n">sequences</span><span class="o">=</span><span class="p">[</span><span class="n">tt</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">len_observed</span><span class="p">)],</span>
+        <span class="n">sequences</span><span class="o">=</span><span class="p">[</span><span class="n">tt</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">len_observed</span><span class="p">)],</span>
         <span class="n">outputs_info</span><span class="o">=</span><span class="n">y0</span><span class="p">,</span>
         <span class="n">non_sequences</span><span class="o">=</span><span class="p">[</span><span class="n">weekly_registrations_base</span><span class="p">,</span> <span class="n">interest_decayed</span><span class="p">],</span>
         <span class="n">n_steps</span><span class="o">=</span><span class="n">len_observed</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="n">total_registrations</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s">"total_registrations"</span><span class="p">,</span> <span class="n">outputs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">total_registrations</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Deterministic</span><span class="p">(</span><span class="sh">"</span><span class="s">total_registrations</span><span class="sh">"</span><span class="p">,</span> <span class="n">outputs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="c1"># Likelihood
-</span>    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
-        <span class="s">"y"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">total_registrations</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">model_data</span><span class="p">.</span><span class="n">Total_scaled</span>
+</span>    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">y</span><span class="sh">"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">total_registrations</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">model_data</span><span class="p">.</span><span class="n">Total_scaled</span>
     <span class="p">)</span>
 
     <span class="c1"># posterior
-</span>    <span class="n">trace_5</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">cores</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</span>    <span class="n">trace_5</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nf">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">cores</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </code></pre></div></div>
 <vegachart schema-url="/assets/posts/2021-07-04-Bayesian-sales-analysis/model_5.json" style="width: 100%"></vegachart>
 
@@ -565,25 +565,25 @@ on how big the impact of COVID-19 is on the base rate of registrations. We can a
 sets rank in terms of interest or popularity.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">model_5</span><span class="p">:</span>
-    <span class="n">stats</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">az</span><span class="p">.</span><span class="n">summary</span><span class="p">(</span><span class="n">trace_5</span><span class="p">,</span> <span class="n">round_to</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">stats</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">az</span><span class="p">.</span><span class="nf">summary</span><span class="p">(</span><span class="n">trace_5</span><span class="p">,</span> <span class="n">round_to</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
 
 <span class="n">stats</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span>
     <span class="p">[</span>
-        <span class="s">"sigma"</span><span class="p">,</span>
-        <span class="s">"covid_start"</span><span class="p">,</span>
-        <span class="s">"weekly_registrations_covid"</span><span class="p">,</span>
-        <span class="s">"weekly_registrations_precovid"</span><span class="p">,</span>
-        <span class="s">"cota_interest"</span><span class="p">,</span>
-        <span class="s">"aoa_interest"</span><span class="p">,</span>
-        <span class="s">"wc_interest"</span><span class="p">,</span>
-        <span class="s">"mm_interest"</span><span class="p">,</span>
-        <span class="s">"dt_interest"</span><span class="p">,</span>
-        <span class="s">"decay_factor"</span><span class="p">,</span>
-        <span class="s">"cota_surplus"</span><span class="p">,</span>
-        <span class="s">"aoa_surplus"</span><span class="p">,</span>
-        <span class="s">"wc_surplus"</span><span class="p">,</span>
-        <span class="s">"mm_surplus"</span><span class="p">,</span>
-        <span class="s">"dt_surplus"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">sigma</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">covid_start</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">weekly_registrations_covid</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">weekly_registrations_precovid</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">cota_interest</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">aoa_interest</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">wc_interest</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">mm_interest</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">dt_interest</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">decay_factor</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">cota_surplus</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">aoa_surplus</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">wc_surplus</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">mm_surplus</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">dt_surplus</span><span class="sh">"</span><span class="p">,</span>
     <span class="p">]</span>
 <span class="p">]</span>
 </code></pre></div></div>
@@ -800,25 +800,25 @@ the pandemic never happened. To do this, we need to tweak the model a little. We
 get the sampling to work with this fixed parameter, <code class="language-plaintext highlighter-rouge">init="adapt_diag"</code> is added to avoid errors.</p>
 
 <p>In the code below only changes from the previous are shown.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_5</span><span class="p">:</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_5</span><span class="p">:</span>
     <span class="c1"># ...
 </span>    <span class="c1"># here we set the start of covid manually (based on previous notebook)
 </span>    <span class="c1"># this way it can be changed after fitting the model
-</span>    <span class="n">covid_start</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Data</span><span class="p">(</span><span class="s">"covid_start"</span><span class="p">,</span> <span class="mi">68</span><span class="p">)</span>
+</span>    <span class="n">covid_start</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Data</span><span class="p">(</span><span class="sh">"</span><span class="s">covid_start</span><span class="sh">"</span><span class="p">,</span> <span class="mi">68</span><span class="p">)</span>
     
     <span class="c1"># ...
 </span>    
     <span class="c1"># posterior
-</span>    <span class="n">trace_5</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">cores</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s">"adapt_diag"</span><span class="p">)</span>
+</span>    <span class="n">trace_5</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nf">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">cores</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="sh">"</span><span class="s">adapt_diag</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>After fitting the model we can change the point where we want COVID-19 to start to a point in the future, using the
 <code class="language-plaintext highlighter-rouge">pm.sample_posterior_predictive()</code> then will show the model, but without the effect of COVID-19.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">model_5</span><span class="p">:</span>
-    <span class="n">pm</span><span class="p">.</span><span class="n">set_data</span><span class="p">({</span><span class="s">"covid_start"</span><span class="p">:</span> <span class="mi">500</span><span class="p">})</span>
+    <span class="n">pm</span><span class="p">.</span><span class="nf">set_data</span><span class="p">({</span><span class="sh">"</span><span class="s">covid_start</span><span class="sh">"</span><span class="p">:</span> <span class="mi">500</span><span class="p">})</span>
 
-<span class="n">chart_without_covid</span> <span class="o">=</span> <span class="n">plot_fit_altair</span><span class="p">(</span><span class="n">model_5</span><span class="p">,</span> <span class="n">trace_5</span><span class="p">,</span> <span class="n">model_data</span><span class="p">)</span>
+<span class="n">chart_without_covid</span> <span class="o">=</span> <span class="nf">plot_fit_altair</span><span class="p">(</span><span class="n">model_5</span><span class="p">,</span> <span class="n">trace_5</span><span class="p">,</span> <span class="n">model_data</span><span class="p">)</span>
 <span class="n">chart_without_covid</span>
 </code></pre></div></div>
 
@@ -841,32 +841,32 @@ pandemic beyond the current time, which can be seen in <a href="/programming/gam
 The approach below still has merit in some cases, so I’ll leave it in, just know there is a better solution available
 for this case.</p>
 
-<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_7</span><span class="p">:</span>
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_7</span><span class="p">:</span>
     <span class="c1"># priors
-</span>    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">"sigma"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">1.17</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.07</span><span class="p">)</span>  <span class="c1"># Sigma for likelihood function
+</span>    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span><span class="sh">"</span><span class="s">sigma</span><span class="sh">"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">1.17</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.07</span><span class="p">)</span>  <span class="c1"># Sigma for likelihood function
 </span>
-    <span class="n">weekly_registrations</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">"weekly_registrations"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">1.55</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.06</span><span class="p">)</span>
+    <span class="n">weekly_registrations</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span><span class="sh">"</span><span class="s">weekly_registrations</span><span class="sh">"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">1.55</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.06</span><span class="p">)</span>
 
     <span class="c1"># Model extra registrations due to shifting interest (like new sets being released)
 </span>    <span class="c1"># The interest factor is calculated on a weekly basis
-</span>    <span class="n">decay_factor</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">"decay_factor"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.84</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+</span>    <span class="n">decay_factor</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span><span class="sh">"</span><span class="s">decay_factor</span><span class="sh">"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.84</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 
-    <span class="n">cota_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">"cota_interest"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">4.11</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.19</span><span class="p">)</span>
-    <span class="n">aoa_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">"aoa_interest"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">1.7</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.16</span><span class="p">)</span>
-    <span class="n">wc_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">"wc_interest"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.13</span><span class="p">)</span>
+    <span class="n">cota_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span><span class="sh">"</span><span class="s">cota_interest</span><span class="sh">"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">4.11</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.19</span><span class="p">)</span>
+    <span class="n">aoa_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span><span class="sh">"</span><span class="s">aoa_interest</span><span class="sh">"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">1.7</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.16</span><span class="p">)</span>
+    <span class="n">wc_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span><span class="sh">"</span><span class="s">wc_interest</span><span class="sh">"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.13</span><span class="p">)</span>
     <span class="c1"># Maybe people's buying behaviour responds differently to
 </span>    <span class="c1"># the release of a new set during COVID.
 </span>    <span class="c1"># Set the two most recent sets to a worst case scenario
-</span>    <span class="n">mm_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
-        <span class="s">"mm_interest"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.13</span>
+</span>    <span class="n">mm_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">mm_interest</span><span class="sh">"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.13</span>
     <span class="p">)</span>  
-    <span class="n">dt_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
-        <span class="s">"dt_interest"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.13</span>
+    <span class="n">dt_interest</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">dt_interest</span><span class="sh">"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.13</span>
     <span class="p">)</span>  
 
     <span class="n">interest_decayed</span> <span class="o">=</span> <span class="p">[</span><span class="n">cota_interest</span><span class="p">]</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">len_observed</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">len_observed</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">new_element</span> <span class="o">=</span> <span class="n">interest_decayed</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">decay_factor</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">27</span><span class="p">:</span>
             <span class="n">new_element</span> <span class="o">+=</span> <span class="n">aoa_interest</span>
@@ -876,27 +876,27 @@ for this case.</p>
             <span class="n">new_element</span> <span class="o">+=</span> <span class="n">mm_interest</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">126</span><span class="p">:</span>
             <span class="n">new_element</span> <span class="o">+=</span> <span class="n">dt_interest</span>
-        <span class="n">interest_decayed</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_element</span><span class="p">)</span>
+        <span class="n">interest_decayed</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">new_element</span><span class="p">)</span>
 
     <span class="c1"># there were 150k decks registered the first week, that is the initial value
-</span>    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">len_observed</span><span class="p">)</span>
-    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="n">set_subtensor</span><span class="p">(</span><span class="n">y0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">15</span><span class="p">)</span>
+</span>    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="nf">zeros</span><span class="p">(</span><span class="n">len_observed</span><span class="p">)</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">tt</span><span class="p">.</span><span class="nf">set_subtensor</span><span class="p">(</span><span class="n">y0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">15</span><span class="p">)</span>
 
-    <span class="n">outputs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">theano</span><span class="p">.</span><span class="n">scan</span><span class="p">(</span>
-        <span class="n">fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">intfac</span><span class="p">:</span> <span class="n">tt</span><span class="p">.</span><span class="n">set_subtensor</span><span class="p">(</span>
+    <span class="n">outputs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">theano</span><span class="p">.</span><span class="nf">scan</span><span class="p">(</span>
+        <span class="n">fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">intfac</span><span class="p">:</span> <span class="n">tt</span><span class="p">.</span><span class="nf">set_subtensor</span><span class="p">(</span>
             <span class="n">y</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="p">(</span><span class="n">weekly_registrations</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">intfac</span><span class="p">[</span><span class="n">t</span><span class="p">]))</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
         <span class="p">),</span>
-        <span class="n">sequences</span><span class="o">=</span><span class="p">[</span><span class="n">tt</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">len_observed</span><span class="p">)],</span>
+        <span class="n">sequences</span><span class="o">=</span><span class="p">[</span><span class="n">tt</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">len_observed</span><span class="p">)],</span>
         <span class="n">outputs_info</span><span class="o">=</span><span class="n">y0</span><span class="p">,</span>
         <span class="n">non_sequences</span><span class="o">=</span><span class="p">[</span><span class="n">interest_decayed</span><span class="p">],</span>
         <span class="n">n_steps</span><span class="o">=</span><span class="n">len_observed</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="n">total_registrations</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s">"total_registrations"</span><span class="p">,</span> <span class="n">outputs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">total_registrations</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Deterministic</span><span class="p">(</span><span class="sh">"</span><span class="s">total_registrations</span><span class="sh">"</span><span class="p">,</span> <span class="n">outputs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="c1"># Likelihood
-</span>    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="n">Normal</span><span class="p">(</span>
-        <span class="s">"y"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">total_registrations</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">model_data</span><span class="p">.</span><span class="n">Total_scaled</span>
+</span>    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">y</span><span class="sh">"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">total_registrations</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">model_data</span><span class="p">.</span><span class="n">Total_scaled</span>
     <span class="p">)</span>
 </code></pre></div></div>
 

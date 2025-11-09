@@ -1,7 +1,15 @@
 {
   "permissions": {
     "allow": [
-      "WebSearch"
+      "WebSearch",
+      "Bash(cat:*)",
+      "Bash(bundle update:*)",
+      "Bash(ruby --version:*)",
+      "Bash(apt list:*)",
+      "Bash(jekyll:*)",
+      "Bash(bundle list:*)",
+      "Bash(bundle exec jekyll build:*)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []

@@ -193,41 +193,41 @@ Origin Resource Sharing, CORS) so we can pull this data in from other websites u
 , build the URL, use the <a href="https://requests.readthedocs.io/en/master/">requests</a> library to grab the HTML and a few lines to process it. Everything, is returned as
 as JSON. Below you can find the code in <code class="language-plaintext highlighter-rouge">main.py</code>.</p>
 
-<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">json</span>
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">requests</span>
+<span class="kn">import</span> <span class="n">re</span>
+<span class="kn">import</span> <span class="n">json</span>
 
 
 <span class="k">def</span> <span class="nf">parse_scholar</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="c1"># Code to handle CORS (from docs)
-</span>    <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">'OPTIONS'</span><span class="p">:</span>
+</span>    <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">method</span> <span class="o">==</span> <span class="sh">'</span><span class="s">OPTIONS</span><span class="sh">'</span><span class="p">:</span>
         <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s">'Access-Control-Allow-Origin'</span><span class="p">:</span> <span class="s">'*'</span><span class="p">,</span>
-            <span class="s">'Access-Control-Allow-Methods'</span><span class="p">:</span> <span class="s">'GET'</span><span class="p">,</span>
-            <span class="s">'Access-Control-Allow-Headers'</span><span class="p">:</span> <span class="s">'Content-Type'</span><span class="p">,</span>
-            <span class="s">'Access-Control-Max-Age'</span><span class="p">:</span> <span class="s">'3600'</span>
+            <span class="sh">'</span><span class="s">Access-Control-Allow-Origin</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">*</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">Access-Control-Allow-Methods</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">GET</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">Access-Control-Allow-Headers</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Content-Type</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">Access-Control-Max-Age</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">3600</span><span class="sh">'</span>
         <span class="p">}</span>
 
-        <span class="k">return</span> <span class="p">(</span><span class="s">''</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+        <span class="nf">return </span><span class="p">(</span><span class="sh">''</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
 
     <span class="c1"># Set CORS headers for the main request
 </span>    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s">'Access-Control-Allow-Origin'</span><span class="p">:</span> <span class="s">'*'</span>
+        <span class="sh">'</span><span class="s">Access-Control-Allow-Origin</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">*</span><span class="sh">'</span>
     <span class="p">}</span>
 
-    <span class="n">request_json</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">get_json</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">request_json</span> <span class="ow">and</span> <span class="s">'user'</span> <span class="ow">in</span> <span class="n">request_json</span><span class="p">:</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s">'https://scholar.google.com/citations?user=</span><span class="si">{</span><span class="n">request_json</span><span class="p">[</span><span class="s">"user"</span><span class="p">]</span><span class="si">}</span><span class="s">'</span>
+    <span class="n">request_json</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">get_json</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">request_json</span> <span class="ow">and</span> <span class="sh">'</span><span class="s">user</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">request_json</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">'</span><span class="s">https://scholar.google.com/citations?user=</span><span class="si">{</span><span class="n">request_json</span><span class="p">[</span><span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">]</span><span class="si">}</span><span class="sh">'</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">args</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'user'</span><span class="p">)</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s">'https://scholar.google.com/citations?user=</span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s">'</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">args</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">user</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">'</span><span class="s">https://scholar.google.com/citations?user=</span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="sh">'</span>
 
-    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
-    <span class="n">hits</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s">'&lt;td class="gsc_rsb_std"&gt;(\d+)&lt;/td&gt;'</span><span class="p">,</span> <span class="n">r</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
-    <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">'citations'</span><span class="p">,</span> <span class="s">'citations_recent'</span><span class="p">,</span> <span class="s">'h_index'</span><span class="p">,</span> <span class="s">'h_index_recent'</span><span class="p">,</span> <span class="s">'i10_index'</span><span class="p">,</span> <span class="s">'i10_index_recent'</span><span class="p">]</span>
+    <span class="n">hits</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nf">findall</span><span class="p">(</span><span class="sa">r</span><span class="sh">'</span><span class="s">&lt;td class=</span><span class="sh">"</span><span class="s">gsc_rsb_std</span><span class="sh">"</span><span class="s">&gt;(\d+)&lt;/td&gt;</span><span class="sh">'</span><span class="p">,</span> <span class="n">r</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">citations</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">citations_recent</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">h_index</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">h_index_recent</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">i10_index</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">i10_index_recent</span><span class="sh">'</span><span class="p">]</span>
 
-    <span class="k">return</span> <span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">hits</span><span class="p">))),</span> <span class="mi">200</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+    <span class="nf">return </span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="nf">dict</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">hits</span><span class="p">))),</span> <span class="mi">200</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
 </code></pre></div></div>
 <p>For Google Cloud functions this needs to be paired with <code class="language-plaintext highlighter-rouge">requirements.txt</code>, which you can find below and make sure
 to set the target to <code class="language-plaintext highlighter-rouge">parse_scholar</code>. That should do the trick !</p>

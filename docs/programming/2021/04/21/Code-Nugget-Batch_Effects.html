@@ -163,36 +163,36 @@ will introduce is a shift, where simply all values measured in that batch are of
 the values are multiplied by a constant factor. As a control, we’ll also include a feature with no effect for each
 distribution.</p>
 
-<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 
 <span class="n">num_samples</span> <span class="o">=</span> <span class="mi">200</span>  <span class="c1"># number of samples per batch
 </span>
-<span class="n">batches</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Batch 1"</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_samples</span> <span class="o">+</span> <span class="p">[</span><span class="s">"Batch 2"</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_samples</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="n">batches</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">Batch 1</span><span class="sh">"</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_samples</span> <span class="o">+</span> <span class="p">[</span><span class="sh">"</span><span class="s">Batch 2</span><span class="sh">"</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_samples</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span>
     <span class="p">{</span>
-        <span class="s">"batch"</span><span class="p">:</span> <span class="n">batches</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">batch</span><span class="sh">"</span><span class="p">:</span> <span class="n">batches</span><span class="p">,</span>
         <span class="c1"># Feature 1-3 are normal distributed, we'll shift one, multiply another and leave one untouched
-</span>        <span class="s">"feature_one"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">(</span>
-            <span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="n">num_samples</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+</span>        <span class="sh">"</span><span class="s">feature_one</span><span class="sh">"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="n">num_samples</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
         <span class="p">),</span>
-        <span class="s">"feature_two"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">(</span>
-            <span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="n">num_samples</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.3</span><span class="p">]</span>
+        <span class="sh">"</span><span class="s">feature_two</span><span class="sh">"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="n">num_samples</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.3</span><span class="p">]</span>
         <span class="p">),</span>
-        <span class="s">"feature_three"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">(</span>
-            <span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="n">num_samples</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)]</span>
+        <span class="sh">"</span><span class="s">feature_three</span><span class="sh">"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="n">num_samples</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)]</span>
         <span class="p">),</span>
         <span class="c1"># Feature 4-6 are uniformly distributed, we'll shift one, multiply another and leave one untouched
-</span>        <span class="s">"feature_four"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">(</span>
-            <span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.2</span><span class="p">]</span>
+</span>        <span class="sh">"</span><span class="s">feature_four</span><span class="sh">"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.2</span><span class="p">]</span>
         <span class="p">),</span>
-        <span class="s">"feature_five"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">(</span>
-            <span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.3</span><span class="p">]</span>
+        <span class="sh">"</span><span class="s">feature_five</span><span class="sh">"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.3</span><span class="p">]</span>
         <span class="p">),</span>
-        <span class="s">"feature_six"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">(</span>
-            <span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)]</span>
+        <span class="sh">"</span><span class="s">feature_six</span><span class="sh">"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)]</span>
         <span class="p">),</span>
     <span class="p">}</span>
 <span class="p">)</span>
@@ -204,13 +204,13 @@ distribution.</p>
 the syntethic data. For this the data needs to be converted into the long format with Pandas’ <code class="language-plaintext highlighter-rouge">melt</code>
 function.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">long_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s">"batch"</span><span class="p">])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">long_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="nf">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">batch</span><span class="sh">"</span><span class="p">])</span>
 
-<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="p">.</span><span class="n">FacetGrid</span><span class="p">(</span>
-    <span class="n">long_df</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">"variable"</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="p">.</span><span class="nc">FacetGrid</span><span class="p">(</span>
+    <span class="n">long_df</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="sh">"</span><span class="s">variable</span><span class="sh">"</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">g</span><span class="p">.</span><span class="n">map_dataframe</span><span class="p">(</span><span class="n">sns</span><span class="p">.</span><span class="n">histplot</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s">"value"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s">"batch"</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">g</span><span class="p">.</span><span class="nf">map_dataframe</span><span class="p">(</span><span class="n">sns</span><span class="p">.</span><span class="n">histplot</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="sh">"</span><span class="s">batch</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p><a href="/assets/posts/2021-04-21-Code-Nugget-Batch_Effects/pycombat_synthetic_dataset.png" class="lightgallery-link" data-sub-html="Distributions of the dataset with batch effects artifically introduced">
@@ -313,9 +313,9 @@ measurements that might need correcting.</p>
 argument the features and the second a list which batch each sample belongs to. With the above dataframe this can
 easily be done using the code below.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">combat.pycombat</span> <span class="kn">import</span> <span class="n">pycombat</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">combat.pycombat</span> <span class="kn">import</span> <span class="n">pycombat</span>
 
-<span class="n">corrected_df</span> <span class="o">=</span> <span class="n">pycombat</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"batch"</span><span class="p">]).</span><span class="n">transpose</span><span class="p">(),</span> <span class="n">df</span><span class="p">[</span><span class="s">"batch"</span><span class="p">]).</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">corrected_df</span> <span class="o">=</span> <span class="nf">pycombat</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="nf">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">batch</span><span class="sh">"</span><span class="p">]).</span><span class="nf">transpose</span><span class="p">(),</span> <span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">batch</span><span class="sh">"</span><span class="p">]).</span><span class="nf">transpose</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>The result is a dataframe with the corrected features as shown below.</p>
@@ -389,25 +389,25 @@ and plotted. Here <code class="language-plaintext highlighter-rouge">scatterplot
 values from different batches (color). If no corrections were done all samples would be on the diagonal as their x- and
 y-values are identical, where corrections are applied there will be a shift.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">long_corrected_df</span> <span class="o">=</span> <span class="n">corrected_df</span><span class="p">.</span><span class="n">melt</span><span class="p">()</span>
-<span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">long_corrected_df</span> <span class="o">=</span> <span class="n">corrected_df</span><span class="p">.</span><span class="nf">melt</span><span class="p">()</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span>
     <span class="n">long_df</span><span class="p">,</span>
     <span class="n">long_corrected_df</span><span class="p">,</span>
     <span class="n">left_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
     <span class="n">right_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-    <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s">"_raw"</span><span class="p">,</span> <span class="s">"_corrected"</span><span class="p">),</span>
+    <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="sh">"</span><span class="s">_raw</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">_corrected</span><span class="sh">"</span><span class="p">),</span>
 <span class="p">)</span>
-<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="p">.</span><span class="n">FacetGrid</span><span class="p">(</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="p">.</span><span class="nc">FacetGrid</span><span class="p">(</span>
     <span class="n">merged_df</span><span class="p">,</span>
-    <span class="n">col</span><span class="o">=</span><span class="s">"variable_raw"</span><span class="p">,</span>
+    <span class="n">col</span><span class="o">=</span><span class="sh">"</span><span class="s">variable_raw</span><span class="sh">"</span><span class="p">,</span>
     <span class="n">height</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
     <span class="n">aspect</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">sharex</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
     <span class="n">sharey</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
     <span class="n">col_wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">g</span><span class="p">.</span><span class="n">map_dataframe</span><span class="p">(</span><span class="n">sns</span><span class="p">.</span><span class="n">scatterplot</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s">"value_raw"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">"value_corrected"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s">"batch"</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">g</span><span class="p">.</span><span class="nf">map_dataframe</span><span class="p">(</span><span class="n">sns</span><span class="p">.</span><span class="n">scatterplot</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="sh">"</span><span class="s">value_raw</span><span class="sh">"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="sh">"</span><span class="s">value_corrected</span><span class="sh">"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="sh">"</span><span class="s">batch</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p><a href="/assets/posts/2021-04-21-Code-Nugget-Batch_Effects/pycombat_corrections.png" class="lightgallery-link" data-sub-html="Comparisons of values raw and after correction for batch effects using pyComBat">

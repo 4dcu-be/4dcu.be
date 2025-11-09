@@ -180,7 +180,7 @@ return a list of possible decks they are playing. But let’s start with two exa
 
 <p>We can feed this information in a function like this:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">predict_deck</span><span class="p">([</span><span class="s">"Plains"</span><span class="p">,</span> <span class="s">"Mother of Runes"</span><span class="p">,</span> <span class="s">"Wasteland"</span><span class="p">]).</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">predict_deck</span><span class="p">([</span><span class="sh">"</span><span class="s">Plains</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Mother of Runes</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Wasteland</span><span class="sh">"</span><span class="p">]).</span><span class="nf">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>And the result is a list of likely decks based on that combination of cards.</p>
@@ -226,7 +226,7 @@ well, however Pikula is something I never encountered and wouldn’t have consid
 
 </div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">predict_deck</span><span class="p">([</span><span class="s">"Arcum's Astrolabe"</span><span class="p">,</span> <span class="s">"Noble Hierarch"</span><span class="p">,</span> <span class="s">"Brainstorm"</span><span class="p">,</span> <span class="s">"Snow-Covered Forest"</span><span class="p">]).</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">predict_deck</span><span class="p">([</span><span class="sh">"</span><span class="s">Arcum</span><span class="sh">'</span><span class="s">s Astrolabe</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Noble Hierarch</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Brainstorm</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Snow-Covered Forest</span><span class="sh">"</span><span class="p">]).</span><span class="nf">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </code></pre></div></div>
 
 <table>
@@ -461,13 +461,13 @@ practise we’ll generate for each deck, for a number of different subset sizes,
 <p>Once the data is in the right format building a classifier is easy. Here I selected a RandomForestClassifier and played
 around with the settings to end up with this.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
-<span class="n">rfc</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> 
-                             <span class="n">criterion</span><span class="o">=</span> <span class="s">'gini'</span><span class="p">,</span> 
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="n">rfc</span> <span class="o">=</span> <span class="nc">RandomForestClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> 
+                             <span class="n">criterion</span><span class="o">=</span> <span class="sh">'</span><span class="s">gini</span><span class="sh">'</span><span class="p">,</span> 
                              <span class="n">max_features</span><span class="o">=</span> <span class="mi">5</span><span class="p">,</span> 
                              <span class="n">n_estimators</span><span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
 <span class="c1"># Build the classifier
-</span><span class="n">rfc</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</span><span class="n">rfc</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>While this classifier will work, there is an issue! Since we are drawing a number of times random cards from each deck,
@@ -482,19 +482,19 @@ so you have to install it.</p>
 <p>Once the library is installed we can balance our dataset by randomly selecting a subset of samples from over-represented
 decklists. This process is called random undersampling.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">imblearn.under_sampling</span> <span class="kn">import</span> <span class="n">RandomUnderSampler</span>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">imblearn.under_sampling</span> <span class="kn">import</span> <span class="n">RandomUnderSampler</span>
+<span class="kn">from</span> <span class="n">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
 
-<span class="n">rus</span> <span class="o">=</span> <span class="n">RandomUnderSampler</span><span class="p">()</span>
-<span class="n">X_rus</span><span class="p">,</span> <span class="n">y_rus</span> <span class="o">=</span> <span class="n">rus</span><span class="p">.</span><span class="n">fit_sample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">rus</span> <span class="o">=</span> <span class="nc">RandomUnderSampler</span><span class="p">()</span>
+<span class="n">X_rus</span><span class="p">,</span> <span class="n">y_rus</span> <span class="o">=</span> <span class="n">rus</span><span class="p">.</span><span class="nf">fit_sample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
 <span class="c1"># Build a new classifier on the under sampled dataset
-</span><span class="n">rfc</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> 
-                             <span class="n">criterion</span><span class="o">=</span> <span class="s">'gini'</span><span class="p">,</span> 
+</span><span class="n">rfc</span> <span class="o">=</span> <span class="nc">RandomForestClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> 
+                             <span class="n">criterion</span><span class="o">=</span> <span class="sh">'</span><span class="s">gini</span><span class="sh">'</span><span class="p">,</span> 
                              <span class="n">max_features</span><span class="o">=</span> <span class="mi">5</span><span class="p">,</span> 
                              <span class="n">n_estimators</span><span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
                              <span class="n">n_jobs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">rfc</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_rus</span><span class="p">,</span> <span class="n">y_rus</span><span class="p">)</span>
+<span class="n">rfc</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">X_rus</span><span class="p">,</span> <span class="n">y_rus</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="using-the-classifier">Using the classifier</h2>
@@ -503,25 +503,25 @@ decklists. This process is called random undersampling.</p>
 right format, run the classifier and return us with a list of probable decks. To do this we need to have a list of all
 cards in the presence-absence matrix (the column names), which we’ll store in a variable <strong>all_cards</strong>.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
 
 <span class="k">def</span> <span class="nf">predict_deck</span><span class="p">(</span><span class="n">cards_known</span><span class="p">):</span>
-    <span class="s">"""
+    <span class="sh">"""</span><span class="s">
     This will take a list of known cards and convert it in a matrix compatible with the classifier.
     Next, this classifier will be used to predict which deck the known cards are coming from and 
     return the results as a sorted pandas dataframe.
-    """</span>
+    </span><span class="sh">"""</span>
     <span class="n">cards_array</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cards_known</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">all_cards</span><span class="p">]]</span>
 
     <span class="n">cards_not_in_model</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cards_known</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">all_cards</span><span class="p">]</span>
     
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cards_not_in_model</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">"Some cards were not included when trainig the model, these will be ignored: %s"</span> <span class="o">%</span> <span class="s">','</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">cards_not_in_model</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">cards_not_in_model</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Some cards were not included when trainig the model, these will be ignored: %s</span><span class="sh">"</span> <span class="o">%</span> <span class="sh">'</span><span class="s">,</span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">cards_not_in_model</span><span class="p">))</span>
     
-    <span class="n">decks_proba</span> <span class="o">=</span> <span class="n">rfc</span><span class="p">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">cards_array</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">decks_proba</span> <span class="o">=</span> <span class="n">rfc</span><span class="p">.</span><span class="nf">predict_proba</span><span class="p">(</span><span class="n">cards_array</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
-    <span class="n">decks</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">rfc</span><span class="p">.</span><span class="n">classes_</span><span class="p">,</span> <span class="n">decks_proba</span><span class="p">)),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"Deck"</span><span class="p">,</span> <span class="s">"Score"</span><span class="p">])</span>\
-              <span class="p">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s">"Score"</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">decks</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">rfc</span><span class="p">.</span><span class="n">classes_</span><span class="p">,</span> <span class="n">decks_proba</span><span class="p">)),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">Deck</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Score</span><span class="sh">"</span><span class="p">])</span>\
+              <span class="p">.</span><span class="nf">sort_values</span><span class="p">(</span><span class="sh">"</span><span class="s">Score</span><span class="sh">"</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">decks</span>
 </code></pre></div></div>

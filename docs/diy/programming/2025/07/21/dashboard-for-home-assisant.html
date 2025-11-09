@@ -180,26 +180,26 @@
 
 <p>First, we need a function to retrieve data from Home Assistant using the access token. The snippet below handles the request and returns the result as a Python dictionary:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">ssl</span>
-<span class="kn">import</span> <span class="nn">urllib.request</span>
-<span class="kn">import</span> <span class="nn">json</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">ssl</span>
+<span class="kn">import</span> <span class="n">urllib.request</span>
+<span class="kn">import</span> <span class="n">json</span>
 
 
 <span class="k">def</span> <span class="nf">get_ha_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">access_token</span><span class="p">):</span>
-    <span class="n">ssl_context</span> <span class="o">=</span> <span class="n">ssl</span><span class="p">.</span><span class="n">_create_unverified_context</span><span class="p">()</span>
+    <span class="n">ssl_context</span> <span class="o">=</span> <span class="n">ssl</span><span class="p">.</span><span class="nf">_create_unverified_context</span><span class="p">()</span>
 
-    <span class="n">request</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">Request</span><span class="p">(</span>
+    <span class="n">request</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="nc">Request</span><span class="p">(</span>
         <span class="n">url</span><span class="p">,</span>
         <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
-            <span class="s">'Authorization'</span><span class="p">:</span> <span class="sa">f</span><span class="s">'Bearer </span><span class="si">{</span><span class="n">access_token</span><span class="si">}</span><span class="s">'</span><span class="p">,</span>
-            <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
+            <span class="sh">'</span><span class="s">Authorization</span><span class="sh">'</span><span class="p">:</span> <span class="sa">f</span><span class="sh">'</span><span class="s">Bearer </span><span class="si">{</span><span class="n">access_token</span><span class="si">}</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">Content-Type</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">application/json</span><span class="sh">'</span>
         <span class="p">}</span>
     <span class="p">)</span>
 
-    <span class="k">with</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">ssl_context</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
-        <span class="n">html</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="nf">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">ssl_context</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">read</span><span class="p">()</span>
 
-    <span class="k">return</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">html</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">json</span><span class="p">.</span><span class="nf">loads</span><span class="p">(</span><span class="n">html</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>When calling a Home Assistant API endpoint with valid credentials, you’ll receive a JSON response like the example below. For most sensors, we’re mainly interested in the <code class="language-plaintext highlighter-rouge">state</code> and <code class="language-plaintext highlighter-rouge">unit_of_measurement</code> fields.</p>
@@ -233,74 +233,74 @@ data from Home Assistant instead of public APIs.</p>
 <div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bin/python3
 # encoding: utf-8
 </span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
-<span class="kn">from</span> <span class="nn">extract</span> <span class="kn">import</span> <span class="n">get_ha_data</span>
-<span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="n">HA_URL</span><span class="p">,</span> <span class="n">HA_TOKEN</span>
+<span class="kn">from</span> <span class="n">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="n">os</span>
+<span class="kn">from</span> <span class="n">os.path</span> <span class="kn">import</span> <span class="n">join</span>
+<span class="kn">from</span> <span class="n">extract</span> <span class="kn">import</span> <span class="n">get_ha_data</span>
+<span class="kn">from</span> <span class="n">config</span> <span class="kn">import</span> <span class="n">HA_URL</span><span class="p">,</span> <span class="n">HA_TOKEN</span>
 
 
-<span class="n">svg_path</span> <span class="o">=</span> <span class="s">'/mnt/base-us/extensions/dashboard/svg/'</span> <span class="k">if</span> <span class="n">os</span><span class="p">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s">'nt'</span> <span class="k">else</span> <span class="s">'../svg'</span>
+<span class="n">svg_path</span> <span class="o">=</span> <span class="sh">'</span><span class="s">/mnt/base-us/extensions/dashboard/svg/</span><span class="sh">'</span> <span class="k">if</span> <span class="n">os</span><span class="p">.</span><span class="n">name</span> <span class="o">!=</span> <span class="sh">'</span><span class="s">nt</span><span class="sh">'</span> <span class="k">else</span> <span class="sh">'</span><span class="s">../svg</span><span class="sh">'</span>
 
 
 <span class="k">def</span> <span class="nf">create_svg</span><span class="p">(</span><span class="n">svg_data</span><span class="p">,</span> <span class="n">svg_template</span><span class="p">,</span> <span class="n">svg_output</span><span class="p">):</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">svg_template</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
-        <span class="n">template</span> <span class="o">=</span> <span class="n">fin</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">svg_template</span><span class="p">,</span> <span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">fin</span><span class="p">.</span><span class="nf">read</span><span class="p">()</span>
 
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">svg_data</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">template</span> <span class="o">=</span> <span class="n">template</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">svg_data</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="n">template</span> <span class="o">=</span> <span class="n">template</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">svg_output</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
-            <span class="n">fout</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">svg_output</span><span class="p">,</span> <span class="sh">'</span><span class="s">w</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+            <span class="n">fout</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">"</span><span class="s">__main__</span><span class="sh">"</span><span class="p">:</span>
     <span class="n">ha_urls</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.sensor_bedroom_temperature"</span><span class="p">,</span>
-        <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.sensor_bedroom_humidity"</span><span class="p">,</span>
-        <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.sensor_nursery_temperature"</span><span class="p">,</span>
-        <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.sensor_nursery_humidity"</span><span class="p">,</span>
-        <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.upgraded_sensor_bme680_temperature"</span><span class="p">,</span>
-        <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.upgraded_sensor_bme680_humidity"</span><span class="p">,</span>
-        <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.herenthumidity"</span><span class="p">,</span>
-        <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.herenttemperature"</span><span class="p">,</span>
-        <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.herentpressure"</span><span class="p">,</span>
-        <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.herentuv"</span><span class="p">]</span>
+        <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.sensor_bedroom_temperature</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.sensor_bedroom_humidity</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.sensor_nursery_temperature</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.sensor_nursery_humidity</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.upgraded_sensor_bme680_temperature</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.upgraded_sensor_bme680_humidity</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.herenthumidity</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.herenttemperature</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.herentpressure</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">HA_URL</span><span class="si">}</span><span class="s">sensor.herentuv</span><span class="sh">"</span><span class="p">]</span>
 
     <span class="n">all_data</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">for</span> <span class="n">ha_url</span> <span class="ow">in</span> <span class="n">ha_urls</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">ha_data</span> <span class="o">=</span> <span class="n">get_ha_data</span><span class="p">(</span><span class="n">ha_url</span><span class="p">,</span> <span class="n">HA_TOKEN</span><span class="p">)</span>
-            <span class="n">all_data</span><span class="p">.</span><span class="n">append</span><span class="p">({</span>
-                <span class="s">'sensor'</span><span class="p">:</span> <span class="n">ha_data</span><span class="p">[</span><span class="s">'attributes'</span><span class="p">][</span><span class="s">'friendly_name'</span><span class="p">],</span>
-                <span class="s">'readout'</span><span class="p">:</span> <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">ha_data</span><span class="p">[</span><span class="s">'state'</span><span class="p">]</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">ha_data</span><span class="p">[</span><span class="s">'attributes'</span><span class="p">][</span><span class="s">'unit_of_measurement'</span><span class="p">]</span><span class="si">}</span><span class="s">"</span>
+            <span class="n">ha_data</span> <span class="o">=</span> <span class="nf">get_ha_data</span><span class="p">(</span><span class="n">ha_url</span><span class="p">,</span> <span class="n">HA_TOKEN</span><span class="p">)</span>
+            <span class="n">all_data</span><span class="p">.</span><span class="nf">append</span><span class="p">({</span>
+                <span class="sh">'</span><span class="s">sensor</span><span class="sh">'</span><span class="p">:</span> <span class="n">ha_data</span><span class="p">[</span><span class="sh">'</span><span class="s">attributes</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">friendly_name</span><span class="sh">'</span><span class="p">],</span>
+                <span class="sh">'</span><span class="s">readout</span><span class="sh">'</span><span class="p">:</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">ha_data</span><span class="p">[</span><span class="sh">'</span><span class="s">state</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">ha_data</span><span class="p">[</span><span class="sh">'</span><span class="s">attributes</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">unit_of_measurement</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span>
             <span class="p">})</span>
 
-            <span class="k">print</span><span class="p">(</span><span class="n">ha_data</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="n">ha_data</span><span class="p">)</span>
 
         <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">_</span><span class="p">:</span>
-            <span class="n">all_data</span><span class="p">.</span><span class="n">append</span><span class="p">({</span>
-                <span class="s">'sensor'</span><span class="p">:</span> <span class="s">"Failed read"</span><span class="p">,</span>
-                <span class="s">'readout'</span><span class="p">:</span> <span class="s">"Failed Update"</span>
+            <span class="n">all_data</span><span class="p">.</span><span class="nf">append</span><span class="p">({</span>
+                <span class="sh">'</span><span class="s">sensor</span><span class="sh">'</span><span class="p">:</span> <span class="sh">"</span><span class="s">Failed read</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">'</span><span class="s">readout</span><span class="sh">'</span><span class="p">:</span> <span class="sh">"</span><span class="s">Failed Update</span><span class="sh">"</span>
             <span class="p">})</span>
 
-    <span class="k">print</span><span class="p">(</span><span class="n">all_data</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">all_data</span><span class="p">)</span>
 
     <span class="c1"># Combine into dict
-</span>    <span class="n">svg_data</span> <span class="o">=</span> <span class="p">{</span><span class="s">"LASTUPDATE"</span><span class="p">:</span> <span class="s">"Last Update: "</span> <span class="o">+</span> <span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">strftime</span><span class="p">(</span><span class="s">"%d/%m/%Y - %H:%M:%S"</span><span class="p">),</span>
-                <span class="s">"R1_TEMP"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="s">'readout'</span><span class="p">].</span><span class="n">replace</span><span class="p">(</span><span class="s">"°"</span><span class="p">,</span> <span class="s">""</span><span class="p">),</span>
-                <span class="s">"R1_HUM"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="s">'readout'</span><span class="p">],</span>
-                <span class="s">"R2_TEMP"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">'readout'</span><span class="p">].</span><span class="n">replace</span><span class="p">(</span><span class="s">"°"</span><span class="p">,</span> <span class="s">""</span><span class="p">),</span>
-                <span class="s">"R2_HUM"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s">'readout'</span><span class="p">],</span>
-                <span class="s">"R3_TEMP"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s">'readout'</span><span class="p">].</span><span class="n">replace</span><span class="p">(</span><span class="s">"°"</span><span class="p">,</span> <span class="s">""</span><span class="p">),</span>
-                <span class="s">"R3_HUM"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="s">'readout'</span><span class="p">],</span>
-                <span class="s">"OUT_TEMP"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">7</span><span class="p">][</span><span class="s">'readout'</span><span class="p">].</span><span class="n">replace</span><span class="p">(</span><span class="s">"°"</span><span class="p">,</span> <span class="s">""</span><span class="p">),</span>
-                <span class="s">"OUT_HUM"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="s">'readout'</span><span class="p">],</span>
-                <span class="s">"OUT_PRES"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">8</span><span class="p">][</span><span class="s">'readout'</span><span class="p">],</span>
-                <span class="s">"OUT_UV"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">9</span><span class="p">][</span><span class="s">'readout'</span><span class="p">],}</span>
+</span>    <span class="n">svg_data</span> <span class="o">=</span> <span class="p">{</span><span class="sh">"</span><span class="s">LASTUPDATE</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Last Update: </span><span class="sh">"</span> <span class="o">+</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">().</span><span class="nf">strftime</span><span class="p">(</span><span class="sh">"</span><span class="s">%d/%m/%Y - %H:%M:%S</span><span class="sh">"</span><span class="p">),</span>
+                <span class="sh">"</span><span class="s">R1_TEMP</span><span class="sh">"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="sh">'</span><span class="s">readout</span><span class="sh">'</span><span class="p">].</span><span class="nf">replace</span><span class="p">(</span><span class="sh">"</span><span class="s">°</span><span class="sh">"</span><span class="p">,</span> <span class="sh">""</span><span class="p">),</span>
+                <span class="sh">"</span><span class="s">R1_HUM</span><span class="sh">"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="sh">'</span><span class="s">readout</span><span class="sh">'</span><span class="p">],</span>
+                <span class="sh">"</span><span class="s">R2_TEMP</span><span class="sh">"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="sh">'</span><span class="s">readout</span><span class="sh">'</span><span class="p">].</span><span class="nf">replace</span><span class="p">(</span><span class="sh">"</span><span class="s">°</span><span class="sh">"</span><span class="p">,</span> <span class="sh">""</span><span class="p">),</span>
+                <span class="sh">"</span><span class="s">R2_HUM</span><span class="sh">"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="sh">'</span><span class="s">readout</span><span class="sh">'</span><span class="p">],</span>
+                <span class="sh">"</span><span class="s">R3_TEMP</span><span class="sh">"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="sh">'</span><span class="s">readout</span><span class="sh">'</span><span class="p">].</span><span class="nf">replace</span><span class="p">(</span><span class="sh">"</span><span class="s">°</span><span class="sh">"</span><span class="p">,</span> <span class="sh">""</span><span class="p">),</span>
+                <span class="sh">"</span><span class="s">R3_HUM</span><span class="sh">"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="sh">'</span><span class="s">readout</span><span class="sh">'</span><span class="p">],</span>
+                <span class="sh">"</span><span class="s">OUT_TEMP</span><span class="sh">"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">7</span><span class="p">][</span><span class="sh">'</span><span class="s">readout</span><span class="sh">'</span><span class="p">].</span><span class="nf">replace</span><span class="p">(</span><span class="sh">"</span><span class="s">°</span><span class="sh">"</span><span class="p">,</span> <span class="sh">""</span><span class="p">),</span>
+                <span class="sh">"</span><span class="s">OUT_HUM</span><span class="sh">"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="sh">'</span><span class="s">readout</span><span class="sh">'</span><span class="p">],</span>
+                <span class="sh">"</span><span class="s">OUT_PRES</span><span class="sh">"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">8</span><span class="p">][</span><span class="sh">'</span><span class="s">readout</span><span class="sh">'</span><span class="p">],</span>
+                <span class="sh">"</span><span class="s">OUT_UV</span><span class="sh">"</span><span class="p">:</span> <span class="n">all_data</span><span class="p">[</span><span class="mi">9</span><span class="p">][</span><span class="sh">'</span><span class="s">readout</span><span class="sh">'</span><span class="p">],}</span>
 
     <span class="c1"># Load Data into SVG
-</span>    <span class="n">create_svg</span><span class="p">(</span><span class="n">svg_data</span><span class="p">,</span> <span class="n">join</span><span class="p">(</span><span class="n">svg_path</span><span class="p">,</span> <span class="s">"template.svg"</span><span class="p">),</span> <span class="n">join</span><span class="p">(</span><span class="n">svg_path</span><span class="p">,</span> <span class="s">"tmp.svg"</span><span class="p">))</span>
+</span>    <span class="nf">create_svg</span><span class="p">(</span><span class="n">svg_data</span><span class="p">,</span> <span class="nf">join</span><span class="p">(</span><span class="n">svg_path</span><span class="p">,</span> <span class="sh">"</span><span class="s">template.svg</span><span class="sh">"</span><span class="p">),</span> <span class="nf">join</span><span class="p">(</span><span class="n">svg_path</span><span class="p">,</span> <span class="sh">"</span><span class="s">tmp.svg</span><span class="sh">"</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>If you want to use this script in your own setup, create a <code class="language-plaintext highlighter-rouge">config.py</code> file that defines <code class="language-plaintext highlighter-rouge">HA_URL</code> and <code class="language-plaintext highlighter-rouge">HA_TOKEN</code>.

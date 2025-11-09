@@ -226,7 +226,7 @@ settings and paths need to be changed.</p>
 
 <p>In <code class="language-plaintext highlighter-rouge">publishconf.py</code> however you will need to specify the final url of your site.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">SITEURL</span> <span class="o">=</span> <span class="s">"https://4dcu.be/DeckLock"</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">SITEURL</span> <span class="o">=</span> <span class="sh">"</span><span class="s">https://4dcu.be/DeckLock</span><span class="sh">"</span>
 </code></pre></div></div>
 
 <h3 id="decks-of-keyforge-api-key">Decks of KeyForge API key</h3>
@@ -244,7 +244,7 @@ settings and paths need to be changed.</p>
 <p>Next, you’ll have to specify where the KeyForge data can be found (folder), in <code class="language-plaintext highlighter-rouge">pelicanconf.py</code>. Note that this path is
 relative to the content folder</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">KEYFORGE_PATH</span> <span class="o">=</span> <span class="s">"./data"</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">KEYFORGE_PATH</span> <span class="o">=</span> <span class="sh">"</span><span class="s">./data</span><span class="sh">"</span>
 </code></pre></div></div>
 
 <p>Now, add a <code class="language-plaintext highlighter-rouge">keyforge.json</code> file to <code class="language-plaintext highlighter-rouge">./content/data</code>, structured as followed with the identifiers of the decks to include.
@@ -313,30 +313,30 @@ and use a Generator, that loads the data, builds a url for each deck and ships t
 <p>Here is a stub on how to create a function and register it to trigger on initialization and how to create a generator and
 register it with Pelican so it will produce our html files.</p>
 
-<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pelican</span> <span class="kn">import</span> <span class="n">signals</span><span class="p">,</span> <span class="n">generators</span>
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">pelican</span> <span class="kn">import</span> <span class="n">signals</span><span class="p">,</span> <span class="n">generators</span>
 
 <span class="k">class</span> <span class="nc">KeyForgeGenerator</span><span class="p">(</span><span class="n">generators</span><span class="p">.</span><span class="n">Generator</span><span class="p">):</span>
-    <span class="s">""" Generator Class to produce pages based on keyforge.cache.json """</span>
+    <span class="sh">"""</span><span class="s"> Generator Class to produce pages based on keyforge.cache.json </span><span class="sh">"""</span>
 
-    <span class="n">template_overview</span> <span class="o">=</span> <span class="s">"keyforge_overview.html"</span>
-    <span class="n">template_deck</span> <span class="o">=</span> <span class="s">"keyforge_deck.html"</span>
+    <span class="n">template_overview</span> <span class="o">=</span> <span class="sh">"</span><span class="s">keyforge_overview.html</span><span class="sh">"</span>
+    <span class="n">template_deck</span> <span class="o">=</span> <span class="sh">"</span><span class="s">keyforge_deck.html</span><span class="sh">"</span>
     
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">settings</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">theme</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">settings</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">theme</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># Initialization function
 </span>        
-    <span class="k">def</span> <span class="nf">generate_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">writer</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">generate_output</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">writer</span><span class="p">):</span>
         <span class="c1"># This function is required, this will be started by Pelican
 </span>        <span class="c1"># Here we'll call two other functions, one to create an overview page
 </span>        <span class="c1"># and one to create a page with deck details.
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">generate_keyforge_overview_page</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">keyforge_data</span><span class="p">)</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">generate_keyforge_overview_page</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">keyforge_data</span><span class="p">)</span>
 
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">keyforge_data</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="bp">self</span><span class="p">.</span><span class="n">generate_keyforge_deck_page</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">keyforge_data</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="n">self</span><span class="p">.</span><span class="nf">generate_keyforge_deck_page</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
         
-    <span class="k">def</span> <span class="nf">generate_keyforge_deck_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span> <span class="n">deck_id</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">generate_keyforge_deck_page</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span> <span class="n">deck_id</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="c1"># Function to generate deck pages
 </span>        
-    <span class="k">def</span> <span class="nf">generate_keyforge_overview_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">generate_keyforge_overview_page</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="c1"># Function to generate overview page        
 </span>
 <span class="k">def</span> <span class="nf">get_keyforge_external_data</span><span class="p">(</span><span class="n">generator</span><span class="p">):</span>
@@ -350,8 +350,8 @@ register it with Pelican so it will produce our html files.</p>
     <span class="k">return</span> <span class="n">KeyForgeGenerator</span>
 
 <span class="k">def</span> <span class="nf">register</span><span class="p">():</span>
-    <span class="s">"""Register our function to get all data and generator to create the pages"""</span>
-    <span class="n">signals</span><span class="p">.</span><span class="n">initialized</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">get_keyforge_external_data</span><span class="p">)</span>
+    <span class="sh">"""</span><span class="s">Register our function to get all data and generator to create the pages</span><span class="sh">"""</span>
+    <span class="n">signals</span><span class="p">.</span><span class="n">initialized</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">get_keyforge_external_data</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="conclusion">Conclusion</h2>

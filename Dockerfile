@@ -1,16 +1,11 @@
-# Use official Ruby 2.6.3 image based on Debian
-FROM ruby:2.6.3-slim-buster
+# Use official Ruby 3.3.6 image based on Debian
+FROM ruby:3.3.6-slim-bookworm
 
 # Set environment variables
 
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8
-
-# Update apt sources to use Debian archive (Buster is EOL)
-RUN sed -i 's|http://deb.debian.org|http://archive.debian.org|g' /etc/apt/sources.list \
-    && sed -i 's|http://security.debian.org|http://archive.debian.org|g' /etc/apt/sources.list \
-    && sed -i '/stretch-updates/d' /etc/apt/sources.list
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -38,9 +33,9 @@ RUN ruby --version && \
     node --version && \
     npm --version
 
-# Install Bundler (specific version compatible with Ruby 2.6.3)
-RUN gem update --system 3.2.3
-RUN gem install bundler:2.4.22
+# Install Bundler (compatible with Ruby 3.3.6)
+RUN gem update --system
+RUN gem install bundler
 
 # Install Pagefind
 RUN npm install -g pagefind

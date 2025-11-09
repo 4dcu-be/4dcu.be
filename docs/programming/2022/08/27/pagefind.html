@@ -224,18 +224,18 @@ Pagefind assigns to the elements it adds (e.g. .pagefind-ui__search-input is the
 entered)</p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
-<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">MicroModal</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+<span class="nf">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nf">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">MicroModal</span><span class="p">.</span><span class="nf">init</span><span class="p">();</span>
 
-	<span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">.nav-link-search</span><span class="dl">'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
-	  <span class="nx">ev</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+	<span class="nf">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">.nav-link-search</span><span class="dl">'</span><span class="p">).</span><span class="nf">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+	  <span class="nx">ev</span><span class="p">.</span><span class="nf">preventDefault</span><span class="p">();</span>
 
-	  <span class="nx">MicroModal</span><span class="p">.</span><span class="nx">show</span><span class="p">(</span><span class="dl">'</span><span class="s1">modal-2</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
-	  		<span class="na">onClose</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">.nav-link-contact</span><span class="dl">'</span><span class="p">).</span><span class="nx">blur</span><span class="p">();</span> <span class="p">},</span>
+	  <span class="nx">MicroModal</span><span class="p">.</span><span class="nf">show</span><span class="p">(</span><span class="dl">'</span><span class="s1">modal-2</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+	  		<span class="na">onClose</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nf">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">.nav-link-contact</span><span class="dl">'</span><span class="p">).</span><span class="nf">blur</span><span class="p">();</span> <span class="p">},</span>
 	  		<span class="na">disableFocus</span><span class="p">:</span> <span class="kc">true</span>
 	  <span class="p">});</span>
 
-	  <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.pagefind-ui__search-input</span><span class="dl">'</span><span class="p">).</span><span class="nx">focus</span><span class="p">();</span>
+	  <span class="nb">document</span><span class="p">.</span><span class="nf">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.pagefind-ui__search-input</span><span class="dl">'</span><span class="p">).</span><span class="nf">focus</span><span class="p">();</span>
 	<span class="p">});</span>
 
 <span class="p">});</span>

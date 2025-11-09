@@ -214,45 +214,45 @@ and Arrow. Though the cool part is the function <strong>on_change</strong> and t
 <strong>before_update</strong> event of SQLAlchemy. With this small bit of code, each time an entry is changed, the field last_update
 is automatically updated as well.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">busyboard</span> <span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">images</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">import</span> <span class="nn">arrow</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">busyboard</span> <span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">images</span>
+<span class="kn">from</span> <span class="n">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="n">arrow</span>
 
 
 <span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">'users'</span>
-    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Text</span><span class="p">)</span>
-    <span class="n">busy</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Boolean</span><span class="p">)</span>
-    <span class="n">busy_with</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Text</span><span class="p">)</span>
-    <span class="n">can_be_disturbed</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Boolean</span><span class="p">)</span>
-    <span class="n">notes</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Text</span><span class="p">)</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Unicode</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span>
-    <span class="n">last_change</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="n">utcnow</span><span class="p">)</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="sh">'</span><span class="s">users</span><span class="sh">'</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">busy</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Boolean</span><span class="p">)</span>
+    <span class="n">busy_with</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">can_be_disturbed</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Boolean</span><span class="p">)</span>
+    <span class="n">notes</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="nc">Unicode</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span>
+    <span class="n">last_change</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="n">utcnow</span><span class="p">)</span>
 
-    <span class="o">@</span><span class="nb">property</span>
-    <span class="k">def</span> <span class="nf">url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">path</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">url</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">path</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">return</span>
-        <span class="k">return</span> <span class="n">images</span><span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">images</span><span class="p">.</span><span class="nf">url</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">path</span><span class="p">)</span>
 
-    <span class="o">@</span><span class="nb">property</span>
-    <span class="k">def</span> <span class="nf">filepath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">path</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">filepath</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">path</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">return</span>
-        <span class="k">return</span> <span class="n">images</span><span class="p">.</span><span class="n">path</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">images</span><span class="p">.</span><span class="nf">path</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">path</span><span class="p">)</span>
 
-    <span class="o">@</span><span class="nb">property</span>
-    <span class="k">def</span> <span class="nf">last_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">age_arrow</span> <span class="o">=</span> <span class="n">arrow</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">last_change</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">age_arrow</span><span class="p">.</span><span class="n">humanize</span><span class="p">()</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">last_changed</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">age_arrow</span> <span class="o">=</span> <span class="n">arrow</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">last_change</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">age_arrow</span><span class="p">.</span><span class="nf">humanize</span><span class="p">()</span>
 
-    <span class="o">@</span><span class="nb">staticmethod</span>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">on_change</span><span class="p">(</span><span class="n">mapper</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
-        <span class="n">target</span><span class="p">.</span><span class="n">last_change</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">utcnow</span><span class="p">()</span>
+        <span class="n">target</span><span class="p">.</span><span class="n">last_change</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">utcnow</span><span class="p">()</span>
 
 
-<span class="n">db</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">listen</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="s">'before_update'</span><span class="p">,</span> <span class="n">User</span><span class="p">.</span><span class="n">on_change</span><span class="p">)</span>
+<span class="n">db</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="nf">listen</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="sh">'</span><span class="s">before_update</span><span class="sh">'</span><span class="p">,</span> <span class="n">User</span><span class="p">.</span><span class="n">on_change</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h3 id="adminpy">admin.py</h3>
@@ -274,55 +274,55 @@ replace the link behind the name with a link to the main app (so you can easily 
 class to link this to the model. The ImageUploadField is added here to allow users to upload an image and write the
 path to the model in one sweep while preventing users to meddle with the path themselves.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span>
-<span class="kn">from</span> <span class="nn">flask_admin.contrib.sqla</span> <span class="kn">import</span> <span class="n">ModelView</span>
-<span class="kn">from</span> <span class="nn">busyboard</span> <span class="kn">import</span> <span class="n">form</span>
-<span class="kn">from</span> <span class="nn">jinja2</span> <span class="kn">import</span> <span class="n">Markup</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">uuid</span>
-<span class="kn">from</span> <span class="nn">werkzeug</span> <span class="kn">import</span> <span class="n">secure_filename</span>
-<span class="kn">from</span> <span class="nn">flask_admin</span> <span class="kn">import</span> <span class="n">expose</span><span class="p">,</span> <span class="n">AdminIndexView</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">flask</span> <span class="kn">import</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span>
+<span class="kn">from</span> <span class="n">flask_admin.contrib.sqla</span> <span class="kn">import</span> <span class="n">ModelView</span>
+<span class="kn">from</span> <span class="n">busyboard</span> <span class="kn">import</span> <span class="n">form</span>
+<span class="kn">from</span> <span class="n">jinja2</span> <span class="kn">import</span> <span class="n">Markup</span>
+<span class="kn">import</span> <span class="n">os</span>
+<span class="kn">import</span> <span class="n">uuid</span>
+<span class="kn">from</span> <span class="n">werkzeug</span> <span class="kn">import</span> <span class="n">secure_filename</span>
+<span class="kn">from</span> <span class="n">flask_admin</span> <span class="kn">import</span> <span class="n">expose</span><span class="p">,</span> <span class="n">AdminIndexView</span>
 
 
 <span class="k">def</span> <span class="nf">_list_thumbnail</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">model</span><span class="p">.</span><span class="n">filename</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s">''</span>
+        <span class="k">return</span> <span class="sh">''</span>
 
-    <span class="k">return</span> <span class="n">Markup</span><span class="p">(</span>
-        <span class="s">'&lt;img src="{model.url}" style="width: 150px;"&gt;'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nc">Markup</span><span class="p">(</span>
+        <span class="sh">'</span><span class="s">&lt;img src=</span><span class="sh">"</span><span class="s">{model.url}</span><span class="sh">"</span><span class="s"> style=</span><span class="sh">"</span><span class="s">width: 150px;</span><span class="sh">"</span><span class="s">&gt;</span><span class="sh">'</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
     <span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">UserAdminView</span><span class="p">(</span><span class="n">ModelView</span><span class="p">):</span>
-    <span class="n">form_columns</span> <span class="o">=</span> <span class="p">(</span><span class="s">'name'</span><span class="p">,</span> <span class="s">'busy'</span><span class="p">,</span> <span class="s">'busy_with'</span><span class="p">,</span> <span class="s">'can_be_disturbed'</span><span class="p">,</span> <span class="s">'notes'</span><span class="p">,</span> <span class="s">'path'</span><span class="p">)</span>
-    <span class="n">form_excluded_columns</span> <span class="o">=</span> <span class="p">(</span><span class="s">'last_updated'</span><span class="p">)</span>
-    <span class="n">column_editable_list</span> <span class="o">=</span> <span class="p">(</span><span class="s">'name'</span><span class="p">,</span> <span class="s">'busy'</span><span class="p">,</span> <span class="s">'busy_with'</span><span class="p">,</span> <span class="s">'can_be_disturbed'</span><span class="p">,</span> <span class="s">'notes'</span><span class="p">)</span>
-    <span class="n">form_create_rules</span> <span class="o">=</span> <span class="p">(</span><span class="s">'name'</span><span class="p">,</span> <span class="s">'busy'</span><span class="p">,</span> <span class="s">'busy_with'</span><span class="p">,</span> <span class="s">'can_be_disturbed'</span><span class="p">,</span> <span class="s">'notes'</span><span class="p">,</span> <span class="s">'path'</span><span class="p">)</span>
-    <span class="n">form_edit_rules</span> <span class="o">=</span> <span class="p">(</span><span class="s">'name'</span><span class="p">,</span> <span class="s">'busy'</span><span class="p">,</span> <span class="s">'busy_with'</span><span class="p">,</span> <span class="s">'can_be_disturbed'</span><span class="p">,</span> <span class="s">'notes'</span><span class="p">,</span> <span class="s">'path'</span><span class="p">)</span>
+    <span class="n">form_columns</span> <span class="o">=</span> <span class="p">(</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">busy</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">busy_with</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">can_be_disturbed</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">notes</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">path</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">form_excluded_columns</span> <span class="o">=</span> <span class="p">(</span><span class="sh">'</span><span class="s">last_updated</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">column_editable_list</span> <span class="o">=</span> <span class="p">(</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">busy</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">busy_with</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">can_be_disturbed</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">notes</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">form_create_rules</span> <span class="o">=</span> <span class="p">(</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">busy</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">busy_with</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">can_be_disturbed</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">notes</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">path</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">form_edit_rules</span> <span class="o">=</span> <span class="p">(</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">busy</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">busy_with</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">can_be_disturbed</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">notes</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">path</span><span class="sh">'</span><span class="p">)</span>
 
     <span class="n">can_create</span> <span class="o">=</span> <span class="bp">True</span>
 
     <span class="n">column_formatters</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s">'image'</span><span class="p">:</span> <span class="n">_list_thumbnail</span>
+        <span class="sh">'</span><span class="s">image</span><span class="sh">'</span><span class="p">:</span> <span class="n">_list_thumbnail</span>
     <span class="p">}</span>
 
     <span class="n">form_extra_fields</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s">'path'</span><span class="p">:</span> <span class="n">form</span><span class="p">.</span><span class="n">ImageUploadField</span><span class="p">(</span>
-            <span class="s">'Image'</span><span class="p">,</span>
-            <span class="n">base_path</span><span class="o">=</span><span class="s">'busyboard/static/images'</span><span class="p">,</span>
-            <span class="n">url_relative_path</span><span class="o">=</span><span class="s">'images/'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">path</span><span class="sh">'</span><span class="p">:</span> <span class="n">form</span><span class="p">.</span><span class="nc">ImageUploadField</span><span class="p">(</span>
+            <span class="sh">'</span><span class="s">Image</span><span class="sh">'</span><span class="p">,</span>
+            <span class="n">base_path</span><span class="o">=</span><span class="sh">'</span><span class="s">busyboard/static/images</span><span class="sh">'</span><span class="p">,</span>
+            <span class="n">url_relative_path</span><span class="o">=</span><span class="sh">'</span><span class="s">images/</span><span class="sh">'</span><span class="p">,</span>
         <span class="p">)</span>
     <span class="p">}</span>
 
 
 <span class="k">class</span> <span class="nc">CustomIndexView</span><span class="p">(</span><span class="n">AdminIndexView</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">is_visible</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">is_visible</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
         <span class="c1"># This view won't appear in the menu structure
 </span>        <span class="k">return</span> <span class="bp">False</span>
 
-    <span class="o">@</span><span class="n">expose</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s">'main_route'</span><span class="p">))</span>
+    <span class="nd">@expose</span><span class="p">(</span><span class="sh">'</span><span class="s">/</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nf">redirect</span><span class="p">(</span><span class="nf">url_for</span><span class="p">(</span><span class="sh">'</span><span class="s">main_route</span><span class="sh">'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <h3 id="initpy"><strong>init</strong>.py</h3>
@@ -330,55 +330,55 @@ path to the model in one sweep while preventing users to meddle with the path th
 <p>Here is all the code to set up the busyboard app, nothing really surprising here apart maybe the <code class="language-plaintext highlighter-rouge">createdb</code> section.
 This adds an command line interface option to create the database using <code class="language-plaintext highlighter-rouge">flask createdb</code></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">os</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span>
 
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
-<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
-<span class="kn">from</span> <span class="nn">flask_admin</span> <span class="kn">import</span> <span class="n">Admin</span><span class="p">,</span> <span class="n">form</span>
-<span class="kn">from</span> <span class="nn">busyboard.admin</span> <span class="kn">import</span> <span class="n">UserAdminView</span><span class="p">,</span> <span class="n">CustomIndexView</span>
-<span class="kn">from</span> <span class="nn">flask_uploads</span> <span class="kn">import</span> <span class="n">UploadSet</span><span class="p">,</span> <span class="n">IMAGES</span><span class="p">,</span> <span class="n">configure_uploads</span><span class="p">,</span> <span class="n">patch_request_class</span>
+<span class="kn">from</span> <span class="n">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
+<span class="kn">from</span> <span class="n">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+<span class="kn">from</span> <span class="n">flask_admin</span> <span class="kn">import</span> <span class="n">Admin</span><span class="p">,</span> <span class="n">form</span>
+<span class="kn">from</span> <span class="n">busyboard.admin</span> <span class="kn">import</span> <span class="n">UserAdminView</span><span class="p">,</span> <span class="n">CustomIndexView</span>
+<span class="kn">from</span> <span class="n">flask_uploads</span> <span class="kn">import</span> <span class="n">UploadSet</span><span class="p">,</span> <span class="n">IMAGES</span><span class="p">,</span> <span class="n">configure_uploads</span><span class="p">,</span> <span class="n">patch_request_class</span>
 
-<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">()</span>
+<span class="n">db</span> <span class="o">=</span> <span class="nc">SQLAlchemy</span><span class="p">()</span>
 
-<span class="n">images</span> <span class="o">=</span> <span class="n">UploadSet</span><span class="p">(</span><span class="s">'images'</span><span class="p">,</span> <span class="n">IMAGES</span><span class="p">)</span>
+<span class="n">images</span> <span class="o">=</span> <span class="nc">UploadSet</span><span class="p">(</span><span class="sh">'</span><span class="s">images</span><span class="sh">'</span><span class="p">,</span> <span class="n">IMAGES</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">create_app</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
     <span class="c1"># Set up app, database and login manager before importing models and controllers
 </span>    <span class="c1"># Important for db_create script
 </span>
-    <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="nc">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="nf">from_object</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
 
     <span class="n">db</span><span class="p">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
-    <span class="n">db</span><span class="p">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+    <span class="n">db</span><span class="p">.</span><span class="nf">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 
-    <span class="n">configure_uploads</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="p">(</span><span class="n">images</span><span class="p">))</span>
-    <span class="n">patch_request_class</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span>
+    <span class="nf">configure_uploads</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="p">(</span><span class="n">images</span><span class="p">))</span>
+    <span class="nf">patch_request_class</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span>
 
-    <span class="kn">from</span> <span class="nn">busyboard.models</span> <span class="kn">import</span> <span class="n">User</span>
+    <span class="kn">from</span> <span class="n">busyboard.models</span> <span class="kn">import</span> <span class="n">User</span>
 
-    <span class="n">admin</span> <span class="o">=</span> <span class="n">Admin</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'BusyBoard'</span><span class="p">,</span> <span class="n">template_mode</span><span class="o">=</span><span class="s">'bootstrap3'</span><span class="p">,</span> <span class="n">index_view</span><span class="o">=</span><span class="n">CustomIndexView</span><span class="p">())</span>
-    <span class="n">admin</span><span class="p">.</span><span class="n">add_view</span><span class="p">(</span><span class="n">UserAdminView</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">db</span><span class="p">.</span><span class="n">session</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s">'users'</span><span class="p">))</span>
+    <span class="n">admin</span> <span class="o">=</span> <span class="nc">Admin</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sh">'</span><span class="s">BusyBoard</span><span class="sh">'</span><span class="p">,</span> <span class="n">template_mode</span><span class="o">=</span><span class="sh">'</span><span class="s">bootstrap3</span><span class="sh">'</span><span class="p">,</span> <span class="n">index_view</span><span class="o">=</span><span class="nc">CustomIndexView</span><span class="p">())</span>
+    <span class="n">admin</span><span class="p">.</span><span class="nf">add_view</span><span class="p">(</span><span class="nc">UserAdminView</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">db</span><span class="p">.</span><span class="n">session</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="sh">'</span><span class="s">users</span><span class="sh">'</span><span class="p">))</span>
 
-    <span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
+    <span class="nd">@app.route</span><span class="p">(</span><span class="sh">'</span><span class="s">/</span><span class="sh">'</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">main_route</span><span class="p">():</span>
-        <span class="n">users</span> <span class="o">=</span> <span class="n">User</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="nb">all</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">'index.html'</span><span class="p">,</span> <span class="n">users</span><span class="o">=</span><span class="n">users</span><span class="p">)</span>
+        <span class="n">users</span> <span class="o">=</span> <span class="n">User</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="nf">all</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nf">render_template</span><span class="p">(</span><span class="sh">'</span><span class="s">index.html</span><span class="sh">'</span><span class="p">,</span> <span class="n">users</span><span class="o">=</span><span class="n">users</span><span class="p">)</span>
 
-    <span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">cli</span><span class="p">.</span><span class="n">command</span><span class="p">()</span>
+    <span class="nd">@app.cli.command</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">createdb</span><span class="p">():</span>
-        <span class="s">"""
+        <span class="sh">"""</span><span class="s">
         function to create the initial database and migration information
-        """</span>
-        <span class="n">SQLALCHEMY_DATABASE_URI</span> <span class="o">=</span> <span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">[</span><span class="s">'SQLALCHEMY_DATABASE_URI'</span><span class="p">]</span>
+        </span><span class="sh">"""</span>
+        <span class="n">SQLALCHEMY_DATABASE_URI</span> <span class="o">=</span> <span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">[</span><span class="sh">'</span><span class="s">SQLALCHEMY_DATABASE_URI</span><span class="sh">'</span><span class="p">]</span>
 
-        <span class="k">if</span> <span class="n">SQLALCHEMY_DATABASE_URI</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">'sqlite:///'</span><span class="p">):</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">SQLALCHEMY_DATABASE_URI</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'sqlite:///'</span><span class="p">,</span> <span class="s">''</span><span class="p">)))</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-                <span class="n">os</span><span class="p">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">SQLALCHEMY_DATABASE_URI</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">sqlite:///</span><span class="sh">'</span><span class="p">):</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">dirname</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">realpath</span><span class="p">(</span><span class="n">SQLALCHEMY_DATABASE_URI</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="sh">'</span><span class="s">sqlite:///</span><span class="sh">'</span><span class="p">,</span> <span class="sh">''</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+                <span class="n">os</span><span class="p">.</span><span class="nf">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
-        <span class="n">db</span><span class="p">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span>
+        <span class="n">db</span><span class="p">.</span><span class="nf">create_all</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">app</span>
 </code></pre></div></div>
