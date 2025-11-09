@@ -3,8 +3,15 @@
 ---
 @charset "utf-8";
 
+// Import modern SASS modules for namespaced functions
+// These allow us to use color.adjust() and math.div() in custom code
+@use "sass:math";
+@use "sass:color";
+
 // Import partials from `sass_dir` (defaults to `_sass`)
 // Includes Bourbon, Neat, and Bitters (thanks, thoughtbot!)
+// Note: Bourbon 4.2.2 & Neat 1.7.2 are archived/abandoned libraries
+// They produce deprecation warnings but remain functional
 @import
   "bourbon/bourbon",
   "base/base",

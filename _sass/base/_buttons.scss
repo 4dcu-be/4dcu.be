@@ -20,7 +20,7 @@ button {
 
   &:hover,
   &:focus {
-    background-color: darken($action-color, 15%);
+    background-color: color.adjust($action-color, $lightness: -15%);
     color: #fff;
   }
 

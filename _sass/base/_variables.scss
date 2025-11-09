@@ -18,7 +18,7 @@ $heading-line-height: 1.8;
 // Other Sizes
 $base-border-radius: 3px;
 $base-spacing: $base-line-height * $em-base;
-$small-spacing: $base-spacing / 2;
+$small-spacing: math.div($base-spacing, 2);
 $base-z-index: 0;
 
 // Colors
@@ -41,8 +41,8 @@ $bc-red: #bc0000;
 $base-background-color: #fff;
 $base-font-color: $dark-gray;
 $action-color: $red;
-$highlight-color: shade($action-color, 33%);
-$dark-color: shade($action-color, 33%);
+$highlight-color: color.mix(#000, $action-color, 33%);
+$dark-color: color.mix(#000, $action-color, 33%);
 
 // Border
 $base-border-color: $light-gray;
@@ -50,4 +50,4 @@ $base-border: 1px solid $base-border-color;
 
 // Forms
 $form-box-shadow: inset 0 1px 3px rgba(#000, 0.06);
-$form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($action-color, $lightness: -5%, $alpha: -0.3);
+$form-box-shadow-focus: $form-box-shadow, 0 0 5px color.adjust($action-color, $lightness: -5%, $alpha: -0.3);

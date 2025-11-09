@@ -8,7 +8,7 @@ table {
 }
 
 th {
-  border-bottom: 1px solid darken($base-border-color, 15%);
+  border-bottom: 1px solid color.adjust($base-border-color, $lightness: -15%);
   font-weight: 600;
   padding: $small-spacing $small-spacing;
   text-align: left;
