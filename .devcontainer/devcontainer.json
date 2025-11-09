@@ -1,0 +1,41 @@
+{
+  "name": "4DCu.be Jekyll Blog",
+  "dockerFile": "../Dockerfile",
+
+  // Set *default* container specific settings.json values on container create.
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "files.eol": "\n",
+        "editor.formatOnSave": true
+      },
+      "extensions": [
+        "sissel.shopify-liquid",
+        "ginfuru.ginfuru-vscode-jekyll-syntax",
+        "rebornix.ruby",
+        "castwide.solargraph"
+      ]
+    }
+  },
+
+  // Forward port 4000 for Jekyll server
+  "forwardPorts": [4000],
+  "portsAttributes": {
+    "4000": {
+      "label": "Jekyll Server",
+      "onAutoForward": "notify"
+    }
+  },
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "bundle install",
+
+  // Set the default shell
+  "postAttachCommand": {
+    "server": "echo 'Ready! Run: bundle exec jekyll serve --host 0.0.0.0 --config _config_dev.yml --livereload'"
+  },
+
+  // Run as root user in container
+  "remoteUser": "root"
+}
