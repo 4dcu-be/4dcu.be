@@ -54,6 +54,10 @@ COPY Gemfile Gemfile.lock ./
 # Install Ruby dependencies
 RUN bundle install
 
+# Install Claude Code globally
+# Using --no-fund and --no-audit flags to reduce installation noise
+RUN npm install -g @anthropic-ai/claude-code --no-fund --no-audit
+
 # Expose Jekyll's default port
 EXPOSE 4000
 
