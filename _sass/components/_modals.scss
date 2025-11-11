@@ -1,133 +1,20 @@
 // Modals Component
-// Custom styling for Bulma modals
+// Minimal custom styling for Bulma modals - relies on Bulma defaults
 
 @use "sass:color";
 @use "../custom-variables" as *;
 
 // ========================================
-// Modal Card Customization
+// Modal Card Width Customization
 // ========================================
 
 .modal-card {
-  // Contact modal default width
-  width: 500px;
-  max-width: calc(100% - 2rem);
-
-  // Mobile adjustments
-  @media screen and (max-width: $mobile) {
-    width: calc(100% - 2rem);
-  }
+  width: 500px; // Contact modal default
 }
 
-// Search modal - wider than contact modal
+// Search modal - wider for search results
 #modal-search .modal-card {
   width: 650px;
-  max-width: calc(100% - 2rem);
-}
-
-// ========================================
-// Modal Card Head Customization
-// ========================================
-
-.modal-card-head {
-  background-color: $white;
-  border-bottom: 2px solid $base-border-color;
-  padding: 1.5rem 2rem;
-
-  .modal-card-title {
-    color: $action-color;
-    font-family: $heading-font-family;
-    font-weight: 600;
-    font-size: 1.5rem;
-  }
-
-  .delete {
-    &:hover {
-      background-color: rgba(10, 10, 10, 0.3);
-    }
-
-    &:focus {
-      outline: 2px solid $action-color;
-      outline-offset: 2px;
-    }
-  }
-}
-
-// ========================================
-// Modal Card Body Customization
-// ========================================
-
-.modal-card-body {
-  padding: 2rem;
-  line-height: 1.6;
-  color: $dark-gray;
-
-  p {
-    margin-bottom: 1rem;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  a {
-    color: $action-color;
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s ease;
-
-    &:hover {
-      border-bottom-color: $action-color;
-    }
-  }
-
-  // Pagefind search UI styling
-  .pagefind-ui {
-    margin-bottom: 1rem;
-  }
-
-  .pagefind-ui__search-input {
-    border: 2px solid $base-border-color;
-    border-radius: $radius;
-    padding: 0.75rem 41px;
-    font-size: 1rem;
-    width: 100%;
-    transition: border-color 0.2s ease;
-
-    &:focus {
-      outline: none;
-      border-color: $action-color;
-      box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
-    }
-  }
-
-  .pagefind-ui__results {
-    max-height: 400px;
-    overflow-y: auto;
-    margin-top: 1rem;
-  }
-}
-
-// ========================================
-// Modal Card Footer Customization
-// ========================================
-
-.modal-card-foot {
-  background-color: $white;
-  border-top: 1px solid $base-border-color;
-  justify-content: flex-end;
-  padding: 1.5rem 2rem;
-
-  .button {
-    &:focus {
-      outline: 2px solid $action-color;
-      outline-offset: 2px;
-    }
-
-    &:active {
-      transform: scale(0.98);
-    }
-  }
 }
 
 // ========================================
@@ -147,53 +34,6 @@
 
     &:last-child {
       margin-bottom: 0;
-    }
-
-    i {
-      color: $action-color;
-      font-size: 1.2rem;
-      width: 1.5rem;
-      text-align: center;
-    }
-  }
-
-  a {
-    color: $action-color;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s ease;
-
-    &:hover {
-      color: darken($action-color, 10%);
-      text-decoration: underline;
-    }
-  }
-
-  .username {
-    display: block;
-    font-size: 0.9em;
-    color: $medium-gray;
-  }
-}
-
-// ========================================
-// Mobile Responsiveness
-// ========================================
-
-@media screen and (max-width: $mobile) {
-  .modal-card-head,
-  .modal-card-body,
-  .modal-card-foot {
-    padding: 1.25rem 1.5rem;
-  }
-
-  .modal-card-foot {
-    justify-content: center;
-    flex-wrap: wrap;
-
-    .button {
-      flex: 1;
-      min-width: 120px;
     }
   }
 }
