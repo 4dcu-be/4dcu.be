@@ -74,7 +74,7 @@
 // - bulma/components/tabs
 
 // ========================================
-// Elements (4/12 used)
+// Elements (5/12 used)
 // ========================================
 
 // Title: Used across all layouts for headings
@@ -86,10 +86,12 @@
 // Delete: Used in modal headers (close button)
 @forward "bulma/elements/delete";
 
+// Content: Used in modal body for proper list/text styling
+@forward "bulma/elements/content";
+
 // NOT imported (unused):
 // - bulma/elements/block
 // - bulma/elements/box
-// - bulma/elements/content
 // - bulma/elements/icon (using Font Awesome directly)
 // - bulma/elements/image
 // - bulma/elements/loader

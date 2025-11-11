@@ -1,9 +1,6 @@
 // Modals Component
 // Minimal custom styling for Bulma modals - relies on Bulma defaults
 
-@use "sass:color";
-@use "../custom-variables" as *;
-
 // ========================================
 // Modal Card Width Customization
 // ========================================
@@ -15,25 +12,4 @@
 // Search modal - wider for search results
 #modal-search .modal-card {
   width: 650px;
-}
-
-// ========================================
-// Modal List (Social Links)
-// ========================================
-
-.modal__list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-
-  li {
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
 }

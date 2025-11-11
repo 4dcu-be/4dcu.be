@@ -5,13 +5,12 @@
 			<p class="modal-card-title">Contact</p>
 			<button class="delete" aria-label="close"></button>
 		</header>
-		<section class="modal-card-body">
+		<section class="modal-card-body content">
 			<p>Have any comments or suggestions, feel free to reach out !</p>
-			<ul class="modal__list">
+			<ul>
 				{% include social_media_links.html %}
 			</ul>
 			{% if site.buy_me_a_coffee_username %}
-			<br />
 			<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/{{site.buy_me_a_coffee_username}}">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
 			{% endif %}
 		</section>
