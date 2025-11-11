@@ -12,26 +12,12 @@
   margin: 0;
   padding: 1rem 0 0 0;
 
-  // Desktop: 73% width in grid layout (handled by .wrapper)
-  @media screen and (min-width: $tablet) {
-    width: 73%;
-    float: left;
-    margin-right: 2%;
-  }
-
   li {
     margin-bottom: $spacing-double;
     padding-bottom: $spacing-double;
 
     &:not(:last-child) {
       border-bottom: 1px solid $base-border-color;
-    }
-
-    // Clear floats after each post item
-    &::after {
-      content: "";
-      display: table;
-      clear: both;
     }
   }
 }
@@ -44,8 +30,20 @@
   text-align: justify;
   line-height: 1.6;
 
+  // Tablet and up: use flexbox for side-by-side image and text
+  @media screen and (min-width: $tablet) {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
   p {
     margin: 0.5rem 0 1rem 0;
+
+    @media screen and (min-width: $tablet) {
+      flex: 1;
+      margin: 0;
+    }
   }
 }
 
@@ -59,12 +57,10 @@
 
   // Tablet and up: smaller thumbnail on left (side-by-side layout)
   @media screen and (min-width: $tablet) {
-    display: inline;
-    float: left;
-    margin-right: 1rem;
-    margin-bottom: 0.5rem;
     width: auto;
     height: 150px;
+    margin-bottom: 0;
+    flex-shrink: 0;
   }
 }
 
@@ -119,9 +115,6 @@
 
   @media screen and (min-width: $tablet) {
     display: block;
-    width: 23%;
-    float: left;
-    padding-left: 2%;
   }
 
   h3 {
@@ -166,11 +159,11 @@
   margin: 0 auto;
   padding: 0 1rem;
 
-  // Clear floats for the sidebar layout
-  &::after {
-    content: "";
-    display: table;
-    clear: both;
+  // Modern CSS Grid layout for sidebar (tablet and up)
+  @media screen and (min-width: $tablet) {
+    display: grid;
+    grid-template-columns: 73% 1fr;
+    gap: 2%;
   }
 }
 
