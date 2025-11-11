@@ -53,6 +53,8 @@
 @use "components/footer";
 @use "components/modals";
 @use "components/buttons-icons";
+@use "components/gallery";
+@use "components/special-features";
 
 // Step 6: Import syntax highlighting CSS
 // This is the Pygments/Rouge code highlighting stylesheet
@@ -76,12 +78,24 @@ html, body {
 }
 
 // Inline code styling (outside of pre blocks)
+// Only apply to inline code, not code inside .highlight or pre tags
 code {
   background-color: $code-background;
   display: inline-block;
   border-radius: 3px;
   padding: 0 3px;
   border: 1px solid $code-border-color;
+}
+
+// Override inline code styling inside highlight blocks (pre + code)
+.highlight code,
+.highlighter-rouge pre code,
+pre code {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  display: inline;
 }
 
 // Blockquote styling

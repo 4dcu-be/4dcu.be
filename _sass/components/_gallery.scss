@@ -1,0 +1,445 @@
+// Gallery Component
+// Modern gallery layouts using Bulma CSS Grid with hover animations
+
+@use "sass:math";
+@use "../custom-variables" as *;
+
+// ========================================
+// Gallery Items Container
+// ========================================
+
+.gallery-items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+  line-height: 0;
+
+  @media screen and (min-width: $tablet) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media screen and (min-width: $desktop) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+// ========================================
+// Gallery Item (Individual Image)
+// ========================================
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  background-color: #000;
+  border: 2px solid $white;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    line-height: 0;
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+
+  // Hover effect: zoom in and fade
+  &:hover img {
+    transform: scale(1.19);
+    opacity: 0.5;
+  }
+
+  // Lightgallery link styling
+  a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:focus {
+      outline: 2px solid $action-color;
+      outline-offset: -2px;
+    }
+
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: auto;
+      height: auto;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+}
+
+// ========================================
+// Gallery with 3 Columns (Custom Class)
+// ========================================
+
+.gallery-3-col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 2rem 0;
+  width: 100%;
+
+  @media screen and (min-width: $mobile) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: $tablet) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  // Direct img children (not wrapped)
+  > img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border: 2px solid $base-border-color;
+    border-radius: $radius;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin: 0;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  // Images inside paragraph tags (common markdown)
+  p {
+    margin: 0;
+    display: contents; // This makes the image a grid child, not the p tag
+  }
+
+  p > img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border: 2px solid $base-border-color;
+    border-radius: $radius;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin: 0;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  // LightGallery wrapping (a > img)
+  > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: $radius;
+    border: 2px solid $base-border-color;
+    aspect-ratio: 4 / 3;
+    background-color: #000;
+    position: relative;
+
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: auto;
+      height: auto;
+      min-width: 100%;
+      min-height: 100%;
+      margin: 0;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    &:hover img {
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+  }
+}
+
+// ========================================
+// Gallery with 2 Columns
+// ========================================
+
+.gallery-2-col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 2rem 0;
+  width: 100%;
+
+  @media screen and (min-width: $tablet) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  // Direct img children (not wrapped)
+  > img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border: 2px solid $base-border-color;
+    border-radius: $radius;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin: 0;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  // Images inside paragraph tags (common markdown)
+  p {
+    margin: 0;
+    display: contents;
+  }
+
+  p > img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border: 2px solid $base-border-color;
+    border-radius: $radius;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin: 0;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  // LightGallery wrapping (a > img)
+  > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: $radius;
+    border: 2px solid $base-border-color;
+    aspect-ratio: 4 / 3;
+    background-color: #000;
+    position: relative;
+
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: auto;
+      height: auto;
+      min-width: 100%;
+      min-height: 100%;
+      margin: 0;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    &:hover img {
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+  }
+}
+
+// ========================================
+// Gallery Lightbox Container (LightGallery)
+// ========================================
+
+.lightgallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+
+  @media screen and (min-width: $tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  a {
+    display: block;
+    overflow: hidden;
+    border-radius: $radius;
+    border: 2px solid $base-border-color;
+    background-color: #000;
+    position: relative;
+    aspect-ratio: 1 / 1;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      opacity: 0.9;
+    }
+
+    &:hover img {
+      transform: scale(1.08);
+      opacity: 1;
+    }
+  }
+}
+
+// ========================================
+// Fullwidth Gallery (Hero-like)
+// ========================================
+
+.gallery-fullwidth {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 2rem 0;
+  width: 100%;
+
+  a {
+    display: block;
+    overflow: hidden;
+    border-radius: $radius;
+    border: 2px solid $base-border-color;
+
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.3s ease-in-out;
+
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
+  }
+}
+
+// ========================================
+// Image Grid (Generic)
+// ========================================
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+
+  @media screen and (min-width: $tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border-radius: $radius;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+
+// ========================================
+// Masonry Gallery Layout
+// ========================================
+
+.gallery-masonry {
+  column-count: 1;
+  column-gap: 1rem;
+  margin: 2rem 0;
+
+  @media screen and (min-width: $tablet) {
+    column-count: 2;
+  }
+
+  @media screen and (min-width: $desktop) {
+    column-count: 3;
+  }
+
+  a, img {
+    display: block;
+    margin-bottom: 1rem;
+    break-inside: avoid;
+    width: 100%;
+    border-radius: $radius;
+  }
+
+  img {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+
+// ========================================
+// Mobile Responsiveness
+// ========================================
+
+@media screen and (max-width: $mobile) {
+  .gallery-items {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .gallery-3-col,
+  .gallery-2-col {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .lightgallery {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .image-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.75rem;
+  }
+}

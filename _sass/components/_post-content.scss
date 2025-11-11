@@ -192,6 +192,21 @@
     tr:nth-child(even) {
       background-color: #fafafa;
     }
+
+    // Large table with horizontal scroll
+    &.large-table {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch; // Smooth scrolling on iOS
+      margin-bottom: 1.5rem;
+
+      // Ensure table takes full width
+      tbody, thead {
+        display: table;
+        width: 100%;
+      }
+    }
   }
 
   // Horizontal rules
