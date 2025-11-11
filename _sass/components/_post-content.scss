@@ -142,6 +142,12 @@
     }
   }
 
+  // Large code blocks with vertical scroll
+  div.large-code {
+    max-height: 400px;
+    overflow-y: scroll;
+  }
+
   // Images
   img {
     display: block;
@@ -170,6 +176,15 @@
       width: auto;
       max-width: 200px;
     }
+  }
+
+  // Image size classes
+  .small-image {
+    max-width: 400px;
+  }
+
+  .medium-image {
+    max-width: 600px;
   }
 
   // Tables

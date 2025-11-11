@@ -139,15 +139,3 @@
 // - bulma/helpers/gap
 // - bulma/helpers/overflow
 // - bulma/helpers/spacing (we use custom spacing variables)
-
-// ========================================
-// Impact Summary
-// ========================================
-//
-// Full Bulma v1.0.2:     ~335KB source, ~500-600KB in compiled CSS
-// This minimal import:   ~100-150KB estimated in compiled CSS
-// Expected reduction:    ~70-75% smaller CSS bundle
-//
-// Files eliminated:      ~40 unused SCSS modules
-// Visual impact:         None (only imports what's actually used)
-// ========================================
