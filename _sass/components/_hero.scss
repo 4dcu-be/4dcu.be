@@ -228,6 +228,21 @@
 }
 
 // ========================================
+// Full Viewport Width (Break out of containers)
+// ========================================
+
+// Make hero sections span full viewport width even when inside containers
+.hero {
+  // Break out of parent container constraints
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+// ========================================
 // Mobile Responsiveness
 // ========================================
 // (Handled in responsive sections above)
