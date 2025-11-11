@@ -17,10 +17,10 @@
   @include light.light-theme;
 }
 
-// prefers-color-scheme: dark
-@include cv.system-theme($name: "dark") {
-  @include dark.dark-theme;
-}
+// Dark mode disabled - prefers-color-scheme: dark
+// @include cv.system-theme($name: "dark") {
+//   @include dark.dark-theme;
+// }
 
 // :root, [data-theme=light], .theme-light
 @include cv.bulma-theme($name: "light") {
@@ -28,8 +28,8 @@
   @include setup.setup-theme;
 }
 
-// [data-theme=dark], .theme-dark
-@include cv.bulma-theme($name: "dark") {
-  @include dark.dark-theme;
-  @include setup.setup-theme;
-}
+// Dark mode disabled - [data-theme=dark], .theme-dark
+// @include cv.bulma-theme($name: "dark") {
+//   @include dark.dark-theme;
+//   @include setup.setup-theme;
+// }
