@@ -1,24 +1,22 @@
-<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
-	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
-		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-			<header class="modal__header">
-				<h2 class="modal__title" id="modal-1-title">
-					Contact
-				</h2>
-			</header>
-			<main class="modal__content" id="modal-1-content">
-				<p>Have any comments or suggestions, feel free to reach out !</p>
-				<ul class="modal__list">
-						{% include social_media_links.html %}
-				</ul>
-				{% if site.buy_me_a_coffee_username %}
-				<br />
-				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/{{site.buy_me_a_coffee_username}}">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
-				{% endif %}
-			</main>
-			<footer class="modal__footer">
-				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
-			</footer>
-		</div>
+<div class="modal" id="modal-contact">
+	<div class="modal-background"></div>
+	<div class="modal-card">
+		<header class="modal-card-head">
+			<p class="modal-card-title">Contact</p>
+			<button class="delete" aria-label="close"></button>
+		</header>
+		<section class="modal-card-body">
+			<p>Have any comments or suggestions, feel free to reach out !</p>
+			<ul class="modal__list">
+				{% include social_media_links.html %}
+			</ul>
+			{% if site.buy_me_a_coffee_username %}
+			<br />
+			<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/{{site.buy_me_a_coffee_username}}">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+			{% endif %}
+		</section>
+		<footer class="modal-card-foot">
+			<button class="button is-primary modal-close-button">Close</button>
+		</footer>
 	</div>
 </div>

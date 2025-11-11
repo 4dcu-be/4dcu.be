@@ -60,30 +60,36 @@
 // Navbar: Fully implemented in header.html with burger menu
 @forward "bulma/components/navbar";
 
+// Modal: Used for contact and search modals
+@forward "bulma/components/modal";
+
 // NOT imported (unused):
 // - bulma/components/breadcrumb
 // - bulma/components/card (custom post-list implementation)
 // - bulma/components/dropdown
 // - bulma/components/menu
 // - bulma/components/message
-// - bulma/components/modal (using MicroModal.js instead)
 // - bulma/components/pagination (custom pagination implementation)
 // - bulma/components/panel
 // - bulma/components/tabs
 
 // ========================================
-// Elements (2/12 used)
+// Elements (4/12 used)
 // ========================================
 
 // Title: Used across all layouts for headings
 @forward "bulma/elements/title";
 
+// Button: Used in modal footers
+@forward "bulma/elements/button";
+
+// Delete: Used in modal headers (close button)
+@forward "bulma/elements/delete";
+
 // NOT imported (unused):
 // - bulma/elements/block
 // - bulma/elements/box
-// - bulma/elements/button (no Bulma buttons used)
 // - bulma/elements/content
-// - bulma/elements/delete
 // - bulma/elements/icon (using Font Awesome directly)
 // - bulma/elements/image
 // - bulma/elements/loader

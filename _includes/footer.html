@@ -46,7 +46,6 @@
   integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
   crossorigin="anonymous"></script>
 <script src="{{ "/js/lightgallery.min.js" | prepend: site.baseurl }}"></script>
-<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script type="text/javascript">
 window.MathJax = {
@@ -102,30 +101,66 @@ $(document).ready(function() {
 		});
 });
 </script>
-<!-- Contact Modal and search modal-->
+<!-- Bulma Modal Handlers -->
 <script type="text/javascript">
 $(document).ready(function() {
-	MicroModal.init();
+	// Function to open modal
+	function openModal($el) {
+		$el.addClass('is-active');
+		$('html').addClass('is-clipped');
+	}
 
+	// Function to close modal
+	function closeModal($el) {
+		$el.removeClass('is-active');
+		$('html').removeClass('is-clipped');
+	}
+
+	// Contact modal trigger
 	$('.nav-link-contact').click(function(ev) {
-	  ev.preventDefault();
-	  MicroModal.show('modal-1', {
-	  		onClose: function() { $('.nav-link-contact').blur(); },
-	  		disableFocus: true
-	  });
+		ev.preventDefault();
+		openModal($('#modal-contact'));
+		$(this).blur();
 	});
 
+	// Search modal trigger
 	$('.nav-link-search').click(function(ev) {
-	  ev.preventDefault();
+		ev.preventDefault();
+		openModal($('#modal-search'));
+		$(this).blur();
 
-	  MicroModal.show('modal-2', {
-	  		onClose: function() { $('.nav-link-contact').blur(); },
-	  		disableFocus: true
-	  });
-
-	  document.querySelector('.pagefind-ui__search-input').focus();
+		// Focus search input after modal opens
+		setTimeout(function() {
+			var searchInput = document.querySelector('.pagefind-ui__search-input');
+			if (searchInput) {
+				searchInput.focus();
+			}
+		}, 100);
 	});
 
+	// Close modal on background click
+	$('.modal-background').click(function() {
+		closeModal($(this).closest('.modal'));
+	});
+
+	// Close modal on delete button click
+	$('.modal .delete').click(function() {
+		closeModal($(this).closest('.modal'));
+	});
+
+	// Close modal on close button click
+	$('.modal-close-button').click(function() {
+		closeModal($(this).closest('.modal'));
+	});
+
+	// Close modal on ESC key
+	$(document).keydown(function(e) {
+		if (e.keyCode === 27) { // ESC key
+			$('.modal.is-active').each(function() {
+				closeModal($(this));
+			});
+		}
+	});
 });
 </script>
 

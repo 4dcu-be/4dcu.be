@@ -1,117 +1,64 @@
 // Modals Component
-// Modern styling for MicroModal.js modals using Bulma paradigms
+// Custom styling for Bulma modals
 
 @use "sass:color";
 @use "../custom-variables" as *;
 
 // ========================================
-// Modal Base Container
+// Modal Card Customization
 // ========================================
 
-.modal {
-  font-family: $family-primary;
-}
+.modal-card {
+  // Contact modal default width
+  width: 500px;
+  max-width: calc(100% - 2rem);
 
-// ========================================
-// Modal Overlay
-// ========================================
-
-.modal__overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 40;
-}
-
-// ========================================
-// Modal Container
-// ========================================
-
-.modal__container {
-  background-color: $white;
-  padding: 2rem;
-  width: 100%;
-  max-width: 500px;
-  max-height: 100vh;
-  border-radius: $radius-large;
-  overflow-y: auto;
-  box-sizing: border-box;
-  box-shadow: 0 5px 40px rgba(0, 0, 0, 0.3);
-
-  // Search modal specific (wider)
-  #modal-2 & {
-    max-width: 650px;
-  }
-
-  // Mobile: full width with padding
+  // Mobile adjustments
   @media screen and (max-width: $mobile) {
-    max-width: calc(100% - 2rem);
-    padding: 1.5rem;
+    width: calc(100% - 2rem);
   }
 }
 
+// Search modal - wider than contact modal
+#modal-search .modal-card {
+  width: 650px;
+  max-width: calc(100% - 2rem);
+}
+
 // ========================================
-// Modal Header
+// Modal Card Head Customization
 // ========================================
 
-.modal__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
+.modal-card-head {
+  background-color: $white;
   border-bottom: 2px solid $base-border-color;
-  padding-bottom: 1rem;
-}
+  padding: 1.5rem 2rem;
 
-.modal__title {
-  margin: 0;
-  font-weight: 600;
-  font-size: 1.5rem;
-  line-height: 1.25;
-  color: $action-color;
-  font-family: $heading-font-family;
-}
-
-.modal__close {
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
-  color: $medium-gray;
-  cursor: pointer;
-  padding: 0;
-  width: 1.5rem;
-  height: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.2s ease;
-
-  &::before {
-    content: "✕";
+  .modal-card-title {
+    color: $action-color;
+    font-family: $heading-font-family;
+    font-weight: 600;
+    font-size: 1.5rem;
   }
 
-  &:hover {
-    color: $dark-gray;
-  }
+  .delete {
+    &:hover {
+      background-color: rgba(10, 10, 10, 0.3);
+    }
 
-  &:focus {
-    outline: 2px solid $action-color;
-    outline-offset: 2px;
+    &:focus {
+      outline: 2px solid $action-color;
+      outline-offset: 2px;
+    }
   }
 }
 
 // ========================================
-// Modal Content
+// Modal Card Body Customization
 // ========================================
 
-.modal__content {
-  margin: 1.5rem 0;
+.modal-card-body {
+  padding: 2rem;
   line-height: 1.6;
   color: $dark-gray;
 
@@ -162,6 +109,28 @@
 }
 
 // ========================================
+// Modal Card Footer Customization
+// ========================================
+
+.modal-card-foot {
+  background-color: $white;
+  border-top: 1px solid $base-border-color;
+  justify-content: flex-end;
+  padding: 1.5rem 2rem;
+
+  .button {
+    &:focus {
+      outline: 2px solid $action-color;
+      outline-offset: 2px;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
+
+// ========================================
 // Modal List (Social Links)
 // ========================================
 
@@ -208,153 +177,23 @@
 }
 
 // ========================================
-// Modal Footer
-// ========================================
-
-.modal__footer {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid $base-border-color;
-}
-
-// ========================================
-// Modal Buttons (Bulma Integration)
-// ========================================
-
-.modal__btn {
-  padding: 0.5rem 1.5rem;
-  font-size: 0.95rem;
-  font-weight: 500;
-  border: none;
-  border-radius: $radius;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  background-color: #e6e6e6;
-  color: $dark-gray;
-  white-space: nowrap;
-
-  &:hover {
-    background-color: #d0d0d0;
-  }
-
-  &:focus {
-    outline: 2px solid $action-color;
-    outline-offset: 2px;
-  }
-
-  &:active {
-    transform: scale(0.98);
-  }
-}
-
-.modal__btn-primary {
-  background-color: $action-color;
-  color: $white;
-
-  &:hover {
-    background-color: darken($action-color, 10%);
-  }
-}
-
-// ========================================
-// Micromodal Animation Keyframes
-// ========================================
-
-@keyframes mmfadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes mmfadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes mmslideIn {
-  from {
-    transform: translateY(15%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
-@keyframes mmslideOut {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-10%);
-  }
-}
-
-// ========================================
-// Micromodal State Management
-// ========================================
-
-.micromodal-slide {
-  display: none;
-}
-
-.micromodal-slide.is-open {
-  display: block;
-}
-
-.micromodal-slide[aria-hidden="false"] .modal__overlay {
-  animation: mmfadeIn 0.3s cubic-bezier(0, 0, 0.2, 1);
-}
-
-.micromodal-slide[aria-hidden="false"] .modal__container {
-  animation: mmslideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
-}
-
-.micromodal-slide[aria-hidden="true"] .modal__overlay {
-  animation: mmfadeOut 0.3s cubic-bezier(0, 0, 0.2, 1);
-}
-
-.micromodal-slide[aria-hidden="true"] .modal__container {
-  animation: mmslideOut 0.3s cubic-bezier(0, 0, 0.2, 1);
-}
-
-.micromodal-slide .modal__container,
-.micromodal-slide .modal__overlay {
-  will-change: transform;
-}
-
-// ========================================
 // Mobile Responsiveness
 // ========================================
 
 @media screen and (max-width: $mobile) {
-  .modal__header {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 1rem;
+  .modal-card-head,
+  .modal-card-body,
+  .modal-card-foot {
+    padding: 1.25rem 1.5rem;
   }
 
-  .modal__close {
-    align-self: flex-end;
-    margin-bottom: -1.5rem;
-  }
-
-  .modal__footer {
+  .modal-card-foot {
     justify-content: center;
     flex-wrap: wrap;
-  }
 
-  .modal__btn {
-    flex: 1;
-    min-width: 120px;
+    .button {
+      flex: 1;
+      min-width: 120px;
+    }
   }
 }
