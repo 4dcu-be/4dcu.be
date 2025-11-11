@@ -5,16 +5,19 @@ layout: default
 <img data-pagefind-meta="image[src]" src="{{ page.thumbnail | prepend: site.baseurl }}" style="display:none" />
 <div class="post">
 
-<div class="post-header-container {% if page.cover %}has-cover{% endif %}" {% if page.cover %}style="background-image: url({{ page.cover | prepend: site.baseurl }});"{% endif %}>
-  <div class="scrim {% if page.cover %}has-cover{% endif %} {% if page.scrim_options %}{{ page.scrim_options }}{% endif %}">
-    <header class="post-header">
-      <h1 class="title">{{ page.title }}</h1>
-			{% if page.byline %}
-      <p class="info"><em>{{ page.byline }}</em></p>
-			{% endif %}
-    </header>
+<section class="hero {% if page.cover %}is-medium has-background has-dark-overlay has-text-shadow has-box-shadow{% else %}is-medium{% endif %} {% if page.scrim_options %}{{ page.scrim_options }}{% endif %}">
+  {% if page.cover %}
+  <img alt="Post cover" class="hero-background is-transparent" src="{{ page.cover | prepend: site.baseurl }}" />
+  {% endif %}
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title {% if page.cover %}has-text-white{% endif %}">{{ page.title }}</h1>
+      {% if page.byline %}
+      <p class="info {% if page.cover %}has-text-white{% endif %}"><em>{{ page.byline }}</em></p>
+      {% endif %}
+    </div>
   </div>
-</div>
+</section>
 
 <div class="wrapper">
 

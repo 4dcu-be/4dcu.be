@@ -1,29 +1,103 @@
 ---
+# Only the main Sass file needs front matter (the dashes are needed)
 ---
 @charset "utf-8";
 
-// Import modern SASS modules for namespaced functions
-@use "sass:math";
+// ========================================
+// 4DCu.be - Bulma-based Theme
+// ========================================
+
+// Step 1: Import Bulma's initial variables and functions
+// This gives us access to Bulma's variable structure
 @use "sass:color";
-@use "sass:list";
+@use "sass:math";
 
-// Modern Sass: Using @use with wildcard (*) to make everything globally available
-// This is the recommended approach for entry point files
-// The `as *` makes all variables, mixins, and functions available without namespace prefix
+// Step 2: Load our custom variables BEFORE Bulma
+// This allows us to override Bulma's default colors/fonts
+@use "custom-variables" as *;
 
-// Modern utilities (replaces Bourbon 4.2.2 & Neat 1.7.2)
-@use "utilities/utilities" as *;
+// Step 3: Import Bulma framework with our custom variables
+// Use 'with' clause to pass our custom variables to Bulma's configuration
+@use "bulma/index" with (
+  // Colors
+  $primary: $turquoise,
+  $link: $red,
+  $info: $blue,
+  $success: $green,
+  $warning: $orange,
+  $danger: $bc-red,
 
-// Base styles (Bitters base modules loaded individually to avoid circular dependencies)
-@use "base/buttons" as *;
-@use "base/forms" as *;
-@use "base/lists" as *;
-@use "base/tables" as *;
-@use "base/typography" as *;
+  // Typography
+  $family-sans-serif: ("Open Sans", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif),
+  $body-line-height: 1.8,
+  $body-color: $dark-gray,
+  $body-background-color: $white,
 
-// Other components
-@use "lightgallery/lightgallery" as *;
-@use "layout" as *;
-@use "gallery" as *;
-@use "modal" as *;
-@use "default.css" as *;
+  // Borders & Radius
+  $radius: 3px,
+  $radius-small: 2px,
+  $radius-large: 5px
+);
+
+// Step 4: Import LightGallery (image gallery functionality)
+@use "lightgallery/lightgallery";
+
+// Step 5: Import custom component styles (Phase 2+)
+// Must come before @import to avoid Sass @use errors
+@use "custom-navbar";
+@use "components/hero";
+@use "components/posts-list";
+@use "components/post-content";
+@use "components/archive";
+@use "components/pagination-custom";
+@use "components/footer";
+@use "components/modals";
+@use "components/buttons-icons";
+
+// Step 6: Import syntax highlighting CSS
+// This is the Pygments/Rouge code highlighting stylesheet
+@import "default.css";
+
+// ========================================
+// Custom Component Styles
+// ========================================
+
+// Apply custom heading font (Bulma doesn't have this by default)
+h1, h2, h3, h4, h5, h6,
+.title, .subtitle {
+  font-family: $heading-font-family;
+}
+
+// Global typography enhancements
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+// Inline code styling (outside of pre blocks)
+code {
+  background-color: $code-background;
+  display: inline-block;
+  border-radius: 3px;
+  padding: 0 3px;
+  border: 1px solid $code-border-color;
+}
+
+// Blockquote styling
+blockquote {
+  color: $medium-gray;
+  font-style: italic;
+  border-left: 2px solid $light-gray;
+  margin-left: 0;
+  padding-left: 3em;
+}
+
+// Tooltip helper class
+.tooltip {
+  border-bottom: 1px dotted $medium-gray;
+  cursor: help;
+}
+
+// Placeholder for future custom styles
+// Future phases will add: gallery layouts, footer, etc.

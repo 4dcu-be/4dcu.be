@@ -84,50 +84,65 @@
 </head>
 
 
-  <body>
+  <body class="has-navbar-fixed-top">
 
-    <header class="navigation" role="banner">
-	<div class="navigation-wrapper">
-    <a href="/" class="logo">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/" class="navbar-item">
       
       <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
       
     </a>
-    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
-      <i class="fa-solid fa-bars"></i>
-    </a>
-    <nav role="navigation">
-      <ul id="js-navigation-menu" class="navigation-menu show">
-				
-				<li class="nav-link"><a href="/about/">About</a>
-	
-				<li class="nav-link"><a href="/gallery/">Gallery</a>
-	
-				<li class="nav-link"><a href="/posts/">Posts</a>
-	
-				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
-<li class="nav-link"><a href="#" class="nav-link-search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a></li>
 
-      </ul>
-    </nav>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
   </div>
-</header>
+
+  <div id="navbarMenu" class="navbar-menu">
+    <div class="navbar-end">
+      
+<a href="/about/" class="navbar-item">
+  About
+</a>
+  
+<a href="/gallery/" class="navbar-item">
+  Gallery
+</a>
+  
+<a href="/posts/" class="navbar-item">
+  Posts
+</a>
+  
+<a href="#" class="navbar-item nav-link-contact">Contact</a>
+<a href="#" class="navbar-item nav-link-search">
+  <i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i>
+</a>
+
+    </div>
+  </div>
+</nav>
 
 
     <div class="page-content">
         <img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/macropad.jpg" style="display:none" />
 <div class="post">
 
-<div class="post-header-container has-cover" style="background-image: url(/assets/posts/2021-04-05-Macropad/macropad_finished.jpg);">
-  <div class="scrim has-cover ">
-    <header class="post-header">
-      <h1 class="title">Better code for the MacroPad</h1>
-			
-      <p class="info"><em>using decorators</em></p>
-			
-    </header>
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  
+  <img alt="Post cover" class="hero-background is-transparent" src="/assets/posts/2021-04-05-Macropad/macropad_finished.jpg" />
+  
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title has-text-white">Better code for the MacroPad</h1>
+      
+      <p class="info has-text-white"><em>using decorators</em></p>
+      
+    </div>
   </div>
-</div>
+</section>
 
 <div class="wrapper">
 
@@ -547,7 +562,7 @@ can focus on the code that needs to run when a button is pressed pays off.</p>
 
     <h3 class="footer-heading">4DCu.be</h3>
 
-		<div>
+		<div class="footer-content">
 			<div class="site-navigation">
 
 				<p><strong>Site Map</strong></p>
@@ -655,19 +670,23 @@ window.MathJax = {
 
 
 <script type="text/javascript">
-$(document).ready(function() {
-  // Header
-  var menuToggle = $('#js-mobile-menu').unbind();
-  $('#js-navigation-menu').removeClass("show");
-  menuToggle.on('click', function(e) {
-    e.preventDefault();
-    $('#js-navigation-menu').slideToggle(function(){
-      if($('#js-navigation-menu').is(':hidden')) {
-        $('#js-navigation-menu').removeAttr('style');
-      }
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
     });
   });
-
 });
 
 </script>

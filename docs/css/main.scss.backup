@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+// Import modern SASS modules for namespaced functions
+@use "sass:math";
+@use "sass:color";
+@use "sass:list";
+
+// Modern Sass: Using @use with wildcard (*) to make everything globally available
+// This is the recommended approach for entry point files
+// The `as *` makes all variables, mixins, and functions available without namespace prefix
+
+// Modern utilities (replaces Bourbon 4.2.2 & Neat 1.7.2)
+@use "utilities/utilities" as *;
+
+// Base styles (Bitters base modules loaded individually to avoid circular dependencies)
+@use "base/buttons" as *;
+@use "base/forms" as *;
+@use "base/lists" as *;
+@use "base/tables" as *;
+@use "base/typography" as *;
+
+// Other components
+@use "lightgallery/lightgallery" as *;
+@use "layout" as *;
+@use "gallery" as *;
+@use "modal" as *;
+@use "default.css" as *;

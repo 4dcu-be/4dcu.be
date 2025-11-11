@@ -1,0 +1,392 @@
+// Post Content Component
+// Modern styling for post detail pages
+
+@use "../custom-variables" as *;
+
+// ========================================
+// Post Container
+// ========================================
+
+.post {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  ul, ol {
+    margin-bottom: 1em;
+  }
+
+  .post-meta {
+    padding-bottom: 1em;
+    border-bottom: 1px solid $base-border-color;
+  }
+}
+
+// ========================================
+// Post Content Typography
+// ========================================
+
+.post-content {
+  text-align: justify;
+  padding: 1rem 0;
+  line-height: 1.8;
+  font-size: 1.05rem;
+
+  @media screen and (min-width: $tablet) {
+    padding: 2rem 0;
+  }
+
+  // Headings
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $heading-font-family;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: $dark-gray;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1.3rem;
+  }
+
+  h5, h6 {
+    font-size: 1.1rem;
+  }
+
+  // Paragraphs
+  p {
+    margin-bottom: 1.5rem;
+  }
+
+  // Links
+  a {
+    color: $action-color;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+
+    &:hover {
+      border-bottom-color: $action-color;
+    }
+  }
+
+  // Lists
+  ul, ol {
+    margin-left: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
+  // Blockquotes
+  blockquote {
+    color: $medium-gray;
+    font-style: italic;
+    border-left: 3px solid $light-gray;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 2rem;
+    padding-right: 1rem;
+    margin-bottom: 1.5rem;
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Code blocks
+  code {
+    background-color: $code-background;
+    border: 1px solid $code-border-color;
+    border-radius: 3px;
+    padding: 0.2em 0.4em;
+    font-size: 0.9em;
+    font-family: "Courier New", Courier, monospace;
+  }
+
+  pre {
+    background-color: $code-background;
+    border: 1px solid $code-border-color;
+    border-radius: 3px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+
+    code {
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      font-size: 0.9em;
+    }
+  }
+
+  // Images
+  img {
+    display: block;
+    margin: 2rem auto;
+    width: 100%;
+    height: auto;
+    border-radius: 3px;
+
+    @media screen and (min-width: $tablet) {
+      width: 90%;
+    }
+
+    &.half-width {
+      width: 50%;
+
+      @media screen and (min-width: $tablet) {
+        width: 45%;
+      }
+    }
+
+    &.original-size {
+      width: auto;
+    }
+
+    &.small {
+      width: auto;
+      max-width: 200px;
+    }
+  }
+
+  // Tables
+  table {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    border-collapse: collapse;
+
+    th, td {
+      padding: 0.75rem;
+      border: 1px solid $base-border-color;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f9f9f9;
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+  }
+
+  // Horizontal rules
+  hr {
+    border: none;
+    border-top: 1px solid $base-border-color;
+    margin: 2rem 0;
+  }
+}
+
+// ========================================
+// Tags Section
+// ========================================
+
+.tags {
+  font-size: 0.9em;
+  margin: 1rem 0;
+  padding: 1rem 0;
+  border-top: 1px solid $base-border-color;
+
+  strong {
+    color: $gray;
+    margin-right: 0.5rem;
+  }
+
+  a {
+    display: inline-block;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    background-color: #f0f0f0;
+    border-radius: 3px;
+    color: $dark-gray;
+    text-decoration: none;
+    font-size: 0.95em;
+
+    &:hover {
+      background-color: $action-color;
+      color: $white;
+    }
+  }
+}
+
+// ========================================
+// Share and RSS Sections
+// ========================================
+
+.share, .rss {
+  margin: 1rem 0;
+
+  @media screen and (min-width: $tablet) {
+    display: inline-block;
+    width: 48%;
+    margin: 1rem 0;
+  }
+}
+
+.share {
+  font-weight: bold;
+
+  @media screen and (min-width: $tablet) {
+    float: left;
+    text-align: right;
+    width: 50%;
+  }
+
+  a {
+    display: inline-block;
+    width: 1.5em;
+    padding: 0 0.25em;
+    text-decoration: none;
+    font-size: 1.2em;
+    color: $action-color;
+
+    &:hover {
+      color: darken($action-color, 15%);
+    }
+  }
+}
+
+.rss {
+  @media screen and (min-width: $tablet) {
+    float: left;
+    width: 50%;
+  }
+
+  a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: $action-color;
+    color: $white;
+    text-decoration: none;
+    border-radius: 3px;
+    font-weight: bold;
+
+    &:hover {
+      background-color: darken($action-color, 10%);
+    }
+  }
+}
+
+// Clear floats after share/rss
+.share + .rss,
+.rss + .post-navigation {
+  clear: both;
+}
+
+// ========================================
+// Post Navigation
+// ========================================
+
+.post-navigation {
+  font-size: 0.9em;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 2rem 0;
+  padding-top: 2rem;
+  border-top: 1px solid $base-border-color;
+  clear: both;
+
+  @media screen and (min-width: $tablet) {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .prev-post,
+  .next-post {
+    display: block;
+  }
+
+  .prev-post {
+    text-align: left;
+  }
+
+  .next-post {
+    text-align: left;
+
+    @media screen and (min-width: $tablet) {
+      text-align: right;
+    }
+  }
+
+  a {
+    color: $action-color;
+    text-decoration: none;
+    font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .label {
+    display: block;
+    font-size: 0.85em;
+    color: $medium-gray;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+// ========================================
+// Page Divider (decorative element)
+// ========================================
+
+.page-divider {
+  display: block;
+  width: 50%;
+  margin: 2rem auto;
+  border-top: 1px solid $light-gray;
+  position: relative;
+
+  .one {
+    position: relative;
+    top: -9px;
+    display: block;
+    background: $light-gray;
+    width: 18px;
+    height: 18px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+  }
+
+  .two {
+    position: relative;
+    top: -26px;
+    display: block;
+    background: $white;
+    width: 16px;
+    height: 16px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+  }
+}

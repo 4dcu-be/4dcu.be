@@ -2,20 +2,23 @@
 layout: default
 sitemap: false
 ---
-<div class="post-header-container {% if site.jekyll-archives.cover %}has-cover{% endif %}" {% if site.jekyll-archives.cover %}style="background-image: url({{ site.jekyll-archives.cover | prepend: site.baseurl }});"{% endif %}>
-	<div class="scrim {% if site.jekyll-archives.cover %}has-cover{% endif %} narrow">
-		<header class="post-header">
+<section class="hero is-narrow {% if site.jekyll-archives.cover %}has-background has-dark-overlay has-text-shadow has-box-shadow{% endif %}">
+	{% if site.jekyll-archives.cover %}
+	<img alt="Archive cover" class="hero-background is-transparent" src="{{ site.jekyll-archives.cover | prepend: site.baseurl }}" />
+	{% endif %}
+	<div class="hero-body">
+		<div class="container has-text-centered">
 			{% if page.type == 'year' %}
-				<h1 class="title">Posts from {{ page.date| date: "%Y" }}</h1>
+				<h1 class="title {% if site.jekyll-archives.cover %}has-text-white{% endif %}">Posts from {{ page.date| date: "%Y" }}</h1>
 			{% else %}
-				<h1 class="title">Posts in {{ page.title | capitalize }}</h1>
+				<h1 class="title {% if site.jekyll-archives.cover %}has-text-white{% endif %}">Posts in {{ page.title | capitalize }}</h1>
 			{% endif %}
 			{% if page.byline %}
-			<p class="info"><em>{{ page.byline }}</em></p>
+			<p class="info {% if site.jekyll-archives.cover %}has-text-white{% endif %}"><em>{{ page.byline }}</em></p>
 			{% endif %}
-		</header>
+		</div>
 	</div>
-</div>
+</section>
 
 <div class="wrapper">
 <div class="page">

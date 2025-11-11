@@ -1,9 +1,13 @@
-{% for page in site.pages -%}
-	{% if page.title and page.main_nav == true %}
-				<li class="nav-link"><a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
-	{% endif %}
+{% for nav_page in site.pages -%}
+  {% if nav_page.title and nav_page.main_nav == true %}
+<a href="{{ nav_page.url | prepend: site.baseurl }}" class="navbar-item{% if page.url == nav_page.url %} is-active{% endif %}">
+  {{ nav_page.title }}
+</a>
+  {% endif %}
 {%- endfor %}
 {%- if site.email %}
-				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+<a href="#" class="navbar-item nav-link-contact">Contact</a>
 {% endif -%}
-		<li class="nav-link"><a href="#" class="nav-link-search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a></li>
+<a href="#" class="navbar-item nav-link-search">
+  <i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i>
+</a>

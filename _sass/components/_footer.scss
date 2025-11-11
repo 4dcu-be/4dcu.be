@@ -1,0 +1,255 @@
+// Footer Component
+// Dark gray background with 3-column grid layout on large screens
+
+@use "sass:color";
+@use "../custom-variables" as *;
+
+// ========================================
+// Site Footer Container
+// ========================================
+
+.site-footer {
+  padding: 1rem 1rem 2rem 1rem;
+  background-color: $dark-gray;
+  color: $light-gray;
+
+  @media screen and (min-width: $tablet) {
+    padding: 2rem 1rem 3rem 1rem;
+  }
+
+  // Link styling
+  a {
+    color: $light-gray;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover,
+    &:focus {
+      color: color.adjust($light-gray, $lightness: -10%);
+    }
+
+    &:active,
+    &:focus {
+      outline: none;
+    }
+  }
+
+  // Footer heading
+  .footer-heading {
+    font-family: $heading-font-family;
+    font-size: 1.5rem;
+    color: $white;
+    margin-bottom: 1.5rem;
+    text-align: center;
+
+    @media screen and (min-width: $tablet) {
+      text-align: left;
+      font-size: 1.8rem;
+    }
+  }
+
+  // Wrapper container
+  .wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+}
+
+// ========================================
+// Footer Content Grid
+// ========================================
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 1.5rem;
+
+  // Tablet and up: 3-column layout
+  @media screen and (min-width: $tablet) {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+  }
+
+  // Desktop: wider gap
+  @media screen and (min-width: $desktop) {
+    gap: 3rem;
+  }
+}
+
+// ========================================
+// Site Navigation (Left Column)
+// ========================================
+
+.site-navigation {
+  font-size: 0.9em;
+
+  p strong {
+    color: $white;
+    font-size: 1.1em;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+  }
+
+  a {
+    display: inline-block;
+    padding: 0.25rem 0;
+
+    &:hover {
+      color: $white;
+      text-decoration: underline;
+    }
+  }
+
+  // Spacing between sections
+  p + p,
+  ul + p {
+    margin-top: 1.5rem;
+  }
+}
+
+// ========================================
+// Site Contact (Center Column)
+// ========================================
+
+.site-contact {
+  font-size: 0.9em;
+
+  p strong {
+    color: $white;
+    font-size: 1.1em;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  ul.social-media-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+  }
+
+  // Icon spacing
+  i {
+    width: 1.5em;
+    text-align: center;
+    display: inline-block;
+    margin-right: 0.25rem;
+  }
+
+  a {
+    display: inline-block;
+    padding: 0.25rem 0;
+
+    &:hover {
+      color: $white;
+      text-decoration: underline;
+    }
+  }
+}
+
+// ========================================
+// Site Signature (Right Column)
+// ========================================
+
+.site-signature {
+  font-size: 0.9em;
+
+  p {
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+  }
+
+  strong {
+    color: $white;
+    font-size: 1.1em;
+  }
+
+  a {
+    text-decoration: underline;
+
+    &:hover {
+      color: $white;
+    }
+  }
+
+  // RSS subscribe
+  .rss-subscribe {
+    margin-bottom: 1rem;
+  }
+
+  // Last updated text
+  .text {
+    color: color.adjust($light-gray, $lightness: -15%);
+    font-size: 0.85em;
+  }
+
+  // Coffee icon
+  .fa-mug-hot {
+    color: #ffdd57;
+    margin-right: 0.25rem;
+  }
+}
+
+// ========================================
+// Footer Links Lists
+// ========================================
+
+.site-footer {
+  ul.pages,
+  ul.social-media-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin-bottom: 0.5rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// ========================================
+// Mobile Responsiveness
+// ========================================
+
+@media screen and (max-width: $mobile) {
+  .site-footer {
+    padding: 1.5rem 1rem;
+
+    .footer-heading {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .footer-content {
+    gap: 1.5rem;
+
+    // Center text on mobile for better readability
+    .site-navigation,
+    .site-contact,
+    .site-signature {
+      text-align: center;
+    }
+  }
+}

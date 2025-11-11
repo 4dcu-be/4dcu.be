@@ -84,50 +84,69 @@
 </head>
 
 
-  <body>
+  <body class="has-navbar-fixed-top">
 
-    <header class="navigation" role="banner">
-	<div class="navigation-wrapper">
-    <a href="/" class="logo">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/" class="navbar-item">
       
       <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
       
     </a>
-    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
-      <i class="fa-solid fa-bars"></i>
-    </a>
-    <nav role="navigation">
-      <ul id="js-navigation-menu" class="navigation-menu show">
-				
-				<li class="nav-link"><a href="/about/">About</a>
-	
-				<li class="nav-link"><a href="/gallery/">Gallery</a>
-	
-				<li class="nav-link"><a href="/posts/">Posts</a>
-	
-				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
-<li class="nav-link"><a href="#" class="nav-link-search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a></li>
 
-      </ul>
-    </nav>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
   </div>
-</header>
+
+  <div id="navbarMenu" class="navbar-menu">
+    <div class="navbar-end">
+      
+<a href="/about/" class="navbar-item">
+  About
+</a>
+  
+<a href="/gallery/" class="navbar-item">
+  Gallery
+</a>
+  
+<a href="/posts/" class="navbar-item">
+  Posts
+</a>
+  
+<a href="#" class="navbar-item nav-link-contact">Contact</a>
+<a href="#" class="navbar-item nav-link-search">
+  <i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i>
+</a>
+
+    </div>
+  </div>
+</nav>
 
 
     <div class="page-content">
         <div class="home">
 
-<div class="site-header-container has-cover" style="background-image: url(/assets/header_image.webp);">
-  <div class="scrim has-cover">
-    <header class="site-header">
-			<img src="/assets/sticker_medium.webp" srcset="/assets/sticker_medium.webp,
-						 /assets/sticker_middle.webp 1.5x,
-             /assets/sticker_large.webp 2x" alt="sticker" class="sticker" width="300" height="300"/>
-      <h1 class="title">4DCu.be</h1>
-      <p class="subtitle">a blog about programming, gaming, technology, ...</p>
-    </header>
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow">
+  
+  <img alt="Site cover" class="hero-background is-transparent" src="/assets/header_image.webp" />
+  
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      
+      <img src="/assets/sticker_medium.webp"
+           srcset="/assets/sticker_medium.webp,
+                   /assets/sticker_middle.webp 1.5x,
+                   /assets/sticker_large.webp 2x"
+           alt="sticker" class="sticker" width="300" height="300"/>
+      
+      <h1 class="title has-text-white">4DCu.be</h1>
+      <p class="subtitle has-text-white">a blog about programming, gaming, technology, ...</p>
+    </div>
   </div>
-</div>
+</section>
 
 <div class="wrapper">
 	<div class="wrapper">
@@ -160,9 +179,6 @@
 					</div>
 				</section>
 			</div>
-		
-		<hr>
-		
 		</li>
 		
 		<li>
@@ -192,9 +208,6 @@
 					</div>
 				</section>
 			</div>
-		
-		<hr>
-		
 		</li>
 		
 		<li>
@@ -220,9 +233,6 @@
 					</div>
 				</section>
 			</div>
-		
-		<hr>
-		
 		</li>
 		
 		<li>
@@ -248,9 +258,6 @@
 					</div>
 				</section>
 			</div>
-		
-		<hr>
-		
 		</li>
 		
 		<li>
@@ -276,9 +283,6 @@
 					</div>
 				</section>
 			</div>
-		
-		<hr>
-		
 		</li>
 		
 		<li>
@@ -304,9 +308,6 @@
 					</div>
 				</section>
 			</div>
-		
-		<hr>
-		
 		</li>
 		
 		<li>
@@ -336,7 +337,6 @@
 					</div>
 				</section>
 			</div>
-		
 		</li>
 		
 	</ul>
@@ -493,7 +493,7 @@
 
     <h3 class="footer-heading">4DCu.be</h3>
 
-		<div>
+		<div class="footer-content">
 			<div class="site-navigation">
 
 				<p><strong>Site Map</strong></p>
@@ -559,7 +559,7 @@
 				
 				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
 				
-			    <p class="text">Last update: November 9, 2025</p>
+			    <p class="text">Last update: November 11, 2025</p>
 			  
 			</div>
 		</div>
@@ -603,19 +603,23 @@ window.MathJax = {
 
 
 <script type="text/javascript">
-$(document).ready(function() {
-  // Header
-  var menuToggle = $('#js-mobile-menu').unbind();
-  $('#js-navigation-menu').removeClass("show");
-  menuToggle.on('click', function(e) {
-    e.preventDefault();
-    $('#js-navigation-menu').slideToggle(function(){
-      if($('#js-navigation-menu').is(':hidden')) {
-        $('#js-navigation-menu').removeAttr('style');
-      }
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
     });
   });
-
 });
 
 </script>

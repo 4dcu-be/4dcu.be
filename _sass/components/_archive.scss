@@ -1,0 +1,268 @@
+// Archive Pages Component
+// Styling for category, tag, and year archive pages
+
+@use "../custom-variables" as *;
+
+// ========================================
+// Page Container
+// ========================================
+
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  min-height: 60vh;
+
+  .post-header {
+    padding: 0.5rem 1rem 1rem 1rem;
+    text-align: center;
+  }
+
+  .profile {
+    max-width: 320px;
+    margin: auto;
+    padding-bottom: 0.5rem;
+  }
+}
+
+// ========================================
+// Archive Posts List
+// ========================================
+
+.posts-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    padding: 0.75rem 0;
+    padding-left: 0;
+    border-bottom: 1px solid $base-border-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  // Post title link
+  a {
+    color: $action-color;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+
+    &:hover {
+      text-decoration: underline;
+      color: darken($action-color, 10%);
+    }
+  }
+
+  // Description text
+  .desc {
+    font-size: 0.9em;
+    color: $medium-text-color;
+    margin-top: 0.5rem;
+    line-height: 1.6;
+  }
+
+  // Post date
+  .post-date {
+    color: $medium-gray;
+    font-size: 0.85em;
+    display: block;
+    margin-top: 0.25rem;
+  }
+}
+
+// ========================================
+// Archive Header Styling
+// ========================================
+
+.archive-header {
+  text-align: center;
+  padding: 2rem 0;
+  border-bottom: 2px solid $base-border-color;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-family: $heading-font-family;
+    font-size: 2rem;
+    color: $dark-gray;
+    margin-bottom: 0.5rem;
+
+    @media screen and (min-width: $tablet) {
+      font-size: 2.5rem;
+    }
+  }
+
+  .archive-count {
+    color: $medium-gray;
+    font-size: 0.9em;
+  }
+}
+
+// ========================================
+// Grouped Archive Layout (by year/month)
+// ========================================
+
+.archive-group {
+  margin-bottom: 3rem;
+
+  h2 {
+    font-family: $heading-font-family;
+    font-size: 1.5rem;
+    color: $dark-gray;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid $base-border-color;
+  }
+}
+
+// ========================================
+// Archive Grid Layout (for category/tag overview)
+// ========================================
+
+.archive-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin: 2rem 0;
+
+  @media screen and (min-width: $mobile) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: $tablet) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .archive-card {
+    padding: 1.5rem;
+    border: 1px solid $base-border-color;
+    border-radius: 3px;
+    transition: box-shadow 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    a {
+      color: $action-color;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .count {
+      display: block;
+      margin-top: 0.5rem;
+      color: $medium-gray;
+      font-size: 0.9em;
+    }
+  }
+}
+
+// ========================================
+// Compact Archive List (sidebar style)
+// ========================================
+
+.archive-list-compact {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  a {
+    color: $action-color;
+    text-decoration: none;
+    flex: 1;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .count {
+    color: $medium-gray;
+    font-size: 0.9em;
+    margin-left: 0.5rem;
+  }
+}
+
+// ========================================
+// Timeline Style Archive (year-based)
+// ========================================
+
+.archive-timeline {
+  position: relative;
+  padding-left: 2rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: $light-gray;
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 2rem;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: -2.5rem;
+      top: 0.5rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: $action-color;
+      border: 2px solid $white;
+    }
+
+    .timeline-date {
+      font-weight: bold;
+      color: $dark-gray;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .timeline-posts {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        margin-bottom: 0.75rem;
+      }
+
+      a {
+        color: $action-color;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .post-date {
+        color: $medium-gray;
+        font-size: 0.85em;
+        margin-left: 0.5rem;
+      }
+    }
+  }
+}

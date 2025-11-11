@@ -1,0 +1,225 @@
+// Hero Component Extensions for Site/Post Headers
+// Recreates the original site-header-container and scrim functionality using Bulma hero
+
+@use "../custom-variables" as *;
+
+// ========================================
+// Dark Overlay (Scrim Effect)
+// ========================================
+
+.hero.has-dark-overlay {
+  position: relative;
+
+  // Create dark overlay using pseudo-element
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 20, 0.5); // Dark blue-black at 50% opacity
+    z-index: 1; // Above background image (z-index: 0) but below content (z-index: 2)
+  }
+
+  // Ensure content stays above overlay
+  .hero-body {
+    position: relative;
+    z-index: 2; // Above both background and overlay
+  }
+}
+
+// ========================================
+// Homepage Dark Red Background (No Cover)
+// ========================================
+
+.hero.is-dark-red {
+  background-color: $highlight-color; // #7d2626
+  color: $white;
+
+  .title, .subtitle {
+    color: $white;
+    text-shadow: 0 2px 1px rgba(0,0,0,0.33);
+  }
+}
+
+// ========================================
+// Text Shadows for Readability
+// ========================================
+
+.hero.has-text-shadow {
+  .title, .subtitle {
+    text-shadow: 0 3px 5px rgba(0,0,0,0.67) !important;
+  }
+}
+
+// ========================================
+// Box Shadow Below Hero
+// ========================================
+
+.hero.has-box-shadow {
+  box-shadow: rgba(0,0,0,0.3) 0px 5px 15px;
+}
+
+// ========================================
+// Sticker Logo Styling - Much Smaller
+// ========================================
+
+.hero img.sticker {
+  width: 100%;
+  max-width: 120px; // Much smaller default
+  height: auto;
+  margin-top: 0; // Clean alignment without negative margin
+  margin-bottom: 0.25em; // Minimal spacing between logo and text
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  // Scale logo based on viewport width
+  @media screen and (min-width: 768px) {
+    max-width: 150px; // Medium screens - still compact
+  }
+
+  @media screen and (min-width: 1024px) {
+    max-width: 180px; // Large screens - still smaller than before
+  }
+}
+
+// ========================================
+// Hero Height Control - Compact like original
+// ========================================
+
+.hero {
+  // Override Bulma's is-medium padding - make it MUCH more compact
+  &.is-medium .hero-body {
+    padding: 1rem 1.5rem; // Compact: ~16px vertical
+
+    @media screen and (min-width: 768px) {
+      padding: 1.25rem 3rem; // ~20px vertical on tablet+
+    }
+
+    @media screen and (min-width: 1024px) {
+      padding: 1.5rem 3rem; // ~24px vertical on desktop
+    }
+  }
+
+  // Even more compact for mobile
+  @media screen and (max-width: 767px) {
+    &.is-medium .hero-body {
+      padding: 0.75rem 1rem; // Minimal on mobile
+    }
+  }
+}
+
+// ========================================
+// Narrow Variant (Archive Pages)
+// ========================================
+
+.hero.is-narrow {
+  .hero-body {
+    padding: 1.5rem 1.5rem; // Very compact for archives
+
+    @media screen and (min-width: 768px) {
+      padding: 2rem 3rem;
+    }
+  }
+}
+
+// ========================================
+// Typography Adjustments - Much Smaller & Compact
+// ========================================
+
+.hero {
+  // Title sizing - much more compact
+  &.has-background .title {
+    font-size: 1.5em; // Smaller to match compact hero
+
+    @media screen and (min-width: 768px) {
+      font-size: 1.75em; // Medium screens
+    }
+
+    @media screen and (min-width: 1024px) {
+      font-size: 2em; // Large screens - still modest
+    }
+  }
+
+  // Homepage specific title sizing (without cover)
+  &.is-dark-red .title {
+    font-size: 1.5em;
+
+    @media screen and (min-width: 768px) {
+      font-size: 1.75em;
+    }
+
+    @media screen and (min-width: 1024px) {
+      font-size: 2em;
+    }
+  }
+
+  // Subtitle sizing - compact
+  .subtitle {
+    font-size: 0.875em; // Smaller base (14px at 16px base)
+    font-style: italic;
+
+    @media screen and (min-width: 768px) {
+      font-size: 0.9375em; // ~15px
+    }
+
+    @media screen and (min-width: 1024px) {
+      font-size: 1em; // 16px on desktop
+    }
+
+    em {
+      font-style: italic;
+    }
+  }
+
+  // Info text (bylines) - compact
+  .info {
+    font-size: 0.875em;
+    font-style: italic;
+
+    @media screen and (min-width: 768px) {
+      font-size: 0.9375em;
+    }
+
+    @media screen and (min-width: 1024px) {
+      font-size: 1em;
+    }
+  }
+}
+
+// ========================================
+// Background Image Handling
+// ========================================
+
+.hero.has-background {
+  position: relative; // Required for absolute positioning of background
+  overflow: hidden; // Prevent image overflow
+  max-height: 450px; // Limit total hero height
+
+  .hero-background {
+    // Use absolute positioning to make it an overlay
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // Ensure proper coverage
+    object-position: 50% 50%; // Center the image
+    z-index: 0; // Behind content
+  }
+
+  // Ensure hero-body stays above the background and overlay
+  .hero-body {
+    position: relative;
+    z-index: 2; // Above both background (0) and overlay (1)
+  }
+}
+
+// ========================================
+// Mobile Responsiveness
+// ========================================
+// (Handled in responsive sections above)

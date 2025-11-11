@@ -8,17 +8,24 @@ pagination:
 ---
 <div class="home">
 
-<div class="site-header-container {% if site.cover %}has-cover{% endif %}" {% if site.cover %}style="background-image: url({{ site.cover | prepend: site.baseurl }});"{% endif %}>
-  <div class="scrim {% if site.cover %}has-cover{% endif %}">
-    <header class="site-header">
-			{% if site.sticker %}<img src="{{site.sticker | prepend: site.baseurl }}" srcset="{{site.sticker | prepend: site.baseurl }},
-						 {{site.sticker-1_5x | prepend: site.baseurl }} 1.5x,
-             {{site.sticker-2x | prepend: site.baseurl }} 2x" alt="sticker" class="sticker" width="300" height="300"/>{% endif %}
-      <h1 class="title">{{ site.title }}</h1>
-      {% if site.subtitle %}<p class="subtitle">{{ site.subtitle }}</p>{% endif %}
-    </header>
+<section class="hero {% if site.cover %}is-medium has-background has-dark-overlay has-text-shadow has-box-shadow{% else %}is-medium is-dark-red{% endif %}">
+  {% if site.cover %}
+  <img alt="Site cover" class="hero-background is-transparent" src="{{ site.cover | prepend: site.baseurl }}" />
+  {% endif %}
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      {% if site.sticker %}
+      <img src="{{site.sticker | prepend: site.baseurl }}"
+           srcset="{{site.sticker | prepend: site.baseurl }},
+                   {{site.sticker-1_5x | prepend: site.baseurl }} 1.5x,
+                   {{site.sticker-2x | prepend: site.baseurl }} 2x"
+           alt="sticker" class="sticker" width="300" height="300"/>
+      {% endif %}
+      <h1 class="title {% if site.cover %}has-text-white{% endif %}">{{ site.title }}</h1>
+      {% if site.subtitle %}<p class="subtitle {% if site.cover %}has-text-white{% endif %}">{{ site.subtitle }}</p>{% endif %}
+    </div>
   </div>
-</div>
+</section>
 
 <div class="wrapper">
 	<div class="wrapper">
@@ -49,9 +56,6 @@ pagination:
 					</div>
 				</section>
 			</div>
-		{% if forloop.last == false %}
-		<hr>
-		{% endif %}
 		</li>
 		{% endfor %}
 	</ul>

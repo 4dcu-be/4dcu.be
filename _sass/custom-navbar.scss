@@ -1,0 +1,68 @@
+// Custom Navbar Styles for 4DCu.be
+// Preserves original design elements with Bulma navbar
+
+// Import custom variables for color references
+@use "custom-variables" as *;
+
+// ========================================
+// Navbar Red Shadow (Original Design)
+// ========================================
+
+.navbar.is-fixed-top {
+  // Red bottom shadow to match original theme
+  box-shadow: 0 3px $highlight-color;
+}
+
+// ========================================
+// Logo Sizing
+// ========================================
+
+.navbar-brand .navbar-item img {
+  // Maintain original logo size
+  max-height: 58px;
+}
+
+// ========================================
+// Active Page Indicator
+// ========================================
+
+.navbar-item.is-active {
+  // Highlight current page in red
+  color: $red !important;
+  border-bottom: 2px solid $red;
+  background-color: transparent !important;
+}
+
+// ========================================
+// Link Hover States
+// ========================================
+
+.navbar-item:hover {
+  // Red hover color to match theme
+  color: $red !important;
+}
+
+// Override Bulma's default navbar hover background
+.navbar-end .navbar-item:hover {
+  background-color: rgba($red, 0.05);
+}
+
+// ========================================
+// Search Icon Sizing
+// ========================================
+
+.navbar-item .fa-magnifying-glass {
+  width: 16px;
+  height: 16px;
+}
+
+// ========================================
+// Mobile Menu Customizations
+// ========================================
+
+@media screen and (max-width: 1023px) {
+  .navbar-menu {
+    // Ensure smooth transitions on mobile
+    box-shadow: 0 8px 16px rgba(10, 10, 10, 0.1);
+  }
+}

@@ -1,0 +1,485 @@
+// Buttons and Icons Component
+// Enhanced Bulma button and icon styling with custom variants
+
+@use "sass:color";
+@use "../custom-variables" as *;
+
+// ========================================
+// Button Enhancements (Bulma Integration)
+// ========================================
+
+.button {
+  // Base styles already provided by Bulma, we enhance them
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border-radius: $radius;
+
+  // Remove text-transform to preserve case
+  text-transform: none;
+
+  // Focus state
+  &:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15);
+  }
+
+  // Active state
+  &:active {
+    transform: translateY(1px);
+  }
+
+  // Disabled state
+  &:disabled,
+  &.is-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  // Loading state
+  &.is-loading {
+    color: transparent;
+    pointer-events: none;
+
+    &::after {
+      content: "";
+      position: absolute;
+      right: calc(50% - 0.5rem);
+      top: calc(50% - 0.5rem);
+      width: 1rem;
+      height: 1rem;
+      border: 2px solid transparent;
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: spinner 0.6s linear infinite;
+    }
+  }
+}
+
+// Spinner animation for loading state
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ========================================
+// Custom Button Variants
+// ========================================
+
+// Ghost button variant (transparent background, colored text/border)
+.button.is-ghost {
+  background-color: transparent;
+  border: 2px solid currentColor;
+  color: $action-color;
+
+  &:hover {
+    background-color: rgba(255, 107, 53, 0.1);
+    border-color: darken($action-color, 10%);
+  }
+}
+
+// Link button variant (looks like a link)
+.button.is-link-button {
+  background-color: transparent;
+  color: $action-color;
+  padding: 0;
+  height: auto;
+  text-decoration: underline;
+  border-radius: 0;
+
+  &:hover {
+    color: darken($action-color, 10%);
+  }
+}
+
+// Icon button (small, square, for icons only)
+.button.is-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &.is-small {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  &.is-large {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+// ========================================
+// Social Buttons
+// ========================================
+
+.button.is-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: $radius;
+
+  i {
+    font-size: 1.1em;
+  }
+
+  // Specific colors for different platforms
+  &.is-github {
+    background-color: #333;
+    color: $white;
+
+    &:hover {
+      background-color: #555;
+    }
+  }
+
+  &.is-twitter {
+    background-color: #1da1f2;
+    color: $white;
+
+    &:hover {
+      background-color: #1a91da;
+    }
+  }
+
+  &.is-bluesky {
+    background-color: #1185fe;
+    color: $white;
+
+    &:hover {
+      background-color: #0d74de;
+    }
+  }
+
+  &.is-facebook {
+    background-color: #1877f2;
+    color: $white;
+
+    &:hover {
+      background-color: #0a66d2;
+    }
+  }
+
+  &.is-linkedin {
+    background-color: #0077b5;
+    color: $white;
+
+    &:hover {
+      background-color: #006399;
+    }
+  }
+
+  &.is-email {
+    background-color: $medium-gray;
+    color: $white;
+
+    &:hover {
+      background-color: darken($medium-gray, 10%);
+    }
+  }
+}
+
+// ========================================
+// Icon Base Class (Bulma)
+// ========================================
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.5rem;
+  width: 1.5rem;
+  flex-shrink: 0;
+
+  // Size variants
+  &.is-small {
+    height: 1rem;
+    width: 1rem;
+  }
+
+  &.is-medium {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  &.is-large {
+    height: 3rem;
+    width: 3rem;
+  }
+
+  // Color variants
+  &.is-primary {
+    color: $primary;
+  }
+
+  &.is-info {
+    color: $info;
+  }
+
+  &.is-success {
+    color: $success;
+  }
+
+  &.is-warning {
+    color: $warning;
+  }
+
+  &.is-danger {
+    color: $danger;
+  }
+
+  &.is-light {
+    color: $light-gray;
+  }
+
+  &.is-dark {
+    color: $dark-gray;
+  }
+
+  // Text with icon layout
+  &.icon-text {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+}
+
+// ========================================
+// Icon Stacks (FontAwesome fa-stack)
+// ========================================
+
+.fa-stack {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 2rem;
+  width: 2rem;
+  line-height: 2rem;
+  font-size: 1rem;
+
+  // Size variants
+  &.fa-lg {
+    font-size: 1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  &.fa-2x {
+    font-size: 2rem;
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .fa-inverse {
+    color: $white;
+  }
+}
+
+// ========================================
+// Pagination Buttons
+// ========================================
+
+.pagination {
+  .button {
+    &.is-current {
+      background-color: $action-color;
+      color: $white;
+      border-color: $action-color;
+      cursor: default;
+    }
+
+    &.is-disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// ========================================
+// Share Button Group
+// ========================================
+
+.share-buttons {
+  display: inline-flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+
+    &.share-button {
+      background-color: transparent;
+      color: $action-color;
+      border: 1px solid $base-border-color;
+
+      &:hover {
+        background-color: $action-color;
+        color: $white;
+        border-color: $action-color;
+      }
+
+      i {
+        font-size: 1.1em;
+      }
+    }
+  }
+}
+
+// ========================================
+// Icon List (for sidebar, navigation)
+// ========================================
+
+.icon-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+
+    .icon {
+      flex-shrink: 0;
+    }
+
+    a {
+      color: $action-color;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: darken($action-color, 10%);
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// ========================================
+// Icon with Text Label
+// ========================================
+
+.icon-with-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .icon {
+    flex-shrink: 0;
+  }
+
+  .label {
+    font-size: 0.9em;
+    color: $medium-gray;
+  }
+}
+
+// ========================================
+// FontAwesome Icon Specific Styling
+// ========================================
+
+i[class*="fa-"] {
+  &.fa-spin {
+    animation: fa-spin 2s infinite linear;
+  }
+
+  &.fa-pulse {
+    animation: fa-pulse 2s infinite steps(8);
+  }
+}
+
+@keyframes fa-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fa-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+// ========================================
+// Link with Icon
+// ========================================
+
+a.icon-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: $action-color;
+  text-decoration: none;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: darken($action-color, 10%);
+
+    i {
+      transform: translateX(2px);
+    }
+  }
+}
+
+// ========================================
+// Button Sizes (enhance Bulma defaults)
+// ========================================
+
+.button {
+  &.is-small {
+    font-size: 0.85rem;
+    padding: 0.375rem 0.75rem;
+  }
+
+  &.is-medium {
+    font-size: 1.125rem;
+    padding: 0.75rem 1.5rem;
+  }
+
+  &.is-large {
+    font-size: 1.25rem;
+    padding: 1rem 2rem;
+  }
+}
+
+// ========================================
+// Mobile Responsiveness
+// ========================================
+
+@media screen and (max-width: $mobile) {
+  .button {
+    &.is-fullwidth {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .share-buttons {
+    width: 100%;
+
+    .button {
+      flex: 1;
+      min-width: 100px;
+    }
+  }
+
+  .icon-stack {
+    font-size: 1.2rem;
+  }
+}

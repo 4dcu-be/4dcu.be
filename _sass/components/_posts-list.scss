@@ -1,0 +1,205 @@
+// Posts List Component
+// Modern CSS Grid/Flexbox implementation for post list layout
+
+@use "../custom-variables" as *;
+
+// ========================================
+// Post List Container
+// ========================================
+
+.post-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 1rem 0 0 0;
+
+  // Desktop: 73% width in grid layout (handled by .wrapper)
+  @media screen and (min-width: $tablet) {
+    width: 73%;
+    float: left;
+    margin-right: 2%;
+  }
+
+  li {
+    margin-bottom: $spacing-double;
+    padding-bottom: $spacing-double;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $base-border-color;
+    }
+
+    // Clear floats after each post item
+    &::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  }
+}
+
+// ========================================
+// Post Excerpt Layout
+// ========================================
+
+.post-excerpt {
+  text-align: justify;
+  line-height: 1.6;
+
+  p {
+    margin: 0.5rem 0 1rem 0;
+  }
+}
+
+.post-excerpt-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+  margin-bottom: 1rem;
+
+  // Tablet and up: smaller thumbnail on left (side-by-side layout)
+  @media screen and (min-width: $tablet) {
+    display: inline;
+    float: left;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+    width: auto;
+    height: 150px;
+  }
+}
+
+// ========================================
+// Post Metadata
+// ========================================
+
+.post-meta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  max-width: 60rem;
+  color: $medium-gray;
+  font-size: 0.9em;
+  margin-top: $spacing-unit;
+
+  // Desktop: two-column layout
+  @media screen and (min-width: $tablet) {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .post-date {
+    text-align: left;
+  }
+
+  .post-categories {
+    text-align: left;
+
+    @media screen and (min-width: $tablet) {
+      text-align: right;
+    }
+  }
+
+  a {
+    color: $action-color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// ========================================
+// Category Sidebar
+// ========================================
+
+.category-wrapper {
+  display: none;
+  padding-top: 1rem;
+
+  @media screen and (min-width: $tablet) {
+    display: block;
+    width: 23%;
+    float: left;
+    padding-left: 2%;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    margin-bottom: $spacing-unit;
+    color: $dark-gray;
+  }
+}
+
+.category-list {
+  list-style-type: none;
+  margin: 0 0 $spacing-double 0;
+  padding: 0;
+
+  li {
+    margin-bottom: $spacing-half;
+    line-height: 1.6;
+  }
+
+  a {
+    color: $action-color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .post-count {
+    color: $medium-gray;
+    font-size: 0.9em;
+    display: inline;
+  }
+}
+
+// ========================================
+// Wrapper Container for Grid Layout
+// ========================================
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  // Clear floats for the sidebar layout
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+// ========================================
+// Post Title Links
+// ========================================
+
+.post-link {
+  color: $dark-gray;
+  text-decoration: none;
+  font-weight: bold;
+
+  &:hover {
+    color: $action-color;
+  }
+}
+
+// ========================================
+// Home Page Specific
+// ========================================
+
+.home {
+  h2 {
+    font-family: $heading-font-family;
+    font-size: 1.8rem;
+    margin-bottom: $spacing-unit;
+
+    @media screen and (min-width: $tablet) {
+      font-size: 2.2rem;
+    }
+  }
+}

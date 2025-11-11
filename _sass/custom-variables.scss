@@ -1,0 +1,100 @@
+// Custom Variables for 4DCu.be
+// Override Bulma's default variables to match existing color scheme
+
+// Google Fonts (keep existing fonts)
+@import url(//fonts.googleapis.com/css?family=Roboto+Slab:400,700,300|Roboto:400,700,300|Open+Sans:300italic,400italic,600italic,700italic,800italic,400,800,700,600,300&display=swap);
+
+// ========================================
+// Color Palette (from original theme)
+// ========================================
+
+// Base colors
+$dark-gray: #333;
+$medium-gray: #999;
+$light-gray: #ddd;
+$white: #fff;
+
+// Flat UI Colors
+$turquoise: #1abc9c;
+$green: #27ae60;
+$blue: #2980b9;
+$purple: #8e44ad;
+$orange: #d35400;
+$red: #b33939;
+$gray: #7f8c8d;
+$bc-red: #bc0000;
+
+// ========================================
+// Bulma Variable Overrides
+// ========================================
+
+// Primary brand color (turquoise)
+$primary: $turquoise;
+
+// Link color (red accent)
+$link: $red;
+$link-hover: darken($red, 10%);
+$link-focus: darken($red, 15%);
+
+// Danger color
+$danger: $bc-red;
+
+// Info/Warning/Success
+$info: $blue;
+$success: $green;
+$warning: $orange;
+
+// Typography
+$family-sans-serif: "Open Sans", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
+$family-primary: $family-sans-serif;
+
+// Custom heading font (Bulma doesn't have a heading-specific variable by default)
+// We'll apply this in custom styles
+$heading-font-family: "Roboto Slab", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+
+// Body
+$body-background-color: $white;
+$body-color: $dark-gray;
+$body-line-height: 1.8;
+
+// Borders
+$border: $light-gray;
+$border-width: 1px;
+
+// Radius
+$radius: 3px;
+$radius-small: 2px;
+$radius-large: 5px;
+
+// Spacing (Bulma uses a 6/12/24 pattern, adjust as needed)
+// Original used 1.8 * 16px = 28.8px for base spacing
+// We'll approximate with Bulma's spacing scale
+
+// ========================================
+// Custom Variables (not Bulma overrides)
+// ========================================
+
+// These are used in our custom components
+$base-font-color: $dark-gray;
+$action-color: $red;
+$highlight-color: mix(#000, $action-color, 33%);
+$base-border-color: $light-gray;
+$base-border: 1px solid $base-border-color;
+
+// Additional text colors
+$light-text-color: #999;
+$medium-text-color: #666;
+
+// Breakpoints (matching legacy layout)
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 960px;
+
+// Spacing variables
+$spacing-unit: 1rem;
+$spacing-half: 0.5rem;
+$spacing-double: 2rem;
+
+// Code blocks
+$code-background: #f5f5f5;
+$code-border-color: #e0e0e0;
