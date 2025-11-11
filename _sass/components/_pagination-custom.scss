@@ -20,7 +20,7 @@
     align-items: center;
     gap: 1rem;
     flex-wrap: wrap;
-    margin: 0;
+    margin: 0 auto;
   }
 
   @media screen and (min-width: $tablet) {
@@ -50,6 +50,7 @@
 
 .pagination {
   a.newer-posts,
+  a.older-posts,
   span.fa-stack {
     display: inline-block;
     text-decoration: none;
@@ -57,32 +58,28 @@
   }
 
   // Active link styling
-  a.newer-posts {
-    cursor: pointer;
-
-    .fa-square {
-      color: $action-color;
+  a.newer-posts,
+  a.older-posts {
+    .fa-stack .fa-square {
+      color: $action-color !important;
       transition: color 0.2s ease;
     }
 
-    .fa-inverse {
-      color: $white;
+    .fa-stack .fa-inverse {
+      color: $white !important;
     }
 
     &:hover {
       transform: scale(1.1);
 
-      .fa-square {
-        color: darken($action-color, 10%);
+      .fa-stack .fa-square {
+        color: darken($action-color, 10%) !important;
       }
     }
   }
 
   // Disabled state (span instead of link)
   span.fa-stack {
-    opacity: 0.3;
-    cursor: not-allowed;
-
     .fa-square {
       color: $medium-gray;
     }
