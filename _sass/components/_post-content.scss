@@ -142,10 +142,21 @@
     }
   }
 
+  // Remove overflow from pre when inside .highlight (parent handles scrolling)
+  .highlight pre {
+    overflow: visible;
+    padding: 0;
+    margin: 0;
+    background: none;
+    border: none;
+  }
+
   // Large code blocks with vertical scroll
   div.large-code {
-    max-height: 400px;
-    overflow-y: scroll;
+    div.highlight {
+      max-height: 400px;
+      overflow-y: scroll;
+    }
   }
 
   // Images
@@ -322,8 +333,6 @@
   a {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background-color: $action-color;
-    color: $white;
     text-decoration: none;
     border-radius: 3px;
     font-weight: bold;
@@ -382,7 +391,14 @@
     font-weight: bold;
 
     &:hover {
-      text-decoration: underline;
+      .page-number {
+        text-decoration: underline;
+      }
+    }
+
+    // Ensure fa-stack never gets underlined
+    .fa-stack {
+      text-decoration: none !important;
     }
   }
 

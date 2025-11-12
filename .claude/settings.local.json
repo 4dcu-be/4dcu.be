@@ -20,7 +20,8 @@
       "Bash(do if ! grep -q '@use \"\"lg-mixins\"\"' \"/workspaces/4dcu.be/_sass/lightgallery/$file\")",
       "Bash(then echo \"$file\")",
       "Bash(fi)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(sass:*)"
     ],
     "deny": [],
     "ask": []

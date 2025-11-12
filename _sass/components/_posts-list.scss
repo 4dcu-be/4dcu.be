@@ -73,6 +73,7 @@
   grid-template-columns: 1fr;
   gap: 0.5rem;
   max-width: 60rem;
+  width: 100%;
   color: $medium-gray;
   font-size: 0.9em;
   margin-top: $spacing-unit;
@@ -158,8 +159,11 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
+}
 
-  // Modern CSS Grid layout for sidebar (tablet and up)
+// Only apply grid layout to home page with sidebar
+// This creates a 73% main content column + sidebar layout
+.home .wrapper {
   @media screen and (min-width: $tablet) {
     display: grid;
     grid-template-columns: 73% 1fr;

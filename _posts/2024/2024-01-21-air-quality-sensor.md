@@ -14,7 +14,7 @@ thumbnail: "/assets/images/thumbnails/ikea_vindriktning_hack.jpg"
 Effective insulation is key in modern homes, offering comfort and energy efficiency. However, it often comes with a 
 need for better ventilation to maintain a healthy air quality. In this guide, we're focusing on an innovative, 
 cost-effective way to enhance your home’s air quality using some clever technology. We'll show you how to combine the 
-[IKEA Vindriktning] air quality monitor with an ESP8266 microcontroller and a BME680 Volatile Organic Compounds (VOC) sensor (which includes CO<sub>2</sub>). With this IKEA-hack, 
+[IKEA Vindriktning] air quality monitor with an ESP8266 microcontroller and a BME680 Volatile Organic Compounds (VOC) sensor (which allows CO<sub>2</sub> levels to be estimated). With this IKEA-hack, 
 you’ll be able to make informed decisions about when to open windows, increase ventilation, or change filters, all 
 based on accurate data. Plus, it integrates smoothly with smart home systems like [Home Assistant] using [ESPHome].
 
