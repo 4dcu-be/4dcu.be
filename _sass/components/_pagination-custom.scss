@@ -91,10 +91,10 @@
 
   // Icon sizing
   .fa-stack {
-    font-size: 1.5rem;
+    font-size: 0.75rem;
 
     @media screen and (min-width: $tablet) {
-      font-size: 2rem;
+      font-size: 1rem;
     }
   }
 }
@@ -236,6 +236,6 @@
   }
 
   .fa-stack {
-    font-size: 1.2rem;
+    font-size: 0.6rem;
   }
 }
