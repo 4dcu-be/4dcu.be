@@ -121,9 +121,11 @@
     background-color: $code-background;
     border: 1px solid $code-border-color;
     border-radius: 3px;
-    padding: 0.2em 0.4em;
+    padding: 0.1em 0.3em;
     font-size: 0.9em;
     font-family: "Courier New", Courier, monospace;
+    line-height: 1;
+    vertical-align: baseline;
   }
 
   pre {
@@ -157,6 +159,12 @@
       max-height: 400px;
       overflow-y: scroll;
     }
+  }
+
+  // Support for {:.large-code} applied directly to pre elements
+  pre.large-code {
+    max-height: 400px;
+    overflow-y: auto;
   }
 
   // Images
