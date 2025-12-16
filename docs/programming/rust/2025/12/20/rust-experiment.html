@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Python to Rust: Porting My Genetic Art Algorithm</title>
+  <meta name="description" content="One of the first posts on this blog showed how to implement a genetic algorithm in Python. Revisiting that project, I realized it is an ideal candidate to po...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2025">
+  
+
+  <!-- External libraries -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="One of the first posts on this blog showed how to implement a genetic algorithm in Python. Revisiting that project, I realized it is an ideal candidate to po..." />
+  <meta property="og:url" content="https://blog.4dcu.be/programming/rust/2025/12/20/rust-experiment.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Python to Rust: Porting My Genetic Art Algorithm" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2025-12-20-Rust-Experiment/python_rust.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Python to Rust: Porting My Genetic Art Algorithm">
+  <meta name="twitter:description" content="One of the first posts on this blog showed how to implement a genetic algorithm in Python. Revisiting that project, I realized it is an ideal candidate to po...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2025-12-20-Rust-Experiment/python_rust.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/programming/rust/2025/12/20/rust-experiment.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="canonical" href="https://blog.4dcu.be/programming/rust/2025/12/20/rust-experiment.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	<link rel="stylesheet" href="/css/main.css">
+
+	<!-- PageFind -->
+	<script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+
+	<script type='text/javascript'>
+	//<![CDATA[
+	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+	//]]>
+	</Script>
+</head>
+
+
+  <body class="has-navbar-fixed-top">
+
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/" class="navbar-item">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+      
+    </a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarMenu" class="navbar-menu">
+    <div class="navbar-end">
+      
+<a href="/about/" class="navbar-item">
+  About
+</a>
+  
+<a href="/gallery/" class="navbar-item">
+  Gallery
+</a>
+  
+<a href="/posts/" class="navbar-item">
+  Posts
+</a>
+  
+<a href="#" class="navbar-item nav-link-contact">Contact</a>
+<a href="#" class="navbar-item nav-link-search">
+  <i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i>
+</a>
+
+    </div>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+        <img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/rust_experiment.jpg" style="display:none" />
+<div class="post">
+
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  
+  <img alt="Post cover" class="hero-background is-transparent" src="/assets/posts/2025-12-20-Rust-Experiment/python_rust.jpg" />
+  
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title has-text-white">Python to Rust: Porting My Genetic Art Algorithm</h1>
+      
+      <p class="info has-text-white"><em></em></p>
+      
+    </div>
+  </div>
+</section>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted December 20, 2025 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/programming">Programming</a>, 
+    
+  
+    
+    <a href="/category/rust">Rust</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content" data-pagefind-body>
+  <p>One of the first posts on this blog showed how to <a href="/programming/2020/01/12/Genetic-Art-Algorithm.html">implement a genetic algorithm in Python</a>. Revisiting that project, I realized it is an ideal candidate to port to <a href="https://rust-lang.org/">Rust</a>: it is computationally heavy, and touches on performance, parallelism, and data structures. In short, a good excuse to finally spend time learning Rust.</p>
+
+<p>At the same time, this project provided an opportunity to experiment with agentic AI coding tools, specifically <a href="https://claude.ai/">Claude Code</a>. I have been using AI-assisted development to improve documentation and test coverage, modernize aging codebases, and build small tools more quickly than I otherwise could. In all of those cases, however, I already understood the language and ecosystem well enough to guide the AI and critically review its output.</p>
+
+<p>This raised a more interesting question: what does agentic coding look like when you are not fluent in the language at all? How effective is it when you are an absolute beginner in a new ecosystem, and can it still support meaningful learning rather than just fast results? This post documents that experiment: porting a Python-based genetic algorithm to Rust while using agentic AI as a primary implementation aid, and reflecting on what that approach enables, where it falls short, and what I learned along the way.</p>
+
+<p>As always, the <a href="https://github.com/4dcu-be/Genetic-Art-Rust">code for this project</a> can be found on GitHub.</p>
+
+<h2 id="setting-up-the-environment">Setting up the environment</h2>
+
+<p>My go-to IDE is <a href="https://code.visualstudio.com/">VSCode</a>, and I’ve gotten into the habit of setting up a devcontainer for most of my projects. For experiments like this, I like not having to install the Rust toolchain on my main system. So I asked Claude Code to take my existing Python Dockerfile and turn it into one that had all the Rust tooling I would need. The result looked sensible, and it worked perfectly for this project, no extra headaches, no messing with local installations. It was a nice reminder of how much smoother experimentation can be when you isolate the environment from your day-to-day setup.</p>
+
+<div class="language-Dockerfile large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Use Debian Trixie slim as base for Rust development</span>
+<span class="k">FROM</span><span class="s"> debian:trixie-slim</span>
+
+<span class="c"># Install system dependencies needed for Rust development and VS Code devcontainer</span>
+<span class="c"># - curl: for downloading Rust installer and general use</span>
+<span class="c"># - git: version control</span>
+<span class="c"># - build-essential: C compiler and build tools (needed for some Rust crates)</span>
+<span class="c"># - pkg-config: helps Rust find system libraries</span>
+<span class="c"># - ca-certificates: SSL certificate validation</span>
+<span class="c"># - gnupg: GPG key management</span>
+<span class="c"># - libssl-dev: OpenSSL development files (commonly needed by Rust projects)</span>
+<span class="k">RUN </span>apt-get update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> <span class="se">\
+</span>    curl <span class="se">\
+</span>    git <span class="se">\
+</span>    build-essential <span class="se">\
+</span>    pkg-config <span class="se">\
+</span>    ca-certificates <span class="se">\
+</span>    gnupg <span class="se">\
+</span>    libssl-dev <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> <span class="nb">rm</span> <span class="nt">-rf</span> /var/lib/apt/lists/<span class="k">*</span>
+
+<span class="c"># Install Rust using rustup (official Rust installer)</span>
+<span class="c"># - Install to /usr/local/cargo and /usr/local/rustup for system-wide access</span>
+<span class="c"># - Use default stable toolchain</span>
+<span class="c"># - Add cargo bin to PATH</span>
+<span class="k">ENV</span><span class="s"> RUSTUP_HOME=/usr/local/rustup \</span>
+    CARGO_HOME=/usr/local/cargo \
+    PATH=/usr/local/cargo/bin:$PATH
+
+<span class="k">RUN </span>curl <span class="nt">--proto</span> <span class="s1">'=https'</span> <span class="nt">--tlsv1</span>.2 <span class="nt">-sSf</span> https://sh.rustup.rs | sh <span class="nt">-s</span> <span class="nt">--</span> <span class="nt">-y</span> <span class="nt">--default-toolchain</span> stable <span class="nt">--profile</span> default <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> <span class="nb">chmod</span> <span class="nt">-R</span> a+w <span class="nv">$RUSTUP_HOME</span> <span class="nv">$CARGO_HOME</span>
+
+<span class="c"># Install Node.js LTS (needed for Claude Code)</span>
+<span class="k">RUN </span>curl <span class="nt">-fsSL</span> https://deb.nodesource.com/setup_lts.x | bash - <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> nodejs <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> <span class="nb">rm</span> <span class="nt">-rf</span> /var/lib/apt/lists/<span class="k">*</span>
+
+<span class="c"># Install Claude Code globally</span>
+<span class="c"># Using --no-fund and --no-audit flags to reduce installation noise</span>
+<span class="k">RUN </span>npm <span class="nb">install</span> <span class="nt">-g</span> @anthropic-ai/claude-code <span class="nt">--no-fund</span> <span class="nt">--no-audit</span>
+
+<span class="c"># Set the working directory</span>
+<span class="k">WORKDIR</span><span class="s"> /workspace</span>
+
+<span class="c"># Verify installations</span>
+<span class="k">RUN </span>rustc <span class="nt">--version</span> <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    cargo <span class="nt">--version</span> <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    claude <span class="nt">--version</span>
+
+<span class="c"># Pre-create cargo registry directory with proper permissions</span>
+<span class="c"># This helps avoid permission issues when first running cargo commands</span>
+<span class="k">RUN </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nv">$CARGO_HOME</span>/registry <span class="o">&amp;&amp;</span> <span class="nb">chmod</span> <span class="nt">-R</span> a+w <span class="nv">$CARGO_HOME</span>
+
+<span class="c"># Keep container running for devcontainer usage</span>
+<span class="k">CMD</span><span class="s"> ["sleep", "infinity"]</span>
+</code></pre></div></div>
+
+<h2 id="converting-the-python-code">Converting the Python Code</h2>
+
+<p>In the <a href="/programming/2020/01/12/Genetic-Art-Algorithm.html">original blogpost</a>, most of the code was included, so I fed it into Claude’s online interface and pointed it to my GitHub repository. I then asked Claude Opus 4.5 to draft a plan for porting the project to Rust. I saved this plan as a markdown file in my project.</p>
+
+<p>From VSCode, I opened Claude Code in the terminal and asked it to review the plan and start implementing the first phase. I also made it clear that I wanted to learn from the process, asking it to explain implementation choices and include helpful comments in the code.</p>
+
+<h3 id="step-1-the-triangle-class">Step 1: The Triangle class</h3>
+
+<div class="language-rust large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Import the random number generator trait from the rand crate</span>
+<span class="k">use</span> <span class="nn">rand</span><span class="p">::</span><span class="n">Rng</span><span class="p">;</span>
+<span class="c1">// Import serialization traits - these allow converting our Triangle to/from JSON</span>
+<span class="k">use</span> <span class="nn">serde</span><span class="p">::{</span><span class="n">Deserialize</span><span class="p">,</span> <span class="n">Serialize</span><span class="p">};</span>
+
+<span class="cd">/// Represents a single triangle gene with position, shape, and color</span>
+<span class="cd">///</span>
+<span class="cd">/// The `#[derive(...)]` macro automatically generates implementations for common traits:</span>
+<span class="cd">/// - Clone: Allows creating copies with .clone()</span>
+<span class="cd">/// - Debug: Allows printing with {:?} for debugging</span>
+<span class="cd">/// - Serialize/Deserialize: Allows converting to/from JSON</span>
+<span class="nd">#[derive(Clone,</span> <span class="nd">Debug,</span> <span class="nd">Serialize,</span> <span class="nd">Deserialize)]</span>
+<span class="k">pub</span> <span class="k">struct</span> <span class="n">Triangle</span> <span class="p">{</span>
+    <span class="cd">/// Three points defining the triangle vertices</span>
+    <span class="cd">/// `pub` makes this accessible from outside the module</span>
+    <span class="cd">/// `[(i32, i32); 3]` is a fixed-size array of 3 tuples, stored on the stack (fast!)</span>
+    <span class="k">pub</span> <span class="n">points</span><span class="p">:</span> <span class="p">[(</span><span class="nb">i32</span><span class="p">,</span> <span class="nb">i32</span><span class="p">);</span> <span class="mi">3</span><span class="p">],</span>
+
+    <span class="cd">/// RGBA color values (0-255)</span>
+    <span class="cd">/// `[u8; 4]` is an array of 4 unsigned 8-bit integers</span>
+    <span class="k">pub</span> <span class="n">color</span><span class="p">:</span> <span class="p">[</span><span class="nb">u8</span><span class="p">;</span> <span class="mi">4</span><span class="p">],</span>
+
+    <span class="cd">/// Image dimensions for boundary checking</span>
+    <span class="cd">/// These are private (no `pub`) - implementation details hidden from users</span>
+    <span class="n">img_width</span><span class="p">:</span> <span class="nb">u32</span><span class="p">,</span>
+    <span class="n">img_height</span><span class="p">:</span> <span class="nb">u32</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="cd">/// Types of mutations that can occur</span>
+<span class="cd">///</span>
+<span class="cd">/// Rust enums are more powerful than C enums - they can hold data (though these don't)</span>
+<span class="cd">/// This is private to the module (no `pub`) since it's just an implementation detail</span>
+<span class="k">enum</span> <span class="n">MutationType</span> <span class="p">{</span>
+    <span class="n">Shift</span><span class="p">,</span>  <span class="c1">// Move entire triangle</span>
+    <span class="n">Point</span><span class="p">,</span>  <span class="c1">// Move single point</span>
+    <span class="n">Color</span><span class="p">,</span>  <span class="c1">// Change color</span>
+    <span class="n">Reset</span><span class="p">,</span>  <span class="c1">// Complete reset to random</span>
+<span class="p">}</span>
+
+<span class="c1">// Implementation block - this is where we define methods for Triangle</span>
+<span class="c1">// Like a class in other languages, but without inheritance</span>
+<span class="k">impl</span> <span class="n">Triangle</span> <span class="p">{</span>
+    <span class="cd">/// Create a new random triangle within image boundaries</span>
+    <span class="cd">///</span>
+    <span class="cd">/// `pub fn new(...)` is a public associated function (like a static method)</span>
+    <span class="cd">/// Returns `Self` (which means Triangle in this context)</span>
+    <span class="k">pub</span> <span class="k">fn</span> <span class="nf">new</span><span class="p">(</span><span class="n">img_width</span><span class="p">:</span> <span class="nb">u32</span><span class="p">,</span> <span class="n">img_height</span><span class="p">:</span> <span class="nb">u32</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="k">Self</span> <span class="p">{</span>
+        <span class="c1">// Get a thread-local random number generator</span>
+        <span class="c1">// `mut` means the variable can be modified (mutability must be explicit in Rust)</span>
+        <span class="k">let</span> <span class="k">mut</span> <span class="n">rng</span> <span class="o">=</span> <span class="nn">rand</span><span class="p">::</span><span class="nf">thread_rng</span><span class="p">();</span>
+
+        <span class="c1">// Pick a random center point for the triangle</span>
+        <span class="c1">// `as i32` converts u32 to i32 (signed integer, can be negative)</span>
+        <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="n">rng</span><span class="nf">.gen_range</span><span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="n">img_width</span> <span class="k">as</span> <span class="nb">i32</span><span class="p">);</span>
+        <span class="k">let</span> <span class="n">y</span> <span class="o">=</span> <span class="n">rng</span><span class="nf">.gen_range</span><span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="n">img_height</span> <span class="k">as</span> <span class="nb">i32</span><span class="p">);</span>
+
+        <span class="c1">// Generate three points around the center</span>
+        <span class="c1">// `Self { ... }` constructs a new Triangle instance</span>
+        <span class="k">Self</span> <span class="p">{</span>
+            <span class="c1">// Array syntax: create 3 points with random offsets from center</span>
+            <span class="n">points</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">rng</span><span class="nf">.gen_range</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="o">..=</span><span class="mi">50</span><span class="p">),</span> <span class="n">y</span> <span class="o">+</span> <span class="n">rng</span><span class="nf">.gen_range</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="o">..=</span><span class="mi">50</span><span class="p">)),</span>
+                <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">rng</span><span class="nf">.gen_range</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="o">..=</span><span class="mi">50</span><span class="p">),</span> <span class="n">y</span> <span class="o">+</span> <span class="n">rng</span><span class="nf">.gen_range</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="o">..=</span><span class="mi">50</span><span class="p">)),</span>
+                <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">rng</span><span class="nf">.gen_range</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="o">..=</span><span class="mi">50</span><span class="p">),</span> <span class="n">y</span> <span class="o">+</span> <span class="n">rng</span><span class="nf">.gen_range</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="o">..=</span><span class="mi">50</span><span class="p">)),</span>
+            <span class="p">],</span>
+            <span class="c1">// Random RGBA color (RGB + Alpha for transparency)</span>
+            <span class="n">color</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">rng</span><span class="nf">.gen_range</span><span class="p">(</span><span class="mi">0</span><span class="o">..=</span><span class="mi">255</span><span class="p">),</span>  <span class="c1">// Red</span>
+                <span class="n">rng</span><span class="nf">.gen_range</span><span class="p">(</span><span class="mi">0</span><span class="o">..=</span><span class="mi">255</span><span class="p">),</span>  <span class="c1">// Green</span>
+                <span class="n">rng</span><span class="nf">.gen_range</span><span class="p">(</span><span class="mi">0</span><span class="o">..=</span><span class="mi">255</span><span class="p">),</span>  <span class="c1">// Blue</span>
+                <span class="n">rng</span><span class="nf">.gen_range</span><span class="p">(</span><span class="mi">0</span><span class="o">..=</span><span class="mi">255</span><span class="p">),</span>  <span class="c1">// Alpha (transparency)</span>
+            <span class="p">],</span>
+            <span class="n">img_width</span><span class="p">,</span>
+            <span class="n">img_height</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="cd">/// Apply a random mutation to this triangle</span>
+    <span class="cd">///</span>
+    <span class="cd">/// # Arguments</span>
+    <span class="cd">/// * `sigma` - Mutation strength (0.0-2.0, default 1.0)</span>
+    <span class="cd">///</span>
+    <span class="cd">/// `&amp;mut self` means:</span>
+    <span class="cd">/// - `&amp;` = borrowed (we don't take ownership)</span>
+    <span class="cd">/// - `mut` = mutable borrow (we can modify the triangle)</span>
+    <span class="cd">/// - `self` = this is a method that operates on an instance</span>
+    <span class="k">pub</span> <span class="k">fn</span> <span class="nf">mutate</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">f32</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Import the weighted index distribution for selecting mutation types</span>
+        <span class="k">use</span> <span class="nn">rand</span><span class="p">::</span><span class="nn">distributions</span><span class="p">::</span><span class="n">WeightedIndex</span><span class="p">;</span>
+        <span class="k">use</span> <span class="nn">rand</span><span class="p">::</span><span class="nn">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+
+        <span class="k">let</span> <span class="k">mut</span> <span class="n">rng</span> <span class="o">=</span> <span class="nn">rand</span><span class="p">::</span><span class="nf">thread_rng</span><span class="p">();</span>
+
+        <span class="c1">// Weighted selection of mutation type</span>
+        <span class="c1">// Higher weights = more likely to be selected</span>
+        <span class="c1">// [30, 35, 30, 5] means Shift and Color are less common, Point is most common, Reset is rare</span>
+        <span class="k">let</span> <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
+        <span class="k">let</span> <span class="n">dist</span> <span class="o">=</span> <span class="nn">WeightedIndex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">weights</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
+
+        <span class="c1">// Sample from the distribution to pick a mutation type</span>
+        <span class="c1">// `match` is Rust's pattern matching - like switch but exhaustive (compiler checks all cases)</span>
+        <span class="k">let</span> <span class="n">mutation_type</span> <span class="o">=</span> <span class="k">match</span> <span class="n">dist</span><span class="nf">.sample</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">rng</span><span class="p">)</span> <span class="p">{</span>
+            <span class="mi">0</span> <span class="k">=&gt;</span> <span class="nn">MutationType</span><span class="p">::</span><span class="n">Shift</span><span class="p">,</span>
+            <span class="mi">1</span> <span class="k">=&gt;</span> <span class="nn">MutationType</span><span class="p">::</span><span class="n">Point</span><span class="p">,</span>
+            <span class="mi">2</span> <span class="k">=&gt;</span> <span class="nn">MutationType</span><span class="p">::</span><span class="n">Color</span><span class="p">,</span>
+            <span class="n">_</span> <span class="k">=&gt;</span> <span class="nn">MutationType</span><span class="p">::</span><span class="n">Reset</span><span class="p">,</span>  <span class="c1">// `_` is a catch-all pattern</span>
+        <span class="p">};</span>
+
+        <span class="c1">// Apply the selected mutation</span>
+        <span class="c1">// Note how each mutation method borrows the RNG mutably</span>
+        <span class="k">match</span> <span class="n">mutation_type</span> <span class="p">{</span>
+            <span class="nn">MutationType</span><span class="p">::</span><span class="n">Shift</span> <span class="k">=&gt;</span> <span class="k">self</span><span class="nf">.mutate_shift</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">rng</span><span class="p">),</span>
+            <span class="nn">MutationType</span><span class="p">::</span><span class="n">Point</span> <span class="k">=&gt;</span> <span class="k">self</span><span class="nf">.mutate_point</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">rng</span><span class="p">),</span>
+            <span class="nn">MutationType</span><span class="p">::</span><span class="n">Color</span> <span class="k">=&gt;</span> <span class="k">self</span><span class="nf">.mutate_color</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">rng</span><span class="p">),</span>
+            <span class="c1">// For reset, we create a new random triangle and replace self's data with `*self = ...`</span>
+            <span class="c1">// The `*` dereferences the mutable reference to assign to the actual value</span>
+            <span class="nn">MutationType</span><span class="p">::</span><span class="n">Reset</span> <span class="k">=&gt;</span> <span class="o">*</span><span class="k">self</span> <span class="o">=</span> <span class="nn">Triangle</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="k">self</span><span class="py">.img_width</span><span class="p">,</span> <span class="k">self</span><span class="py">.img_height</span><span class="p">),</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="cd">/// Shift entire triangle by a random amount</span>
+    <span class="cd">///</span>
+    <span class="cd">/// Private method (no `pub`) - internal implementation detail</span>
+    <span class="cd">/// `&amp;mut self` - we need to modify the triangle's points</span>
+    <span class="cd">/// `rng: &amp;mut impl Rng` - accepts ANY type that implements the Rng trait</span>
+    <span class="cd">///   This is a "trait bound" - enables zero-cost polymorphism</span>
+    <span class="k">fn</span> <span class="nf">mutate_shift</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">f32</span><span class="p">,</span> <span class="n">rng</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="k">impl</span> <span class="n">Rng</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Calculate random x and y shifts, scaled by sigma</span>
+        <span class="c1">// `as f32` converts i32 to f32, then multiply by sigma, then `as i32` converts back</span>
+        <span class="k">let</span> <span class="n">x_shift</span> <span class="o">=</span> <span class="p">(</span><span class="n">rng</span><span class="nf">.gen_range</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="o">..=</span><span class="mi">50</span><span class="p">)</span> <span class="k">as</span> <span class="nb">f32</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">)</span> <span class="k">as</span> <span class="nb">i32</span><span class="p">;</span>
+        <span class="k">let</span> <span class="n">y_shift</span> <span class="o">=</span> <span class="p">(</span><span class="n">rng</span><span class="nf">.gen_range</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="o">..=</span><span class="mi">50</span><span class="p">)</span> <span class="k">as</span> <span class="nb">f32</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">)</span> <span class="k">as</span> <span class="nb">i32</span><span class="p">;</span>
+
+        <span class="c1">// Iterate through all points and shift them</span>
+        <span class="c1">// `&amp;mut self.points` borrows the array mutably</span>
+        <span class="c1">// `point` is a mutable reference to each element</span>
+        <span class="k">for</span> <span class="n">point</span> <span class="k">in</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="py">.points</span> <span class="p">{</span>
+            <span class="n">point</span><span class="na">.0</span> <span class="o">+=</span> <span class="n">x_shift</span><span class="p">;</span>  <span class="c1">// .0 accesses first tuple element (x)</span>
+            <span class="n">point</span><span class="na">.1</span> <span class="o">+=</span> <span class="n">y_shift</span><span class="p">;</span>  <span class="c1">// .1 accesses second tuple element (y)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="cd">/// Move a single point of the triangle</span>
+    <span class="k">fn</span> <span class="nf">mutate_point</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">f32</span><span class="p">,</span> <span class="n">rng</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="k">impl</span> <span class="n">Rng</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Pick a random point index (0, 1, or 2)</span>
+        <span class="k">let</span> <span class="n">index</span> <span class="o">=</span> <span class="n">rng</span><span class="nf">.gen_range</span><span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">3</span><span class="p">);</span>
+        <span class="c1">// Modify that point's coordinates</span>
+        <span class="k">self</span><span class="py">.points</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="na">.0</span> <span class="o">+=</span> <span class="p">(</span><span class="n">rng</span><span class="nf">.gen_range</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="o">..=</span><span class="mi">50</span><span class="p">)</span> <span class="k">as</span> <span class="nb">f32</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">)</span> <span class="k">as</span> <span class="nb">i32</span><span class="p">;</span>
+        <span class="k">self</span><span class="py">.points</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="na">.1</span> <span class="o">+=</span> <span class="p">(</span><span class="n">rng</span><span class="nf">.gen_range</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="o">..=</span><span class="mi">50</span><span class="p">)</span> <span class="k">as</span> <span class="nb">f32</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">)</span> <span class="k">as</span> <span class="nb">i32</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/// Change the color of the triangle</span>
+    <span class="k">fn</span> <span class="nf">mutate_color</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">f32</span><span class="p">,</span> <span class="n">rng</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="k">impl</span> <span class="n">Rng</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Iterate through each color channel (R, G, B, A)</span>
+        <span class="k">for</span> <span class="n">channel</span> <span class="k">in</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="py">.color</span> <span class="p">{</span>
+            <span class="k">let</span> <span class="n">change</span> <span class="o">=</span> <span class="p">(</span><span class="n">rng</span><span class="nf">.gen_range</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="o">..=</span><span class="mi">50</span><span class="p">)</span> <span class="k">as</span> <span class="nb">f32</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">)</span> <span class="k">as</span> <span class="nb">i32</span><span class="p">;</span>
+            <span class="c1">// Important: clamp the value to 0-255 range to prevent overflow</span>
+            <span class="c1">// `*channel` dereferences to get the u8 value</span>
+            <span class="c1">// `.clamp(0, 255)` ensures value stays in valid range</span>
+            <span class="o">*</span><span class="n">channel</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">channel</span> <span class="k">as</span> <span class="nb">i32</span> <span class="o">+</span> <span class="n">change</span><span class="p">)</span><span class="nf">.clamp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span> <span class="k">as</span> <span class="nb">u8</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Conditional compilation: this module only exists in test builds</span>
+<span class="c1">// Keeps test code out of release binaries</span>
+<span class="nd">#[cfg(test)]</span>
+<span class="k">mod</span> <span class="n">tests</span> <span class="p">{</span>
+    <span class="c1">// Import everything from parent module (Triangle and its types)</span>
+    <span class="k">use</span> <span class="k">super</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+
+    <span class="cd">/// Test that triangle creation works correctly</span>
+    <span class="cd">///</span>
+    <span class="cd">/// `#[test]` marks this function as a test - cargo test will run it</span>
+    <span class="nd">#[test]</span>
+    <span class="k">fn</span> <span class="nf">test_triangle_creation</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="n">tri</span> <span class="o">=</span> <span class="nn">Triangle</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">);</span>
+        <span class="c1">// `assert_eq!` checks equality and panics with helpful message if they differ</span>
+        <span class="nd">assert_eq!</span><span class="p">(</span><span class="n">tri</span><span class="py">.img_width</span><span class="p">,</span> <span class="mi">800</span><span class="p">);</span>
+        <span class="nd">assert_eq!</span><span class="p">(</span><span class="n">tri</span><span class="py">.img_height</span><span class="p">,</span> <span class="mi">600</span><span class="p">);</span>
+        <span class="nd">assert_eq!</span><span class="p">(</span><span class="n">tri</span><span class="py">.points</span><span class="nf">.len</span><span class="p">(),</span> <span class="mi">3</span><span class="p">);</span>
+        <span class="nd">assert_eq!</span><span class="p">(</span><span class="n">tri</span><span class="py">.color</span><span class="nf">.len</span><span class="p">(),</span> <span class="mi">4</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cd">/// Test that mutation actually changes the triangle</span>
+    <span class="nd">#[test]</span>
+    <span class="k">fn</span> <span class="nf">test_triangle_mutation</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="k">mut</span> <span class="n">tri</span> <span class="o">=</span> <span class="nn">Triangle</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">);</span>
+        <span class="k">let</span> <span class="n">original_color</span> <span class="o">=</span> <span class="n">tri</span><span class="py">.color</span><span class="p">;</span>
+
+        <span class="c1">// Mutate multiple times - should eventually change something</span>
+        <span class="c1">// `_` means we don't use the loop variable</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..</span><span class="mi">10</span> <span class="p">{</span>
+            <span class="n">tri</span><span class="nf">.mutate</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Very unlikely to be identical after 10 mutations</span>
+        <span class="c1">// `||` is logical OR - check if EITHER color OR points changed</span>
+        <span class="c1">// `!=` works because we derived PartialEq (via Debug)</span>
+        <span class="nd">assert!</span><span class="p">(</span><span class="n">tri</span><span class="py">.color</span> <span class="o">!=</span> <span class="n">original_color</span> <span class="p">||</span> <span class="n">tri</span><span class="py">.points</span> <span class="o">!=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="mi">3</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This is definitely far removed from Python code, we need to specify the type of numbers we’re using, explicitly define which variables are mutable, … but Claude Code did a very good job highlighting where some of the Rust paradigms are relevant. Also the way tests are implemented, inside the file they are testing, is very different from Python. Here the first downside of agentic coding hit me, this is not a good way to learn the syntax of a new language, at least not for me. For a new syntax to register, I have to do it the hard way by typing out a few thousand lines of code.</p>
+
+<p>Furthermore, in the comments key Rust concepts like <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html">ownership</a> and <a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html">borrowing</a> were mentioned. As I wasn’t familiar with these from other programming languages, I made a mental note this was something to look into later. Furthermore, by diving deeper into the code, I realized how central Rust’s <code class="language-plaintext highlighter-rouge">enum</code> and <code class="language-plaintext highlighter-rouge">match</code> keywords are, enabling expressive and type-safe handling of multiple cases, which made the implementation both clear and robust.</p>
+
+<p>Though everything compiled, I didn’t have a working program, so I gave Claude Code the instructions to continue with the implementation.</p>
+
+<h3 id="step-2-paintings-and-populations">Step 2: Paintings and Populations</h3>
+
+<p>As in the Python code, triangles (or circles as I’ve added an extra shape later) are combined into a list, the painting, this class also has the functionality to <code class="language-plaintext highlighter-rouge">render</code> itself, <code class="language-plaintext highlighter-rouge">mutate</code> its triangles. Multiple paintings are grouped into a population, with functions to <code class="language-plaintext highlighter-rouge">evaluate</code> the fitness of the individuals and find the most fit individual. Most generated code there was in line with the previous, but the latter <code class="language-plaintext highlighter-rouge">evaluate</code> stood out as it contained code that could be run in parallel. Admittedly, this a trivial problem to run in parallel, but it wouldn’t be straightforward in Python (requires multi-processing). Here you simply use <code class="language-plaintext highlighter-rouge">.par_iter_mut()</code> from the <a href="https://docs.rs/rayon/latest/rayon/">rayon</a> crate (which packages/libraries are called in Rust) on a list and that’s it.</p>
+
+<div class="language-rust large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cd">/// Evaluate fitness for all individuals in parallel</span>
+    <span class="cd">///</span>
+    <span class="cd">/// This is where Rust really shines!</span>
+    <span class="cd">/// We're going to evaluate ALL individuals simultaneously across all CPU cores.</span>
+    <span class="cd">///</span>
+    <span class="cd">/// **Rust Concept: Parallel Mutation**</span>
+    <span class="cd">/// - `.par_iter_mut()` creates a parallel iterator over mutable references</span>
+    <span class="cd">/// - Each thread gets exclusive access to different individuals</span>
+    <span class="cd">///</span>
+    <span class="cd">/// **Why is this safe?**</span>
+    <span class="cd">/// 1. Each individual is independent (no shared state)</span>
+    <span class="cd">/// 2. `&amp;mut` ensures exclusive access per thread</span>
+    <span class="cd">/// 3. Compiler verifies this at compile time</span>
+    <span class="k">pub</span> <span class="k">fn</span> <span class="nf">evaluate</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Process all individuals in parallel</span>
+        <span class="c1">// `.par_iter_mut()` is the parallel version of `.iter_mut()`</span>
+        <span class="k">self</span><span class="py">.individuals</span><span class="nf">.par_iter_mut</span><span class="p">()</span><span class="nf">.for_each</span><span class="p">(|</span><span class="n">individual</span><span class="p">|</span> <span class="p">{</span>
+            <span class="c1">// Render this individual's painting to an image</span>
+            <span class="k">let</span> <span class="n">rendered</span> <span class="o">=</span> <span class="n">individual</span><span class="py">.chromosome</span><span class="nf">.render</span><span class="p">();</span>
+
+            <span class="c1">// Compare to target using the configured fitness function</span>
+            <span class="c1">// Lower score = better match to target</span>
+            <span class="n">individual</span><span class="py">.fitness</span> <span class="o">=</span> <span class="nf">Some</span><span class="p">(</span><span class="k">match</span> <span class="k">self</span><span class="py">.fitness_config.function</span> <span class="p">{</span>
+                <span class="nn">FitnessFunction</span><span class="p">::</span><span class="n">Mad</span> <span class="k">=&gt;</span> <span class="p">{</span>
+                    <span class="nf">image_diff_parallel</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rendered</span><span class="p">,</span> <span class="o">&amp;</span><span class="k">self</span><span class="py">.target_image</span><span class="p">)</span>
+                <span class="p">}</span>
+                <span class="nn">FitnessFunction</span><span class="p">::</span><span class="n">EdgeWeighted</span> <span class="k">=&gt;</span> <span class="p">{</span>
+                    <span class="nf">edge_weighted_fitness</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rendered</span><span class="p">,</span> <span class="o">&amp;</span><span class="k">self</span><span class="py">.target_image</span><span class="p">,</span> <span class="o">&amp;</span><span class="k">self</span><span class="py">.fitness_config</span><span class="p">)</span>
+                <span class="p">}</span>
+                <span class="nn">FitnessFunction</span><span class="p">::</span><span class="n">MsSsim</span> <span class="k">=&gt;</span> <span class="p">{</span>
+                    <span class="nf">ms_ssim_fitness</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rendered</span><span class="p">,</span> <span class="o">&amp;</span><span class="k">self</span><span class="py">.target_image</span><span class="p">,</span> <span class="k">self</span><span class="py">.fitness_config.detail_weight</span><span class="p">)</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="step-3-evolution-and-the-fitness-function">Step 3: Evolution and the Fitness Function</h3>
+
+<p>Once we have populations, we need a way to rank individuals, breed the best individuals and create the next generation, which hopefully is a bit better than the previous. Here better means, a painting consisting out of a number of triangles (or circles) that looks like a reference image. The closer pixels’ values are the better. For the evolution part, the Python implementation could rely on the <a href="https://github.com/godatadriven/evol">evol</a> library, Claude Code decided to implement it in Rust, and it worked. Pretty impressive as the evol package was not part of the code I provided (and as far as I can tell, it didn’t look that up online), so purely based on how the package was used it reconstructed the internals flawlessly. When using agentic coding I’ve noticed that relatively straightforward functionality is often generated as code, rather than pulling in an existing package. Which could create bloat and introduce a maintenance overhead, though on the flipside, it also adds in an easy access to those functions to customize them beyond what you could do using a package.</p>
+
+<p>The fitness function here is where Claude Code made things interesting, it implemented this as a parallel function, computing different pixels in different threads. The function <code class="language-plaintext highlighter-rouge">.par_iter()</code> from the rayon library makes this again multi-threaded to leverage all available cores in your machine during this step.</p>
+
+<div class="language-rust large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cd">/// Parallel version of image_diff (faster for large images)</span>
+<span class="cd">///</span>
+<span class="cd">/// **Rust Concept: Fearless Concurrency**</span>
+<span class="cd">/// This function uses ALL your CPU cores automatically, safely!</span>
+<span class="cd">///</span>
+<span class="cd">/// How does Rust make parallel programming safe?</span>
+<span class="cd">/// 1. The borrow checker prevents data races at compile time</span>
+<span class="cd">/// 2. Only immutable references (&amp;) are used, so parallel access is safe</span>
+<span class="cd">/// 3. No locks, no mutexes needed - the type system guarantees safety</span>
+<span class="cd">///</span>
+<span class="cd">/// **When to use this?**</span>
+<span class="cd">/// - Large images (&gt;1000x1000 pixels) - overhead is worth it</span>
+<span class="cd">/// - When you have multiple CPU cores (which you probably do!)</span>
+<span class="cd">/// - The population evaluation (comparing many images) benefits hugely</span>
+<span class="k">pub</span> <span class="k">fn</span> <span class="nf">image_diff_parallel</span><span class="p">(</span><span class="n">source</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">RgbaImage</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">RgbaImage</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">f64</span> <span class="p">{</span>
+    <span class="nd">assert_eq!</span><span class="p">(</span>
+        <span class="n">source</span><span class="nf">.dimensions</span><span class="p">(),</span>
+        <span class="n">target</span><span class="nf">.dimensions</span><span class="p">(),</span>
+        <span class="s">"Images must have same dimensions"</span>
+    <span class="p">);</span>
+
+    <span class="c1">// The ONLY difference: collect into vectors and use par_iter!</span>
+    <span class="c1">//</span>
+    <span class="c1">// **What's .par_iter()?**</span>
+    <span class="c1">// - Creates a parallel iterator over a collection</span>
+    <span class="c1">// - Rayon automatically splits work across CPU cores</span>
+    <span class="c1">// - Uses work-stealing: idle cores help busy cores</span>
+    <span class="c1">// - No manual thread management needed!</span>
+    <span class="c1">//</span>
+    <span class="c1">// We need to collect both iterators first since rayon's zip needs both sides parallel</span>
+    <span class="k">let</span> <span class="n">source_pixels</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">_</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">source</span><span class="nf">.pixels</span><span class="p">()</span><span class="nf">.collect</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">target_pixels</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">_</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">target</span><span class="nf">.pixels</span><span class="p">()</span><span class="nf">.collect</span><span class="p">();</span>
+
+    <span class="k">let</span> <span class="n">total_diff</span><span class="p">:</span> <span class="nb">u64</span> <span class="o">=</span> <span class="n">source_pixels</span>
+        <span class="nf">.par_iter</span><span class="p">()</span> <span class="c1">// &lt;-- Parallel iterator over source pixels</span>
+        <span class="nf">.zip</span><span class="p">(</span><span class="n">target_pixels</span><span class="nf">.par_iter</span><span class="p">())</span> <span class="c1">// &lt;-- Zip with parallel iterator over target pixels</span>
+        <span class="nf">.map</span><span class="p">(|(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">)|</span> <span class="p">{</span>
+            <span class="k">let</span> <span class="n">dr</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">as</span> <span class="nb">i32</span> <span class="o">-</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">as</span> <span class="nb">i32</span><span class="p">)</span><span class="nf">.abs</span><span class="p">()</span> <span class="k">as</span> <span class="nb">u64</span><span class="p">;</span>
+            <span class="k">let</span> <span class="n">dg</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">as</span> <span class="nb">i32</span> <span class="o">-</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">as</span> <span class="nb">i32</span><span class="p">)</span><span class="nf">.abs</span><span class="p">()</span> <span class="k">as</span> <span class="nb">u64</span><span class="p">;</span>
+            <span class="k">let</span> <span class="n">db</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">as</span> <span class="nb">i32</span> <span class="o">-</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">as</span> <span class="nb">i32</span><span class="p">)</span><span class="nf">.abs</span><span class="p">()</span> <span class="k">as</span> <span class="nb">u64</span><span class="p">;</span>
+            <span class="n">dr</span> <span class="o">+</span> <span class="n">dg</span> <span class="o">+</span> <span class="n">db</span>
+        <span class="p">})</span>
+        <span class="nf">.sum</span><span class="p">();</span> <span class="c1">// Rayon's sum() automatically combines results from all threads</span>
+
+    <span class="n">total_diff</span> <span class="k">as</span> <span class="nb">f64</span> <span class="o">/</span> <span class="p">(</span><span class="n">source</span><span class="nf">.width</span><span class="p">()</span> <span class="o">*</span> <span class="n">source</span><span class="nf">.height</span><span class="p">()</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span> <span class="k">as</span> <span class="nb">f64</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="step-4-the-cli">Step 4: The CLI</h3>
+
+<p>One thing I found Claude Code to be very useful for, is to create a CLI for applications. I personally find it tedious and I’m happy to hand this task over to AI. Here, Claude Code used the <a href="https://docs.rs/clap/latest/clap/">clap</a> crate, which is an excellent choice! The CLI itself is simple but functional.</p>
+
+<h3 id="step-5-testing-things-out">Step 5: Testing Things Out</h3>
+
+<p>As I instructed Claude Code to build the app in phases and run tests at each step, after a few rounds of building-failing-debugging-retrying the code compiled and the app was ready to be tested by me. Besides a small issue in rendering the image, it all worked!</p>
+
+<p>I tested it out on the same image I used back in 2020, Van Gogh’s <a href="https://en.wikipedia.org/wiki/The_Starry_Night"><em>The Starry Night</em></a>, and the first thing I noticed was that this quickly pushed my CPU to 95% usage and it stayed there!</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Run a quick test with triangles (100 generations)</span>
+./target/release/genetic-art <span class="se">\</span>
+  <span class="nt">--input</span> input/starry_night.jpg <span class="se">\</span>
+  <span class="nt">--generations</span> 100 <span class="se">\</span>
+  <span class="nt">--shapes</span> 100
+</code></pre></div></div>
+
+<p>I also noticed that it ran a lot faster, though I’m also using a new computer, so let’s find out how much of this is the implementation.</p>
+
+<h2 id="performance-testing--optimization">Performance Testing &amp; Optimization</h2>
+
+<p>“Rewrite in Rust” might be a bit of a meme, but I immediately noticed a speedup when running my code. To get a better sense of what was going on, I did a few testruns and compared runtimes with the original Python implementation. Each test used a 570×452 pixel target image, and other parameters are listed in the tables below.</p>
+
+<p>The results were a bit surprising. On a single thread, Rust was actually slower than Python, likely because the Pillow library in Python handles most of the image drawing and comparison more efficiently than the initial implementation. It also revealed something I didn’t realized, Python scaled terribly across multiple cores, becoming noticeably slower (!) when using more threads. Rust, on the other hand, handled multithreading beautifully. On my 8-core Ryzen 7 3700X, parallel efficiency was excellent, and once Rust was allowed to use multiple cores, it easily outpaced Python.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Generations (n)</th>
+      <th>Shapes (n)</th>
+      <th>Threads (n)</th>
+      <th>Rust (mm:ss)</th>
+      <th>Threads (n)</th>
+      <th>Python (mm:ss)</th>
+      <th>Speedup (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>100</td>
+      <td>100</td>
+      <td>1</td>
+      <td>15:22</td>
+      <td>1</td>
+      <td>09:34</td>
+      <td>62%</td>
+    </tr>
+    <tr>
+      <td>100</td>
+      <td>100</td>
+      <td>4</td>
+      <td>04:28</td>
+      <td>4</td>
+      <td>12:05</td>
+      <td>271%</td>
+    </tr>
+    <tr>
+      <td>100</td>
+      <td>100</td>
+      <td>8</td>
+      <td>02:30</td>
+      <td>8</td>
+      <td>11:30</td>
+      <td>460%</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Generations (n)</th>
+      <th>Shapes (n)</th>
+      <th>Threads (n)</th>
+      <th>Rust (mm:ss)</th>
+      <th>Threads (n)</th>
+      <th>Python (mm:ss)</th>
+      <th>Speedup (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>100</td>
+      <td>100</td>
+      <td>16</td>
+      <td>02:07</td>
+      <td>1</td>
+      <td>09:34</td>
+      <td>452%</td>
+    </tr>
+    <tr>
+      <td>100</td>
+      <td>300</td>
+      <td>16</td>
+      <td>06:04</td>
+      <td>1</td>
+      <td>25:47</td>
+      <td>425%</td>
+    </tr>
+    <tr>
+      <td>300</td>
+      <td>100</td>
+      <td>16</td>
+      <td>06:17</td>
+      <td>1</td>
+      <td>30:19</td>
+      <td>482%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>After asking Claude Code to check why the single threaded performance was actually worse than Python, it found a few places (related with drawing the images and comparing to the reference) where the code could be optimized. This all sounded plausible, so I decided to give it a go and green-light Claude Code to implement the most impactful change (optimizing the way the shapes were drawn, updating a small part of the image instead of the image as a whole). Now suddenly 100 generations with 100 shapes took 23 seconds instead of 2 minutes 7 seconds. Clearly Claude Code knows how to optimize things, so I started the reading about the next improvement it suggested: using <a href="https://doc.rust-lang.org/std/simd/index.html">SIMD</a>, <em>Single Instruction, Multiple Data</em>, to optimize some of the calculations. After studying up on this, I did seem like a very reasonable thing to implement here, so I gave the okay to make the changes.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Generations (n)</th>
+      <th>Shapes (n)</th>
+      <th>Threads (n)</th>
+      <th>Rust (mm:ss)</th>
+      <th>Threads (n)</th>
+      <th>Python (mm:ss)</th>
+      <th>Speedup (%)</th>
+      <th>Comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>100</td>
+      <td>100</td>
+      <td>16</td>
+      <td>02:07</td>
+      <td>1</td>
+      <td>09:34</td>
+      <td>452%</td>
+      <td>First implementation</td>
+    </tr>
+    <tr>
+      <td>100</td>
+      <td>100</td>
+      <td>16</td>
+      <td>00:23</td>
+      <td>1</td>
+      <td>09:34</td>
+      <td>2496%</td>
+      <td>Better painting</td>
+    </tr>
+    <tr>
+      <td>100</td>
+      <td>100</td>
+      <td>16</td>
+      <td>00:11</td>
+      <td>1</td>
+      <td>09:34</td>
+      <td>5218%</td>
+      <td>Using SIMD</td>
+    </tr>
+    <tr>
+      <td>100</td>
+      <td>100</td>
+      <td>1</td>
+      <td>01:45</td>
+      <td>1</td>
+      <td>09:34</td>
+      <td>547%</td>
+      <td>All optimizations (1 core)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>These additional optimizations turned out to be extremely worthwhile, on this little test the runtime went down from 127 seconds to 23 after improving the painting, with SIMD it went further down to a mere 11 seconds, that is a 10x improvement over the unoptimized Rust version and utilizing all cores we are now 52x faster than the Python version can possibly run.</p>
+
+<p>Do note these benchmarks were single runs, so take the numbers as indicative rather than absolute, but the difference in performance between implementations is immediately obvious.</p>
+
+<h2 id="the-results">The Results</h2>
+
+<p>Running the Rust version with the same parameters as the original Python code produced very similar results. After enough iterations, both tend to converge on images that clearly resemble the target. As you might expect with a genetic algorithm, there’s a lot of randomness, so each run is different, but Rust (left) didn’t behave any differently than Python (right) in that regard. I’ve included a side-by-side comparison of outputs below, and visually they’re, aside from the usual stochastic variation, very similar.</p>
+
+<div class="gallery-2-col">
+  <p><a href="/assets/posts/2025-12-20-Rust-Experiment/rust_150_5000.png" class="lightgallery-link" data-sub-html="Rust 150 triangles, 5000 generations">
+<img src="/assets/posts/2025-12-20-Rust-Experiment/rust_150_5000.png" alt="Rust 150 triangles, 5000 generations" height="452" width="570" data-src="/assets/posts/2025-12-20-Rust-Experiment/rust_150_5000.png" loading="lazy" />
+</a>
+<a href="/assets/posts/2025-12-20-Rust-Experiment/python_150_5000.png" class="lightgallery-link" data-sub-html="Python 150 triangles, 5000 generations">
+<img src="/assets/posts/2025-12-20-Rust-Experiment/python_150_5000.png" alt="Python 150 triangles, 5000 generations" height="452" width="570" data-src="/assets/posts/2025-12-20-Rust-Experiment/python_150_5000.png" loading="lazy" />
+</a></p>
+</div>
+
+<p>One fun side effect of using agentic coding was how easy it was to experiment. I asked Claude Code to add a mode using circles instead of triangles, and it worked! The output using René Magritte’s <a href="https://en.wikipedia.org/wiki/The_Son_of_Man"><em>The Son of Man</em></a> as a target shows that the core algorithm is flexible enough to handle different primitives without rewriting the engine.</p>
+
+<div class="gallery-3-col">
+  <p><a href="/assets/posts/2025-12-20-Rust-Experiment/the_son_of_man.jpg" class="lightgallery-link" data-sub-html="Son of Man, painting by René Magritte">
+<img src="/assets/posts/2025-12-20-Rust-Experiment/the_son_of_man.jpg" alt="Son of Man, painting by René Magritte" height="675" width="500" data-src="/assets/posts/2025-12-20-Rust-Experiment/the_son_of_man.jpg" loading="lazy" />
+</a>
+<a href="/assets/posts/2025-12-20-Rust-Experiment/som_100_500_ew.png" class="lightgallery-link" data-sub-html="Son of Man, 100 circles, 500 generations, version 1">
+<img src="/assets/posts/2025-12-20-Rust-Experiment/som_100_500_ew.png" alt="Son of Man, 100 circles, 500 generations, version 1" height="675" width="500" data-src="/assets/posts/2025-12-20-Rust-Experiment/som_100_500_ew.png" loading="lazy" />
+</a>
+<a href="/assets/posts/2025-12-20-Rust-Experiment/som_100_500_mad.png" class="lightgallery-link" data-sub-html="Son of Man, 100 circles, 500 generations, version 2">
+<img src="/assets/posts/2025-12-20-Rust-Experiment/som_100_500_mad.png" alt="Son of Man, 100 circles, 500 generations, version 2" height="675" width="500" data-src="/assets/posts/2025-12-20-Rust-Experiment/som_100_500_mad.png" loading="lazy" />
+</a></p>
+</div>
+
+<p>All in all, Rust gives you roughly the same results as Python, but faster and fully utilizing the CPU, while also letting you play around and tweak things much more freely.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>As a technology, Claude Code is impressive: porting an existing tool to another language took less than an hour, with another hour or so spent doing the optimizations. The generated code was readable, compiled without friction, and came with sensible comments, tests, and coverage. At the same time, it is tempting to let the AI run ahead without staying in the loop. While it excelled at implementing familiar patterns and making reasonable architectural choices, such as reconstructing the internals of the evol library or introducing parallelism with rayon, it still required guidance on overall direction and verification that the output matched expectations. Early issues in image rendering were a good reminder that correct-looking code is not the same as correct behavior.</p>
+
+<p>As a learning tool, the experience had clear strengths and limitations. Working on a project I already understood made it easy to identify which Rust concepts actually mattered for this type of application. Through reviewing the generated code, I gained a much better understanding of concepts like: ownership and borrowing, enums and pattern matching, rayon, and the surrounding tooling with cargo. The comments generated by Claude Code were particularly useful in pointing out these concepts and providing the right keywords to look up in the official documentation. However, with all code being written for me, syntax simply did not stick. I would not be able to write Rust from scratch after this project, and I cannot meaningfully judge how idiomatic the code is style-wise. Not having to write or modify any of the code was efficient, and I would not have had the time to take on this project, but also somewhat bittersweet, as actually enjoy that part of the process.</p>
+
+<div class="gallery-3-col">
+  <p><a href="/assets/posts/2025-12-20-Rust-Experiment/american_gothic.jpg" class="lightgallery-link" data-sub-html="American Gothic by Grant Wood">
+<img src="/assets/posts/2025-12-20-Rust-Experiment/american_gothic.jpg" alt="American Gothic by Grant Wood" height="600" width="497" data-src="/assets/posts/2025-12-20-Rust-Experiment/american_gothic.jpg" loading="lazy" />
+</a>
+<a href="/assets/posts/2025-12-20-Rust-Experiment/american_gothic_400_triangles_5000_gen_edge.png" class="lightgallery-link" data-sub-html="American Gothic, 400 Triangles, 5000 generations, Edge Weight">
+<img src="/assets/posts/2025-12-20-Rust-Experiment/american_gothic_400_triangles_5000_gen_edge.png" alt="American Gothic, 400 Triangles, 5000 generations, Edge Weight" height="600" width="497" data-src="/assets/posts/2025-12-20-Rust-Experiment/american_gothic_400_triangles_5000_gen_edge.png" loading="lazy" />
+</a>
+<a href="/assets/posts/2025-12-20-Rust-Experiment/american_gothic_600_circles_5000_gen_edge.png" class="lightgallery-link" data-sub-html="American Gothic, 600 Circles, 5000 generations, Edge Weight">
+<img src="/assets/posts/2025-12-20-Rust-Experiment/american_gothic_600_circles_5000_gen_edge.png" alt="American Gothic, 600 Circles, 5000 generations, Edge Weight" height="600" width="497" data-src="/assets/posts/2025-12-20-Rust-Experiment/american_gothic_600_circles_5000_gen_edge.png" loading="lazy" />
+</a></p>
+</div>
+
+<p>The real value was therefore not just the 50x speedup over Python, though that is certainly nice (and allows comparisons with more shapes, larger populations and more generations as you can see above in Grant Wood’s <a href="https://en.wikipedia.org/wiki/American_Gothic"><em>American Gothic</em></a>, where 400 triangles or 600 circles were used). It was the ability to explore a new language with limited time available and get a quick impression of the tooling and the ecosystem. Using Claude Code on a project I would not have been able to do myself was also a humbling experience, these tools are incredebly powerfull! But they are not fully autonomous agents that can do a project like this from A-Z without guidance. The key is treating the AI as an experienced pair programmer: it can write the code, but you still need to understand the architecture, review the implementation, and verify that it solves the right problem. For exploring new technologies while still learning from a concrete, real project, this approach worked remarkably well.</p>
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/rust">rust</a>,&nbsp;<a href="/tag/evolution">evolution</a>,&nbsp;<a href="/tag/genetic-algorithm">genetic-algorithm</a>,&nbsp;<a href="/tag/algorithm">algorithm</a>,&nbsp;<a href="/tag/art">art</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+	    
+    
+    
+  
+    
+    
+	    
+      <a href="//bsky.app/intent/compose?text=Python+to+Rust%3A+Porting+My+Genetic+Art+Algorithm%20https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Frust%2F2025%2F12%2F20%2Frust-experiment.html"
+        target="_blank">
+        <i class="fa-brands fa-bluesky"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+	    
+    
+      <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Frust%2F2025%2F12%2F20%2Frust-experiment.html"
+        target="_blank">
+        <i class="fa-brands fa-square-facebook fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+	    
+    
+    
+      <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Frust%2F2025%2F12%2F20%2Frust-experiment.html"
+        target="_blank">
+        <i class="fa-brands fa-linkedin fa-lg"></i>
+      </a>
+    
+  
+    
+    
+      <a href="//x.com/share?text=Python+to+Rust%3A+Porting+My+Genetic+Art+Algorithm&url=https%3A%2F%2Fblog.4dcu.be%2Fprogramming%2Frust%2F2025%2F12%2F20%2Frust-experiment.html&via="
+        target="_blank">
+        <i class="fa-brands fa-x-twitter fa-lg"></i>
+      </a>
+    
+	    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/diy/programming/2025/07/21/dashboard-for-home-assisant.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa-solid fa-square fa-stack-2x"></i>
+						<i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Using my Kindle PW3 as a Dashboard for Home Assistant</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+		<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Site Map</strong></p>
+				<ul class="pages">
+					
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+				</ul>
+				<br />
+				<p><strong>Legal</strong></p>
+				<p><a href="/policy/">Privacy policy</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Contribute</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+				
+				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+
+
+
+
+  </body>
+
+</html>
