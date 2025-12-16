@@ -4,7 +4,7 @@ title:  "Python to Rust: Porting My Genetic Art Algorithm"
 byline: ""
 date:   2025-12-20 08:00:00
 author: Sebastian Proost
-categories: programming rust
+categories: programming
 tags:	python rust evolution genetic-algorithm algorithm art
 cover:  "/assets/posts/2025-12-20-Rust-Experiment/python_rust.jpg"
 thumbnail: "/assets/images/thumbnails/rust_experiment.jpg"
