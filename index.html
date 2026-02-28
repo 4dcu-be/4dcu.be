@@ -47,9 +47,9 @@ pagination:
 					<div class="post-categories">Posted {{ post.date | date: "%B %-d, %Y" }}
 					{% if post.categories.size > 0 %}in {% for cat in post.categories %}
 						{% if site.jekyll-archives %}
-						<a href="{{ site.baseurl }}/category/{{ cat }}">{{ cat | capitalize }}</a>{% if forloop.last == false %}, {% endif %}
+						<a href="{{ site.baseurl }}/category/{{ cat }}">{{ cat | category_name }}</a>{% if forloop.last == false %}, {% endif %}
 						{% else %}
-						<a href="{{ site.baseurl }}/posts/#{{ cat }}">{{ cat | capitalize }}</a>{% if forloop.last == false %}, {% endif %}
+						<a href="{{ site.baseurl }}/posts/#{{ cat }}">{{ cat | category_name }}</a>{% if forloop.last == false %}, {% endif %}
 						{% endif %}
 					{% endfor %}{% endif %}
 					</div>
@@ -63,7 +63,7 @@ pagination:
 	<ul class="category-list">
 		{% for category in site.categories %}
 		{% capture cat %}{{ category | first }}{% endcapture %}
-		<li><a href="{{ site.baseurl }}/category/{{ cat }}">{{ cat | capitalize }}</a> <span class="post-count">({{ category[1].size }})</span></li>
+		<li><a href="{{ site.baseurl }}/category/{{ cat }}">{{ cat | category_name }}</a> <span class="post-count">({{ category[1].size }})</span></li>
 		{% endfor %}
 	</ul>
 	<br />

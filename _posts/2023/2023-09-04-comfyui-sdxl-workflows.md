@@ -4,7 +4,7 @@ title:  "ComfyUI and SDXL: New Workflows"
 byline: "experiments with Control-LoRas and the SDXL Refiner"
 date:   2023-09-03 08:00:00
 author: Sebastian Proost
-categories: aiart
+categories: ai
 tags:	aiart python stable-diffusion art
 cover:  "/assets/posts/2023-09-04-comfyui-sdxl-workflows/sdxl_header.jpg"
 thumbnail: "/assets/images/thumbnails/sdxl_header.jpg"

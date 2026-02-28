@@ -11,7 +11,7 @@ sitemap: false
 			{% if page.type == 'year' %}
 				<h1 class="title {% if site.jekyll-archives.cover %}has-text-white{% endif %}">Posts from {{ page.date| date: "%Y" }}</h1>
 			{% else %}
-				<h1 class="title {% if site.jekyll-archives.cover %}has-text-white{% endif %}">Posts in {{ page.title | capitalize }}</h1>
+				<h1 class="title {% if site.jekyll-archives.cover %}has-text-white{% endif %}">Posts in {{ page.title | category_name }}</h1>
 			{% endif %}
 			{% if page.byline %}
 			<p class="info {% if site.jekyll-archives.cover %}has-text-white{% endif %}"><em>{{ page.byline }}</em></p>

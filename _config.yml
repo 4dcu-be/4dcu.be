@@ -106,6 +106,9 @@ descriptions:
   - cat: biology
     desc: "The world away from the computer screen"
 
+  - cat: ai
+    desc: "Artificial Intelligence, Machine Learning, ..."
+
   - cat: general
     desc: "Things about 4DCu.Be"
 

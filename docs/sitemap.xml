@@ -2,13 +2,13 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
       <loc>https://blog.4dcu.be</loc>
-      <lastmod>2025-12-16T20:13:06+00:00</lastmod>
+      <lastmod>2026-02-28T14:35:49+00:00</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1.0</priority>
     </url>
   
     <url>
-      <loc>https://blog.4dcu.be/programming/2025/12/20/rust-experiment.html</loc>
+      <loc>https://blog.4dcu.be/ai/programming/2025/12/20/rust-experiment.html</loc>
       <lastmod>2025-12-20T08:00:00+00:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>1.0</priority>
@@ -71,7 +71,7 @@
     </url>
   
     <url>
-      <loc>https://blog.4dcu.be/aiart/2023/09/03/comfyui-sdxl-workflows.html</loc>
+      <loc>https://blog.4dcu.be/ai/2023/09/03/comfyui-sdxl-workflows.html</loc>
       <lastmod>2023-09-03T08:00:00+00:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>1.0</priority>
@@ -99,7 +99,7 @@
     </url>
   
     <url>
-      <loc>https://blog.4dcu.be/aiart/2022/12/31/Stable-Diffusion-Workflow.html</loc>
+      <loc>https://blog.4dcu.be/ai/2022/12/31/Stable-Diffusion-Workflow.html</loc>
       <lastmod>2022-12-31T10:00:00+00:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>1.0</priority>
@@ -527,91 +527,91 @@
   
     <url>
       <loc>https://blog.4dcu.be/about/</loc>
-      <lastmod>2025-12-16T20:13:06+00:00</lastmod>
+      <lastmod>2026-02-28T14:35:49+00:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
     </url>
     
     <url>
       <loc>https://blog.4dcu.be/gallery/</loc>
-      <lastmod>2025-12-16T20:13:06+00:00</lastmod>
+      <lastmod>2026-02-28T14:35:49+00:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
     </url>
     
     <url>
       <loc>https://blog.4dcu.be/index.html</loc>
-      <lastmod>2025-12-16T20:13:06+00:00</lastmod>
+      <lastmod>2026-02-28T14:35:49+00:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
     </url>
     
     <url>
       <loc>https://blog.4dcu.be/page/2/index.html</loc>
-      <lastmod>2025-12-16T20:13:06+00:00</lastmod>
+      <lastmod>2026-02-28T14:35:49+00:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
     </url>
     
     <url>
       <loc>https://blog.4dcu.be/page/3/index.html</loc>
-      <lastmod>2025-12-16T20:13:06+00:00</lastmod>
+      <lastmod>2026-02-28T14:35:49+00:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
     </url>
     
     <url>
       <loc>https://blog.4dcu.be/page/4/index.html</loc>
-      <lastmod>2025-12-16T20:13:06+00:00</lastmod>
+      <lastmod>2026-02-28T14:35:49+00:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
     </url>
     
     <url>
       <loc>https://blog.4dcu.be/page/5/index.html</loc>
-      <lastmod>2025-12-16T20:13:06+00:00</lastmod>
+      <lastmod>2026-02-28T14:35:49+00:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
     </url>
     
     <url>
       <loc>https://blog.4dcu.be/page/6/index.html</loc>
-      <lastmod>2025-12-16T20:13:06+00:00</lastmod>
+      <lastmod>2026-02-28T14:35:49+00:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
     </url>
     
     <url>
       <loc>https://blog.4dcu.be/page/7/index.html</loc>
-      <lastmod>2025-12-16T20:13:06+00:00</lastmod>
+      <lastmod>2026-02-28T14:35:49+00:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
     </url>
     
     <url>
       <loc>https://blog.4dcu.be/page/8/index.html</loc>
-      <lastmod>2025-12-16T20:13:06+00:00</lastmod>
+      <lastmod>2026-02-28T14:35:49+00:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
     </url>
     
     <url>
       <loc>https://blog.4dcu.be/page/9/index.html</loc>
-      <lastmod>2025-12-16T20:13:06+00:00</lastmod>
+      <lastmod>2026-02-28T14:35:49+00:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
     </url>
     
     <url>
       <loc>https://blog.4dcu.be/page/10/index.html</loc>
-      <lastmod>2025-12-16T20:13:06+00:00</lastmod>
+      <lastmod>2026-02-28T14:35:49+00:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
     </url>
     
     <url>
       <loc>https://blog.4dcu.be/page/11/index.html</loc>
-      <lastmod>2025-12-16T20:13:06+00:00</lastmod>
+      <lastmod>2026-02-28T14:35:49+00:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
     </url>

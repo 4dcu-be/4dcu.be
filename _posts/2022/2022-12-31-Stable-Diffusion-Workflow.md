@@ -4,7 +4,7 @@ title:  "Get the most out of Stable Diffusion 2.1: Tips and Tricks"
 byline: ""
 date:   2022-12-31 10:00:00
 author: Sebastian Proost
-categories: aiart
+categories: ai
 tags:	aiart python stable-diffusion dreambooth art
 cover:  "/assets/posts/2022-12-31-Stable-Diffusion-Workflow/header.jpg"
 thumbnail: "/assets/images/thumbnails/stable_diffusion_part_1.jpg"
