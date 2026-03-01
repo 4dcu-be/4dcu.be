@@ -21,7 +21,10 @@
       "Bash(then echo \"$file\")",
       "Bash(fi)",
       "Bash(done)",
-      "Bash(sass:*)"
+      "Bash(sass:*)",
+      "WebFetch(domain:bgb.bircd.org)",
+      "WebFetch(domain:en.wikipedia.org)",
+      "WebFetch(domain:funnyplaying.com)"
     ],
     "deny": [],
     "ask": []

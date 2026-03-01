@@ -197,6 +197,15 @@
     }
   }
 
+  // Compact table style
+  .compact-table {
+    font-size: 75%;
+
+    th, td {
+      padding: 0.15em 0.4em;
+    }
+  }
+
   // Image size classes
   .small-image {
     max-width: 400px;

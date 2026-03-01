@@ -50,11 +50,19 @@
 
 .pagination {
   a.newer-posts,
-  a.older-posts,
-  span.fa-stack {
-    display: inline-block;
+  a.older-posts {
+    display: inline-flex;
+    align-items: center;
     text-decoration: none;
     transition: all 0.2s ease;
+  }
+
+  span.fa-stack {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    vertical-align: middle;
   }
 
   // Active link styling
