@@ -118,25 +118,29 @@ The AI strategies and the groundwork from Zen Garden gave me the confidence I ne
 
 For most games there are a few screens to go through before the game is started. That is the case here as well: you are first welcomed with a title screen where you can start the game, then you pick the opponent, the difficulty, your side (dark/light) and then the game starts. This is a simple logic and allows building up to implementing the actual game, where we'll need to show the board, the pieces, the dice, ... But also implement the UI to select which move to make, ... 
 
+### The Title Screen
 
+This one has evolved a lot over the course of development, from a static image with a small menu to an animated screen leveraging the background and sprites to create some visual interest.
 
-<!--
-The main development phase — break this into logical chunks:
+### Starting the Game (single player)
 
-### Menu System
-- Title screen, difficulty selection, game mode selection
-- Navigating Game Boy UI constraints (no touch, limited buttons)
+The next few screens allow the player to set up parameters for the game, they pick an opponent (which corresponds to a different AI), they set the difficulty (which affects how tight the AI will follow their strategy) and the side they play with (dark or light). Along with the title screen these are all a state machine, with multiple layers to keep track of options selected. 
 
-### The Game Board
-- Designing the board layout for a 160×144 pixel screen
-- Tile design and sprite work: fitting an ancient board game 
-  into the Game Boy's aesthetic
-- Representing game state visually: pieces, valid moves, dice rolls
+Designing assets was relatively easy, I've mostly used Gemini (nano banana 2) to create the artwork, loaded it up in GIMP to do some cleaning and turning it into a true 2-bit graphic. Then using `png2asset` this was created into assets for the game. Doing this one by one however was a mistake, passing a single large image into `png2asset` and then loading the right tiles, is more efficient. For the assets used here this didn't cause any issues, however, in the next phase I would not be so lucky.
 
-### Controls
-- Mapping a board game's interactions to a D-pad and two buttons
-- Making move selection intuitive despite the limited input
--->
+### Creating the Actual Game Loop
+
+Continuing with the step-by-step approach, I drew a board, had Claude add that to the game, the text and opponent's profile was added, ... But then it was time to draw the pieces on the board .... here we hit a roadblock. As I used a png of the entire-gameboard, adding tiles with the game pieces on them turned out, which then should be converted into assets and shown on the right position to be impossible for Claude to figure out. I ended going down and entirely different route, I made a file that contained all board-squares, each one empty, with a black piece and a white piece and converted those. Then I (manually) linked those to screen positions where they needed to be drawn. This permitted a much simpler logic to draw an occupied spot on the board by simply taking the tiles from another position in that reference. 
+
+Once that was sorted out, sprited needed to be made. This also gave me some headaches as sprites only use 3 out of 4 colors, one becoming transparant, as I was making sprites one by one, this transparant color was different for each sprite and new sprites were not showing up correctly. Once I figured out the issue was the palette used for sprites, I made all sprites for a given screen together, sharing the transparant color, and set the palette config correctly for each screen. 
+
+Everything else Claude managed to add with only minor hickups. Again I take my time, making small-ish incremental changes and testing the changes each and every time. 
+
+Initially the computer just did random moves all the time. Adding the AI however was surprisingly easy, I copied over the code from the Python agents I used to test and optimize different AI strategies and Claude converted that to C making the nessesary changes to match the game's implementation. Very impressive!
+
+### Winning and Losing
+
+The final screen shows who won the game. Initially it was a static image, but an animation was added to the profile later on (also here the way profiles were converted to assets had to be reconsidered.)
 
 ## Multiplayer: Adding Link Cable Support
 
@@ -146,44 +150,43 @@ This certainly was the most challenging part of implementing this game! More the
 
 To test this, the [Emulicious](https://emulicious.net/) emulator should be used. On my system BGB couldn't connect two instances ... 
 
-
+For those wondering, this required the full 50$ worth of API credits and without would have been a week or two worth of Claude Code's Pro subscription. Those credits were very timely, as without this feature wouldn't have been implemented.
 
 ## Sound and Music
 
-<!--
-The audio layer:
-- The Game Boy's sound hardware: four channels, what each can do
-- How you composed or created the music and sound effects
-- Tools used for sound design
-- Balancing audio with the rest of the ROM's memory budget
--->
+This is the part where things could be improved a lot, some GB games have incredibly iconic and atmospheric soundtracks and excellent sound-effects. So the system is really capable of a lot more than I've been able to squeeze out. As I'm no composer I picked a scale that felt somewhat oriental, the Phrygian scale and added a few variations along with a few notes here an there in the second channel. That left the wave and noise channels open to use for sound-effects. 
+
+This was all a bit of trail-and-mostly-error to get anything acceptable sounding, but there is definitely a lot of room for improvement here. The music does tend to get a bit repetitive (despite the variations), so I decided to add the option to disable it. If you don't like the SFX either, you can turn down the volume of the console. 
+
+Before moving to another project, I'll be spending some more time in hUGETracker to figure out how to create the sound effects and music I want in a more principled and predictable way. 
+
+There were some issues adding a background soundtrack this late in development. In some screens, there wasn't much headroom to play the music and notes would start too late or be skipped entirely. This required removing some features (I initially had an animation in the title screen) and refactoring some code to run more efficiently and regularly.
 
 ## What I Learned
 
-<!--
-Reflections and takeaways:
+The [engineering of the Game Boy](https://www.youtube.com/watch?v=BKm45Az02YE) is incredible, it contains a ton of clever features that enable programmers to do a lot with a low power device. Though it does require a decent understanding of the system to do so, and somewhat surprisingly, Claude Code was able to implement features using those tricks. By using plan mode, and asking it to explain design decisions you can learn a lot about the system! 
 
-### On Agentic Coding
-- Where AI-assisted development shone (boilerplate, unfamiliar APIs, 
-  debugging cryptic errors)
-- Where it struggled (hardware-specific quirks, niche platform knowledge)
-- Would you use this approach again for unfamiliar platforms?
 
 ### A New Appreciation for Game Boy Games
-- Now that you understand the hardware constraints firsthand, 
-  specific games impress you in new ways:
-  - Jurassic Park: the character walking *under* trees — how layering 
-    and window tricks make that possible
-  - Pokémon Gold/Silver/Crystal: the sheer scale of content squeezed 
-    into a tiny ROM
-  - Donkey Kong Land: impressive graphical fidelity given the hardware
-  - (add more examples as you like)
-- The gap between "playing" and "understanding" a platform
+
+While working on this game and starting to understand some of the limitations of the system, I find myself been increasingly impressed with some of my childhood games. For instance in Jurasic Park the player can walk behind elements (walls and trees), which seems impossible given how the background-layer, sprites and the window-layer interact, still they pulled this off. The graphics of Donkey Kong Land always were ahead of the competition, but knowing what I know now it seems even more impossible what those developers pulled off! The sheer size of Pokémon Gold/Silver/Crystal also amazes me, while using multiple banks for storage, these games are huge.
 
 ### On the Royal Game of Ur Itself
-- Did building it deepen your understanding or appreciation of the game?
-- Any historical or mechanical insights that surprised you?
--->
+
+Most racing style board games are fairly random, luck drives the entire game and the players don't have much agency about the outcome. Here, you have a surprising amount of control. The use of four binary dice favors rolling a two, with 1-3 being slightly less likely and extremes 0 and 4 being quite rare, this reduces the frustration of rolling a single D6. Having multiple pieces on the board and deciding which one should move allows for more strategy and planning one might think. 
+
+
+## Whats Next 
+
+There are a few things left unexplored on this system. This game fits in the simplest 32K cartridges, if you want to pack more assets and code, you need to spread it accross different memory banks and switch between them depending on the assets needed. Working with other types of carts which have multiple banks would be a logical next step as this allows more complex and larger games. A save function wasn't needed for this ROM, however as games grow more complex and longer, this becomes a requirement. Having completed this game, doing something more elaborate became possible. 
+
+There are tricks you can do with graphics not only are there cool things you can do using just the background layer, I've only used static sprites here and only briefly touched the window layer (for the pause screen). Exploring this to create more interesting transitions between screens could be a nice way.
+
+Running the ROM on hardware would be awasome as well, but this will become pricey. I'd have to figure out how to make the carts (at the very least I'd have to purchase a device to write to ROM to a cart) but also acquire suiteable handhelds, a pair of suitable handhelds to test the link cable mode. Real devices are getting expensive around here, too expensive to justify this (I have plenty of handhelds that can play GB games through emuluation just fine), but there might be some options like the funny playing game boy color, fpgbc, which is an fpga based system which emulates the Game Boy Color at the hardware level and supports carts and link cable... It is tempting though ...
+
+## Can I Play the Game 
+
+Not just yet, I'll release it soon, but I'm currently figuring out what the best way is to do so! 
 
 
 ## Acknowledgements
