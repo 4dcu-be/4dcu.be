@@ -15,7 +15,7 @@ Years ago, a [documentary on "The Royal Game of Ur"](https://www.youtube.com/wat
 Want to try the game! Grab it from [itch.io](https://sebastianproost.itch.io/the-royal-game-of-ur) for free!
 
 <div style="text-align: center;">
-<iframe frameborder="0" src="https://itch.io/embed/4341652?link_color=579375" width="552" height="167"><a href="https://sebastianproost.itch.io/the-royal-game-of-ur">The Royal Game of Ur by sebastian.proost</a></iframe>
+<iframe frameborder="0" src="https://itch.io/embed/4341652?link_color=579375" width="552" height="167" style="max-width: 100%;"><a href="https://sebastianproost.itch.io/the-royal-game-of-ur">The Royal Game of Ur by sebastian.proost</a></iframe>
 </div>
 
 ## Why the Game Boy? Why Agentic Coding?
