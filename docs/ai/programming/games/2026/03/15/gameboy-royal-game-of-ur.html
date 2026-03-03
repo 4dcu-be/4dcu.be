@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>The Royal Game Boy of Ur</title>
+  <meta name="description" content="Years ago, a documentary on “The Royal Game of Ur”, one of the oldest known board games, nearly 5,000 years old, instantly piqued my interest. When I later h...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2026">
+  
+
+  <!-- External libraries -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Years ago, a documentary on “The Royal Game of Ur”, one of the oldest known board games, nearly 5,000 years old, instantly piqued my interest. When I later h..." />
+  <meta property="og:url" content="https://blog.4dcu.be/ai/programming/games/2026/03/15/gameboy-royal-game-of-ur.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="The Royal Game Boy of Ur" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2026-03-15-gameboy-royal-game-of-ur/header.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Royal Game Boy of Ur">
+  <meta name="twitter:description" content="Years ago, a documentary on “The Royal Game of Ur”, one of the oldest known board games, nearly 5,000 years old, instantly piqued my interest. When I later h...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2026-03-15-gameboy-royal-game-of-ur/header.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/ai/programming/games/2026/03/15/gameboy-royal-game-of-ur.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="canonical" href="https://blog.4dcu.be/ai/programming/games/2026/03/15/gameboy-royal-game-of-ur.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	<link rel="stylesheet" href="/css/main.css">
+
+	<!-- PageFind -->
+	<script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+
+	<script type='text/javascript'>
+	//<![CDATA[
+	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+	//]]>
+	</Script>
+</head>
+
+
+  <body class="has-navbar-fixed-top">
+
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/" class="navbar-item">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+      
+    </a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarMenu" class="navbar-menu">
+    <div class="navbar-end">
+      
+<a href="/about/" class="navbar-item">
+  About
+</a>
+  
+<a href="/gallery/" class="navbar-item">
+  Gallery
+</a>
+  
+<a href="/posts/" class="navbar-item">
+  Posts
+</a>
+  
+<a href="#" class="navbar-item nav-link-contact">Contact</a>
+<a href="#" class="navbar-item nav-link-search">
+  <i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i>
+</a>
+
+    </div>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+        <img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/royal_gameboy_of_ur.jpg" style="display:none" />
+<div class="post">
+
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  
+  <img alt="Post cover" class="hero-background is-transparent" src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/header.jpg" />
+  
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title has-text-white">The Royal Game Boy of Ur</h1>
+      
+      <p class="info has-text-white"><em>Building a Game Boy version of the world's oldest board game</em></p>
+      
+    </div>
+  </div>
+</section>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted March 15, 2026 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/ai">AI</a>, 
+    
+  
+    
+    <a href="/category/programming">Programming</a>, 
+    
+  
+    
+    <a href="/category/games">Games</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content" data-pagefind-body>
+  <p>Years ago, a <a href="https://www.youtube.com/watch?v=WZskjLq040I">documentary on “The Royal Game of Ur”</a>, one of the oldest known board games, nearly 5,000 years old, instantly piqued my interest. When I later heard Dr. Irving Finkel discuss it on <a href="https://www.youtube.com/watch?v=_bBRVNkAfkQ">a podcast</a>, the fascination came flooding back. But this time, I had an idea: build a playable version of the Royal Game of Ur for the original Game Boy.</p>
+
+<p>Want to try the game! Grab it from <a href="https://sebastianproost.itch.io/the-royal-game-of-ur">itch.io</a> for free!</p>
+
+<div style="text-align: center;">
+<iframe frameborder="0" src="https://itch.io/embed/4341652?link_color=579375" width="552" height="167"><a href="https://sebastianproost.itch.io/the-royal-game-of-ur">The Royal Game of Ur by sebastian.proost</a></iframe>
+</div>
+
+<h2 id="why-the-game-boy-why-agentic-coding">Why the Game Boy? Why Agentic Coding?</h2>
+
+<p>I grew up with the Nintendo Game Boy; it was the first console I had and I have fond memories playing those games. But it is also an older system and Game Boy homebrew development, even with tools like <a href="https://gbdk.org/">GBDK</a>, is a niche with a small but dedicated community. For agentic coding tools like <a href="https://claude.ai/">Claude Code</a>, that matters: when working on a Python project with popular libraries like pandas or flask, there is plenty of reference material available. In <a href="/ai/programming/2025/12/20/rust-experiment.html">my previous experiment</a>, porting a genetic art algorithm to Rust, Claude Code performed impressively, but Rust is a well-documented, popular language. I wanted to test if Claude Code could handle a much less common ecosystem, where documentation is sparser and the community is smaller.</p>
+
+<p>On a device like this, you are also working closer to the hardware: handling interrupts, managing memory, working within tight constraints. This is a far cry from modern application development, where most of this is abstracted away by frameworks. That unfamiliarity was part of the appeal: how do you prompt an agentic coding tool effectively when you yourself don’t know the packages, functions, and terminology for the platform?</p>
+
+<p>When developing games, creating the assets is often the limiting factor. The Game Boy’s resolution (160×144 pixels) and color palette (2-bit: white, light gray, dark gray, and black) are more forgiving on that front. I’m a developer, not an artist, so a platform where simple graphics are the norm rather than the exception suits me well. And the Royal Game of Ur, with its simple rules and turn-based gameplay, seemed like an ideal fit for these constraints.</p>
+
+<p>So the goal was threefold: test how well Claude Code works for a less common platform, deepen my understanding of the Game Boy’s hardware, and — if all went well — end up with a playable game.</p>
+
+<h2 id="testing-the-waters-a-simpler-first-app">Testing the Waters: A Simpler First App</h2>
+
+<p>Diving right in didn’t feel like a great option here. I wanted to set up my toolchain (VSCode, Docker and devcontainer) correctly first, then check if I could get a simple application running, something that put some graphics on the screen, handled user input and played some sound. Zen Garden was born, a simple meditation app which just shows a few images on the background, has a menu the user can interact with and a simple background melody and sound effects.</p>
+
+<p>My Dockerfile, which I use with VSCode and devcontainer, is found below. I included Python (good to have access in case a quick script is needed to convert something), Node.js (to install and run Claude Code inside the container) and GBDK (the build tools for the Game Boy). Testing I did manually with <a href="https://sameboy.github.io/">SameBoy</a> but later switched to <a href="https://bgb.bircd.org/">BGB</a> which has better tools to debug ROMs.</p>
+
+<div class="language-dockerfile large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Game Boy Development Environment with GBDK-2020, Node.js, and development tools</span>
+<span class="k">FROM</span><span class="s"> ubuntu:22.04</span>
+
+<span class="c"># Prevent interactive prompts during package installation</span>
+<span class="k">ENV</span><span class="s"> DEBIAN_FRONTEND=noninteractive</span>
+
+<span class="c"># Install system dependencies</span>
+<span class="k">RUN </span>apt-get update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> <span class="se">\
+</span>    build-essential <span class="se">\
+</span>    wget <span class="se">\
+</span>    curl <span class="se">\
+</span>    unzip <span class="se">\
+</span>    git <span class="se">\
+</span>    make <span class="se">\
+</span>    cmake <span class="se">\
+</span>    pkg-config <span class="se">\
+</span>    libsdl2-dev <span class="se">\
+</span>    libsdl2-image-dev <span class="se">\
+</span>    python3 <span class="se">\
+</span>    python3-pip <span class="se">\
+</span>    <span class="nb">sudo</span> <span class="se">\
+</span>    bc <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> <span class="nb">rm</span> <span class="nt">-rf</span> /var/lib/apt/lists/<span class="k">*</span>
+
+<span class="c"># Install Node.js (latest LTS) and npm for Claude Code</span>
+<span class="k">RUN </span>curl <span class="nt">-fsSL</span> https://deb.nodesource.com/setup_lts.x | bash - <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> nodejs <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> npm <span class="nt">--version</span> <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> node <span class="nt">--version</span>
+
+<span class="c"># Create development user to avoid running as root</span>
+<span class="k">RUN </span>useradd <span class="nt">-m</span> <span class="nt">-s</span> /bin/bash gbdev <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">"gbdev ALL=(ALL) NOPASSWD:ALL"</span> <span class="o">&gt;&gt;</span> /etc/sudoers
+
+<span class="c"># Switch to development user</span>
+<span class="k">USER</span><span class="s"> gbdev</span>
+<span class="k">WORKDIR</span><span class="s"> /home/gbdev</span>
+
+<span class="c"># Install GBDK-2020 (Game Boy Development Kit)</span>
+<span class="k">RUN </span>wget https://github.com/gbdk-2020/gbdk-2020/releases/download/4.2.0/gbdk-linux64.tar.gz <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> <span class="nb">tar</span> <span class="nt">-xzf</span> gbdk-linux64.tar.gz <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> <span class="nb">rm </span>gbdk-linux64.tar.gz
+
+<span class="c"># Set up environment variables for GBDK</span>
+<span class="k">ENV</span><span class="s"> GBDK_HOME=/home/gbdev/gbdk</span>
+<span class="k">ENV</span><span class="s"> PATH="${GBDK_HOME}/bin:${PATH}"</span>
+
+<span class="c"># Note: SameBoy emulator installation skipped in container</span>
+<span class="c"># SameBoy requires GUI/X11 which is complex in containers</span>
+<span class="c"># Install via: apt install sameboy (if available) or use BGB/other emulators</span>
+<span class="c"># For now, ROMs can be tested by copying to host machine</span>
+
+<span class="c"># Install Claude Code globally as gbdev user</span>
+<span class="k">RUN </span>curl <span class="nt">-fsSL</span> https://claude.ai/install.sh | bash
+
+<span class="k">USER</span><span class="s"> gbdev</span>
+<span class="c"># Create project structure</span>
+<span class="k">RUN </span><span class="nb">mkdir</span> <span class="nt">-p</span> /home/gbdev/gameboy-project/<span class="o">{</span>src,include,build,assets,tools<span class="o">}</span>
+
+<span class="c"># Set working directory for the project</span>
+<span class="k">WORKDIR</span><span class="s"> /home/gbdev/gameboy-project</span>
+
+<span class="c"># Copy development files when container starts</span>
+<span class="k">VOLUME</span><span class="s"> ["/home/gbdev/gameboy-project"]</span>
+
+<span class="c"># Default command</span>
+<span class="k">CMD</span><span class="s"> ["/bin/bash"]</span>
+</code></pre></div></div>
+
+<p>This all worked much smoother than I expected! Using Claude Code, prompting it to do small steps in plan mode (so I could check what was about to happen and if it made sense), this application came together nicely. Claude would run GBDK tools like <code class="language-plaintext highlighter-rouge">png2asset</code> to convert my images to tiles compatible with the Game Boy. Code to display graphics, pop up menus and transition between screens was also generated without huge issues. Some things, like clearing the screen with the background tiles after closing a menu, you have to handle explicitly and Claude often omitted these steps. Though once I got a handle on what caused some of the graphical issues, I was able to prompt Claude to fix them.</p>
+
+<div class="gallery-2-col">
+  <p><a href="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/zen_garden_menu.png" class="lightgallery-link" data-sub-html="Screenshot of Zen Garden running in SameBoy, showing the menu">
+<img src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/zen_garden_menu.png" alt="Screenshot of Zen Garden running in SameBoy, showing the menu" height="522" width="624" data-src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/zen_garden_menu.png" loading="lazy" />
+</a>
+<a href="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/zen_garden_running.png" class="lightgallery-link" data-sub-html="Screenshot of Zen Garden running in SameBoy, showing a meditation in progress">
+<img src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/zen_garden_running.png" alt="Screenshot of Zen Garden running in SameBoy, showing a meditation in progress" height="522" width="624" data-src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/zen_garden_running.png" loading="lazy" />
+</a></p>
+</div>
+
+<p>Probably the trickiest part was sound. For graphics you can rely on AI to generate artwork, and I have just enough experience with <a href="https://www.gimp.org/">GIMP</a> to clean that up. But sound is another matter — using hUGETracker is quite the challenge, though I got something out I considered good enough.</p>
+
+<p>So this test checked most of my boxes: I got some rudimentary graphics running (however, only using the background layer, no sprites yet) and had basic sound and a pretty solid menu implementation. This gave me some more hope that this idea was actually feasible and in a reasonable timeframe.</p>
+
+<h2 id="building-the-ai-opponent-in-python">Building the AI Opponent in Python</h2>
+
+<p>While the Royal Game of Ur is a dice-based game and there is some luck involved, there is more strategy to it than you might expect. The <a href="https://royalur.net/rules">rules</a> are simple: race your pieces along the board, capture opponents by landing on them, and score by moving pieces off the end. Since you can have multiple pieces on the board and choose which one to move, there’s room to position pieces strategically and set up captures more efficiently.</p>
+
+<p>So before starting, I wanted to explore options to implement an AI for the CPU opponent: check if I could come up with a few different playstyles, test how well these worked and optimize parameters. This I opted to do in Python, the language I’m most familiar with, so it made sense to prototype in this environment. This might warrant an entire post dedicated to it by itself, but the concept is relatively simple and very much in line with <a href="/programming/games/2020/11/11/Gwent-Pro-Rank-ABM.html">my post about using an agent-based model</a>, except here we’re not simulating a game … the agents will actually play a game. Different agents can use different strategies (or the same strategy with different parameters), which allows me to pick a few options to include in the Game Boy ROM. I ultimately landed on four strategies that were conceptually distinct enough to link to four different CPU opponents in the game. Those strategies also match the characters’ backgrounds — the merchant, for instance, uses a greedy strategy that goes for the best move in the short run.</p>
+
+<p>In the table below you can see which strategies worked best and how they ranked against each other.</p>
+
+<table class="compact-table">
+  <thead>
+    <tr>
+      <th>Strategy</th>
+      <th>Elo Rating</th>
+      <th>Games Played</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TurnEconomy-Optimized</td>
+      <td>2170.8</td>
+      <td>6400</td>
+    </tr>
+    <tr>
+      <td>TurnEconomy</td>
+      <td>1955.3</td>
+      <td>6400</td>
+    </tr>
+    <tr>
+      <td>TEExpectimax-D1</td>
+      <td>1914.0</td>
+      <td>6400</td>
+    </tr>
+    <tr>
+      <td>PhaseBased-Optimized_V3</td>
+      <td>1865.5</td>
+      <td>6390</td>
+    </tr>
+    <tr>
+      <td>PhaseBased-Optimized_V2</td>
+      <td>1689.4</td>
+      <td>6399</td>
+    </tr>
+    <tr>
+      <td>Greedy-Default</td>
+      <td>1653.6</td>
+      <td>6400</td>
+    </tr>
+    <tr>
+      <td>Adaptive</td>
+      <td>1647.3</td>
+      <td>6400</td>
+    </tr>
+    <tr>
+      <td>PhaseBased-Optimized</td>
+      <td>1567.1</td>
+      <td>6400</td>
+    </tr>
+    <tr>
+      <td>VarianceAware-Aggr</td>
+      <td>1467.1</td>
+      <td>6400</td>
+    </tr>
+    <tr>
+      <td>PhaseBased</td>
+      <td>1444.6</td>
+      <td>6400</td>
+    </tr>
+    <tr>
+      <td>Greedy-Defensive</td>
+      <td>1413.2</td>
+      <td>6400</td>
+    </tr>
+    <tr>
+      <td>Priority</td>
+      <td>1387.7</td>
+      <td>6400</td>
+    </tr>
+    <tr>
+      <td>Expectimax-D1-Aggr</td>
+      <td>1379.7</td>
+      <td>6400</td>
+    </tr>
+    <tr>
+      <td>Greedy-Aggressive</td>
+      <td>1179.8</td>
+      <td>6389</td>
+    </tr>
+    <tr>
+      <td>VarianceAware-Optimized</td>
+      <td>1039.3</td>
+      <td>6400</td>
+    </tr>
+    <tr>
+      <td>Expectimax-D1-Def</td>
+      <td>960.8</td>
+      <td>6400</td>
+    </tr>
+    <tr>
+      <td>Random</td>
+      <td>764.9</td>
+      <td>6400</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The AI strategies and the groundwork from Zen Garden gave me the confidence I needed. Now came the real challenge: turning all of this into a polished Game Boy game.</p>
+
+<h2 id="building-the-game-menus-graphics-and-controls">Building the Game: Menus, Graphics, and Controls</h2>
+
+<p>For most games there are a few screens to go through before the game is started. That is the case here as well: you are first welcomed with a title screen where you can start the game, then you pick the opponent, the difficulty, your side (dark/light) and then the game starts. This is a simple logic and allows building up to implementing the actual game, where we’ll need to show the board, the pieces, the dice, … But also implement the UI to select which move to make, …</p>
+
+<h3 id="the-title-screen">The Title Screen</h3>
+
+<p>This one has evolved a lot over the course of development, from a static image with a small menu to an animated screen leveraging the background and sprites to create some visual interest.</p>
+
+<p><a href="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/title_screen.png" class="lightgallery-link" data-sub-html="The Royal Game of Ur as a Game Boy game running in BGB, the title screen showing the board, opponent profile and menu to start the game">
+<img src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/title_screen.png" alt="The Royal Game of Ur as a Game Boy game running in BGB, the title screen showing the board, opponent profile and menu to start the game" height="464" width="482" class="small-image" data-src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/title_screen.png" loading="lazy" />
+</a></p>
+
+<h3 id="starting-the-game-single-player">Starting the Game (single player)</h3>
+
+<p>The next few screens allow the player to set up parameters for the game: they pick an opponent (which corresponds to a different AI), they set the difficulty (which affects how tightly the AI will follow its strategy) and the side they play with (dark or light). Along with the title screen these are all a state machine, with multiple layers to keep track of options selected.</p>
+
+<p>Designing assets was relatively easy. I mostly used Gemini (nano banana 2) to create the artwork, loaded it up in GIMP to do some cleaning and turned it into a true 2-bit graphic. Then using <code class="language-plaintext highlighter-rouge">png2asset</code> this was converted into assets for the game. Doing this one by one however was a mistake; passing a single large image into <code class="language-plaintext highlighter-rouge">png2asset</code> and then loading the right tiles is more efficient. For the assets used here this didn’t cause any issues, however, in the next phase I would not be so lucky.</p>
+
+<div class="gallery-3-col">
+  <p><a href="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/opponent_select.png" class="lightgallery-link" data-sub-html="The Royal Game of Ur as a Game Boy game running in BGB, selecting your opponent">
+<img src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/opponent_select.png" alt="The Royal Game of Ur as a Game Boy game running in BGB, selecting your opponent" height="464" width="482" data-src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/opponent_select.png" loading="lazy" />
+</a>
+<a href="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/difficulty_select.png" class="lightgallery-link" data-sub-html="The Royal Game of Ur as a Game Boy game running in BGB, selecting the difficulty">
+<img src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/difficulty_select.png" alt="The Royal Game of Ur as a Game Boy game running in BGB, selecting the difficulty" height="464" width="482" data-src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/difficulty_select.png" loading="lazy" />
+</a>
+<a href="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/side_select.png" class="lightgallery-link" data-sub-html="The Royal Game of Ur as a Game Boy game running in BGB, selecting the side">
+<img src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/side_select.png" alt="The Royal Game of Ur as a Game Boy game running in BGB, selecting the side" height="464" width="482" data-src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/side_select.png" loading="lazy" />
+</a></p>
+</div>
+
+<h3 id="creating-the-actual-game-loop">Creating the Actual Game Loop</h3>
+
+<p>Continuing with the step-by-step approach, I drew a board, had Claude add that to the game, the text and opponent’s profile were added, … But then it was time to draw the pieces on the board… here we hit a roadblock. As I used a png of the entire gameboard, adding tiles with the game pieces on them, which then should be converted into assets and shown at the right position, turned out to be impossible for Claude to figure out. I ended up going down an entirely different route: I made a file that contained all board squares, each one empty, with a black piece and a white piece and converted those. Then I (manually) linked those to screen positions where they needed to be drawn. This permitted a much simpler logic to draw an occupied spot on the board by simply taking the tiles from another position in that reference (see below).</p>
+
+<div class="gallery-2-col">
+  <p><a href="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/board_tiles.png" class="lightgallery-link" data-sub-html="board-squares tiles">
+<img src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/board_tiles.png" alt="board-squares tiles" height="96" width="48" style="width:auto; max-width:none; image-rendering:pixelated;" data-src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/board_tiles.png" loading="lazy" />
+</a>
+<a href="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/profiles_merged.png" class="lightgallery-link" data-sub-html="opponent profiles">
+<img src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/profiles_merged.png" alt="opponent profiles" height="160" width="120" style="width:auto; max-width:none; image-rendering:pixelated;" data-src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/profiles_merged.png" loading="lazy" />
+</a></p>
+</div>
+
+<p>I found BGB’s debug feature, and specifically the one to view the VRAM, very useful for figuring out some of these issues.</p>
+
+<p><a href="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/bgb_vram_debug.png" class="lightgallery-link" data-sub-html="The VRAM viewer in BGB">
+<img src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/bgb_vram_debug.png" alt="The VRAM viewer in BGB" height="425" width="562" class="small-image" data-src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/bgb_vram_debug.png" loading="lazy" />
+</a></p>
+
+<p>Once that was sorted out, sprites needed to be made. This also gave me some headaches as sprites only use 3 out of 4 colors, one becoming transparent. As I was making sprites one by one, this transparent color was different for each sprite and new sprites were not showing up correctly. Once I figured out the issue was the palette used for sprites, I made all sprites for a given screen together, sharing the transparent color, and set the palette config correctly for each screen.</p>
+
+<p><a href="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/game_board.png" class="lightgallery-link" data-sub-html="The Royal Game of Ur as a Game Boy game running in BGB, the main game">
+<img src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/game_board.png" alt="The Royal Game of Ur as a Game Boy game running in BGB, the main game" height="464" width="482" class="small-image" data-src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/game_board.png" loading="lazy" />
+</a></p>
+
+<p>Everything else Claude managed to add with only minor hiccups. Again I took my time, making small-ish incremental changes and testing the changes each and every time.</p>
+
+<p>Initially the computer just did random moves all the time. Adding the AI however was surprisingly easy: I copied over the code from the Python agents I used to test and optimize different AI strategies and Claude converted that to C, making the necessary changes to match the game’s implementation. Very impressive! I just had to indicate which AI I wanted linked with which profile.</p>
+
+<table class="compact-table">
+  <thead>
+    <tr>
+      <th>Opponent</th>
+      <th>Strategy</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>The Scholar</strong></td>
+      <td>Adaptive</td>
+      <td>Switches between defensive/balanced/aggressive modes based on whether the AI is ahead, even, or behind</td>
+    </tr>
+    <tr>
+      <td><strong>The Merchant</strong></td>
+      <td>Greedy</td>
+      <td>Evaluates board positions based on advancement, rosettes, and captures</td>
+    </tr>
+    <tr>
+      <td><strong>The Musician</strong></td>
+      <td>Turn Economy</td>
+      <td>Minimizes turns to win, highly values extra turns from rosettes</td>
+    </tr>
+    <tr>
+      <td><strong>The Priestess</strong></td>
+      <td>Phase-based</td>
+      <td>Adapts evaluation weights based on game phase (opening/midgame/endgame)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Each strategy also has difficulty settings (Easy/Medium/Hard) that control how often the AI uses its strategy versus making random moves:</p>
+
+<ul>
+  <li><strong>Easy</strong>: 40% chance to use strategy, 60% random</li>
+  <li><strong>Medium</strong>: 65% chance to use strategy, 35% random</li>
+  <li><strong>Hard</strong>: 100% always uses strategy</li>
+</ul>
+
+<h3 id="winning-and-losing">Winning and Losing</h3>
+
+<p>The final screen shows who won the game. Initially it was a static image, but an animation was added to the profile later on (here too the way profiles were converted to assets had to be reconsidered).</p>
+
+<h2 id="multiplayer-adding-link-cable-support">Multiplayer: Adding Link Cable Support</h2>
+
+<p>Around the time I had a working version, I was thinking about wrapping it up and calling it good. Though this could be a two-player game with link cable support… Given that the Game Boy link cable system is essentially a low-level serial connection between the two consoles, this is somewhat easier said than done; you’d really have to implement the whole communication protocol. However, Anthropic released Opus 4.6 and gifted $50 worth of API credits for users to play with the new model. With a stronger model and the extra credits, I decided to give it a go!</p>
+
+<p>This certainly was the most challenging part of implementing this game! More than once, large chunks of code needed to be refactored, the logic for how the two devices should communicate wasn’t obvious, and testing was time-consuming. Claude’s changes often had to be reverted as even the Opus 4.6 model with high effort couldn’t always figure out the correct implementation. Despite having to take a step or two back every once in a while, by testing the code, checking the implementation and pushing the model in the right direction it ultimately worked.</p>
+
+<p>To test this, the <a href="https://emulicious.net/">Emulicious</a> emulator should be used. On my system BGB couldn’t connect two instances …</p>
+
+<p><a href="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/emulicious_link_cable.png" class="lightgallery-link" data-sub-html="Two instances of Emulicious running the game to test link cable mode">
+<img src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/emulicious_link_cable.png" alt="Two instances of Emulicious running the game to test link cable mode" height="422" width="959" data-src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/emulicious_link_cable.png" loading="lazy" />
+</a></p>
+
+<p>For those wondering, this required the full $50 worth of API credits and without them would have been a week or two worth of Claude Code’s Pro subscription. Those credits were very timely, as without them this feature wouldn’t have been implemented.</p>
+
+<h2 id="sound-and-music">Sound and Music</h2>
+
+<p>This is the part where things could be improved a lot. Some GB games have incredibly iconic and atmospheric soundtracks and excellent sound effects. So the system is really capable of a lot more than I’ve been able to squeeze out. As I’m no composer, I picked a scale that felt Middle Eastern, the Phrygian scale, and added a few variations along with a few notes here and there in the second channel. That left the wave and noise channels open to use for sound effects.</p>
+
+<p>This was all a bit of trial-and-mostly-error to get anything acceptable sounding, but there is definitely a lot of room for improvement here. The music does tend to get a bit repetitive (despite the variations), so I decided to add the option to disable it. If you don’t like the SFX either, you can turn down the volume of the console.</p>
+
+<p>Before moving to another project, I’ll be spending some more time in hUGETracker to figure out how to create the sound effects and music I want in a more principled and predictable way.</p>
+
+<p>There were some issues adding a background soundtrack this late in development. In some screens, there wasn’t much headroom to play the music and notes would start too late or be skipped entirely. This required removing some features (I initially had an animation in the title screen) and refactoring some code to run more efficiently and regularly.</p>
+
+<h2 id="what-i-learned">What I Learned</h2>
+
+<p>The <a href="https://www.youtube.com/watch?v=BKm45Az02YE">engineering of the Game Boy</a> is incredible; it contains a ton of clever features that enable programmers to do a lot with a low-power device. Though it does require a decent understanding of the system to do so, and somewhat surprisingly, Claude Code was able to implement features using those tricks. By using plan mode and asking it to explain design decisions, you can learn a lot about the system!</p>
+
+<h3 id="a-new-appreciation-for-game-boy-games">A New Appreciation for Game Boy Games</h3>
+
+<p>While working on this game and starting to understand some of the limitations of the system, I found myself increasingly impressed with some of my childhood games. For instance, in Jurassic Park the player can walk behind elements (walls and trees), which seems impossible given how the background layer, sprites and the window layer interact, yet they pulled this off. The graphics of Donkey Kong Land always were ahead of the competition, but knowing what I know now it seems even more impossible what those developers pulled off! The sheer size of Pokémon Gold/Silver/Crystal also amazes me, while using multiple banks for storage, these games are huge.</p>
+
+<div class="gallery-2-col">
+  <p><a href="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/jurassic_park.png" class="lightgallery-link" data-sub-html="In Jurassic Park the main player can go behind foliage">
+<img src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/jurassic_park.png" alt="In Jurassic Park the main player can go behind foliage" height="464" width="482" class="small-image" data-src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/jurassic_park.png" loading="lazy" />
+</a>
+<a href="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/donkey_kong_land.png" class="lightgallery-link" data-sub-html="Donkey Kong Land on the Game Boy had incredible graphics">
+<img src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/donkey_kong_land.png" alt="Donkey Kong Land on the Game Boy had incredible graphics" height="464" width="482" class="small-image" data-src="/assets/posts/2026-03-15-gameboy-royal-game-of-ur/donkey_kong_land.png" loading="lazy" />
+</a></p>
+</div>
+
+<h3 id="on-the-royal-game-of-ur-itself">On the Royal Game of Ur Itself</h3>
+
+<p>Most racing-style board games are fairly random; luck drives the entire game and the players don’t have much agency over the outcome. Here, you have a surprising amount of control. The use of four binary dice favors rolling a two, with 1 and 3 being slightly less likely and the extremes 0 and 4 being quite rare. This reduces the frustration of rolling a single D6. Having multiple pieces on the board and deciding which one to move allows for more strategy and planning than one might think.</p>
+
+<h2 id="whats-next">What’s Next</h2>
+
+<p>There are a few things left unexplored on this system. This game fits in the simplest 32K cartridges; if you want to pack more assets and code, you need to spread it across different memory banks and switch between them depending on the assets needed. Working with other types of carts which have multiple banks would be a logical next step as this allows more complex and larger games. A save function wasn’t needed for this ROM, however as games grow more complex and longer, this becomes a requirement. Having completed this game, doing something more elaborate has become possible.</p>
+
+<p>There are tricks you can do with graphics: not only are there cool things you can do using just the background layer, I’ve only used static sprites here and only briefly touched the window layer (for the pause screen). Exploring these to create more interesting transitions between screens would be a nice next step.</p>
+
+<p>Running the ROM on hardware would be awesome as well, but this will become pricey. I’d have to figure out how to make the carts (at the very least I’d have to purchase a device to write the ROM to a cart) but also acquire suitable handhelds, a pair of suitable handhelds to test the link cable mode. Real devices are getting expensive around here, too expensive to justify this (I have plenty of handhelds that can play GB games through emulation just fine), but there might be some options like the Funny Playing Game Boy Color (FPGBC), which is an FPGA-based system that emulates the Game Boy Color at the hardware level and supports carts and link cable. It is tempting though…</p>
+
+<h2 id="additional-reading">Additional Reading</h2>
+
+<h3 id="tools--software">Tools &amp; Software</h3>
+<ul>
+  <li><a href="https://gbdk.org/">GBDK-2020</a> – Game Boy Development Kit, the toolchain used to build this ROM</li>
+  <li><a href="https://github.com/SuperDisk/hUGETracker">hUGETracker</a> – Music tracker for Game Boy homebrew</li>
+  <li><a href="https://claude.ai/">Claude Code</a> – Agentic AI coding tool used throughout development</li>
+  <li><a href="https://www.gimp.org/">GIMP</a> – Image editor used for cleaning up game assets</li>
+  <li><a href="https://gemini.google.com/app">Gemini</a> – Used to generate artwork for the game</li>
+</ul>
+
+<h3 id="emulators">Emulators</h3>
+<ul>
+  <li><a href="https://sameboy.github.io/">SameBoy</a> – Accurate Game Boy emulator</li>
+  <li><a href="https://bgb.bircd.org/">BGB</a> – Game Boy emulator with excellent debugging tools</li>
+  <li><a href="https://emulicious.net/">Emulicious</a> – Multi-system emulator with link cable support between instances</li>
+</ul>
+
+<h3 id="the-royal-game-of-ur">The Royal Game of Ur</h3>
+<ul>
+  <li><a href="https://royalur.net/rules">Rules of the Royal Game of Ur</a> – Clear overview of the rules, plus you can play online</li>
+  <li><a href="https://www.youtube.com/watch?v=WZskjLq040I">Tom Scott vs Irving Finkel: The Royal Game of Ur</a> – The British Museum video that started this whole project</li>
+  <li><a href="https://www.youtube.com/watch?v=_bBRVNkAfkQ">Irving Finkel on the Royal Game of Ur</a> – The podcast that reignited the idea</li>
+  <li><a href="https://en.wikipedia.org/wiki/Royal_Game_of_Ur">The Royal Game of Ur on Wikipedia</a> – History, rules, and archaeological context</li>
+  <li><a href="https://www.britishmuseum.org/collection/object/W_1928-1009-378">British Museum: The Royal Game of Ur</a> – The original board in the museum’s collection</li>
+</ul>
+
+<h3 id="game-boy-development-resources">Game Boy Development Resources</h3>
+<ul>
+  <li><a href="https://gbdk-2020.github.io/gbdk-2020/docs/api/">GBDK-2020 Documentation</a> – Official GBDK docs and API reference</li>
+  <li><a href="https://gbdev.io/pandocs/">Pan Docs</a> – Comprehensive technical reference for Game Boy hardware</li>
+  <li><a href="https://github.com/gbdev/awesome-gbdev">Awesome Game Boy Development</a> – Curated list of Game Boy development resources</li>
+  <li><a href="https://www.youtube.com/watch?v=HyzD8pNlpwI">The Ultimate Game Boy Talk</a> – Excellent technical deep-dive into the hardware</li>
+</ul>
+
+<h3 id="hardware">Hardware</h3>
+<ul>
+  <li><a href="https://funnyplaying.com/products/fpgbc-kit">FunnyPlaying FPGBC</a> – FPGA-based Game Boy Color compatible system</li>
+</ul>
+
+<h3 id="related-posts-on-this-blog">Related Posts on This Blog</h3>
+<ul>
+  <li><a href="/ai/programming/2025/12/20/rust-experiment.html">Python to Rust: Porting My Genetic Art Algorithm</a> – A similar experiment using Claude Code for an unfamiliar ecosystem</li>
+  <li><a href="/programming/games/2020/11/11/Gwent-Pro-Rank-ABM.html">An Agent Based Model to look at Gwent Pro Ladder</a> – The agent-based modeling approach referenced for the AI opponents</li>
+  <li><a href="/programming/2023/02/02/chatgpt-python-gui-app.html">Can ChatGPT write a Python GUI app for me?</a> – An earlier experiment with AI-assisted development</li>
+  <li><a href="/diy/games/2021/01/31/Gameboy-Zero.html">GameBoy Zero Builds</a> – Previous Game Boy project on this blog</li>
+</ul>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+
+<p>The header image was generated using <a href="https://gemini.google.com/app">Gemini</a> starting from a <a href="https://commons.wikimedia.org/wiki/File:British_Museum_Royal_Game_of_Ur.jpg">public domain image</a>.</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/c">c</a>,&nbsp;<a href="/tag/nintendo">nintendo</a>,&nbsp;<a href="/tag/gameboy">gameboy</a>,&nbsp;<a href="/tag/retrogaming">retrogaming</a>,&nbsp;<a href="/tag/homebrew">homebrew</a>,&nbsp;<a href="/tag/ai">ai</a>,&nbsp;<a href="/tag/claude-code">claude-code</a>,&nbsp;<a href="/tag/agent-based-modeling">agent-based-modeling</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+	    
+    
+    
+  
+    
+    
+	    
+      <a href="//bsky.app/intent/compose?text=The+Royal+Game+Boy+of+Ur%20https%3A%2F%2Fblog.4dcu.be%2Fai%2Fprogramming%2Fgames%2F2026%2F03%2F15%2Fgameboy-royal-game-of-ur.html"
+        target="_blank">
+        <i class="fa-brands fa-bluesky"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+	    
+    
+      <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fai%2Fprogramming%2Fgames%2F2026%2F03%2F15%2Fgameboy-royal-game-of-ur.html"
+        target="_blank">
+        <i class="fa-brands fa-square-facebook fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+	    
+    
+    
+      <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fai%2Fprogramming%2Fgames%2F2026%2F03%2F15%2Fgameboy-royal-game-of-ur.html"
+        target="_blank">
+        <i class="fa-brands fa-linkedin fa-lg"></i>
+      </a>
+    
+  
+    
+    
+      <a href="//x.com/share?text=The+Royal+Game+Boy+of+Ur&url=https%3A%2F%2Fblog.4dcu.be%2Fai%2Fprogramming%2Fgames%2F2026%2F03%2F15%2Fgameboy-royal-game-of-ur.html&via="
+        target="_blank">
+        <i class="fa-brands fa-x-twitter fa-lg"></i>
+      </a>
+    
+	    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/ai/programming/2025/12/20/rust-experiment.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa-solid fa-square fa-stack-2x"></i>
+						<i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Python to Rust: Porting My Genetic Art Algorithm</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+		<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Site Map</strong></p>
+				<ul class="pages">
+					
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+				</ul>
+				<br />
+				<p><strong>Legal</strong></p>
+				<p><a href="/policy/">Privacy policy</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Contribute</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+				
+				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+
+
+
+
+  </body>
+
+</html>

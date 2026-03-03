@@ -12,6 +12,11 @@ thumbnail: "/assets/images/thumbnails/royal_gameboy_of_ur.jpg"
 
 Years ago, a [documentary on "The Royal Game of Ur"](https://www.youtube.com/watch?v=WZskjLq040I), one of the oldest known board games, nearly 5,000 years old, instantly piqued my interest. When I later heard Dr. Irving Finkel discuss it on [a podcast](https://www.youtube.com/watch?v=_bBRVNkAfkQ), the fascination came flooding back. But this time, I had an idea: build a playable version of the Royal Game of Ur for the original Game Boy.
 
+Want to try the game! Grab it from [itch.io](https://sebastianproost.itch.io/the-royal-game-of-ur) for free!
+
+<div style="text-align: center;">
+<iframe frameborder="0" src="https://itch.io/embed/4341652?link_color=579375" width="552" height="167"><a href="https://sebastianproost.itch.io/the-royal-game-of-ur">The Royal Game of Ur by sebastian.proost</a></iframe>
+</div>
 
 ## Why the Game Boy? Why Agentic Coding?
 
@@ -103,8 +108,8 @@ CMD ["/bin/bash"]
 This all worked much smoother than I expected! Using Claude Code, prompting it to do small steps in plan mode (so I could check what was about to happen and if it made sense), this application came together nicely. Claude would run GBDK tools like `png2asset` to convert my images to tiles compatible with the Game Boy. Code to display graphics, pop up menus and transition between screens was also generated without huge issues. Some things, like clearing the screen with the background tiles after closing a menu, you have to handle explicitly and Claude often omitted these steps. Though once I got a handle on what caused some of the graphical issues, I was able to prompt Claude to fix them.
 
 <div class="gallery-2-col" markdown="1">
-![Sceenshot of Zen Garden running in SameBoy, showing the menu](/assets/posts/2026-03-15-gameboy-royal-game-of-ur/zen_garden_menu.png)
-![Sceenshot of Zen Garden running in SameBoy, showing a meditation in progress](/assets/posts/2026-03-15-gameboy-royal-game-of-ur/zen_garden_running.png)
+![Screenshot of Zen Garden running in SameBoy, showing the menu](/assets/posts/2026-03-15-gameboy-royal-game-of-ur/zen_garden_menu.png)
+![Screenshot of Zen Garden running in SameBoy, showing a meditation in progress](/assets/posts/2026-03-15-gameboy-royal-game-of-ur/zen_garden_running.png)
 </div>
 
 Probably the trickiest part was sound. For graphics you can rely on AI to generate artwork, and I have just enough experience with [GIMP](https://www.gimp.org/) to clean that up. But sound is another matter — using hUGETracker is quite the challenge, though I got something out I considered good enough. 
@@ -208,11 +213,13 @@ The final screen shows who won the game. Initially it was a static image, but an
 
 ## Multiplayer: Adding Link Cable Support
 
-Around the time I had a working version, I was thinking about wrapping it up and calling it good. Though this could be a two-player game with link cable support... Given that the Game Boy link cable system is essentially a simple serial connection between the two consoles" or "a low-level serial link between the two consoles, this is somewhat easier said than done; you'd really have to implement the whole communication protocol. However, Anthropic released Opus 4.6 and gifted $50 worth of API credits for users to play with the new model. With a stronger model and the extra credits, I decided to give it a go!
+Around the time I had a working version, I was thinking about wrapping it up and calling it good. Though this could be a two-player game with link cable support... Given that the Game Boy link cable system is essentially a low-level serial connection between the two consoles, this is somewhat easier said than done; you'd really have to implement the whole communication protocol. However, Anthropic released Opus 4.6 and gifted $50 worth of API credits for users to play with the new model. With a stronger model and the extra credits, I decided to give it a go!
 
 This certainly was the most challenging part of implementing this game! More than once, large chunks of code needed to be refactored, the logic for how the two devices should communicate wasn't obvious, and testing was time-consuming. Claude's changes often had to be reverted as even the Opus 4.6 model with high effort couldn't always figure out the correct implementation. Despite having to take a step or two back every once in a while, by testing the code, checking the implementation and pushing the model in the right direction it ultimately worked.
 
 To test this, the [Emulicious](https://emulicious.net/) emulator should be used. On my system BGB couldn't connect two instances ... 
+
+![Two instances of Emulicious running the game to test link cable mode](/assets/posts/2026-03-15-gameboy-royal-game-of-ur/emulicious_link_cable.png)
 
 For those wondering, this required the full $50 worth of API credits and without them would have been a week or two worth of Claude Code's Pro subscription. Those credits were very timely, as without them this feature wouldn't have been implemented.
 
@@ -235,6 +242,11 @@ The [engineering of the Game Boy](https://www.youtube.com/watch?v=BKm45Az02YE) i
 
 While working on this game and starting to understand some of the limitations of the system, I found myself increasingly impressed with some of my childhood games. For instance, in Jurassic Park the player can walk behind elements (walls and trees), which seems impossible given how the background layer, sprites and the window layer interact, yet they pulled this off. The graphics of Donkey Kong Land always were ahead of the competition, but knowing what I know now it seems even more impossible what those developers pulled off! The sheer size of Pokémon Gold/Silver/Crystal also amazes me, while using multiple banks for storage, these games are huge.
 
+<div class="gallery-2-col" markdown="1">
+![In Jurassic Park the main player can go behind foliage](/assets/posts/2026-03-15-gameboy-royal-game-of-ur/jurassic_park.png){:.small-image}
+![Donkey Kong Land on the Game Boy had incredible graphics](/assets/posts/2026-03-15-gameboy-royal-game-of-ur/donkey_kong_land.png){:.small-image}
+</div>
+
 ### On the Royal Game of Ur Itself
 
 Most racing-style board games are fairly random; luck drives the entire game and the players don't have much agency over the outcome. Here, you have a surprising amount of control. The use of four binary dice favors rolling a two, with 1 and 3 being slightly less likely and the extremes 0 and 4 being quite rare. This reduces the frustration of rolling a single D6. Having multiple pieces on the board and deciding which one to move allows for more strategy and planning than one might think.
@@ -248,9 +260,6 @@ There are tricks you can do with graphics: not only are there cool things you ca
 
 Running the ROM on hardware would be awesome as well, but this will become pricey. I'd have to figure out how to make the carts (at the very least I'd have to purchase a device to write the ROM to a cart) but also acquire suitable handhelds, a pair of suitable handhelds to test the link cable mode. Real devices are getting expensive around here, too expensive to justify this (I have plenty of handhelds that can play GB games through emulation just fine), but there might be some options like the Funny Playing Game Boy Color (FPGBC), which is an FPGA-based system that emulates the Game Boy Color at the hardware level and supports carts and link cable. It is tempting though...
 
-## Can I Play the Game?
-
-Not just yet, I'll release it soon, but I'm currently figuring out what the best way is to do so! 
 
 ## Additional Reading
 
@@ -290,6 +299,6 @@ Not just yet, I'll release it soon, but I'm currently figuring out what the best
 
 ## Acknowledgements
 
-The header image was generated using [Gemini](https://gemini.google.com/app) starting from a [public domain image](https://commons.wikimedia.org/wiki/File:British_Museum_Royal_Game_of_Ur.jpg)
+The header image was generated using [Gemini](https://gemini.google.com/app) starting from a [public domain image](https://commons.wikimedia.org/wiki/File:British_Museum_Royal_Game_of_Ur.jpg).
 
 
