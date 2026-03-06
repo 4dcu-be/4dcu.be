@@ -18,6 +18,8 @@ Want to try the game! Grab it from [itch.io](https://sebastianproost.itch.io/the
 <iframe frameborder="0" src="https://itch.io/embed/4341652?link_color=579375" width="552" height="167" style="max-width: 100%;"><a href="https://sebastianproost.itch.io/the-royal-game-of-ur">The Royal Game of Ur by sebastian.proost</a></iframe>
 </div>
 
+If you want to have a look at the code of this project, you can [find it on GitHub](https://github.com/sepro/dmg-royal-game-of-ur).
+
 ## Why the Game Boy? Why Agentic Coding?
 
 I grew up with the Nintendo Game Boy; it was the first console I had and I have fond memories playing those games. But it is also an older system and Game Boy homebrew development, even with tools like [GBDK](https://gbdk.org/), is a niche with a small but dedicated community. For agentic coding tools like [Claude Code](https://claude.ai/), that matters: when working on a Python project with popular libraries like pandas or flask, there is plenty of reference material available. In [my previous experiment]({% post_url 2025/2025-12-20-rust-experiment %}), porting a genetic art algorithm to Rust, Claude Code performed impressively, but Rust is a well-documented, popular language. I wanted to test if Claude Code could handle a much less common ecosystem, where documentation is sparser and the community is smaller.
