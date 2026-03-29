@@ -24,7 +24,8 @@
       "Bash(sass:*)",
       "WebFetch(domain:bgb.bircd.org)",
       "WebFetch(domain:en.wikipedia.org)",
-      "WebFetch(domain:funnyplaying.com)"
+      "WebFetch(domain:funnyplaying.com)",
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []
