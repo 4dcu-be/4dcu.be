@@ -154,6 +154,31 @@
 		<li>
 			<div data-aos="fade-in">
 				<h2>
+					<a class="post-link" href="/diy/2021/03/24/MQTT.html">Adding Aqara Sensors to Home Assistant</a>
+				</h2>
+				<section class="post-excerpt" itemprop="description">
+					<a class="post-link" href="/diy/2021/03/24/MQTT.html">
+						<img class="post-excerpt-image" src="/assets/images/thumbnails/aqara_sensor.jpg" alt="thumbnail for Adding Aqara Sensors to Home Assistant" width="430" height="288" loading=lazy/>
+					</a>
+					<p>Home Assistant is running great! It is time to add some more devices to my setup, and since all groundwork to add Zigbee devices using Zigbee2MQTT was done previously (check out this post) it makes sense to add more devices that support this protocol. For this post I picked up...</p>
+					
+				</section>
+				<section class="post-meta">
+					<div class="post-date">Reading time: <strong> 5 minutes </strong></div>
+					<div class="post-categories">Posted March 24, 2021
+					in 
+						
+						<a href="/category/diy">DIY</a>
+						
+					
+					</div>
+				</section>
+			</div>
+		</li>
+		
+		<li>
+			<div data-aos="fade-in">
+				<h2>
 					<a class="post-link" href="/programming/2021/03/19/Code-Nugget-PCA-with-loadings.html">PCA Plots with Loadings in Python</a>
 				</h2>
 				<section class="post-excerpt" itemprop="description">
@@ -309,41 +334,16 @@
 			</div>
 		</li>
 		
-		<li>
-			<div data-aos="fade-in">
-				<h2>
-					<a class="post-link" href="/programming/2021/01/09/Google-Cloud-Functions.html">Setting up a Google Cloud Function</a>
-				</h2>
-				<section class="post-excerpt" itemprop="description">
-					<a class="post-link" href="/programming/2021/01/09/Google-Cloud-Functions.html">
-						<img class="post-excerpt-image" src="/assets/images/thumbnails/server_header.jpg" alt="thumbnail for Setting up a Google Cloud Function" width="430" height="288" loading=lazy/>
-					</a>
-					<p>With Google’s Cloud Functions you can make simple microservices that can perform a task on Google’s infrastructure. This allows some functionality of an app to be moved to the cloud. This can be useful in a number of cases; for instance the Dashboard from a previous post. When running scripts...</p>
-					
-				</section>
-				<section class="post-meta">
-					<div class="post-date">Reading time: <strong> 7 minutes </strong></div>
-					<div class="post-categories">Posted January 9, 2021
-					in 
-						
-						<a href="/category/programming">Programming</a>
-						
-					
-					</div>
-				</section>
-			</div>
-		</li>
-		
 	</ul>
 	<div class="category-wrapper">
 	<h3>Categories</h3>
 	<ul class="category-list">
 		
 		
-		<li><a href="/category/programming">Programming</a> <span class="post-count">(47)</span></li>
+		<li><a href="/category/programming">Programming</a> <span class="post-count">(48)</span></li>
 		
 		
-		<li><a href="/category/games">Games</a> <span class="post-count">(21)</span></li>
+		<li><a href="/category/games">Games</a> <span class="post-count">(22)</span></li>
 		
 		
 		<li><a href="/category/diy">DIY</a> <span class="post-count">(31)</span></li>
@@ -355,7 +355,7 @@
 		<li><a href="/category/biology">Biology</a> <span class="post-count">(3)</span></li>
 		
 		
-		<li><a href="/category/ai">AI</a> <span class="post-count">(4)</span></li>
+		<li><a href="/category/ai">AI</a> <span class="post-count">(5)</span></li>
 		
 	</ul>
 	<br />
@@ -363,7 +363,7 @@
 	<ul class="category-list">
 		
 		
-			<li><a href="/year/2026">2026</a> <span class="post-count">(1)</span></li>
+			<li><a href="/year/2026">2026</a> <span class="post-count">(2)</span></li>
 		
 			<li><a href="/year/2025">2025</a> <span class="post-count">(4)</span></li>
 		
@@ -558,7 +558,7 @@
 				
 				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
 				
-			    <p class="text">Last update: March 6, 2026</p>
+			    <p class="text">Last update: March 29, 2026</p>
 			  
 			</div>
 		</div>
@@ -661,6 +661,62 @@ $(document).ready(function() {
     window.addEventListener('DOMContentLoaded', (event) => {
         new PagefindUI({ element: "#search" });
     });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
 </script>
 
 

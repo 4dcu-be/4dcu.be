@@ -7,6 +7,10 @@ categories: ai programming games
 tags: cpp nintendo nds retrogaming homebrew ai claude-code gemini rubiks-cube devkitpro docker
 cover: "/assets/posts/2026-03-29-dscube-twist-puzzle-nds/header.jpg"
 thumbnail: "/assets/images/thumbnails/dscube.jpg"
+gallery_items:
+  - image: "/assets/posts/2026-03-29-dscube-twist-puzzle-nds/solved_02.jpg"
+    gallery_image: "/assets/images/gallery/dscube.jpg"
+    description: "A Nintendo DS Lite running my twist cube game DSCube."
 author: Sebastian Proost
 ---
 
@@ -19,10 +23,12 @@ would do: I wrote a Rubik's cube simulator for the Nintendo DS to practice.
 That little project, **DSCube**, sat dormant for nearly two decades. The code still compiled (barely), but its
 text-based menus and bare-bones interface were showing their age. Recently, I decided to revisit it, not out
 of pure nostalgia, but to see how far AI-assisted development could push a project that I never had the time
-or graphical skills to finish properly. The result is a fully polished twist puzzle simulator with 3D rendering,
+or graphical skills to finish to a point I was really happy with. The result is a fully polished twist puzzle simulator with 3D rendering,
 touch controls, custom artwork, and support for 2x2, 3x3, and 4x4 cubes.
 
-![DSCube box art](/assets/posts/2026-03-29-dscube-twist-puzzle-nds/box_art.jpg)
+If you want to try the final game, head over to [itch.io](https://sebastianproost.itch.io/dscube) and download the ROM there.
+
+![DSCube box art](/assets/posts/2026-03-29-dscube-twist-puzzle-nds/box_art.jpg){:.medium-image}
 
 ## The Original: C++ Practice on a Dual-Screen Handheld
 
@@ -161,9 +167,6 @@ This is where the project went from "functional" to "finished." The old text-bas
 full button-based UI system supporting both touch and D-pad navigation:
 
 ![Title screen](/assets/posts/2026-03-29-dscube-twist-puzzle-nds/main_menu_01.jpg)
-![Title screen](/assets/posts/2026-03-29-dscube-twist-puzzle-nds/main_menu_02.jpg)
-
-![Gameplay](/assets/posts/2026-03-29-dscube-twist-puzzle-nds/countdown.jpg)
 
 The game flows through a clean state machine: title screen, countdown (with animated 3-2-1-GO graphics), playing,
 paused, and solved states. A `ButtonGroup` class handles spatial navigation, when you press a direction on the
@@ -172,7 +175,7 @@ the DS's 256x192 screen.
 
 ### Graphics: Where Gemini Stepped In
 
-This is one area where my skills simply don't reach. I used **Google Gemini** to generate all the visual assets:
+This is one area where my skills simply don't reach. I used [**Google Gemini**](https://gemini.google.com/app) to generate all the visual assets:
 button graphics in normal and focused states for each cube size, background screens for every game state, street
 art-style title text, and even mock box art. The assets were then converted to the NDS's RGB555 format using a
 Python script:
@@ -187,6 +190,8 @@ Each pixel gets packed into a 16-bit word with 5 bits per channel and an alpha b
 compiled directly into the ROM via devkitARM's `bin2o` tool, making them available as byte arrays in C. It's a
 simple pipeline, but it works. Having an AI generate the source assets meant I could iterate on the visual
 style without being blocked by my own artistic limitations.
+
+![Gameplay](/assets/posts/2026-03-29-dscube-twist-puzzle-nds/countdown.jpg)
 
 ### The libfb Compatibility Layer
 
@@ -215,7 +220,7 @@ library and the API I needed, and got a working replacement.
 
 Working on this project in 2026 versus 2007 is a very different experience. Here's what stood out:
 
-**The toolchain is solved.** Twenty years ago, getting devkitPro running was itself a multi-day project. With a Docker image, a `Dockerfile` and a `Makefile` give you a reproducible build in minutes. This
+**Setting up a toolchain is a breeze now.** Twenty years ago, getting devkitPro running was itself a multi-day project. With Docker, a `Dockerfile` and a `Makefile` can give you a reproducible build environment in minutes. This
 is not an AI thing, it's the cumulative effect of two decades of open-source tooling improvements.
 
 **AI handles the tedious work.** Code reviews, refactoring, writing compatibility layers, implementing
@@ -229,7 +234,7 @@ produced usable assets from text descriptions, and while they're not pixel-perfe
 I could draw by hand.
 
 **The hard parts are still hard.** Touch-based 3D selection (using `gluPickMatrix` for hit testing), the 4x4
-solved-state detection algorithm, and camera math — these required the same careful thinking they always did. AI can
+solved-state detection algorithm, and camera math, these required the same careful thinking they always did. AI can
 help implement a solution once you've designed it, but the design still needs a human who understands the problem
 space.
 
@@ -240,18 +245,11 @@ but it can't see your screen.
 
 ## Running It Yourself
 
-If you want to try DSCube, you have two options:
+If you want to try DSCube, first grab it from [itch.io](https://sebastianproost.itch.io/dscube). To run it you have two options:
 
-1. **On real hardware**: Flash `dscube.nds` to a DS flashcart
+1. **On real hardware**: Copy `dscube.nds` to a DS flashcart
 2. **In an emulator**: Load it in [melonDS](https://melonds.kuribo64.net/) or [DeSmuME](https://desmume.org/)
 
-To build from source, clone the repo and use the Docker-based toolchain:
-
-```bash
-make          # produces dscube.nds
-make debug    # single-rotation scramble for testing
-make clean    # remove build artifacts
-```
 
 ![Solved](/assets/posts/2026-03-29-dscube-twist-puzzle-nds/solved_closeup.jpg)
 ![Solved](/assets/posts/2026-03-29-dscube-twist-puzzle-nds/solved_01.jpg)
@@ -276,8 +274,6 @@ complete" is exactly the kind of gap these tools are best at closing.
 It's strange to finally see this project finished. Twenty years ago I shelved it because life (and a PhD thesis)
 got in the way. The core logic was always sound, it just needed more time and effort than I could justify.
 Now, with some AI help, it's done.
-
-The source code is available on [GitHub](https://github.com/sepro/dscube).
 
 
 

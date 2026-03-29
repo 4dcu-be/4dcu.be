@@ -573,6 +573,62 @@ $(document).ready(function() {
     });
 </script>
 
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
 
 <!-- Custom page specific js files -->
   

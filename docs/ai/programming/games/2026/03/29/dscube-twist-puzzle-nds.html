@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Revisiting a 20-Year-Old NDS Project with AI</title>
+  <meta name="description" content="Almost twenty years ago, during my PhD in bioinformatics, I needed to brush up on C++. Our lab was doing comparative genomics, studying how genomes evolve at...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2026">
+  
+
+  <!-- External libraries -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Almost twenty years ago, during my PhD in bioinformatics, I needed to brush up on C++. Our lab was doing comparative genomics, studying how genomes evolve at..." />
+  <meta property="og:url" content="https://blog.4dcu.be/ai/programming/games/2026/03/29/dscube-twist-puzzle-nds.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Revisiting a 20-Year-Old NDS Project with AI" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2026-03-29-dscube-twist-puzzle-nds/header.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Revisiting a 20-Year-Old NDS Project with AI">
+  <meta name="twitter:description" content="Almost twenty years ago, during my PhD in bioinformatics, I needed to brush up on C++. Our lab was doing comparative genomics, studying how genomes evolve at...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2026-03-29-dscube-twist-puzzle-nds/header.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/ai/programming/games/2026/03/29/dscube-twist-puzzle-nds.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="canonical" href="https://blog.4dcu.be/ai/programming/games/2026/03/29/dscube-twist-puzzle-nds.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	<link rel="stylesheet" href="/css/main.css">
+
+	<!-- PageFind -->
+	<script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+
+	<script type='text/javascript'>
+	//<![CDATA[
+	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+	//]]>
+	</Script>
+</head>
+
+
+  <body class="has-navbar-fixed-top">
+
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/" class="navbar-item">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+      
+    </a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarMenu" class="navbar-menu">
+    <div class="navbar-end">
+      
+<a href="/about/" class="navbar-item">
+  About
+</a>
+  
+<a href="/gallery/" class="navbar-item">
+  Gallery
+</a>
+  
+<a href="/posts/" class="navbar-item">
+  Posts
+</a>
+  
+<a href="#" class="navbar-item nav-link-contact">Contact</a>
+<a href="#" class="navbar-item nav-link-search">
+  <i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i>
+</a>
+
+    </div>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+        <img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/dscube.jpg" style="display:none" />
+<div class="post">
+
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  
+  <img alt="Post cover" class="hero-background is-transparent" src="/assets/posts/2026-03-29-dscube-twist-puzzle-nds/header.jpg" />
+  
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title has-text-white">Revisiting a 20-Year-Old NDS Project with AI</h1>
+      
+      <p class="info has-text-white"><em>Reviving a Nintendo DS homebrew project with Claude Code and Gemini</em></p>
+      
+    </div>
+  </div>
+</section>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted March 29, 2026 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/ai">AI</a>, 
+    
+  
+    
+    <a href="/category/programming">Programming</a>, 
+    
+  
+    
+    <a href="/category/games">Games</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content" data-pagefind-body>
+  <p>Almost twenty years ago, during my PhD in bioinformatics, I needed to brush up on C++. Our lab was doing
+comparative genomics, studying how genomes evolve at the structural level, particularly the effects of whole
+genome duplications in plant genomes. One of the key tools we used, <a href="https://academic.oup.com/bioinformatics/article/24/1/127/204920">i-ADHoRe 2.0</a>, had a bug that prevented me
+from scaling it to more genomes, and I was going to have to fix it. So I did what any self-respecting nerd
+would do: I wrote a Rubik’s cube simulator for the Nintendo DS to practice.</p>
+
+<p>That little project, <strong>DSCube</strong>, sat dormant for nearly two decades. The code still compiled (barely), but its
+text-based menus and bare-bones interface were showing their age. Recently, I decided to revisit it, not out
+of pure nostalgia, but to see how far AI-assisted development could push a project that I never had the time
+or graphical skills to finish to a point I was really happy with. The result is a fully polished twist puzzle simulator with 3D rendering,
+touch controls, custom artwork, and support for 2x2, 3x3, and 4x4 cubes.</p>
+
+<p>If you want to try the final game, head over to <a href="https://sebastianproost.itch.io/dscube">itch.io</a> and download the ROM there.</p>
+
+<p><a href="/assets/posts/2026-03-29-dscube-twist-puzzle-nds/box_art.jpg" class="lightgallery-link" data-sub-html="DSCube box art">
+<img src="/assets/posts/2026-03-29-dscube-twist-puzzle-nds/box_art.jpg" alt="DSCube box art" height="976" width="1095" class="medium-image" data-src="/assets/posts/2026-03-29-dscube-twist-puzzle-nds/box_art.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="the-original-c-practice-on-a-dual-screen-handheld">The Original: C++ Practice on a Dual-Screen Handheld</h2>
+
+<p>The Nintendo DS was a fascinating platform to target. Its ARM9 processor, hardware-accelerated 3D engine, and
+touchscreen made it feel like a real development challenge — not a toy. The original DSCube had the core puzzle
+logic working: you could rotate layers on different sized cubes rendered in 3D on the top screen. But everything around it
+was rough. Menus were text-only, there was no visual polish, and the code was the kind of “it works, don’t touch
+it” C++ that a bioinformatician writes when learning the language.</p>
+
+<p>The original NDS toolchain was also a different world. Setting up devkitPro, getting libnds configured, and
+understanding the hardware registers, all of that required trawling through sparse documentation and forum posts.
+There was no Stack Overflow to speak of for NDS homebrew. You had a few wikis, some example code, and a lot of
+trial and error.</p>
+
+<h2 id="two-decades-later">Two Decades Later</h2>
+
+<p>Fast-forward to 2026. I’ve been exploring how AI-assisted coding can help push hobby projects to a level I
+couldn’t reach alone, whether that’s <a href="/ai/programming/2025/12/20/rust-experiment.html">porting a genetic art algorithm to Rust</a> or <a href="/ai/programming/games/2026/03/15/gameboy-royal-game-of-ur.html">building a Game Boy game from
+scratch</a>. Each project teaches me something new about where AI excels and where human judgment is still essential.</p>
+
+<p>DSCube felt like the perfect candidate. The core logic was solid but the surrounding code was messy. The UI needed
+a complete overhaul. All of this is exactly the kind of work where AI assistance works well: refactoring existing code, implementing
+well-defined features, and handling the tedious parts so I can focus on design decisions.</p>
+
+<h2 id="setting-up-a-modern-build-environment">Setting Up a Modern Build Environment</h2>
+
+<p>The first order of business was getting the project to build reliably. The NDS toolchain has evolved significantly
+since the mid-2000s, and I wanted a reproducible setup. I put together a Dockerfile based on the official
+devkitPro image:</p>
+
+<div class="language-dockerfile large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Multi-stage build: start from the official devkitPro devkitARM image</span>
+<span class="c"># which includes the full NDS toolchain (devkitARM, libnds, ndstool, etc.)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">devkitpro/devkitarm:latest</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">devkitarm</span>
+
+<span class="c"># Use a modern Debian base for the final image so we get recent Python</span>
+<span class="c"># and can install Node.js / Claude Code without fighting old system packages</span>
+<span class="k">FROM</span><span class="s"> debian:bookworm-slim</span>
+
+<span class="c"># Carry over the entire devkitPro toolchain from the official image</span>
+<span class="k">COPY</span><span class="s"> --from=devkitarm /opt/devkitpro /opt/devkitpro</span>
+
+<span class="c"># devkitPro environment variables expected by all NDS Makefiles</span>
+<span class="k">ENV</span><span class="s"> DEVKITPRO=/opt/devkitpro</span>
+<span class="k">ENV</span><span class="s"> DEVKITARM=${DEVKITPRO}/devkitARM</span>
+<span class="k">ENV</span><span class="s"> PATH=${DEVKITPRO}/tools/bin:${DEVKITARM}/bin:${PATH}</span>
+
+<span class="c"># Core build tools and utilities needed for NDS development and general use</span>
+<span class="k">RUN </span>apt-get update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> <span class="nt">--no-install-recommends</span> <span class="se">\
+</span>    <span class="c"># Build essentials for compiling native helper tools or asset pipelines</span>
+    build-essential \
+    make \
+    # Python 3.11+ ships with Bookworm
+    python3 \
+    python3-pip \
+    python3-venv \
+    # Node.js needed for Claude Code (npm method) and JS-based asset tools
+    curl \
+    ca-certificates \
+    # Version control
+    git \
+    # Useful for NDS ROM inspection and data manipulation
+    xxd \
+    # C/C++ code formatter (equivalent to black/ruff for Python)
+    clang-format \
+    # Shell niceties for devcontainer use
+    less \
+    nano \
+    &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+# Install Node.js 22 LTS via NodeSource for Claude Code compatibility
+<span class="k">RUN </span>curl <span class="nt">-fsSL</span> https://deb.nodesource.com/setup_22.x | bash - <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> <span class="nt">--no-install-recommends</span> nodejs <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> <span class="nb">rm</span> <span class="nt">-rf</span> /var/lib/apt/lists/<span class="k">*</span>
+
+<span class="c"># Install Claude Code globally via npm</span>
+<span class="c"># The native installer requires an interactive shell, so npm is more</span>
+<span class="c"># straightforward inside a container build</span>
+<span class="k">RUN </span>npm <span class="nb">install</span> <span class="nt">-g</span> @anthropic-ai/claude-code
+
+<span class="c"># Create a non-root user for devcontainer use</span>
+<span class="k">ARG</span><span class="s"> USERNAME=vscode</span>
+<span class="k">ARG</span><span class="s"> USER_UID=1000</span>
+<span class="k">ARG</span><span class="s"> USER_GID=${USER_UID}</span>
+<span class="k">RUN </span>groupadd <span class="nt">--gid</span> <span class="k">${</span><span class="nv">USER_GID</span><span class="k">}</span> <span class="k">${</span><span class="nv">USERNAME</span><span class="k">}</span> <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> useradd <span class="nt">--uid</span> <span class="k">${</span><span class="nv">USER_UID</span><span class="k">}</span> <span class="nt">--gid</span> <span class="k">${</span><span class="nv">USER_GID</span><span class="k">}</span> <span class="nt">-m</span> <span class="k">${</span><span class="nv">USERNAME</span><span class="k">}</span> <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> apt-get update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> <span class="nt">--no-install-recommends</span> <span class="nb">sudo</span> <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">USERNAME</span><span class="k">}</span><span class="s2"> ALL=(ALL) NOPASSWD:ALL"</span> <span class="o">&gt;&gt;</span> /etc/sudoers <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> <span class="nb">rm</span> <span class="nt">-rf</span> /var/lib/apt/lists/<span class="k">*</span>
+
+<span class="k">USER</span><span class="s"> ${USERNAME}</span>
+<span class="k">WORKDIR</span><span class="s"> /workspace</span>
+
+</code></pre></div></div>
+
+<p>This multi-stage build pulls the full NDS toolchain from devkitPro’s official image and drops it onto a modern
+Debian base. The container includes Python (for asset conversion scripts), Node.js (for Claude Code), and
+clang-format for consistent code style. With this setup, anyone can clone the repo and build the ROM with a
+simple <code class="language-plaintext highlighter-rouge">make</code>.</p>
+
+<h2 id="the-modernization-process">The Modernization Process</h2>
+
+<p>My workflow with Claude Code followed a pattern I’ve refined over several projects. First, I work out a markdown document with
+step-by-step changes I would like to make and detail how I want them implemented. Then I point the AI at a specific step, letting it implement it and then remove that step from the list. For substantial changes, I
+do an extra round in <strong>plan mode</strong>, having Claude draft one or more implementation plans for a given step. I review that plan carefully, revise if needed and then let Claude implement while I check the outcome. For straightforward tasks I skip the planning phase, and for trivial fixes I’ll drop
+down to the Sonnet model to save time and tokens.</p>
+
+<h3 id="cleaning-up-the-foundation">Cleaning Up the Foundation</h3>
+
+<p>The first passes were all about code quality. Claude Code performed a thorough code review, identifying dead
+code, inconsistent naming, redundant logic, and potential bugs. One early win was consolidating loose global
+variables into proper objects, a <code class="language-plaintext highlighter-rouge">GameSession</code> class to track timer and move state, and an <code class="language-plaintext highlighter-rouge">nds_init</code> wrapper
+class for hardware initialization:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">GameSession</span>
+<span class="p">{</span>
+  <span class="nl">public:</span>
+    <span class="kt">void</span> <span class="n">start</span><span class="p">(</span><span class="kt">int</span> <span class="n">initialMoves</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="n">reset</span><span class="p">();</span>
+    <span class="kt">bool</span> <span class="n">isSolved</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">getMoves</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">getElapsedTicks</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>This kind of refactoring is tedious to do by hand but goes fast with a coding assistant. Claude
+consistently identified patterns I would have missed, unused declarations, magic numbers that should be
+constants, functions that could be simplified.</p>
+
+<h3 id="the-interface-overhaul">The Interface Overhaul</h3>
+
+<p>This is where the project went from “functional” to “finished.” The old text-based menus were replaced with a
+full button-based UI system supporting both touch and D-pad navigation:</p>
+
+<p><a href="/assets/posts/2026-03-29-dscube-twist-puzzle-nds/main_menu_01.jpg" class="lightgallery-link" data-sub-html="Title screen">
+<img src="/assets/posts/2026-03-29-dscube-twist-puzzle-nds/main_menu_01.jpg" alt="Title screen" height="720" width="1080" data-src="/assets/posts/2026-03-29-dscube-twist-puzzle-nds/main_menu_01.jpg" loading="lazy" />
+</a></p>
+
+<p>The game flows through a clean state machine: title screen, countdown (with animated 3-2-1-GO graphics), playing,
+paused, and solved states. A <code class="language-plaintext highlighter-rouge">ButtonGroup</code> class handles spatial navigation, when you press a direction on the
+D-pad, it finds the nearest button in that direction, which sounds simple but requires some care to get right on
+the DS’s 256x192 screen.</p>
+
+<h3 id="graphics-where-gemini-stepped-in">Graphics: Where Gemini Stepped In</h3>
+
+<p>This is one area where my skills simply don’t reach. I used <a href="https://gemini.google.com/app"><strong>Google Gemini</strong></a> to generate all the visual assets:
+button graphics in normal and focused states for each cube size, background screens for every game state, street
+art-style title text, and even mock box art. The assets were then converted to the NDS’s RGB555 format using a
+Python script:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># tools/png2bin.py - Convert images to NDS RGB555 format
+</span><span class="n">r5</span><span class="p">,</span> <span class="n">g5</span><span class="p">,</span> <span class="n">b5</span> <span class="o">=</span> <span class="n">r</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">,</span> <span class="n">g</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">,</span> <span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span>
+<span class="n">pixel</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">15</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">b5</span> <span class="o">&lt;&lt;</span> <span class="mi">10</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">g5</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="o">|</span> <span class="n">r5</span>
+</code></pre></div></div>
+
+<p>Each pixel gets packed into a 16-bit word with 5 bits per channel and an alpha bit. These <code class="language-plaintext highlighter-rouge">.bin</code> files are then
+compiled directly into the ROM via devkitARM’s <code class="language-plaintext highlighter-rouge">bin2o</code> tool, making them available as byte arrays in C. It’s a
+simple pipeline, but it works. Having an AI generate the source assets meant I could iterate on the visual
+style without being blocked by my own artistic limitations.</p>
+
+<p><a href="/assets/posts/2026-03-29-dscube-twist-puzzle-nds/countdown.jpg" class="lightgallery-link" data-sub-html="Gameplay">
+<img src="/assets/posts/2026-03-29-dscube-twist-puzzle-nds/countdown.jpg" alt="Gameplay" height="675" width="1080" data-src="/assets/posts/2026-03-29-dscube-twist-puzzle-nds/countdown.jpg" loading="lazy" />
+</a></p>
+
+<h3 id="the-libfb-compatibility-layer">The libfb Compatibility Layer</h3>
+
+<p>One thing that barely registered as a challenge, but would have been a headache twenty years ago, was that the
+<code class="language-plaintext highlighter-rouge">libfb</code> library my original code depended on had been removed from libnds at some point. Claude Code wrote a
+drop-in compatibility layer (<code class="language-plaintext highlighter-rouge">libfb_compat</code>) that reimplements the framebuffer text rendering and image blitting
+on the sub screen using <code class="language-plaintext highlighter-rouge">bgInitSub</code> and <code class="language-plaintext highlighter-rouge">dmaCopy</code>. A software framebuffer is composed each frame and DMA’d to
+VRAM:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="n">u16</span> <span class="n">fb_buffer</span><span class="p">[</span><span class="mi">256</span> <span class="o">*</span> <span class="mi">192</span><span class="p">];</span>  <span class="c1">// software framebuffer</span>
+
+<span class="kt">void</span> <span class="nf">bg_swapBuffers</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">dmaCopy</span><span class="p">(</span><span class="n">fb_buffer</span><span class="p">,</span> <span class="n">bgGetGfxPtr</span><span class="p">(</span><span class="n">bg_id</span><span class="p">),</span> <span class="mi">256</span> <span class="o">*</span> <span class="mi">192</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">u16</span><span class="p">));</span>
+    <span class="c1">// Reset to background image for next frame</span>
+    <span class="n">dmaCopy</span><span class="p">(</span><span class="n">current_bg</span><span class="p">,</span> <span class="n">fb_buffer</span><span class="p">,</span> <span class="mi">256</span> <span class="o">*</span> <span class="mi">192</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">u16</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>I mention this because it’s a perfect example of the kind of problem that used to consume an entire weekend of digging 
+through documentation and debugging. With Claude Code, it was done in one step. I described the missing
+library and the API I needed, and got a working replacement.</p>
+
+<h2 id="then-vs-now-how-development-has-changed">Then vs. Now: How Development Has Changed</h2>
+
+<p>Working on this project in 2026 versus 2007 is a very different experience. Here’s what stood out:</p>
+
+<p><strong>Setting up a toolchain is a breeze now.</strong> Twenty years ago, getting devkitPro running was itself a multi-day project. With Docker, a <code class="language-plaintext highlighter-rouge">Dockerfile</code> and a <code class="language-plaintext highlighter-rouge">Makefile</code> can give you a reproducible build environment in minutes. This
+is not an AI thing, it’s the cumulative effect of two decades of open-source tooling improvements.</p>
+
+<p><strong>AI handles the tedious work.</strong> Code reviews, refactoring, writing compatibility layers, implementing
+well-specified features, … these are tasks where Claude Code does well without much direction.
+Twenty years ago, this amount of polishing would have taken weeks or months of work on and off during my spare time,
+and honestly, I probably would have given up.</p>
+
+<p><strong>Graphics are no longer a blocker.</strong> For a hobbyist programmer with little artistic skill, generating decent
+button graphics and backgrounds used to mean either settling for programmer art or finding a collaborator. Gemini
+produced usable assets from text descriptions, and while they’re not pixel-perfect, they’re much better than what
+I could draw by hand.</p>
+
+<p><strong>The hard parts are still hard.</strong> Touch-based 3D selection (using <code class="language-plaintext highlighter-rouge">gluPickMatrix</code> for hit testing), the 4x4
+solved-state detection algorithm, and camera math, these required the same careful thinking they always did. AI can
+help implement a solution once you’ve designed it, but the design still needs a human who understands the problem
+space.</p>
+
+<p><strong>Debugging embedded targets hasn’t changed much.</strong> When something goes wrong on the NDS, you’re still staring
+at a black screen or garbled pixels. The emulators (melonDS, DeSmuME) are better than they were, but
+debugging on constrained hardware with no stdout is still just as painful. Claude Code can suggest fixes,
+but it can’t see your screen.</p>
+
+<h2 id="running-it-yourself">Running It Yourself</h2>
+
+<p>If you want to try DSCube, first grab it from <a href="https://sebastianproost.itch.io/dscube">itch.io</a>. To run it you have two options:</p>
+
+<ol>
+  <li><strong>On real hardware</strong>: Copy <code class="language-plaintext highlighter-rouge">dscube.nds</code> to a DS flashcart</li>
+  <li><strong>In an emulator</strong>: Load it in <a href="https://melonds.kuribo64.net/">melonDS</a> or <a href="https://desmume.org/">DeSmuME</a></li>
+</ol>
+
+<p><a href="/assets/posts/2026-03-29-dscube-twist-puzzle-nds/solved_closeup.jpg" class="lightgallery-link" data-sub-html="Solved">
+<img src="/assets/posts/2026-03-29-dscube-twist-puzzle-nds/solved_closeup.jpg" alt="Solved" height="675" width="1080" data-src="/assets/posts/2026-03-29-dscube-twist-puzzle-nds/solved_closeup.jpg" loading="lazy" />
+</a>
+<a href="/assets/posts/2026-03-29-dscube-twist-puzzle-nds/solved_01.jpg" class="lightgallery-link" data-sub-html="Solved">
+<img src="/assets/posts/2026-03-29-dscube-twist-puzzle-nds/solved_01.jpg" alt="Solved" height="675" width="1080" data-src="/assets/posts/2026-03-29-dscube-twist-puzzle-nds/solved_01.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="what-i-learned">What I Learned</h2>
+
+<p><strong>AI-assisted development scales down.</strong> Most of the attention around AI coding tools focuses on large codebases
+and modern frameworks. But it works surprisingly well on a 20-year-old C++ project targeting an ARM9 processor with
+4 MB of RAM. Claude Code understood the NDS APIs, the OpenGL-like rendering pipeline, and the constraints of the
+platform without needing a lot of context from me.</p>
+
+<p><strong>The best use of AI is multiplying existing knowledge.</strong> I understood the cube logic, the NDS hardware model,
+and what I wanted the finished product to look like. Claude Code and Gemini filled in the implementation gaps:
+the boilerplate, the compatibility code, the visual assets. If I had started this project from zero with no
+embedded programming experience, the AI assistance would have been far less effective.</p>
+
+<p><strong>Old projects are great AI benchmarks.</strong> If you want to understand what AI coding tools can actually do, try
+pointing them at your oldest, crustiest side project. The gap between “working but ugly” and “polished and
+complete” is exactly the kind of gap these tools are best at closing.</p>
+
+<p>It’s strange to finally see this project finished. Twenty years ago I shelved it because life (and a PhD thesis)
+got in the way. The core logic was always sound, it just needed more time and effort than I could justify.
+Now, with some AI help, it’s done.</p>
+
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/tag/cpp">cpp</a>,&nbsp;<a href="/tag/nintendo">nintendo</a>,&nbsp;<a href="/tag/nds">nds</a>,&nbsp;<a href="/tag/retrogaming">retrogaming</a>,&nbsp;<a href="/tag/homebrew">homebrew</a>,&nbsp;<a href="/tag/ai">ai</a>,&nbsp;<a href="/tag/claude-code">claude-code</a>,&nbsp;<a href="/tag/gemini">gemini</a>,&nbsp;<a href="/tag/rubiks-cube">rubiks-cube</a>,&nbsp;<a href="/tag/devkitpro">devkitpro</a>,&nbsp;<a href="/tag/docker">docker</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+	    
+    
+    
+  
+    
+    
+	    
+      <a href="//bsky.app/intent/compose?text=Revisiting+a+20-Year-Old+NDS+Project+with+AI%20https%3A%2F%2Fblog.4dcu.be%2Fai%2Fprogramming%2Fgames%2F2026%2F03%2F29%2Fdscube-twist-puzzle-nds.html"
+        target="_blank">
+        <i class="fa-brands fa-bluesky"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+	    
+    
+      <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fai%2Fprogramming%2Fgames%2F2026%2F03%2F29%2Fdscube-twist-puzzle-nds.html"
+        target="_blank">
+        <i class="fa-brands fa-square-facebook fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+	    
+    
+    
+      <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fai%2Fprogramming%2Fgames%2F2026%2F03%2F29%2Fdscube-twist-puzzle-nds.html"
+        target="_blank">
+        <i class="fa-brands fa-linkedin fa-lg"></i>
+      </a>
+    
+  
+    
+    
+      <a href="//x.com/share?text=Revisiting+a+20-Year-Old+NDS+Project+with+AI&url=https%3A%2F%2Fblog.4dcu.be%2Fai%2Fprogramming%2Fgames%2F2026%2F03%2F29%2Fdscube-twist-puzzle-nds.html&via="
+        target="_blank">
+        <i class="fa-brands fa-x-twitter fa-lg"></i>
+      </a>
+    
+	    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/ai/programming/games/2026/03/15/gameboy-royal-game-of-ur.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa-solid fa-square fa-stack-2x"></i>
+						<i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">The Royal Game Boy of Ur</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+		<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Site Map</strong></p>
+				<ul class="pages">
+					
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+				</ul>
+				<br />
+				<p><strong>Legal</strong></p>
+				<p><a href="/policy/">Privacy policy</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Contribute</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+				
+				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+
+</html>
