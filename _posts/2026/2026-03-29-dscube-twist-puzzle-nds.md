@@ -253,8 +253,8 @@ make debug    # single-rotation scramble for testing
 make clean    # remove build artifacts
 ```
 
-![Solved](/assets/posts/2026-03-29-dscube-twist-puzzle-nds/solved_closeup.png)
-![Solved](/assets/posts/2026-03-29-dscube-twist-puzzle-nds/solved_01.png)
+![Solved](/assets/posts/2026-03-29-dscube-twist-puzzle-nds/solved_closeup.jpg)
+![Solved](/assets/posts/2026-03-29-dscube-twist-puzzle-nds/solved_01.jpg)
 
 
 ## What I Learned
