@@ -31,7 +31,7 @@ touch controls, custom artwork, and support for 2x2, 3x3, and 4x4 cubes.
 If you want to try the final game, head over to [itch.io](https://sebastianproost.itch.io/dscube) and download the ROM there.
 
 <div style="text-align: center;">
-<iframe frameborder="0" src="https://itch.io/embed/4419149" width="552" height="167"><a href="https://sebastianproost.itch.io/dscube">DSCube by sebastian.proost</a></iframe>
+<iframe frameborder="0" src="https://itch.io/embed/4419149" width="552" height="167"  style="max-width: 100%;"><a href="https://sebastianproost.itch.io/dscube">DSCube by sebastian.proost</a></iframe>
 </div>
 
 ## The Original: C++ Practice on a Dual-Screen Handheld
