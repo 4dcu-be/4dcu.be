@@ -20,6 +20,8 @@ genome duplications in plant genomes. One of the key tools we used, [i-ADHoRe 2.
 from scaling it to more genomes, and I was going to have to fix it. So I did what any self-respecting nerd
 would do: I wrote a Rubik's cube simulator for the Nintendo DS to practice.
 
+![DSCube box art](/assets/posts/2026-03-29-dscube-twist-puzzle-nds/box_art.jpg){:.medium-image}
+
 That little project, **DSCube**, sat dormant for nearly two decades. The code still compiled (barely), but its
 text-based menus and bare-bones interface were showing their age. Recently, I decided to revisit it, not out
 of pure nostalgia, but to see how far AI-assisted development could push a project that I never had the time
@@ -28,7 +30,9 @@ touch controls, custom artwork, and support for 2x2, 3x3, and 4x4 cubes.
 
 If you want to try the final game, head over to [itch.io](https://sebastianproost.itch.io/dscube) and download the ROM there.
 
-![DSCube box art](/assets/posts/2026-03-29-dscube-twist-puzzle-nds/box_art.jpg){:.medium-image}
+<div style="text-align: center;">
+<iframe frameborder="0" src="https://itch.io/embed/4419149" width="552" height="167"><a href="https://sebastianproost.itch.io/dscube">DSCube by sebastian.proost</a></iframe>
+</div>
 
 ## The Original: C++ Practice on a Dual-Screen Handheld
 
@@ -37,6 +41,8 @@ touchscreen made it feel like a real development challenge — not a toy. The or
 logic working: you could rotate layers on different sized cubes rendered in 3D on the top screen. But everything around it
 was rough. Menus were text-only, there was no visual polish, and the code was the kind of "it works, don't touch
 it" C++ that a bioinformatician writes when learning the language.
+
+
 
 The original NDS toolchain was also a different world. Setting up devkitPro, getting libnds configured, and
 understanding the hardware registers, all of that required trawling through sparse documentation and forum posts.
