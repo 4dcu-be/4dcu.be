@@ -12,6 +12,7 @@ gallery_items:
   - image: "/assets/posts/2021-01-31-Gameboy-Zero/mkII.jpg"
     gallery_image: "/assets/images/gallery/gbz_mkII.jpg"
     description: "New GameBoy Zero based on Kite's Circuit Sword Lite"  
+    gallery_size: tall
   - image: "/assets/posts/2021-01-31-Gameboy-Zero/mkII_back.jpg"
     gallery_image: "/assets/images/gallery/gbz_mkII_back.jpg"
     description: "New GameBoy Zero based on Kite's Circuit Sword Lite"

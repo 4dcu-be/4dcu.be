@@ -12,6 +12,7 @@ gallery_items:
   - image: "/assets/posts/2023-09-04-comfyui-sdxl-workflows/sdxl_header.jpg"
     gallery_image: "/assets/images/gallery/sdxl_vermeer_gallery.jpg"
     description: "Girl with the Pearl Earring by Johannes Vermeer and a reimagined cinematic cyberpunk version using SDXL"
+    gallery_size: wide
 ---
 
 The latest version of our software, StableDiffusion, aptly named SDXL, has recently been launched. This has 

@@ -13,6 +13,7 @@ gallery_items:
   - image: "/assets/posts/2020-10-04-PythonKindleDashboard_2/final_dashboard.jpg"
     gallery_image: "/assets/images/gallery/kual_dashboard.jpg"
     description: "Custom dashboard running on a Kindle Paperwhite 3."
+    gallery_size: big
 ---
 
 In the [last post] a Kindle Paperwhite 3 was jailbroken, Python 3.8 installed and all boilerplate code was added to 

@@ -14,6 +14,7 @@ gallery_items:
   - image: "/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/vermeer_generation_05600.png"
     gallery_image: "/assets/images/gallery/vermeer_generation_5600.jpg"
     description: "Vermeer's Girl with a Pearl Earring re-drawn using a genetic algorithm in a minimalist style using a Voronoi diagram."
+    gallery_size: tall
 
 ---
 
