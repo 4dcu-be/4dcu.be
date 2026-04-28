@@ -13,6 +13,7 @@ gallery_items:
   - image: "/assets/posts/2024-11-11-diy-mechanical-watches/watch_gallery.jpeg"
     gallery_image: "/assets/images/gallery/three_watches.jpg"
     description: "On AliExpress you can find parts to build watches on a budget. Here are details on those I’ve built..."
+    gallery_size: wide
 ---
 
 I recently embarked on a watch-building journey, inspired by a YouTube video from [Elliot Coll], where he demonstrated how to [build custom watches using affordable parts](https://www.youtube.com/watch?v=g89vt-bN_Po). With the rise of accessible components from platforms like AliExpress, it’s now easier than ever to create unique, high-quality timepieces without breaking the bank. In this post, I’ll show off three watches I built using budget-friendly parts: a classic dress watch, a rugged titanium pilot, and a sleek chronograph. If you’ve ever considered building your own watch, this guide will walk you through the essentials, starting with movements like the NH35, NH72, and VK63. Each of these can be built for around €100 in parts, making it an affordable way to create custom timepieces.

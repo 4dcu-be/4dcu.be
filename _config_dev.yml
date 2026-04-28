@@ -79,8 +79,8 @@ thumbnail:
     height: '288'
 
 gallery_items:
-    resize_dimensions: '430x288^'
-    crop_dimensions: '430x288+0+0'
+    resize_dimensions: '860x576^'
+    crop_dimensions: '860x576+0+0'
 
 sass:
     style: compressed
