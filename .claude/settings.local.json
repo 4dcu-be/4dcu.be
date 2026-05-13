@@ -27,7 +27,9 @@
       "WebFetch(domain:funnyplaying.com)",
       "Bash(ls:*)",
       "Bash(grep:*)",
-      "Bash(identify miscore_site_main.png miscore_site_recent.png miscore_site_records.png cv_main.png cv_publications.png cv_media.png)"
+      "Bash(identify miscore_site_main.png miscore_site_recent.png miscore_site_records.png cv_main.png cv_publications.png cv_media.png)",
+      "Bash(git mv *)",
+      "Bash(bash /root/.claude/statusline-command.sh)"
     ],
     "deny": [],
     "ask": []

@@ -215,6 +215,55 @@
     max-width: 600px;
   }
 
+  // Captioned image (figure wrapper emitted when a markdown title is present)
+  figure.captioned-image {
+    display: block;
+    margin: 2rem auto;
+    width: 100%;
+
+    @media screen and (min-width: $tablet) {
+      width: 90%;
+    }
+
+    &.small-image  { max-width: 400px; }
+    &.medium-image { max-width: 600px; }
+    &.half-width {
+      width: 50%;
+
+      @media screen and (min-width: $tablet) {
+        width: 45%;
+      }
+    }
+    &.original-size { width: auto; }
+
+    > a, > img {
+      display: block;
+      margin: 0;
+    }
+
+    // Neutralize any <p> wrapper kramdown may add inside the figure
+    > p {
+      margin: 0;
+      display: contents;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 3px;
+      margin: 0;
+    }
+
+    figcaption {
+      text-align: left;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: $base-font-color;
+    }
+  }
+
   // Tables
   table {
     width: 100%;

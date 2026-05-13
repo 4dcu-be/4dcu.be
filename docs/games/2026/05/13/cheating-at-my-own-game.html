@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Creating cheats for my own Game Boy game</title>
+  <meta name="description" content="While the computer games I played in my childhood often came with cheat codes baked into the game that allowed you to pass parts where you got stuck, for han...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2026">
+  
+
+  <!-- External libraries -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="While the computer games I played in my childhood often came with cheat codes baked into the game that allowed you to pass parts where you got stuck, for han..." />
+  <meta property="og:url" content="https://blog.4dcu.be/games/2026/05/13/cheating-at-my-own-game.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Creating cheats for my own Game Boy game" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2026-05-13-cheating-at-my-own-game/game_genie_header.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Creating cheats for my own Game Boy game">
+  <meta name="twitter:description" content="While the computer games I played in my childhood often came with cheat codes baked into the game that allowed you to pass parts where you got stuck, for han...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2026-05-13-cheating-at-my-own-game/game_genie_header.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/games/2026/05/13/cheating-at-my-own-game.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="canonical" href="https://blog.4dcu.be/games/2026/05/13/cheating-at-my-own-game.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	<link rel="stylesheet" href="/css/main.css">
+
+	<!-- PageFind -->
+	<script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+
+	<script type='text/javascript'>
+	//<![CDATA[
+	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+	//]]>
+	</Script>
+</head>
+
+
+  <body class="has-navbar-fixed-top">
+
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/" class="navbar-item">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+      
+    </a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarMenu" class="navbar-menu">
+    <div class="navbar-end">
+      
+<a href="/about/" class="navbar-item">
+  About
+</a>
+  
+<a href="/gallery/" class="navbar-item">
+  Gallery
+</a>
+  
+<a href="/posts/" class="navbar-item">
+  Posts
+</a>
+  
+<a href="#" class="navbar-item nav-link-contact">Contact</a>
+<a href="#" class="navbar-item nav-link-search">
+  <i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i>
+</a>
+
+    </div>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+        <img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/game_genie.jpg" style="display:none" />
+<div class="post">
+
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  
+  <img alt="Post cover" class="hero-background is-transparent" src="/assets/posts/2026-05-13-cheating-at-my-own-game/game_genie_header.jpg" />
+  
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title has-text-white">Creating cheats for my own Game Boy game</h1>
+      
+      <p class="info has-text-white"><em>by probing and poking the ROM and RAM</em></p>
+      
+    </div>
+  </div>
+</section>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted May 13, 2026 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/games">Games</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content" data-pagefind-body>
+  <p>While the computer games I played in my childhood often came with cheat codes baked into the game that allowed you to pass parts where you got stuck, for handhelds like the Game Boy specialized hardware was needed. One of my most prized possessions from my childhood was such a device, the Game Genie, a large gray device that would sit on top of the Game Boy and physically slot between the cartridge and the console. When starting the device you needed to enter a number of codes which would change small parts of the game; you’d have infinite lives, wouldn’t take damage, deal more damage, … I had no idea how it worked, but I was very glad I owned one as it allowed me to get to the end credits of some games (like the notoriously difficult Gremlins 2) which 9-year-old me never would have been able to beat.</p>
+
+<p>In this post I want to do a deep dive into these devices, see how they actually worked, and see if we can create some functional cheat codes for my very own Game Boy game “The Royal Game of Ur” which I covered a few months ago.</p>
+
+<h2 id="the-royal-game-of-ur-for-game-boy">The Royal Game of Ur for Game Boy</h2>
+
+<p>In a <a href="/ai/programming/games/2026/03/15/gameboy-royal-game-of-ur.html">previous</a> post I walked you through my journey developing a Game Boy game from scratch, albeit with some serious assistance from Agentic Coding. This is an ancient board game, “The Royal Game of Ur”, adapted for the DMG Game Boy. The game can currently be downloaded from <a href="https://sebastianproost.itch.io/the-royal-game-of-ur">itch.io</a>. It is essentially a racing game: each player starts with seven pieces in a reserve pile and has to move them along a 14-tile route around the board, with the goal of being the first to get all seven pieces off the far end into the finished pile. Their tracks overlap in the middle of the board, where pieces can capture each other and send the captured piece back to its owner’s reserve. While it is fairly easy to beat the CPU opponent on easy, and there is no content which unlocks after winning a game, so there is no real reason to cheat… I want to see if I can do so anyway! Given this is my first ever attempt to make any sense of a system’s memory with this type of debugger, I also wanted to do this on a project where I know how things are implemented and can consult the source code if needed.</p>
+
+<h2 id="game-genie-vs-action-replaygameshark">Game Genie vs Action Replay/GameShark</h2>
+
+<p>There were different devices on the market and, while they all slot in between the console and cartridge and accept codes that change something, they actually leverage different tricks to create a cheat.</p>
+
+<p>The Game Genie essentially applies a patch to the ROM (address range <code class="language-plaintext highlighter-rouge">$0002-$7FFF</code>): a code references an address in the ROM bank and a value to change that into. This allows you to change values within the ROM or disable functions (e.g. no life loss when taking damage). On real hardware the Game Genie only accepted three codes at a time, so you had to pick your cheats carefully; emulators have no such limit.</p>
+
+<p>On the other hand, there are devices which target the RAM (addresses <code class="language-plaintext highlighter-rouge">$8000+</code>) ; depending on where you would pick one up this would be branded Action Replay or GameShark. Here a code points to a location in RAM and overwrites that value at specific points (each frame at VBlank). This can achieve similar effects: since it resets your life total to max each frame you become invulnerable, it can enable power-ups you didn’t pick up yet, … it can directly manipulate the game state. These devices also had a code limit: four codes at a time on the DMG Game Boy, emulators, of course, ignore the limit entirely.</p>
+
+<p>The RAM seemed more comprehensible than opcodes in the ROM, so I decided to start tinkering there first.</p>
+
+<h2 id="hacking-my-own-games-ram">Hacking my Own Game’s RAM</h2>
+
+<p>As I wanted to mess with the game’s state to prevent the opponent from winning, the RAM seemed like a good place to start. That means we need an emulator which allows the memory to be searched and tampered with; <a href="https://bgb.bircd.org/">BGB</a> is a solid choice for this, it helped me a lot fixing issues related with tiles (VRAM) when making the game and allows the memory (ROM and RAM) to be inspected and manipulated.</p>
+
+<p>The game tracks how many pieces are in the reserve pile and how many have finished a round separately for the player and the CPU opponent. BGB lets you search memory addresses which carry a specific value, and later narrow down that list to addresses that now contain another value, … Specifically for the finished pieces, you’d search the memory for spots which initially have the value <code class="language-plaintext highlighter-rouge">00</code>, then as the opponent moves a piece off the board narrow it down to those which now have <code class="language-plaintext highlighter-rouge">01</code>, … after a few iterations there was only one address left: <code class="language-plaintext highlighter-rouge">$C0D3</code>. So in theory, freezing that number to zero would prevent the opponent from winning the game, as that position is checked against the total number of pieces a player has available and if it matches that player is declared the winner.</p>
+
+<figure class="captioned-image small-image">
+  <p><a href="/assets/posts/2026-05-13-cheating-at-my-own-game/game_running.png" class="lightgallery-link" data-sub-html="This is a screenshot of the game running, there are values shown on the screen next to R (reserve pile) and F (finished) which indicate how many pieces are there. The first step is to find where those values are stored in the RAM and see if manipulating them works.">
+<img src="/assets/posts/2026-05-13-cheating-at-my-own-game/game_running.png" alt="The Royal Game of Ur ROM running in BGB" height="464" width="482" class="small-image" data-src="/assets/posts/2026-05-13-cheating-at-my-own-game/game_running.png" loading="lazy" />
+</a></p>
+  <figcaption>This is a screenshot of the game running, there are values shown on the screen next to R (reserve pile) and F (finished) which indicate how many pieces are there. The first step is to find where those values are stored in the RAM and see if manipulating them works.</figcaption>
+</figure>
+
+<p>Now we need to convert this into a cheat code. If we could lock the value at that address at <code class="language-plaintext highlighter-rouge">00</code>, the number of pieces that moved off the board would never reach the desired amount. For the Action Replay, codes are made up of 8 hex digits built up as shown in the table below.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Digits</th>
+      <th>Field</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1-2</td>
+      <td>External RAM bank</td>
+      <td>Which SRAM bank to target. For standard WRAM cheats this is always <code class="language-plaintext highlighter-rouge">01</code>.</td>
+    </tr>
+    <tr>
+      <td>3-4</td>
+      <td>New value</td>
+      <td>The byte to write at the target address.</td>
+    </tr>
+    <tr>
+      <td>5-6</td>
+      <td>Address low byte</td>
+      <td>The low byte of the RAM address (little-endian — comes first).</td>
+    </tr>
+    <tr>
+      <td>7-8</td>
+      <td>Address high byte</td>
+      <td>The high byte of the RAM address.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>So in our example the code would be <code class="language-plaintext highlighter-rouge">0100D3C0</code>, which we can enter in BGB, enable, and test. In the memory view you will see that the value at position <code class="language-plaintext highlighter-rouge">$C0D3</code> is now shown in a different color, indicating it is frozen.</p>
+
+<p>However, it didn’t work… there was a flaw in my logic. The variable that stores how many pieces moved off the board is computed from the board state and immediately used in the game’s logic and to draw the counts on screen. The moment BGB or an Action Replay/GameShark hooks into the memory to mess with the value, it’s too late: the game has already processed the correct value and noticed the CPU player won. To prevent them from winning, we need to change the board state itself!</p>
+
+<h3 id="targeting-the-board-state-directly">Targeting the Board State Directly</h3>
+
+<p>The board state is stored as two arrays (length of <em>n</em> pieces), one for the human player and one for the CPU, each storing the position of every piece. A value of <code class="language-plaintext highlighter-rouge">00</code> indicates that piece is in the reserve pile, positions 1-14 are encoded as <code class="language-plaintext highlighter-rouge">01</code> - <code class="language-plaintext highlighter-rouge">0E</code>, and a finished piece has value <code class="language-plaintext highlighter-rouge">0F</code>. Using the same strategy as before, looking at movements of pieces and then finding memory addresses whose values change accordingly, I found that <code class="language-plaintext highlighter-rouge">$C0C9-$C0CF</code> holds the positions of the CPU’s pieces and <code class="language-plaintext highlighter-rouge">$C0C2-$C0C8</code> those of the human player.</p>
+
+<figure class="captioned-image">
+  <p><a href="/assets/posts/2026-05-13-cheating-at-my-own-game/modified_ram.png" class="lightgallery-link" data-sub-html="BGB allows you to quickly freeze specific RAM values; here the CPU's pieces are all pushed into the final pile (position 0F) immediately.">
+<img src="/assets/posts/2026-05-13-cheating-at-my-own-game/modified_ram.png" alt="BGB running, fixing specific values in the RAM (here we are giving the CPU player an advantage by pushing six of their pieces into the final pile immediately)" height="755" width="1073" data-src="/assets/posts/2026-05-13-cheating-at-my-own-game/modified_ram.png" loading="lazy" />
+</a></p>
+  <figcaption>BGB allows you to quickly freeze specific RAM values; here the CPU's pieces are all pushed into the final pile (position 0F) immediately.</figcaption>
+</figure>
+
+<p>Now we can create a code that fixes one of the player’s pieces to value <code class="language-plaintext highlighter-rouge">0F</code>, marking that piece as finished and giving the human player an advantage while playing. Nastier would be to force the CPU’s pieces back to the reserve pile, so they can never actually finish the game. Note that while the latter works, if the clamped piece is placed on the board those tiles will be updated, and when the piece is then moved back, that board position is not updated, so visually there will be a piece on the board, even though there isn’t.</p>
+
+<figure class="captioned-image small-image">
+  <p><a href="/assets/posts/2026-05-13-cheating-at-my-own-game/ram_cheat_enabled.png" class="lightgallery-link" data-sub-html="When you freeze values in the debugger, RAM-based cheats are automatically generated; here is the set that will prevent the opponent from moving any piece onto the board.">
+<img src="/assets/posts/2026-05-13-cheating-at-my-own-game/ram_cheat_enabled.png" alt="BGB Cheat window with a handful of AR/GameShark codes loaded" height="391" width="520" class="small-image" data-src="/assets/posts/2026-05-13-cheating-at-my-own-game/ram_cheat_enabled.png" loading="lazy" />
+</a></p>
+  <figcaption>When you freeze values in the debugger, RAM-based cheats are automatically generated; here is the set that will prevent the opponent from moving any piece onto the board.</figcaption>
+</figure>
+
+<h2 id="patching-the-rom">Patching the ROM</h2>
+
+<p>While I did manage to create a few cheat codes, I really wanted to create one for the device I used to own: the Game Genie! Brute-forcing values into the RAM, while efficient, introduces glitches and feels like fighting with the game rather than applying a patch. The Game Genie’s strategy is therefore somewhat more elegant, but also more involved. First, we need to find points in the logic where we can patch the ROM to prevent the CPU player from winning the game, or to give us an edge. We could hijack the code that detects whether a player won and then flags which player won, the CPU or the human player. If we can pinpoint where in the ROM that check occurs and flag the human player as the winner even when it was actually the CPU that moved all pieces off the board first, we have a working cheat. This has the added advantage that it won’t cause any of the graphical glitches that meddling with the RAM causes.</p>
+
+<p>So we first need to pinpoint where that value is stored. To do so we’ll use our previous RAM-based hack to give the CPU an unfair advantage and start with 6 pieces finished already, so they will win quickly and give us a chance to find the flags that pass information on the victor of the game to the next screen. This can be done with the cheat codes below.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>010FC2C0
+010FC3C0
+010FC4C0
+010FC5C0
+010FC6C0
+010FC7C0
+</code></pre></div></div>
+
+<p>Now I looked at addresses which changed when moving to the victory screen. A final filter showing all those which were set to 01 at the end revealed the list below.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  C0B4=01   C0B6=01   C1B7=01   DFBE=01   DFBF=01   DFCA=01   DFD3=01   DFD6=01 
+  DFE1=01 
+</code></pre></div></div>
+
+<p>Now we apply the cheat below, let the CPU win, and check which of these values are 0 in the win screen with the CPU coming out on top. Of course we are making the assumption here that the flag is <code class="language-plaintext highlighter-rouge">01</code> if the human wins and <code class="language-plaintext highlighter-rouge">00</code> if the CPU wins. In this case we have access to the source code, so we know this is the case, but when going in blind this would require the reverse to be tested as well.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>010FCEC0
+010FCDC0
+010FCCC0
+010FCBC0
+010FCAC0
+010FC9C0
+</code></pre></div></div>
+
+<p>Once the CPU won, we click the update button and now see that <code class="language-plaintext highlighter-rouge">$C0B6</code> and <code class="language-plaintext highlighter-rouge">$C1B7</code> are good candidates to hold that flag.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  C0B4=02   C0B6=00   C1B7=00   DFBE=74   DFBF=EB   DFCA=01   DFD3=10   DFD6=D8 
+  DFE1=1C 
+</code></pre></div></div>
+
+<p>For good measure I switched the cheat codes, won myself, and looked at the locations once more, confirming that those two addresses might have something to do with holding the state of who won.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  C0B4=01   C0B6=01   C1B7=01   DFBE=01   DFBF=01   DFCA=01   DFD3=01   DFD6=01 
+  DFE1=01 
+</code></pre></div></div>
+
+<p>Normally at this point you’d probably go look at the code in the ROM to see which one is likely, but since I have zero experience with this I’ll consult the RAM map first, since we have one in this case (saves me a couple of hours of potential frustration). When compiling the game, gbdev creates a <code class="language-plaintext highlighter-rouge">.map</code> file to debug the ROM; this should contain a mapping between our C variables and the final RAM location of those variables.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Area                       Addr        Size        Decimal Bytes (Attributes)
+--------------------       ----        ----        ------- ----- ------------
+_INITIALIZED           0000C1A0    0000004C =          76. bytes (REL,CON)
+
+        Value  Global            Value  Global            Value  Global    
+        -----  ------            -----  ------            -----  ------    
+     0000C1A0  _current_ |    0000C1A1  _next_sta |    0000C1A2  _selected
+     0000C1A3  _coin_res |    0000C1A4  _starting |    0000C1AF  _selected
+     0000C1B7  _human_wo |    0000C1B8  _game_mod |    0000C1B9  _selected
+     0000C1BC  _link_sta |    0000C1BD  _link_rol |    0000C1BE  _link_ali
+     0000C1C6  _link_loc |    0000C1C7  _link_rem |    0000C1D4  _opponent
+     0000C1DC  _opponent |    0000C1EB  __map_til
+</code></pre></div></div>
+
+<p>Looking at the <code class="language-plaintext highlighter-rouge">.map</code> file reveals we had it correct! It is <code class="language-plaintext highlighter-rouge">$C1B7</code> that contains the <code class="language-plaintext highlighter-rouge">human_won</code> variable which we needed to identify. <code class="language-plaintext highlighter-rouge">$C0B6</code> is likely a static variable somewhere; in C, static variables aren’t passed to the linker, so they don’t appear in the <code class="language-plaintext highlighter-rouge">.map</code> file.</p>
+
+<p>Now we need to find instructions in the ROM where that specific value is compared or set — let’s dig some more. To see when the code touches that variable we need to set a watchpoint. As we are specifically interested in what happens when the CPU wins, we’ll load the cheats again that give the CPU the advantage (and play as badly as possible ourselves). The watchpoint picked up a line that sets <code class="language-plaintext highlighter-rouge">$C1B7</code> to <code class="language-plaintext highlighter-rouge">00</code> when the CPU wins.</p>
+
+<figure class="captioned-image small-image">
+  <p><a href="/assets/posts/2026-05-13-cheating-at-my-own-game/watchpoint.png" class="lightgallery-link" data-sub-html="BGB's interface to set a watchpoint; we want to monitor all read/write operations to/from address $C1B7 to see where it is set to 00 when the CPU player wins.">
+<img src="/assets/posts/2026-05-13-cheating-at-my-own-game/watchpoint.png" alt="Watchpoint set to monitor which instructions change the desired value" height="435" width="411" class="small-image" data-src="/assets/posts/2026-05-13-cheating-at-my-own-game/watchpoint.png" loading="lazy" />
+</a></p>
+  <figcaption>BGB's interface to set a watchpoint; we want to monitor all read/write operations to/from address $C1B7 to see where it is set to 00 when the CPU player wins.</figcaption>
+</figure>
+
+<p>This immediately pointed to this line:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ROM0:1DE8   36 00       ld (hl),00
+</code></pre></div></div>
+
+<p>There are two bytes here: <code class="language-plaintext highlighter-rouge">36</code>, the opcode for <code class="language-plaintext highlighter-rouge">LD (HL), n</code>, which loads the immediate value into the memory location the <code class="language-plaintext highlighter-rouge">HL</code> register points to (in this case <code class="language-plaintext highlighter-rouge">$C1B7</code>, set by an earlier <code class="language-plaintext highlighter-rouge">LD HL, $C1B7</code> instruction), and <code class="language-plaintext highlighter-rouge">00</code>, the value to load. These are in ROM positions <code class="language-plaintext highlighter-rouge">$1DE8</code> and <code class="language-plaintext highlighter-rouge">$1DE9</code>, so in theory if we patch <code class="language-plaintext highlighter-rouge">$1DE9</code> to <code class="language-plaintext highlighter-rouge">01</code> that should fool the game into thinking the human won, even though the CPU opponent did. To test this, we can play again, and when that line hits, change the value to <code class="language-plaintext highlighter-rouge">01</code> and then proceed with running the code.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ROM0:1DE8   36 01       ld (hl),01
+</code></pre></div></div>
+
+<figure class="captioned-image">
+  <p><a href="/assets/posts/2026-05-13-cheating-at-my-own-game/modified_opcode.png" class="lightgallery-link" data-sub-html="When the line highlighted in red is modified, the game is tricked into thinking the human player won the game, even in this case where they didn't!">
+<img src="/assets/posts/2026-05-13-cheating-at-my-own-game/modified_opcode.png" alt="Screenshot of BGB running the ROM but with the opcode in $1DE9 modified" height="1027" width="1518" data-src="/assets/posts/2026-05-13-cheating-at-my-own-game/modified_opcode.png" loading="lazy" />
+</a></p>
+  <figcaption>When the line highlighted in red is modified, the game is tricked into thinking the human player won the game, even in this case where they didn't!</figcaption>
+</figure>
+
+<p>Once confirmed this worked, it now needs to be converted to a Game Genie cheat. The working code is <code class="language-plaintext highlighter-rouge">01D-E9E-E6A</code>, however it isn’t nearly as trivial to find as with the Action Replay/GameShark. You actually need a little script to do this; you can find one on <a href="https://github.com/jseaman/gbgenie">GitHub</a> where you punch in the address <code class="language-plaintext highlighter-rouge">0x1de9</code>, the target value <code class="language-plaintext highlighter-rouge">0x01</code>, and the original value <code class="language-plaintext highlighter-rouge">0x00</code>, and the correct code comes out. Alternatively you can use the script below that <a href="https://claude.ai">Claude</a> created.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sh">"""</span><span class="s">
+Game Boy Game Genie code encoder/decoder.
+
+Verified against gbgenie</span><span class="sh">'</span><span class="s">s documented code </span><span class="sh">"</span><span class="s">004-BCE-E66</span><span class="sh">"</span><span class="s"> = (addr=0x14BC, old=0x03, new=0x00).
+
+Code layout (9 hex digits displayed as ABC-DEF-GHI):
+
+  Position: 0  1  2  3  4  5  6  7  8
+            ─────  ──────────  ───────
+            new    address     compare
+            value  (scrambled) (scrambled)
+
+  - pos[0..1]: new value, plain hex (high nibble, low nibble)
+  - pos[2]:    address bits 8-11
+  - pos[3]:    address bits 4-7
+  - pos[4]:    address bits 0-3 (low nibble of address)
+  - pos[5]:    address bits 12-15 (high nibble), XORed with $F
+  - pos[6]:    high nibble of </span><span class="sh">"</span><span class="s">original_byte XOR $BA, rotated left 2</span><span class="sh">"</span><span class="s">
+  - pos[7]:    cloak nibble = pos[6] XOR 8 (validity check)
+  - pos[8]:    low nibble of </span><span class="sh">"</span><span class="s">original_byte XOR $BA, rotated left 2</span><span class="sh">"</span><span class="s">
+</span><span class="sh">"""</span>
+
+
+<span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="n">new_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">original_byte</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">Encode a cheat into a Game Genie code formatted as ABC-DEF-GHI.</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">new_value</span> <span class="o">&lt;=</span> <span class="mh">0xFF</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">new_value must be a byte</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="mh">0x0002</span> <span class="o">&lt;=</span> <span class="n">address</span> <span class="o">&lt;=</span> <span class="mh">0x7FFF</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">Game Genie can only patch ROM addresses $0002-$7FFF</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">original_byte</span> <span class="o">&lt;=</span> <span class="mh">0xFF</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">original_byte must be a byte</span><span class="sh">"</span><span class="p">)</span>
+
+    <span class="n">nv_hi</span> <span class="o">=</span> <span class="p">(</span><span class="n">new_value</span> <span class="o">&gt;&gt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xF</span>
+    <span class="n">nv_lo</span> <span class="o">=</span> <span class="n">new_value</span> <span class="o">&amp;</span> <span class="mh">0xF</span>
+
+    <span class="n">addr_hi</span>     <span class="o">=</span> <span class="p">(</span><span class="n">address</span> <span class="o">&gt;&gt;</span> <span class="mi">12</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xF</span>
+    <span class="n">addr_mid_hi</span> <span class="o">=</span> <span class="p">(</span><span class="n">address</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">)</span>  <span class="o">&amp;</span> <span class="mh">0xF</span>
+    <span class="n">addr_mid_lo</span> <span class="o">=</span> <span class="p">(</span><span class="n">address</span> <span class="o">&gt;&gt;</span> <span class="mi">4</span><span class="p">)</span>  <span class="o">&amp;</span> <span class="mh">0xF</span>
+    <span class="n">addr_lo</span>     <span class="o">=</span> <span class="n">address</span> <span class="o">&amp;</span> <span class="mh">0xF</span>
+
+    <span class="n">obfuscated</span> <span class="o">=</span> <span class="n">original_byte</span> <span class="o">^</span> <span class="mh">0xBA</span>
+    <span class="n">rotated_left_2</span> <span class="o">=</span> <span class="p">((</span><span class="n">obfuscated</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">obfuscated</span> <span class="o">&gt;&gt;</span> <span class="mi">6</span><span class="p">))</span> <span class="o">&amp;</span> <span class="mh">0xFF</span>
+    <span class="n">cmp_hi</span> <span class="o">=</span> <span class="p">(</span><span class="n">rotated_left_2</span> <span class="o">&gt;&gt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xF</span>
+    <span class="n">cmp_lo</span> <span class="o">=</span> <span class="n">rotated_left_2</span> <span class="o">&amp;</span> <span class="mh">0xF</span>
+    <span class="n">cloak</span> <span class="o">=</span> <span class="n">cmp_hi</span> <span class="o">^</span> <span class="mh">0x8</span>
+
+    <span class="n">nibbles</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">nv_hi</span><span class="p">,</span> <span class="n">nv_lo</span><span class="p">,</span>
+        <span class="n">addr_mid_hi</span><span class="p">,</span> <span class="n">addr_mid_lo</span><span class="p">,</span> <span class="n">addr_lo</span><span class="p">,</span> <span class="n">addr_hi</span> <span class="o">^</span> <span class="mh">0xF</span><span class="p">,</span>
+        <span class="n">cmp_hi</span><span class="p">,</span> <span class="n">cloak</span><span class="p">,</span> <span class="n">cmp_lo</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="sh">""</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="n">X</span><span class="si">}</span><span class="sh">"</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nibbles</span><span class="p">)</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="si">:</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s">-</span><span class="si">{</span><span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="si">:</span><span class="mi">6</span><span class="p">]</span><span class="si">}</span><span class="s">-</span><span class="si">{</span><span class="n">s</span><span class="p">[</span><span class="mi">6</span><span class="si">:</span><span class="mi">9</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span>
+
+
+<span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+    <span class="sh">"""</span><span class="s">Decode a Game Genie code into (new_value, address, original_byte).</span><span class="sh">"""</span>
+    <span class="n">clean</span> <span class="o">=</span> <span class="n">code</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="sh">"</span><span class="s">-</span><span class="sh">"</span><span class="p">,</span> <span class="sh">""</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="sh">"</span><span class="s"> </span><span class="sh">"</span><span class="p">,</span> <span class="sh">""</span><span class="p">).</span><span class="nf">upper</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">clean</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">9</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">expected 9 hex digits</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="p">[</span><span class="nf">int</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">clean</span><span class="p">]</span>
+
+    <span class="n">new_value</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">|</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">address</span> <span class="o">=</span> <span class="p">((</span><span class="n">n</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">^</span> <span class="mh">0xF</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">12</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">|</span> <span class="n">n</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+
+    <span class="n">rotated</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">|</span> <span class="n">n</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+    <span class="n">unrotated</span> <span class="o">=</span> <span class="p">((</span><span class="n">rotated</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">rotated</span> <span class="o">&lt;&lt;</span> <span class="mi">6</span><span class="p">))</span> <span class="o">&amp;</span> <span class="mh">0xFF</span>
+    <span class="n">original</span> <span class="o">=</span> <span class="n">unrotated</span> <span class="o">^</span> <span class="mh">0xBA</span>
+
+    <span class="k">return</span> <span class="n">new_value</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">original</span>
+
+
+<span class="c1"># Verification
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Verification against gbgenie</span><span class="sh">'</span><span class="s">s documented example:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">code_str</span><span class="p">,</span> <span class="n">exp_addr</span><span class="p">,</span> <span class="n">exp_old</span><span class="p">,</span> <span class="n">exp_new</span> <span class="o">=</span> <span class="sh">"</span><span class="s">004-BCE-E66</span><span class="sh">"</span><span class="p">,</span> <span class="mh">0x14BC</span><span class="p">,</span> <span class="mh">0x03</span><span class="p">,</span> <span class="mh">0x00</span>
+<span class="n">nv</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="n">old</span> <span class="o">=</span> <span class="nf">decode</span><span class="p">(</span><span class="n">code_str</span><span class="p">)</span>
+<span class="n">decode_ok</span> <span class="o">=</span> <span class="n">nv</span> <span class="o">==</span> <span class="n">exp_new</span> <span class="ow">and</span> <span class="n">addr</span> <span class="o">==</span> <span class="n">exp_addr</span> <span class="ow">and</span> <span class="n">old</span> <span class="o">==</span> <span class="n">exp_old</span>
+<span class="n">re_encoded</span> <span class="o">=</span> <span class="nf">encode</span><span class="p">(</span><span class="n">exp_new</span><span class="p">,</span> <span class="n">exp_addr</span><span class="p">,</span> <span class="n">exp_old</span><span class="p">)</span>
+<span class="n">encode_ok</span> <span class="o">=</span> <span class="n">re_encoded</span> <span class="o">==</span> <span class="n">code_str</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  decode(</span><span class="si">{</span><span class="n">code_str</span><span class="si">}</span><span class="s">) -&gt; new=0x</span><span class="si">{</span><span class="n">nv</span><span class="si">:</span><span class="mi">02</span><span class="n">X</span><span class="si">}</span><span class="s">, addr=0x</span><span class="si">{</span><span class="n">addr</span><span class="si">:</span><span class="mi">04</span><span class="n">X</span><span class="si">}</span><span class="s">, old=0x</span><span class="si">{</span><span class="n">old</span><span class="si">:</span><span class="mi">02</span><span class="n">X</span><span class="si">}</span><span class="s">  </span><span class="sh">"</span>
+      <span class="sa">f</span><span class="sh">"</span><span class="s">[</span><span class="si">{</span><span class="sh">'</span><span class="s">OK</span><span class="sh">'</span> <span class="k">if</span> <span class="n">decode_ok</span> <span class="k">else</span> <span class="sh">'</span><span class="s">FAIL</span><span class="sh">'</span><span class="si">}</span><span class="s">]</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  encode back              -&gt; </span><span class="si">{</span><span class="n">re_encoded</span><span class="si">}</span><span class="s">  [</span><span class="si">{</span><span class="sh">'</span><span class="s">OK</span><span class="sh">'</span> <span class="k">if</span> <span class="n">encode_ok</span> <span class="k">else</span> <span class="sh">'</span><span class="s">FAIL</span><span class="sh">'</span><span class="si">}</span><span class="s">]</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">Round-trip on other cases:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">new_val</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="n">old</span> <span class="ow">in</span> <span class="p">[(</span><span class="mh">0x01</span><span class="p">,</span> <span class="mh">0x1DE9</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">),</span> <span class="p">(</span><span class="mh">0xFF</span><span class="p">,</span> <span class="mh">0x4000</span><span class="p">,</span> <span class="mh">0x42</span><span class="p">),</span> <span class="p">(</span><span class="mh">0x55</span><span class="p">,</span> <span class="mh">0x7FFE</span><span class="p">,</span> <span class="mh">0x99</span><span class="p">)]:</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="nf">encode</span><span class="p">(</span><span class="n">new_val</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="n">old</span><span class="p">)</span>
+    <span class="n">rt</span> <span class="o">=</span> <span class="nf">decode</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">ok</span> <span class="o">=</span> <span class="n">rt</span> <span class="o">==</span> <span class="p">(</span><span class="n">new_val</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="n">old</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  encode(</span><span class="si">{</span><span class="n">new_val</span><span class="si">:</span><span class="c1">#04x</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">addr</span><span class="si">:</span><span class="c1">#06x</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">old</span><span class="si">:</span><span class="c1">#04x</span><span class="si">}</span><span class="s">) -&gt; </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s"> -&gt; </span><span class="si">{</span><span class="n">rt</span><span class="si">}</span><span class="s">  </span><span class="sh">"</span>
+          <span class="sa">f</span><span class="sh">"</span><span class="s">[</span><span class="si">{</span><span class="sh">'</span><span class="s">OK</span><span class="sh">'</span> <span class="k">if</span> <span class="n">ok</span> <span class="k">else</span> <span class="sh">'</span><span class="s">FAIL</span><span class="sh">'</span><span class="si">}</span><span class="s">]</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">=</span><span class="sh">"</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Cheat for dmg-royal-game-of-ur:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">  Patch ROM $1DE9: replace $00 with $01</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">  (forces human_won = 1 on what was the CPU-victory write)</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  Game Genie code: </span><span class="si">{</span><span class="nf">encode</span><span class="p">(</span><span class="mh">0x01</span><span class="p">,</span> <span class="mh">0x1DE9</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">=</span><span class="sh">"</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>It worked! There are now cheat codes for both the Action Replay/GameShark and the Game Genie for my very own Game Boy game. Especially the Game Genie took a fair amount of work, and I’m wondering how people were able to figure this out back in the day. There were debuggers, but they weren’t as advanced as BGB, and it must have taken a fair bit of research to figure out how to convert the codes.</p>
+
+<h2 id="further-reading">Further Reading</h2>
+<ul>
+  <li><strong>My Previous Post Describing the development of this game</strong>: <a href="/ai/programming/games/2026/03/15/gameboy-royal-game-of-ur.html">/ai/programming/games/2026/03/15/gameboy-royal-game-of-ur.html</a></li>
+  <li><strong>The Royal Game of UR</strong>: <a href="https://sebastianproost.itch.io/the-royal-game-of-ur">https://sebastianproost.itch.io/the-royal-game-of-ur</a> — The Game’s page on itch.io where you can obtain the ROM</li>
+  <li><strong>Pan Docs — Game Genie &amp; GameShark section</strong>: <a href="https://gbdev.io/pandocs/Shark_Cheats.html">https://gbdev.io/pandocs/Shark_Cheats.html</a> — the canonical reference for both code formats.</li>
+  <li><strong>BGB manual</strong>: <a href="https://bgb.bircd.org/manual.html">https://bgb.bircd.org/manual.html</a> — the debugger used here, fully documented.</li>
+  <li><strong>gbgenie (Python encoder/decoder)</strong>: <a href="https://github.com/jseaman/gbgenie">https://github.com/jseaman/gbgenie</a> — a working reference implementation; useful for sanity-checking your own encoder. (note that the original gbgenie repo has a bug with the order of parameters not matching the documentation!)</li>
+</ul>
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/tag/nintendo">nintendo</a>,&nbsp;<a href="/tag/gameboy">gameboy</a>,&nbsp;<a href="/tag/retrogaming">retrogaming</a>,&nbsp;<a href="/tag/homebrew">homebrew</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+	    
+    
+    
+  
+    
+    
+	    
+      <a href="//bsky.app/intent/compose?text=Creating+cheats+for+my+own+Game+Boy+game%20https%3A%2F%2Fblog.4dcu.be%2Fgames%2F2026%2F05%2F13%2Fcheating-at-my-own-game.html"
+        target="_blank">
+        <i class="fa-brands fa-bluesky"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+	    
+    
+      <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fgames%2F2026%2F05%2F13%2Fcheating-at-my-own-game.html"
+        target="_blank">
+        <i class="fa-brands fa-square-facebook fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+	    
+    
+    
+      <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fgames%2F2026%2F05%2F13%2Fcheating-at-my-own-game.html"
+        target="_blank">
+        <i class="fa-brands fa-linkedin fa-lg"></i>
+      </a>
+    
+  
+    
+    
+      <a href="//x.com/share?text=Creating+cheats+for+my+own+Game+Boy+game&url=https%3A%2F%2Fblog.4dcu.be%2Fgames%2F2026%2F05%2F13%2Fcheating-at-my-own-game.html&via="
+        target="_blank">
+        <i class="fa-brands fa-x-twitter fa-lg"></i>
+      </a>
+    
+	    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/ai/programming/2026/04/27/claude-design.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa-solid fa-square fa-stack-2x"></i>
+						<i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Claude Design to revamp two projects</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+		<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Site Map</strong></p>
+				<ul class="pages">
+					
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+				</ul>
+				<br />
+				<p><strong>Legal</strong></p>
+				<p><a href="/policy/">Privacy policy</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Contribute</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+				
+				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+
+</html>

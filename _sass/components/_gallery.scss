@@ -156,8 +156,9 @@
     }
   }
 
-  // LightGallery wrapping (a > img)
-  > a {
+  // LightGallery wrapping (a > img), also applies when wrapped in a captioned figure
+  > a,
+  > figure.captioned-image > a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -185,6 +186,25 @@
 
     &:hover img {
       transform: translate(-50%, -50%) scale(1.05);
+    }
+  }
+
+  > figure.captioned-image {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+
+    > p {
+      margin: 0;
+      display: contents;
+    }
+
+    figcaption {
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-align: center;
+      line-height: 1.35;
     }
   }
 }
@@ -248,8 +268,9 @@
     }
   }
 
-  // LightGallery wrapping (a > img)
-  > a {
+  // LightGallery wrapping (a > img), also applies when wrapped in a captioned figure
+  > a,
+  > figure.captioned-image > a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -277,6 +298,25 @@
 
     &:hover img {
       transform: translate(-50%, -50%) scale(1.05);
+    }
+  }
+
+  > figure.captioned-image {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+
+    > p {
+      margin: 0;
+      display: contents;
+    }
+
+    figcaption {
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-align: center;
+      line-height: 1.35;
     }
   }
 }
