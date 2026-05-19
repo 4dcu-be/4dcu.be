@@ -249,6 +249,7 @@ print(f"  Game Genie code: {encode(0x01, 0x1DE9, 0x00)}")
 print("=" * 60)
 ```
 
+**Update:** For the DX version, with colored sprites when running on GBC hardware the ROM positions are `$1EEB` and `$1EEC` so the corresponding cheat code is `01E-ECE-E6A`. The RAM map is identical, so the Action Replay/GameShark codes work for both versions of the game.
 
 ## Conclusion
 
