@@ -3,8 +3,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  {% comment %} Use the front matter description if specified, otherwise fall back to the excerpt or the site default. {% endcomment %}
+  {% capture page_description %}{% if page.description %}{{ page.description | strip_html | truncate: 160 }}{% elsif page.excerpt %}{{ page.excerpt | newline_to_br | strip_newlines | replace: '<br />', ' '| strip_html | truncate: 160 }}{% else %}{{ site.description }}{% endif %}{% endcapture %}
+
   <title>{% if page.title %}{{ page.title | strip_html }}{% else %}{{ site.title | strip_html }}{% endif %}</title>
-  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | newline_to_br | strip_newlines | replace: '<br />', ' '| strip_html | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <meta name="description" content="{{ page_description }}">
   {% if site.name %}
   <meta name="author" content="{{ site.name }}">
   <meta name="copyright" content="&copy; {{ site.name }} {{ site.time | date: '%Y' }}">
@@ -36,7 +39,7 @@
 
   {% if site.protocols.fb_image %}
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="{% if page.excerpt %}{{ page.excerpt | newline_to_br | strip_newlines | replace: '<br />', ' '| strip_html | truncate: 160 }}{% else %}{{ site.description }}{% endif %}" />
+  <meta property="og:description" content="{{ page_description }}" />
   <meta property="og:url" content="{% if page.url %}{{ site.url }}{{ page.url }}{% else %}{{ site.url }}{% endif %}">
   <meta property="og:site_name" content="{{ site.title }}" />
   <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}" />
@@ -51,7 +54,7 @@
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
-  <meta name="twitter:description" content="{% if page.excerpt %}{{ page.excerpt | newline_to_br | strip_newlines | replace: '<br />', ' '| strip_html | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <meta name="twitter:description" content="{{ page_description }}">
   <meta name="twitter:image" content="{% if page.cover %}{{ page.cover | prepend: site.baseurl | prepend: site.url }}{% else %}{{ site.protocols.twitter_image | prepend: site.baseurl | prepend: site.url }}{% endif %}">
   <meta name="twitter:url" content="{% if page.url %}{{ site.url }}{{ page.url }}{% else %}{{ site.url }}{% endif %}">
   {% endif %}
