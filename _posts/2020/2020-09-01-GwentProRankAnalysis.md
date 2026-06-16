@@ -2,6 +2,7 @@
 layout: post
 title:  "Gwent: Pro Ladder Analysis and National Rankings"
 byline: ""
+description: "Scraping Gwent Pro Ladder data with Python and pandas to compute national rankings, ladder efficiency, country popularity and seasonal statistics."
 date:   2020-09-01 12:00:00
 author: Sebastian Proost
 categories: programming games

@@ -2,6 +2,7 @@
 layout: post
 title:  "BusyBoard: no more interruptions during meetings"
 byline: ""
+description: "Building BusyBoard, a Python Flask web app with SQLAlchemy, Flask-Admin and Bulma, in a four-hour challenge to tell your household when you are busy."
 date:   2020-07-26 12:00:00
 author: Sebastian Proost
 categories: programming

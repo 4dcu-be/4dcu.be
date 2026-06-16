@@ -2,6 +2,7 @@
 layout: post
 title:  "DIY mechanical watches on a budget"
 byline: "building an automatic from AliExpress parts"
+description: "Building three DIY mechanical watches from budget AliExpress parts, a dress watch, titanium pilot, and chronograph, using NH35, NH72, and VK63 movements and basic tools."
 date:   2024-11-11 08:00:00
 author: Sebastian Proost
 slug: diy-mechanical-watch

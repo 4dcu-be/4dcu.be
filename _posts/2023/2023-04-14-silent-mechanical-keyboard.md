@@ -2,6 +2,7 @@
 layout: post
 title:  "The Sound of Silence: Building a Quiet Mechanical Keyboard"
 byline: ""
+description: "Building a quiet mechanical keyboard on the id75 board, explaining what makes mechanical switches loud and the tweaks that keep tactile feel while reducing noise."
 date:   2023-04-14 08:00:00
 author: Sebastian Proost
 categories: diy

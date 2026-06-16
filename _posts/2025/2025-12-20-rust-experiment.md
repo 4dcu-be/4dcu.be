@@ -2,6 +2,7 @@
 layout: post
 title:  "Python to Rust: Porting My Genetic Art Algorithm"
 byline: ""
+description: "Porting a Python genetic art algorithm to Rust using Claude Code as the main coding aid, exploring how agentic AI works when you are a complete beginner in a language."
 date:   2025-12-20 08:00:00
 author: Sebastian Proost
 categories: ai programming

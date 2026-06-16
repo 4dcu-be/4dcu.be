@@ -2,6 +2,7 @@
 layout: post
 title:  "ComfyUI and SDXL: New Workflows"
 byline: "experiments with Control-LoRas and the SDXL Refiner"
+description: "Hands-on ComfyUI workflows for Stable Diffusion SDXL, experimenting with Control-LoRas and the SDXL Refiner using the node-based interface instead of Automatic1111."
 date:   2023-09-03 08:00:00
 author: Sebastian Proost
 categories: ai

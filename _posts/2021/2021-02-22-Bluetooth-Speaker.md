@@ -2,6 +2,7 @@
 layout: post
 title:  "Building a Bluetooth Speaker Part 2"
 byline: "... painting things"
+description: "Finishing a Star Wars Kyber Crystal Crate Bluetooth speaker, covering 3D printing the PETG shell, filling, sanding and spray painting the case."
 date:   2021-02-22 10:00:00
 author: Sebastian Proost
 categories: diy

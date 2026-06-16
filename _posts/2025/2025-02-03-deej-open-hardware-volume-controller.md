@@ -2,6 +2,7 @@
 layout: post
 title:  "Building a Custom Deej Volume Mixer with an RP2040 Pro Micro"
 byline: "using CircuitPython"
+description: "Building a Deej open-source USB volume mixer with an RP2040 Pro Micro and CircuitPython, with a USB-C port and quality-of-life tweaks to control per-app volumes."
 date:   2025-02-03 08:00:00
 author: Sebastian Proost
 categories: diy programming

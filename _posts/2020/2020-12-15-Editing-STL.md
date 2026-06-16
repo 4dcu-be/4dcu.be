@@ -2,6 +2,7 @@
 layout: post
 title:  "Best Tools to Edit STL Files"
 byline: "Comparing MeshMixer, Fusion360 and Blender"
+description: "Comparing MeshMixer, Fusion360 and Blender for editing STL files, using a Kyber Crystal Crate Bluetooth speaker project to weigh each tool's strengths."
 date:   2020-12-15 13:00:00
 author: Sebastian Proost
 categories: diy

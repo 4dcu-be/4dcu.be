@@ -2,6 +2,7 @@
 layout: post
 title:  "Setting up a Google Cloud Function"
 byline: "making a microservice"
+description: "How to set up a Google Cloud Function as a Python microservice, building one that scrapes citation data from a Google Scholar profile over HTTP."
 date:   2021-01-09 13:00:00
 author: Sebastian Proost
 categories: programming

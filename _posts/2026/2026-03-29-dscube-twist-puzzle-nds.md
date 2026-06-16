@@ -2,6 +2,7 @@
 layout: post
 title: "Revisiting a 20-Year-Old NDS Project with AI"
 byline: "Reviving a Nintendo DS homebrew project with Claude Code and Gemini"
+description: "Reviving DSCube, a 20-year-old Nintendo DS Rubik's cube homebrew written in C++, using Claude Code and Gemini with devkitPro and Docker to get it building again."
 date: 2026-03-29 08:00:00
 categories: ai programming games
 tags: cpp nintendo nds retrogaming homebrew ai claude-code gemini rubiks-cube devkitpro docker

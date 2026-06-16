@@ -2,6 +2,7 @@
 layout: post
 title:  "Clustering the Palmer Station penguin data, using PyMC3"
 byline: "Adelie, Chinstrap, Gentoo..."
+description: "Unsupervised clustering of the Palmer Station penguin dataset with PyMC3, inferring how many species exist from flipper, bill and body mass measurements."
 date:   2021-08-01 08:00:00
 author: Sebastian Proost
 categories: programming biology

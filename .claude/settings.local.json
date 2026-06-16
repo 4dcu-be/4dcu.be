@@ -29,7 +29,8 @@
       "Bash(grep:*)",
       "Bash(identify miscore_site_main.png miscore_site_recent.png miscore_site_records.png cv_main.png cv_publications.png cv_media.png)",
       "Bash(git mv *)",
-      "Bash(bash /root/.claude/statusline-command.sh)"
+      "Bash(bash /root/.claude/statusline-command.sh)",
+      "Bash(awk '/^---$/{c++} c==1{print} c==2{print; exit}' _posts/2026/2026-04-27-claude-design.md)"
     ],
     "deny": [],
     "ask": []

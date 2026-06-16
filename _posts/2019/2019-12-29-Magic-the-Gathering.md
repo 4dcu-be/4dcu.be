@@ -2,6 +2,7 @@
 layout: post
 title:  "Machine Learning: the Gathering"
 byline: "predicting your opponent's deck from the first few cards played"
+description: "Building a Python scikit-learn classifier that predicts a Magic the Gathering opponent's deck from the first few cards they play, using pandas and machine learning."
 date:   2019-12-29 12:00:00
 author: Sebastian Proost
 categories: programming games

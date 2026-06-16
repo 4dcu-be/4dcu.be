@@ -2,6 +2,7 @@
 layout: post
 title:  "Lights, Camera, GitHub, Actions: My Favorite GitHub Actions"
 byline: ""
+description: "A tour of my favorite GitHub Actions workflows to automate tasks like formatting Python with black, running unit tests and pulling in data on a schedule."
 date:   2021-10-15 06:00:00
 author: Sebastian Proost
 categories: programming

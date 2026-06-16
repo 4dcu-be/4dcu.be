@@ -2,6 +2,7 @@
 layout: post
 title:  "Genetic Art Algorithm"
 byline: "Using a genetic algorithm to re-draw Van Gogh's The Starry Night"
+description: "Building a Python genetic algorithm with the Evol library that evolves 150 random triangles to re-draw Van Gogh's The Starry Night over 5000 generations."
 date:   2020-01-12 12:00:00
 author: Sebastian Proost
 categories: programming

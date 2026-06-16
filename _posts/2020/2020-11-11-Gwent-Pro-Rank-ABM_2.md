@@ -2,6 +2,7 @@
 layout: post
 title:  "An Agent Based Model to look at Gwent Pro Ladder (results)"
 byline: "let's dive into the data the ABM generated"
+description: "Analyzing the Gwent agent based model results to show that grinding more games and simple luck, not just skill, raise peak MMR on Pro Ladder (results)."
 date:   2020-11-11 13:00:00
 author: Sebastian Proost
 categories: programming games

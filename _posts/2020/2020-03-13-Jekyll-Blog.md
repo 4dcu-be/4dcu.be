@@ -2,6 +2,7 @@
 layout: post
 title:  "Improving blogs with custom Jekyll Plugins"
 byline: "taking things to a higher level"
+description: "Writing custom Jekyll plugins in Ruby to add features like automatic LightGallery links and a map marking where each blog post was written for a travel blog."
 date:   2020-03-13 12:00:00
 author: Sebastian Proost
 categories: programming

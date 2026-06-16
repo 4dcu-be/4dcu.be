@@ -2,6 +2,7 @@
 layout: post
 title:  "Expanding Zigbee Range with Ikea Tradfri Repeaters"
 byline: "solving random disconnects"
+description: "Using cheap Ikea Tradfri repeaters to extend Zigbee range and fix random Aqara sensor disconnects in Home Assistant, plus switching to Home Assistant OS."
 date:   2021-04-28 08:00:00
 author: Sebastian Proost
 categories: diy

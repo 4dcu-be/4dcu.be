@@ -2,6 +2,7 @@
 layout: post
 title:  "Building a Mechanical Keyboard"
 byline: ""
+description: "How I built a compact 60% mechanical keyboard from scratch, covering switches, soldering and why mechanical switches beat rubber-dome membranes."
 date:   2020-05-01 12:00:00
 author: Sebastian Proost
 categories: diy

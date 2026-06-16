@@ -2,6 +2,7 @@
 layout: post
 title:  "Building a Bluetooth Speaker Part 1"
 byline: "... the electronics"
+description: "Building a portable Bluetooth speaker from scratch, covering the electronics: speakers, LiPo battery, an M38 Bluetooth amplifier module and TP4056 charging."
 date:   2021-01-16 10:00:00
 author: Sebastian Proost
 categories: diy

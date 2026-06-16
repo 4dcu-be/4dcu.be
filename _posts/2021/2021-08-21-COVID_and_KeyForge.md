@@ -2,6 +2,7 @@
 layout: post
 title:  "COVID-19 impact on KeyForge"
 byline: ""
+description: "A non-technical look at how COVID-19 hit KeyForge sales, with a PyMC3 model estimating roughly 500,000 fewer decks registered during the pandemic."
 date:   2021-08-20 08:00:00
 author: Sebastian Proost
 categories: programming games

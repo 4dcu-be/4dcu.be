@@ -2,6 +2,7 @@
 layout: post
 title:  "CodeForces: Trying on Competitive Coding"
 byline: ""
+description: "Trying competitive programming on CodeForces as a self-taught coder, solving easy algorithm problems in Python to fill gaps in my computer science knowledge."
 date:   2020-12-03 13:00:00
 author: Sebastian Proost
 categories: programming

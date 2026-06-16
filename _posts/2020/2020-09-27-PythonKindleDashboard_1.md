@@ -2,6 +2,7 @@
 layout: post
 title:  "Kindle + Python = e-Ink Dashboard (part 1)"
 byline: "repurposing an old kindle paperwhite 3"
+description: "Repurposing an old Kindle Paperwhite 3 into a low-power e-Ink dashboard by jailbreaking it via the serial port and installing Python (part 1)."
 date:   2020-09-27 12:00:00
 author: Sebastian Proost
 categories: diy

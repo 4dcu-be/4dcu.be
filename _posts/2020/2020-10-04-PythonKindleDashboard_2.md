@@ -2,6 +2,7 @@
 layout: post
 title:  "Kindle + Python = e-Ink Dashboard (part 2)"
 byline: "repurposing an old kindle paperwhite 3"
+description: "Coding the Kindle e-Ink dashboard in Python with a small ETL pipeline that scrapes Google Scholar citations, Gwent rank and TV air dates into an SVG (part 2)."
 date:   2020-10-04 12:00:00
 author: Sebastian Proost
 categories: diy

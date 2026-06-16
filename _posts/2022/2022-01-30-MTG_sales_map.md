@@ -2,6 +2,7 @@
 layout: post
 title:  "Where are my Magic: the Gathering cards ?"
 byline: "plotting where my sold cards were shipped to"
+description: "Extracting buyer addresses from CardMarket order emails, geocoding them with Google's API, and mapping where my Magic: the Gathering cards shipped using Python and Altair."
 date:   2022-01-30 10:00:00
 author: Sebastian Proost
 categories: programming games

@@ -2,6 +2,7 @@
 layout: post
 title:  "Plotting post hoc tests with Python"
 byline: "combining scikit-posthocs with statannotations"
+description: "How to plot post hoc tests in Python by combining scikit-posthocs with statannotations, annotating boxplots from Kruskal-Wallis or ANOVA results."
 date:   2021-12-30 06:00:00
 author: Sebastian Proost
 categories: programming

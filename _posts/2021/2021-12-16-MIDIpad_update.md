@@ -2,6 +2,7 @@
 layout: post
 title:  "Better Raspberry Pi Pico MIDI controller"
 byline: "adding modifier keys and chord support"
+description: "Upgrading a Raspberry Pi Pico MIDI controller with modifier keys and chord support in CircuitPython, expanding from 9 to 28 playable notes and chords."
 date:   2021-12-16 06:00:00
 author: Sebastian Proost
 categories: diy

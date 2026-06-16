@@ -2,6 +2,7 @@
 layout: post
 title:  "Putting Benford's Law to the Test"
 byline: "numbers might not be as random as you think"
+description: "Testing Benford's Law with Python, pandas and seaborn, exploring why leading digits in real datasets favor 1, inspired by the Netflix show Connected."
 date:   2020-09-05 12:00:00
 author: Sebastian Proost
 categories: programming

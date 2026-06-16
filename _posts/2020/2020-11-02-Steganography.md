@@ -2,6 +2,7 @@
 layout: post
 title:  "Steganography using PIL and NumPy"
 byline: "hiding messages in plain sight"
+description: "Hiding secret messages inside images using Python with PIL and NumPy, encoding text into the least significant bits of each pixel's RGB values."
 date:   2020-11-02 12:00:00
 author: Sebastian Proost
 categories: programming

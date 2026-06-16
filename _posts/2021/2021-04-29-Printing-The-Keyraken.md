@@ -2,6 +2,7 @@
 layout: post
 title:  "Printing <em>Rise of the Keyraken</em> with PrinterStudio/MPC"
 byline: "and FFG's other Print-and-Play assets"
+description: "How to prepare Fantasy Flight Games' Rise of the Keyraken KeyForge Print-and-Play PDFs for professional printing at PrinterStudio or MakePlayingCards."
 date:   2021-04-29 06:00:00
 author: Sebastian Proost
 categories: programming games diy

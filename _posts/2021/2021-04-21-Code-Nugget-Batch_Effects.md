@@ -2,6 +2,7 @@
 layout: post
 title:  "Fighting Batch Effects with pyComBat"
 byline: ""
+description: "How to correct batch effects in measurement data using the Python package pyComBat, demonstrated on a synthetic dataset with shift and scaling effects."
 date:   2021-04-21 10:00:00
 author: Sebastian Proost
 categories: programming

@@ -2,6 +2,7 @@
 layout: post
 title:  "Gwent: How Many Pro Players Are Out There ?"
 byline: ""
+description: "Using Python, web scraping and data science to estimate how many players are on Gwent's Pro Ladder, exploring three methods to count them."
 date: 2021-01-24 12:00:00
 author: Sebastian Proost
 categories: programming games

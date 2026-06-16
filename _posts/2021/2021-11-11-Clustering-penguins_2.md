@@ -2,6 +2,7 @@
 layout: post
 title:  "Faster Mixture Models in PyMC3"
 byline: "ft. more penguins"
+description: "Speeding up PyMC3 mixture models on the Palmer penguins dataset using pm.Mixture, and predicting species for new observations without re-sampling."
 date:   2021-11-11 08:00:00
 author: Sebastian Proost
 categories: programming biology

@@ -2,6 +2,7 @@
 layout: post
 title:  "Sentiment Analysis and the Shape of Stories"
 byline: "The shape of Lord of the Rings - The Fellowship of the Ring"
+description: "Using Python and NLTK sentiment analysis to plot the emotional shape of a story, applied to Tolkien's Lord of the Rings and inspired by Kurt Vonnegut."
 date:   2019-12-01 12:00:00
 author: Sebastian Proost
 categories: programming

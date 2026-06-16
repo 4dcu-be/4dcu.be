@@ -2,6 +2,7 @@
 layout: post
 title:  "Bayesian analysis of sales data, using PyMC3"
 byline: ""
+description: "A first attempt at Bayesian analysis with PyMC3 on KeyForge deck registration data, modelling the impact of new set releases and COVID-19 on sales."
 date:   2021-07-04 08:00:00
 author: Sebastian Proost
 categories: programming games

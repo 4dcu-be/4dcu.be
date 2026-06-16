@@ -2,6 +2,7 @@
 layout: post
 title:  "KeyForge: How many decks were printed ?"
 byline: "... and which percentage has been registered ?"
+description: "Estimating how many KeyForge Dark Tidings decks were printed using Evil Twin decks and Capture-Mark-Recapture in PyMC3, giving about 312,000 decks."
 date:   2021-09-4 06:00:00
 author: Sebastian Proost
 categories: programming games

@@ -2,6 +2,7 @@
 layout: post
 title:  "Static Site Generators: Jekyll vs Pelican vs Gatsby"
 byline: "which one should you use?"
+description: "Comparing the static site generators Jekyll, Pelican and Gatsby from real project experience, weighing the strengths and weaknesses of each to help you choose."
 date:   2020-11-22 13:00:00
 author: Sebastian Proost
 categories: programming

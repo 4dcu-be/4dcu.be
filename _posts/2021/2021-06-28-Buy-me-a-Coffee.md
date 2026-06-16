@@ -2,6 +2,7 @@
 layout: post
 title:  "Like this blog? You can buy me a coffee now!"
 byline: ""
+description: "Announcing a Buy me a Coffee option to support the 4DCu.be blog, with any surplus going to the Natuurhulpcentrum wildlife charity."
 date:   2021-06-28 10:00:00
 author: Sebastian Proost
 categories: general

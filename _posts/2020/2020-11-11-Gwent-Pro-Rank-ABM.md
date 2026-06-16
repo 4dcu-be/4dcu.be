@@ -2,6 +2,7 @@
 layout: post
 title:  "An Agent Based Model to look at Gwent Pro Ladder (code)"
 byline: "ABM using Mesa and Pandas"
+description: "Building an agent based model in Python with Mesa and pandas to simulate Gwent players and test whether skill or grinding games drives Pro Ladder ranking (code)."
 date:   2020-11-11 12:00:00
 author: Sebastian Proost
 categories: programming games

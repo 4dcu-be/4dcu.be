@@ -2,6 +2,7 @@
 layout: post
 title:  "Minimalist Art Using a Genetic Algorithm"
 byline: "a different take on Vermeer's Girl with a Pearl Earring"
+description: "Using a Python genetic algorithm with Voronoi diagrams and gene duplication to re-draw Vermeer's Girl with a Pearl Earring in a minimalist style."
 date:   2020-02-10 12:00:00
 author: Sebastian Proost
 categories: programming
