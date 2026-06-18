@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+
+  <title>Hnefatafl, Viking Chess for Game Boy</title>
+  <meta name="description" content="Building Hnefatafl, the Viking Chess game, along with Brandubh and Tablut, for the original Game Boy, exploring background scrolling, save systems, and Super...">
+  
+  <meta name="author" content="Sebastian Proost">
+  <meta name="copyright" content="&copy; Sebastian Proost 2026">
+  
+
+  <!-- External libraries -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Building Hnefatafl, the Viking Chess game, along with Brandubh and Tablut, for the original Game Boy, exploring background scrolling, save systems, and Super..." />
+  <meta property="og:url" content="https://blog.4dcu.be/ai/programming/games/2026/06/30/gameboy-hnefatafl.html">
+  <meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Hnefatafl, Viking Chess for Game Boy" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/posts/2026-06-30-gameboy-hnefatafl/hnefatafl_pieces.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hnefatafl, Viking Chess for Game Boy">
+  <meta name="twitter:description" content="Building Hnefatafl, the Viking Chess game, along with Brandubh and Tablut, for the original Game Boy, exploring background scrolling, save systems, and Super...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/posts/2026-06-30-gameboy-hnefatafl/hnefatafl_pieces.jpg">
+  <meta name="twitter:url" content="https://blog.4dcu.be/ai/programming/games/2026/06/30/gameboy-hnefatafl.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="canonical" href="https://blog.4dcu.be/ai/programming/games/2026/06/30/gameboy-hnefatafl.html">
+	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+	<link rel="stylesheet" href="/css/main.css">
+
+	<!-- PageFind -->
+	<script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+
+	<script type='text/javascript'>
+	//<![CDATA[
+	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+	//]]>
+	</Script>
+</head>
+
+
+  <body class="has-navbar-fixed-top">
+
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/" class="navbar-item">
+      
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+      
+    </a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarMenu" class="navbar-menu">
+    <div class="navbar-end">
+      
+<a href="/about/" class="navbar-item">
+  About
+</a>
+  
+<a href="/gallery/" class="navbar-item">
+  Gallery
+</a>
+  
+<a href="/posts/" class="navbar-item">
+  Posts
+</a>
+  
+<a href="#" class="navbar-item nav-link-contact">Contact</a>
+<a href="#" class="navbar-item nav-link-search">
+  <i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i>
+</a>
+
+    </div>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+        <img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/hnefatafl_pieces.jpg" style="display:none" />
+<div class="post">
+
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  
+  <img alt="Post cover" class="hero-background is-transparent" src="/assets/posts/2026-06-30-gameboy-hnefatafl/hnefatafl_pieces.jpg" />
+  
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title has-text-white">Hnefatafl, Viking Chess for Game Boy</h1>
+      
+      <p class="info has-text-white"><em>Building Hnefatafl, Brandubh, and Tablut for the original Game Boy</em></p>
+      
+    </div>
+  </div>
+</section>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">Posted June 30, 2026 by Sebastian Proost</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/ai">AI</a>, 
+    
+  
+    
+    <a href="/category/programming">Programming</a>, 
+    
+  
+    
+    <a href="/category/games">Games</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content" data-pagefind-body>
+  <p>On <a href="/ai/programming/games/2026/03/15/gameboy-royal-game-of-ur.html">The Royal Game of Ur</a>, the link cable nearly broke me. It was by far the hardest feature of that project, burning through most of $50 in API credits before it finally worked. Music was a close second, the part I was least happy with. So when I set out to port the family of <a href="https://en.wikipedia.org/wiki/Tafl_games">Tafl games</a> to the original Game Boy, I half expected those same walls.</p>
+
+<p><a href="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/game_playing.jpg" class="lightgallery-link" data-sub-html="A game of Tablut in progress on the Game Boy">
+<img src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/game_playing.jpg" alt="A game of Tablut in progress on the Game Boy" height="144" width="160" class="small-image" data-src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/game_playing.jpg" loading="lazy" />
+</a></p>
+
+<p>They didn’t show up. The features that had been the most painful last time turned out to be among the smoothest this time, and the reason why is the story of this project. Some of it is a stronger model, some of it is me knowing the system better, but the biggest factor was planning: laying the groundwork before writing a single line of game logic. More on that below, but first, the game.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Tafl_games#Hnefatafl">Hnefatafl</a>, the Viking board game known as Viking Chess, and its cousins <a href="https://en.wikipedia.org/wiki/Tafl_games#Brandubh">Brandubh</a> (Irish) and <a href="https://en.wikipedia.org/wiki/Tafl_games#Tablut">Tablut</a> (Sámi) now all run on the original Game Boy. Beyond the link cable and music, I still had a few corners of DMG development left unexplored: background scrolling, scanline-based effects, a save system, Super Game Boy support, and multiple memory banks. Porting this family of historic games gave me the perfect excuse to dig into all of it.</p>
+
+<p><a href="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/title_screen.jpg" class="lightgallery-link" data-sub-html="The Hnefatafl title screen running on a Game Boy">
+<img src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/title_screen.jpg" alt="The Hnefatafl title screen running on a Game Boy" height="144" width="160" class="small-image" data-src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/title_screen.jpg" loading="lazy" />
+</a></p>
+
+<p>Want to try the game? <a href="https://sebastianproost.itch.io/hnefatafl-viking-chess">Download Hnefatafl on itch.io</a> for free!</p>
+
+<div style="text-align: center;">
+<iframe frameborder="0" src="https://itch.io/embed/4667078?link_color=5ba9fa" width="552" height="167" style="max-width: 100%;"><a href="https://sebastianproost.itch.io/hnefatafl-viking-chess">Hnefatafl - Viking Chess by sebastian.proost</a></iframe>
+</div>
+
+<h2 id="the-tafl-family-hnefatafl-brandubh-and-tablut">The Tafl Family: Hnefatafl, Brandubh, and Tablut</h2>
+
+<p>Long before chess arrived in Northern Europe, the Tafl games were <em>the</em> board games to play, for roughly a thousand years from around the 4th to the 12th century. “Tafl” just means “board” or “table” in Old Norse, and as the Vikings travelled and traded, the game travelled with them, picking up local flavors along the way: Hnefatafl (“the king’s table”) in Scandinavia, Brandubh (“black raven”) in Ireland, and Tablut among the Sámi in the far north of Scandinavia. None of these games survived as a living tradition, what we know of the rules comes from a patchwork of old manuscripts, fragments of boards, and one famous, slightly ambiguous description written down by <a href="https://en.wikipedia.org/wiki/Carl_Linnaeus">Carl Linnaeus</a> during his travels through Lapland in 1732.</p>
+
+<p>What makes the Tafl games so different from chess is the asymmetry. Rather than two mirrored armies, you get a king and a small group of defenders huddled in the centre of the board, surrounded on all sides by a much larger force of attackers. The attackers win by trapping the king so he can’t move, while the defenders win by getting him to safety on one of the board’s edges or corners, depending on the variant. Captures work by “sandwiching” a piece between two of your opponent’s pieces along a row or column, easy enough to explain, but the lopsided starting position means attackers and defenders need almost completely different strategies, which makes for a surprisingly deep little game given how few rules there are.</p>
+
+<p>The variants mostly differ in board size, and that turned out to matter quite a bit for a Game Boy port. Brandubh is played on a tidy 7x7 board, Tablut on 9x9, and Hnefatafl, in the most common modern reconstruction, on 11x11. The Game Boy’s 160x144 pixel screen works out to a 20x18 tile grid, so even the 11x11 Hnefatafl board fits, but only if every square maps to a single 8x8 pixel tile with nothing larger. That ruled out giving each square its own bigger, more detailed tile, an approach that would have worked fine for Brandubh’s 7x7 or Tablut’s 9x9 board, and meant the board art and pieces all had to stay legible at 8x8 pixels.</p>
+
+<h2 id="one-engine-three-rulesets">One Engine, Three Rulesets</h2>
+
+<p><a href="/assets/posts/2026-06-30-gameboy-hnefatafl/hnefatafl_boxart.jpg" class="lightgallery-link" data-sub-html="Boxart for a homebrew game boy game Hnefatafl">
+<img src="/assets/posts/2026-06-30-gameboy-hnefatafl/hnefatafl_boxart.jpg" alt="Boxart for a homebrew game boy game Hnefatafl" height="1024" width="1024" class="medium-image" data-src="/assets/posts/2026-06-30-gameboy-hnefatafl/hnefatafl_boxart.jpg" loading="lazy" />
+</a></p>
+
+<p>Before writing a line of GBDK code, I built the game engine in Python: board state, move validation, capture rules, and win conditions for all three variants, parameterized by board size and starting layout. That gave me a fast environment to write AI agents and pit them against each other, tuning move-selection strategies for Hnefatafl, Brandubh, and Tablut. This Python implementation then became the starting point for the C port, same rules and structure, translated to the constraints of the hardware. This is the same approach I used previously and it works incredibly well; I’ve <a href="/ai/programming/2025/12/20/rust-experiment.html">written before about how well Claude can port code from Python to other languages</a>.</p>
+
+<p>Porting core logic to C is exactly the kind of place where small mistakes, an off-by-one in a capture check, a sign error in a direction vector, quietly break a game. So this time I had Claude add unit tests for the C implementation, and the approach it came up with was clever: the Python engine, already battle-tested from the agent-vs-agent runs, generates test fixtures (board states, moves, expected outcomes), which get compiled together with the C code into a small standalone binary. Running that binary replays the same scenarios through the C logic and compares the results against the Python-generated expectations, catching divergences before they ever show up on actual hardware. A neat trick, and exactly the kind of safety net I wish I’d had on the previous project.</p>
+
+<div class="gallery-3-col">
+  <p><a href="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_brandubh.jpg" class="lightgallery-link" data-sub-html="Menu showing Brandubh option">
+<img src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_brandubh.jpg" alt="Menu showing Brandubh option" height="144" width="160" data-src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_brandubh.jpg" loading="lazy" />
+</a>
+<a href="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_tablut.jpg" class="lightgallery-link" data-sub-html="Menu showing Tablut option">
+<img src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_tablut.jpg" alt="Menu showing Tablut option" height="144" width="160" data-src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_tablut.jpg" loading="lazy" />
+</a>
+<a href="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_hnefatafl.jpg" class="lightgallery-link" data-sub-html="Menu showing Hnefatafl option">
+<img src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_hnefatafl.jpg" alt="Menu showing Hnefatafl option" height="144" width="160" data-src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_hnefatafl.jpg" loading="lazy" />
+</a></p>
+</div>
+
+<h2 id="planning-made-the-difference">Planning Made the Difference</h2>
+
+<p>If there’s one thing that separated this project from the last, it’s how much groundwork I laid before any game code existed. On the Royal Game of Ur I learned the hard way that feeding assets to an agent one image at a time leads to grief; this time I front-loaded the planning, and almost every “it just worked” moment later in the project traces back to it.</p>
+
+<p>I improved in two concrete ways. First, I did far more planning with Claude up front: I prepared a handoff HTML document with detailed descriptions of how I wanted things implemented, which assets I would provide, and exactly how each should be used. Then I created those assets to match the spec, rather than improvising them as I went. Laying out full tile and sprite sheets ahead of time meant Claude Code could confidently reuse existing tiles instead of generating new ones, which paid off in ways I didn’t fully anticipate (the Super Game Boy border below is the clearest example).</p>
+
+<p>Second, I got a lot better at preparing the art itself, converting images to clean 2-bit indexed PNGs that <code class="language-plaintext highlighter-rouge">png2asset</code> could ingest without any hiccups. That one change removed a whole category of asset-pipeline friction that had dogged the previous project.</p>
+
+<p>The other thing I could lean on this time was the source code from the Royal Game of Ur. The link cable mode there took endless back and forth to get right. This time I simply pointed Claude at that earlier implementation and asked it to reuse the best parts and adapt them. It worked after 3-4 iterations, where last time it had taken weeks and most of those API credits. That contrast, the previous project’s biggest headache becoming one of this project’s smoothest features, set the tone for everything that followed.</p>
+
+<h2 id="visual-effects-background-scrolling-and-scanlines">Visual Effects: Background Scrolling and Scanlines</h2>
+
+<p>While I haven’t decided yet what type of game I ultimately want to make, I know single static screens won’t do. I want the player to be able to explore a world without too many interruptions, which means building a large map in the background layer and moving it around. For a board game that isn’t required during play, but there’s no reason the menu can’t be a bit nicer, with images sliding as the player selects a different option.</p>
+
+<video style="display:block; margin:0 auto; width:100%; max-width:464px; max-height:464px;" controls="">Your browser does not support the &lt;video&gt; tag.
+    <source src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_animation.mp4" />
+</video>
+
+<p>I also played around with scanline effects, where you scroll the background at a specific point while the screen is being redrawn. Old racing games used this trick to draw curved tracks, you see it whenever water ripples at the bottom of the screen while the sky stays static, and some of the attacks in Pokémon are animated this way too. I got it running, but the effect didn’t really fit a board game, so it didn’t make the cut. Still, it’s exactly the kind of trick I’ll want in the toolbox for that bigger, more exploratory game down the line.</p>
+
+<h2 id="saving-stats-and-memory-banks">Saving Stats and Memory Banks</h2>
+
+<p>Since a round of Tafl doesn’t take long, saving a game in the middle didn’t make much sense. So as an excuse to work with the battery-backed SRAM, I decided to keep lifetime win/loss tallies instead. On the previous project a save system was something I’d flagged as “next time” work and expected to wrestle with. Here it was almost anticlimactic: Claude handled the read/write and persistence logic without much fuss.</p>
+
+<p><a href="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/stats_screen.jpg" class="lightgallery-link" data-sub-html="The stats screen">
+<img src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/stats_screen.jpg" alt="The stats screen" height="144" width="160" class="small-image" data-src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/stats_screen.jpg" loading="lazy" />
+</a></p>
+
+<p>Cartridges with SRAM also tend to come with multiple ROM banks (and I do want to make physical copies of these games at some point), and that extra headroom opened the door to more elaborate artwork for the side-select and win/loss screens than I’d otherwise have been able to fit. What surprised me most was how well Claude managed the bank-switching itself; memory layout across banks is exactly the kind of bookkeeping that’s easy to get subtly wrong. To catch issues early, it built a small memory-bank agent that runs on every build, checking that everything is laid out correctly and flagging any overlaps or overflows before they turn into a hard-to-debug crash on hardware.</p>
+
+<p>The side-select screens were one place that headroom paid off, each side getting its own character art rather than a plain text prompt.</p>
+
+<div class="gallery-2-col">
+  <p><a href="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_side_attacker.jpg" class="lightgallery-link" data-sub-html="The attacker side-select screen">
+<img src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_side_attacker.jpg" alt="The attacker side-select screen" height="144" width="160" data-src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_side_attacker.jpg" loading="lazy" />
+</a>
+<a href="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_side_defender.jpg" class="lightgallery-link" data-sub-html="The defender side-select screen">
+<img src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_side_defender.jpg" alt="The defender side-select screen" height="144" width="160" data-src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_side_defender.jpg" loading="lazy" />
+</a></p>
+</div>
+
+<p>The win and loss screens got the same treatment, a dedicated end-of-game board state alongside a result screen showing the final tallies.</p>
+
+<div class="gallery-2-col">
+  <p><a href="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/game_lost.jpg" class="lightgallery-link" data-sub-html="The defender-wins end screen">
+<img src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/game_lost.jpg" alt="The defender-wins end screen" height="144" width="160" data-src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/game_lost.jpg" loading="lazy" />
+</a>
+<a href="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/result_lost.jpg" class="lightgallery-link" data-sub-html="The result screen with final tallies">
+<img src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/result_lost.jpg" alt="The result screen with final tallies" height="144" width="160" data-src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/result_lost.jpg" loading="lazy" />
+</a></p>
+</div>
+
+<h2 id="super-game-boy-support">Super Game Boy Support</h2>
+
+<p>This is the feature where the planning really showed its value. Last time I tried adding a border that appears around the game screen when a Super Game Boy is used (or, more likely, emulated), but I ran into a wall. That ROM targeted the simplest cartridge, and there just wasn’t enough memory left over to fit the extra data the border needed.</p>
+
+<p><a href="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/sbg_support.jpg" class="lightgallery-link" data-sub-html="Hnefatafl running in an emulator with the SGB border visible">
+<img src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/sbg_support.jpg" alt="Hnefatafl running in an emulator with the SGB border visible" height="671" width="768" class="medium-image" data-src="/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/sbg_support.jpg" loading="lazy" />
+</a></p>
+
+<p>This time I’m targeting a more advanced cartridge with multiple banks, which has plenty of headroom for SGB support, especially since the border could mostly reuse tiles I’d already laid out for the board. Here the latest Opus model (4.8) really impressed me. I described what I wanted, a Hnefatafl board split diagonally with one half in the top left and the other in the bottom right, and from that description alone it created a PNG, converted the asset, recognized that those tiles were already available, and implemented the border. When I then asked for a splash of color, that got added too, without any hiccups. That only worked because the tiles were sitting there ready to be reused, exactly the payoff I was hoping for from all the up-front planning.</p>
+
+<h2 id="sound-and-music">Sound and Music</h2>
+
+<p>Music was the other feature I dreaded after last time, when Claude couldn’t get my songs into a format <a href="https://github.com/SuperDisk/hUGETracker">hUGETracker</a> would load. One advantage here is that there are known Scandinavian melodies I could use royalty free, so I started there and found a few candidates: <a href="https://en.wikipedia.org/wiki/Dr%C3%B8mde_mik_en_dr%C3%B8m_i_nat"><em>Drömde mig en dröm i nat</em></a> (a medieval Nordic ballad, the oldest known secular song in Scandinavia), <a href="https://en.wikipedia.org/wiki/Who_Can_Sail_Without_the_Wind%3F"><em>Vem kan segla förutan vind</em></a> (a Swedish folk song), and <a href="https://en.wikipedia.org/wiki/Herr_Mannelig"><em>Herr Mannelig</em></a> (a Swedish medieval ballad).</p>
+
+<p>The melodies that sound Viking-like to me usually have a bowed instrument that can sustain low notes for a long time. That sound comes from a bass tagelharpa, which is a bit bigger and lower than the more historically correct versions. Percussion is another modern addition; I wanted a bit of a beat, even though it doesn’t seem to have been common in traditional Nordic music. The melody itself is often carried by shrill flutes.</p>
+
+<p>The difference from last time came down to knowing what I wanted before I asked for it. I described which instruments to emulate and how to map them onto the Game Boy’s channels: droning bowed strings on the wave channel, the flute melody on a pulse channel, and the noise channel for percussion, leaving CH1 free for in-game SFX. With that prompt, and after a few tries, I got working <code class="language-plaintext highlighter-rouge">.uge</code> files back. A few tweaks later in hUGETracker and they were ready to drop into the game.</p>
+
+<h2 id="what-i-learned">What I Learned</h2>
+
+<p>The throughline of this whole project is that planning turns hard problems into easy ones. Laying out full tile and sprite sheets before writing any game logic meant Claude Code could confidently reuse tiles instead of generating new ones, which is exactly what made the Super Game Boy border come together so quickly. Knowing up front which instruments I wanted and how to map them to channels is what finally got music working. And describing assets in a detailed handoff document before building them kept the whole asset pipeline from snagging the way it had before.</p>
+
+<p>The other half is experience, on both sides. After a full project’s worth of GBDK work, I simply know the lingo better, SCX/SCY, STAT interrupts, VRAM banks, so I can ask for the right things. And the newer Opus model (4.8) clearly handles this kind of low-level work better too. The link cable code is the clearest case of everything coming together: on the Royal Game of Ur it was the most painful feature by far, burning through most of that $50 in API credits before it worked. This time I pointed Claude Code at the earlier implementation, iterated a handful of times, and got a reliable version back. Last project’s biggest headache became one of this project’s smoothest features, and music, usually the weakest link in my games, got a similar boost.</p>
+
+<p>Taken together, these wins leave me a lot more confident that bigger, more ambitious handheld projects are well within reach. I’m not sure yet what that next one will be, but I’m increasingly convinced the Game Boy still has plenty left to give.</p>
+
+<h2 id="disclaimer">Disclaimer</h2>
+
+<p>The game pieces depicted in the header and thumbnail of this post were AI generated. These were then further processed into the resulting box art and the art included in the game.</p>
+
+</article>
+
+
+
+<section class="tags">
+	<strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/tag/python">python</a>,&nbsp;<a href="/tag/c">c</a>,&nbsp;<a href="/tag/nintendo">nintendo</a>,&nbsp;<a href="/tag/gameboy">gameboy</a>,&nbsp;<a href="/tag/retrogaming">retrogaming</a>,&nbsp;<a href="/tag/homebrew">homebrew</a>,&nbsp;<a href="/tag/ai">ai</a>,&nbsp;<a href="/tag/claude-code">claude-code</a>,&nbsp;<a href="/tag/agent-based-modeling">agent-based-modeling</a>
+</section>
+
+
+
+<section class="rss">
+	
+	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+	
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+	    
+    
+    
+  
+    
+    
+	    
+      <a href="//bsky.app/intent/compose?text=Hnefatafl%2C+Viking+Chess+for+Game+Boy%20https%3A%2F%2Fblog.4dcu.be%2Fai%2Fprogramming%2Fgames%2F2026%2F06%2F30%2Fgameboy-hnefatafl.html"
+        target="_blank">
+        <i class="fa-brands fa-bluesky"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+	    
+    
+      <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fai%2Fprogramming%2Fgames%2F2026%2F06%2F30%2Fgameboy-hnefatafl.html"
+        target="_blank">
+        <i class="fa-brands fa-square-facebook fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+	    
+    
+    
+      <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fai%2Fprogramming%2Fgames%2F2026%2F06%2F30%2Fgameboy-hnefatafl.html"
+        target="_blank">
+        <i class="fa-brands fa-linkedin fa-lg"></i>
+      </a>
+    
+  
+    
+    
+      <a href="//x.com/share?text=Hnefatafl%2C+Viking+Chess+for+Game+Boy&url=https%3A%2F%2Fblog.4dcu.be%2Fai%2Fprogramming%2Fgames%2F2026%2F06%2F30%2Fgameboy-hnefatafl.html&via="
+        target="_blank">
+        <i class="fa-brands fa-x-twitter fa-lg"></i>
+      </a>
+    
+	    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/games/2026/05/13/cheating-at-my-own-game.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa-solid fa-square fa-stack-2x"></i>
+						<i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">Creating Cheats for my Own Game Boy Game</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+</div>
+</div>
+
+    </div>
+
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+		<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Site Map</strong></p>
+				<ul class="pages">
+					
+				<li class="nav-link"><a href="/about/">About</a>
+	
+				<li class="nav-link"><a href="/gallery/">Gallery</a>
+	
+				<li class="nav-link"><a href="/posts/">Posts</a>
+	
+				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+
+				</ul>
+				<br />
+				<p><strong>Legal</strong></p>
+				<p><a href="/policy/">Privacy policy</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Contribute</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+				
+				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+
+</html>
