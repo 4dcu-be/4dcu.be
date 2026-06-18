@@ -13,13 +13,16 @@ thumbnail: "/assets/images/thumbnails/hnefatafl_pieces.jpg"
 
 [Hnefatafl](https://en.wikipedia.org/wiki/Tafl_games#Hnefatafl), the Viking board game known as Viking Chess, and its cousins [Brandubh](https://en.wikipedia.org/wiki/Tafl_games#Brandubh) (Irish) and [Tablut](https://en.wikipedia.org/wiki/Tafl_games#Tablut) (Sámi) now run on the original Game Boy. After finishing [The Royal Game of Ur]({% post_url 2026/2026-03-15-gameboy-royal-game-of-ur %}), I still had a few corners of DMG Game Boy development left unexplored before moving on to something bigger: background scrolling, scanline-based effects, a save system, Super Game Boy support, multiple memory banks and decent music ... and my asset pipeline could use some work too. Porting this family of historic Tafl games gave me the perfect excuse to dig into all of it.
 
-<!-- Want to try the game! Link to itch.io + embed, and GitHub repo link, once published (mirrors the Royal Game of Ur post intro). -->
+Want to try the game! [Download Hnefatafl on itch.io](https://sebastianproost.itch.io/hnefatafl-viking-chess) for free!
 
-![Boxart for a homebrew game boy game Hnefatafl](/assets/posts/2026-06-30-gameboy-hnefatafl/hnefatafl_boxart.jpg){:.medium-image}
+<div style="text-align: center;">
+<iframe frameborder="0" src="https://itch.io/embed/4667078?link_color=5ba9fa" width="552" height="167"  style="max-width: 100%;"><a href="https://sebastianproost.itch.io/hnefatafl-viking-chess">Hnefatafl - Viking Chess by sebastian.proost</a></iframe>
+</div>
+
 
 ## The Tafl Family: Hnefatafl, Brandubh, and Tablut
 
-Long before chess arrived in Northern Europe, the Tafl games were *the* board games to play, for roughly a thousand years from around the 4th to the 12th century. "Tafl" just means "board" or "table" in Old Norse, and as the Vikings travelled and traded, the game travelled with them, picking up local flavors along the way: Hnefatafl ("the king's table") in Scandinavia, Brandubh ("black raven") in Ireland, and Tablut among the Sámi in the far north of Scandinavia. None of these games survived as a living tradition, what we know of the rules comes from a patchwork of old manuscripts, fragments of boards, and one famous, slightly ambiguous description written down by Carl Linnaeus during his travels through Lapland in 1732.
+Long before chess arrived in Northern Europe, the Tafl games were *the* board games to play, for roughly a thousand years from around the 4th to the 12th century. "Tafl" just means "board" or "table" in Old Norse, and as the Vikings travelled and traded, the game travelled with them, picking up local flavors along the way: Hnefatafl ("the king's table") in Scandinavia, Brandubh ("black raven") in Ireland, and Tablut among the Sámi in the far north of Scandinavia. None of these games survived as a living tradition, what we know of the rules comes from a patchwork of old manuscripts, fragments of boards, and one famous, slightly ambiguous description written down by [Carl Linnaeus](https://en.wikipedia.org/wiki/Carl_Linnaeus) during his travels through Lapland in 1732.
 
 What makes the Tafl games so different from chess is the asymmetry. Rather than two mirrored armies, you get a king and a small group of defenders huddled in the centre of the board, surrounded on all sides by a much larger force of attackers. The attackers win by trapping the king so he can't move, while the defenders win by getting him to safety on one of the board's edges or corners, depending on the variant. Captures work by "sandwiching" a piece between two of your opponent's pieces along a row or column, easy enough to explain, but the lopsided starting position means attackers and defenders need almost completely different strategies, which makes for a surprisingly deep little game given how few rules there are.
 
@@ -27,28 +30,41 @@ The variants mostly differ in board size, and that turned out to matter quite a 
 
 ## One Engine, Three Rulesets
 
-Before writing a line of GBDK code, I built the game engine in Python: board state, move validation, capture rules, and win conditions for all three variants, parameterized by board size and starting layout. That gave me a fast environment to write AI agents and pit them against each other, tuning move-selection strategies for Hnefatafl, Brandubh, and Tablut. This Python implementation then became the starting point for the C port, same rules and structure, translated to the constraints of the hardware.
+![Boxart for a homebrew game boy game Hnefatafl](/assets/posts/2026-06-30-gameboy-hnefatafl/hnefatafl_boxart.jpg){:.medium-image}
+
+Before writing a line of GBDK code, I built the game engine in Python: board state, move validation, capture rules, and win conditions for all three variants, parameterized by board size and starting layout. That gave me a fast environment to write AI agents and pit them against each other, tuning move-selection strategies for Hnefatafl, Brandubh, and Tablut. This Python implementation then became the starting point for the C port, same rules and structure, translated to the constraints of the hardware. This is the same approach I used previously as I felt this approach works incredibly well and I've wrote a post on how well [Claude can port code from Python to other languages]({% post_url 2025/2025-12-20-rust-experiment %}).
 
 Porting core logic to C is exactly the kind of place where small mistakes, an off-by-one in a capture check, a sign error in a direction vector, quietly break a game. So this time I had Claude add unit tests for the C implementation, and the approach it came up with was clever: the Python engine, already battle-tested from the agent-vs-agent runs, generates test fixtures (board states, moves, expected outcomes), which get compiled together with the C code into a small standalone binary. Running that binary replays the same scenarios through the C logic and compares the results against the Python-generated expectations, catching divergences before they ever show up on actual hardware. A neat trick, and exactly the kind of safety net I wish I'd had on the previous project.
 
+<div class="gallery-3-col" markdown="1">
+![Menu showing Brandubh option](/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_brandubh.jpg)
+![Menu showing Tablut option](/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_tablut.jpg)
+![Menu showing Hnefatafl option](/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_hnefatafl.jpg)
+</div>
 
-## A Better Asset Pipeline
-<!--
-- What was painful about asset creation/management in the Royal Game of Ur project
-- New tools/workflow adopted this time (tile/sprite export, palettes, automation scripts)
-- Before/after comparison if useful
--->
+## Planning Matters
+
+When using agents to build your code and projects, having the right assets ready is quite important. Here I improved on my previous projects in two ways. First, I did a lot more planning with Claude: I prepared a handoff HTML with detailed descriptions of how I wanted things implemented, and which assets I would provide and how they should be used. Then I created those assets based on the spec! Second, I got a lot better at converting images to 2-bit indexed PNGs, which ```png2assets``` could then convert without any hiccups.
+
+Another thing I could leverage this time, is the source code from my previous project. The link cable mode there took a lot of back and forth to get right. Now I pointed Claude to that implementation and asked to reuse the best parts and adapt them for this project. It work with 3-4 iterations, last time it took way longer. 
 
 ## Visual Effects: Background Scrolling and Scanlines
-<!--
-- Where scrolling is used (board larger than the viewport? menus/transitions?)
-- How it's implemented on hardware (SCX/SCY registers, etc.)
-- What the scanline-based effect does and how it's achieved (STAT interrupts, per-row palette/background changes)
--->
+
+While I haven't decided yet what type of game I ultimately want to make, single static screens won't do. I want the player to be able to explore the world without too many interruptions, so we'll have to build a large map in the background layer and move that around. For a board game that isn't required during play, but there's no reason we can't make the menu a bit nicer, with images sliding when the user selects a different option.
+
+<video style="width:100%" controls>Your browser does not support the &lt;video&gt; tag.
+    <source src="{{site.baseurl}}/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_animation.mp4"/>
+</video>
+
+
+I played around with some scanline effects, where you scroll the background at a specific point while the screen is being redrawn. Old racing games used this trick to draw curved tracks, you can see it in games where water moves at the bottom of the screen while the sky stays static, and some of the attacks in Pokemon are animated this way too. There are a lot of options. I got it running, though the effect didn't really fit the game. Still, it's a good trick to know about for the future.
+
 
 ## Saving Stats and Memory Banks
 
 Since a round of Tafl doesn't take long, saving it in the middle didn't make much sense.  So as an excuse to add something that required reading/writing the battery-backed SRAM, I decided to keep track of lifetime win/loss tallies. Wiring that up turned out to be almost anticlimactic, it just worked, with Claude handling the read/write and persistence logic without much fuss.
+
+![The stats screen](/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/stats_screen.jpg){:.small-image}
 
 Cartridges with SRAM also tend to come with multiple ROM banks (and I do want to make physical copies of these games at one point), and that extra headroom opened the door to more elaborate artwork for the side-select and win/loss screens than I'd have been able to fit otherwise. What surprised me most was how well Claude managed the bank-switching itself, memory layout across banks is exactly the kind of bookkeeping that's easy to get subtly wrong. To catch issues early, it built a small memory-bank agent that runs on every build, checking that everything is laid out correctly and flagging any overlaps or overflows before they turn into a hard-to-debug crash on hardware.
 
@@ -57,7 +73,7 @@ Cartridges with SRAM also tend to come with multiple ROM banks (and I do want to
 
 Last time I tried adding a border that appears around the game screen when a Super Game Boy is used (or, more likely, emulated), but I ran into a wall. That ROM was targeting the simplest cartridge, and there just wasn't enough memory left over to fit the extra data the border needed.
 
-![Hnefatafl running in an emulator with the SGB border visible](/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/sbg_support.jpg)
+![Hnefatafl running in an emulator with the SGB border visible](/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/sbg_support.jpg){:.medium-image}
 
 This time I'm targeting a more advanced cartridge with multiple banks, which has plenty of headroom for SGB support, especially since I'd mostly be reusing tiles from the board. Here the latest Opus model (4.8) really impressed me. I described what I wanted, a Hnefatafl board split diagonally with one half in the top left and the other in the bottom right, and from that description alone it created a png, converted the asset, picked up that those tiles were already available, and implemented the border. When I then asked for a splash of color, that got added too, without any hiccups!
 
@@ -70,9 +86,11 @@ Last time Claude wasn't able to convert the songs to something [hUGEtracker](htt
 
 ## What I Learned
 
-Planning paid off on two fronts. Laying out full tile and sprite sheets before writing any game logic meant Claude Code could reuse tiles confidently instead of generating new ones, which is exactly what made the Super Game Boy border come together so quickly. On my side, after a full project's worth of GBDK work, I know the lingo better, SCX/SCY, STAT interrupts, VRAM banks, and the newer Opus model (4.8) clearly handles this kind of low-level work better too.
+Planning paid off on two fronts. Laying out full tile and sprite sheets before writing any game logic meant Claude Code could confidently reuse tiles instead of generating new ones, which is exactly what made the Super Game Boy border come together so quickly. And on my side, after a full project's worth of GBDK work, I simply know the lingo better, SCX/SCY, STAT interrupts, VRAM banks. The newer Opus model (4.8) clearly handles this kind of low-level work better too.
 
-That combination paid off most with the link cable code: on the Royal Game of Ur this was by far the hardest part, burning through most of that $50 in API credits. This time, pointing Claude Code at that earlier implementation and iterating a handful of times produced a reliable version, turning last project's most painful feature into one of this project's smoothest. Music, often the weakest link in my games, got a similar boost. Together, these wins give me a lot more confidence that bigger, more ambitious handheld projects are within reach.
+That same combination turned what used to be the hard parts into the easy ones. The link cable code is the clearest example: on the Royal Game of Ur it was by far the most painful feature, burning through most of that $50 in API credits before it worked. This time I just pointed Claude Code at the earlier implementation, iterated a handful of times, and got a reliable version back, last project's biggest headache became one of this project's smoothest features. Music, usually the weakest link in my games, got a similar boost.
+
+Taken together, these wins leave me a lot more confident that bigger, more ambitious handheld projects are well within reach. I'm not sure yet what that next one will be, but I'm increasingly convinced the Game Boy still has plenty left to give.
 
 
 ## Disclaimer
