@@ -33,7 +33,8 @@
       "Bash(awk '/^---$/{c++} c==1{print} c==2{print; exit}' _posts/2026/2026-04-27-claude-design.md)",
       "Bash(echo \"exit: $?\")",
       "Bash(command -v ffprobe)",
-      "Bash(ffprobe -v error -show_entries stream=codec_type,codec_name,pix_fmt -of default=noprint_wrappers=1 assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_animation.mp4)"
+      "Bash(ffprobe -v error -show_entries stream=codec_type,codec_name,pix_fmt -of default=noprint_wrappers=1 assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_animation.mp4)",
+      "Bash(sed 's/[.,\\)]*$//')"
     ],
     "deny": [],
     "ask": []
