@@ -28,3 +28,8 @@ pagefind.exe
 plan.md
 
 gemfile.lock.backup
+
+__pycache__/
+
+# Generated link-check report
+utils/link_report.json

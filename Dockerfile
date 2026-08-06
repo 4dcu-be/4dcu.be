@@ -19,6 +19,10 @@ RUN apt-get update && apt-get install -y \
     curl \
     wget \
     gnupg2 \
+    # Python for utility scripts (utils/)
+    python3 \
+    python3-pip \
+    python3-venv \
     && rm -rf /var/lib/apt/lists/*
 
  
@@ -39,6 +43,14 @@ RUN gem install bundler
 
 # Install Pagefind
 RUN npm install -g pagefind
+
+# Install Python dependencies for utility scripts into a venv.
+# Debian bookworm is PEP 668 "externally managed", so we use a venv on PATH.
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv "$VIRTUAL_ENV"
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+COPY utils/requirements.txt /tmp/utils-requirements.txt
+RUN pip install --no-cache-dir -r /tmp/utils-requirements.txt
 
 # Set working directory
 WORKDIR /app
