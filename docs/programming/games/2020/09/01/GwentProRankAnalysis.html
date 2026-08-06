@@ -193,7 +193,9 @@ code). Download links for the full tables discussed here (in Excel-format) are a
 
 <p><strong>Update 03/09/2020:</strong> Credit where credit is due! After putting this blog post up I found two articles by Lerio2 that
 predate mine where he did the same analysis to check the popularity and rank countries (based on teams of 4 players). 
-Though I did my analysis independently, he had the idea several months earlier and deserves full credit for that! (06/08/2026 - Unfortunately these are no longer available online)</p>
+Though I did my analysis independently, he had the idea several months earlier and deserves full credit for that! 
+You can read his articles, called Nations of Gwent, <a href="https://web.archive.org/web/20210415222805/https://teamlegacy.org/gwent-for-geeks-nations-of-gwent/">here</a> and <a href="https://web.archive.org/web/20210416003340/https://teamlegacy.org/gwent-for-geeks-nations-of-gwent-vol-2/">here</a> 
+(06/08/2026 - teamlegacy.org is no longer online, these link to archived copies)</p>
 
 <h2 id="getting-the-data">Getting the Data</h2>
 
@@ -302,7 +304,7 @@ which players are more efficient in climbing (and arguably better at the game th
 the MMR, subtract the base value (9600) and divide by the number of matches. However, as 
 increasing the MMR score becomes progressively more difficult as players will face better opponents as they climb the
 ladder, Lerio2 from Team Legacy proposed to divide by the square root of the number of matches. Their metric, the
-<a href="https://teamlegacy.org/2020/08/05/gwent-players-scores-and-efficiency-index/">Ladder Efficiency Index</a> or <em>LEI</em> is 
+<a href="https://web.archive.org/web/20201001135246/https://teamlegacy.org/2020/08/05/gwent-players-scores-and-efficiency-index/">Ladder Efficiency Index</a> or <em>LEI</em> is 
 calculated here as well.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">full_df</span><span class="p">[</span><span class="sh">'</span><span class="s">efficiency</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">full_df</span><span class="p">[</span><span class="sh">'</span><span class="s">mmr</span><span class="sh">'</span><span class="p">]</span><span class="o">-</span><span class="mi">9600</span><span class="p">))</span><span class="o">/</span><span class="n">full_df</span><span class="p">[</span><span class="sh">'</span><span class="s">matches</span><span class="sh">'</span><span class="p">]</span>

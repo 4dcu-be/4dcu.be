@@ -36,7 +36,9 @@ code). Download links for the full tables discussed here (in Excel-format) are a
 
 **Update 03/09/2020:** Credit where credit is due! After putting this blog post up I found two articles by Lerio2 that
 predate mine where he did the same analysis to check the popularity and rank countries (based on teams of 4 players). 
-Though I did my analysis independently, he had the idea several months earlier and deserves full credit for that! (06/08/2026 - Unfortunately these are no longer available online)
+Though I did my analysis independently, he had the idea several months earlier and deserves full credit for that! 
+You can read his articles, called Nations of Gwent, [here](https://web.archive.org/web/20210415222805/https://teamlegacy.org/gwent-for-geeks-nations-of-gwent/) and [here](https://web.archive.org/web/20210416003340/https://teamlegacy.org/gwent-for-geeks-nations-of-gwent-vol-2/) 
+(06/08/2026 - teamlegacy.org is no longer online, these link to archived copies)
 
 ## Getting the Data
 
@@ -97,7 +99,7 @@ which players are more efficient in climbing (and arguably better at the game th
 the MMR, subtract the base value (9600) and divide by the number of matches. However, as 
 increasing the MMR score becomes progressively more difficult as players will face better opponents as they climb the
 ladder, Lerio2 from Team Legacy proposed to divide by the square root of the number of matches. Their metric, the
-[Ladder Efficiency Index](https://teamlegacy.org/2020/08/05/gwent-players-scores-and-efficiency-index/) or *LEI* is 
+[Ladder Efficiency Index](https://web.archive.org/web/20201001135246/https://teamlegacy.org/2020/08/05/gwent-players-scores-and-efficiency-index/) or *LEI* is 
 calculated here as well.
 
 ```python
