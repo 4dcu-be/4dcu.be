@@ -83,7 +83,7 @@ to be made for Jekyll. Here all work can go into creating the web design and the
 a YAML file. Now updating those values is as simple as changing the values in that YAML file and GitHub can take care
 of everything else. I can think of plenty of cases, ranging from small businesses, sports clubs, ... where this would be
 an efficient way to set up and maintain a website. My previous resume was set up like this, and while I have switched to
-one powered by [Gatsby] last week. You can still find the previous version [here](https://sebastian.proost.science/resume-pre2020/).
+one powered by [Gatsby] last week. You can still find the previous version [here](https://github.com/sepro/resume-pre2020).
 
 Both blogs I've set up ([Beyond the Known] and this one), are also powered by Jekyll, though they both use plugins and
 customizations that GitHub doesn't support. So these are build locally into the ```/docs``` folder and committed to 

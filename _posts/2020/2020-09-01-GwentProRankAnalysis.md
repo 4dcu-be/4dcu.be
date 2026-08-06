@@ -36,8 +36,7 @@ code). Download links for the full tables discussed here (in Excel-format) are a
 
 **Update 03/09/2020:** Credit where credit is due! After putting this blog post up I found two articles by Lerio2 that
 predate mine where he did the same analysis to check the popularity and rank countries (based on teams of 4 players). 
-Though I did my analysis independently, he had the idea several months earlier and deserves full credit for that! 
-You can read his articles, called Nations of Gwent, [here](https://teamlegacy.org/gwent-for-geeks-nations-of-gwent/) and [here](https://teamlegacy.org/gwent-for-geeks-nations-of-gwent-vol-2/)
+Though I did my analysis independently, he had the idea several months earlier and deserves full credit for that! (06/08/2026 - Unfortunately these are no longer available online)
 
 ## Getting the Data
 

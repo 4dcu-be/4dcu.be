@@ -1,0 +1,178 @@
+{
+  "dead": {
+    "cad.onshape.com": [
+      {
+        "url": "https://cad.onshape.com/documents/d51390908518dae3537d30cb/v/5795621a4955a186f8259639/e/c5e3987990b6848a5d2c0405",
+        "detail": "error: Exceeded maximum allowed redirects.",
+        "posts": [
+          "2020-02-25-3D-printing.md"
+        ]
+      }
+    ],
+    "fabdb.net": [
+      {
+        "url": "https://fabdb.net",
+        "detail": "timeout: ",
+        "posts": [
+          "2021-09-28-DeckLock4.md"
+        ]
+      },
+      {
+        "url": "https://fabdb.net/",
+        "detail": "timeout: ",
+        "posts": [
+          "2021-09-28-DeckLock4.md"
+        ]
+      },
+      {
+        "url": "https://fabdb.net/decks/GkNKXvRA/",
+        "detail": "timeout: ",
+        "posts": [
+          "2021-09-28-DeckLock4.md"
+        ]
+      }
+    ],
+    "inkscape.org": [
+      {
+        "url": "https://inkscape.org/",
+        "detail": "timeout: ",
+        "posts": [
+          "2025-02-03-deej-open-hardware-volume-controller.md"
+        ]
+      }
+    ],
+    "mrl33h.de": [
+      {
+        "url": "https://mrl33h.de/post/30",
+        "detail": "HTTP 404",
+        "posts": [
+          "2020-07-26-BusyBoard.md"
+        ]
+      }
+    ],
+    "pyscript.net": [
+      {
+        "url": "https://pyscript.net/alpha/pyscript.css",
+        "detail": "HTTP 404",
+        "posts": [
+          "2022-06-05-pyscript_first_tests.md"
+        ]
+      },
+      {
+        "url": "https://pyscript.net/alpha/pyscript.js",
+        "detail": "HTTP 404",
+        "posts": [
+          "2022-06-05-pyscript_first_tests.md"
+        ]
+      }
+    ],
+    "sebastian.proost.science": [
+      {
+        "url": "https://sebastian.proost.science/resume-pre2020/",
+        "detail": "HTTP 404",
+        "posts": [
+          "2020-11-22-Static-Web-Generators.md"
+        ]
+      }
+    ],
+    "sudomod.com": [
+      {
+        "url": "https://sudomod.com/",
+        "detail": "timeout: ",
+        "posts": [
+          "2020-10-17-3D-printing_2.md"
+        ]
+      }
+    ],
+    "teamlegacy.org": [
+      {
+        "url": "https://teamlegacy.org/2020/08/05/gwent-players-scores-and-efficiency-index/",
+        "detail": "error: Server disconnected without sending a response.",
+        "posts": [
+          "2020-09-01-GwentProRankAnalysis.md"
+        ]
+      },
+      {
+        "url": "https://teamlegacy.org/gwent-for-geeks-nations-of-gwent-vol-2/",
+        "detail": "error: Server disconnected without sending a response.",
+        "posts": [
+          "2020-09-01-GwentProRankAnalysis.md"
+        ]
+      },
+      {
+        "url": "https://teamlegacy.org/gwent-for-geeks-nations-of-gwent/",
+        "detail": "error: Server disconnected without sending a response.",
+        "posts": [
+          "2020-09-01-GwentProRankAnalysis.md"
+        ]
+      }
+    ],
+    "www.bbc.co.uk": [
+      {
+        "url": "https://www.bbc.co.uk/bitesize/guides/zmxbkqt/revision/3",
+        "detail": "HTTP 404",
+        "posts": [
+          "2021-08-30-Capture_Mark_Recapture.md",
+          "2021-09-04-KeyForge_Decks_Printed.md"
+        ]
+      }
+    ],
+    "www.ikea.com": [
+      {
+        "url": "https://www.ikea.com/be/en/p/vindriktning-air-quality-sensor-70498242/",
+        "detail": "HTTP 404",
+        "posts": [
+          "2024-01-21-air-quality-sensor.md"
+        ]
+      },
+      {
+        "url": "https://www.ikea.com/gb/en/p/lots-mirror-39151700/",
+        "detail": "HTTP 404",
+        "posts": [
+          "2020-02-25-3D-printing.md"
+        ]
+      },
+      {
+        "url": "https://www.ikea.com/us/en/p/tradfri-signal-repeater-30400407/",
+        "detail": "HTTP 404",
+        "posts": [
+          "2021-04-28-MQTT-Ikea-Tradfri.md"
+        ]
+      }
+    ],
+    "www.kaggle.com": [
+      {
+        "url": "https://www.kaggle.com/aungpyaeap/fish-market",
+        "detail": "HTTP 404",
+        "posts": [
+          "2021-08-01-Clustering-penguins.md"
+        ]
+      },
+      {
+        "url": "https://www.kaggle.com/erikbruin/countries-of-the-world-iso-codes-and-population/data#",
+        "detail": "HTTP 404",
+        "posts": [
+          "2020-09-01-GwentProRankAnalysis.md"
+        ]
+      }
+    ],
+    "www.sciensano.be": [
+      {
+        "url": "https://www.sciensano.be/en/covid-19-data",
+        "detail": "HTTP 404",
+        "posts": [
+          "2020-09-05-Testing-Benfords-Law.md"
+        ]
+      }
+    ],
+    "www.sudomod.com": [
+      {
+        "url": "https://www.sudomod.com/forum/",
+        "detail": "timeout: ",
+        "posts": [
+          "2021-01-31-Gameboy-Zero.md"
+        ]
+      }
+    ]
+  }
+}

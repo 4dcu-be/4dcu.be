@@ -134,5 +134,5 @@ to install them more than make up for that.
 [File Editor]: https://github.com/home-assistant/addons/tree/master/configurator
 [Samba share]: https://github.com/home-assistant/addons/tree/master/samba
 [Aqara Cube]: https://www.aqara.com/us/cube.html
-[Ikea Tradfri repeater]: https://www.ikea.com/us/en/p/tradfri-signal-repeater-30400407/
+[Ikea Tradfri repeater]: https://web.archive.org/web/20211203142442/https://www.ikea.com/us/en/p/tradfri-signal-repeater-30400407/
 [MemoBoard]: https://github.com/sepro/MemoBoard

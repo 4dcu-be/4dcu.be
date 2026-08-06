@@ -50,7 +50,7 @@ The layout left much to be desired, so this was improved by adding some CSS to t
 was great to quickly make some cards for each user, and after some tweaking it looked great. Using some of the more 
 advanced options from Flask-Admin it was also made easy to change the status of users from the admin panel. Though, at this stage I also decided to make it 
 possible for users to add their picture. [Flask-Uploads] can be used to handle the uploads and there are some options to
-integrate this with Flask-Admin, which are documented on [here](https://mrl33h.de/post/30). This took a few attempts and
+integrate this with Flask-Admin, which are documented on [here](https://web.archive.org/web/20201123223344/https://mrl33h.de/post/30). This took a few attempts and
 a fair amount of time was lost figuring out that Flask-Uploads wasn't compatible with the most recent version of
 [Werkzeug]. 
 

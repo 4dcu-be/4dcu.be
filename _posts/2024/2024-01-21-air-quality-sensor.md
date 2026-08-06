@@ -427,7 +427,7 @@ There are a lot of different variations to this project, check out some links be
 
 Or check out the [next post]({% post_url 2024/2024-04-04-air-quality-sensor-part-two %}), where we untether the sensor from Home Assistant and turn it into a stand-alone device.
 
-[IKEA Vindriktning]: https://www.ikea.com/be/en/p/vindriktning-air-quality-sensor-70498242/
+[IKEA Vindriktning]: https://web.archive.org/web/20221003172915/https://www.ikea.com/be/en/p/vindriktning-air-quality-sensor-70498242/
 [Home Assistant]: https://www.home-assistant.io/
 [ESPHome]: https://esphome.io/
 [Transform Your IKEA Air Quality Sensor into a Smart Home Essential with This DIY Upgrade]: https://www.youtube.com/watch?v=YmqtMTO5NVc
