@@ -24,7 +24,7 @@ sitemap: false
 
 <div class="wrapper">
 <div class="page">
-  <article class="post-content">
+  <article class="archive-content">
     {% if page.type == 'year' %}
       {% capture more_label %}More posts from {{ page.date | date: "%Y" }}{% endcapture %}
       {% include archive_post_listing.html posts=page.posts cards_limit=9 more_label=more_label %}
