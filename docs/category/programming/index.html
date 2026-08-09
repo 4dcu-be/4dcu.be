@@ -3,23 +3,18 @@
 
   <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>programming</title>
+  <meta name="description" content="Everything related with code, programming, ...">
   
-  
-
-  <title>programming</title>
-  <meta name="description" content="A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.">
   
   <meta name="author" content="Sebastian Proost">
   <meta name="copyright" content="&copy; Sebastian Proost 2026">
   
 
   <!-- External libraries -->
-	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
-  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <!-- Favicon and other icons -->
   <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
@@ -31,7 +26,7 @@
   <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
   <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
@@ -39,51 +34,87 @@
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
-
-  
-  <!-- Facebook OGP cards -->
-  <meta property="og:description" content="A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more." />
-  <meta property="og:url" content="https://blog.4dcu.be/category/programming/">
+  <!-- Open Graph -->
   <meta property="og:site_name" content="4DCu.be" />
   <meta property="og:title" content="programming" />
+  <meta property="og:description" content="Everything related with code, programming, ..." />
+  <meta property="og:url" content="https://blog.4dcu.be/category/programming/" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://blog.4dcu.be/assets/social_fb.jpg" />
-  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/site-default.jpg" />
+  <meta property="og:image:alt" content="programming" />
+  <meta property="og:image:type" content="image/jpeg" />
+  
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   
+  
+  
 
   
-  <!-- Twitter: card tags -->
+  <!-- Twitter / X cards -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="programming">
-  <meta name="twitter:description" content="A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.">
-  <meta name="twitter:image" content="https://blog.4dcu.be/assets/social_fb.jpg">
+  <meta name="twitter:description" content="Everything related with code, programming, ...">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/social/site-default.jpg">
+  <meta name="twitter:image:alt" content="programming">
   <meta name="twitter:url" content="https://blog.4dcu.be/category/programming/">
   
 
-  
-
-  <!-- Site styles -->
+  <!-- Site styles and discovery -->
   <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
   <link rel="canonical" href="https://blog.4dcu.be/category/programming/">
-	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
-	<link rel="stylesheet" href="/css/main.css">
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+  <link rel="stylesheet" href="/css/main.css">
 
-	<!-- PageFind -->
-	<script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <!-- Structured data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png",
+      "sameAs": ["https://github.com/4dcu-be", "https://bsky.app/profile/blog.4dcu.be"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/category/programming/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/" },
+        { "@type": "ListItem", "position": 2, "name": "Programming" }
+      ]
+    }
+  ]
+}
+</script>
 
 
-	<!-- Tooltips -->
-	<script type="text/javascript">
-		window.tooltips = []
-	</script>
+  <!-- PageFind -->
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
 
-	<script type='text/javascript'>
-	//<![CDATA[
-	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
-	//]]>
-	</Script>
+  <!-- Tooltips -->
+  <script type="text/javascript">
+    window.tooltips = []
+  </script>
+
+  <script type="text/javascript">
+  //<![CDATA[
+  function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+  //]]>
+  </script>
 </head>
 
 
@@ -131,127 +162,479 @@
 
     <div class="page-content">
         <section class="hero is-narrow has-background has-dark-overlay has-text-shadow has-box-shadow">
-	
-	<img alt="Archive cover" class="hero-background is-transparent" src="/assets/images/headers/gameboyzero.jpg" />
-	
-	<div class="hero-body">
-		<div class="container has-text-centered">
-			
-				<h1 class="title has-text-white">Posts in Programming</h1>
-			
-			
-		</div>
-	</div>
+  
+  <img alt="" class="hero-background is-transparent" src="/assets/images/headers/gameboyzero.jpg" />
+  
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      
+        <h1 class="title has-text-white">Posts in Programming</h1>
+      
+      
+    </div>
+  </div>
 </section>
 
 <div class="wrapper">
 <div class="page">
-  <article class="post-content">
-    <ul class="posts-list">
+  <article class="archive-content">
+    
       
-      <li><strong><a class="post-link" href="/ai/programming/games/2026/06/30/gameboy-hnefatafl.html">Hnefatafl, Viking Chess for Game Boy</a></strong><span class="post-date"> - June 30, 2026</span></li>
       
-      <li><strong><a class="post-link" href="/ai/programming/2026/04/27/claude-design.html">Claude Design to revamp two projects</a></strong><span class="post-date"> - April 27, 2026</span></li>
-      
-      <li><strong><a class="post-link" href="/ai/programming/games/2026/03/29/dscube-twist-puzzle-nds.html">Revisiting a 20-Year-Old NDS Project with AI</a></strong><span class="post-date"> - March 29, 2026</span></li>
-      
-      <li><strong><a class="post-link" href="/ai/programming/games/2026/03/15/gameboy-royal-game-of-ur.html">The Royal Game Boy of Ur</a></strong><span class="post-date"> - March 15, 2026</span></li>
-      
-      <li><strong><a class="post-link" href="/ai/programming/2025/12/20/rust-experiment.html">Python to Rust: Porting My Genetic Art Algorithm</a></strong><span class="post-date"> - December 20, 2025</span></li>
-      
-      <li><strong><a class="post-link" href="/diy/programming/2025/07/21/dashboard-for-home-assisant.html">Using my Kindle PW3 as a Dashboard for Home Assistant</a></strong><span class="post-date"> - July 21, 2025</span></li>
-      
-      <li><strong><a class="post-link" href="/diy/programming/2025/02/03/deej-open-hardware-volume-controller.html">Building a Custom Deej Volume Mixer with an RP2040 Pro Micro</a></strong><span class="post-date"> - February 3, 2025</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2023/02/02/chatgpt-python-gui-app.html">Can ChatGPT write a Python GUI app for me?</a></strong><span class="post-date"> - February 2, 2023</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2022/12/12/tiny-rp2040.html">XIAO-RP2040: A tiny RPi Pico alternative</a></strong><span class="post-date"> - December 12, 2022</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2022/08/27/pagefind.html">Pagefind: Search in a static website</a></strong><span class="post-date"> - August 27, 2022</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2022/07/17/path_in_R.html">Getting a script's path in R</a></strong><span class="post-date"> - July 17, 2022</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2022/06/05/pyscript_first_tests.html">PyScript: Python in the browser!</a></strong><span class="post-date"> - June 5, 2022</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/games/2022/04/13/KeyForge_Hiatus.html">The KeyForge hiatus: impact on deck registrations</a></strong><span class="post-date"> - April 13, 2022</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/games/2022/01/30/MTG_sales_map.html">Where are my Magic: the Gathering cards ?</a></strong><span class="post-date"> - January 30, 2022</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2021/12/30/Posthoc-Statannotations.html">Plotting post hoc tests with Python</a></strong><span class="post-date"> - December 30, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/biology/2021/11/11/Clustering-penguins_2.html">Faster Mixture Models in PyMC3</a></strong><span class="post-date"> - November 11, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2021/10/15/GitHub-Actions.html">Lights, Camera, GitHub, Actions: My Favorite GitHub Actions</a></strong><span class="post-date"> - October 15, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/games/2021/09/28/DeckLock4.html">DeckLock part 4: Flesh and Blood</a></strong><span class="post-date"> - September 28, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/games/2021/09/04/KeyForge_Decks_Printed.html">KeyForge: How many decks were printed ?</a></strong><span class="post-date"> - September 4, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/biology/2021/08/30/Capture_Mark_Recapture.html">Capture-Mark-Recapture model in PyMC3</a></strong><span class="post-date"> - August 30, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/games/2021/08/20/COVID_and_KeyForge.html">COVID-19 impact on KeyForge</a></strong><span class="post-date"> - August 20, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/biology/2021/08/01/Clustering-penguins.html">Clustering the Palmer Station penguin data, using PyMC3</a></strong><span class="post-date"> - August 1, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/games/2021/07/04/Bayesian-sales-analysis.html">Bayesian analysis of sales data, using PyMC3</a></strong><span class="post-date"> - July 4, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/diy/games/programming/2021/06/19/KeyForge-Adventure-Abyssal-Conspiracy.html">Printing Abyssal Conspiracy</a></strong><span class="post-date"> - June 19, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2021/05/03/Interactive-Visualizations.html">Altair + Vega + Justcharts = Interactive Visualisations in Static Websites</a></strong><span class="post-date"> - May 3, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/games/diy/2021/04/29/Printing-The-Keyraken.html">Printing <em>Rise of the Keyraken</em> with PrinterStudio/MPC</a></strong><span class="post-date"> - April 29, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2021/04/21/Code-Nugget-Batch_Effects.html">Fighting Batch Effects with pyComBat</a></strong><span class="post-date"> - April 21, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2021/03/19/Code-Nugget-PCA-with-loadings.html">PCA Plots with Loadings in Python</a></strong><span class="post-date"> - March 19, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2021/03/16/Code-Nugget-Correlation-Heatmaps.html">Correlation Heatmaps with Significance in Python</a></strong><span class="post-date"> - March 16, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/games/2021/01/24/GwentProPlayersAnalysis.html">Gwent: How Many Pro Players Are Out There ?</a></strong><span class="post-date"> - January 24, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2021/01/09/Google-Cloud-Functions.html">Setting up a Google Cloud Function</a></strong><span class="post-date"> - January 9, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/games/diy/2021/01/03/One-Year.html">One Year 4DCu.be</a></strong><span class="post-date"> - January 3, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2020/12/03/CodeForces.html">CodeForces: Trying on Competitive Coding</a></strong><span class="post-date"> - December 3, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2020/11/22/Static-Web-Generators.html">Static Site Generators: Jekyll vs Pelican vs Gatsby</a></strong><span class="post-date"> - November 22, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/games/2020/11/11/Gwent-Pro-Rank-ABM_2.html">An Agent Based Model to look at Gwent Pro Ladder (results)</a></strong><span class="post-date"> - November 11, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/games/2020/11/11/Gwent-Pro-Rank-ABM.html">An Agent Based Model to look at Gwent Pro Ladder (code)</a></strong><span class="post-date"> - November 11, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2020/11/02/Steganography.html">Steganography using PIL and NumPy</a></strong><span class="post-date"> - November 2, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2020/09/05/Testing-Benfords-Law.html">Putting Benford's Law to the Test</a></strong><span class="post-date"> - September 5, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/games/2020/09/01/GwentProRankAnalysis.html">Gwent: Pro Ladder Analysis and National Rankings</a></strong><span class="post-date"> - September 1, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2020/08/25/BusyBoard2.html">Integrate BusyBoard into HomeAssistant</a></strong><span class="post-date"> - August 25, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2020/07/26/BusyBoard.html">BusyBoard: no more interruptions during meetings</a></strong><span class="post-date"> - July 26, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/games/2020/05/25/DeckLock3.html">DeckLock part 3: How about a game of Gwent?</a></strong><span class="post-date"> - May 25, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/games/2020/04/26/DeckLock2.html">DeckLock part 2: Magic the Gathering</a></strong><span class="post-date"> - April 26, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/games/2020/04/05/DeckLock.html">DeckLock: keep track of your card games</a></strong><span class="post-date"> - April 5, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2020/03/13/Jekyll-Blog.html">Improving blogs with custom Jekyll Plugins</a></strong><span class="post-date"> - March 13, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2020/02/10/Genetic-Art-Algorithm-2.html">Minimalist Art Using a Genetic Algorithm</a></strong><span class="post-date"> - February 10, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2020/01/12/Genetic-Art-Algorithm.html">Genetic Art Algorithm</a></strong><span class="post-date"> - January 12, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/games/2019/12/29/Magic-the-Gathering.html">Machine Learning: the Gathering</a></strong><span class="post-date"> - December 29, 2019</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/games/diy/2019/12/04/25-Fortnights.html">25 Fortnights of Code</a></strong><span class="post-date"> - December 4, 2019</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/2019/12/01/Sentiment-Analysis.html">Sentiment Analysis and the Shape of Stories</a></strong><span class="post-date"> - December 1, 2019</span></li>
-      
-    </ul>
-  </article>
 
+
+
+
+<ul class="post-list" data-pagefind-ignore>
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/ai/programming/games/2026/06/30/gameboy-hnefatafl.html">Hnefatafl, Viking Chess for Game Boy</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      
+      <a class="post-link" href="/ai/programming/games/2026/06/30/gameboy-hnefatafl.html">
+        <img class="post-excerpt-image"
+             src="/assets/images/thumbnails/hnefatafl_pieces.jpg"
+             alt="Thumbnail for Hnefatafl, Viking Chess for Game Boy"
+             width="430"
+             height="288"
+             loading="lazy"
+             decoding="async" />
+      </a>
+      
+      <p>On The Royal Game of Ur, the link cable nearly broke me. It was by far the hardest feature of that project, burning through most of $50 in API credits before it finally worked. Music was a close second, the part I was least happy with. So when I set...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">Posted <time datetime="2026-06-30T08:00:00+00:00">June 30, 2026</time></div>
+    </section>
+  </li>
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/ai/programming/2026/04/27/claude-design.html">Claude Design to revamp two projects</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      
+      <a class="post-link" href="/ai/programming/2026/04/27/claude-design.html">
+        <img class="post-excerpt-image"
+             src="/assets/images/thumbnails/claude_design.jpg"
+             alt="Thumbnail for Claude Design to revamp two projects"
+             width="430"
+             height="288"
+             loading="lazy"
+             decoding="async" />
+      </a>
+      
+      <p>Design has always been my bottleneck. I usually have a fairly clear idea of what I want, but turning that into a consistent interface is where I get stuck. For the last redesign of my resume site, back in 2024, I ended up hiring a designer through Fiverr to get...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">Posted <time datetime="2026-04-27T08:00:00+00:00">April 27, 2026</time></div>
+    </section>
+  </li>
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/ai/programming/games/2026/03/29/dscube-twist-puzzle-nds.html">Revisiting a 20-Year-Old NDS Project with AI</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      
+      <a class="post-link" href="/ai/programming/games/2026/03/29/dscube-twist-puzzle-nds.html">
+        <img class="post-excerpt-image"
+             src="/assets/images/thumbnails/dscube.jpg"
+             alt="Thumbnail for Revisiting a 20-Year-Old NDS Project with AI"
+             width="430"
+             height="288"
+             loading="lazy"
+             decoding="async" />
+      </a>
+      
+      <p>Almost twenty years ago, during my PhD in bioinformatics, I needed to brush up on C++. Our lab was doing comparative genomics, studying how genomes evolve at the structural level, particularly the effects of whole genome duplications in plant genomes. One of the key tools we used, i-ADHoRe 2.0, had...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">Posted <time datetime="2026-03-29T08:00:00+00:00">March 29, 2026</time></div>
+    </section>
+  </li>
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/ai/programming/games/2026/03/15/gameboy-royal-game-of-ur.html">The Royal Game Boy of Ur</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      
+      <a class="post-link" href="/ai/programming/games/2026/03/15/gameboy-royal-game-of-ur.html">
+        <img class="post-excerpt-image"
+             src="/assets/images/thumbnails/royal_gameboy_of_ur.jpg"
+             alt="Thumbnail for The Royal Game Boy of Ur"
+             width="430"
+             height="288"
+             loading="lazy"
+             decoding="async" />
+      </a>
+      
+      <p>Years ago, a documentary on “The Royal Game of Ur”, one of the oldest known board games, nearly 5,000 years old, instantly piqued my interest. When I later heard Dr. Irving Finkel discuss it on a podcast, the fascination came flooding back. But this time, I had an idea: build...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">Posted <time datetime="2026-03-15T08:00:00+00:00">March 15, 2026</time></div>
+    </section>
+  </li>
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/ai/programming/2025/12/20/rust-experiment.html">Python to Rust: Porting My Genetic Art Algorithm</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      
+      <a class="post-link" href="/ai/programming/2025/12/20/rust-experiment.html">
+        <img class="post-excerpt-image"
+             src="/assets/images/thumbnails/rust_experiment.jpg"
+             alt="Thumbnail for Python to Rust: Porting My Genetic Art Algorithm"
+             width="430"
+             height="288"
+             loading="lazy"
+             decoding="async" />
+      </a>
+      
+      <p>One of the first posts on this blog showed how to implement a genetic algorithm in Python. Revisiting that project, I realized it is an ideal candidate to port to Rust: it is computationally heavy, and touches on performance, parallelism, and data structures. In short, a good excuse to finally...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">Posted <time datetime="2025-12-20T08:00:00+00:00">December 20, 2025</time></div>
+    </section>
+  </li>
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/diy/programming/2025/07/21/dashboard-for-home-assisant.html">Using my Kindle PW3 as a Dashboard for Home Assistant</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      
+      <a class="post-link" href="/diy/programming/2025/07/21/dashboard-for-home-assisant.html">
+        <img class="post-excerpt-image"
+             src="/assets/images/thumbnails/kindle_update_header.jpg"
+             alt="Thumbnail for Using my Kindle PW3 as a Dashboard for Home Assistant"
+             width="430"
+             height="288"
+             loading="lazy"
+             decoding="async" />
+      </a>
+      
+      <p>An old Kindle, once jailbroken and running KUAL, can be repurposed as a dashboard for just about anything. I’ve actually done this before - though right now, I don’t really need those stats anymore. It would be nice, however, to show some real-time data from my Home Assistant setup on...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">Posted <time datetime="2025-07-21T08:00:00+00:00">July 21, 2025</time></div>
+    </section>
+  </li>
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/diy/programming/2025/02/03/deej-open-hardware-volume-controller.html">Building a Custom Deej Volume Mixer with an RP2040 Pro Micro</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      
+      <a class="post-link" href="/diy/programming/2025/02/03/deej-open-hardware-volume-controller.html">
+        <img class="post-excerpt-image"
+             src="/assets/images/thumbnails/deej_header.jpg"
+             alt="Thumbnail for Building a Custom Deej Volume Mixer with an RP2040 Pro Micro"
+             width="430"
+             height="288"
+             loading="lazy"
+             decoding="async" />
+      </a>
+      
+      <p>Looking for a DIY hardware volume mixer to control individual app volumes effortlessly? Whether you’re a gamer, streamer, or audio enthusiast, manually adjusting software volume sliders can be frustrating. That’s where Deej, an open-source USB volume mixer, comes in. This guide will show you how I’ve built a Deej volume...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">Posted <time datetime="2025-02-03T08:00:00+00:00">February 3, 2025</time></div>
+    </section>
+  </li>
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/programming/2023/02/02/chatgpt-python-gui-app.html">Can ChatGPT write a Python GUI app for me?</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      
+      <a class="post-link" href="/programming/2023/02/02/chatgpt-python-gui-app.html">
+        <img class="post-excerpt-image"
+             src="/assets/images/thumbnails/chatgpt_gui_app.jpg"
+             alt="Thumbnail for Can ChatGPT write a Python GUI app for me?"
+             width="430"
+             height="288"
+             loading="lazy"
+             decoding="async" />
+      </a>
+      
+      <p>Imagine being able to create a fully functioning Python GUI application with just providing instructions. No need to spend hours writing and debugging code, you’d just let AI do the heavy lifting for you. In this post, we’ll explore the capabilities of ChatGPT in developing a Python GUI app and...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">Posted <time datetime="2023-02-02T10:00:00+00:00">February 2, 2023</time></div>
+    </section>
+  </li>
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/programming/2022/12/12/tiny-rp2040.html">XIAO-RP2040: A tiny RPi Pico alternative</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      
+      <a class="post-link" href="/programming/2022/12/12/tiny-rp2040.html">
+        <img class="post-excerpt-image"
+             src="/assets/images/thumbnails/tinyrp2040_header.jpg"
+             alt="Thumbnail for XIAO-RP2040: A tiny RPi Pico alternative"
+             width="430"
+             height="288"
+             loading="lazy"
+             decoding="async" />
+      </a>
+      
+      <p>Doing an electronics project where space comes at a premium? A regular rpi pico is to large? Have a look at the XIAO-RP2040 from Seeed Studio. Seeed Studio provided me a XIAO-RP2040 to review so let’s have a look at this nifty little board. The microchip is identical, though as...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">Posted <time datetime="2022-12-12T10:00:00+00:00">December 12, 2022</time></div>
+    </section>
+  </li>
+  
+</ul>
+
+
+  
+  <section class="listing-archive">
+    <h2>More posts in Programming</h2>
+
+    
+      
+      
+      <h3 class="listing-archive-year">2022</h3>
+      <ul class="posts-list">
+        
+        <li>
+          <strong><a class="post-link" href="/programming/2022/08/27/pagefind.html">Pagefind: Search in a static website</a></strong>
+          <span class="post-date"> - <time datetime="2022-08-27T10:00:00+00:00">August 27, 2022</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/2022/07/17/path_in_R.html">Getting a script's path in R</a></strong>
+          <span class="post-date"> - <time datetime="2022-07-17T10:00:00+00:00">July 17, 2022</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/2022/06/05/pyscript_first_tests.html">PyScript: Python in the browser!</a></strong>
+          <span class="post-date"> - <time datetime="2022-06-05T10:00:00+00:00">June 5, 2022</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/games/2022/04/13/KeyForge_Hiatus.html">The KeyForge hiatus: impact on deck registrations</a></strong>
+          <span class="post-date"> - <time datetime="2022-04-13T08:00:00+00:00">April 13, 2022</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/games/2022/01/30/MTG_sales_map.html">Where are my Magic: the Gathering cards ?</a></strong>
+          <span class="post-date"> - <time datetime="2022-01-30T10:00:00+00:00">January 30, 2022</time></span>
+        </li>
+        
+      </ul>
+      
+      <h3 class="listing-archive-year">2021</h3>
+      <ul class="posts-list">
+        
+        <li>
+          <strong><a class="post-link" href="/programming/2021/12/30/Posthoc-Statannotations.html">Plotting post hoc tests with Python</a></strong>
+          <span class="post-date"> - <time datetime="2021-12-30T06:00:00+00:00">December 30, 2021</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/biology/2021/11/11/Clustering-penguins_2.html">Faster Mixture Models in PyMC3</a></strong>
+          <span class="post-date"> - <time datetime="2021-11-11T08:00:00+00:00">November 11, 2021</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/2021/10/15/GitHub-Actions.html">Lights, Camera, GitHub, Actions: My Favorite GitHub Actions</a></strong>
+          <span class="post-date"> - <time datetime="2021-10-15T06:00:00+00:00">October 15, 2021</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/games/2021/09/28/DeckLock4.html">DeckLock part 4: Flesh and Blood</a></strong>
+          <span class="post-date"> - <time datetime="2021-09-28T06:00:00+00:00">September 28, 2021</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/games/2021/09/04/KeyForge_Decks_Printed.html">KeyForge: How many decks were printed ?</a></strong>
+          <span class="post-date"> - <time datetime="2021-09-04T06:00:00+00:00">September 4, 2021</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/biology/2021/08/30/Capture_Mark_Recapture.html">Capture-Mark-Recapture model in PyMC3</a></strong>
+          <span class="post-date"> - <time datetime="2021-08-30T06:00:00+00:00">August 30, 2021</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/games/2021/08/20/COVID_and_KeyForge.html">COVID-19 impact on KeyForge</a></strong>
+          <span class="post-date"> - <time datetime="2021-08-20T08:00:00+00:00">August 20, 2021</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/biology/2021/08/01/Clustering-penguins.html">Clustering the Palmer Station penguin data, using PyMC3</a></strong>
+          <span class="post-date"> - <time datetime="2021-08-01T08:00:00+00:00">August 1, 2021</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/games/2021/07/04/Bayesian-sales-analysis.html">Bayesian analysis of sales data, using PyMC3</a></strong>
+          <span class="post-date"> - <time datetime="2021-07-04T08:00:00+00:00">July 4, 2021</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/diy/games/programming/2021/06/19/KeyForge-Adventure-Abyssal-Conspiracy.html">Printing Abyssal Conspiracy</a></strong>
+          <span class="post-date"> - <time datetime="2021-06-19T10:00:00+00:00">June 19, 2021</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/2021/05/03/Interactive-Visualizations.html">Altair + Vega + Justcharts = Interactive Visualisations in Static Websites</a></strong>
+          <span class="post-date"> - <time datetime="2021-05-03T10:00:00+00:00">May 3, 2021</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/games/diy/2021/04/29/Printing-The-Keyraken.html">Printing <em>Rise of the Keyraken</em> with PrinterStudio/MPC</a></strong>
+          <span class="post-date"> - <time datetime="2021-04-29T06:00:00+00:00">April 29, 2021</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/2021/04/21/Code-Nugget-Batch_Effects.html">Fighting Batch Effects with pyComBat</a></strong>
+          <span class="post-date"> - <time datetime="2021-04-21T10:00:00+00:00">April 21, 2021</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/2021/03/19/Code-Nugget-PCA-with-loadings.html">PCA Plots with Loadings in Python</a></strong>
+          <span class="post-date"> - <time datetime="2021-03-19T10:00:00+00:00">March 19, 2021</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/2021/03/16/Code-Nugget-Correlation-Heatmaps.html">Correlation Heatmaps with Significance in Python</a></strong>
+          <span class="post-date"> - <time datetime="2021-03-16T10:00:00+00:00">March 16, 2021</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/games/2021/01/24/GwentProPlayersAnalysis.html">Gwent: How Many Pro Players Are Out There ?</a></strong>
+          <span class="post-date"> - <time datetime="2021-01-24T12:00:00+00:00">January 24, 2021</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/2021/01/09/Google-Cloud-Functions.html">Setting up a Google Cloud Function</a></strong>
+          <span class="post-date"> - <time datetime="2021-01-09T13:00:00+00:00">January 9, 2021</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/games/diy/2021/01/03/One-Year.html">One Year 4DCu.be</a></strong>
+          <span class="post-date"> - <time datetime="2021-01-03T13:00:00+00:00">January 3, 2021</time></span>
+        </li>
+        
+      </ul>
+      
+      <h3 class="listing-archive-year">2020</h3>
+      <ul class="posts-list">
+        
+        <li>
+          <strong><a class="post-link" href="/programming/2020/12/03/CodeForces.html">CodeForces: Trying on Competitive Coding</a></strong>
+          <span class="post-date"> - <time datetime="2020-12-03T13:00:00+00:00">December 3, 2020</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/2020/11/22/Static-Web-Generators.html">Static Site Generators: Jekyll vs Pelican vs Gatsby</a></strong>
+          <span class="post-date"> - <time datetime="2020-11-22T13:00:00+00:00">November 22, 2020</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/games/2020/11/11/Gwent-Pro-Rank-ABM_2.html">An Agent Based Model to look at Gwent Pro Ladder (results)</a></strong>
+          <span class="post-date"> - <time datetime="2020-11-11T13:00:00+00:00">November 11, 2020</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/games/2020/11/11/Gwent-Pro-Rank-ABM.html">An Agent Based Model to look at Gwent Pro Ladder (code)</a></strong>
+          <span class="post-date"> - <time datetime="2020-11-11T12:00:00+00:00">November 11, 2020</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/2020/11/02/Steganography.html">Steganography using PIL and NumPy</a></strong>
+          <span class="post-date"> - <time datetime="2020-11-02T12:00:00+00:00">November 2, 2020</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/2020/09/05/Testing-Benfords-Law.html">Putting Benford's Law to the Test</a></strong>
+          <span class="post-date"> - <time datetime="2020-09-05T12:00:00+00:00">September 5, 2020</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/games/2020/09/01/GwentProRankAnalysis.html">Gwent: Pro Ladder Analysis and National Rankings</a></strong>
+          <span class="post-date"> - <time datetime="2020-09-01T12:00:00+00:00">September 1, 2020</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/2020/08/25/BusyBoard2.html">Integrate BusyBoard into HomeAssistant</a></strong>
+          <span class="post-date"> - <time datetime="2020-08-25T12:00:00+00:00">August 25, 2020</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/2020/07/26/BusyBoard.html">BusyBoard: no more interruptions during meetings</a></strong>
+          <span class="post-date"> - <time datetime="2020-07-26T12:00:00+00:00">July 26, 2020</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/games/2020/05/25/DeckLock3.html">DeckLock part 3: How about a game of Gwent?</a></strong>
+          <span class="post-date"> - <time datetime="2020-05-25T12:00:00+00:00">May 25, 2020</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/games/2020/04/26/DeckLock2.html">DeckLock part 2: Magic the Gathering</a></strong>
+          <span class="post-date"> - <time datetime="2020-04-26T12:00:00+00:00">April 26, 2020</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/games/2020/04/05/DeckLock.html">DeckLock: keep track of your card games</a></strong>
+          <span class="post-date"> - <time datetime="2020-04-05T12:00:00+00:00">April 5, 2020</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/2020/03/13/Jekyll-Blog.html">Improving blogs with custom Jekyll Plugins</a></strong>
+          <span class="post-date"> - <time datetime="2020-03-13T12:00:00+00:00">March 13, 2020</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/2020/02/10/Genetic-Art-Algorithm-2.html">Minimalist Art Using a Genetic Algorithm</a></strong>
+          <span class="post-date"> - <time datetime="2020-02-10T12:00:00+00:00">February 10, 2020</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/2020/01/12/Genetic-Art-Algorithm.html">Genetic Art Algorithm</a></strong>
+          <span class="post-date"> - <time datetime="2020-01-12T12:00:00+00:00">January 12, 2020</time></span>
+        </li>
+        
+      </ul>
+      
+      <h3 class="listing-archive-year">2019</h3>
+      <ul class="posts-list">
+        
+        <li>
+          <strong><a class="post-link" href="/programming/games/2019/12/29/Magic-the-Gathering.html">Machine Learning: the Gathering</a></strong>
+          <span class="post-date"> - <time datetime="2019-12-29T12:00:00+00:00">December 29, 2019</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/games/diy/2019/12/04/25-Fortnights.html">25 Fortnights of Code</a></strong>
+          <span class="post-date"> - <time datetime="2019-12-04T10:00:00+00:00">December 4, 2019</time></span>
+        </li>
+        
+        <li>
+          <strong><a class="post-link" href="/programming/2019/12/01/Sentiment-Analysis.html">Sentiment Analysis and the Shape of Stories</a></strong>
+          <span class="post-date"> - <time datetime="2019-12-01T12:00:00+00:00">December 1, 2019</time></span>
+        </li>
+        
+      </ul>
+      
+    
+  </section>
+
+
+    
+  </article>
 </div>
 </div>
 <br>

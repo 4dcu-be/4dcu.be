@@ -3,23 +3,18 @@
 
   <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  
-
-  <title>pymc3</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>pymc3</title>
   <meta name="description" content="A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.">
+  <meta name="robots" content="noindex, follow">
   
   <meta name="author" content="Sebastian Proost">
   <meta name="copyright" content="&copy; Sebastian Proost 2026">
   
 
   <!-- External libraries -->
-	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
-  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <!-- Favicon and other icons -->
   <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
@@ -31,7 +26,7 @@
   <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
   <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
@@ -39,51 +34,79 @@
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
-
-  
-  <!-- Facebook OGP cards -->
-  <meta property="og:description" content="A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more." />
-  <meta property="og:url" content="https://blog.4dcu.be/tag/pymc3/">
+  <!-- Open Graph -->
   <meta property="og:site_name" content="4DCu.be" />
   <meta property="og:title" content="pymc3" />
+  <meta property="og:description" content="A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more." />
+  <meta property="og:url" content="https://blog.4dcu.be/tag/pymc3/" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://blog.4dcu.be/assets/social_fb.jpg" />
-  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/site-default.jpg" />
+  <meta property="og:image:alt" content="pymc3" />
+  <meta property="og:image:type" content="image/jpeg" />
+  
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   
+  
+  
 
   
-  <!-- Twitter: card tags -->
+  <!-- Twitter / X cards -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="pymc3">
   <meta name="twitter:description" content="A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.">
-  <meta name="twitter:image" content="https://blog.4dcu.be/assets/social_fb.jpg">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/social/site-default.jpg">
+  <meta name="twitter:image:alt" content="pymc3">
   <meta name="twitter:url" content="https://blog.4dcu.be/tag/pymc3/">
   
 
-  
-
-  <!-- Site styles -->
+  <!-- Site styles and discovery -->
   <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
   <link rel="canonical" href="https://blog.4dcu.be/tag/pymc3/">
-	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
-	<link rel="stylesheet" href="/css/main.css">
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+  <link rel="stylesheet" href="/css/main.css">
 
-	<!-- PageFind -->
-	<script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <!-- Structured data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png",
+      "sameAs": ["https://github.com/4dcu-be", "https://bsky.app/profile/blog.4dcu.be"]
+    }
+  ]
+}
+</script>
 
 
-	<!-- Tooltips -->
-	<script type="text/javascript">
-		window.tooltips = []
-	</script>
+  <!-- PageFind -->
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
 
-	<script type='text/javascript'>
-	//<![CDATA[
-	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
-	//]]>
-	</Script>
+  <!-- Tooltips -->
+  <script type="text/javascript">
+    window.tooltips = []
+  </script>
+
+  <script type="text/javascript">
+  //<![CDATA[
+  function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+  //]]>
+  </script>
 </head>
 
 
@@ -131,41 +154,198 @@
 
     <div class="page-content">
         <section class="hero is-narrow has-background has-dark-overlay has-text-shadow has-box-shadow">
-	
-	<img alt="Archive cover" class="hero-background is-transparent" src="/assets/images/headers/gameboyzero.jpg" />
-	
-	<div class="hero-body">
-		<div class="container has-text-centered">
-			
-				<h1 class="title has-text-white">Posts in Pymc3</h1>
-			
-			
-		</div>
-	</div>
+  
+  <img alt="" class="hero-background is-transparent" src="/assets/images/headers/gameboyzero.jpg" />
+  
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      
+        <h1 class="title has-text-white">Posts tagged with pymc3</h1>
+      
+      
+    </div>
+  </div>
 </section>
 
 <div class="wrapper">
 <div class="page">
-  <article class="post-content">
-    <ul class="posts-list">
+  <article class="archive-content">
+    
       
-      <li><strong><a class="post-link" href="/programming/games/2022/04/13/KeyForge_Hiatus.html">The KeyForge hiatus: impact on deck registrations</a></strong><span class="post-date"> - April 13, 2022</span></li>
       
-      <li><strong><a class="post-link" href="/programming/biology/2021/11/11/Clustering-penguins_2.html">Faster Mixture Models in PyMC3</a></strong><span class="post-date"> - November 11, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/games/2021/09/04/KeyForge_Decks_Printed.html">KeyForge: How many decks were printed ?</a></strong><span class="post-date"> - September 4, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/biology/2021/08/30/Capture_Mark_Recapture.html">Capture-Mark-Recapture model in PyMC3</a></strong><span class="post-date"> - August 30, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/games/2021/08/20/COVID_and_KeyForge.html">COVID-19 impact on KeyForge</a></strong><span class="post-date"> - August 20, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/biology/2021/08/01/Clustering-penguins.html">Clustering the Palmer Station penguin data, using PyMC3</a></strong><span class="post-date"> - August 1, 2021</span></li>
-      
-      <li><strong><a class="post-link" href="/programming/games/2021/07/04/Bayesian-sales-analysis.html">Bayesian analysis of sales data, using PyMC3</a></strong><span class="post-date"> - July 4, 2021</span></li>
-      
-    </ul>
-  </article>
 
+
+
+
+<ul class="post-list" data-pagefind-ignore>
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/programming/games/2022/04/13/KeyForge_Hiatus.html">The KeyForge hiatus: impact on deck registrations</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      
+      <a class="post-link" href="/programming/games/2022/04/13/KeyForge_Hiatus.html">
+        <img class="post-excerpt-image"
+             src="/assets/images/thumbnails/keyforge_hiatus.jpg"
+             alt="Thumbnail for The KeyForge hiatus: impact on deck registrations"
+             width="430"
+             height="288"
+             loading="lazy"
+             decoding="async" />
+      </a>
+      
+      <p>Is has been a few months since FFG announced KeyForge would be paused, or in their words going on hiatus. Though as decks are still being registered we can get a glimpse of the effect of this announcement on the game. In a previous post, a model was made that...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">Posted <time datetime="2022-04-13T08:00:00+00:00">April 13, 2022</time></div>
+    </section>
+  </li>
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/programming/biology/2021/11/11/Clustering-penguins_2.html">Faster Mixture Models in PyMC3</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      
+      <a class="post-link" href="/programming/biology/2021/11/11/Clustering-penguins_2.html">
+        <img class="post-excerpt-image"
+             src="/assets/images/thumbnails/classifying_penguins_2_header.jpg"
+             alt="Thumbnail for Faster Mixture Models in PyMC3"
+             width="430"
+             height="288"
+             loading="lazy"
+             decoding="async" />
+      </a>
+      
+      <p>In a previous post about clustering the palmer penguins using PyMC3, the mixture model was implemented in the model itself. Though this is great for understanding what is going on, it isn’t very efficient when sampling the model. Furthermore, observations (here penguins) were assigned to groups (here the species of...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">Posted <time datetime="2021-11-11T08:00:00+00:00">November 11, 2021</time></div>
+    </section>
+  </li>
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/programming/games/2021/09/04/KeyForge_Decks_Printed.html">KeyForge: How many decks were printed ?</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      
+      <a class="post-link" href="/programming/games/2021/09/04/KeyForge_Decks_Printed.html">
+        <img class="post-excerpt-image"
+             src="/assets/images/thumbnails/keyforge_deck_estimate.jpg"
+             alt="Thumbnail for KeyForge: How many decks were printed ?"
+             width="430"
+             height="288"
+             loading="lazy"
+             decoding="async" />
+      </a>
+      
+      <p>KeyForge is often advertised as having 104 septillion possible decks per set (that is 104 followed by 24 zeros), but how many of those decks actually exist? Fantasy Flight Games never released data on how many decks were printed per run. Though with Dark Tiding having Evil Twin decks (exact...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">Posted <time datetime="2021-09-04T06:00:00+00:00">September 4, 2021</time></div>
+    </section>
+  </li>
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/programming/biology/2021/08/30/Capture_Mark_Recapture.html">Capture-Mark-Recapture model in PyMC3</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      
+      <a class="post-link" href="/programming/biology/2021/08/30/Capture_Mark_Recapture.html">
+        <img class="post-excerpt-image"
+             src="/assets/images/thumbnails/fish_school.jpg"
+             alt="Thumbnail for Capture-Mark-Recapture model in PyMC3"
+             width="430"
+             height="288"
+             loading="lazy"
+             decoding="async" />
+      </a>
+      
+      <p>Imagine you wish to know how many fish are in a rather large pond… The water is murky so forget about counting them easily… In ecology this is a common problem! The population size of a species often needs to be known, but it is either impractical or simply impossible...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">Posted <time datetime="2021-08-30T06:00:00+00:00">August 30, 2021</time></div>
+    </section>
+  </li>
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/programming/games/2021/08/20/COVID_and_KeyForge.html">COVID-19 impact on KeyForge</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      
+      <a class="post-link" href="/programming/games/2021/08/20/COVID_and_KeyForge.html">
+        <img class="post-excerpt-image"
+             src="/assets/images/thumbnails/keyforge_covid.jpg"
+             alt="Thumbnail for COVID-19 impact on KeyForge"
+             width="430"
+             height="288"
+             loading="lazy"
+             decoding="async" />
+      </a>
+      
+      <p>All our lives were impacted by COVID-19, but what was the impact on KeyForge sales? There was a very technical post last month, this one is intended for everyone that cares about KeyForge, but not the details of how to create models. 500 000 fewer decks registered during COVID This...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">Posted <time datetime="2021-08-20T08:00:00+00:00">August 20, 2021</time></div>
+    </section>
+  </li>
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/programming/biology/2021/08/01/Clustering-penguins.html">Clustering the Palmer Station penguin data, using PyMC3</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      
+      <a class="post-link" href="/programming/biology/2021/08/01/Clustering-penguins.html">
+        <img class="post-excerpt-image"
+             src="/assets/images/thumbnails/classifying_penguins_header.jpg"
+             alt="Thumbnail for Clustering the Palmer Station penguin data, using PyMC3"
+             width="430"
+             height="288"
+             loading="lazy"
+             decoding="async" />
+      </a>
+      
+      <p>This post will be all about trying to infer the species various observations originated from, without actually having access to the labels. This might sound like a far-fetched example, but it happens more often than you might expect in biology! When studying large animals you can usually find clear differences...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">Posted <time datetime="2021-08-01T08:00:00+00:00">August 1, 2021</time></div>
+    </section>
+  </li>
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/programming/games/2021/07/04/Bayesian-sales-analysis.html">Bayesian analysis of sales data, using PyMC3</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      
+      <a class="post-link" href="/programming/games/2021/07/04/Bayesian-sales-analysis.html">
+        <img class="post-excerpt-image"
+             src="/assets/images/thumbnails/bayesian_sales_header.jpg"
+             alt="Thumbnail for Bayesian analysis of sales data, using PyMC3"
+             width="430"
+             height="288"
+             loading="lazy"
+             decoding="async" />
+      </a>
+      
+      <p>Bayesian analysis and probabilistic programming is fairly different from ‘regular’ analysis. So here I’ll take you through my first attempt at using PyMC3 to analyse sales data of KeyForge decks and explore the effects of COVID-19 restrictions and releasing new content. PyMC3 takes some getting used to, but at the...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">Posted <time datetime="2021-07-04T08:00:00+00:00">July 4, 2021</time></div>
+    </section>
+  </li>
+  
+</ul>
+
+
+
+    
+  </article>
 </div>
 </div>
 <br>

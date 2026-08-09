@@ -3,23 +3,18 @@
 
   <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  
-
-  <title>4DCu.be</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>4DCu.be</title>
   <meta name="description" content="A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.">
+  <meta name="robots" content="noindex, follow">
   
   <meta name="author" content="Sebastian Proost">
   <meta name="copyright" content="&copy; Sebastian Proost 2026">
   
 
   <!-- External libraries -->
-	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
-  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <!-- Favicon and other icons -->
   <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
@@ -31,7 +26,7 @@
   <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
   <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
@@ -39,51 +34,79 @@
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
-
-  
-  <!-- Facebook OGP cards -->
-  <meta property="og:description" content="A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more." />
-  <meta property="og:url" content="https://blog.4dcu.be/year/2025/">
+  <!-- Open Graph -->
   <meta property="og:site_name" content="4DCu.be" />
   <meta property="og:title" content="4DCu.be" />
+  <meta property="og:description" content="A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more." />
+  <meta property="og:url" content="https://blog.4dcu.be/year/2025/" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://blog.4dcu.be/assets/social_fb.jpg" />
-  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/site-default.jpg" />
+  <meta property="og:image:alt" content="4DCu.be" />
+  <meta property="og:image:type" content="image/jpeg" />
+  
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   
+  
+  
 
   
-  <!-- Twitter: card tags -->
+  <!-- Twitter / X cards -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="4DCu.be">
   <meta name="twitter:description" content="A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.">
-  <meta name="twitter:image" content="https://blog.4dcu.be/assets/social_fb.jpg">
+  <meta name="twitter:image" content="https://blog.4dcu.be/assets/social/site-default.jpg">
+  <meta name="twitter:image:alt" content="4DCu.be">
   <meta name="twitter:url" content="https://blog.4dcu.be/year/2025/">
   
 
-  
-
-  <!-- Site styles -->
+  <!-- Site styles and discovery -->
   <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
   <link rel="canonical" href="https://blog.4dcu.be/year/2025/">
-	<link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
-	<link rel="stylesheet" href="/css/main.css">
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+  <link rel="stylesheet" href="/css/main.css">
 
-	<!-- PageFind -->
-	<script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <!-- Structured data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png",
+      "sameAs": ["https://github.com/4dcu-be", "https://bsky.app/profile/blog.4dcu.be"]
+    }
+  ]
+}
+</script>
 
 
-	<!-- Tooltips -->
-	<script type="text/javascript">
-		window.tooltips = []
-	</script>
+  <!-- PageFind -->
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
 
-	<script type='text/javascript'>
-	//<![CDATA[
-	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
-	//]]>
-	</Script>
+  <!-- Tooltips -->
+  <script type="text/javascript">
+    window.tooltips = []
+  </script>
+
+  <script type="text/javascript">
+  //<![CDATA[
+  function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+  //]]>
+  </script>
 </head>
 
 
@@ -131,35 +154,129 @@
 
     <div class="page-content">
         <section class="hero is-narrow has-background has-dark-overlay has-text-shadow has-box-shadow">
-	
-	<img alt="Archive cover" class="hero-background is-transparent" src="/assets/images/headers/gameboyzero.jpg" />
-	
-	<div class="hero-body">
-		<div class="container has-text-centered">
-			
-				<h1 class="title has-text-white">Posts from 2025</h1>
-			
-			
-		</div>
-	</div>
+  
+  <img alt="" class="hero-background is-transparent" src="/assets/images/headers/gameboyzero.jpg" />
+  
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      
+        <h1 class="title has-text-white">Posts from 2025</h1>
+      
+      
+    </div>
+  </div>
 </section>
 
 <div class="wrapper">
 <div class="page">
-  <article class="post-content">
-    <ul class="posts-list">
+  <article class="archive-content">
+    
       
-      <li><strong><a class="post-link" href="/ai/programming/2025/12/20/rust-experiment.html">Python to Rust: Porting My Genetic Art Algorithm</a></strong><span class="post-date"> - December 20, 2025</span></li>
       
-      <li><strong><a class="post-link" href="/diy/programming/2025/07/21/dashboard-for-home-assisant.html">Using my Kindle PW3 as a Dashboard for Home Assistant</a></strong><span class="post-date"> - July 21, 2025</span></li>
-      
-      <li><strong><a class="post-link" href="/diy/programming/2025/02/03/deej-open-hardware-volume-controller.html">Building a Custom Deej Volume Mixer with an RP2040 Pro Micro</a></strong><span class="post-date"> - February 3, 2025</span></li>
-      
-      <li><strong><a class="post-link" href="/diy/2025/01/19/diy-mechanical-watch-2.html">Building a custom GMT watch</a></strong><span class="post-date"> - January 19, 2025</span></li>
-      
-    </ul>
-  </article>
 
+
+
+
+<ul class="post-list" data-pagefind-ignore>
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/ai/programming/2025/12/20/rust-experiment.html">Python to Rust: Porting My Genetic Art Algorithm</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      
+      <a class="post-link" href="/ai/programming/2025/12/20/rust-experiment.html">
+        <img class="post-excerpt-image"
+             src="/assets/images/thumbnails/rust_experiment.jpg"
+             alt="Thumbnail for Python to Rust: Porting My Genetic Art Algorithm"
+             width="430"
+             height="288"
+             loading="lazy"
+             decoding="async" />
+      </a>
+      
+      <p>One of the first posts on this blog showed how to implement a genetic algorithm in Python. Revisiting that project, I realized it is an ideal candidate to port to Rust: it is computationally heavy, and touches on performance, parallelism, and data structures. In short, a good excuse to finally...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">Posted <time datetime="2025-12-20T08:00:00+00:00">December 20, 2025</time></div>
+    </section>
+  </li>
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/diy/programming/2025/07/21/dashboard-for-home-assisant.html">Using my Kindle PW3 as a Dashboard for Home Assistant</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      
+      <a class="post-link" href="/diy/programming/2025/07/21/dashboard-for-home-assisant.html">
+        <img class="post-excerpt-image"
+             src="/assets/images/thumbnails/kindle_update_header.jpg"
+             alt="Thumbnail for Using my Kindle PW3 as a Dashboard for Home Assistant"
+             width="430"
+             height="288"
+             loading="lazy"
+             decoding="async" />
+      </a>
+      
+      <p>An old Kindle, once jailbroken and running KUAL, can be repurposed as a dashboard for just about anything. I’ve actually done this before - though right now, I don’t really need those stats anymore. It would be nice, however, to show some real-time data from my Home Assistant setup on...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">Posted <time datetime="2025-07-21T08:00:00+00:00">July 21, 2025</time></div>
+    </section>
+  </li>
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/diy/programming/2025/02/03/deej-open-hardware-volume-controller.html">Building a Custom Deej Volume Mixer with an RP2040 Pro Micro</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      
+      <a class="post-link" href="/diy/programming/2025/02/03/deej-open-hardware-volume-controller.html">
+        <img class="post-excerpt-image"
+             src="/assets/images/thumbnails/deej_header.jpg"
+             alt="Thumbnail for Building a Custom Deej Volume Mixer with an RP2040 Pro Micro"
+             width="430"
+             height="288"
+             loading="lazy"
+             decoding="async" />
+      </a>
+      
+      <p>Looking for a DIY hardware volume mixer to control individual app volumes effortlessly? Whether you’re a gamer, streamer, or audio enthusiast, manually adjusting software volume sliders can be frustrating. That’s where Deej, an open-source USB volume mixer, comes in. This guide will show you how I’ve built a Deej volume...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">Posted <time datetime="2025-02-03T08:00:00+00:00">February 3, 2025</time></div>
+    </section>
+  </li>
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/diy/2025/01/19/diy-mechanical-watch-2.html">Building a custom GMT watch</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      
+      <a class="post-link" href="/diy/2025/01/19/diy-mechanical-watch-2.html">
+        <img class="post-excerpt-image"
+             src="/assets/images/thumbnails/explorer_2_header.jpg"
+             alt="Thumbnail for Building a custom GMT watch"
+             width="430"
+             height="288"
+             loading="lazy"
+             decoding="async" />
+      </a>
+      
+      <p>With several custom watches under my belt, I felt ready to tackle a more advanced build. This project combines three new elements: building a GMT watch using the NH34 movement, upgrading the crystal, and customizing the date wheel. While these modifications require a few additional tools and introduce some new...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">Posted <time datetime="2025-01-19T08:00:00+00:00">January 19, 2025</time></div>
+    </section>
+  </li>
+  
+</ul>
+
+
+
+    
+  </article>
 </div>
 </div>
 <br>

@@ -317,7 +317,6 @@ place on ladder. The [Mesa] library made it surprisingly easy to set up this sys
 familiar pandas dataframe the actual analysis can begin. This however is reserved for the [next post]!
 
 
-[Team Bandit Gang]: https://teambanditgang.com/climbing-pro-ladder-grind-vs-skill/
 [GitHub]: https://github.com/4dcu-be/GwentAgentBasedModeling
 [Gwent Masters]: https://masters.playgwent.com/en/
 [Mesa]: https://mesa.readthedocs.io/en/stable/#
