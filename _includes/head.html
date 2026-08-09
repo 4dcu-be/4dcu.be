@@ -1,22 +1,45 @@
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  {% comment %} Use the front matter description if specified, otherwise fall back to the excerpt or the site default. {% endcomment %}
-  {% capture page_description %}{% if page.description %}{{ page.description | strip_html | truncate: 160 }}{% elsif page.excerpt %}{{ page.excerpt | newline_to_br | strip_newlines | replace: '<br />', ' '| strip_html | truncate: 160 }}{% else %}{{ site.description }}{% endif %}{% endcapture %}
+  {%- assign meta_title = page.title | default: site.title | strip_html -%}
+  {%- if paginator and paginator.page > 1 -%}
+    {%- capture meta_title -%}{{ meta_title }} - Page {{ paginator.page }}{%- endcapture -%}
+  {%- endif -%}
 
-  <title>{% if page.title %}{{ page.title | strip_html }}{% else %}{{ site.title | strip_html }}{% endif %}</title>
-  <meta name="description" content="{{ page_description }}">
+  {%- if page.description and page.description != '' -%}
+    {%- assign meta_description = page.description | strip_html | strip_newlines | truncate: 160 -%}
+  {%- elsif page.type == 'category' -%}
+    {%- assign category_description = nil -%}
+    {%- for item in site.descriptions -%}
+      {%- if item.cat == page.title -%}{%- assign category_description = item.desc -%}{%- endif -%}
+    {%- endfor -%}
+    {%- if category_description -%}
+      {%- assign meta_description = category_description | strip_html | strip_newlines | truncate: 160 -%}
+    {%- else -%}
+      {%- capture meta_description -%}Posts about {{ page.title | category_name }} on {{ site.title }}.{%- endcapture -%}
+    {%- endif -%}
+  {%- elsif page.excerpt -%}
+    {%- assign meta_description = page.excerpt | strip_html | strip_newlines | truncate: 160 -%}
+  {%- else -%}
+    {%- assign meta_description = site.description -%}
+  {%- endif -%}
+  {%- if paginator and paginator.page > 1 -%}
+    {%- capture meta_description -%}{{ meta_description }} (Page {{ paginator.page }}){%- endcapture -%}
+  {%- endif -%}
+
+  <title>{{ meta_title | escape }}</title>
+  <meta name="description" content="{{ meta_description | escape }}">
+  {% if page.noindex or page.type == 'tag' or page.type == 'year' %}<meta name="robots" content="noindex, follow">{% endif %}
   {% if site.name %}
-  <meta name="author" content="{{ site.name }}">
-  <meta name="copyright" content="&copy; {{ site.name }} {{ site.time | date: '%Y' }}">
+  <meta name="author" content="{{ site.name | escape }}">
+  <meta name="copyright" content="&copy; {{ site.name | escape }} {{ site.time | date: '%Y' }}">
   {% endif %}
 
   <!-- External libraries -->
-	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
-  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <!-- Favicon and other icons -->
   <link rel="shortcut icon" href="{{ "/assets/icons/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon">
   <link rel="icon" href="{{ "/assets/icons/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon">
   <link rel="apple-touch-icon" sizes="57x57" href="{{ "/assets/icons/apple-icon-57x57.png" | prepend: site.baseurl }}">
@@ -28,7 +51,7 @@
   <link rel="apple-touch-icon" sizes="144x144" href="{{ "/assets/icons/apple-icon-144x144.png" | prepend: site.baseurl }}">
   <link rel="apple-touch-icon" sizes="152x152" href="{{ "/assets/icons/apple-icon-152x152.png" | prepend: site.baseurl }}">
   <link rel="apple-touch-icon" sizes="180x180" href="{{ "/assets/icons/apple-icon-180x180.png" | prepend: site.baseurl }}">
-  <link rel="icon" type="image/png" sizes="192x192"  href="{{ "/assets/icons/android-icon-192x192.png" | prepend: site.baseurl }}">
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ "/assets/icons/android-icon-192x192.png" | prepend: site.baseurl }}">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ "/assets/icons/favicon-32x32.png" | prepend: site.baseurl }}">
   <link rel="icon" type="image/png" sizes="96x96" href="{{ "/assets/icons/favicon-96x96.png" | prepend: site.baseurl }}">
   <link rel="icon" type="image/png" sizes="16x16" href="{{ "/assets/icons/favicon-16x16.png" | prepend: site.baseurl }}">
@@ -37,54 +60,77 @@
   <meta name="msapplication-TileImage" content="{{ "/assets/icons/ms-icon-144x144.png" | prepend: site.baseurl }}">
   <meta name="theme-color" content="#ffffff">
 
-  {% if site.protocols.fb_image %}
-  <!-- Facebook OGP cards -->
-  <meta property="og:description" content="{{ page_description }}" />
-  <meta property="og:url" content="{% if page.url %}{{ site.url }}{{ page.url }}{% else %}{{ site.url }}{% endif %}">
-  <meta property="og:site_name" content="{{ site.title }}" />
-  <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="{% if page.cover %}{{ page.cover | prepend: site.baseurl | prepend: site.url }}{% else %}{{ site.protocols.fb_image | prepend: site.baseurl | prepend: site.url }}{% endif %}" />
-  <meta property="og:image:type" content="{{ site.protocols.fb_image_type }}" />
-  <meta property="og:image:width" content="{{ site.protocols.fb_image_width }}" />
-  <meta property="og:image:height" content="{{ site.protocols.fb_image_height }}" />
+  {%- assign canonical_path = page.url | replace: 'index.html', '' -%}
+  {%- assign page_url_absolute = canonical_path | prepend: site.baseurl | prepend: site.url -%}
+
+  {%- assign og_image = page.social_image | default: site.social_image.default -%}
+  {%- if og_image -%}
+    {%- assign og_image_type = 'image/jpeg' -%}
+    {%- assign og_image_width = site.social_image.width -%}
+    {%- assign og_image_height = site.social_image.height -%}
+  {%- else -%}
+    {%- assign og_image = site.protocols.fb_image -%}
+    {%- assign og_image_type = site.protocols.fb_image_type -%}
+    {%- assign og_image_width = site.protocols.fb_image_width -%}
+    {%- assign og_image_height = site.protocols.fb_image_height -%}
+  {%- endif -%}
+  {%- assign og_image_absolute = og_image | prepend: site.baseurl | prepend: site.url -%}
+  {%- assign og_image_alt = page.cover_alt | default: page.title | default: site.title -%}
+
+  {% if og_image %}
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="{{ site.title | escape }}" />
+  <meta property="og:title" content="{{ meta_title | escape }}" />
+  <meta property="og:description" content="{{ meta_description | escape }}" />
+  <meta property="og:url" content="{{ page_url_absolute }}" />
+  <meta property="og:type" content="{% if page.collection == 'posts' %}article{% else %}website{% endif %}" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:image" content="{{ og_image_absolute }}" />
+  <meta property="og:image:alt" content="{{ og_image_alt | escape }}" />
+  {% if og_image_type %}<meta property="og:image:type" content="{{ og_image_type }}" />{% endif %}
+  {% if og_image_width %}
+  <meta property="og:image:width" content="{{ og_image_width }}" />
+  <meta property="og:image:height" content="{{ og_image_height }}" />
+  {% endif %}
+  {% if page.collection == 'posts' %}
+  <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}" />
+  <meta property="article:modified_time" content="{{ page.last_modified_at | default: page.lastmod | default: page.date | date_to_xmlschema }}" />
+  <meta property="article:author" content="{{ page.author | default: site.name | escape }}" />
+  {% for category in page.categories %}<meta property="article:section" content="{{ category | category_name | escape }}" />{% endfor %}
+  {% for tag in page.tags %}<meta property="article:tag" content="{{ tag | escape }}" />{% endfor %}
+  {% endif %}
   {% endif %}
 
-  {% if site.protocols.twitter_image %}
-  <!-- Twitter: card tags -->
+  {% if og_image %}
+  <!-- Twitter / X cards -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
-  <meta name="twitter:description" content="{{ page_description }}">
-  <meta name="twitter:image" content="{% if page.cover %}{{ page.cover | prepend: site.baseurl | prepend: site.url }}{% else %}{{ site.protocols.twitter_image | prepend: site.baseurl | prepend: site.url }}{% endif %}">
-  <meta name="twitter:url" content="{% if page.url %}{{ site.url }}{{ page.url }}{% else %}{{ site.url }}{% endif %}">
+  <meta name="twitter:title" content="{{ meta_title | escape }}">
+  <meta name="twitter:description" content="{{ meta_description | escape }}">
+  <meta name="twitter:image" content="{{ og_image_absolute }}">
+  <meta name="twitter:image:alt" content="{{ og_image_alt | escape }}">
+  <meta name="twitter:url" content="{{ page_url_absolute }}">
   {% endif %}
 
-  {% if protocols.os_repo and protocols.os_rcs_type and protocols.os_src %}
-  <!-- Open Source Protocol -->
-  <link rel="profile" href="http://osprotocol.com" />
-  <meta property="os:repo" content="{{ protocols.os_repo }}" />
-  <meta property="os:rcs_type" content="{{ protocols.os_rcs_type }}" />
-  <meta property="os:src" content="{{ protocols.os_src }}" />
-  {% endif %}
-
-  <!-- Site styles -->
+  <!-- Site styles and discovery -->
   <link rel="stylesheet" href="{{ "/pagefind/pagefind-ui.css" | prepend: site.baseurl }}">
-  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-	<link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
-	<link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
+  <link rel="canonical" href="{{ page_url_absolute }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
+  <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
 
-	<!-- PageFind -->
-	<script src="{{ "/pagefind/pagefind-ui.js" | prepend: site.baseurl }}" type="text/javascript"></script>
+  <!-- Structured data -->
+  {% include schema.html %}
 
+  <!-- PageFind -->
+  <script src="{{ "/pagefind/pagefind-ui.js" | prepend: site.baseurl }}" type="text/javascript"></script>
 
-	<!-- Tooltips -->
-	<script type="text/javascript">
-		window.tooltips = []
-	</script>
+  <!-- Tooltips -->
+  <script type="text/javascript">
+    window.tooltips = []
+  </script>
 
-	<script type='text/javascript'>
-	//<![CDATA[
-	function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
-	//]]>
-	</Script>
+  <script type="text/javascript">
+  //<![CDATA[
+  function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+  //]]>
+  </script>
 </head>

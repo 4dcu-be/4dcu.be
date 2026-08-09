@@ -26,6 +26,30 @@
 }
 
 // ========================================
+// Archive Content
+// ========================================
+
+.archive-content {
+  padding: 1rem 0;
+  line-height: 1.8;
+
+  @media screen and (min-width: $tablet) {
+    padding: 2rem 0;
+  }
+
+  .post-list h2 {
+    font-family: $heading-font-family;
+    font-size: 1.8rem;
+    line-height: 1.3;
+    margin: 0 0 1rem 0;
+
+    @media screen and (min-width: $tablet) {
+      font-size: 2rem;
+    }
+  }
+}
+
+// ========================================
 // Archive Posts List
 // ========================================
 
@@ -71,6 +95,44 @@
     font-size: 0.85em;
     display: block;
     margin-top: 0.25rem;
+  }
+}
+
+// ========================================
+// Rich listing + compact remainder
+// ========================================
+
+.listing-archive {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid $base-border-color;
+
+  > h2 {
+    font-family: $heading-font-family;
+    font-size: 1.8rem;
+    line-height: 1.3;
+    color: $dark-gray;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .listing-archive-year {
+    font-family: $heading-font-family;
+    font-size: 1.25rem;
+    color: $dark-gray;
+    margin: 1.5rem 0 0.25rem 0;
+  }
+
+  .posts-list {
+    margin-bottom: 1.5rem;
+
+    li {
+      padding: 0.5rem 0;
+    }
+
+    .post-date {
+      display: inline;
+      margin-top: 0;
+    }
   }
 }
 

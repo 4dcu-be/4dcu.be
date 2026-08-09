@@ -83,6 +83,13 @@ gallery_items:
     resize_dimensions: '860x576^'
     crop_dimensions: '860x576+0+0'
 
+# Dedicated 1.91:1 images for Open Graph/Twitter cards.
+social_image:
+    dir: "/assets/social"
+    width: 1200
+    height: 630
+    quality: 82
+
 sass:
     style: compressed
     # Modern Sass compilation using @use/@forward (converted Jan 2025)
@@ -144,17 +151,9 @@ social:
     desc: Share on X
     share: true
 
-# Social sharing protocols
-# These are for automatically generating sharing metadata for FB and Twitter
-# OS Protocol is for sharing the source of your site, if you're interested. For more, see osprotocol.com
+# Fallback social image used only if generation is unavailable.
 protocols:
     fb_image: "/assets/social_fb.jpg"
     fb_image_width: 1200
     fb_image_height: 630
-    fb_image_type: "image/jpg"
-
-    twitter_image: "/assets/social_fb.jpg"
-
-    os_repo: "https://github.com/4dcu-be/4dcu.be"
-    os_rcs_type: "git"
-    os_src: "git@github.com:4dcu-be/4dcu.be.git"
+    fb_image_type: "image/jpeg"

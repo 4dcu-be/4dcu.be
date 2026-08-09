@@ -3,33 +3,40 @@ layout: null
 sitemap: false
 ---
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-      <loc>{{ site.url }}</loc>
-      <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>1.0</priority>
-    </url>
-  {% for post in site.posts %}
-    <url>
-      <loc>{{ site.url }}{{ post.url }}</loc>
-      {% if post.lastmod == null -%}
-        <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
-      {%- else -%}
-        <lastmod>{{ post.lastmod | date_to_xmlschema }}</lastmod>
-      {%- endif %}
-      <changefreq>monthly</changefreq>
-      <priority>1.0</priority>
-    </url>
-  {% endfor %}
-  {%- for page in site.pages -%}
-    {% if page.sitemap == true %}
-    <url>
-      <loc>{{ site.url }}{{ page.url }}</loc>
-      <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.8</priority>
-    </url>
-    {% endif %}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {%- assign latest_post = site.posts | first -%}
+  <url>
+    <loc>{{ site.url }}/</loc>
+    {% if latest_post %}<lastmod>{{ latest_post.last_modified_at | default: latest_post.lastmod | default: latest_post.date | date_to_xmlschema }}</lastmod>{% endif %}
+  </url>
+
+  {%- for post in site.posts %}
+  <url>
+    <loc>{{ site.url }}{{ post.url }}</loc>
+    <lastmod>{{ post.last_modified_at | default: post.lastmod | default: post.date | date_to_xmlschema }}</lastmod>
+  </url>
+  {%- endfor %}
+
+  {%- comment -%}Category archives are useful topic hubs and are intentionally indexable.{%- endcomment -%}
+  {%- for category in site.categories %}
+    {%- assign category_name = category[0] -%}
+    {%- assign category_posts = category[1] -%}
+    {%- assign category_latest = category_posts | first -%}
+  <url>
+    <loc>{{ site.url }}/category/{{ category_name | slugify }}/</loc>
+    {% if category_latest %}<lastmod>{{ category_latest.last_modified_at | default: category_latest.lastmod | default: category_latest.date | date_to_xmlschema }}</lastmod>{% endif %}
+  </url>
+  {%- endfor %}
+
+  {%- for page in site.pages %}
+    {%- if page.sitemap == true and page.url != '/' and page.url != '/index.html' -%}
+      {%- unless page.url contains '/page/' -%}
+  <url>
+    <loc>{{ site.url }}{{ page.url | replace: 'index.html', '' }}</loc>
+    {%- assign page_lastmod = page.last_modified_at | default: page.lastmod | default: page.date -%}
+    {% if page_lastmod %}<lastmod>{{ page_lastmod | date_to_xmlschema }}</lastmod>{% endif %}
+  </url>
+      {%- endunless -%}
+    {%- endif -%}
   {%- endfor %}
 </urlset>
