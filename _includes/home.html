@@ -2,7 +2,19 @@
 {%- assign strings = site.data.translations[locale] -%}
 <div class="home">
 <section class="hero {% if site.cover %}is-medium has-background has-dark-overlay has-text-shadow has-box-shadow{% else %}is-medium is-dark-red{% endif %}">
-  {% if site.cover %}<img alt="Site cover" class="hero-background is-transparent" src="{{ site.cover | prepend: site.baseurl }}" />{% endif %}
+  {% if site.cover %}
+  <img alt="Mechanical keyboard, Python notebook and coffee on a wooden desk"
+       class="hero-background is-transparent"
+       src="{{ site.cover | prepend: site.baseurl }}"
+       srcset="{{ site.cover_640 | prepend: site.baseurl }} 640w,
+               {{ site.cover_1024 | prepend: site.baseurl }} 1024w,
+               {{ site.cover | prepend: site.baseurl }} 1672w"
+       sizes="100vw"
+       width="1672"
+       height="941"
+       fetchpriority="high"
+       decoding="async" />
+  {% endif %}
   <div class="hero-body"><div class="container has-text-centered">
     {% if site.sticker %}
     <img src="{{ site.sticker | prepend: site.baseurl }}"
