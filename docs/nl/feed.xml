@@ -5,8 +5,8 @@
     <link>https://blog.4dcu.be/nl/</link>
     <language>nl-NL</language>
     <atom:link href="https://blog.4dcu.be/nl/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 12 Aug 2026 17:51:49 +0000</pubDate>
-    <lastBuildDate>Wed, 12 Aug 2026 17:51:49 +0000</lastBuildDate>
+    <pubDate>Wed, 12 Aug 2026 19:09:13 +0000</pubDate>
+    <lastBuildDate>Wed, 12 Aug 2026 19:09:13 +0000</lastBuildDate>
     <generator>Jekyll v4.4.1</generator>
       <item>
         <title>Hnefatafl, Vikingschaak voor de Game Boy</title>
@@ -26,6 +26,16 @@
         <guid isPermaLink="true">https://blog.4dcu.be/nl/games/2026/05/cheating-at-my-own-game/</guid>
         <category>nintendo</category><category>gameboy</category><category>retrogaming</category><category>homebrew</category>
         <category>games</category>
+      </item>
+    
+      <item>
+        <title>Claude Design om twee projecten op te frissen</title>
+        <description>&lt;p&gt;Design is altijd mijn Achilleshiel geweest. Meestal heb ik een vrij duidelijk beeld van wat ik wil, maar dat omzetten in een consistente interface, daar loopt het mis. Voor de...</description>
+        <pubDate>Mon, 27 Apr 2026 08:00:00 +0000</pubDate>
+        <link>https://blog.4dcu.be/nl/ai/programming/2026/04/claude-design/</link>
+        <guid isPermaLink="true">https://blog.4dcu.be/nl/ai/programming/2026/04/claude-design/</guid>
+        <category>claude-code</category><category>claude-design</category><category>javascript</category><category>web-development</category><category>eleventy</category><category>svelte</category>
+        <category>ai</category><category>programming</category>
       </item>
     
   </channel>

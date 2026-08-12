@@ -4,6 +4,7 @@ title: "Claude Design to revamp two projects"
 byline: "... can AI do webdesign now?"
 description: "Hands-on review of Anthropic's Claude Design: using AI to redesign a Svelte app and a resume site from screenshots, then implementing the mockups with Claude Code."
 date: 2026-04-27 08:00:00
+post_id: claude-design
 categories: ai programming
 tags: claude-code claude-design javascript web-development eleventy svelte
 cover: "/assets/posts/2026-04-27-claude-design/claude_design.jpg"

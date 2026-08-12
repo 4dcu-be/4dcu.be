@@ -35,7 +35,8 @@
       "Bash(command -v ffprobe)",
       "Bash(ffprobe -v error -show_entries stream=codec_type,codec_name,pix_fmt -of default=noprint_wrappers=1 assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/menu_animation.mp4)",
       "Bash(sed 's/[.,\\)]*$//')",
-      "Bash(git fetch *)"
+      "Bash(git fetch *)",
+      "Bash(gh pr *)"
     ],
     "deny": [],
     "ask": []
