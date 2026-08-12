@@ -89,6 +89,10 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    // `.navbar-item.has-dropdown` zeroes padding; restore the same
+    // .5rem/.75rem the sibling nav buttons use so "Language:" lines up with
+    // them and the row keeps matching vertical rhythm.
+    padding: 0.5rem 0.75rem !important;
     gap: 0.25rem 0.75rem;
 
     // No dropdown affordance on touch: hide the "EN" trigger and its arrow
@@ -110,7 +114,10 @@
     &.is-hoverable:focus-within &__options {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      // Options carry .5rem side padding of their own, so no extra gap is
+      // needed: this keeps the EN/NL pair (16px apart) visibly tighter to
+      // each other than to the "Language:" label (20px).
+      gap: 0;
       position: static;
       box-shadow: none;
       border-top: 0;
@@ -120,8 +127,13 @@
       min-width: 0;
     }
 
-    &__option {
-      padding: 0.25rem 0.25rem;
+    // Outrank Bulma's `.navbar-dropdown .navbar-item{padding:.375rem 1rem}`
+    // and `.navbar-dropdown a.navbar-item{padding-inline-end:3rem}`, which
+    // would otherwise indent the codes away from the "Language:" label.
+    &__options .lang-switch__option,
+    &__options a.lang-switch__option {
+      padding: 0.25rem 0.5rem;
+      padding-inline-end: 0.5rem;
       // Comfortable touch target without stretching the row
       min-width: 2.5rem;
       text-align: center;
