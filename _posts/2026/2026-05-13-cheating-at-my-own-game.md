@@ -5,6 +5,7 @@ byline: "by probing and poking the ROM and RAM"
 description: "How Game Boy cheat devices like the Game Genie and GameShark worked, and creating working cheat codes for my own homebrew game The Royal Game of Ur by probing ROM and RAM."
 date:   2026-05-13 08:00:00
 author: Sebastian Proost
+post_id: cheating-at-my-own-game
 categories: games
 tags:	nintendo gameboy retrogaming homebrew
 cover:  "/assets/posts/2026-05-13-cheating-at-my-own-game/game_genie_header.jpg"

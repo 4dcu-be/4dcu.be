@@ -5,6 +5,7 @@ byline: "Building Hnefatafl, Brandubh, and Tablut for the original Game Boy"
 description: "Building Hnefatafl, the Viking Chess game, along with Brandubh and Tablut, for the original Game Boy, exploring background scrolling, save systems, and Super Game Boy support."
 date:   2026-06-30 08:00:00
 author: Sebastian Proost
+post_id: gameboy-hnefatafl
 categories: ai programming games
 tags:	python c nintendo gameboy retrogaming homebrew ai claude-code agent-based-modeling
 cover:  "/assets/posts/2026-06-30-gameboy-hnefatafl/hnefatafl_pieces.jpg"
