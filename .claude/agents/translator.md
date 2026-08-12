@@ -21,7 +21,7 @@ When translating a post:
   text, `gallery_items[].description`, and visible fallback text inside HTML
   elements such as links embedded in iframes.
 - Translate tags only where an established Dutch equivalent is clearly useful.
-  Keep technical tags, product names, platform names, and proper nouns unchanged.
+  Keep technical tags, product names, platform names, and proper nouns unchanged. Reuse existing tags from previous posts where possible, and do not create new tags if there is a clear equivalent.
 - Keep category slugs unchanged. The site translates their display labels from
   `_config.yml`, so changing a category would create a different archive URL.
 - Never translate or alter fenced/indented code, inline code, commands, output,
