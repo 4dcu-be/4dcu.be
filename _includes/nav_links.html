@@ -1,13 +1,9 @@
+{%- assign nav_locale = page.locale | default: site.languages[0].locale -%}
+{%- assign strings = site.data.translations[nav_locale] -%}
 {% for nav_page in site.pages -%}
-  {% if nav_page.title and nav_page.main_nav == true %}
-<a href="{{ nav_page.url | prepend: site.baseurl }}" class="navbar-item{% if page.url == nav_page.url %} is-active{% endif %}">
-  {{ nav_page.title }}
-</a>
+  {% if nav_page.title and nav_page.main_nav == true and nav_page.locale == nav_locale %}
+<a href="{{ nav_page.url | prepend: site.baseurl }}" class="navbar-item{% if page.url == nav_page.url %} is-active{% endif %}">{{ nav_page.title }}</a>
   {% endif %}
 {%- endfor %}
-{%- if site.email %}
-<a href="#" class="navbar-item nav-link-contact">Contact</a>
-{% endif -%}
-<a href="#" class="navbar-item nav-link-search">
-  <i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i>
-</a>
+{%- if site.email %}<a href="#" class="navbar-item nav-link-contact">{{ strings.contact }}</a>{% endif -%}
+<a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>

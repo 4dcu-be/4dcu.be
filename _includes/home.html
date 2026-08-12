@@ -1,0 +1,62 @@
+{%- assign locale = page.locale | default: site.languages[0].locale -%}
+{%- assign strings = site.data.translations[locale] -%}
+<div class="home">
+<section class="hero {% if site.cover %}is-medium has-background has-dark-overlay has-text-shadow has-box-shadow{% else %}is-medium is-dark-red{% endif %}">
+  {% if site.cover %}<img alt="Site cover" class="hero-background is-transparent" src="{{ site.cover | prepend: site.baseurl }}" />{% endif %}
+  <div class="hero-body"><div class="container has-text-centered">
+    {% if site.sticker %}
+    <img src="{{ site.sticker | prepend: site.baseurl }}"
+         srcset="{{ site.sticker | prepend: site.baseurl }}, {{ site.sticker-1_5x | prepend: site.baseurl }} 1.5x, {{ site.sticker-2x | prepend: site.baseurl }} 2x"
+         alt="4DCu.be mascot" class="sticker" width="300" height="300" />
+    {% endif %}
+    <h1 class="title {% if site.cover %}has-text-white{% endif %}">{{ site.title }}</h1>
+    <p class="subtitle {% if site.cover %}has-text-white{% endif %}">{{ strings.subtitle }}</p>
+  </div></div>
+</section>
+
+<div class="wrapper">
+  {% if paginator.posts.size > 0 %}
+  <ul class="post-list" data-pagefind-ignore>
+    {% for post in paginator.posts %}
+    <li><div data-aos="fade-in">
+      <h2><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
+      <section class="post-excerpt" itemprop="description">
+        {% if post.thumbnail %}<a class="post-link" href="{{ post.url | prepend: site.baseurl }}"><img class="post-excerpt-image" src="{{ post.thumbnail | prepend: site.baseurl }}" alt="Thumbnail for {{ post.title | strip_html | escape }}" width="{{ site.thumbnail.width }}" height="{{ site.thumbnail.height }}" loading="lazy" /></a>{% endif %}
+        <p>{{ post.content | strip_html | truncatewords: 50 }}</p>
+        {% assign words = post.content | number_of_words %}
+      </section>
+      <section class="post-meta">
+        <div class="post-date">{{ strings.reading_time }}: <strong>{% if words < 360 %}1 {{ strings.minute }}{% else %}{{ words | divided_by: 180 }} {{ strings.minutes }}{% endif %}</strong></div>
+        <div class="post-categories">{{ strings.posted }} {{ post.date | date: "%B %-d, %Y" }}
+        {% if post.categories.size > 0 %} {{ strings.in }} {% for category in post.categories %}<a href="{% if locale == site.languages[0].locale %}{{ site.baseurl }}{% else %}{{ site.baseurl }}/nl{% endif %}/category/{{ category | slugify }}/">{{ category | category_name }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}{% endif %}</div>
+      </section>
+    </div></li>
+    {% endfor %}
+  </ul>
+  {% else %}<p>{{ strings.no_posts }}</p>{% endif %}
+
+  {%- assign localized_posts = site.posts | where: "locale", locale -%}
+  <div class="category-wrapper">
+    <h3>{{ strings.categories }}</h3>
+    <ul class="category-list">
+      {% assign localized_categories = localized_posts | map: "categories" | join: "," | split: "," | uniq | sort %}
+      {% for category in localized_categories %}{% unless category == '' %}
+      {% assign category_count = 0 %}{% for post in localized_posts %}{% if post.categories contains category %}{% assign category_count = category_count | plus: 1 %}{% endif %}{% endfor %}
+      <li><a href="{% if locale == site.languages[0].locale %}{{ site.baseurl }}{% else %}{{ site.baseurl }}/nl{% endif %}/category/{{ category | slugify }}/">{{ category | category_name: locale }}</a> <span class="post-count">({{ category_count }})</span></li>
+      {% endunless %}{% endfor %}
+    </ul>
+    <br />
+    <h3>{{ strings.posts_from }}</h3>
+    <ul class="category-list">
+      {% assign posts_by_year = localized_posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+      {% for year in posts_by_year %}<li><a href="{% if locale == site.languages[0].locale %}{{ site.baseurl }}{% else %}{{ site.baseurl }}/nl{% endif %}/year/{{ year.name }}/">{{ year.name }}</a> <span class="post-count">({{ year.items.size }})</span></li>{% endfor %}
+    </ul>
+  </div>
+</div>
+
+<nav class="pagination" role="navigation"><p>
+  {% if paginator.previous_page %}<a class="newer-posts" href="{{ site.baseurl }}{{ paginator.previous_page_path }}">{% endif %}<span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angles-left fa-stack-1x fa-inverse"></i></span>{% if paginator.previous_page %}</a>{% endif %}
+  <span class="page-number">{{ strings.page }} {{ paginator.page }} {{ strings.of }} {{ paginator.total_pages }}</span>
+  {% if paginator.next_page %}<a class="newer-posts" href="{{ site.baseurl }}{{ paginator.next_page_path }}">{% endif %}<span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angles-right fa-stack-1x fa-inverse"></i></span>{% if paginator.next_page %}</a>{% endif %}
+</p></nav>
+</div>

@@ -1,0 +1,7 @@
+{%- assign feed_locale = include.locale | default: page.locale | default: site.languages[0].locale -%}
+{%- assign feed_index = site.languages[0].index -%}
+{%- for language in site.languages -%}
+  {%- if language.locale == feed_locale -%}{%- assign feed_index = language.index -%}{%- endif -%}
+{%- endfor -%}
+{%- assign feed_path = feed_index | append: 'feed.xml' -%}
+{%- assign feed_lang = feed_locale | replace: '_', '-' -%}

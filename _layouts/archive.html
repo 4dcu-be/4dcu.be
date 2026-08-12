@@ -1,41 +1,19 @@
 ---
 layout: default
-sitemap: false
 ---
-<section class="hero is-narrow {% if site.jekyll-archives.cover %}has-background has-dark-overlay has-text-shadow has-box-shadow{% endif %}">
-  {% if site.jekyll-archives.cover %}
-  <img alt="" class="hero-background is-transparent" src="{{ site.jekyll-archives.cover | prepend: site.baseurl }}" />
-  {% endif %}
-  <div class="hero-body">
-    <div class="container has-text-centered">
-      {% if page.type == 'year' %}
-        <h1 class="title {% if site.jekyll-archives.cover %}has-text-white{% endif %}">Posts from {{ page.date | date: "%Y" }}</h1>
-      {% elsif page.type == 'tag' %}
-        <h1 class="title {% if site.jekyll-archives.cover %}has-text-white{% endif %}">Posts tagged with {{ page.title }}</h1>
-      {% else %}
-        <h1 class="title {% if site.jekyll-archives.cover %}has-text-white{% endif %}">Posts in {{ page.title | category_name }}</h1>
-      {% endif %}
-      {% if page.byline %}
-      <p class="info {% if site.jekyll-archives.cover %}has-text-white{% endif %}"><em>{{ page.byline }}</em></p>
-      {% endif %}
-    </div>
-  </div>
+{%- assign locale = page.locale | default: site.languages[0].locale -%}
+{%- assign strings = site.data.translations[locale] -%}
+<section class="hero is-narrow {% if site.archive_cover %}has-background has-dark-overlay has-text-shadow has-box-shadow{% endif %}">
+  {% if site.archive_cover %}<img alt="" class="hero-background is-transparent" src="{{ site.archive_cover | prepend: site.baseurl }}" />{% endif %}
+  <div class="hero-body"><div class="container has-text-centered">
+    {% if page.type == 'year' %}<h1 class="title {% if site.archive_cover %}has-text-white{% endif %}">{{ strings.year_line }} {{ page.title }}</h1>
+    {% elsif page.type == 'tag' %}<h1 class="title {% if site.archive_cover %}has-text-white{% endif %}">{{ strings.tag_line }} {{ page.title }}</h1>
+    {% else %}<h1 class="title {% if site.archive_cover %}has-text-white{% endif %}">{{ strings.category_line }} {{ page.title | category_name: locale }}</h1>{% endif %}
+  </div></div>
 </section>
-
-<div class="wrapper">
-<div class="page">
-  <article class="archive-content">
-    {% if page.type == 'year' %}
-      {% capture more_label %}More posts from {{ page.date | date: "%Y" }}{% endcapture %}
-      {% include archive_post_listing.html posts=page.posts cards_limit=9 more_label=more_label %}
-    {% elsif page.type == 'tag' %}
-      {% capture more_label %}More posts tagged with {{ page.title }}{% endcapture %}
-      {% include archive_post_listing.html posts=page.posts cards_limit=9 more_label=more_label group_by_year="true" %}
-    {% else %}
-      {% capture more_label %}More posts in {{ page.title | category_name }}{% endcapture %}
-      {% include archive_post_listing.html posts=page.posts cards_limit=9 more_label=more_label group_by_year="true" %}
-    {% endif %}
-  </article>
-</div>
-</div>
-<br>
+<div class="wrapper"><div class="page"><article class="archive-content">
+  {% if page.type == 'year' %}{% capture more_label %}{{ strings.more_from_year }} {{ page.title }}{% endcapture %}
+  {% elsif page.type == 'tag' %}{% capture more_label %}{{ strings.more_with_tag }} {{ page.title }}{% endcapture %}
+  {% else %}{% capture more_label %}{{ strings.more_in_category }} {{ page.title | category_name: locale }}{% endcapture %}{% endif %}
+  {% include archive_post_listing.html posts=page.posts cards_limit=9 more_label=more_label group_by_year="true" %}
+</article></div></div><br>

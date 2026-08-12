@@ -1,0 +1,16 @@
+{%- assign locale = include.locale | default: page.locale | default: site.languages[0].locale -%}
+{%- assign localized_posts = site.posts | where: "locale", locale -%}
+{%- assign localized_categories = localized_posts | map: "categories" | join: "," | split: "," | uniq | sort -%}
+<div data-pagefind-ignore>
+{% for category in localized_categories %}{% unless category == '' %}
+  <h2 id="{{ category | slugify }}">{{ category | category_name: locale }}</h2>
+  {% for description in site.descriptions %}{% if description.cat == category and description.locale == locale %}<p class="desc"><em>{{ description.desc }}</em></p>{% endif %}{% endfor %}
+  <ul class="posts-list">
+  {% for post in localized_posts %}{% if post.categories contains category %}
+    <li><strong><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></strong> <span class="post-date">- {{ post.date | date_to_long_string }}</span></li>
+  {% endif %}{% endfor %}
+  </ul>
+  {% unless forloop.last %}<hr>{% endunless %}
+{% endunless %}{% endfor %}
+</div>
+![Box with things](/assets/box_medium.png){:.small}

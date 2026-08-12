@@ -1,0 +1,18 @@
+{%- assign gallery_locale = page.locale | default: site.languages[0].locale -%}
+{%- assign strings = site.data.translations[gallery_locale] -%}
+<div class="gallery-grid" id="gallery-grid">
+{% for post in site.posts -%}
+  {% if post.locale == gallery_locale %}
+    {% for item in post.gallery_items -%}
+    {% assign gallery_size = item.gallery_size %}
+    <div class="gallery-tile"{% if gallery_size %} data-size="{{ gallery_size }}"{% endif %}>
+      <a href="{{ item.image | prepend: site.baseurl }}" class="lightgallery-link" data-sub-html="{{ item.description | escape }} <a href='{{ post.url }}'>{{ strings.read_more }}</a>">
+        <img src="{{ item.gallery_image | prepend: site.baseurl }}" data-src="{{ item.image | prepend: site.baseurl }}" alt="Image from post: {{ post.title | strip_html | escape }}" loading="lazy" />
+        <div class="gallery-tile-overlay"><div class="gallery-tile-title">{{ post.title | strip_html }}</div><div class="gallery-tile-cta">{{ strings.view }} &rarr;</div></div>
+      </a>
+    </div>
+    {%- endfor %}
+  {% endif %}
+{%- endfor %}
+</div>
+<script src="{{ '/js/gallery-packer.js' | prepend: site.baseurl }}"></script>

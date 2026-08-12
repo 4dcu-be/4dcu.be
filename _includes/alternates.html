@@ -1,0 +1,23 @@
+{%- assign available = '' -%}
+{%- for language in site.languages -%}
+  {%- assign language_url = '' -%}
+  {%- if page.post_id -%}
+    {%- for post in site.posts -%}
+      {%- if post.post_id == page.post_id and post.locale == language.locale -%}
+        {%- assign language_url = post.url -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- for translated_page in site.pages -%}
+      {%- if translated_page.post_id == page.post_id and translated_page.locale == language.locale -%}
+        {%- assign language_url = translated_page.url -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- else -%}
+    {%- assign language_url = language.index -%}
+  {%- endif -%}
+  {%- if language_url != '' -%}
+    {%- include canonical_url.html url=language_url -%}
+    {%- capture available -%}{{ available }}{{ language.locale }}~{{ canonical_path }}|{%- endcapture -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign available_list = available | split: '|' -%}

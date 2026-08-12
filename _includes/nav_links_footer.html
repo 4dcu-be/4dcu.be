@@ -1,8 +1,6 @@
-{% for page in site.pages -%}
-	{% if page.title and page.main_nav == true %}
-				<li class="nav-link"><a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
-	{% endif %}
+{%- assign nav_locale = page.locale | default: site.languages[0].locale -%}
+{%- assign strings = site.data.translations[nav_locale] -%}
+{% for nav_page in site.pages -%}
+  {% if nav_page.title and nav_page.main_nav == true and nav_page.locale == nav_locale %}<li class="nav-link"><a href="{{ nav_page.url | prepend: site.baseurl }}">{{ nav_page.title }}</a></li>{% endif %}
 {%- endfor %}
-{%- if site.email %}
-				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
-{% endif -%}
+{%- if site.email %}<li class="nav-link"><a href="#" class="nav-link-contact">{{ strings.contact }}</a></li>{% endif -%}

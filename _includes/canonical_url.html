@@ -1,0 +1,8 @@
+{%- assign canonical_path = include.url -%}
+{%- if canonical_path.size > 10 -%}
+  {%- assign tail = canonical_path | slice: -10, 10 -%}
+  {%- if tail == 'index.html' -%}
+    {%- assign keep = canonical_path.size | minus: 10 -%}
+    {%- assign canonical_path = canonical_path | slice: 0, keep -%}
+  {%- endif -%}
+{%- endif -%}

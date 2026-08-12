@@ -1,3 +1,5 @@
+{%- assign footer_locale = page.locale | default: site.languages[0].locale -%}
+{%- assign footer_strings = site.data.translations[footer_locale] -%}
 <footer class="site-footer">
 
   <div class="wrapper">
@@ -7,17 +9,17 @@
 		<div class="footer-content">
 			<div class="site-navigation">
 
-				<p><strong>Site Map</strong></p>
+				<p><strong>{{ footer_strings.site_map }}</strong></p>
 				<ul class="pages">
 					{% include nav_links_footer.html %}
 				</ul>
 				<br />
-				<p><strong>Legal</strong></p>
-				<p><a href="{{ "/policy/" | prepend: site.baseurl }}">Privacy policy</a></p>
+				<p><strong>{{ footer_strings.legal }}</strong></p>
+				<p><a href="{{ "/policy/" | prepend: site.baseurl }}">{{ footer_strings.privacy }}</a></p>
 			</div>
 
 			<div class="site-contact">
-				<p><strong>Contact</strong></p>
+				<p><strong>{{ footer_strings.contact }}</strong></p>
 				<ul class="social-media-list">
 					{% include social_media_links.html %}
 				</ul>
@@ -25,12 +27,12 @@
 
 			<div class="site-signature">
 				{% if site.buy_me_a_coffee_username %}
-				<p><strong>Contribute</strong></p>
-				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/{{site.buy_me_a_coffee_username}}">Buy me a Coffee </a></p>
+				<p><strong>{{ footer_strings.contribute }}</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/{{site.buy_me_a_coffee_username}}">{{ footer_strings.buy_coffee }} </a></p>
 				{% endif %}
-				<p class="rss-subscribe text"><strong>Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></strong></p>
+				{% include feed_url.html %}<p class="rss-subscribe text"><strong>{{ footer_strings.subscribe }} <a href="{{ feed_path | prepend: site.baseurl }}">{{ footer_strings.via_rss }}</a></strong></p>
 				{% if page.show_updated %}
-			    <p class="text">Last update: {{ site.time | date: "%B %-d, %Y" }}</p>
+			    <p class="text">{{ footer_strings.last_update }}: {{ site.time | date: "%B %-d, %Y" }}</p>
 			  {% endif %}
 			</div>
 		</div>

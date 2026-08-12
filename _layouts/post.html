@@ -1,117 +1,37 @@
 ---
 layout: default
 ---
-
+{%- assign locale = page.locale | default: site.languages[0].locale -%}
+{%- assign strings = site.data.translations[locale] -%}
+{%- assign locale_prefix = '' -%}{%- unless locale == site.languages[0].locale -%}{%- assign locale_prefix = '/nl' -%}{%- endunless -%}
 <img data-pagefind-meta="image[src]" src="{{ page.thumbnail | prepend: site.baseurl }}" alt="" aria-hidden="true" style="display:none" />
 <div class="post">
-
 <section class="hero {% if page.cover %}is-medium has-background has-dark-overlay has-text-shadow has-box-shadow{% else %}is-medium{% endif %} {% if page.scrim_options %}{{ page.scrim_options }}{% endif %}">
-  {% if page.cover %}
-  <img alt="{{ page.cover_alt | default: page.title | escape }}" class="hero-background is-transparent" src="{{ page.cover | prepend: site.baseurl }}" />
-  {% endif %}
-  <div class="hero-body">
-    <div class="container has-text-centered">
-      <h1 class="title {% if page.cover %}has-text-white{% endif %}">{{ page.title }}</h1>
-      {% if page.byline %}
-      <p class="info {% if page.cover %}has-text-white{% endif %}"><em>{{ page.byline }}</em></p>
-      {% endif %}
-    </div>
-  </div>
+  {% if page.cover %}<img alt="{{ page.cover_alt | default: page.title | escape }}" class="hero-background is-transparent" src="{{ page.cover | prepend: site.baseurl }}" />{% endif %}
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title {% if page.cover %}has-text-white{% endif %}">{{ page.title }}</h1>{% if page.byline %}<p class="info {% if page.cover %}has-text-white{% endif %}"><em>{{ page.byline }}</em></p>{% endif %}</div></div>
 </section>
-
 <div class="wrapper">
-
-{% unless page.cover %} {% include page_divider.html %} {% endunless %}
-
+{% unless page.cover %}{% include page_divider.html %}{% endunless %}
 <section class="post-meta">
-  <div class="post-date">Posted {{ page.date | date: "%B %-d, %Y" }} by {{ page.author | default: site.name }}</div>
-  <div class="post-categories">
-  {% if page.categories.size > 0 %}in {% for cat in page.categories %}
-    {% if site.jekyll-archives %}
-    <a href="{{ site.baseurl }}/category/{{ cat }}">{{ cat | category_name }}</a>{% if forloop.last == false %}, {% endif %}
-    {% else %}
-    <a href="{{ site.baseurl }}/posts/#{{ cat }}">{{ cat | category_name }}</a>{% if forloop.last == false %}, {% endif %}
-    {% endif %}
-  {% endfor %}{% endif %}
-  </div>
+  <div class="post-date">{{ strings.posted }} {{ page.date | date: "%B %-d, %Y" }} {{ strings.by }} {{ page.author | default: site.name }}</div>
+  <div class="post-categories">{% if page.categories.size > 0 %}{{ strings.in }} {% for category in page.categories %}<a href="{{ site.baseurl }}{{ locale_prefix }}/category/{{ category | slugify }}/">{{ category | category_name: locale }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}{% endif %}</div>
 </section>
-
-<article class="post-content" data-pagefind-body>
-  {{ content }}
-</article>
-
-{% if site.jekyll-archives %}
-{% if page.tags.size > 0 %}
-<section class="tags">
-	<strong><i class="fa-solid fa-tags"></i> Tags:</strong> {% for tag in page.tags %}<a href="{{ site.baseurl }}/tag/{{ tag | downcase }}">{{ tag }}</a>{% if forloop.last == false %},&nbsp;{% endif %}{% endfor %}
-</section>
-{% endif %}
-{% endif %}
-
+<article class="post-content" data-pagefind-body>{{ content }}</article>
+{% if page.tags.size > 0 %}<section class="tags"><strong><i class="fa-solid fa-tags"></i> {{ strings.tags }}:</strong> {% for tag in page.tags %}<a href="{{ site.baseurl }}{{ locale_prefix }}/tag/{{ tag | slugify }}/">{{ tag }}</a>{% unless forloop.last %},&nbsp;{% endunless %}{% endfor %}</section>{% endif %}
 <section class="rss">
-	{% if site.buy_me_a_coffee_username %}
-	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/{{ site.buy_me_a_coffee_username }}">You can buy me a coffee <i class="fa-solid fa-mug-hot"></i></a></strong></p>
-	{% else %}
-  <p class="rss-subscribe text"><strong>Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></strong></p>
-	{% endif %}
+  {% if site.buy_me_a_coffee_username %}<p class="rss-subscribe text">{{ strings.liked_post }} <strong><a href="https://buymeacoffee.com/{{ site.buy_me_a_coffee_username }}">{{ strings.buy_coffee }} <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  {% else %}{% include feed_url.html %}<p class="rss-subscribe text"><strong>{{ strings.subscribe }} <a href="{{ feed_path | prepend: site.baseurl }}">{{ strings.via_rss }}</a></strong></p>{% endif %}
 </section>
-
-<section class="share">
-  <span>Share: </span>
-  {% for social in site.social %}
-    {% capture full_url %}{{ site.url }}{{ site.baseurl }}{{ page.url }}{% endcapture %}
-    {% if social.name == "X" and social.share == true %}
-      <a href="//x.com/share?text={{ page.title | cgi_escape }}&url={{ full_url | cgi_escape}}&via={{social.username}}"
-        target="_blank">
-        <i class="fa-brands fa-x-twitter fa-lg"></i>
-      </a>
-    {% endif %}
-	    {% if social.name == "BlueSky" and social.share == true %}
-      <a href="//bsky.app/intent/compose?text={{ page.title | cgi_escape }}%20{{ full_url | cgi_escape}}"
-        target="_blank">
-        <i class="fa-brands fa-bluesky"></i>
-      </a>
-    {% endif %}
-    {% if social.name == "Facebook" and social.share == true %}
-      <a href="//www.facebook.com/sharer/sharer.php?&u={{ full_url | cgi_escape}}"
-        target="_blank">
-        <i class="fa-brands fa-square-{{ social.icon }} fa-lg"></i>
-      </a>
-    {% endif %}
-    {% if social.name == "LinkedIn" and social.share == true %}
-      <a href="//www.linkedin.com/sharing/share-offsite/?url={{ full_url | cgi_escape}}"
-        target="_blank">
-        <i class="fa-brands fa-{{ social.icon }} fa-lg"></i>
-      </a>
-    {% endif %}
+<section class="share"><span>{{ strings.share }}: </span>
+  {% for social in site.social %}{% capture full_url %}{{ site.url }}{{ site.baseurl }}{{ page.url }}{% endcapture %}
+    {% if social.name == "X" and social.share == true %}<a href="//x.com/share?text={{ page.title | cgi_escape }}&url={{ full_url | cgi_escape }}&via={{ social.username }}" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>{% endif %}
+    {% if social.name == "BlueSky" and social.share == true %}<a href="//bsky.app/intent/compose?text={{ page.title | cgi_escape }}%20{{ full_url | cgi_escape }}" target="_blank"><i class="fa-brands fa-bluesky"></i></a>{% endif %}
+    {% if social.name == "Facebook" and social.share == true %}<a href="//www.facebook.com/sharer/sharer.php?&u={{ full_url | cgi_escape }}" target="_blank"><i class="fa-brands fa-square-{{ social.icon }} fa-lg"></i></a>{% endif %}
+    {% if social.name == "LinkedIn" and social.share == true %}<a href="//www.linkedin.com/sharing/share-offsite/?url={{ full_url | cgi_escape }}" target="_blank"><i class="fa-brands fa-{{ social.icon }} fa-lg"></i></a>{% endif %}
   {% endfor %}
 </section>
-{% if site.inter_post_navigation == true %}
-	<section class="post-navigation">
-		<span class="prev-post">
-			{% if page.previous.url %}
-				<a href="{{page.previous.url | prepend: site.baseurl}}">
-					<span class="fa-stack fa-lg">
-						<i class="fa-solid fa-square fa-stack-2x"></i>
-						<i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i>
-					</span>
-					<span class="page-number">{{page.previous.title}}</span>
-				</a>
-			{% endif %}
-		</span>
-		<span class="next-post">
-			{% if page.next.url %}
-				<a href="{{page.next.url | prepend: site.baseurl}}">
-					<span class="page-number">{{page.next.title}}</span>
-					<span class="fa-stack fa-lg">
-						<i class="fa-solid fa-square fa-stack-2x"></i>
-						<i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i>
-					</span>
-				</a>
-			{% endif %}
-		</span>
-	</section>
-{% endif %}
-
-</div>
-</div>
+{% if site.inter_post_navigation == true %}<section class="post-navigation">
+  <span class="prev-post">{% if page.previous_in_locale.url %}<a href="{{ page.previous_in_locale.url | prepend: site.baseurl }}"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">{{ page.previous_in_locale.title }}</span></a>{% endif %}</span>
+  <span class="next-post">{% if page.next_in_locale.url %}<a href="{{ page.next_in_locale.url | prepend: site.baseurl }}"><span class="page-number">{{ page.next_in_locale.title }}</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a>{% endif %}</span>
+</section>{% endif %}
+</div></div>

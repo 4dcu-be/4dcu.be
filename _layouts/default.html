@@ -1,20 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-
+{%- assign document_locale = page.locale | default: site.languages[0].locale -%}
+<html lang="{{ document_locale | split: '_' | first }}">
   {% include head.html %}
-
   <body class="has-navbar-fixed-top">
-
     {% include header.html %}
-
-    <div class="page-content">
-        {{ content }}
-    </div>
-
-		{% include contact_modal.html %}
-		{% include search_modal.html %}
-
+    <div class="page-content">{{ content }}</div>
+    {% include contact_modal.html %}
+    {% include search_modal.html %}
     {% include footer.html %}
   </body>
-
 </html>

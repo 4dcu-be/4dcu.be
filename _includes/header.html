@@ -1,23 +1,25 @@
+{%- assign current_locale = page.locale | default: site.languages[0].locale -%}
+{%- assign current_index = site.languages[0].index -%}
+{%- for language in site.languages -%}{%- if language.locale == current_locale -%}{%- assign current_index = language.index -%}{%- endif -%}{%- endfor -%}
 <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a href="{{ site.baseurl }}/" class="navbar-item">
-      {% if site.logo %}
-      <img src="{{ site.logo | prepend: site.baseurl }}" alt="{{ site.title }}" width="58" height="58" />
-      {% else %}
-      <span>{{ site.title }}</span>
-      {% endif %}
+    <a href="{{ current_index | prepend: site.baseurl }}" class="navbar-item">
+      {% if site.logo %}<img src="{{ site.logo | prepend: site.baseurl }}" alt="{{ site.title }}" width="58" height="58" />{% else %}<span>{{ site.title }}</span>{% endif %}
     </a>
-
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
   </div>
-
-  <div id="navbarMenu" class="navbar-menu">
-    <div class="navbar-end">
-      {% include nav_links.html %}
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    {% include nav_links.html %}
+    {% include alternates.html %}
+    {% if available_list.size > 1 %}
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link" aria-label="Choose language">{% for language in site.languages %}{% if language.locale == current_locale %}{{ language.short }}{% endif %}{% endfor %}</a>
+      <div class="navbar-dropdown is-right">
+      {% for entry in available_list %}{% assign parts = entry | split: '~' %}{% assign entry_locale = parts[0] %}{% assign entry_url = parts[1] %}
+        {% for language in site.languages %}{% if language.locale == entry_locale %}<a class="navbar-item{% if entry_locale == current_locale %} is-active{% endif %}" lang="{{ entry_locale | split: '_' | first }}" href="{{ entry_url | prepend: site.baseurl }}">{{ language.name }}</a>{% endif %}{% endfor %}
+      {% endfor %}
+      </div>
     </div>
-  </div>
+    {% endif %}
+  </div></div>
 </nav>

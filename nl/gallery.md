@@ -1,13 +1,13 @@
 ---
 layout: page
-title: "Gallery"
-description: "Images from projects and posts published on 4DCu.be."
-permalink: /gallery/
+title: "Galerij"
+description: "Afbeeldingen uit projecten en artikels op 4DCu.be."
+permalink: /nl/galerij/
 main_nav: true
 cover: "/assets/images/headers/gameboyzero.jpg"
 cover_options: narrow
 sitemap: true
-locale: en_US
+locale: nl_NL
 post_id: gallery_page
 ---
 {% include gallery.html %}
