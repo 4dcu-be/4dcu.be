@@ -6,6 +6,8 @@ main_nav: true
 cover:  "/assets/images/headers/hard_disk.jpg"
 cover_options: narrow
 sitemap: true
+locale: en_US
+post_id: about_page
 ---
 
 # About me ...
