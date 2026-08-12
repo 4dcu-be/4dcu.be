@@ -1,4 +1,11 @@
 {%- assign available = '' -%}
+{%- assign current_locale = page.locale | default: site.languages[0].locale -%}
+{%- assign is_language_index = false -%}
+{%- for language in site.languages -%}
+  {%- if page.url == language.index -%}
+    {%- assign is_language_index = true -%}
+  {%- endif -%}
+{%- endfor -%}
 {%- for language in site.languages -%}
   {%- assign language_url = '' -%}
   {%- if page.post_id -%}
@@ -12,7 +19,12 @@
         {%- assign language_url = translated_page.url -%}
       {%- endif -%}
     {%- endfor -%}
-  {%- else -%}
+  {%- elsif is_language_index -%}
+    {%- assign language_url = language.index -%}
+  {%- elsif language.locale == current_locale -%}
+    {%- assign language_url = page.url -%}
+  {%- endif -%}
+  {%- if language_url == '' and include.fallback_to_index -%}
     {%- assign language_url = language.index -%}
   {%- endif -%}
   {%- if language_url != '' -%}
