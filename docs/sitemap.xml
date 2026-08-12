@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
-    <loc>https://blog.4dcu.be/</loc>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://blog.4dcu.be/nl/ai/programming/games/2026/06/gameboy-hnefatafl/</loc>
     <lastmod>2026-06-30T08:00:00+00:00</lastmod>
   </url>
   <url>
     <loc>https://blog.4dcu.be/ai/programming/games/2026/06/30/gameboy-hnefatafl.html</loc>
     <lastmod>2026-06-30T08:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.4dcu.be/nl/games/2026/05/cheating-at-my-own-game/</loc>
+    <lastmod>2026-05-13T08:00:00+00:00</lastmod>
   </url>
   <url>
     <loc>https://blog.4dcu.be/games/2026/05/13/cheating-at-my-own-game.html</loc>
@@ -319,26 +324,36 @@
     <loc>https://blog.4dcu.be/programming/2019/12/01/Sentiment-Analysis.html</loc>
     <lastmod>2019-12-01T12:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.4dcu.be/category/programming/</loc>
-    <lastmod>2026-06-30T08:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.4dcu.be/category/games/</loc>
-    <lastmod>2026-06-30T08:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.4dcu.be/category/diy/</loc>
-    <lastmod>2025-07-21T08:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.4dcu.be/category/general/</loc>
-    <lastmod>2021-06-28T10:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.4dcu.be/category/biology/</loc>
-    <lastmod>2021-11-11T08:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.4dcu.be/category/ai/</loc>
-    <lastmod>2026-06-30T08:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://blog.4dcu.be/about/</loc>
   </url><url>
+    <loc>https://blog.4dcu.be/nl/galerij/</loc>
+  </url><url>
     <loc>https://blog.4dcu.be/gallery/</loc>
+  </url><url>
+    <loc>https://blog.4dcu.be/nl/artikels/</loc>
+  </url><url>
+    <loc>https://blog.4dcu.be/posts/</loc>
+  </url><url>
+    <loc>https://blog.4dcu.be/category/programming/</loc>
+  </url><url>
+    <loc>https://blog.4dcu.be/category/games/</loc>
+  </url><url>
+    <loc>https://blog.4dcu.be/category/diy/</loc>
+  </url><url>
+    <loc>https://blog.4dcu.be/category/general/</loc>
+  </url><url>
+    <loc>https://blog.4dcu.be/category/biology/</loc>
+  </url><url>
+    <loc>https://blog.4dcu.be/category/ai/</loc>
+  </url><url>
+    <loc>https://blog.4dcu.be/nl/category/games/</loc>
+  </url><url>
+    <loc>https://blog.4dcu.be/nl/category/ai/</loc>
+  </url><url>
+    <loc>https://blog.4dcu.be/nl/category/programming/</loc>
+  </url><url>
+    <loc>https://blog.4dcu.be/nl/</loc>
+  </url><url>
+    <loc>https://blog.4dcu.be/</loc>
   </url>
 </urlset>

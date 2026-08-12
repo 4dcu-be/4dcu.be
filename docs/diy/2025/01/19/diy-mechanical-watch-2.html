@@ -1,79 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!DOCTYPE html><html lang="en">
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1"><title>Building a custom GMT watch</title>
   <meta name="description" content="Building a custom GMT watch from AliExpress parts with the NH34 movement, plus upgrading to a double-domed crystal and swapping the date wheel to match the c...">
   
-  
-  <meta name="author" content="Sebastian Proost">
-  <meta name="copyright" content="&copy; Sebastian Proost 2026">
-  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
 
-  <!-- External libraries -->
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
-  <!-- Favicon and other icons -->
   <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
-  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
   <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
   <link rel="manifest" href="/assets/icons/manifest.json">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
-  <!-- Open Graph -->
-  <meta property="og:site_name" content="4DCu.be" />
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
   <meta property="og:title" content="Building a custom GMT watch" />
   <meta property="og:description" content="Building a custom GMT watch from AliExpress parts with the NH34 movement, plus upgrading to a double-domed crystal and swapping the date wheel to match the c..." />
   <meta property="og:url" content="https://blog.4dcu.be/diy/2025/01/19/diy-mechanical-watch-2.html" />
   <meta property="og:type" content="article" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2025-01-19-diy-mechanical-watches-2-explorer_2_header.jpg" />
-  <meta property="og:image:alt" content="Building a custom GMT watch" />
-  <meta property="og:image:type" content="image/jpeg" />
-  
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  
-  
-  <meta property="article:published_time" content="2025-01-19T08:00:00+00:00" />
-  <meta property="article:modified_time" content="2025-01-19T08:00:00+00:00" />
-  <meta property="article:author" content="Sebastian Proost" />
-  <meta property="article:section" content="DIY" />
-  <meta property="article:tag" content="mechanical" /><meta property="article:tag" content="watch" /><meta property="article:tag" content="watchmaking" />
-  
-  
+  <meta property="og:locale:alternate" content="nl_NL" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2025-01-19-diy-mechanical-watches-2-explorer_2_header.jpg" /><meta property="og:image:alt" content="Building a custom GMT watch" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2025-01-19T08:00:00+00:00" /><meta property="article:modified_time" content="2025-01-19T08:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="DIY" /><meta property="article:tag" content="mechanical" /><meta property="article:tag" content="watch" /><meta property="article:tag" content="watchmaking" />
 
-  
-  <!-- Twitter / X cards -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Building a custom GMT watch">
-  <meta name="twitter:description" content="Building a custom GMT watch from AliExpress parts with the NH34 movement, plus upgrading to a double-domed crystal and swapping the date wheel to match the c...">
-  <meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2025-01-19-diy-mechanical-watches-2-explorer_2_header.jpg">
-  <meta name="twitter:image:alt" content="Building a custom GMT watch">
-  <meta name="twitter:url" content="https://blog.4dcu.be/diy/2025/01/19/diy-mechanical-watch-2.html">
-  
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Building a custom GMT watch"><meta name="twitter:description" content="Building a custom GMT watch from AliExpress parts with the NH34 movement, plus upgrading to a double-domed crystal and swapping the date wheel to match the c..."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2025-01-19-diy-mechanical-watches-2-explorer_2_header.jpg"><meta name="twitter:image:alt" content="Building a custom GMT watch"><meta name="twitter:url" content="https://blog.4dcu.be/diy/2025/01/19/diy-mechanical-watch-2.html">
 
-  <!-- Site styles and discovery -->
-  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
   <link rel="canonical" href="https://blog.4dcu.be/diy/2025/01/19/diy-mechanical-watch-2.html">
-  <link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/">
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (en-US)" href="https://blog.4dcu.be/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
   <link rel="stylesheet" href="/css/main.css">
-
-  <!-- Structured data -->
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -84,7 +44,7 @@
       "url": "https://blog.4dcu.be/",
       "name": "4DCu.be",
       "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
-      "inLanguage": "en",
+      "inLanguage": ["en-US", "nl-NL"],
       "publisher": { "@id": "https://blog.4dcu.be/#person" }
     },
     {
@@ -92,8 +52,7 @@
       "@id": "https://blog.4dcu.be/#person",
       "name": "Sebastian Proost",
       "url": "https://blog.4dcu.be/",
-      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png",
-      "sameAs": ["https://github.com/4dcu-be", "https://bsky.app/profile/blog.4dcu.be"]
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
     },
     {
       "@type": "BlogPosting",
@@ -104,13 +63,12 @@
       "description": "Building a custom GMT watch from AliExpress parts with the NH34 movement, plus upgrading to a double-domed crystal and swapping the date wheel to match the c...",
       "datePublished": "2025-01-19T08:00:00+00:00",
       "dateModified": "2025-01-19T08:00:00+00:00",
-      "inLanguage": "en",
+      "inLanguage": "en-US",
       "author": { "@id": "https://blog.4dcu.be/#person" },
       "publisher": { "@id": "https://blog.4dcu.be/#person" },
       "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
       "image": "https://blog.4dcu.be/assets/social/posts-2025-01-19-diy-mechanical-watches-2-explorer_2_header.jpg",
-      "keywords": ["mechanical", "watch", "watchmaking"],
-      "articleSection": ["DIY"]
+      "keywords": ["mechanical", "watch", "watchmaking"]
     },
     {
       "@type": "BreadcrumbList",
@@ -125,100 +83,57 @@
 }
 </script>
 
-
-  <!-- PageFind -->
   <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
-
-  <!-- Tooltips -->
-  <script type="text/javascript">
-    window.tooltips = []
-  </script>
-
-  <script type="text/javascript">
-  //<![CDATA[
-  function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
-  //]]>
-  </script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
 </head>
 
-
   <body class="has-navbar-fixed-top">
-
     <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a href="/" class="navbar-item">
-      
       <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
-      
     </a>
-
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
   </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/about/" class="navbar-item">About</a>
+  
+<a href="/gallery/" class="navbar-item">Gallery</a>
+  
+<a href="/posts/" class="navbar-item">Posts</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
 
-  <div id="navbarMenu" class="navbar-menu">
-    <div class="navbar-end">
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Choose language">EN</a>
+      <span class="lang-switch__label" aria-hidden="true">Language:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
       
-<a href="/about/" class="navbar-item">
-  About
-</a>
-  
-<a href="/gallery/" class="navbar-item">
-  Gallery
-</a>
-  
-<a href="/posts/" class="navbar-item">
-  Posts
-</a>
-  
-<a href="#" class="navbar-item nav-link-contact">Contact</a>
-<a href="#" class="navbar-item nav-link-search">
-  <i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i>
-</a>
-
+        <a class="navbar-item lang-switch__option is-current" lang="en" href="/" aria-current="true"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
     </div>
-  </div>
+    
+  </div></div>
 </nav>
 
-
-    <div class="page-content">
-        <img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/explorer_2_header.jpg" alt="" aria-hidden="true" style="display:none" />
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/explorer_2_header.jpg" alt="" aria-hidden="true" style="display:none" />
 <div class="post">
-
 <section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
-  
   <img alt="Building a custom GMT watch" class="hero-background is-transparent" src="/assets/posts/2025-01-19-diy-mechanical-watches-2/explorer_2_header.jpg" />
-  
-  <div class="hero-body">
-    <div class="container has-text-centered">
-      <h1 class="title has-text-white">Building a custom GMT watch</h1>
-      
-      <p class="info has-text-white"><em>and swapping the crystal and date-wheel</em></p>
-      
-    </div>
-  </div>
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">Building a custom GMT watch</h1><p class="info has-text-white"><em>and swapping the crystal and date-wheel</em></p></div></div>
 </section>
-
 <div class="wrapper">
 
-
-
 <section class="post-meta">
-  <div class="post-date">Posted January 19, 2025 by Sebastian Proost</div>
-  <div class="post-categories">
-  in 
-    
-    <a href="/category/diy">DIY</a>
-    
-  
-  </div>
+  <div class="post-date">Posted 19-01-2025 by Sebastian Proost</div>
+  <div class="post-categories">in <a href="/category/diy/">DIY</a></div>
 </section>
-
-<article class="post-content" data-pagefind-body>
-  <p>With several <a href="/diy/2024/11/11/diy-mechanical-watch.html">custom watches</a> under my belt, I felt ready to tackle a more advanced build. This project combines three new elements: building a GMT watch using the NH34 movement, upgrading the crystal, and customizing the date wheel. While these modifications require a few additional tools and introduce some new techniques, they’re excellent next steps for anyone comfortable with basic watch assembly.</p>
+<article class="post-content" data-pagefind-body><p>With several <a href="/diy/2024/11/11/diy-mechanical-watch.html">custom watches</a> under my belt, I felt ready to tackle a more advanced build. This project combines three new elements: building a GMT watch using the NH34 movement, upgrading the crystal, and customizing the date wheel. While these modifications require a few additional tools and introduce some new techniques, they’re excellent next steps for anyone comfortable with basic watch assembly.</p>
 
 <p>The NH34 movement, a reliable Seiko clone that typically costs around $35-50, has become increasingly popular among DIY watchmakers for good reason. At its heart is the GMT complication - a fourth hand that rotates once every 24 hours to track a second time zone. Unlike basic three-hand watches, GMT watches can simultaneously display both local time (say, New York at 2:00 PM) and another time zone (like London at 7:00 PM) using this additional hand. This functionality made GMT watches essential tools for pilots since the 1950s, and they remain valuable for international business and travel today.</p>
 
@@ -342,110 +257,47 @@ sporty for that bracelet. So I swapped it with the <a href="https://www.watch-wi
   <li><a href="https://www.youtube.com/watch?v=5UEjFZutgU8">NH36 Samurai style build</a> which includes a crystal swap by <a href="https://www.youtube.com/@LumeShot">LumeShot</a></li>
   <li><a href="https://www.youtube.com/watch?v=KayliCyDOKo">How to dress a screwdriver</a> by <a href="https://www.youtube.com/@welwynwatches5976">WelwynWatches</a></li>
 </ul>
-
 </article>
-
-
-
-<section class="tags">
-	<strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/tag/mechanical">mechanical</a>,&nbsp;<a href="/tag/watch">watch</a>,&nbsp;<a href="/tag/watchmaking">watchmaking</a>
-</section>
-
-
-
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/tag/mechanical/">mechanical</a>,&nbsp;<a href="/tag/watch/">watch</a>,&nbsp;<a href="/tag/watchmaking/">watchmaking</a></section>
 <section class="rss">
-	
-	<p class="rss-subscribe text">Liked this post ? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa-solid fa-mug-hot"></i></a></strong></p>
-	
+  <p class="rss-subscribe text">Liked this post? <strong><a href="https://buymeacoffee.com/4dcube">You can buy me a coffee <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
 </section>
-
-<section class="share">
-  <span>Share: </span>
+<section class="share"><span>Share: </span>
   
     
-    
-	    
-    
-    
-  
-    
-    
-	    
-      <a href="//bsky.app/intent/compose?text=Building+a+custom+GMT+watch%20https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2025%2F01%2F19%2Fdiy-mechanical-watch-2.html"
-        target="_blank">
-        <i class="fa-brands fa-bluesky"></i>
-      </a>
     
     
     
   
     
-    
-	    
-    
-      <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2025%2F01%2F19%2Fdiy-mechanical-watch-2.html"
-        target="_blank">
-        <i class="fa-brands fa-square-facebook fa-lg"></i>
-      </a>
+    <a href="//bsky.app/intent/compose?text=Building+a+custom+GMT+watch%20https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2025%2F01%2F19%2Fdiy-mechanical-watch-2.html" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
     
     
   
     
     
-	    
-    
-    
-      <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2025%2F01%2F19%2Fdiy-mechanical-watch-2.html"
-        target="_blank">
-        <i class="fa-brands fa-linkedin fa-lg"></i>
-      </a>
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2025%2F01%2F19%2Fdiy-mechanical-watch-2.html" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
     
   
     
     
-      <a href="//x.com/share?text=Building+a+custom+GMT+watch&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2025%2F01%2F19%2Fdiy-mechanical-watch-2.html&via="
-        target="_blank">
-        <i class="fa-brands fa-x-twitter fa-lg"></i>
-      </a>
     
-	    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2025%2F01%2F19%2Fdiy-mechanical-watch-2.html" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=Building+a+custom+GMT+watch&url=https%3A%2F%2Fblog.4dcu.be%2Fdiy%2F2025%2F01%2F19%2Fdiy-mechanical-watch-2.html&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
     
     
   
 </section>
-
-	<section class="post-navigation">
-		<span class="prev-post">
-			
-				<a href="/diy/2024/11/11/diy-mechanical-watch.html">
-					<span class="fa-stack fa-lg">
-						<i class="fa-solid fa-square fa-stack-2x"></i>
-						<i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i>
-					</span>
-					<span class="page-number">DIY mechanical watches on a budget</span>
-				</a>
-			
-		</span>
-		<span class="next-post">
-			
-				<a href="/diy/programming/2025/02/03/deej-open-hardware-volume-controller.html">
-					<span class="page-number">Building a Custom Deej Volume Mixer with an RP2040 Pro Micro</span>
-					<span class="fa-stack fa-lg">
-						<i class="fa-solid fa-square fa-stack-2x"></i>
-						<i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i>
-					</span>
-				</a>
-			
-		</span>
-	</section>
-
-
+<section class="post-navigation">
+  <span class="prev-post"><a href="/diy/2024/11/11/diy-mechanical-watch.html"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">DIY mechanical watches on a budget</span></a></span>
+  <span class="next-post"><a href="/diy/programming/2025/02/03/deej-open-hardware-volume-controller.html"><span class="page-number">Building a Custom Deej Volume Mixer with an RP2040 Pro Micro</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
 </div>
-</div>
-
-    </div>
-
-		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
 	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
 		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
 			<header class="modal__header">
@@ -502,7 +354,7 @@ sporty for that bracelet. So I swapped it with the <a href="https://www.watch-wi
 	</div>
 </div>
 
-		<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
 	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
 		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
 			<header class="modal__header">
@@ -520,7 +372,6 @@ sporty for that bracelet. So I swapped it with the <a href="https://www.watch-wi
 	</div>
 </div>
 
-
     <footer class="site-footer">
 
   <div class="wrapper">
@@ -530,17 +381,9 @@ sporty for that bracelet. So I swapped it with the <a href="https://www.watch-wi
 		<div class="footer-content">
 			<div class="site-navigation">
 
-				<p><strong>Site Map</strong></p>
+				<p><strong>Site map</strong></p>
 				<ul class="pages">
-					
-				<li class="nav-link"><a href="/about/">About</a>
-	
-				<li class="nav-link"><a href="/gallery/">Gallery</a>
-	
-				<li class="nav-link"><a href="/posts/">Posts</a>
-	
-				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
-
+					<li class="nav-link"><a href="/about/">About</a></li><li class="nav-link"><a href="/gallery/">Gallery</a></li><li class="nav-link"><a href="/posts/">Posts</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
 				</ul>
 				<br />
 				<p><strong>Legal</strong></p>
@@ -589,7 +432,7 @@ sporty for that bracelet. So I swapped it with the <a href="https://www.watch-wi
 			<div class="site-signature">
 				
 				<p><strong>Contribute</strong></p>
-				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">You can buy me a coffee </a></p>
 				
 				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
 				
@@ -759,5 +602,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   </body>
-
 </html>

@@ -1,73 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!DOCTYPE html><html lang="en">
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1"><title>About</title>
   <meta name="description" content="A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.">
   
-  
-  <meta name="author" content="Sebastian Proost">
-  <meta name="copyright" content="&copy; Sebastian Proost 2026">
-  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
 
-  <!-- External libraries -->
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
-  <!-- Favicon and other icons -->
   <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
-  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
   <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
   <link rel="manifest" href="/assets/icons/manifest.json">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
-  <!-- Open Graph -->
-  <meta property="og:site_name" content="4DCu.be" />
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
   <meta property="og:title" content="About" />
   <meta property="og:description" content="A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more." />
   <meta property="og:url" content="https://blog.4dcu.be/about/" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:image" content="https://blog.4dcu.be/assets/social/site-default.jpg" />
-  <meta property="og:image:alt" content="About" />
-  <meta property="og:image:type" content="image/jpeg" />
-  
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  
-  
+  <meta property="og:locale:alternate" content="nl_NL" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social_fb.jpg" /><meta property="og:image:alt" content="About" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
   
 
-  
-  <!-- Twitter / X cards -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="About">
-  <meta name="twitter:description" content="A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.">
-  <meta name="twitter:image" content="https://blog.4dcu.be/assets/social/site-default.jpg">
-  <meta name="twitter:image:alt" content="About">
-  <meta name="twitter:url" content="https://blog.4dcu.be/about/">
-  
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="About"><meta name="twitter:description" content="A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social_fb.jpg"><meta name="twitter:image:alt" content="About"><meta name="twitter:url" content="https://blog.4dcu.be/about/">
 
-  <!-- Site styles and discovery -->
-  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
   <link rel="canonical" href="https://blog.4dcu.be/about/">
-  <link rel="alternate" type="application/rss+xml" title="4DCu.be" href="https://blog.4dcu.be/feed.xml" />
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/">
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (en-US)" href="https://blog.4dcu.be/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
   <link rel="stylesheet" href="/css/main.css">
-
-  <!-- Structured data -->
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -78,7 +44,7 @@
       "url": "https://blog.4dcu.be/",
       "name": "4DCu.be",
       "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
-      "inLanguage": "en",
+      "inLanguage": ["en-US", "nl-NL"],
       "publisher": { "@id": "https://blog.4dcu.be/#person" }
     },
     {
@@ -86,74 +52,51 @@
       "@id": "https://blog.4dcu.be/#person",
       "name": "Sebastian Proost",
       "url": "https://blog.4dcu.be/",
-      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png",
-      "sameAs": ["https://github.com/4dcu-be", "https://bsky.app/profile/blog.4dcu.be"]
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
     }
   ]
 }
 </script>
 
-
-  <!-- PageFind -->
   <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
-
-  <!-- Tooltips -->
-  <script type="text/javascript">
-    window.tooltips = []
-  </script>
-
-  <script type="text/javascript">
-  //<![CDATA[
-  function loadCSS(e, t, n) { "use strict"; var i = window.document.createElement("link"); var o = t || window.document.getElementsByTagName("script")[0]; i.rel = "stylesheet"; i.href = e; i.media = "only x"; o.parentNode.insertBefore(i, o); setTimeout(function () { i.media = n || "all" }) }loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
-  //]]>
-  </script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
 </head>
 
-
   <body class="has-navbar-fixed-top">
-
     <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a href="/" class="navbar-item">
-      
       <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
-      
     </a>
-
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
   </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/about/" class="navbar-item is-active">About</a>
+  
+<a href="/gallery/" class="navbar-item">Gallery</a>
+  
+<a href="/posts/" class="navbar-item">Posts</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
 
-  <div id="navbarMenu" class="navbar-menu">
-    <div class="navbar-end">
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Choose language">EN</a>
+      <span class="lang-switch__label" aria-hidden="true">Language:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
       
-<a href="/about/" class="navbar-item is-active">
-  About
-</a>
-  
-<a href="/gallery/" class="navbar-item">
-  Gallery
-</a>
-  
-<a href="/posts/" class="navbar-item">
-  Posts
-</a>
-  
-<a href="#" class="navbar-item nav-link-contact">Contact</a>
-<a href="#" class="navbar-item nav-link-search">
-  <i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i>
-</a>
-
+        <a class="navbar-item lang-switch__option is-current" lang="en" href="/" aria-current="true"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
     </div>
-  </div>
+    
+  </div></div>
 </nav>
 
-
-    <div class="page-content">
-        <img data-pagefind-meta="image[src]" src="/assets/images/headers/hard_disk.jpg" style="display:none" />
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/headers/hard_disk.jpg" style="display:none" />
 <section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow narrow">
 	
 	<img alt="Page cover" class="hero-background is-transparent" src="/assets/images/headers/hard_disk.jpg" />
@@ -197,10 +140,8 @@
 
 </div>
 </div>
-
-    </div>
-
-		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
 	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
 		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
 			<header class="modal__header">
@@ -257,7 +198,7 @@
 	</div>
 </div>
 
-		<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
 	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
 		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
 			<header class="modal__header">
@@ -275,7 +216,6 @@
 	</div>
 </div>
 
-
     <footer class="site-footer">
 
   <div class="wrapper">
@@ -285,17 +225,9 @@
 		<div class="footer-content">
 			<div class="site-navigation">
 
-				<p><strong>Site Map</strong></p>
+				<p><strong>Site map</strong></p>
 				<ul class="pages">
-					
-				<li class="nav-link"><a href="/about/">About</a>
-	
-				<li class="nav-link"><a href="/gallery/">Gallery</a>
-	
-				<li class="nav-link"><a href="/posts/">Posts</a>
-	
-				<li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
-
+					<li class="nav-link"><a href="/about/">About</a></li><li class="nav-link"><a href="/gallery/">Gallery</a></li><li class="nav-link"><a href="/posts/">Posts</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
 				</ul>
 				<br />
 				<p><strong>Legal</strong></p>
@@ -344,7 +276,7 @@
 			<div class="site-signature">
 				
 				<p><strong>Contribute</strong></p>
-				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee </a></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">You can buy me a coffee </a></p>
 				
 				<p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
 				
@@ -514,5 +446,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   </body>
-
 </html>

@@ -1,46 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>
     <title>4DCu.be</title>
     <description>A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.</description>
     <link>https://blog.4dcu.be/</link>
+    <language>en-US</language>
     <atom:link href="https://blog.4dcu.be/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 12 Aug 2026 07:17:33 +0000</pubDate>
-    <lastBuildDate>Wed, 12 Aug 2026 07:17:33 +0000</lastBuildDate>
+    <pubDate>Wed, 12 Aug 2026 17:51:49 +0000</pubDate>
+    <lastBuildDate>Wed, 12 Aug 2026 17:51:49 +0000</lastBuildDate>
     <generator>Jekyll v4.4.1</generator>
-    
       <item>
         <title>Hnefatafl, Viking Chess for Game Boy</title>
         <description>&lt;p&gt;On &lt;a href=&quot;/ai/programming/games/2026/03/15/gameboy-royal-game-of-ur.html&quot;&gt;The Royal Game of Ur&lt;/a&gt;, the link cable nearly broke me. It was by far the hardest feature of that project, burning through most of $50 in API...</description>
         <pubDate>Tue, 30 Jun 2026 08:00:00 +0000</pubDate>
         <link>https://blog.4dcu.be/ai/programming/games/2026/06/30/gameboy-hnefatafl.html</link>
         <guid isPermaLink="true">https://blog.4dcu.be/ai/programming/games/2026/06/30/gameboy-hnefatafl.html</guid>
-        
-        <category>python</category>
-        
-        <category>c</category>
-        
-        <category>nintendo</category>
-        
-        <category>gameboy</category>
-        
-        <category>retrogaming</category>
-        
-        <category>homebrew</category>
-        
-        <category>ai</category>
-        
-        <category>claude-code</category>
-        
-        <category>agent-based-modeling</category>
-        
-        
-        <category>ai</category>
-        
-        <category>programming</category>
-        
-        <category>games</category>
-        
+        <category>python</category><category>c</category><category>nintendo</category><category>gameboy</category><category>retrogaming</category><category>homebrew</category><category>ai</category><category>claude-code</category><category>agent-based-modeling</category>
+        <category>ai</category><category>programming</category><category>games</category>
       </item>
     
       <item>
@@ -49,18 +24,8 @@
         <pubDate>Wed, 13 May 2026 08:00:00 +0000</pubDate>
         <link>https://blog.4dcu.be/games/2026/05/13/cheating-at-my-own-game.html</link>
         <guid isPermaLink="true">https://blog.4dcu.be/games/2026/05/13/cheating-at-my-own-game.html</guid>
-        
-        <category>nintendo</category>
-        
-        <category>gameboy</category>
-        
-        <category>retrogaming</category>
-        
-        <category>homebrew</category>
-        
-        
+        <category>nintendo</category><category>gameboy</category><category>retrogaming</category><category>homebrew</category>
         <category>games</category>
-        
       </item>
     
       <item>
@@ -69,24 +34,8 @@
         <pubDate>Mon, 27 Apr 2026 08:00:00 +0000</pubDate>
         <link>https://blog.4dcu.be/ai/programming/2026/04/27/claude-design.html</link>
         <guid isPermaLink="true">https://blog.4dcu.be/ai/programming/2026/04/27/claude-design.html</guid>
-        
-        <category>claude-code</category>
-        
-        <category>claude-design</category>
-        
-        <category>javascript</category>
-        
-        <category>web-development</category>
-        
-        <category>eleventy</category>
-        
-        <category>svelte</category>
-        
-        
-        <category>ai</category>
-        
-        <category>programming</category>
-        
+        <category>claude-code</category><category>claude-design</category><category>javascript</category><category>web-development</category><category>eleventy</category><category>svelte</category>
+        <category>ai</category><category>programming</category>
       </item>
     
       <item>
@@ -95,36 +44,8 @@
         <pubDate>Sun, 29 Mar 2026 08:00:00 +0000</pubDate>
         <link>https://blog.4dcu.be/ai/programming/games/2026/03/29/dscube-twist-puzzle-nds.html</link>
         <guid isPermaLink="true">https://blog.4dcu.be/ai/programming/games/2026/03/29/dscube-twist-puzzle-nds.html</guid>
-        
-        <category>cpp</category>
-        
-        <category>nintendo</category>
-        
-        <category>nds</category>
-        
-        <category>retrogaming</category>
-        
-        <category>homebrew</category>
-        
-        <category>ai</category>
-        
-        <category>claude-code</category>
-        
-        <category>gemini</category>
-        
-        <category>rubiks-cube</category>
-        
-        <category>devkitpro</category>
-        
-        <category>docker</category>
-        
-        
-        <category>ai</category>
-        
-        <category>programming</category>
-        
-        <category>games</category>
-        
+        <category>cpp</category><category>nintendo</category><category>nds</category><category>retrogaming</category><category>homebrew</category><category>ai</category><category>claude-code</category><category>gemini</category><category>rubiks-cube</category><category>devkitpro</category><category>docker</category>
+        <category>ai</category><category>programming</category><category>games</category>
       </item>
     
       <item>
@@ -133,32 +54,8 @@
         <pubDate>Sun, 15 Mar 2026 08:00:00 +0000</pubDate>
         <link>https://blog.4dcu.be/ai/programming/games/2026/03/15/gameboy-royal-game-of-ur.html</link>
         <guid isPermaLink="true">https://blog.4dcu.be/ai/programming/games/2026/03/15/gameboy-royal-game-of-ur.html</guid>
-        
-        <category>python</category>
-        
-        <category>c</category>
-        
-        <category>nintendo</category>
-        
-        <category>gameboy</category>
-        
-        <category>retrogaming</category>
-        
-        <category>homebrew</category>
-        
-        <category>ai</category>
-        
-        <category>claude-code</category>
-        
-        <category>agent-based-modeling</category>
-        
-        
-        <category>ai</category>
-        
-        <category>programming</category>
-        
-        <category>games</category>
-        
+        <category>python</category><category>c</category><category>nintendo</category><category>gameboy</category><category>retrogaming</category><category>homebrew</category><category>ai</category><category>claude-code</category><category>agent-based-modeling</category>
+        <category>ai</category><category>programming</category><category>games</category>
       </item>
     
       <item>
@@ -167,24 +64,8 @@
         <pubDate>Sat, 20 Dec 2025 08:00:00 +0000</pubDate>
         <link>https://blog.4dcu.be/ai/programming/2025/12/20/rust-experiment.html</link>
         <guid isPermaLink="true">https://blog.4dcu.be/ai/programming/2025/12/20/rust-experiment.html</guid>
-        
-        <category>python</category>
-        
-        <category>rust</category>
-        
-        <category>evolution</category>
-        
-        <category>genetic-algorithm</category>
-        
-        <category>algorithm</category>
-        
-        <category>art</category>
-        
-        
-        <category>ai</category>
-        
-        <category>programming</category>
-        
+        <category>python</category><category>rust</category><category>evolution</category><category>genetic-algorithm</category><category>algorithm</category><category>art</category>
+        <category>ai</category><category>programming</category>
       </item>
     
       <item>
@@ -193,20 +74,8 @@
         <pubDate>Mon, 21 Jul 2025 08:00:00 +0000</pubDate>
         <link>https://blog.4dcu.be/diy/programming/2025/07/21/dashboard-for-home-assisant.html</link>
         <guid isPermaLink="true">https://blog.4dcu.be/diy/programming/2025/07/21/dashboard-for-home-assisant.html</guid>
-        
-        <category>home-assistant</category>
-        
-        <category>yaml</category>
-        
-        <category>python</category>
-        
-        <category>kindle</category>
-        
-        
-        <category>diy</category>
-        
-        <category>programming</category>
-        
+        <category>home-assistant</category><category>yaml</category><category>python</category><category>kindle</category>
+        <category>diy</category><category>programming</category>
       </item>
     
       <item>
@@ -215,22 +84,8 @@
         <pubDate>Mon, 03 Feb 2025 08:00:00 +0000</pubDate>
         <link>https://blog.4dcu.be/diy/programming/2025/02/03/deej-open-hardware-volume-controller.html</link>
         <guid isPermaLink="true">https://blog.4dcu.be/diy/programming/2025/02/03/deej-open-hardware-volume-controller.html</guid>
-        
-        <category>deej</category>
-        
-        <category>python</category>
-        
-        <category>raspberry-pi</category>
-        
-        <category>soldering</category>
-        
-        <category>electronics</category>
-        
-        
-        <category>diy</category>
-        
-        <category>programming</category>
-        
+        <category>deej</category><category>python</category><category>raspberry-pi</category><category>soldering</category><category>electronics</category>
+        <category>diy</category><category>programming</category>
       </item>
     
       <item>
@@ -239,16 +94,8 @@
         <pubDate>Sun, 19 Jan 2025 08:00:00 +0000</pubDate>
         <link>https://blog.4dcu.be/diy/2025/01/19/diy-mechanical-watch-2.html</link>
         <guid isPermaLink="true">https://blog.4dcu.be/diy/2025/01/19/diy-mechanical-watch-2.html</guid>
-        
-        <category>mechanical</category>
-        
-        <category>watch</category>
-        
-        <category>watchmaking</category>
-        
-        
+        <category>mechanical</category><category>watch</category><category>watchmaking</category>
         <category>diy</category>
-        
       </item>
     
       <item>
@@ -257,16 +104,8 @@
         <pubDate>Mon, 11 Nov 2024 08:00:00 +0000</pubDate>
         <link>https://blog.4dcu.be/diy/2024/11/11/diy-mechanical-watch.html</link>
         <guid isPermaLink="true">https://blog.4dcu.be/diy/2024/11/11/diy-mechanical-watch.html</guid>
-        
-        <category>mechanical</category>
-        
-        <category>watch</category>
-        
-        <category>watchmaking</category>
-        
-        
+        <category>mechanical</category><category>watch</category><category>watchmaking</category>
         <category>diy</category>
-        
       </item>
     
   </channel>
