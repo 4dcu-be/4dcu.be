@@ -12,11 +12,13 @@
     {% include nav_links.html %}
     {% include alternates.html %}
     {% if available_list.size > 1 %}
-    <div class="navbar-item has-dropdown is-hoverable">
-      <a class="navbar-link" aria-label="Choose language">{% for language in site.languages %}{% if language.locale == current_locale %}{{ language.short }}{% endif %}{% endfor %}</a>
-      <div class="navbar-dropdown is-right">
+    {%- assign strings = site.data.translations[current_locale] -%}
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="{{ strings.choose_language | default: 'Choose language' }}">{% for language in site.languages %}{% if language.locale == current_locale %}{{ language.short }}{% endif %}{% endfor %}</a>
+      <span class="lang-switch__label" aria-hidden="true">{{ strings.language | default: 'Language' }}:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
       {% for entry in available_list %}{% assign parts = entry | split: '~' %}{% assign entry_locale = parts[0] %}{% assign entry_url = parts[1] %}
-        {% for language in site.languages %}{% if language.locale == entry_locale %}<a class="navbar-item{% if entry_locale == current_locale %} is-active{% endif %}" lang="{{ entry_locale | split: '_' | first }}" href="{{ entry_url | prepend: site.baseurl }}">{{ language.name }}</a>{% endif %}{% endfor %}
+        {% for language in site.languages %}{% if language.locale == entry_locale %}<a class="navbar-item lang-switch__option{% if entry_locale == current_locale %} is-current{% endif %}" lang="{{ entry_locale | split: '_' | first }}" href="{{ entry_url | prepend: site.baseurl }}"{% if entry_locale == current_locale %} aria-current="true"{% endif %}><span class="lang-switch__name">{{ language.name }}</span><span class="lang-switch__short" aria-hidden="true">{{ language.short }}</span></a>{% endif %}{% endfor %}
       {% endfor %}
       </div>
     </div>

@@ -57,6 +57,88 @@
 }
 
 // ========================================
+// Language Switcher
+// ========================================
+
+.lang-switch {
+  // The inline "Language:" label is desktop-hidden; only the mobile row uses it
+  &__label {
+    display: none;
+  }
+
+  // Current language: bold rather than underlined
+  &__option.is-current {
+    font-weight: 700;
+    color: $red !important;
+    border-bottom: 0;
+    background-color: transparent !important;
+  }
+
+  // Desktop dropdown shows full language names ("English"), not codes
+  &__short {
+    display: none;
+  }
+}
+
+// ----------------------------------------
+// Mobile: flat "Language: EN NL" row
+// ----------------------------------------
+
+@media screen and (max-width: 1023px) {
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.75rem;
+
+    // No dropdown affordance on touch: hide the "EN" trigger and its arrow
+    &__current {
+      display: none;
+    }
+
+    &__label {
+      display: inline;
+      color: $medium-text-color;
+    }
+
+    // Unfold the dropdown into an inline row of language codes.
+    // &.is-hoverable beats Bulma's `.navbar-item.is-hoverable:hover
+    // .navbar-dropdown{display:block}`, which would otherwise re-stack the
+    // row as soon as the item is tapped or hovered on touch devices.
+    &__options,
+    &.is-hoverable:hover &__options,
+    &.is-hoverable:focus-within &__options {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: static;
+      box-shadow: none;
+      border-top: 0;
+      background-color: transparent;
+      padding: 0;
+      width: auto;
+      min-width: 0;
+    }
+
+    &__option {
+      padding: 0.25rem 0.25rem;
+      // Comfortable touch target without stretching the row
+      min-width: 2.5rem;
+      text-align: center;
+    }
+
+    // Show the short code, hide the full name
+    &__name {
+      display: none;
+    }
+
+    &__short {
+      display: inline;
+    }
+  }
+}
+
+// ========================================
 // Mobile Menu Customizations
 // ========================================
 

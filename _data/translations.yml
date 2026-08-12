@@ -35,6 +35,8 @@ en_US:
   tag_description: "Posts tagged %{tag} on 4DCu.be."
   read_more: "Read more ..."
   view: "View"
+  language: "Language"
+  choose_language: "Choose language"
 
 nl_NL:
   subtitle: "een blog over programmeren, gaming, technologie, ..."
@@ -73,3 +75,5 @@ nl_NL:
   tag_description: "Artikels met de tag %{tag} op 4DCu.be."
   read_more: "Lees meer ..."
   view: "Bekijken"
+  language: "Taal"
+  choose_language: "Kies een taal"
