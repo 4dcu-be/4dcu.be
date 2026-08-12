@@ -32,7 +32,7 @@
 				{% endif %}
 				{% include feed_url.html %}<p class="rss-subscribe text"><strong>{{ footer_strings.subscribe }} <a href="{{ feed_path | prepend: site.baseurl }}">{{ footer_strings.via_rss }}</a></strong></p>
 				{% if page.show_updated %}
-			    <p class="text">{{ footer_strings.last_update }}: {{ site.time | date: "%B %-d, %Y" }}</p>
+			    <p class="text">{{ footer_strings.last_update }}: {{ site.time | localized_date: footer_locale }}</p>
 			  {% endif %}
 			</div>
 		</div>

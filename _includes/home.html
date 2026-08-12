@@ -39,7 +39,7 @@
       </section>
       <section class="post-meta">
         <div class="post-date">{{ strings.reading_time }}: <strong>{% if words < 360 %}1 {{ strings.minute }}{% else %}{{ words | divided_by: 180 }} {{ strings.minutes }}{% endif %}</strong></div>
-        <div class="post-categories">{{ strings.posted }} {{ post.date | date: "%B %-d, %Y" }}
+        <div class="post-categories">{{ strings.posted }} {{ post.date | localized_date }}
         {% if post.categories.size > 0 %} {{ strings.in }} {% for category in post.categories %}<a href="{% if locale == site.languages[0].locale %}{{ site.baseurl }}{% else %}{{ site.baseurl }}/nl{% endif %}/category/{{ category | slugify }}/">{{ category | category_name }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}{% endif %}</div>
       </section>
     </div></li>

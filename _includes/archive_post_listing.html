@@ -11,7 +11,7 @@
       {% if post.thumbnail %}<a class="post-link" href="{{ post.url | prepend: site.baseurl }}"><img class="post-excerpt-image" src="{{ post.thumbnail | prepend: site.baseurl }}" alt="Thumbnail for {{ post.title | strip_html | escape }}" width="{{ site.thumbnail.width }}" height="{{ site.thumbnail.height }}" loading="lazy" decoding="async" /></a>{% endif %}
       <p>{{ post.content | strip_html | truncatewords: 50 }}</p>
     </section>
-    <section class="post-meta"><div class="post-date">{{ strings.posted }} <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time></div></section>
+    <section class="post-meta"><div class="post-date">{{ strings.posted }} <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | localized_date }}</time></div></section>
   </li>
   {% endfor %}
 </ul>
@@ -20,7 +20,7 @@
   <section class="listing-archive"><h2>{{ include.more_label }}</h2>
     {% if include.group_by_year == "true" %}
       {% assign by_year = remaining | group_by_exp: "post", "post.date | date: '%Y'" %}
-      {% for year_group in by_year %}<h3 class="listing-archive-year">{{ year_group.name }}</h3><ul class="posts-list">{% for post in year_group.items %}<li><strong><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></strong> <span class="post-date">- <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time></span></li>{% endfor %}</ul>{% endfor %}
-    {% else %}<ul class="posts-list">{% for post in remaining %}<li><strong><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></strong> <span class="post-date">- <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time></span></li>{% endfor %}</ul>{% endif %}
+      {% for year_group in by_year %}<h3 class="listing-archive-year">{{ year_group.name }}</h3><ul class="posts-list">{% for post in year_group.items %}<li><strong><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></strong> <span class="post-date">- <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | localized_date }}</time></span></li>{% endfor %}</ul>{% endfor %}
+    {% else %}<ul class="posts-list">{% for post in remaining %}<li><strong><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></strong> <span class="post-date">- <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | localized_date }}</time></span></li>{% endfor %}</ul>{% endif %}
   </section>
 {% endif %}

@@ -7,7 +7,7 @@
   {% for description in site.descriptions %}{% if description.cat == category and description.locale == locale %}<p class="desc"><em>{{ description.desc }}</em></p>{% endif %}{% endfor %}
   <ul class="posts-list">
   {% for post in localized_posts %}{% if post.categories contains category %}
-    <li><strong><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></strong> <span class="post-date">- {{ post.date | date_to_long_string }}</span></li>
+    <li><strong><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></strong> <span class="post-date">- {{ post.date | localized_date }}</span></li>
   {% endif %}{% endfor %}
   </ul>
   {% unless forloop.last %}<hr>{% endunless %}
