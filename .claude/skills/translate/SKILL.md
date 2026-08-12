@@ -51,11 +51,14 @@ the unchanged category slugs, and the linked-post mapping from Step 3.
 
 Translate:
 
-- `title` and `description`
+- `title`, `byline`, and `description`
 - `gallery_items[].description`
 - human-readable `alt` and `title` text on images
+- visible human-readable fallback text inside HTML elements, including links
+  embedded in iframes
 - normal Markdown/HTML prose, headings, lists, and table text
-- tags when a natural Dutch equivalent is appropriate
+- tags only when an established Dutch equivalent is clearly useful; keep
+  technical tags, product/platform names, and proper nouns unchanged
 
 Copy unchanged:
 

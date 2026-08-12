@@ -17,14 +17,18 @@ When translating a post:
 - Preserve all Markdown, Liquid, and HTML structure exactly: headings, lists,
   tables, image tags, links, shortcode tags, classes, blank-line spacing, and
   front-matter structure.
-- Translate human-readable prose, `title`, `description`, image alt text,
-  `gallery_items[].description`, and tags where a natural Dutch equivalent is
-  appropriate.
+- Translate human-readable prose, `title`, `byline`, `description`, image alt
+  text, `gallery_items[].description`, and visible fallback text inside HTML
+  elements such as links embedded in iframes.
+- Translate tags only where an established Dutch equivalent is clearly useful.
+  Keep technical tags, product names, platform names, and proper nouns unchanged.
 - Keep category slugs unchanged. The site translates their display labels from
   `_config.yml`, so changing a category would create a different archive URL.
 - Never translate or alter fenced/indented code, inline code, commands, output,
   variable/function/class names, package names, filenames, paths, URLs, HTML
   attributes other than human-readable alt/title text, or Liquid expressions.
+  Visible human-readable text between HTML tags is prose and should be translated,
+  even when it serves as fallback content for an embed.
 - Never translate or alter `layout`, `date`, `author`, `cover`, `thumbnail`,
   `post_id`, `coords`, `gallery_items[].image`, or image `src` paths.
 - Follow the supplied instructions for rewriting `{% post_url %}` links. Do not
