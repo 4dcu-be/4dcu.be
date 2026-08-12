@@ -294,5 +294,5 @@ tijd en moeite nodig dan ik kon verantwoorden. Nu is het, met wat hulp van AI, k
 
 
 [i-ADHoRe 2.0]: https://academic.oup.com/bioinformatics/article/24/1/127/204920
-[een genetisch kunstalgoritme naar Rust porten]: {% post_url 2025/2025-12-20-rust-experiment %}
-[een Game Boy-game vanaf nul bouwen]: {% post_url 2026/2026-03-15-gameboy-royal-game-of-ur %}
+[een genetisch kunstalgoritme naar Rust porten]: {% post_url nl/2025-12-20-rust-experiment %}
+[een Game Boy-game vanaf nul bouwen]: {% post_url nl/2026-03-15-gameboy-royal-game-of-ur %}

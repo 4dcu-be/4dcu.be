@@ -5,6 +5,7 @@ byline: "Building a Game Boy version of the world's oldest board game"
 description: "Building a playable Game Boy version of the 5,000-year-old Royal Game of Ur with GBDK and C, using Claude Code agentic coding in a niche homebrew ecosystem."
 date:   2026-03-15 08:00:00
 author: Sebastian Proost
+post_id: gameboy-royal-game-of-ur
 categories: ai programming games
 tags:	python c nintendo gameboy retrogaming homebrew ai claude-code agent-based-modeling
 cover:  "/assets/posts/2026-03-15-gameboy-royal-game-of-ur/header.jpg"
