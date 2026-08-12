@@ -137,6 +137,22 @@
       // Comfortable touch target without stretching the row
       min-width: 2.5rem;
       text-align: center;
+      // The whole row already highlights on hover; a second box behind an
+      // individual code adds no information. Bulma paints one via
+      // `.navbar-dropdown a.navbar-item:not(.is-active,.is-selected)`, whose
+      // lightness delta shifts when the parent item is hovered.
+      background-color: transparent !important;
+
+      // Same for hovering/tapping a code directly, which would otherwise
+      // pick up Bulma's item hover shade and the red tint from
+      // `.navbar-end .navbar-item:hover` above.
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: transparent !important;
+        // Feedback comes from the text colour instead of a box
+        color: $red !important;
+      }
     }
 
     // Show the short code, hide the full name
