@@ -10,7 +10,7 @@
   </div>
   <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
     {% include nav_links.html %}
-    {% include alternates.html %}
+    {% include alternates.html fallback_to_index=true %}
     {% if available_list.size > 1 %}
     {%- assign strings = site.data.translations[current_locale] -%}
     <div class="navbar-item has-dropdown is-hoverable lang-switch">

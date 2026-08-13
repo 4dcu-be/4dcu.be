@@ -57,9 +57,11 @@
   {% if og_image %}<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{{ meta_title | escape }}"><meta name="twitter:description" content="{{ meta_description | escape }}"><meta name="twitter:image" content="{{ og_image_absolute }}"><meta name="twitter:image:alt" content="{{ og_image_alt | escape }}"><meta name="twitter:url" content="{{ page_url_absolute }}">{% endif %}
 
   <link rel="canonical" href="{{ page_url_absolute }}">
+  {% if available_list.size > 1 %}
   {% assign default_url = '' %}
   {% for entry in available_list %}{% assign parts = entry | split: '~' %}<link rel="alternate" hreflang="{{ parts[0] | replace: '_', '-' }}" href="{{ parts[1] | prepend: site.baseurl | prepend: site.url }}">{% if parts[0] == site.languages[0].locale %}{% assign default_url = parts[1] %}{% endif %}{% endfor %}
   {% if default_url != '' %}<link rel="alternate" hreflang="x-default" href="{{ default_url | prepend: site.baseurl | prepend: site.url }}">{% endif %}
+  {% endif %}
   {% include feed_url.html %}<link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }} ({{ language_code }})" href="{{ feed_path | prepend: site.baseurl | prepend: site.url }}" />
   <link rel="stylesheet" href="{{ '/pagefind/pagefind-ui.css' | prepend: site.baseurl }}">
   <link rel="stylesheet" href="{{ '/css/main.css' | prepend: site.baseurl }}">
