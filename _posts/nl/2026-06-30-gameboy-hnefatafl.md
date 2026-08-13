@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Hnefatafl, Vikingschaak voor de Game Boy"
+title:  "Hnefatafl, een Vikingschaakspel voor de Game Boy"
 byline: "Hnefatafl, Brandubh en Tablut bouwen voor de originele Game Boy"
 description: "Hnefatafl, het Vikingschaakspel, samen met Brandubh en Tablut bouwen voor de originele Game Boy, en daarbij achtergrondscrolling, opslagsystemen en ondersteuning voor de Super Game Boy verkennen."
 date:   2026-06-30 08:00:00
@@ -18,14 +18,14 @@ Bij [The Royal Game of Ur]({% post_url nl/2026-03-15-gameboy-royal-game-of-ur %}
 
 Maar deze keer was het een stuk eenvoudiger. De functies die de vorige keer het pijnlijkst waren, bleken nu net zonder problemen te gaan. Hoe dat kwam, is het verhaal van dit project. Deels lag het aan een sterker model, deels aan het feit dat ik het systeem beter ken, maar de grootste factor was de planning: de basis leggen voor ik ook maar één regel gamelogica schreef. Daarover verderop meer, maar eerst het spel.
 
-[Hnefatafl](https://en.wikipedia.org/wiki/Tafl_games#Hnefatafl), het Vikingbordspel dat bekendstaat als Vikingschaak, en zijn verwanten [Brandubh](https://en.wikipedia.org/wiki/Tafl_games#Brandubh) (Iers) en [Tablut](https://en.wikipedia.org/wiki/Tafl_games#Tablut) (Samisch) draaien nu allemaal op de originele Game Boy. Naast de linkkabel en muziek waren er nog enkele aspecten van DMG-ontwikkeling die ik niet had verkend: achtergrondscrolling, effecten op basis van scanlines, een opslagsysteem, ondersteuning voor de Super Game Boy en meerdere geheugenbanken. Deze familie van historische spellen porten was het perfecte excuus om me in al die zaken te verdiepen.
+[Hnefatafl](https://en.wikipedia.org/wiki/Tafl_games#Hnefatafl), het Vikingschaakspel, en zijn verwanten [Brandubh](https://en.wikipedia.org/wiki/Tafl_games#Brandubh) (Iers) en [Tablut](https://en.wikipedia.org/wiki/Tafl_games#Tablut) (Samisch) draaien nu allemaal op de originele Game Boy. Naast de linkkabel en muziek waren er nog enkele aspecten van DMG-ontwikkeling die ik niet had verkend: achtergrondscrolling, effecten op basis van scanlines, een opslagsysteem, ondersteuning voor de Super Game Boy en meerdere geheugenbanken. Deze familie van historische spellen porten was het perfecte excuus om me in al die zaken te verdiepen.
 
 ![Het titelscherm van Hnefatafl op een Game Boy](/assets/posts/2026-06-30-gameboy-hnefatafl/screenshots/title_screen.jpg){:.small-image}
 
 Wil je het spel uitproberen? [Download Hnefatafl gratis op itch.io](https://sebastianproost.itch.io/hnefatafl-viking-chess)!
 
 <div style="text-align: center;">
-<iframe frameborder="0" src="https://itch.io/embed/4667078?link_color=5ba9fa" width="552" height="167"  style="max-width: 100%;"><a href="https://sebastianproost.itch.io/hnefatafl-viking-chess">Hnefatafl - Vikingschaak door sebastian.proost</a></iframe>
+<iframe frameborder="0" src="https://itch.io/embed/4667078?link_color=5ba9fa" width="552" height="167"  style="max-width: 100%;"><a href="https://sebastianproost.itch.io/hnefatafl-viking-chess">Hnefatafl - Vikingschaakspel door sebastian.proost</a></iframe>
 </div>
 
 

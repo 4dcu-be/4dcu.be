@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Van Python naar Rust: mijn genetisch kunstalgoritme geporteerd"
+title:  "Van Python naar Rust: mijn genetisch kunstalgoritme"
 byline: ""
-description: "Een genetisch kunstalgoritme in Python porteren naar Rust met Claude Code als voornaamste codeerhulp, en onderzoeken hoe agentic AI werkt wanneer je absolute beginner bent in een taal."
+description: "Een genetisch kunstalgoritme van Python vertalen naar Rust met Claude Code als voornaamste codeerhulp, en onderzoeken hoe agentic AI werkt wanneer je absolute beginner bent in een taal."
 date:   2025-12-20 08:00:00
 author: Sebastian Proost
 post_id: rust-experiment
@@ -86,7 +86,7 @@ CMD ["sleep", "infinity"]
 
 ## De Python-code omzetten
 
-In de [oorspronkelijke blogpost]({% post_url 2020/2020-01-12-Genetic-Art-Algorithm %}) stond het grootste deel van de code, dus die voerde ik in in de online interface van Claude en ik verwees naar mijn GitHub-repository. Vervolgens vroeg ik Claude Opus 4.5 om een plan op te stellen om het project naar Rust te porteren. Dat plan bewaarde ik als een markdownbestand in mijn project.
+In de [oorspronkelijke blogpost]({% post_url 2020/2020-01-12-Genetic-Art-Algorithm %}) stond het grootste deel van de code, dus die voerde ik in in de online interface van Claude en ik verwees naar mijn GitHub-repository. Vervolgens vroeg ik Claude Opus 4.5 om een plan op te stellen om het project naar Rust te vertalen. Dat plan bewaarde ik als een markdownbestand in mijn project.
 
 Vanuit VSCode opende ik Claude Code in de terminal en vroeg ik om het plan na te kijken en de eerste fase te beginnen implementeren. Ik maakte ook duidelijk dat ik iets wilde leren uit het proces, en vroeg om implementatiekeuzes toe te lichten en nuttige commentaar in de code te zetten.
 
@@ -480,7 +480,7 @@ Al bij al levert Rust je ruwweg dezelfde resultaten als Python, maar sneller en 
 
 ## Conclusie
 
-Als technologie is Claude Code indrukwekkend: een bestaande tool porteren naar een andere taal kostte minder dan een uur, met nog eens ongeveer een uur voor de optimalisaties. De gegenereerde code was leesbaar, compileerde zonder gedoe en kwam met zinvolle commentaar, tests en dekking. Tegelijk is het verleidelijk om de AI vooruit te laten hollen zonder zelf betrokken te blijven. Het blonk uit in het implementeren van bekende patronen en het maken van redelijke architecturale keuzes, zoals het reconstrueren van de interne werking van de evol-library of het introduceren van parallellisme met rayon, maar het had nog steeds sturing nodig over de grote lijnen en verificatie dat de output aan de verwachtingen voldeed. De vroege problemen bij het renderen van afbeeldingen waren een goede herinnering dat code die er correct uitziet niet hetzelfde is als correct gedrag.
+Als technologie is Claude Code indrukwekkend: een bestaande tool vertalen naar een andere taal kostte minder dan een uur, met nog eens ongeveer een uur voor de optimalisaties. De gegenereerde code was leesbaar, compileerde zonder gedoe en kwam met zinvolle commentaar, tests en dekking. Tegelijk is het verleidelijk om de AI vooruit te laten hollen zonder zelf betrokken te blijven. Het blonk uit in het implementeren van bekende patronen en het maken van redelijke architecturale keuzes, zoals het reconstrueren van de interne werking van de evol-library of het introduceren van parallellisme met rayon, maar het had nog steeds sturing nodig over de grote lijnen en verificatie dat de output aan de verwachtingen voldeed. De vroege problemen bij het renderen van afbeeldingen waren een goede herinnering dat code die er correct uitziet niet hetzelfde is als correct gedrag.
 
 Als leermiddel had de ervaring duidelijke sterktes en beperkingen. Werken aan een project dat ik al begreep, maakte het makkelijk om te zien welke Rust-concepten er voor dit soort applicaties echt toe deden. Door de gegenereerde code na te kijken, kreeg ik een veel beter begrip van concepten als ownership en borrowing, enums en pattern matching, rayon, en de omliggende tooling met cargo. De commentaar die Claude Code genereerde, was bijzonder nuttig om die concepten aan te wijzen en de juiste zoektermen aan te reiken voor de officiële documentatie. Maar doordat alle code voor mij geschreven werd, bleef de syntax gewoon niet hangen. Na dit project zou ik geen Rust vanaf nul kunnen schrijven, en ik kan niet zinvol beoordelen hoe idiomatisch de code stilistisch is. Dat ik geen enkele regel code moest schrijven of aanpassen was efficiënt, en ik zou ook nooit de tijd gehad hebben om dit project aan te vatten, maar het voelt ook wat bitterzoet, want dat deel van het proces vind ik eigenlijk best plezant.
 

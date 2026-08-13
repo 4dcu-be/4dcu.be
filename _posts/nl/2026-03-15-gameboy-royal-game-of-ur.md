@@ -12,7 +12,7 @@ cover:  "/assets/posts/2026-03-15-gameboy-royal-game-of-ur/header.jpg"
 thumbnail: "/assets/images/thumbnails/royal_gameboy_of_ur.jpg"
 ---
 
-Jaren geleden wekte een [documentaire over "The Royal Game of Ur"](https://www.youtube.com/watch?v=WZskjLq040I), een van de oudste bekende bordspellen en bijna 5.000 jaar oud, meteen mijn interesse. Toen ik dr. Irving Finkel er later over hoorde praten in [een podcast](https://www.youtube.com/watch?v=_bBRVNkAfkQ), kwam die fascinatie in alle hevigheid terug. Maar deze keer had ik een idee: een speelbare versie van The Royal Game of Ur bouwen voor de originele Game Boy.
+Jaren geleden wekte een [documentaire over "The Royal Game of Ur"](https://www.youtube.com/watch?v=WZskjLq040I), een van de oudste bekende bordspellen van bijna 5.000 jaar oud, meteen mijn interesse. Toen ik dr. Irving Finkel er later over hoorde praten in [een podcast](https://www.youtube.com/watch?v=_bBRVNkAfkQ), kwam die fascinatie onmiddelijk terug. Maar deze keer had ik een idee om er zelf wat mee te doen: een speelbare versie van The Royal Game of Ur bouwen voor de originele Game Boy.
 
 Wil je het spel uitproberen? Download het gratis op [itch.io](https://sebastianproost.itch.io/the-royal-game-of-ur)!
 
@@ -206,9 +206,9 @@ Aanvankelijk deed de computer gewoon steeds willekeurige zetten. De AI toevoegen
 
 Elke strategie heeft ook moeilijkheidsinstellingen (Easy/Medium/Hard) die bepalen hoe vaak de AI zijn strategie gebruikt in plaats van willekeurige zetten te doen:
 
-- **Easy**: 40% kans op de strategie, 60% willekeurig
-- **Medium**: 65% kans op de strategie, 35% willekeurig
-- **Hard**: 100% altijd de strategie
+- **Easy**: 40% kans dat de strategie gevolgd wordt, 60% willekeurig
+- **Medium**: 65% kans dat de strategie gevolgd wordt, 35% willekeurig
+- **Hard**: volgt de gekozen strategie 100%
 
 
 ### Winnen en verliezen
