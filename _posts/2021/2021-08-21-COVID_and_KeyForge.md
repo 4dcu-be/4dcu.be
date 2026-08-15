@@ -5,6 +5,7 @@ byline: ""
 description: "A non-technical look at how COVID-19 hit KeyForge sales, with a PyMC3 model estimating roughly 500,000 fewer decks registered during the pandemic."
 date:   2021-08-20 08:00:00
 author: Sebastian Proost
+post_id: covid-and-keyforge
 categories: programming games
 tags:	python pymc3 keyforge data-analysis data-science machine-learning altair covid-19
 cover:  "/assets/posts/2021-08-21-COVID_and_KeyForge/ammonia_clouds_header.jpg"

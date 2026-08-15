@@ -5,6 +5,7 @@ byline: ""
 description: "How I built a compact 60% mechanical keyboard from scratch, covering switches, soldering and why mechanical switches beat rubber-dome membranes."
 date:   2020-05-01 12:00:00
 author: Sebastian Proost
+post_id: mechanical-keyboard
 categories: diy
 tags:	mechanical-keyboard soldering electronics
 cover:  "/assets/posts/2020-05-01-Mechanical-Keyboard/all-switches-in-place.jpg"
@@ -62,9 +63,9 @@ Here you can see the parts I picked up for my keyboard:
   * A set of **switches**: Kailh Box Burnt Orange (71)
 
 Which PCB you should opt for depends on the layout of your keyboard as this determines which keycaps, case, backplate, 
-... you'll need. I picked a 60% one as this is fairly standard, so there is ample of choice of other items. This is also
+... you'll need. I picked a 60% one as this is fairly standard, so there is ample choice of other items. This is also
 about the smallest you can go without venturing into rather exotic or weird keyboard layouts. The Kailh Box Burnt Orange
-switched seemed like a good compromise for all round use, typing, programming and some gaming. They are a bit heavier 
+switches seemed like a good compromise for all round use, typing, programming and some gaming. They are a bit heavier
 as I do like a keyboard that pushes back a little. Depending on the PCB you picked, there might be an option to add LED
 lighting underneath the keys, which LEDs depends again on the PCB. Also note that not all switches have room for an LED
 light. Stabilizers are required for larger keys, like the spacebar, shift, ... For 60% keyboards there are ample of 
@@ -120,10 +121,10 @@ switches in places where there is only one possible position (most of the top ro
 with those switches on the PCB. (I had an issue with the space bar stabilizer, to access it I had to actually make two
 small cuts in the backplate in order to replace the stabilizer without desoldering all (!) switches)
 
-When soldering the switches it is super important they are soldered firmly against the PCB. To ensure the, solder one
+When soldering the switches it is super important they are soldered firmly against the PCB. To ensure this, solder one
 pin in place, then melt that connection again while pushing the switch firmly in place. Next, solder the other pin and
 clean up the connection on the first by adding a little extra solder if necessary. Repeat this for the other switches and
-start adding switches, it can be a bit cumbersome to get them to snap in place with the backpanel and some force was 
+start adding switches, it can be a bit cumbersome to get them to snap in place with the backplate and some force was
 required. Be careful not to damage the PCB.
 
 ![Soldering the switches](/assets/posts/2020-05-01-Mechanical-Keyboard/half-way-though.jpg)
@@ -134,7 +135,7 @@ there are multiple options, check with switches with the keycaps attached where 
 ### Step 4: Install some keycaps
 
 You can start putting the keycaps on at this point. This is pretty straightforward, put the cap on the switch and push 
-it down firmly. Just make sure not the cover the holes to screw holes yet, you'll need to be able to access those to
+it down firmly. Just make sure not to cover the screw holes yet, you'll need to be able to access those to
 put the PCB in the case. Test one more time if everything works.
 
 ![Installing the keycaps](/assets/posts/2020-05-01-Mechanical-Keyboard/installing-keycaps.jpg)
@@ -167,14 +168,14 @@ lights I moved to layer two, where I also set up some media controls and a way t
 
 ## Conclusion
 
-Building things if fun, especially things you get to use every day. The keyboard feels super sturdy and is extremely
+Building things is fun, especially things you get to use every day. The keyboard feels super sturdy and is extremely
 pleasant to type on. While it does make significantly more noise than a membrane keyboard, I find the clicking and clacking
 when typing fast encouraging. However, it is something you should consider when taking a mechanical keyboard to the 
 office. Lacking some of the buttons, especially the arrow keys, was initially problematic but after adding them to the
 additional layers in a way that makes sense for me I got used to it very fast.
 
 The backplate gave me some grievances when I had to access the space bar's stabilizer (the bar popped out of the joint).
-Eventually I had to strategically clip the backplate with a bolt cutters and file the cuts to be able to replace the 
+Eventually I had to strategically clip the backplate with a pair of bolt cutters and file the cuts to be able to replace the
 stabilizer. Since these boards are intended to last a long time, they should be repairable. So if you get a backplate, 
 get one that allows access to other components without modification. The LED isn't directly under the letter with this 
 PCB, that cannot be changed, but the letter on the keys don't light up as bright as I hoped. In time I might replace the 

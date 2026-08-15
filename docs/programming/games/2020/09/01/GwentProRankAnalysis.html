@@ -21,13 +21,17 @@
   <meta property="og:url" content="https://blog.4dcu.be/programming/games/2020/09/01/GwentProRankAnalysis.html" />
   <meta property="og:type" content="article" />
   <meta property="og:locale" content="en_US" />
-  
+  <meta property="og:locale:alternate" content="nl_NL" />
   <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2020-09-01-GwentProRankAnalysis-gwent_pro_rank.jpg" /><meta property="og:image:alt" content="Gwent: Pro Ladder Analysis and National Rankings" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
   <meta property="article:published_time" content="2020-09-01T12:00:00+00:00" /><meta property="article:modified_time" content="2020-09-01T12:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programming" /><meta property="article:section" content="Games" /><meta property="article:tag" content="python" /><meta property="article:tag" content="jupyter" /><meta property="article:tag" content="pandas" /><meta property="article:tag" content="gwent" /><meta property="article:tag" content="data-science" />
 
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Gwent: Pro Ladder Analysis and National Rankings"><meta name="twitter:description" content="Scraping Gwent Pro Ladder data with Python and pandas to compute national rankings, ladder efficiency, country popularity and seasonal statistics."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2020-09-01-GwentProRankAnalysis-gwent_pro_rank.jpg"><meta name="twitter:image:alt" content="Gwent: Pro Ladder Analysis and National Rankings"><meta name="twitter:url" content="https://blog.4dcu.be/programming/games/2020/09/01/GwentProRankAnalysis.html">
 
   <link rel="canonical" href="https://blog.4dcu.be/programming/games/2020/09/01/GwentProRankAnalysis.html">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/games/2020/09/01/GwentProRankAnalysis.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/games/2020/09/GwentProRankAnalysis/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/games/2020/09/01/GwentProRankAnalysis.html">
   
   <link rel="alternate" type="application/rss+xml" title="4DCu.be (en-US)" href="https://blog.4dcu.be/feed.xml" />
   <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
@@ -111,7 +115,7 @@
       
         <a class="navbar-item lang-switch__option is-current" lang="en" href="/programming/games/2020/09/01/GwentProRankAnalysis.html" aria-current="true"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
       
-        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/programming/games/2020/09/GwentProRankAnalysis/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
       
       </div>
     </div>
@@ -131,12 +135,12 @@
   <div class="post-date">Posted 01-09-2020 by Sebastian Proost</div>
   <div class="post-categories">in <a href="/category/programming/">Programming</a>, <a href="/category/games/">Games</a></div>
 </section>
-<article class="post-content" data-pagefind-body><p>Data for on players in Pro Ladder is released on <a href="https://masters.playgwent.com/en/">playgwent.com</a>, but it is limited.
+<article class="post-content" data-pagefind-body><p>Data on players in Pro Ladder is released on <a href="https://masters.playgwent.com/en/">playgwent.com</a>, but it is limited.
 You get the rank, the score, the country of origin and the number of matches played. Using some fairly basic data
 analysis tricks there must be more we can do with these data! Using python we’ll scrape data for the top 
 <a href="https://masters.playgwent.com/en/rankings/masters-2/season-of-the-draconid/1/1">Gwent players on pro-ladder</a> 
 and calculate additional statistics about the current season, popularity of the game in different countries, players’ 
-efficiency, players national rank, …</p>
+efficiency, players’ national rank, …</p>
 
 <p>A jupyter notebook with all code can be found on <a href="https://github.com/4dcu-be/GwentRank">GitHub</a> which you can explore
 through <a href="https://mybinder.org/v2/gh/4dcu-be/GwentRank/master?filepath=Gwent%20Stats.ipynb">Binder</a> without installing
@@ -175,7 +179,7 @@ standard</a>.</p>
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"flag-icon flag-icon-pl"</span><span class="nt">&gt;&lt;/i&gt;</span>
 </code></pre></div></div>
 
-<p>The two letter code can be easily extracted from the the html tag, while converting it to a human readable name can be
+<p>The two letter code can be easily extracted from the HTML tag, while converting it to a human readable name can be
 done in a few lines of code using the python library <a href="https://pypi.org/project/pycountry/">pycountry</a>. As shown in the
 stub below, you can provide it with a two letter code (<em>pl</em> in the example below) and it will return all other names, including the
 common name (<em>Poland</em> here). So after scraping the data, the pycountry library was used to get proper names for all
@@ -188,7 +192,7 @@ countries.</p>
 # Country(alpha_2='PL', alpha_3='POL', name='Poland', numeric='616', official_name='Republic of Poland')
 </span></code></pre></div></div>
 <p>While reading the data we’ll also keep track of which players were in the top 500 the season before (note that this
-does require all seasons to be loaded and in orde). So we end up with a table (called full_df in the code), that looks 
+does require all seasons to be loaded and in order). So we end up with a table (called full_df in the code), that looks
 like this:</p>
 
 <table class="large-table narrow-rows">
@@ -264,7 +268,7 @@ like this:</p>
 This will give you a base score, MMR, of 9600. Winning a game increases the MMR, depending on the current rank of your
 opponent (usually about 7 points are gained) and losing costs you MMR points. The highest reached MMR per faction is 
 summed up to get the final score. So with a higher win-rate, better scores can be obtained with fewer games. To find out
-which players are more efficient in climbing (and arguably better at the game than others at the same MMR) we we take 
+which players are more efficient in climbing (and arguably better at the game than others at the same MMR) we take
 the MMR, subtract the base value (9600) and divide by the number of matches. However, as 
 increasing the MMR score becomes progressively more difficult as players will face better opponents as they climb the
 ladder, Lerio2 from Team Legacy proposed to divide by the square root of the number of matches. Their metric, the
@@ -474,7 +478,7 @@ Here the aggregate function <code class="language-plaintext highlighter-rouge">a
 <p>The number of matches played by the top players is an indication how many people are playing the game, as more
 active players would require more games to be played to climb pro ladder. You can see that the popularity peaked during
 the Season of the Elves. During this season also some new leader abilities
-were introduced, so the fresh content could also to players return to the game. A similar increase in matches can be 
+were introduced, so the fresh content could also cause players to return to the game. A similar increase in matches can be
 seen in the Season of the Griffin with the release of new cards through the Master Mirror expansion. So it seems that 
 new content is a good incentive for players to play more, and spark a fiercer competition.</p>
 
@@ -483,7 +487,7 @@ new content is a good incentive for players to play more, and spark a fiercer co
 <h2 id="where-is-gwent-being-played">Where is Gwent Being Played</h2>
 
 <p>So using the <code class="language-plaintext highlighter-rouge">groupby</code> function in combination with the <code class="language-plaintext highlighter-rouge">agg</code> we can very quickly count how many pro players there are
-per country. We can then combine this with the population size of each country (and somewhat up-to-date list can be found
+per country. We can then combine this with the population size of each country (a somewhat up-to-date list can be found
 <a href="https://www.kaggle.com/erikbruin/countries-of-the-world-iso-codes-and-population/data#">here</a>). By dividing the number
 of players in pro-ladder by the number of inhabitants (in millions) we can get the number of pro players per capita.</p>
 
@@ -542,7 +546,7 @@ of players in pro-ladder by the number of inhabitants (in millions) we can get t
   </tbody>
 </table>
 
-<p>The top 5 countries is comprised out of Eastern European Countries, which is no surprise as the company that created
+<p>The top 5 countries comprise Eastern European countries, which is no surprise as the company that created
 Gwent is based in Poland and The Witcher lore has been created based on Slavic myths and legends. Iceland, Finland, 
 Hong Kong, Malta and Croatia complete the top 10. These are all relatively small countries, so a single player 
 making it up to Pro Rank boosts them up in the ranking.</p>
@@ -616,7 +620,7 @@ followed by Russia and Poland.</p>
 
 <p>For players that made it up to Pro Rank during multiple seasons we’ll quickly generate a summary. Again the <em>groupby</em> and
 <em>agg</em> function are being leveraged again to group things and get the summary statistics. We’ll count the number of 
-appearnaces on pro ladder, the min, mean, max MMR score. Average number of matches and total number of matches as well as
+appearances on pro ladder, the min, mean, max MMR score. Average number of matches and total number of matches as well as
 the best global and national ranks.</p>
 
 <p>This can give you a quick impression of all the data available on a player. Here you can see the output from myself (handle <em>sepro</em>).</p>
@@ -653,11 +657,11 @@ the best global and national ranks.</p>
 </table>
 
 <p>You can download the full table <a href="/assets/posts/2020-09-01-GwentProRankAnalysis/player_summaries.xlsx">here</a> to find your
-own or your favorite players stats.</p>
+own or your favorite player’s stats.</p>
 
 <h2 id="conclusion">Conclusion</h2>
 
-<p>Initially, I set out to get players national ranks. When you are from a small country, just making it to 
+<p>Initially, I set out to get players’ national ranks. When you are from a small country, just making it to
 Pro Rank will likely give you bragging rights about being in the top 3 of your country. Though with some fairly basic
 data science you can very quickly get a lot more details on various aspects of the game.</p>
 

@@ -5,6 +5,7 @@ byline: "using pandas, sklearn and seaborn"
 description: "How to make PCA biplots in Python with loadings and variance explained added, using pandas, scikit-learn and seaborn on the Iris dataset."
 date:   2021-03-19 10:00:00
 author: Sebastian Proost
+post_id: code-nugget-pca-with-loadings
 categories: programming
 tags:	python pandas data-science seaborn code-nugget sklearn
 cover:  "/assets/posts/2021-03-19-Code-Nugget-PCA-with-loadings/PCA_header.jpg"

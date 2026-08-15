@@ -5,6 +5,7 @@ byline: "the second KeyForge Adventure"
 description: "How to print the KeyForge Adventure Abyssal Conspiracy, fixing JPEG2000 PDF extraction in Python and 3D printing the Seal Tableau token."
 date:   2021-06-19 10:00:00
 author: Sebastian Proost
+post_id: keyforge-adventure-abyssal-conspiracy
 categories: diy games programming
 tags:	printing 3d-printing python keyforge
 cover:  "/assets/posts/2021-06-19-KeyForge-Adventure-Abyssal-Conspiracy/abyssal_conspiracy_header.jpg"

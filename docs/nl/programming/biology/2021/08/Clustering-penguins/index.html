@@ -1,0 +1,866 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>De pinguïndata van Palmer Station clusteren met PyMC3</title>
+  <meta name="description" content="Ongesuperviseerd clusteren van de Palmer Station-pinguïndataset met PyMC3, waarbij het aantal soorten wordt afgeleid uit metingen van vinnen, snavels en lich...">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="De pinguïndata van Palmer Station clusteren met PyMC3" />
+  <meta property="og:description" content="Ongesuperviseerd clusteren van de Palmer Station-pinguïndataset met PyMC3, waarbij het aantal soorten wordt afgeleid uit metingen van vinnen, snavels en lich..." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/programming/biology/2021/08/Clustering-penguins/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2021-08-01-Clustering-penguins-penguin_header.jpg" /><meta property="og:image:alt" content="De pinguïndata van Palmer Station clusteren met PyMC3" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2021-08-01T08:00:00+00:00" /><meta property="article:modified_time" content="2021-08-01T08:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programmeren" /><meta property="article:section" content="Biologie" /><meta property="article:tag" content="python" /><meta property="article:tag" content="pymc3" /><meta property="article:tag" content="data-analysis" /><meta property="article:tag" content="data-science" /><meta property="article:tag" content="machine-learning" /><meta property="article:tag" content="altair" /><meta property="article:tag" content="biology" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="De pinguïndata van Palmer Station clusteren met PyMC3"><meta name="twitter:description" content="Ongesuperviseerd clusteren van de Palmer Station-pinguïndataset met PyMC3, waarbij het aantal soorten wordt afgeleid uit metingen van vinnen, snavels en lich..."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2021-08-01-Clustering-penguins-penguin_header.jpg"><meta name="twitter:image:alt" content="De pinguïndata van Palmer Station clusteren met PyMC3"><meta name="twitter:url" content="https://blog.4dcu.be/nl/programming/biology/2021/08/Clustering-penguins/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/programming/biology/2021/08/Clustering-penguins/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/biology/2021/08/01/Clustering-penguins.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/biology/2021/08/Clustering-penguins/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/biology/2021/08/01/Clustering-penguins.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/programming/biology/2021/08/Clustering-penguins/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/programming/biology/2021/08/Clustering-penguins/" },
+      "url": "https://blog.4dcu.be/nl/programming/biology/2021/08/Clustering-penguins/",
+      "headline": "De pinguïndata van Palmer Station clusteren met PyMC3",
+      "description": "Ongesuperviseerd clusteren van de Palmer Station-pinguïndataset met PyMC3, waarbij het aantal soorten wordt afgeleid uit metingen van vinnen, snavels en lich...",
+      "datePublished": "2021-08-01T08:00:00+00:00",
+      "dateModified": "2021-08-01T08:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2021-08-01-Clustering-penguins-penguin_header.jpg",
+      "keywords": ["python", "pymc3", "data-analysis", "data-science", "machine-learning", "altair", "biology"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/programming/biology/2021/08/Clustering-penguins/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Programmeren", "item": "https://blog.4dcu.be/nl/category/programming/" },
+        { "@type": "ListItem", "position": 3, "name": "De pinguïndata van Palmer Station clusteren met PyMC3" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/programming/biology/2021/08/01/Clustering-penguins.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/programming/biology/2021/08/Clustering-penguins/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/classifying_penguins_header.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="De pinguïndata van Palmer Station clusteren met PyMC3" class="hero-background is-transparent" src="/assets/posts/2021-08-01-Clustering-penguins/penguin_header.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">De pinguïndata van Palmer Station clusteren met PyMC3</h1><p class="info has-text-white"><em>Adelie, kinband, ezel...</em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 01-08-2021 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/programming/">Programmeren</a>, <a href="/nl/category/biology/">Biologie</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Deze post draait om het afleiden van de soort waaruit verschillende waarnemingen afkomstig zijn, zonder toegang te hebben 
+tot de labels. Dat klinkt misschien vergezocht, maar in de biologie komt het vaker voor dan je zou verwachten! 
+Bij grote dieren vind je meestal duidelijke verschillen tussen soorten, maar bij nematoden
+(kleine wormen) in een bodemmonster zijn die verschillen soms bijzonder moeilijk te zien. Er kan ook een subpopulatie zijn die
+licht afwijkt van de hoofdpopulatie. Zo kunnen polyploïde planten (met extra kopieën van hun genoom) 
+in hetzelfde veld groeien als planten met normale ploïdie. Ze gelden als dezelfde soort en lijken in bijna alle opzichten op elkaar,
+maar zijn bijvoorbeeld wat groter, sterker of toleranter. Bij de eerste metingen vallen ze daardoor mogelijk niet op. Of denk aan 
+indirecte metingen: sommige dieren zijn zeldzaam en leven op afgelegen plaatsen, waardoor biologen hun voetafdrukken gebruiken om ze te bestuderen.
+Als meerdere soorten vergelijkbare afdrukken achterlaten, moeten ze misschien de grootte van de afdrukken, 
+de afstand ertussen enzovoort gebruiken om te schatten van welke soort een reeks afdrukken afkomstig is. De oplossing is dus zoveel
+mogelijk exemplaren te meten en het later (hopelijk) uit te zoeken.</p>
+
+<p>Verschillende groepen herkennen is bijzonder lastig als je niet eens weet hoeveel groepen er zijn. Hier 
+gebruiken we de <a href="https://allisonhorst.github.io/palmerpenguins/">Palmer Station Penguin</a>-dataset om het probleem te tonen (we verbergen de soortlabels voor de modellen). Met metingen van vinnen, snavels en lichaamsgewicht 
+proberen we te bepalen hoeveel soorten de dataset bevat en welke exemplaren tot dezelfde
+groep behoren.</p>
+
+<p>Notebooks met de gegevens en de volledige code voor deze post vind je in deze <a href="https://github.com/4dcu-be/ClassifyingPenguins">GitHub repo</a>. Daar staat ook de
+code toegepast op andere datasets, zoals <a href="https://archive.ics.uci.edu/ml/datasets/iris">Iris</a> en <a href="https://www.kaggle.com/aungpyaeap/fish-market">Fish Market</a>, zij het met minder documentatie.</p>
+
+<h2 id="de-gegevens-laden">De gegevens laden</h2>
+
+<p>De <a href="https://github.com/4dcu-be/ClassifyingPenguins">GitHub repo</a> bevat de gegevens als .csv-bestand, dat rechtstreeks met pandas kan worden geladen. We hebben het
+eiland waar de waarneming plaatsvond en het geslacht van het dier niet nodig, dus laten we die kolommen weg. Rijen met nog 
+ontbrekende waarden worden verwijderd met <code class="language-plaintext highlighter-rouge">.dropna()</code>. Het soortlabel behouden we wel, zodat we later kunnen controleren of 
+onze clustering echt werkt, maar tijdens het clusteren wordt het niet gebruikt.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">load_ext</span> <span class="n">nb_black</span>
+<span class="kn">import</span> <span class="n">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+<span class="kn">import</span> <span class="n">pymc3</span> <span class="k">as</span> <span class="n">pm</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">arviz</span> <span class="k">as</span> <span class="n">az</span>
+
+<span class="kn">import</span> <span class="n">altair</span> <span class="k">as</span> <span class="n">alt</span>
+
+<span class="n">penguin_df</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="sh">"</span><span class="s">./data/penguins_size.csv</span><span class="sh">"</span><span class="p">).</span><span class="nf">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">island</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">sex</span><span class="sh">"</span><span class="p">]).</span><span class="nf">dropna</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">penguin_df</span>
+</code></pre></div></div>
+
+<p>We schalen de gegevens het best zodat het gemiddelde van elk kenmerk nul is, met een standaardafwijking van één. <code class="language-plaintext highlighter-rouge">StandardScaler</code>
+ maakt dat eenvoudig.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="nc">StandardScaler</span><span class="p">()</span>
+<span class="n">scaled_penguin_df</span> <span class="o">=</span> <span class="n">scaler</span><span class="p">.</span><span class="nf">fit_transform</span><span class="p">(</span><span class="n">penguin_df</span><span class="p">.</span><span class="nf">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">species</span><span class="sh">"</span><span class="p">]))</span>
+<span class="n">scaled_penguin_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">scaled_penguin_df</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">penguin_df</span><span class="p">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+<span class="n">scaled_penguin_df</span><span class="p">[</span><span class="sh">"</span><span class="s">species</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">penguin_df</span><span class="p">[</span><span class="sh">"</span><span class="s">species</span><span class="sh">"</span><span class="p">])</span>
+<span class="n">scaled_penguin_df</span>
+</code></pre></div></div>
+
+<h2 id="het-eerste-model---één-kenmerk-gebruiken">Het eerste model - één kenmerk gebruiken</h2>
+
+<p>Alle modellen in deze post hebben een <code class="language-plaintext highlighter-rouge">pm.Dirichlet</code>-verdeling als kern, die de kans bepaalt om een
+bepaalde groep — hier een soort — waar te nemen. Voorlopig stellen we het gewenste aantal clusters in met <code class="language-plaintext highlighter-rouge">n_clusters</code>;
+later werken we daar omheen, geen zorgen! Vervolgens kennen we op basis van die kansen categorieën toe aan alle waarnemingen. 
+Door categorieën expliciet op te nemen met <code class="language-plaintext highlighter-rouge">pm.Categorical</code> kunnen we de groepen later erg eenvoudig uitlezen. Merk
+wel op dat <code class="language-plaintext highlighter-rouge">pm.NormalMixture</code> efficiënter is als we alleen een model willen fitten.</p>
+
+<p>Hier nemen we voor elke categorie een sigma en een gemiddelde op. Daarmee maken we een likelihood-functie om een normale
+verdeling te fitten op de waarnemingen van het lichaamsgewicht van elke soort.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">n_observations</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="n">scaled_penguin_df</span><span class="p">.</span><span class="n">shape</span>
+
+<span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Dirichlet</span><span class="p">(</span><span class="sh">"</span><span class="s">p</span><span class="sh">"</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">))</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Categorical</span><span class="p">(</span><span class="sh">"</span><span class="s">category</span><span class="sh">"</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_observations</span><span class="p">)</span>
+    
+    <span class="n">bm_sigmas</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">HalfNormal</span><span class="p">(</span><span class="sh">"</span><span class="s">bm_sigmas</span><span class="sh">"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+    <span class="n">bm_means</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span><span class="sh">"</span><span class="s">bm_means</span><span class="sh">"</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+
+    <span class="n">y_bm</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">y_bm</span><span class="sh">"</span><span class="p">,</span>
+        <span class="n">mu</span><span class="o">=</span><span class="n">bm_means</span><span class="p">[</span><span class="n">category</span><span class="p">],</span>
+        <span class="n">sd</span><span class="o">=</span><span class="n">bm_sigmas</span><span class="p">[</span><span class="n">category</span><span class="p">],</span>
+        <span class="n">observed</span><span class="o">=</span><span class="n">scaled_penguin_df</span><span class="p">.</span><span class="n">body_mass_g</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nf">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Na het samplen kunnen we de categorieën uit een van de traces halen en met de werkelijke soorten vergelijken om te zien
+hoe goed het werkte. We voegen de groepen opnieuw toe aan de oorspronkelijke gegevens, herformatteren die snel om aantallen te krijgen en visualiseren ze 
+met Altair.</p>
+
+<p><code class="language-plaintext highlighter-rouge">[2][200]</code> verwijst naar de chain met index twee en de trace met index 200. Bekijk bij deze oefening
+meerdere waarden om een indruk te krijgen van de algemene prestaties.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">groups</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sa">f</span><span class="sh">"</span><span class="s">Group </span><span class="si">{</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="sh">"</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">list</span><span class="p">(</span><span class="n">trace</span><span class="p">.</span><span class="nf">get_values</span><span class="p">(</span><span class="sh">"</span><span class="s">category</span><span class="sh">"</span><span class="p">,</span> <span class="n">burn</span><span class="o">=</span><span class="mi">6000</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="bp">False</span><span class="p">)[</span><span class="mi">2</span><span class="p">][</span><span class="mi">20</span><span class="p">])</span>
+<span class="p">]</span>
+<span class="n">penguin_df</span><span class="p">[</span><span class="sh">"</span><span class="s">group</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">groups</span>
+
+<span class="n">plot_df</span> <span class="o">=</span> <span class="n">penguin_df</span><span class="p">.</span><span class="nf">groupby</span><span class="p">([</span><span class="sh">"</span><span class="s">species</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">group</span><span class="sh">"</span><span class="p">]).</span><span class="nf">size</span><span class="p">().</span><span class="nf">reset_index</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sh">"</span><span class="s">counts</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">alt</span><span class="p">.</span><span class="nc">Chart</span><span class="p">(</span><span class="n">plot_df</span><span class="p">).</span><span class="nf">mark_bar</span><span class="p">().</span><span class="nf">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="p">.</span><span class="nc">X</span><span class="p">(</span><span class="sh">"</span><span class="s">group</span><span class="sh">"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="bp">None</span><span class="p">),</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="p">.</span><span class="nc">Y</span><span class="p">(</span><span class="sh">"</span><span class="s">counts</span><span class="sh">"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sh">"</span><span class="s">Count</span><span class="sh">"</span><span class="p">),</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">alt</span><span class="p">.</span><span class="nc">Color</span><span class="p">(</span><span class="sh">"</span><span class="s">species</span><span class="sh">"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sh">"</span><span class="s">Species</span><span class="sh">"</span><span class="p">),</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">group</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">counts</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">species</span><span class="sh">"</span><span class="p">],</span>
+<span class="p">).</span><span class="nf">properties</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+</code></pre></div></div>
+
+<vegachart schema-url="/assets/posts/2021-08-01-Clustering-penguins/model_01.json" style="width: 100%"></vegachart>
+
+<p>Hier zie je dat Groep 2 alle ezelspinguïns bevat — de grootste en zwaarste soort — maar ook enkele
+andere pinguïns. De twee overige groepen bevatten een mix van adelie- en kinbandpinguïns, niet bepaald indrukwekkend voor
+een classifier. Laten we voor we verdergaan de gegevens bekijken die we aan het model gaven.</p>
+
+<vegachart schema-url="/assets/posts/2021-08-01-Clustering-penguins/body_mass_distribution.json" style="width: 100%"></vegachart>
+
+<p>Zoals je ziet, overlappen de soorten sterk. Dat is niet ideaal voor zo’n eenvoudige classifier. We moeten dus
+meer metingen opnemen, zoals de lengte van de vin en de lengte en diepte van de culmen (een deel van de snavel).</p>
+
+<h2 id="een-model-met-alle-kenmerken">Een model met alle kenmerken</h2>
+
+<p>De eenvoudigste manier om dit model uit te breiden, is meer sigma’s, gemiddelden en likelihoods toe te voegen die allemaal dezelfde
+categorieën delen.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">n_observations</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="n">scaled_penguin_df</span><span class="p">.</span><span class="n">shape</span>
+<span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Dirichlet</span><span class="p">(</span><span class="sh">"</span><span class="s">p</span><span class="sh">"</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">))</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Categorical</span><span class="p">(</span><span class="sh">"</span><span class="s">category</span><span class="sh">"</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_observations</span><span class="p">)</span>
+
+    <span class="n">cl_sigmas</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">HalfNormal</span><span class="p">(</span><span class="sh">"</span><span class="s">cl_sigmas</span><span class="sh">"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+    <span class="n">cd_sigmas</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">HalfNormal</span><span class="p">(</span><span class="sh">"</span><span class="s">cd_sigmas</span><span class="sh">"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+    <span class="n">fl_sigmas</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">HalfNormal</span><span class="p">(</span><span class="sh">"</span><span class="s">fl_sigmas</span><span class="sh">"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+    <span class="n">bm_sigmas</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">HalfNormal</span><span class="p">(</span><span class="sh">"</span><span class="s">bm_sigmas</span><span class="sh">"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+    
+    <span class="n">cl_means</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span><span class="sh">"</span><span class="s">cl_means</span><span class="sh">"</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+    <span class="n">cd_means</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span><span class="sh">"</span><span class="s">cd_means</span><span class="sh">"</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+    <span class="n">fl_means</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span><span class="sh">"</span><span class="s">fl_means</span><span class="sh">"</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+    <span class="n">bm_means</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span><span class="sh">"</span><span class="s">bm_means</span><span class="sh">"</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+
+    <span class="n">y_cl</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">y_cl</span><span class="sh">"</span><span class="p">,</span>
+        <span class="n">mu</span><span class="o">=</span><span class="n">cl_means</span><span class="p">[</span><span class="n">category</span><span class="p">],</span>
+        <span class="n">sd</span><span class="o">=</span><span class="n">cl_sigmas</span><span class="p">[</span><span class="n">category</span><span class="p">],</span>
+        <span class="n">observed</span><span class="o">=</span><span class="n">scaled_penguin_df</span><span class="p">.</span><span class="n">culmen_length_mm</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">y_cd</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">y_cd</span><span class="sh">"</span><span class="p">,</span>
+        <span class="n">mu</span><span class="o">=</span><span class="n">cd_means</span><span class="p">[</span><span class="n">category</span><span class="p">],</span>
+        <span class="n">sd</span><span class="o">=</span><span class="n">cd_sigmas</span><span class="p">[</span><span class="n">category</span><span class="p">],</span>
+        <span class="n">observed</span><span class="o">=</span><span class="n">scaled_penguin_df</span><span class="p">.</span><span class="n">culmen_depth_mm</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">y_fl</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">y_fl</span><span class="sh">"</span><span class="p">,</span>
+        <span class="n">mu</span><span class="o">=</span><span class="n">fl_means</span><span class="p">[</span><span class="n">category</span><span class="p">],</span>
+        <span class="n">sd</span><span class="o">=</span><span class="n">fl_sigmas</span><span class="p">[</span><span class="n">category</span><span class="p">],</span>
+        <span class="n">observed</span><span class="o">=</span><span class="n">scaled_penguin_df</span><span class="p">.</span><span class="n">flipper_length_mm</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">y_bm</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">y_bm</span><span class="sh">"</span><span class="p">,</span>
+        <span class="n">mu</span><span class="o">=</span><span class="n">bm_means</span><span class="p">[</span><span class="n">category</span><span class="p">],</span>
+        <span class="n">sd</span><span class="o">=</span><span class="n">bm_sigmas</span><span class="p">[</span><span class="n">category</span><span class="p">],</span>
+        <span class="n">observed</span><span class="o">=</span><span class="n">scaled_penguin_df</span><span class="p">.</span><span class="n">body_mass_g</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nf">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Dit werkt zeker, al zou een lus beter zijn dan code voor elk kenmerk te herhalen. Maar
+is het ook beter dan het vorige model? Laten we een willekeurig geselecteerde chain en trace bekijken.</p>
+
+<vegachart schema-url="/assets/posts/2021-08-01-Clustering-penguins/model_02.json" style="width: 100%"></vegachart>
+
+<p>Dit is duidelijk een veel betere classificatie, wat wordt bevestigd wanneer we meerdere traces bekijken. Alle ezelspinguïns zitten
+samen in groep één, groep drie bevat vooral adeliepinguïns en groep twee is wat gemengd. Dit 
+model heeft echter een groot nadeel: meerdere likelihoods. Daardoor is het erg moeilijk om met PyMC3 en Arviz het model met
+andere modellen te vergelijken. Het is niet onmogelijk — in de <a href="https://github.com/4dcu-be/ClassifyingPenguins">GitHub repo</a> staat een notebook met code daarvoor —
+maar het was erg omslachtig en iets wat je waar mogelijk beter vermijdt.</p>
+
+<h2 id="overschakelen-op-multivariate-normale-verdelingen">Overschakelen op multivariate normale verdelingen</h2>
+
+<p>Om het probleem met meerdere likelihoods op te lossen, kunnen we <code class="language-plaintext highlighter-rouge">pm.MvNormal</code> gebruiken. Dat is een multivariate normale of 
+Gaussische verdeling die meerdere invoerwaarden in één likelihood combineert. Ze vereist een gemiddelde 
+voor elk kenmerk in de invoer en een Cholesky-decompositie van de covariantiematrix… Oei, ik ga niet beweren dat ik de 
+onderliggende wiskunde begrijp — dat doe ik niet — maar gelukkig vond ik code die met <code class="language-plaintext highlighter-rouge">pm.LKJCholeskyCov</code> de vereiste 
+matrix genereert. Kort gezegd is dit nodig om rekening te houden met correlaties tussen verschillende kenmerken.</p>
+
+<p>Daarnaast maakt dit de code aanzienlijk netter en algemener dan bij het vorige model. Dat is dus 
+mooi meegenomen.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">scaled_penguin_df</span><span class="p">.</span><span class="nf">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">species</span><span class="sh">"</span><span class="p">]).</span><span class="n">values</span>
+<span class="n">n_observations</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">shape</span>
+<span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">chol</span><span class="p">,</span> <span class="n">corr</span><span class="p">,</span> <span class="n">stds</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">LKJCholeskyCov</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">chol</span><span class="sh">"</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="n">n_features</span><span class="p">,</span>
+        <span class="n">eta</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+        <span class="n">sd_dist</span><span class="o">=</span><span class="n">pm</span><span class="p">.</span><span class="n">Exponential</span><span class="p">.</span><span class="nf">dist</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span>
+        <span class="n">compute_corr</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">cov</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Deterministic</span><span class="p">(</span><span class="sh">"</span><span class="s">cov</span><span class="sh">"</span><span class="p">,</span> <span class="n">chol</span><span class="p">.</span><span class="nf">dot</span><span class="p">(</span><span class="n">chol</span><span class="p">.</span><span class="n">T</span><span class="p">))</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">mu</span><span class="sh">"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">n_features</span><span class="p">),</span> <span class="n">testval</span><span class="o">=</span><span class="n">data</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">p</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Dirichlet</span><span class="p">(</span><span class="sh">"</span><span class="s">p</span><span class="sh">"</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">))</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Categorical</span><span class="p">(</span><span class="sh">"</span><span class="s">category</span><span class="sh">"</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_observations</span><span class="p">)</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">MvNormal</span><span class="p">(</span><span class="sh">"</span><span class="s">y</span><span class="sh">"</span><span class="p">,</span> <span class="n">mu</span><span class="p">[</span><span class="n">category</span><span class="p">],</span> <span class="n">chol</span><span class="o">=</span><span class="n">chol</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nf">sample</span><span class="p">(</span><span class="mi">8000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Omdat een multivariate Gaussische verdeling kijkt naar de kans op combinaties van kenmerken, past deze methode ook beter
+bij deze gegevens. We krijgen er dus ook een beter passend model voor terug. Kijk maar naar de classificatie hieronder: die is
+bijna perfect!</p>
+
+<vegachart schema-url="/assets/posts/2021-08-01-Clustering-penguins/multivariate_model_check.json" style="width: 100%"></vegachart>
+
+<h2 id="het-aantal-clusters-bepalen">Het aantal clusters bepalen</h2>
+
+<p>Tot nu toe legden we het gewenste aantal clusters vast in de code. Dat is handig als je het aantal kent, maar wat als je geen idee hebt?
+Dan moet je een model bouwen met 2, 3, 4, 5… clusters en bekijken welk model het best past zonder 
+te complex te worden. Eerst maken we een functie die een model met <em>n</em> clusters bouwt, het samplet en het 
+model en de traces retourneert. Daarna voeren we dit uit voor meerdere clustergroottes, slaan we de resultaten op en vergelijken we ze met Arviz.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">run_model</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">n_clusters</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">4000</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Building model with </span><span class="si">{</span><span class="n">n_clusters</span><span class="si">}</span><span class="s"> cluster and </span><span class="si">{</span><span class="n">samples</span><span class="si">}</span><span class="s"> samples.</span><span class="sh">"</span><span class="p">)</span>
+
+    <span class="n">n_observations</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">shape</span>
+    <span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+        <span class="n">chol</span><span class="p">,</span> <span class="n">corr</span><span class="p">,</span> <span class="n">stds</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">LKJCholeskyCov</span><span class="p">(</span>
+            <span class="sh">"</span><span class="s">chol</span><span class="sh">"</span><span class="p">,</span>
+            <span class="n">n</span><span class="o">=</span><span class="n">n_features</span><span class="p">,</span>
+            <span class="n">eta</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+            <span class="n">sd_dist</span><span class="o">=</span><span class="n">pm</span><span class="p">.</span><span class="n">Exponential</span><span class="p">.</span><span class="nf">dist</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span>
+            <span class="n">compute_corr</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Normal</span><span class="p">(</span>
+            <span class="sh">"</span><span class="s">mu</span><span class="sh">"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">n_features</span><span class="p">),</span> <span class="n">testval</span><span class="o">=</span><span class="n">data</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">p</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Dirichlet</span><span class="p">(</span><span class="sh">"</span><span class="s">p</span><span class="sh">"</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">))</span>
+        <span class="n">category</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Categorical</span><span class="p">(</span><span class="sh">"</span><span class="s">category</span><span class="sh">"</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">n_observations</span><span class="p">)</span>
+
+        <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">MvNormal</span><span class="p">(</span><span class="sh">"</span><span class="s">y</span><span class="sh">"</span><span class="p">,</span> <span class="n">mu</span><span class="p">[</span><span class="n">category</span><span class="p">],</span> <span class="n">chol</span><span class="o">=</span><span class="n">chol</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nf">sample</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span><span class="p">,</span> <span class="n">trace</span>
+</code></pre></div></div>
+
+<p>Dit is eigenlijk een erg algemene functie die elke dataframe of matrix aanvaardt — ze moet wel geschaald zijn — samen met een 
+aantal clusters. Ze bouwt en samplet een model en retourneert het daarna. Met enkele regels code kunnen we de functie uitvoeren en
+de uitvoer in een dictionary opslaan. Vervolgens vergelijken we met <code class="language-plaintext highlighter-rouge">az.compare</code> de modellen met verschillende aantallen
+clusters.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">scaled_penguin_df</span><span class="p">.</span><span class="nf">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">species</span><span class="sh">"</span><span class="p">]).</span><span class="n">values</span>
+<span class="n">model_traces</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sa">f</span><span class="sh">"</span><span class="s">model_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s">_clusters</span><span class="sh">"</span><span class="p">:</span> <span class="nf">run_model</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">8000</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="n">comp</span> <span class="o">=</span> <span class="n">az</span><span class="p">.</span><span class="nf">compare</span><span class="p">({</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model_traces</span><span class="p">.</span><span class="nf">items</span><span class="p">()})</span>
+<span class="n">comp</span>
+</code></pre></div></div>
+
+<table class="large-table">
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right">rank</th>
+      <th style="text-align: right">loo</th>
+      <th style="text-align: right">p_loo</th>
+      <th style="text-align: right">d_loo</th>
+      <th style="text-align: right">weight</th>
+      <th style="text-align: right">se</th>
+      <th style="text-align: right">dse</th>
+      <th style="text-align: right">warning</th>
+      <th style="text-align: right">loo_scale</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">model_3_clusters</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">-905.740656</td>
+      <td style="text-align: right">68.837020</td>
+      <td style="text-align: right">0.000000</td>
+      <td style="text-align: right">4.808971e-01</td>
+      <td style="text-align: right">29.476505</td>
+      <td style="text-align: right">0.000000</td>
+      <td style="text-align: right">True</td>
+      <td style="text-align: right">log</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">model_5_clusters</td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">-905.837578</td>
+      <td style="text-align: right">197.606731</td>
+      <td style="text-align: right">0.096921</td>
+      <td style="text-align: right">5.191029e-01</td>
+      <td style="text-align: right">28.926480</td>
+      <td style="text-align: right">11.295538</td>
+      <td style="text-align: right">True</td>
+      <td style="text-align: right">log</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">model_4_clusters</td>
+      <td style="text-align: right">2</td>
+      <td style="text-align: right">-922.262126</td>
+      <td style="text-align: right">175.651671</td>
+      <td style="text-align: right">16.521469</td>
+      <td style="text-align: right">0.000000e+00</td>
+      <td style="text-align: right">29.039549</td>
+      <td style="text-align: right">10.030136</td>
+      <td style="text-align: right">True</td>
+      <td style="text-align: right">log</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">model_2_clusters</td>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">-1284.311894</td>
+      <td style="text-align: right">156.435489</td>
+      <td style="text-align: right">378.571238</td>
+      <td style="text-align: right">2.416753e-09</td>
+      <td style="text-align: right">28.624421</td>
+      <td style="text-align: right">16.756834</td>
+      <td style="text-align: right">True</td>
+      <td style="text-align: right">log</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="language-plaintext highlighter-rouge">az.compare</code> past verschillende maatstaven toe om te bepalen welk model het best bij onze gegevens past. Standaard
+gebruikt dit <em>leave-one-out cross-validation</em>. <code class="language-plaintext highlighter-rouge">loo</code>, <code class="language-plaintext highlighter-rouge">p_loo</code> en <code class="language-plaintext highlighter-rouge">d_loo</code> zijn de waarden uit 
+die analyse (loo is de maatstaf die je bekijkt en lager is beter; p_loo is het geschatte aantal parameters en d_loo is 
+het verschil met het beste model). Het gewicht kun je ruwweg zien als de kans dat het model correct is gegeven de 
+gegevens; dichter bij 1 is hier beter. De standaardfout van de crossvalidatie, <code class="language-plaintext highlighter-rouge">se</code> in de tabel, is ook opgenomen, 
+net als het verschil met het beste model, <code class="language-plaintext highlighter-rouge">dse</code>.</p>
+
+<p>We zien dat het model met drie clusters hier het best presteert. Omdat dit niet het maximale geteste aantal 
+clusters is, kunnen we dat aanvaarden. Vaak maken deze cijfers echter niet zo duidelijk welk model je moet 
+kiezen: twee modellen kunnen erg dicht bij elkaar liggen. Een grafiek met <code class="language-plaintext highlighter-rouge">az.plot_compare</code> kan dan uitsluitsel geven.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">az</span><span class="p">.</span><span class="nf">plot_compare</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><a href="/assets/posts/2021-08-01-Clustering-penguins/cluster_selection.png" class="lightgallery-link" data-sub-html="Vergelijkingsgrafiek van Arviz-modellen">
+<img src="/assets/posts/2021-08-01-Clustering-penguins/cluster_selection.png" alt="Vergelijkingsgrafiek van Arviz-modellen" height="1200" width="1840" class="small-image" data-src="/assets/posts/2021-08-01-Clustering-penguins/cluster_selection.png" loading="lazy" />
+</a></p>
+
+<p>Hier zie je de scores van alle modellen; de verticale grijze lijn markeert de beste score. Alle modellen waarvan de zwarte balk
+deze lijn kruist, kun je waarschijnlijk als even goed beschouwen (in dit geval de modellen met 3, 4 en 5 clusters). 
+Kies dan het model met de minste clusters, zelfs als het niet bovenaan staat.</p>
+
+<h2 id="conclusie">Conclusie</h2>
+
+<p>Omdat ik nog maar een maand of twee met PyMC3 en Bayesiaanse statistiek werk, gaan sommige concepten hier verder dan
+wat ik volledig begrijp. Neem alles dus met een flinke korrel zout! Door rustig en stap voor stap te 
+werken, was het toch mogelijk een bijzonder goed presterende classifier voor deze dataset te bouwen. Het geeft me ook een 
+duidelijke richting voor de theorie die ik verder moet bestuderen: multivariate Gaussische verdelingen.</p>
+
+<h2 id="referenties">Referenties</h2>
+
+<ul>
+  <li><strong><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a>: Palmer Archipelago (Antarctica) penguin data.</strong> Allison Marie Horst and Alison Presmanes Hill and Kristen 
+B Gorman (2020).</li>
+</ul>
+
+<h2 id="dankwoord">Dankwoord</h2>
+
+<p>Headerfoto door <a href="https://unsplash.com/@goosegrease?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Derek Oyen</a> op <a href="https://unsplash.com/s/photos/penguin?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
+
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/python/">python</a>,&nbsp;<a href="/nl/tag/pymc3/">pymc3</a>,&nbsp;<a href="/nl/tag/data-analysis/">data-analysis</a>,&nbsp;<a href="/nl/tag/data-science/">data-science</a>,&nbsp;<a href="/nl/tag/machine-learning/">machine-learning</a>,&nbsp;<a href="/nl/tag/altair/">altair</a>,&nbsp;<a href="/nl/tag/biology/">biology</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=De+pingu%C3%AFndata+van+Palmer+Station+clusteren+met+PyMC3%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fbiology%2F2021%2F08%2FClustering-penguins%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fbiology%2F2021%2F08%2FClustering-penguins%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fbiology%2F2021%2F08%2FClustering-penguins%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=De+pingu%C3%AFndata+van+Palmer+Station+clusteren+met+PyMC3&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fbiology%2F2021%2F08%2FClustering-penguins%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/programming/games/2021/07/Bayesian-sales-analysis/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">Bayesiaanse analyse van verkoopgegevens met PyMC3</span></a></span>
+  <span class="next-post"><a href="/nl/programming/games/2021/08/COVID_and_KeyForge/"><span class="page-number">De impact van COVID-19 op KeyForge</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+<!-- Custom page specific js files -->
+  
+    <script src='/js/vega.min.js' type="text/javascript"></script>
+  
+    <script src='/js/vega-lite.min.js' type="text/javascript"></script>
+  
+    <script src='/js/vega-embed.min.js' type="text/javascript"></script>
+  
+    <script src='/js/justcharts.js' type="text/javascript"></script>
+  
+
+
+
+
+  </body>
+</html>

@@ -21,13 +21,17 @@
   <meta property="og:url" content="https://blog.4dcu.be/programming/2020/11/22/Static-Web-Generators.html" />
   <meta property="og:type" content="article" />
   <meta property="og:locale" content="en_US" />
-  
+  <meta property="og:locale:alternate" content="nl_NL" />
   <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2020-11-22-Static-Web-Generators-generator_header.jpg" /><meta property="og:image:alt" content="Static Site Generators: Jekyll vs Pelican vs Gatsby" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
   <meta property="article:published_time" content="2020-11-22T13:00:00+00:00" /><meta property="article:modified_time" content="2020-11-22T13:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programming" /><meta property="article:tag" content="python" /><meta property="article:tag" content="ruby" /><meta property="article:tag" content="javascript" /><meta property="article:tag" content="pelican" /><meta property="article:tag" content="jekyll" /><meta property="article:tag" content="gatsby" />
 
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Static Site Generators: Jekyll vs Pelican vs Gatsby"><meta name="twitter:description" content="Comparing the static site generators Jekyll, Pelican and Gatsby from real project experience, weighing the strengths and weaknesses of each to help you choose."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2020-11-22-Static-Web-Generators-generator_header.jpg"><meta name="twitter:image:alt" content="Static Site Generators: Jekyll vs Pelican vs Gatsby"><meta name="twitter:url" content="https://blog.4dcu.be/programming/2020/11/22/Static-Web-Generators.html">
 
   <link rel="canonical" href="https://blog.4dcu.be/programming/2020/11/22/Static-Web-Generators.html">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/2020/11/22/Static-Web-Generators.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/2020/11/Static-Web-Generators/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/2020/11/22/Static-Web-Generators.html">
   
   <link rel="alternate" type="application/rss+xml" title="4DCu.be (en-US)" href="https://blog.4dcu.be/feed.xml" />
   <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
@@ -111,7 +115,7 @@
       
         <a class="navbar-item lang-switch__option is-current" lang="en" href="/programming/2020/11/22/Static-Web-Generators.html" aria-current="true"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
       
-        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/programming/2020/11/Static-Web-Generators/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
       
       </div>
     </div>
@@ -148,7 +152,7 @@ section below.</p>
 </a></p>
 
 <p><a href="https://jekyllrb.com/">Jekyll</a>, released in 2008, is one of the first static site generators and has grown in popularity as it has 
-integrated in GitHub. While it is possible to build a wide variety of sites using Jekyll, at the core it is intended
+been integrated with GitHub. While it is possible to build a wide variety of sites using Jekyll, at the core it is intended
 for blogs. It is rather opinionated about file structure, post metadata, extensions, … but once you accept these 
 patterns it really allows you to forget the web development aspect and focus on the content.</p>
 
@@ -202,7 +206,7 @@ markdown files in the <code class="language-plaintext highlighter-rouge">/docs</
 boon. This can also be easily changed and extended though GitHub’s system. So anyone that adds a feature to the code
 can add the corresponding documentation without having to install any additional tools on their system.</p>
 
-<p>For simple websites, where there are few variable elements that need to updated from time to time, there is also a case 
+<p>For simple websites, where there are few variable elements that need to be updated from time to time, there is also a case
 to be made for Jekyll. Here all work can go into creating the web design and the few variable pieces can be pulled from
 a YAML file. Now updating those values is as simple as changing the values in that YAML file and GitHub can take care
 of everything else. I can think of plenty of cases, ranging from small businesses, sports clubs, … where this would be
@@ -210,7 +214,7 @@ an efficient way to set up and maintain a website. My previous resume was set up
 one powered by <a href="https://www.gatsbyjs.com/">Gatsby</a> last week. You can still find the previous version <a href="https://github.com/sepro/resume-pre2020">here</a>.</p>
 
 <p>Both blogs I’ve set up (<a href="https://www.beyond-the-known.eu/">Beyond the Known</a> and this one), are also powered by Jekyll, though they both use plugins and
-customizations that GitHub doesn’t support. So these are build locally into the <code class="language-plaintext highlighter-rouge">/docs</code> folder and committed to 
+customizations that GitHub doesn’t support. So these are built locally into the <code class="language-plaintext highlighter-rouge">/docs</code> folder and committed to
 GitHub. A bit more involved, but a similar step is required for all other static site generators.</p>
 
 <h2 id="pelican">Pelican</h2>
@@ -220,7 +224,7 @@ GitHub. A bit more involved, but a similar step is required for all other static
 </a></p>
 
 <p>Given that I’m most proficient with Python, a static site generator which is based on Python sounds very attractive. 
-There are a few option available, though Pelican was the most popular of those platforms, so I picked this to play around
+There are a few options available, though Pelican was the most popular of those platforms, so I picked this to play around
 with and ultimately created <a href="/programming/games/2020/04/05/DeckLock.html">DeckLock</a>, a website to keep track of decks I have for various collectible card games.</p>
 
 <h3 id="pros-1">Pros</h3>
@@ -247,7 +251,7 @@ is a little steeper than with Jekyll.</p>
 <h3 id="where-to-use-it--1">Where to use it ?</h3>
 
 <p>Pelican is a great option if you need to do some significant processing of your input before it can be turned into
-a page. <a href="/programming/games/2020/04/05/DeckLock.html">DeckLock</a> starts with very limited information (e.g. a decks identifier for a KeyForge deck), pulls in all
+a page. <a href="/programming/games/2020/04/05/DeckLock.html">DeckLock</a> starts with very limited information (e.g. a deck’s identifier for a KeyForge deck), pulls in all
 information it needs (like the decklist, card art, card details, … ), does some additional statistics and then turns 
 that into a page using a template. While I won’t say this is impossible using <a href="https://jekyllrb.com/">Jekyll</a> or <a href="https://www.gatsbyjs.com/">Gatsby</a>, it will be 
 quite a bit more complicated. Being able to leverage amazing packages from the Python ecosystem really gives Pelican a
@@ -280,7 +284,7 @@ are far more time consuming to include using other frameworks.</p>
 <h3 id="cons-2">Cons</h3>
 
 <p>Steepest learning curve of the frameworks discussed here. Apart from knowing the frameworks and some HTML + CSS to pull
-of the template, Gatsby will require some knowledge of React, modern JavaScript (ES6 is the current flavor), npm, …
+off the template, Gatsby will require some knowledge of React, modern JavaScript (ES6 is the current flavor), npm, …
 Not something everybody will be able or willing to do.</p>
 
 <h3 id="where-to-use-it--2">Where to use it ?</h3>
@@ -291,12 +295,12 @@ as long as you are willing to put in the extra time to learn JavaScript, React, 
 for <a href="https://jekyllrb.com/">Jekyll</a></p>
 
 <p>For a niche project like <a href="/programming/games/2020/04/05/DeckLock.html">DeckLock</a> where all sorts of pre-processing is necessary to build a page Python might have better
-options. So here <a href="https://docs.getpelican.com/en/latest/">Pelican</a> could be an advantage, though with some extra effort this can be pulled of in JS and hence
+options. So here <a href="https://docs.getpelican.com/en/latest/">Pelican</a> could be an advantage, though with some extra effort this can be pulled off in JS and hence
 Gatsby as well.</p>
 
 <h2 id="conclusion">Conclusion</h2>
 
-<p>I must admit I didn’t think highly about statically generated sites a few year ago. Mostly because my first
+<p>I must admit I didn’t think highly of statically generated sites a few years ago. Mostly because my first
 encounter with a statically generated site was abysmal. It simply wasn’t the right tool for that job, but a misguided 
 attempt at avoiding the use of a proper database. With a terrible implementation on top, having to maintain that code 
 was a major pain…</p>

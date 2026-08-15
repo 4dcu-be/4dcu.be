@@ -5,6 +5,7 @@ byline: "Can it really replace JavaScript?"
 description: "First tests of PyScript, which runs Python in the browser, comparing it to JavaScript for common web tasks with a hands-on HTML, CSS, and Python example."
 date:   2022-06-05 10:00:00
 author: Sebastian Proost
+post_id: pyscript-first-tests
 categories: programming
 tags:	python web-development pyscript javascript
 cover:  "/assets/images/headers/python_code.jpg"

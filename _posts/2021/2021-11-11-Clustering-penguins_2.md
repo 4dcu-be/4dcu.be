@@ -5,6 +5,7 @@ byline: "ft. more penguins"
 description: "Speeding up PyMC3 mixture models on the Palmer penguins dataset using pm.Mixture, and predicting species for new observations without re-sampling."
 date:   2021-11-11 08:00:00
 author: Sebastian Proost
+post_id: clustering-penguins-2
 categories: programming biology
 tags:	python pymc3 data-analysis data-science machine-learning altair biology
 cover:  "/assets/posts/2021-11-11-Clustering-penguins_2/penguin_header.jpg"

@@ -13,7 +13,7 @@ thumbnail: "/assets/images/thumbnails/kindle_update_header.jpg"
 ---
 
 
-Een oude Kindle die ooit werd **[gejailbreakt]({% post_url 2020/2020-09-27-PythonKindleDashboard_1 %})** en KUAL draait, kun je hergebruiken als dashboard voor zowat alles. Ik heb dat trouwens [al eens gedaan]({% post_url 2020/2020-10-04-PythonKindleDashboard_2 %}), al heb ik die statistieken nu niet echt meer nodig.
+Een oude Kindle die ooit werd **[gejailbreakt]({% post_url nl/2020/2020-09-27-PythonKindleDashboard_1 %})** en KUAL draait, kun je hergebruiken als dashboard voor zowat alles. Ik heb dat trouwens [al eens gedaan]({% post_url nl/2020/2020-10-04-PythonKindleDashboard_2 %}), al heb ik die statistieken nu niet echt meer nodig.
 
 Het zou wel fijn zijn om enkele realtimegegevens uit mijn **Home Assistant**-opstelling te tonen op een energiezuinig e-inkscherm zoals dat van de Kindle. Dat zou niet al te moeilijk mogen zijn, dus laten we er meteen aan beginnen.
 
@@ -186,5 +186,5 @@ Hoewel je voor deze opstelling een [gejailbreakte Kindle](https://kindlemodding.
 ## Bronnen
 
   * [https://kindlemodding.org/jailbreaking/](https://kindlemodding.org/jailbreaking/): Een recente handleiding om een Kindle te jailbreaken
-  * [Kindle-dashboard deel 1]({% post_url 2020/2020-09-27-PythonKindleDashboard_1 %}): Oudere post over hoe je een Kindle jailbreakt en KUAL-extensies maakt
-  * [Kindle-dashboard deel 2]({% post_url 2020/2020-10-04-PythonKindleDashboard_2 %}): Post uit 2020 over het eerste dashboard dat ik met deze Kindle maakte
+  * [Kindle-dashboard deel 1]({% post_url nl/2020/2020-09-27-PythonKindleDashboard_1 %}): Oudere post over hoe je een Kindle jailbreakt en KUAL-extensies maakt
+  * [Kindle-dashboard deel 2]({% post_url nl/2020/2020-10-04-PythonKindleDashboard_2 %}): Post uit 2020 over het eerste dashboard dat ik met deze Kindle maakte

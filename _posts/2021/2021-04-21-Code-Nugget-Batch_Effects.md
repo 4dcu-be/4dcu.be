@@ -5,6 +5,7 @@ byline: ""
 description: "How to correct batch effects in measurement data using the Python package pyComBat, demonstrated on a synthetic dataset with shift and scaling effects."
 date:   2021-04-21 10:00:00
 author: Sebastian Proost
+post_id: code-nugget-batch-effects
 categories: programming
 tags:	python pandas data-science seaborn code-nugget sklearn pycombat
 cover:  "/assets/posts/2021-04-21-Code-Nugget-Batch_Effects/pycombat_header.jpg"

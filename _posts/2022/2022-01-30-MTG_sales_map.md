@@ -5,6 +5,7 @@ byline: "plotting where my sold cards were shipped to"
 description: "Extracting buyer addresses from CardMarket order emails, geocoding them with Google's API, and mapping where my Magic: the Gathering cards shipped using Python and Altair."
 date:   2022-01-30 10:00:00
 author: Sebastian Proost
+post_id: mtg-sales-map
 categories: programming games
 tags:	python pandas data-science altair vega mtg magic-the-gathering geopandas sklearn
 cover:  "/assets/posts/2022-01-30-MTG_sales_map/mtg_map.png"

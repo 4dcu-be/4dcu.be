@@ -5,6 +5,7 @@ byline: "Using a genetic algorithm to re-draw Van Gogh's The Starry Night"
 description: "Building a Python genetic algorithm with the Evol library that evolves 150 random triangles to re-draw Van Gogh's The Starry Night over 5000 generations."
 date:   2020-01-12 12:00:00
 author: Sebastian Proost
+post_id: genetic-art-algorithm
 categories: programming
 tags:	python evolution genetic-algorithm algorithm art
 cover:  "/assets/posts/2020-01-12-Genetic-Art-Algorithm/post_header.jpg"
@@ -29,7 +30,7 @@ an algorithm that evolves 150 random triangles into a famous piece of art. The w
 
 The code for this post can be found on GitHub [here](https://github.com/4dcu-be/Genetic-Art-Algorithm)
 
-**Update 25/03/20201**: There was a change in the Evol API in version 0.5.2 where the function ```apply()``` has been 
+**Update 25/03/2021**: There was a change in the Evol API in version 0.5.2 where the function ```apply()``` has been
 renamed to ```callback()```, the code here and in the repository has been updated.
 
 ## Genetic algorithms
@@ -57,16 +58,16 @@ In this context:
 ## Implementing the algorithm in Python
 
 Coding all steps yourself wouldn't be that difficult, though the [Evol]
-provides a great API that takes care of all the scoring, breeding, ... and has multi-processing build in for calculating
-the finess of each individual in a population.
+provides a great API that takes care of all the scoring, breeding, ... and has multiprocessing built in for calculating
+the fitness of each individual in a population.
 
 ### The triangle class
 
-A chromosome here is a list of triangles. A single triangle has three point with x,y coordinates and a color with 
+A chromosome here is a list of triangles. A single triangle has three points with x,y coordinates and a color with
 opacity. A few different changes can occur during a mutation, the triangle can move (shift all points), change shape (move points
 individually) or the color can change. There also is a more significant event that will destroy the current triangle and
 replace it with a totally random one. This is all taken care of by the `.mutate` function. The sigma value can be used to
-specify the strenght of a mutation (how strong the change will be) and the weights are used to specify which types of 
+specify the strength of a mutation (how strong the change will be) and the weights are used to specify which types of
 mutation will occur more often than others.
 
 {:.large-code}
@@ -241,7 +242,7 @@ class Painting:
 
 ### Putting the algorithm together
 
-The [Evol] package will take care of most of the work for use, but we do need to define a couple functions to get 
+The [Evol] package will take care of most of the work for us, but we do need to define a couple functions to get
 started. We will have a score function, that checks the distance to the target image. A function how individuals will
 find a partner to mate with and define how we wish to evolve the population. We'll also add a function to print the
 fitness scores (so we can see if there is still progress), that stores the image of the best individual and that stores
@@ -384,7 +385,7 @@ though these images have comparable distances to the target image, they are quit
 
 ## Conclusion & outlook
 
-There results are quite cool, and since there is very little difference between generation 4500 and 5000 this is probably
+These results are quite cool, and since there is very little difference between generation 4500 and 5000 this is probably
 as good as it gets using only 150 triangles. There are a few things that could be improved though. The algorithm
 tries to match as many pixels correctly as possible. So matching pixels in large even spaces yields a much better score
 than getting details right. You could generate a mask, highlighting detailed areas, and rewarding correct pixels in those

@@ -5,6 +5,7 @@ byline: "taking things to a higher level"
 description: "Writing custom Jekyll plugins in Ruby to add features like automatic LightGallery links and a map marking where each blog post was written for a travel blog."
 date:   2020-03-13 12:00:00
 author: Sebastian Proost
+post_id: jekyll-blog
 categories: programming
 tags:	ruby jekyll blog
 cover:  "/assets/posts/2020-03-13-Jekyll-Blog/map_extension.png"
@@ -27,7 +28,7 @@ I made for this blog and [Beyond the Known] (a travel blog).
 
 For both blogs I'm involved in, the [Centrarium] theme was used as a starting point. This theme already included many 
 bits and pieces I wanted. There really isn't any need to re-invent the wheel for every project. I did make a number of changes
-to the theme, for instance I removed support for [HighlightJS] in favor for default code highlighter present in Jekyll.
+to the theme, for instance I removed support for [HighlightJS] in favor of default code highlighter present in Jekyll.
 I also prefer [LightGallery] over [Lightbox], so I swapped that out as well. 
 
 These changes are pure html, js and css, you just need to pinpoint where the relevant code in the `_sass`, `_includes` or 
@@ -44,7 +45,7 @@ In markdown you have a rather simple way to include an image.
 
 Technically, you should add the website's baseurl to the path. This way the site will work also when hosted in a 
 sub-directory. This can be done by adding `{%raw%}{{ site.baseurl }}/{%endraw%}` before the path. This however is specific for the theme I started from and if you ever want to 
-use the markdown files with another theme or,framework this will come back to haunt you... To include the image, with all the 
+use the markdown files with another theme or framework this will come back to haunt you... To include the image, with all the
 required features for LightGallery, you'll have to resort to including pure html in your markdown file.
 
 {% raw %}
@@ -81,11 +82,11 @@ declaration.
 
 Without pictures, the overview pages look rather dull, so adding a thumbnail there to grab the attention is a must.
 As I will include a header image for each post, using the same image as the thumbnail is an option. However, the header
-image is far larger than needed, so I wanted to automatically scale this down. Using a generator you can can create new
+image is far larger than needed, so I wanted to automatically scale this down. Using a generator you can create new
 files using Ruby code, this can be used to create a low-resolution thumbnail for each header automatically.
 
 First, we need to add the desired size of the thumbnails in the website's `_config.yml`, as shown below. These
-are parameters that will be passed to ImageMagik.
+are parameters that will be passed to ImageMagick.
 
 ```yaml
 plugins:
@@ -223,7 +224,7 @@ layout: null
 {%endraw%}
 
 Now we can include a map on a page using the code below. This will include JQuery to load the data in `map_data.json` 
-(which is build from the coordinates in the
+(which is built from the coordinates in the
 posts' headers), these will be converted to markers on the map (complete with a popup menu) and together with the map
 added to the div with `id="map"`. 
 
@@ -298,7 +299,7 @@ p.map_info_window {
 ![Map page from Beyond-the-Known, with pins that can be clicked to jump to the relevant post](/assets/posts/2020-03-13-Jekyll-Blog/map_extension.png)
 
 The final result on [Beyond the Known]. Note that I also included a custom style (have a look at the Google Maps Javascript API documentation
-for details how to do that). This overview allows you to quickly find a relevant post about a region you'd might 
+for details how to do that). This overview allows you to quickly find a relevant post about a region you might
 like to visit! Very useful feature for a travel blog.
 
 ## Conclusion

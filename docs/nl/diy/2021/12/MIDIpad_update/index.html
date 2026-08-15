@@ -1,0 +1,796 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>Een betere Raspberry Pi Pico-MIDI-controller</title>
+  <meta name="description" content="Een Raspberry Pi Pico-MIDI-controller uitbreiden met modificatietoetsen en ondersteuning voor akkoorden in CircuitPython, van 9 naar 28 speelbare noten en ak...">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Een betere Raspberry Pi Pico-MIDI-controller" />
+  <meta property="og:description" content="Een Raspberry Pi Pico-MIDI-controller uitbreiden met modificatietoetsen en ondersteuning voor akkoorden in CircuitPython, van 9 naar 28 speelbare noten en ak..." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/diy/2021/12/MIDIpad_update/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2021-12-16-MIDIpad_update-midipad_button_mapping.jpg" /><meta property="og:image:alt" content="Een betere Raspberry Pi Pico-MIDI-controller" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2021-12-16T06:00:00+00:00" /><meta property="article:modified_time" content="2021-12-16T06:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="DIY" /><meta property="article:tag" content="raspberry-pi" /><meta property="article:tag" content="python" /><meta property="article:tag" content="mechanical-keyboard" /><meta property="article:tag" content="soldering" /><meta property="article:tag" content="electronics" /><meta property="article:tag" content="midi" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Een betere Raspberry Pi Pico-MIDI-controller"><meta name="twitter:description" content="Een Raspberry Pi Pico-MIDI-controller uitbreiden met modificatietoetsen en ondersteuning voor akkoorden in CircuitPython, van 9 naar 28 speelbare noten en ak..."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2021-12-16-MIDIpad_update-midipad_button_mapping.jpg"><meta name="twitter:image:alt" content="Een betere Raspberry Pi Pico-MIDI-controller"><meta name="twitter:url" content="https://blog.4dcu.be/nl/diy/2021/12/MIDIpad_update/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/diy/2021/12/MIDIpad_update/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/diy/2021/12/16/MIDIpad_update.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/diy/2021/12/MIDIpad_update/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/diy/2021/12/16/MIDIpad_update.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/diy/2021/12/MIDIpad_update/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/diy/2021/12/MIDIpad_update/" },
+      "url": "https://blog.4dcu.be/nl/diy/2021/12/MIDIpad_update/",
+      "headline": "Een betere Raspberry Pi Pico-MIDI-controller",
+      "description": "Een Raspberry Pi Pico-MIDI-controller uitbreiden met modificatietoetsen en ondersteuning voor akkoorden in CircuitPython, van 9 naar 28 speelbare noten en ak...",
+      "datePublished": "2021-12-16T06:00:00+00:00",
+      "dateModified": "2021-12-16T06:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2021-12-16-MIDIpad_update-midipad_button_mapping.jpg",
+      "keywords": ["raspberry-pi", "python", "mechanical-keyboard", "soldering", "electronics", "midi"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/diy/2021/12/MIDIpad_update/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "DIY", "item": "https://blog.4dcu.be/nl/category/diy/" },
+        { "@type": "ListItem", "position": 3, "name": "Een betere Raspberry Pi Pico-MIDI-controller" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/diy/2021/12/16/MIDIpad_update.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/diy/2021/12/MIDIpad_update/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/midipad2.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="Een betere Raspberry Pi Pico-MIDI-controller" class="hero-background is-transparent" src="/assets/posts/2021-12-16-MIDIpad_update/midipad_button_mapping.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">Een betere Raspberry Pi Pico-MIDI-controller</h1><p class="info has-text-white"><em>met modificatietoetsen en ondersteuning voor akkoorden</em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 16-12-2021 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/diy/">DIY</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Om het aantal noten en akkoorden uit te breiden dat mijn RP2040-gebaseerde <a href="/nl/diy/2021/05/MIDIpad/">MIDI-controller</a> kan spelen, maken we van 
+twee toetsen modificatietoetsen. Zo kunnen aan elk van de zeven andere knoppen vier verschillende noten of akkoorden worden toegewezen (standaard,
+met modificatietoets één ingedrukt, met modificatietoets twee ingedrukt en met beide modificatietoetsen actief). We gaan dus van 9 noten of akkoorden naar 
+28 verschillende opties, wat het aantal speelbare nummers aanzienlijk moet vergroten.</p>
+
+<p>Hoewel dit op het eerste gezicht eenvoudig lijkt, zijn er enkele zaken waarmee we rekening moeten houden. Een
+MIDI-apparaat stuurt een signaal wanneer een noot wordt ingedrukt en nog een wanneer ze wordt losgelaten. In de vorige post was dat rechttoe rechtaan: elke
+knop speelde twee noten met een octaaf ertussen en er was geen overlap tussen knoppen. Wanneer een knop wordt ingedrukt, 
+kunnen de bijbehorende noten dus starten; wanneer de knop wordt losgelaten, kunnen die noten weer worden gestopt. Eenvoudig…</p>
+
+<p><a href="/assets/posts/2021-12-16-MIDIpad_update/midipad_button_mapping.jpg" class="lightgallery-link" data-sub-html="Nu is elke knop aan vier akkoorden gekoppeld, afhankelijk van welke modificatietoetsen zijn ingedrukt">
+<img src="/assets/posts/2021-12-16-MIDIpad_update/midipad_button_mapping.jpg" alt="Nu is elke knop aan vier akkoorden gekoppeld, afhankelijk van welke modificatietoetsen zijn ingedrukt" height="800" width="1200" data-src="/assets/posts/2021-12-16-MIDIpad_update/midipad_button_mapping.jpg" loading="lazy" />
+</a></p>
+
+<p>Wanneer we echte akkoorden aan knoppen toewijzen, wordt het ingewikkelder. Stel je een toets voor die een C-akkoord speelt: zodra je erop drukt, wordt een signaal
+verstuurd om de noten C, E en G te spelen. Wanneer je de toets loslaat, is een signaal nodig om die noten te stoppen. Maar als je zonder de eerste los te laten op een andere 
+toets drukt die een E-akkoord (E-G#-Bb) speelt, overlapt er een noot. Bij het 
+loslaten van de knop voor het C-akkoord mag de E-noot dus <strong>niet</strong> stoppen. Daarvoor moeten we enkele zaken bijhouden: 
+welke modificatietoetsen actief waren toen een knop werd ingedrukt en welke noten momenteel spelen. Zo kunnen we op elk 
+moment bepalen welke noten moeten spelen en welke moeten stoppen. Dat brengt wat extra verwerking met zich mee, 
+maar gelukkig heeft de RP2040-chip ruim voldoende kracht om dit zonder veel moeite te doen.</p>
+
+<p>Hoe je het toetsenblok bouwt, wordt <a href="/nl/diy/2021/04/Macropad/">hier</a> besproken. Die post bevat een onderdelenlijst, 
+alle benodigde schema’s en STL-bestanden voor de 3D-geprinte onderdelen. Als MIDI-apparaten nieuw voor je zijn, kun je beter
+beginnen met de <a href="/nl/diy/2021/05/MIDIpad/">vorige post</a>, omdat die een toegankelijker vertrekpunt biedt.</p>
+
+<h2 id="midipad-v20---de-code">MIDIPad v2.0 - de code</h2>
+
+<p>Hieronder staat de volledige code, die je ook <a href="./assets/posts/2021-12-16-MIDIpad_update/midapad_2.py">hier</a> kunt downloaden. Ze is bedoeld voor <a href="https://circuitpython.readthedocs.io/">CircuitPython</a> 
+en vereist dat de <a href="https://github.com/adafruit/Adafruit_CircuitPython_MIDI">AdaFruit MIDI</a>-bibliotheek op het apparaat is geïnstalleerd. Na de code licht ik enkele belangrijke wijzigingen
+toe. Dit bestand moet worden hernoemd naar <code class="language-plaintext highlighter-rouge">code.py</code> en in de hoofdmap van de Pi Pico worden geplaatst.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">board</span>
+<span class="kn">import</span> <span class="n">digitalio</span>
+<span class="kn">import</span> <span class="n">pwmio</span>
+<span class="kn">import</span> <span class="n">time</span>
+
+<span class="kn">import</span> <span class="n">usb_midi</span>
+<span class="kn">import</span> <span class="n">adafruit_midi</span>
+
+<span class="kn">from</span> <span class="n">adafruit_midi.note_on</span> <span class="kn">import</span> <span class="n">NoteOn</span>
+<span class="kn">from</span> <span class="n">adafruit_midi.note_off</span> <span class="kn">import</span> <span class="n">NoteOff</span>
+
+
+<span class="n">midi</span> <span class="o">=</span> <span class="n">adafruit_midi</span><span class="p">.</span><span class="nc">MIDI</span><span class="p">(</span><span class="n">midi_out</span><span class="o">=</span><span class="n">usb_midi</span><span class="p">.</span><span class="n">ports</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">out_channel</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">MacroPad MIDI Board</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Default output MIDI channel:</span><span class="sh">"</span><span class="p">,</span> <span class="n">midi</span><span class="p">.</span><span class="n">out_channel</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Configuration, which LED pins are used, which buttons, how buttons map to notes
+</span><span class="n">led_pins</span> <span class="o">=</span> <span class="p">[</span><span class="n">board</span><span class="p">.</span><span class="n">GP18</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP17</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP16</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP21</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP20</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP19</span><span class="p">,</span> <span class="n">board</span><span class="p">.</span><span class="n">GP27</span><span class="p">,</span> <span class="n">board</span><span class="p">.</span><span class="n">GP26</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP22</span><span class="p">]</span>
+<span class="n">button_pins</span> <span class="o">=</span> <span class="p">[</span><span class="n">board</span><span class="p">.</span><span class="n">GP13</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP14</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP15</span><span class="p">,</span> <span class="n">board</span><span class="p">.</span><span class="n">GP10</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP11</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP12</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP7</span><span class="p">]</span>
+<span class="n">button_led_ix</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+
+<span class="n">modifier_pins</span> <span class="o">=</span> <span class="p">[</span><span class="n">board</span><span class="p">.</span><span class="n">GP8</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP9</span><span class="p">]</span>
+<span class="n">modifier_led_ix</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+
+<span class="n">note_mapping</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># Notes when no modifier is pressed (major chord)
+</span>    <span class="mi">0</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">C3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">E3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">D3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">F#3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">E3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">G#3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">F3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">D4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C#4</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">E4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">D#4</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">F#4</span><span class="sh">"</span><span class="p">]],</span>
+    <span class="c1"># Notes when modifier one is pressed (minor chords)
+</span>    <span class="mi">1</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">C3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Eb3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">D3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">F3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">E3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">F3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Ab3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Bb3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">D4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C4</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">E4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">D4</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">F#4</span><span class="sh">"</span><span class="p">]],</span>
+    <span class="c1"># Notes when modifier two is pressed (sus2 chords)
+</span>    <span class="mi">2</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">C3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">D3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">D3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">E3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">E3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">F#3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">F3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">D4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">E4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C#4</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">F#4</span><span class="sh">"</span><span class="p">]],</span>
+    <span class="c1"># Notes when both modifiers are pressed (sus4 chords)
+</span>    <span class="mi">3</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">C3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">F3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">D3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">E3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">F3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">A#3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C4</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">D4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">D4</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">E4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">E4</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">F#4</span><span class="sh">"</span><span class="p">]]</span>
+    <span class="p">}</span>
+    
+
+<span class="c1"># Set up buttons
+</span><span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span><span class="n">digitalio</span><span class="p">.</span><span class="nc">DigitalInOut</span><span class="p">(</span><span class="n">bp</span><span class="p">)</span> <span class="k">for</span> <span class="n">bp</span> <span class="ow">in</span> <span class="n">button_pins</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">btn</span> <span class="ow">in</span> <span class="n">buttons</span><span class="p">:</span>
+    <span class="n">btn</span><span class="p">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">digitalio</span><span class="p">.</span><span class="n">Direction</span><span class="p">.</span><span class="n">INPUT</span>
+    <span class="n">btn</span><span class="p">.</span><span class="n">pull</span> <span class="o">=</span> <span class="n">digitalio</span><span class="p">.</span><span class="n">Pull</span><span class="p">.</span><span class="n">UP</span>
+
+<span class="n">modifiers</span> <span class="o">=</span> <span class="p">[</span><span class="n">digitalio</span><span class="p">.</span><span class="nc">DigitalInOut</span><span class="p">(</span><span class="n">bp</span><span class="p">)</span> <span class="k">for</span> <span class="n">bp</span> <span class="ow">in</span> <span class="n">modifier_pins</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">modif</span> <span class="ow">in</span> <span class="n">modifiers</span><span class="p">:</span>
+    <span class="n">modif</span><span class="p">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">digitalio</span><span class="p">.</span><span class="n">Direction</span><span class="p">.</span><span class="n">INPUT</span>
+    <span class="n">modif</span><span class="p">.</span><span class="n">pull</span> <span class="o">=</span> <span class="n">digitalio</span><span class="p">.</span><span class="n">Pull</span><span class="p">.</span><span class="n">UP</span>
+
+<span class="c1"># Set up LEDs
+</span><span class="n">leds</span> <span class="o">=</span> <span class="p">[</span><span class="n">pwmio</span><span class="p">.</span><span class="nc">PWMOut</span><span class="p">(</span><span class="n">lp</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">duty_cycle</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">lp</span> <span class="ow">in</span> <span class="n">led_pins</span><span class="p">]</span>
+
+<span class="c1"># Set Initial Duty Cycles to 0 for each LED
+</span><span class="n">duty_cycles</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">led_pins</span><span class="p">]</span>
+
+<span class="c1"># Last Pressed
+</span><span class="n">pressed_keys</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">button_pins</span><span class="p">]</span>
+<span class="n">triggered_keys</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">button_pins</span><span class="p">]</span>
+
+<span class="n">pressed_modifiers</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">modifier_pins</span><span class="p">]</span>
+
+<span class="c1"># Notes playing
+</span><span class="n">notes_playing</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">started loop</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="c1"># Handle modifier buttons
+</span>    <span class="n">modifier_value</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="p">(</span><span class="n">led_ix</span><span class="p">,</span> <span class="n">modif</span><span class="p">)</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">modifier_led_ix</span><span class="p">,</span> <span class="n">modifiers</span><span class="p">)):</span>
+        <span class="n">pressed_modifiers</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">modif</span><span class="p">.</span><span class="n">value</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">modif</span><span class="p">.</span><span class="n">value</span><span class="p">:</span>
+            <span class="n">modifier_value</span> <span class="o">+=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">ix</span>
+            <span class="c1"># print(f"pressed modifier {ix}")
+</span>            <span class="c1"># print(f"current modifier {modifier_value}")
+</span>            <span class="n">duty_cycles</span><span class="p">[</span><span class="n">led_ix</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65025</span>
+    
+    <span class="c1"># Handle buttons pressed
+</span>    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="p">(</span><span class="n">led_ix</span><span class="p">,</span> <span class="n">btn</span><span class="p">)</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">button_led_ix</span><span class="p">,</span> <span class="n">buttons</span><span class="p">)):</span>
+        <span class="n">pressed_keys</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">btn</span><span class="p">.</span><span class="n">value</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">btn</span><span class="p">.</span><span class="n">value</span><span class="p">:</span>
+            <span class="c1"># print(f"pressed button {ix}")
+</span>            <span class="n">duty_cycles</span><span class="p">[</span><span class="n">led_ix</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65025</span>
+            
+    
+    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="p">(</span><span class="n">pk</span><span class="p">,</span> <span class="n">tk</span><span class="p">)</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">pressed_keys</span><span class="p">,</span> <span class="n">triggered_keys</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">pk</span> <span class="ow">and</span> <span class="n">tk</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">note </span><span class="si">{</span><span class="n">ix</span><span class="si">}</span><span class="s"> started with modifier </span><span class="si">{</span><span class="n">modifier_value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="n">triggered_keys</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="n">modifier_value</span>
+            <span class="c1"># Start all notes in the chord
+</span>            <span class="n">midi</span><span class="p">.</span><span class="nf">send</span><span class="p">([</span><span class="nc">NoteOn</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">note_mapping</span><span class="p">[</span><span class="n">modifier_value</span><span class="p">][</span><span class="n">ix</span><span class="p">]])</span>
+            <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">note_mapping</span><span class="p">[</span><span class="n">modifier_value</span><span class="p">][</span><span class="n">ix</span><span class="p">]:</span>
+                <span class="n">notes_playing</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">pk</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">tk</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">note </span><span class="si">{</span><span class="n">ix</span><span class="si">}</span><span class="s"> stopped</span><span class="sh">"</span><span class="p">)</span>
+            <span class="n">triggered_keys</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+     
+    <span class="c1"># Check which notes/chords are currently playing after handling buttons
+</span>    <span class="n">notes_playing_updated</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">tk</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">triggered_keys</span><span class="p">):</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">tk</span><span class="p">:</span>
+            <span class="n">notes_playing_updated</span> <span class="o">=</span> <span class="n">notes_playing_updated</span> <span class="o">+</span> <span class="n">note_mapping</span><span class="p">[</span><span class="n">tk</span><span class="p">][</span><span class="n">ix</span><span class="p">]</span>
+    
+    <span class="c1"># Stop notes no longer playing
+</span>    <span class="n">notes_to_stop</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">notes_playing</span><span class="p">)</span> <span class="o">-</span> <span class="nf">set</span><span class="p">(</span><span class="n">notes_playing_updated</span><span class="p">)</span>
+    <span class="n">midi</span><span class="p">.</span><span class="nf">send</span><span class="p">([</span><span class="nc">NoteOff</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">notes_to_stop</span><span class="p">])</span>
+    
+    <span class="c1"># Move updated list to notes_playing for next cycle
+</span>    <span class="n">notes_playing</span> <span class="o">=</span> <span class="n">notes_playing_updated</span>
+    
+    <span class="c1"># Fade effect on LEDs 
+</span>    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">led</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">leds</span><span class="p">):</span>
+        <span class="n">led</span><span class="p">.</span><span class="n">duty_cycle</span> <span class="o">=</span> <span class="n">duty_cycles</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span>
+        <span class="n">duty_cycles</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">duty_cycles</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">-</span> <span class="mi">900</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="modificatietoetsen-toevoegen">Modificatietoetsen toevoegen</h2>
+
+<p>Twee knoppen worden als modificatietoets gebruikt en worden in de programmalogica nu anders behandeld dan gewone 
+knoppen die noten spelen. Er zijn nog enkele wijzigingen nodig om elke knop correct aan de juiste
+led te blijven koppelen. Daarom definiëren we zowel een lijst met pinnen voor de knoppen als een lijst met de index van
+de bijbehorende led. Hetzelfde doen we voor de modificatietoetsen.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Configuration, which LED pins are used, which buttons, how buttons map to notes
+</span><span class="n">led_pins</span> <span class="o">=</span> <span class="p">[</span><span class="n">board</span><span class="p">.</span><span class="n">GP18</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP17</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP16</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP21</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP20</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP19</span><span class="p">,</span> <span class="n">board</span><span class="p">.</span><span class="n">GP27</span><span class="p">,</span> <span class="n">board</span><span class="p">.</span><span class="n">GP26</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP22</span><span class="p">]</span>
+<span class="n">button_pins</span> <span class="o">=</span> <span class="p">[</span><span class="n">board</span><span class="p">.</span><span class="n">GP13</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP14</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP15</span><span class="p">,</span> <span class="n">board</span><span class="p">.</span><span class="n">GP10</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP11</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP12</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP7</span><span class="p">]</span>
+<span class="n">button_led_ix</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+
+<span class="n">modifier_pins</span> <span class="o">=</span> <span class="p">[</span><span class="n">board</span><span class="p">.</span><span class="n">GP8</span><span class="p">,</span><span class="n">board</span><span class="p">.</span><span class="n">GP9</span><span class="p">]</span>
+<span class="n">modifier_led_ix</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>Om deze aanpassingen mogelijk te maken, waren doorheen de code nog enkele wijzigingen nodig. Niets al te ingewikkelds: de 
+modificatietoetsen moeten afzonderlijk worden ingesteld en wanneer de <em>duty cycle</em> van een bepaalde led verandert, moet de index uit
+<code class="language-plaintext highlighter-rouge">button_led_ix</code> of <code class="language-plaintext highlighter-rouge">modifier_led_ix</code> worden gebruikt omdat toetsen en leds niet langer één-op-één gekoppeld zijn.</p>
+
+<p>De modificatietoetsen gebruiken een oud trucje. Elke modificatietoets krijgt in essentie een waarde die
+een macht van twee is: de eerste is 1 (2^0), de volgende 2 (2^1), daarna 4 (2^2), enzovoort. Tel je de waarden van alle 
+ingedrukte modificatietoetsen op, dan krijg je voor elke mogelijke combinatie een uniek getal. Hier zijn slechts twee knoppen beschikbaar,
+dus kan de modificatiewaarde 0 (geen modificatietoets), 1 (eerste knop ingedrukt), 2 (tweede knop ingedrukt) of 3 (beide knoppen 
+ingedrukt) zijn. Dat gebeurt in het stukje code hieronder en vormt de eerste stap van de hoofdlus.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1"># Handle modifier buttons
+</span>    <span class="n">modifier_value</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="p">(</span><span class="n">led_ix</span><span class="p">,</span> <span class="n">modif</span><span class="p">)</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">modifier_led_ix</span><span class="p">,</span> <span class="n">modifiers</span><span class="p">)):</span>
+        <span class="n">pressed_modifiers</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">modif</span><span class="p">.</span><span class="n">value</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">modif</span><span class="p">.</span><span class="n">value</span><span class="p">:</span>
+            <span class="n">modifier_value</span> <span class="o">+=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">ix</span>
+            <span class="c1"># print(f"pressed modifier {ix}")
+</span>            <span class="c1"># print(f"current modifier {modifier_value}")
+</span>            <span class="n">duty_cycles</span><span class="p">[</span><span class="n">led_ix</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65025</span>
+</code></pre></div></div>
+
+<h2 id="akkoorden-spelen">Akkoorden spelen</h2>
+
+<p>De grootste hindernis bij het spelen van akkoorden is dat noten uit verschillende akkoorden kunnen overlappen. De logica om
+bepaalde noten te starten en te stoppen moest dus worden uitgebreid.</p>
+
+<p>In de vorige versie hielden we bij welke toetsen ingedrukt waren (zodat we ze correct konden loslaten) en of de noten 
+die bij een toets hoorden al speelden, oftewel geactiveerd waren. Nu moeten we ook bijhouden welke modificatietoetsen 
+actief waren toen een toets werd geactiveerd. In plaats van booleaanse logica stellen we de trigger daarom in op -1 (niet geactiveerd) of op de
+modificatiewaarde (0-3) wanneer een knop wordt ingedrukt.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="p">(</span><span class="n">pk</span><span class="p">,</span> <span class="n">tk</span><span class="p">)</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">pressed_keys</span><span class="p">,</span> <span class="n">triggered_keys</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">pk</span> <span class="ow">and</span> <span class="n">tk</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">note </span><span class="si">{</span><span class="n">ix</span><span class="si">}</span><span class="s"> started with modifier </span><span class="si">{</span><span class="n">modifier_value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="n">triggered_keys</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="n">modifier_value</span>
+            <span class="c1"># Start all notes in the chord
+</span>            <span class="n">midi</span><span class="p">.</span><span class="nf">send</span><span class="p">([</span><span class="nc">NoteOn</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">note_mapping</span><span class="p">[</span><span class="n">modifier_value</span><span class="p">][</span><span class="n">ix</span><span class="p">]])</span>
+            <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">note_mapping</span><span class="p">[</span><span class="n">modifier_value</span><span class="p">][</span><span class="n">ix</span><span class="p">]:</span>
+                <span class="n">notes_playing</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">pk</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">tk</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">note </span><span class="si">{</span><span class="n">ix</span><span class="si">}</span><span class="s"> stopped</span><span class="sh">"</span><span class="p">)</span>
+            <span class="n">triggered_keys</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+     
+    <span class="c1"># Check which notes/chords are currently playing after handling buttons
+</span>    <span class="n">notes_playing_updated</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">tk</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">triggered_keys</span><span class="p">):</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">tk</span><span class="p">:</span>
+            <span class="n">notes_playing_updated</span> <span class="o">=</span> <span class="n">notes_playing_updated</span> <span class="o">+</span> <span class="n">note_mapping</span><span class="p">[</span><span class="n">tk</span><span class="p">][</span><span class="n">ix</span><span class="p">]</span>
+    
+    <span class="c1"># Stop notes no longer playing
+</span>    <span class="n">notes_to_stop</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">notes_playing</span><span class="p">)</span> <span class="o">-</span> <span class="nf">set</span><span class="p">(</span><span class="n">notes_playing_updated</span><span class="p">)</span>
+    <span class="n">midi</span><span class="p">.</span><span class="nf">send</span><span class="p">([</span><span class="nc">NoteOff</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">notes_to_stop</span><span class="p">])</span>
+    
+    <span class="c1"># Move updated list to notes_playing for next cycle
+</span>    <span class="n">notes_playing</span> <span class="o">=</span> <span class="n">notes_playing_updated</span>
+</code></pre></div></div>
+
+<h2 id="welke-akkoorden-kies-je-en-hoe-definieer-je-ze">Welke akkoorden kies je en hoe definieer je ze?</h2>
+
+<p>Het korte antwoord: je voegt de akkoorden toe die je nodig hebt. Uit een majeurtoonladder koos ik de majeurakkoorden (C, D, E, F, G, A 
+en B); met de modificatietoetsen kun je daar mineur-, sus2- of sus4-akkoorden van maken. Ze worden gedefinieerd in
+een dictionary aan het begin van de code, <code class="language-plaintext highlighter-rouge">note_mapping</code>. De sleutel is de actieve modificatietoets en de
+waarde is een lijst met akkoorden die overeenkomt met de gedefinieerde knoppen.</p>
+
+<p>De akkoorden aan je voorkeuren aanpassen is bijzonder eenvoudig. Voeg gewoon noten toe aan deze lijst, verwijder ze of wijzig ze, 
+en klaar!</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">note_mapping</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># Notes when no modifier is pressed (major chord)
+</span>    <span class="mi">0</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">C3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">E3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">D3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">F#3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">E3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">G#3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">F3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">D4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C#4</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">E4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">D#4</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">F#4</span><span class="sh">"</span><span class="p">]],</span>
+    <span class="c1"># Notes when modifier one is pressed (minor chords)
+</span>    <span class="mi">1</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">C3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Eb3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">D3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">F3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">E3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">F3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Ab3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Bb3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">D4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C4</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">E4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">D4</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">F#4</span><span class="sh">"</span><span class="p">]],</span>
+    <span class="c1"># Notes when modifier two is pressed (sus2 chords)
+</span>    <span class="mi">2</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">C3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">D3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">D3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">E3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">E3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">F#3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">F3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">D4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">E4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C#4</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">F#4</span><span class="sh">"</span><span class="p">]],</span>
+    <span class="c1"># Notes when both modifiers are pressed (sus4 chords)
+</span>    <span class="mi">3</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">C3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">F3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">D3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">E3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">F3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">A#3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">G3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C4</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">D4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">A3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">D4</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">E4</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">B3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">E4</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">F#4</span><span class="sh">"</span><span class="p">]]</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="conclusie">Conclusie</h2>
+
+<p>De MIDIpad kan nu 28 verschillende akkoorden spelen, een flinke toename tegenover de 9 uit de vorige versie. Ook
+worden overlappende noten tussen akkoorden nu correct afgehandeld. Met een beetje extra moeite kan het kleine toetsenblok dus plots
+een paar nieuwe trucjes. Er blijft wel een probleem met gewone schakelaars: die detecteren niet hoe hard een noot
+wordt ingedrukt… Dat wil ik in een toekomstige post nog oplossen!</p>
+
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/raspberry-pi/">raspberry-pi</a>,&nbsp;<a href="/nl/tag/python/">python</a>,&nbsp;<a href="/nl/tag/mechanical-keyboard/">mechanical-keyboard</a>,&nbsp;<a href="/nl/tag/soldering/">soldering</a>,&nbsp;<a href="/nl/tag/electronics/">electronics</a>,&nbsp;<a href="/nl/tag/midi/">midi</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=Een+betere+Raspberry+Pi+Pico-MIDI-controller%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2F2021%2F12%2FMIDIpad_update%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2F2021%2F12%2FMIDIpad_update%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2F2021%2F12%2FMIDIpad_update%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=Een+betere+Raspberry+Pi+Pico-MIDI-controller&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2F2021%2F12%2FMIDIpad_update%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/programming/biology/2021/11/Clustering-penguins_2/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">Snellere mengmodellen in PyMC3</span></a></span>
+  <span class="next-post"><a href="/nl/programming/2021/12/Posthoc-Statannotations/"><span class="page-number">Post-hoctests plotten met Python</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

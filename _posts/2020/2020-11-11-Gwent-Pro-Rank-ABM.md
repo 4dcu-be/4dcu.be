@@ -5,6 +5,7 @@ byline: "ABM using Mesa and Pandas"
 description: "Building an agent based model in Python with Mesa and pandas to simulate Gwent players and test whether skill or grinding games drives Pro Ladder ranking (code)."
 date:   2020-11-11 12:00:00
 author: Sebastian Proost
+post_id: gwent-pro-rank-abm
 categories: programming games
 tags:	python numpy gwent mesa abm agent-based-modeling pandas data-science
 cover:  "/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/crowd_header.jpg"
@@ -29,16 +30,16 @@ a different number of games during a simulated season. In this post we'll explor
 using the [Mesa] library, can assess how much grinding can improve your ranking while playing Gwent or if pure skill
 prevails.
 
-This post is about the technical details how to implement the model. If you want to jump directly into the results and
+This post is about the technical details of how to implement the model. If you want to jump directly into the results and
 conclusions about ranked ladder, skip right ahead to the [next post] where that will be covered.
 
 ## Creating the GwentAgent Class
 
-The full code for this project is available on [GitHub], though some of the important part are highlighted here. When
+The full code for this project is available on [GitHub], though some of the important parts are highlighted here. When
 working with [Mesa] an Agent class needs to be defined. This class should contain all parameters an entity in the
 simulation would have and how that entity should behave. So here our agents will have two important traits :
 
-  * **ELO level** : This represents an entities proficiency at the game at the beginning of the season. Here an
+  * **ELO level** : This represents an entity's proficiency at the game at the beginning of the season. Here an
   [ELO] level is selected at the beginning for each entity. This is a rating system used in Chess to rank players. (Note
   that the MMR system included in Gwent is essentially an ELO rating, where changes are calculated with a 
   K-factor of 14.)
@@ -312,7 +313,7 @@ df
 
 ## Results
 
-So using an Agent Based Model a very clean dataset, where the actual skill of each player is known and their final 
+Using an agent-based model produces a very clean dataset, where the actual skill of each player is known and their final
 place on ladder. The [Mesa] library made it surprisingly easy to set up this system. With all data now included in the
 familiar pandas dataframe the actual analysis can begin. This however is reserved for the [next post]!
 

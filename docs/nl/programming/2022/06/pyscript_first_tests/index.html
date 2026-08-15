@@ -1,0 +1,674 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>PyScript: Python in de browser!</title>
+  <meta name="description" content="Eerste tests met PyScript, dat Python in de browser uitvoert, vergeleken met JavaScript voor veelvoorkomende webtaken aan de hand van een praktisch voorbeeld...">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="PyScript: Python in de browser!" />
+  <meta property="og:description" content="Eerste tests met PyScript, dat Python in de browser uitvoert, vergeleken met JavaScript voor veelvoorkomende webtaken aan de hand van een praktisch voorbeeld..." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/programming/2022/06/pyscript_first_tests/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/images-headers-python_code.jpg" /><meta property="og:image:alt" content="PyScript: Python in de browser!" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2022-06-05T10:00:00+00:00" /><meta property="article:modified_time" content="2022-06-05T10:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programmeren" /><meta property="article:tag" content="python" /><meta property="article:tag" content="web-development" /><meta property="article:tag" content="pyscript" /><meta property="article:tag" content="javascript" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="PyScript: Python in de browser!"><meta name="twitter:description" content="Eerste tests met PyScript, dat Python in de browser uitvoert, vergeleken met JavaScript voor veelvoorkomende webtaken aan de hand van een praktisch voorbeeld..."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/images-headers-python_code.jpg"><meta name="twitter:image:alt" content="PyScript: Python in de browser!"><meta name="twitter:url" content="https://blog.4dcu.be/nl/programming/2022/06/pyscript_first_tests/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/programming/2022/06/pyscript_first_tests/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/2022/06/05/pyscript_first_tests.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/2022/06/pyscript_first_tests/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/2022/06/05/pyscript_first_tests.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/programming/2022/06/pyscript_first_tests/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/programming/2022/06/pyscript_first_tests/" },
+      "url": "https://blog.4dcu.be/nl/programming/2022/06/pyscript_first_tests/",
+      "headline": "PyScript: Python in de browser!",
+      "description": "Eerste tests met PyScript, dat Python in de browser uitvoert, vergeleken met JavaScript voor veelvoorkomende webtaken aan de hand van een praktisch voorbeeld...",
+      "datePublished": "2022-06-05T10:00:00+00:00",
+      "dateModified": "2022-06-05T10:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/images-headers-python_code.jpg",
+      "keywords": ["python", "web-development", "pyscript", "javascript"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/programming/2022/06/pyscript_first_tests/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Programmeren", "item": "https://blog.4dcu.be/nl/category/programming/" },
+        { "@type": "ListItem", "position": 3, "name": "PyScript: Python in de browser!" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/programming/2022/06/05/pyscript_first_tests.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/programming/2022/06/pyscript_first_tests/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/python_code.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="PyScript: Python in de browser!" class="hero-background is-transparent" src="/assets/images/headers/python_code.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">PyScript: Python in de browser!</h1><p class="info has-text-white"><em>Kan het JavaScript echt vervangen?</em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 05-06-2022 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/programming/">Programmeren</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Op PyCon 2022 werd <a href="https://pyscript.net/">PyScript</a> aangekondigd als een manier om Python in de browser uit te voeren. Sindsdien heeft het heel wat losgemaakt. 
+Hoewel het project enkele bijzonder knappe demo’s bevat, bevindt het zich nog in een vroege ontwikkelingsfase 
+en loopt de documentatie wat achter. Laten we daarom enkele veelvoorkomende toepassingen van JavaScript bekijken
+en nagaan hoe je die met PyScript realiseert.</p>
+
+<p>Alle code uit deze post vind je op <a href="https://github.com/4dcu-be/PyScript-Basics">GitHub</a>. Wil je de code in actie zien, ga dan naar <a href="http://4dcu.be/PyScript-Basics/">http://4dcu.be/PyScript-Basics/</a>.</p>
+
+<h2 id="aan-de-slag">Aan de slag</h2>
+
+<p>We maken drie bestanden: <code class="language-plaintext highlighter-rouge">index.html</code>, <code class="language-plaintext highlighter-rouge">style.css</code> en <code class="language-plaintext highlighter-rouge">main.py</code>. De eerste twee vormen de HTML-pagina 
+en het CSS-bestand voor de opmaak, terwijl het laatste onze eigen code bevat die via PyScript wordt uitgevoerd.</p>
+
+<p>We beginnen met <code class="language-plaintext highlighter-rouge">index.html</code>. Hier definiëren we het absolute minimum om PyScript, onze CSS en Python-code te laden.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>PyScript Test<span class="nt">&lt;/title&gt;</span>
+
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"./style.css"</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"https://pyscript.net/alpha/pyscript.css"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;script </span><span class="na">defer</span> <span class="na">src=</span><span class="s">"https://pyscript.net/alpha/pyscript.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;p&gt;</span>PyScript status: <span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">"pyscript_status"</span><span class="nt">&gt;</span>Not Loaded<span class="nt">&lt;/span&gt;&lt;/p&gt;</span>
+
+        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"clicks"</span> <span class="na">pys-onClick=</span><span class="s">"increase_counter"</span> <span class="na">class=</span><span class="s">"btn"</span><span class="nt">&gt;</span>Count 0<span class="nt">&lt;/button&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"toggle"</span> <span class="na">pys-onClick=</span><span class="s">"toggle_text"</span> <span class="na">class=</span><span class="s">"btn"</span><span class="nt">&gt;</span>Show Text<span class="nt">&lt;/button&gt;</span>
+
+        <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"toggle_text"</span> <span class="na">class=</span><span class="s">"hidden"</span><span class="nt">&gt;</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus cursus 
+          mauris mauris, vel fermentum risus hendrerit tincidunt. Aliquam pulvinar tellus et iaculis vestibulum. In 
+          pharetra diam eu lectus dignissim tristique. Phasellus laoreet vulputate urna. Fusce vitae elit sodales, 
+          tempus dui in, scelerisque magna.<span class="nt">&lt;/p&gt;</span>
+        
+        <span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"clicks_class"</span> <span class="na">pys-onClick=</span><span class="s">"test_class.inc"</span> <span class="na">class=</span><span class="s">"btn"</span><span class="nt">&gt;</span>Count <span class="nt">&lt;strong&gt;</span>0<span class="nt">&lt;/strong&gt;&lt;/button&gt;</span>
+
+        <span class="nt">&lt;py-script</span> <span class="na">src=</span><span class="s">'./main.py'</span><span class="nt">&gt;&lt;/py-script&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>En een beetje CSS om het tekstveld te kunnen verbergen, plus wat code die ik van <a href="https://www.w3schools.com/css/css3_buttons.asp">w3schools</a> haalde om de knoppen 
+er als echte knoppen te laten uitzien.</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">body</span> <span class="p">{</span>
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">15px</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="nc">.hidden</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.btn</span> <span class="p">{</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="nx">#4CAF50</span><span class="p">;</span>
+    <span class="nl">border</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="nx">white</span><span class="p">;</span>
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">15px</span> <span class="m">32px</span><span class="p">;</span>
+    <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+    <span class="nl">text-decoration</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="nb">inline-block</span><span class="p">;</span>
+    <span class="nl">font-size</span><span class="p">:</span> <span class="m">16px</span><span class="p">;</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="met-python-verbinden">Met Python verbinden</h2>
+
+<p>De code bevat twee aanknopingspunten die PyScript gebruikt om de code in <code class="language-plaintext highlighter-rouge">main.py</code> uit te voeren. Onderaan de body staat
+de tag <code class="language-plaintext highlighter-rouge">&lt;py-script src='./main.py'&gt;&lt;/py-script&gt;</code>, die aangeeft dat er een extern bestand is dat moet worden
+uitgevoerd zodra de pagina geladen is. Dit concept is identiek aan de manier waarop je een stukje JavaScript-code met
+<code class="language-plaintext highlighter-rouge">&lt;script&gt;</code>-tags invoegt.</p>
+
+<p>In de code van een knop kun je aangeven welke functie moet worden uitgevoerd wanneer erop wordt geklikt. Voeg daarvoor het attribuut
+<code class="language-plaintext highlighter-rouge">pys-onClick="increase_counter"</code> toe aan het element dat aanklikbaar moet zijn. In de bovenstaande code voert de ene knop bij elke klik de functie
+<code class="language-plaintext highlighter-rouge">increase_counter</code> uit (die in <code class="language-plaintext highlighter-rouge">main.py</code> staat), en de andere <code class="language-plaintext highlighter-rouge">toggle_text</code>.</p>
+
+<p>Daarnaast is het belangrijk dat de elementen waarmee de Python-code moet werken een identificatiecode hebben. 
+Dat zou trouwens ook nodig zijn als je JavaScript zonder framework aan een webpagina toevoegt.</p>
+
+<h2 id="de-python-code">De Python-code</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">pyscript</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">pyscript_status</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">PyScript Loaded Successfully</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">increase_counter</span><span class="p">(</span><span class="o">*</span><span class="n">ags</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">counter</span>
+    <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">button</span> <span class="o">=</span> <span class="nc">Element</span><span class="p">(</span><span class="sh">'</span><span class="s">clicks</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">button</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Count </span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="sh">"</span>
+
+<span class="k">def</span> <span class="nf">toggle_text</span><span class="p">(</span><span class="o">*</span><span class="n">ags</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="nc">Element</span><span class="p">(</span><span class="sh">'</span><span class="s">toggle_text</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">button</span> <span class="o">=</span> <span class="nc">Element</span><span class="p">(</span><span class="sh">'</span><span class="s">toggle</span><span class="sh">'</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="sh">"</span><span class="s">hidden</span><span class="sh">"</span> <span class="ow">in</span> <span class="n">text</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">classList</span><span class="p">:</span>
+        <span class="n">text</span><span class="p">.</span><span class="nf">remove_class</span><span class="p">(</span><span class="sh">"</span><span class="s">hidden</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">button</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Hide Text</span><span class="sh">"</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">text</span><span class="p">.</span><span class="nf">add_class</span><span class="p">(</span><span class="sh">"</span><span class="s">hidden</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">button</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Show Text</span><span class="sh">"</span>
+
+<span class="k">class</span> <span class="nc">Test</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">text_element</span> <span class="o">=</span> <span class="nc">Element</span><span class="p">(</span><span class="sh">'</span><span class="s">clicks_class</span><span class="sh">'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">inc</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="o">*</span><span class="n">ags</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">text_element</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Count &lt;strong&gt;</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">counter</span><span class="si">}</span><span class="s">&lt;/strong&gt;</span><span class="sh">"</span>
+
+<span class="n">test_class</span> <span class="o">=</span> <span class="nc">Test</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Zodra onze HTML-pagina is geladen, wordt het bovenstaande script uitgevoerd. De eerste manier om met de elementen op de
+webpagina te werken is <code class="language-plaintext highlighter-rouge">pyscript.write()</code>. Het eerste argument bepaalt in welk element (aan de hand van de ID) je een stukje
+tekst wilt schrijven; die tekst wordt in het tweede argument opgegeven. In dit geval werken we het element pyscript_status bij, zodat er 
+“PyScript Loaded Successfully” komt te staan. Dit is niet alleen een goed voorbeeld van de eenvoudigste manier om met de DOM te werken,
+maar geeft ook een visuele bevestiging dat onze code wordt uitgevoerd.</p>
+
+<p>Het volgende stukje bepaalt wat er gebeurt wanneer de telknop wordt ingedrukt. Twee zaken zijn hier belangrijk: het gebruik van een
+<code class="language-plaintext highlighter-rouge">global</code>-variabele om de teller bij te houden en de manier waarop de tekst wordt ingesteld. Omdat we de teller moeten bijhouden
+in een variabele buiten de functie, maakt de globale variabele <code class="language-plaintext highlighter-rouge">button = Element('clicks')</code>
+een Python-object aan dat gekoppeld is aan het DOM-element met de ID “clicks”. Nu kunnen we de innerHTML van dat element
+naar wens aanpassen. Dit heeft één voordeel ten opzichte van <code class="language-plaintext highlighter-rouge">pyscript.write()</code>: op deze manier kun je HTML in een element opnemen.
+Als we bijvoorbeeld het getal vet wilden maken, konden we gewoon de onderstaande regel gebruiken:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">button</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Count &lt;strong&gt;</span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="s">&lt;/strong&gt;</span><span class="sh">"</span>
+</code></pre></div></div>
+
+<h2 id="met-klasseattributen-werken">Met klasseattributen werken</h2>
+
+<p>De laatste functie in het voorbeeld toont hoe je kunt werken met de klassen die aan een element zijn toegewezen. Dat is
+handig om het uiterlijk van elementen onmiddellijk te veranderen door over te schakelen naar een klasse met een andere stijl in het 
+CSS-bestand, of gewoon om een element te verbergen of te tonen zoals hier.</p>
+
+<p>Met <code class="language-plaintext highlighter-rouge">Element()</code> worden de knop en het tekstveld geselecteerd. Vervolgens openen we de
+<code class="language-plaintext highlighter-rouge">classList</code> van de tekst om te controleren of die al dan niet verborgen is. Deze lijst bevat alle klassen die momenteel aan het DOM-element zijn gekoppeld. Om
+na te gaan of het element een bepaalde klasse heeft, volstaat het om te controleren of die klasse in de lijst voorkomt. Hier gaan we na of
+het element verborgen is. Is dat zo, dan verwijderen we die klasse met <code class="language-plaintext highlighter-rouge">text.remove_class("hidden")</code>. Anders voegen we 
+de klasse hidden toe met <code class="language-plaintext highlighter-rouge">text.add_class("hidden")</code>. In beide gevallen wordt de tekst van de knop overeenkomstig aangepast.</p>
+
+<h2 id="een-python-klasse-gebruiken">Een Python-klasse gebruiken</h2>
+
+<p>De globale variabele uit het eerste voorbeeld is niet erg elegant. Hetzelfde geldt voor het uitvoeren van de functie <code class="language-plaintext highlighter-rouge">Element()</code> bij elke
+klik op de knop. Met een klasse kunnen we dit vermijden! Met een testklasse kun je een eigenschap maken voor de huidige teller en
+de elementen waarmee je wilt werken. Vervolgens voegen we een functie <code class="language-plaintext highlighter-rouge">inc</code> toe om de teller te verhogen. Kijk goed naar de
+structuur van de argumenten: eerst self, daarna de args en kwargs die PyScript nodig heeft. Aan het einde van <code class="language-plaintext highlighter-rouge">main.py</code> maken we
+een instantie van deze klasse met de naam <code class="language-plaintext highlighter-rouge">test_class</code>. In de HTML-code kunnen we de functie inc binnen die instantie koppelen 
+met <code class="language-plaintext highlighter-rouge">pys-onClick="test_class.inc"</code>.</p>
+
+<p>Hoewel dat in een klein voorbeeld niet eenvoudiger lijkt (het is eigenlijk één regel code meer), is dit voor
+complexere apps een veel betere manier om de toestand van de app te beheren.</p>
+
+<h1 id="tot-slot">Tot slot</h1>
+
+<p>Uit de voorbeelden blijkt duidelijk dat ook veelvoorkomende taken waarvoor JavaScript zonder framework vaak wordt gebruikt met 
+PyScript kunnen worden uitgevoerd. Door de gebrekkige documentatie vergt het wat zoekwerk, maar vaak
+volstond een snelle blik op de broncode om het uit te pluizen. Het ophalen van de Python-runtime zorgt echter voor een aanzienlijke extra laadtijd
+van een webpagina. In sommige gevallen kan dat een breekpunt zijn.</p>
+
+<p>Als je daarentegen al logica in Python hebt geïmplementeerd, kan dit de omzetting van die code in een app
+aanzienlijk versnellen. <a href="https://github.com/4dcu-be/WinstonCubeSim">WinstonCubeSim</a>, een project dat ik vaak gebruik om nieuwe pakketten, tools enzovoort te testen, kon ik in één of twee avonden ombouwen tot een werkende
+webapp, inclusief enkele knappe extra functies (zoals gegevens ophalen uit een externe API).
+Alles naar JavaScript overzetten zou me meer tijd hebben gekost, en nu hoef ik maar één codebasis voor de CLI- en
+webversie te onderhouden. De app is nogal niche, maar bekijk <a href="https://github.com/4dcu-be/WinstonCubeSimPyScript">WinstonCubeSimPyScript</a> als je het resultaat wilt zien.</p>
+
+<h1 id="het-nadeel-van-pyscript">Het nadeel van PyScript</h1>
+
+<p>Hoewel dit vrij eenvoudige voorbeelden zijn, moest ik een of twee keer in de broncode duiken om iets uit te pluizen, omdat PyScript nog altijd weinig documentatie heeft.
+Dat valt in deze fase te verwachten en zal mettertijd verbeteren. Aangezien dit project zich in de alfafase bevindt,
+zullen er waarschijnlijk sowieso nog zaken veranderen. Documentatie schrijven die later opnieuw moet worden geschreven, is dus niet
+erg productief voor het team. Dat neem ik hen niet kwalijk, maar wees voorbereid op wat extra werk als je erin wilt duiken.</p>
+
+<p>Het PyScript-pakket bevat enkele mooie voorbeelden, al zijn die wat meer op datawetenschap gericht. Hoewel
+ik niet kan wachten om dat verder te testen, vinden mensen die JavaScript zonder framework door Python willen vervangen misschien moeilijk wat ze nodig hebben.</p>
+
+<p>De laadtijd is aanzienlijk. Efficiënte caching van een website zou dit probleem kunnen verzachten, maar bij de eerste laadbeurt moet
+de volledige Python-runtime in WASM worden opgehaald. Helaas kan dat alleen worden vermeden als PyScript net als JavaScript
+in de browser zou worden ingebouwd. Het is nog wat vroeg, maar ooit misschien …</p>
+
+<h1 id="meer-lezen">Meer lezen</h1>
+
+<ul>
+  <li><a href="https://github.com/4dcu-be/WinstonCubeSimPyScript">WinstonCubeSimPyScript</a> : Webapp die PyScript gebruikt en deze stukjes code toepast om een gebruikersinterface voor een bestaande bibliotheek te maken</li>
+  <li><a href="https://pyscript.net/">PyScript</a> : Officiële website</li>
+  <li><a href="https://www.youtube.com/watch?v=lC2jUeDKv-s">Python + pyscript + WebAssembly: Python Web Apps, Running Locally with pyscript</a> : Tutorial om met PyScript aan de slag te gaan en je code om te zetten in een Progressive Web App</li>
+</ul>
+
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/python/">python</a>,&nbsp;<a href="/nl/tag/web-development/">web-development</a>,&nbsp;<a href="/nl/tag/pyscript/">pyscript</a>,&nbsp;<a href="/nl/tag/javascript/">javascript</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=PyScript%3A+Python+in+de+browser%21%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2022%2F06%2Fpyscript_first_tests%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2022%2F06%2Fpyscript_first_tests%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2022%2F06%2Fpyscript_first_tests%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=PyScript%3A+Python+in+de+browser%21&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2022%2F06%2Fpyscript_first_tests%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/diy/2022/05/Macropad_update/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">Betere code voor de MacroPad</span></a></span>
+  <span class="next-post"><a href="/nl/programming/2022/07/path_in_R/"><span class="page-number">Het pad naar een script opvragen in R</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

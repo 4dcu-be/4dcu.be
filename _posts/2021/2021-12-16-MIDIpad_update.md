@@ -5,6 +5,7 @@ byline: "adding modifier keys and chord support"
 description: "Upgrading a Raspberry Pi Pico MIDI controller with modifier keys and chord support in CircuitPython, expanding from 9 to 28 playable notes and chords."
 date:   2021-12-16 06:00:00
 author: Sebastian Proost
+post_id: midipad-update
 categories: diy
 tags:	raspberry-pi python mechanical-keyboard soldering electronics midi
 cover:  "/assets/posts/2021-12-16-MIDIpad_update/midipad_button_mapping.jpg"
@@ -19,7 +20,7 @@ pressed with modifier one, pressed with modifier two and pressed with both modif
 While at first glance this seems like an easy task, there are a few things that need to be taken into consideration. A
 MIDI device sends a signal once a note is pressed and one when it is released. In the previous post this was straightforward; each
 button was playing two notes one octave apart, and there was no overlap between buttons. So when a button goes down, 
-the corresponding notes can start, if that button goes up those notes can be started again, easy ...
+the corresponding notes can start, if that button goes up those notes can be stopped again, easy ...
 
 ![New each button maps to 4 chords, depending on which modifiers are pressed](/assets/posts/2021-12-16-MIDIpad_update/midipad_button_mapping.jpg)
 

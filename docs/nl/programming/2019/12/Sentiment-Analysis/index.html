@@ -1,0 +1,661 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>Sentimentanalyse en de vorm van verhalen</title>
+  <meta name="description" content="Met Python en NLTK-sentimentanalyse de emotionele vorm van een verhaal plotten, toegepast op Tolkiens Lord of the Rings en geïnspireerd door Kurt Vonnegut.">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Sentimentanalyse en de vorm van verhalen" />
+  <meta property="og:description" content="Met Python en NLTK-sentimentanalyse de emotionele vorm van een verhaal plotten, toegepast op Tolkiens Lord of the Rings en geïnspireerd door Kurt Vonnegut." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/programming/2019/12/Sentiment-Analysis/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2019-12-01-Sentiment-Analysis-header.jpg" /><meta property="og:image:alt" content="Sentimentanalyse en de vorm van verhalen" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2019-12-01T12:00:00+00:00" /><meta property="article:modified_time" content="2019-12-01T12:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programmeren" /><meta property="article:tag" content="python" /><meta property="article:tag" content="NLP" /><meta property="article:tag" content="NLTK" /><meta property="article:tag" content="pandas" /><meta property="article:tag" content="matplotlib" /><meta property="article:tag" content="LotR" /><meta property="article:tag" content="data-science" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Sentimentanalyse en de vorm van verhalen"><meta name="twitter:description" content="Met Python en NLTK-sentimentanalyse de emotionele vorm van een verhaal plotten, toegepast op Tolkiens Lord of the Rings en geïnspireerd door Kurt Vonnegut."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2019-12-01-Sentiment-Analysis-header.jpg"><meta name="twitter:image:alt" content="Sentimentanalyse en de vorm van verhalen"><meta name="twitter:url" content="https://blog.4dcu.be/nl/programming/2019/12/Sentiment-Analysis/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/programming/2019/12/Sentiment-Analysis/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/2019/12/01/Sentiment-Analysis.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/2019/12/Sentiment-Analysis/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/2019/12/01/Sentiment-Analysis.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/programming/2019/12/Sentiment-Analysis/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/programming/2019/12/Sentiment-Analysis/" },
+      "url": "https://blog.4dcu.be/nl/programming/2019/12/Sentiment-Analysis/",
+      "headline": "Sentimentanalyse en de vorm van verhalen",
+      "description": "Met Python en NLTK-sentimentanalyse de emotionele vorm van een verhaal plotten, toegepast op Tolkiens Lord of the Rings en geïnspireerd door Kurt Vonnegut.",
+      "datePublished": "2019-12-01T12:00:00+00:00",
+      "dateModified": "2019-12-01T12:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2019-12-01-Sentiment-Analysis-header.jpg",
+      "keywords": ["python", "NLP", "NLTK", "pandas", "matplotlib", "LotR", "data-science"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/programming/2019/12/Sentiment-Analysis/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Programmeren", "item": "https://blog.4dcu.be/nl/category/programming/" },
+        { "@type": "ListItem", "position": 3, "name": "Sentimentanalyse en de vorm van verhalen" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/programming/2019/12/01/Sentiment-Analysis.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/programming/2019/12/Sentiment-Analysis/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/sentiment_analysis.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="Sentimentanalyse en de vorm van verhalen" class="hero-background is-transparent" src="/assets/posts/2019-12-01-Sentiment-Analysis/header.png" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">Sentimentanalyse en de vorm van verhalen</h1><p class="info has-text-white"><em>De vorm van Lord of the Rings - The Fellowship of the Ring</em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 01-12-2019 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/programming/">Programmeren</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Toen ik toevallig op een presentatie van <a href="https://en.wikipedia.org/wiki/Kurt_Vonnegut">Kurt Vonnegut</a> 
+stuitte over hoe <a href="https://www.youtube.com/watch?v=oP3c1h8v2ZQ">verhalen een vorm hebben</a>, begon ik na te denken … “Kun je 
+natuurlijke taalverwerking (NLP) gebruiken om die vormen te herkennen via een sentimentanalyse van de eigenlijke tekst?” 
+Hier toon ik de aanpak die ik bedacht en pas ik die toe op 
+<a href="https://en.wikipedia.org/wiki/J._R._R._Tolkien">J.R.R. Tolkiens</a> 
+<a href="https://en.wikipedia.org/wiki/The_Lord_of_the_Rings">Lord of the Rings</a> - The Fellowship of the Ring. Alle code vind je
+in een Jupyter-notebook in <a href="https://github.com/4dcu-be/ShapeOfStories-SentimentAnalysis">deze repository</a>.</p>
+
+<p>Om te begrijpen waar deze post over gaat, moet je echt <a href="https://www.youtube.com/watch?v=oP3c1h8v2ZQ">deze video</a> bekijken.</p>
+
+<h2 id="sentimentanalyse-in-python">Sentimentanalyse in Python</h2>
+
+<p>Python beschikt over de <a href="https://www.nltk.org/">Natural Language Toolkit</a>, die een heel eenvoudige manier bevat om een sentimentanalyse 
+uit te voeren. Importeer de juiste bibliotheek, maak een <code class="language-plaintext highlighter-rouge">SentimentIntensityAnalyzer()</code> aan en pas die toe op een tekstfragment. Klaar! 
+In de voorbeelden hieronder zie je hoe enkele regels code herkennen welke fragmenten positief, negatief of 
+neutraal zijn (weergegeven in ‘pos’, ‘neg’ en ‘neu’). Daarnaast is er een <strong>samengestelde score</strong> die positief is als het algemene
+sentiment van de tekst goed is en negatief als het slecht is. Dat is de maatstaf waarmee we de vorm van het verhaal willen maken.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">nltk.sentiment.vader</span> <span class="kn">import</span> <span class="n">SentimentIntensityAnalyzer</span>
+<span class="n">sid</span> <span class="o">=</span> <span class="nc">SentimentIntensityAnalyzer</span><span class="p">()</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">sid</span><span class="p">.</span><span class="nf">polarity_scores</span><span class="p">(</span><span class="sh">"</span><span class="s">He smiled, he was happy. It had been an amazing day!</span><span class="sh">"</span><span class="p">))</span>
+<span class="c1"># {'neg': 0.0, 'neu': 0.415, 'pos': 0.585, 'compound': 0.906}
+</span><span class="nf">print</span><span class="p">(</span><span class="n">sid</span><span class="p">.</span><span class="nf">polarity_scores</span><span class="p">(</span><span class="sh">"</span><span class="s">They feared the others. When they show up, bad things happen.</span><span class="sh">"</span><span class="p">))</span>
+<span class="c1"># {'neg': 0.427, 'neu': 0.573, 'pos': 0.0, 'compound': -0.7717}
+</span><span class="nf">print</span><span class="p">(</span><span class="n">sid</span><span class="p">.</span><span class="nf">polarity_scores</span><span class="p">(</span><span class="sh">"</span><span class="s">While driving to their destination, nothing happened.</span><span class="sh">"</span><span class="p">))</span>
+<span class="c1"># {'neg': 0.0, 'neu': 1.0, 'pos': 0.0, 'compound': 0.0}
+</span></code></pre></div></div>
+
+<h2 id="je-boek-verwerken">Je boek verwerken</h2>
+
+<p>Je moet je boek doorlopen en de alinea’s eruit halen. Titels, ondertitels, … moeten worden verwijderd. 
+Specifiek voor Lord of the Rings - The Fellowship of the Ring werden ook dialogen en liederen verwijderd. Alleen alinea’s 
+die lang genoeg zijn, worden bewaard. Voor deze analyse nemen we dus enkel de 303 langste alinea’s van het boek mee.</p>
+
+<p>Ik bewaarde het verwerkte boek als volgt in een .json-bestand:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w"> </span><span class="nl">"paragraph"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Paragraph one text..."</span><span class="w"> </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w"> </span><span class="nl">"paragraph"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Paragraph two text..."</span><span class="w"> </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<p>LotR is auteursrechtelijk beschermd. Ik bezit legaal zowel een fysiek als digitaal exemplaar, maar kan het verwerkte 
+boek hier niet delen. Er bestaat geen algemene manier om een e-book in alinea’s op te delen, want afhankelijk van de bron wordt het einde van een alinea
+anders gecodeerd.</p>
+
+<p>Met de code hieronder kan dit bestand worden geladen en kan op elke alinea een sentimentanalyse worden toegepast. De scores worden 
+in een pandas-dataframe bewaard. Sentimentanalyse kan behoorlijk ruisachtig zijn: op een erg positieve alinea kan 
+een vrij negatieve volgen. Enkele negatieve alinea’s na elkaar zijn echter wel relevant. Daarom passen we een voortschrijdend venster 
+op de scores toe om de gemiddelde score over een aantal alinea’s te berekenen.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">json</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">from</span> <span class="n">nltk.sentiment.vader</span> <span class="kn">import</span> <span class="n">SentimentIntensityAnalyzer</span>
+<span class="n">sid</span> <span class="o">=</span> <span class="nc">SentimentIntensityAnalyzer</span><span class="p">()</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">./output/The_Fellowship_Of_The_Ring.paragraphs.json</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
+
+<span class="c1"># create a data frame with the sentiment scores
+</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">([</span><span class="n">sid</span><span class="p">.</span><span class="nf">polarity_scores</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="sh">'</span><span class="s">paragraph</span><span class="sh">'</span><span class="p">])</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">data</span><span class="p">])</span>
+
+<span class="c1"># Create a column with paragraph numbers (starting with 1)
+</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">paragraph_num</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="c1"># Apply a rolling window on the compound score to smooth out noise
+# Downside is that the first and last elements will be NA
+</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">smooth_compound</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">compound</span><span class="sh">'</span><span class="p">].</span><span class="nf">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">win_type</span><span class="o">=</span><span class="sh">'</span><span class="s">triang</span><span class="sh">'</span><span class="p">).</span><span class="nf">mean</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Dat is alles! We hebben nu een dataframe met de sentimentscores voor elke alinea en een voortschrijdend 
+venster dat een afgevlakt resultaat oplevert. Nu moeten we alleen nog de vorm van ons boek visualiseren en kijken of die steek houdt. 
+Normaal kun je Seaborn gebruiken om snel je gegevens te visualiseren, maar hier wilde ik een curve waarbij het
+gebied eronder volgens het sentiment wordt ingekleurd: groen voor positieve en blauw voor negatieve stukken. Daarvoor moest ik
+matplotlib rechtstreeks gebruiken.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">rcParams</span><span class="p">[</span><span class="sh">'</span><span class="s">figure.figsize</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+
+<span class="n">blue</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.2980392156862745</span><span class="p">,</span> <span class="mf">0.4470588235294118</span><span class="p">,</span> <span class="mf">0.6901960784313725</span><span class="p">)</span>
+<span class="n">green</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.3333333333333333</span><span class="p">,</span> <span class="mf">0.6588235294117647</span><span class="p">,</span> <span class="mf">0.40784313725490196</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="p">.</span><span class="nf">set_style</span><span class="p">(</span><span class="sh">"</span><span class="s">white</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="sh">'</span><span class="s">Lord of the Rings - The Fellowship of the Ring</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Paragraph</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Sentiment</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">yticks</span><span class="p">([])</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">fill_between</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">paragraph_num</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">smooth_compound</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">df</span><span class="p">.</span><span class="n">smooth_compound</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">green</span><span class="p">,</span> <span class="n">interpolate</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">fill_between</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">paragraph_num</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">smooth_compound</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">df</span><span class="p">.</span><span class="n">smooth_compound</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">blue</span><span class="p">,</span> <span class="n">interpolate</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">axhline</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="sh">'</span><span class="s">gray</span><span class="sh">'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><a href="/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.svg" class="lightgallery-link" data-sub-html="Sentimentgrafiek van Lord of the Rings - The Fellowship of the Ring">
+<img src="/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.svg" alt="Sentimentgrafiek van Lord of the Rings - The Fellowship of the Ring" height="432" width="1080" data-src="/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.svg" loading="lazy" />
+</a></p>
+
+<p>Dit komt behoorlijk dicht in de buurt van wat ik wilde! Maar klopt het ook … Om dat uit te zoeken voegen we enkele annotaties
+aan de grafiek toe. Ik zocht de alinea’s met belangrijke momenten uit het verhaal en voeg die aan de grafiek toe. Zo zien
+we beter of de grafiek steek houdt en het verhaal echt volgt.</p>
+
+<p>De code hiervoor lijkt op die hierboven, behalve dat er punten en tekst worden toegevoegd.</p>
+
+<p><strong>Let op: het gedeelte onder de code bevat SPOILERS voor zowel het boek als de film</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">annotations</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="sh">'</span><span class="s">Frodo meets Aragorn</span><span class="sh">'</span><span class="p">,</span> <span class="p">(</span><span class="mi">105</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">104</span><span class="p">][</span><span class="sh">'</span><span class="s">smooth_compound</span><span class="sh">'</span><span class="p">])),</span>
+    <span class="p">(</span><span class="sh">'</span><span class="s">Black Riders arrive in Bree</span><span class="sh">'</span><span class="p">,</span> <span class="p">(</span><span class="mi">116</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">115</span><span class="p">][</span><span class="sh">'</span><span class="s">smooth_compound</span><span class="sh">'</span><span class="p">])),</span>
+    <span class="p">(</span><span class="sh">'</span><span class="s">Black Riders assembling near Weathertop</span><span class="sh">'</span><span class="p">,</span> <span class="p">(</span><span class="mi">129</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">128</span><span class="p">][</span><span class="sh">'</span><span class="s">smooth_compound</span><span class="sh">'</span><span class="p">])),</span>
+    <span class="p">(</span><span class="sh">'</span><span class="s">Frodo meets up with Bilbo in Rivendell</span><span class="sh">'</span><span class="p">,</span> <span class="p">(</span><span class="mi">152</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">151</span><span class="p">][</span><span class="sh">'</span><span class="s">smooth_compound</span><span class="sh">'</span><span class="p">])),</span>
+    <span class="p">(</span><span class="sh">'"</span><span class="s">Fly, you fools</span><span class="sh">"'</span><span class="p">,</span> <span class="p">(</span><span class="mi">241</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">240</span><span class="p">][</span><span class="sh">'</span><span class="s">smooth_compound</span><span class="sh">'</span><span class="p">]))</span>
+<span class="p">]</span>
+
+<span class="n">sns</span><span class="p">.</span><span class="nf">set_style</span><span class="p">(</span><span class="sh">"</span><span class="s">white</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="sh">'</span><span class="s">Lord of the Rings - The Fellowship of the Ring</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Paragraph</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Sentiment</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">yticks</span><span class="p">([])</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">fill_between</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">paragraph_num</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">smooth_compound</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">df</span><span class="p">.</span><span class="n">smooth_compound</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">green</span><span class="p">,</span> <span class="n">interpolate</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">fill_between</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">paragraph_num</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">smooth_compound</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">df</span><span class="p">.</span><span class="n">smooth_compound</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">blue</span><span class="p">,</span> <span class="n">interpolate</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">axhline</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="sh">'</span><span class="s">gray</span><span class="sh">'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">annotations</span><span class="p">:</span>
+    <span class="n">plt</span><span class="p">.</span><span class="nf">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="sh">'</span><span class="s">black</span><span class="sh">'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="nf">annotate</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="mf">0.05</span><span class="p">))</span>
+  
+<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">Fellowship.annotated.svg</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">wb</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">svg_out</span><span class="p">:</span>
+    <span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="n">svg_out</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="sh">"</span><span class="s">svg</span><span class="sh">"</span><span class="p">)</span>
+    
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><a href="/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.annotated.svg" class="lightgallery-link" data-sub-html="Geannoteerde sentimentgrafiek van Lord of the Rings - The Fellowship of the Ring">
+<img src="/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.annotated.svg" alt="Geannoteerde sentimentgrafiek van Lord of the Rings - The Fellowship of the Ring" height="432" width="1080" data-src="/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.annotated.svg" loading="lazy" />
+</a></p>
+
+<h2 id="bespreking">Bespreking</h2>
+
+<p>Ik was verbaasd over hoe goed de afbeelding het verhaal weerspiegelt! Voor wie een opfrissing nodig heeft, volgt hier een 
+korte samenvatting van het verhaal, met de nadruk op de annotaties die aan de afbeelding werden toegevoegd.</p>
+
+<p>The Fellowship of the Ring begint met een verjaardagsfeest waarop de Hobbits en hun dorp in The Shire worden voorgesteld.
+Het verhaal begint dus erg vrolijk en opgewekt. Omdat Tolkien deze personages uitvoerig beschrijft, neemt dit een groot
+deel van het boek in beslag. Ontmoetingen met nieuwe personages, zoals Strider/Aragorn, gaan vaak gepaard met een positief sentiment.</p>
+
+<p>Het sentiment daalt aanzienlijk zodra Frodo naar Bree trekt en de Black Riders (later onthuld als de
+Ringwraiths of <a href="https://lotr.fandom.com/wiki/Nazg%C3%BBl">Nazgûl</a>) hen beginnen te achtervolgen, met een confrontatie op 
+Weathertop tot gevolg. Frodo raakt daar gewond en moet met spoed naar Rivendell worden gebracht. Dit gedeelte is zowel in het boek als in de film
+vrij duister. De Hobbits vrezen de Riders en beginnen te beseffen dat hun missie veel gevaarlijker is dan ze ooit
+hadden gedacht.</p>
+
+<p>In Rivendell wordt Frodo genezen en ziet hij zijn oom Bilbo terug. De Hobbits zijn er veilig en dat zie je terug in
+het sentiment van de tekst. Elrond vertelt in Rivendell ook over Sauron, Isildur en de Ring. Deze flashback is
+vrij negatief (Isildur slaagde er niet in de Ring te vernietigen) en dat is eveneens duidelijk zichtbaar in de grafiek. Zodra de 
+Fellowship is gevormd en ze Rivendell verlaten richting Mordor, is de stemming goed. Wanneer ze echter gedwongen worden door de 
+Mines of Moria te trekken, wordt het grimmig. Gandalf verslaat uiteindelijk de Balrog, maar wordt zelf meegetrokken in de duistere
+diepten van de mijn. Zijn laatste woorden, “Fly, you fools!”, voordat hij in de afgrond verdwijnt, vormen een van de meest 
+negatieve momenten in zowel het boek als de film. Dit is ook de scherpste negatieve piek in de grafiek. De anderen 
+ontsnappen levend uit de Mines en vinden onderdak bij de elfen van Lothlórien.</p>
+
+<p>Zodra ze het bos en hun gastvrouw Galadriel, de Lady of Lórien, verlaten, neemt het verhaal aan het einde snel een wending
+ten kwade. Orks komen dichterbij, Boromir verraadt hen en probeert de Ring van
+Frodo af te nemen (anders dan in de film staat zijn dood niet in dit boek, maar aan het begin van The Two Towers). De Fellowship 
+valt uiteen en slaagt er dus niet in haar queeste te voltooien.</p>
+
+<p>Ik vraag me af of deze aanpak ook voor andere boeken zou werken?</p>
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/python/">python</a>,&nbsp;<a href="/nl/tag/nlp/">NLP</a>,&nbsp;<a href="/nl/tag/nltk/">NLTK</a>,&nbsp;<a href="/nl/tag/pandas/">pandas</a>,&nbsp;<a href="/nl/tag/matplotlib/">matplotlib</a>,&nbsp;<a href="/nl/tag/lotr/">LotR</a>,&nbsp;<a href="/nl/tag/data-science/">data-science</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=Sentimentanalyse+en+de+vorm+van+verhalen%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2019%2F12%2FSentiment-Analysis%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2019%2F12%2FSentiment-Analysis%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2019%2F12%2FSentiment-Analysis%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=Sentimentanalyse+en+de+vorm+van+verhalen&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2019%2F12%2FSentiment-Analysis%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"></span>
+  <span class="next-post"><a href="/nl/programming/games/diy/2019/12/25-Fortnights/"><span class="page-number">25 veertiendaagsen vol code</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

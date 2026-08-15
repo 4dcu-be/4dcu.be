@@ -5,6 +5,7 @@ byline: "predicting your opponent's deck from the first few cards played"
 description: "Building a Python scikit-learn classifier that predicts a Magic the Gathering opponent's deck from the first few cards they play, using pandas and machine learning."
 date:   2019-12-29 12:00:00
 author: Sebastian Proost
+post_id: magic-the-gathering
 categories: programming games
 tags:	python sklearn machine-learning pandas mtg magic-the-gathering data-science
 cover:  "/assets/images/headers/machine_learning.jpg"
@@ -13,7 +14,7 @@ github: "https://github.com/4dcu-be/Machine-Learning-the-Gathering"
 ---
 
 In [Magic: the Gathering](https://magic.wizards.com/en), a collectible card game, competitive players tend to gravitate towards a few dozen of the best 
-decks made up out of a subset of all available cards. For instance in the Legacy format nearly all 18000 cards can be 
+decks made up of a subset of all available cards. For instance in the Legacy format nearly all 18000 cards can be
 played, yet you'll only see about 500 show up in tournaments with some cards (e.g. Brainstorm and Force of Will) showing up 
 in > 50% of all high-ranking decks.
 
@@ -82,7 +83,7 @@ interesting parts I'll discuss here.
 
 ## Getting decklists
 
-To start we'll need a example decks for all types of decks, also called archetypes. There are several websites that
+To start we'll need example decks for all types of decks, also called archetypes. There are several websites that
 store decklists, the one I've used is [MTG Top 8](http://www.mtgtop8.com/). Using the requests library to download the
 site data, and Beautiful Soup to parse the html, I got all Legacy decklists from the last two weeks 
 (downloaded 29/12/2019). You can find all code how to do this in the repo, collecting data and parsing it isn't the
@@ -93,7 +94,7 @@ most exciting thing to do though.
 From each deck we'll take samples with a few random cards, these are then turned into a presence-absence matrix. In such
 a matrix each column represents a card and each row a sample, if a card is present in the sample the corresponding cell
 is 1, if it is absent it is 0. Furthermore for each row we need to keep track of the archetype in another list. In 
-practise we'll generate for each deck, for a number of different subset sizes, **1500** random samples.
+practice we'll generate for each deck, for a number of different subset sizes, **1500** random samples.
 
 The result looks like this:
 
@@ -170,7 +171,7 @@ rfc.fit(X_rus, y_rus)
 ## Using the classifier
 
 The final part we lack is a function that can take a list of known cards in the opponent's deck, convert that to the 
-right format, run the classifier and return us with a list of probable decks. To do this we need to have a list of all
+right format, run the classifier and return a list of probable decks. To do this we need to have a list of all
 cards in the presence-absence matrix (the column names), which we'll store in a variable **all_cards**. 
 
 ```python
@@ -199,7 +200,7 @@ def predict_deck(cards_known):
 
 That's the function from the very beginning of this post. Again, on this page there are only bits and pieces of code 
 highlighted, the notebook on GitHub contains a [fully working example](https://github.com/4dcu-be/Machine-Learning-the-Gathering).
-This is a rather nice example how we could go from a set of decklists to a dataset to train the classifier to a working
+This is a rather nice example of how we could go from a set of decklists to a dataset to train the classifier to a working
 classifier.
 
 Personally, I think it is awesome how you can, in a matter of minutes, pull a set of all decklists and train a 

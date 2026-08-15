@@ -1,0 +1,761 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>Blogs verbeteren met zelfgemaakte Jekyll-plugins</title>
+  <meta name="description" content="Zelf Jekyll-plugins in Ruby schrijven voor functies zoals automatische LightGallery-links en een kaart die voor een reisblog aangeeft waar elk artikel werd g...">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Blogs verbeteren met zelfgemaakte Jekyll-plugins" />
+  <meta property="og:description" content="Zelf Jekyll-plugins in Ruby schrijven voor functies zoals automatische LightGallery-links en een kaart die voor een reisblog aangeeft waar elk artikel werd g..." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/programming/2020/03/Jekyll-Blog/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2020-03-13-Jekyll-Blog-map_extension.jpg" /><meta property="og:image:alt" content="Blogs verbeteren met zelfgemaakte Jekyll-plugins" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2020-03-13T12:00:00+00:00" /><meta property="article:modified_time" content="2020-03-13T12:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programmeren" /><meta property="article:tag" content="ruby" /><meta property="article:tag" content="jekyll" /><meta property="article:tag" content="blog" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Blogs verbeteren met zelfgemaakte Jekyll-plugins"><meta name="twitter:description" content="Zelf Jekyll-plugins in Ruby schrijven voor functies zoals automatische LightGallery-links en een kaart die voor een reisblog aangeeft waar elk artikel werd g..."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2020-03-13-Jekyll-Blog-map_extension.jpg"><meta name="twitter:image:alt" content="Blogs verbeteren met zelfgemaakte Jekyll-plugins"><meta name="twitter:url" content="https://blog.4dcu.be/nl/programming/2020/03/Jekyll-Blog/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/programming/2020/03/Jekyll-Blog/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/2020/03/13/Jekyll-Blog.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/2020/03/Jekyll-Blog/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/2020/03/13/Jekyll-Blog.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/programming/2020/03/Jekyll-Blog/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/programming/2020/03/Jekyll-Blog/" },
+      "url": "https://blog.4dcu.be/nl/programming/2020/03/Jekyll-Blog/",
+      "headline": "Blogs verbeteren met zelfgemaakte Jekyll-plugins",
+      "description": "Zelf Jekyll-plugins in Ruby schrijven voor functies zoals automatische LightGallery-links en een kaart die voor een reisblog aangeeft waar elk artikel werd g...",
+      "datePublished": "2020-03-13T12:00:00+00:00",
+      "dateModified": "2020-03-13T12:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2020-03-13-Jekyll-Blog-map_extension.jpg",
+      "keywords": ["ruby", "jekyll", "blog"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/programming/2020/03/Jekyll-Blog/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Programmeren", "item": "https://blog.4dcu.be/nl/category/programming/" },
+        { "@type": "ListItem", "position": 3, "name": "Blogs verbeteren met zelfgemaakte Jekyll-plugins" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/programming/2020/03/13/Jekyll-Blog.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/programming/2020/03/Jekyll-Blog/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/jekyll_map.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="Blogs verbeteren met zelfgemaakte Jekyll-plugins" class="hero-background is-transparent" src="/assets/posts/2020-03-13-Jekyll-Blog/map_extension.png" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">Blogs verbeteren met zelfgemaakte Jekyll-plugins</h1><p class="info has-text-white"><em>til je blog naar een hoger niveau</em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 13-03-2020 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/programming/">Programmeren</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Deze blog is gebouwd met <a href="https://jekyllrb.com/">Jekyll</a>, waarmee je een statische website kunt genereren op basis van een reeks sjablonen (voor de
+lay-out) en Markdown-bestanden (voor de inhoud). Het grote voordeel is dat je GitHub Pages kunt gebruiken om die
+statische pagina’s gratis te hosten. Hoewel er heel wat uitstekende <a href="http://jekyllthemes.org/">thema’s</a> beschikbaar zijn, ontbreken bepaalde functies die ik echt wilde
+doorgaans. Gelukkig ondersteunt <a href="https://jekyllrb.com/">Jekyll</a> plugins om die leemtes op te vullen. Hier lees je over enkele plugins 
+die ik maakte voor deze blog en <a href="http://beyond-the-known.eu/">Beyond the Known</a> (een reisblog).</p>
+
+<h2 id="aan-de-slag">Aan de slag</h2>
+
+<p>Voor beide blogs waarbij ik betrokken ben, diende het <a href="https://github.com/bencentra/centrarium">Centrarium</a>-thema als vertrekpunt. Dat thema bevatte al heel wat 
+onderdelen die ik wilde. Het is echt niet nodig om voor elk project het wiel opnieuw uit te vinden. Ik bracht wel een aantal wijzigingen aan
+het thema aan. Zo verwijderde ik de ondersteuning voor <a href="https://highlightjs.org/">HighlightJS</a> ten gunste van de standaard code-highlighter van Jekyll.
+Ik verkies ook <a href="http://sachinchoolur.github.io/lightGallery/">LightGallery</a> boven <a href="https://lokeshdhakar.com/projects/lightbox2/">Lightbox</a>, dus die heb ik eveneens vervangen.</p>
+
+<p>Deze wijzigingen bestaan louter uit HTML, JS en CSS. Je moet alleen de relevante code in de map <code class="language-plaintext highlighter-rouge">_sass</code>, <code class="language-plaintext highlighter-rouge">_includes</code> of 
+<code class="language-plaintext highlighter-rouge">_layouts</code> vinden en aanpassen. Ik wilde echter nog enkele dingen toevoegen die wat meer moeite
+kostten.</p>
+
+<h2 id="automatische-lightgallery-links-voor-alle-afbeeldingen">Automatische LightGallery-links voor alle afbeeldingen</h2>
+
+<p>In Markdown kun je heel eenvoudig een afbeelding invoegen.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code> !<span class="p">[</span><span class="nv">image_description</span><span class="p">](</span><span class="sx">path/to/the/image.jpg</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Technisch gezien moet je de <em>base URL</em> van de website aan het pad toevoegen. Zo blijft de site ook werken wanneer die in een 
+submap wordt gehost. Dat kan door <code class="language-plaintext highlighter-rouge">{{ site.baseurl }}/</code> vóór het pad te plaatsen. Dit is echter specifiek voor het thema waarmee ik begon en als je de 
+Markdown-bestanden ooit met een ander thema of framework wilt gebruiken, zal dat je parten spelen… Om de afbeelding met alle 
+vereiste LightGallery-functies op te nemen, moet je pure HTML in je Markdown-bestand plaatsen.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{{ site.baseurl }}/path/to/the/image.jpg"</span> <span class="na">class=</span><span class="s">"lightgallery-link"</span> <span class="na">data-sub-html=</span><span class="s">"image_description"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">alt=</span><span class="s">"image_description"</span> <span class="na">data-src=</span><span class="s">"{{ site.baseurl }}/path/to/the/image.jpg"</span> <span class="na">src=</span><span class="s">"{{ site.baseurl }}/path/to/the/image.jpg"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/a&gt;</span>"
+</code></pre></div></div>
+
+<p>Dit is bijzonder omslachtig, waardoor enkele afbeeldingen toevoegen de leesbaarheid van de Markdown sterk vermindert. Bovendien
+moet de URL drie keer worden herhaald en de beschrijving twee keer. Dat ergerde me … enorm! Ik wil de eenvoudige
+syntaxis in mijn Markdown-bestanden gebruiken, maar die bij het bouwen van de pagina naar HTML omzetten. Dat kan met een 
+<strong>Jekyll Hook</strong>. Hooks worden uitgevoerd voordat het bestand wordt verwerkt en bieden een plaats om de Markdown-bestanden te bewerken voordat
+Jekyll ze verwerkt. Hier voegen we een hook toe die alles automatisch omzet.</p>
+
+<p>Daarvoor moet je in je project een map <code class="language-plaintext highlighter-rouge">_plugins</code> maken en een bestand <code class="language-plaintext highlighter-rouge">lightgallery_links.rb</code> toevoegen met de 
+onderstaande code.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">Jekyll</span><span class="o">::</span><span class="no">Hooks</span><span class="p">.</span><span class="nf">register</span> <span class="ss">:posts</span><span class="p">,</span> <span class="ss">:pre_render</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="p">,</span> <span class="n">payload</span><span class="o">|</span>
+  <span class="n">post</span><span class="p">.</span><span class="nf">content</span><span class="p">.</span><span class="nf">gsub!</span><span class="p">(</span><span class="sr">/^!\[(.*)\]\(([^\)]+)\)((?:{:[^}]+})*)/</span><span class="p">,</span> <span class="s2">"&lt;a href=</span><span class="se">\"</span><span class="s2">{{ site.baseurl }}</span><span class="se">\\</span><span class="s2">2</span><span class="se">\"</span><span class="s2"> class=</span><span class="se">\"</span><span class="s2">lightgallery-link</span><span class="se">\"</span><span class="s2"> data-sub-html=</span><span class="se">\"\\</span><span class="s2">1</span><span class="se">\"</span><span class="s2">&gt;</span><span class="se">\n</span><span class="s2">![</span><span class="se">\\</span><span class="s2">1]({{ site.baseurl }}</span><span class="se">\\</span><span class="s2">2){: height="" width=""}</span><span class="se">\\</span><span class="s2">3{:data-src=</span><span class="se">\"</span><span class="s2">{{ site.baseurl }}</span><span class="se">\\</span><span class="s2">2</span><span class="se">\"</span><span class="s2">}</span><span class="se">\n</span><span class="s2">&lt;/a&gt;"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>De cryptische regel is een reguliere expressie die afbeeldingstags in de standaard Markdown-syntaxis detecteert, ze in HTML-
+linktags plaatst en een deel toevoegt om de data-src van de afbeelding correct in te stellen. Dit wordt alleen toegepast op afbeeldingen die
+aan het begin van een regel staan. Je kunt het dus uitschakelen door simpelweg een spatie vóór de afbeeldingsdeclaratie 
+te plaatsen.</p>
+
+<h2 id="thumbnailgenerator">Thumbnailgenerator</h2>
+
+<p>Zonder afbeeldingen zien overzichtspagina’s er nogal saai uit, dus is een thumbnail die de aandacht trekt een must.
+Omdat ik voor elk artikel een headerafbeelding gebruik, kan dezelfde afbeelding als thumbnail dienen. De headerafbeelding
+is echter veel groter dan nodig, dus wilde ik die automatisch verkleinen. Met een generator kun je via Ruby-code nieuwe
+bestanden maken. Zo kan voor elke header automatisch een thumbnail met lage resolutie worden aangemaakt.</p>
+
+<p>Eerst voegen we de gewenste afmetingen van de thumbnails toe aan <code class="language-plaintext highlighter-rouge">_config.yml</code> van de website, zoals hieronder. Deze
+parameters worden aan ImageMagick doorgegeven.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">plugins</span><span class="pi">:</span>
+  <span class="c1"># Add Mini magick to the plugins</span>
+  <span class="pi">-</span> <span class="s">mini_magick</span>
+
+<span class="na">thumbnail</span><span class="pi">:</span>
+    <span class="na">resize_dimensions</span><span class="pi">:</span> <span class="s1">'</span><span class="s">430x288^'</span>
+    <span class="na">crop_dimensions</span><span class="pi">:</span> <span class="s1">'</span><span class="s">430x288+0+0'</span>
+</code></pre></div></div>
+
+<p>We moeten mini_magic ook aan het <code class="language-plaintext highlighter-rouge">Gemfile</code> toevoegen. Dat ziet er als volgt uit:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> <span class="s1">'https://rubygems.org'</span>
+gem <span class="s1">'jekyll'</span>, <span class="s1">'&lt;4'</span>
+gem <span class="s1">'jekyll-archives'</span>
+gem <span class="s1">'jekyll-sitemap'</span>
+gem <span class="s1">'jekyll-paginate-v2'</span>
+gem <span class="s1">'mini_magick'</span>
+</code></pre></div></div>
+
+<p>In de header van elk artikel moeten we een pad toevoegen waar de verkleinde afbeelding wordt opgeslagen. Bekijk de header van dit artikel in het
+voorbeeld hieronder: de cover moet worden ingesteld als invoer voor de thumbnailgenerator en het thumbnailpad is
+de plaats waar de verkleinde afbeelding wordt weggeschreven.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">layout</span><span class="pi">:</span> <span class="s">post</span>
+<span class="na">title</span><span class="pi">:</span>  <span class="s2">"</span><span class="s">Jekyll</span><span class="nv"> </span><span class="s">Plugins"</span>
+<span class="na">byline</span><span class="pi">:</span> <span class="s2">"</span><span class="s">lift</span><span class="nv"> </span><span class="s">your</span><span class="nv"> </span><span class="s">blog</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">higher</span><span class="nv"> </span><span class="s">level"</span>
+<span class="na">date</span><span class="pi">:</span>   <span class="s">2020-03-13 12:00:00</span>
+<span class="na">author</span><span class="pi">:</span> <span class="s">Sebastian Proost</span>
+<span class="na">categories</span><span class="pi">:</span> <span class="s">programming</span>
+<span class="na">tags</span><span class="pi">:</span> <span class="s">ruby jekyll blog</span>
+<span class="na">cover</span><span class="pi">:</span>  <span class="s2">"</span><span class="s">/assets/posts/2020-03-13-Jekyll-Blog/map_extension.png"</span>
+<span class="na">thumbnail</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/assets/images/thumbnails/jekyll_map.jpg"</span>
+</code></pre></div></div>
+
+<p>Plaats ten slotte een bestand <code class="language-plaintext highlighter-rouge">thumbnail_generator.rb</code> met de onderstaande code in de map <code class="language-plaintext highlighter-rouge">_plugins</code>.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"mini_magick"</span>
+<span class="kp">include</span> <span class="no">MiniMagick</span>
+
+<span class="k">module</span> <span class="nn">Jekyll</span>
+  <span class="k">class</span> <span class="nc">ThumbnailGenerator</span> <span class="o">&lt;</span> <span class="no">Generator</span>
+    <span class="n">safe</span> <span class="kp">true</span>
+
+    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
+       <span class="n">posts</span> <span class="o">=</span> <span class="n">site</span><span class="p">.</span><span class="nf">posts</span><span class="p">.</span><span class="nf">docs</span><span class="p">.</span><span class="nf">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span> <span class="n">post</span><span class="p">.</span><span class="nf">data</span><span class="p">[</span><span class="s1">'thumbnail'</span><span class="p">]</span> <span class="p">}</span>
+       <span class="n">resize_dimensions</span> <span class="o">=</span> <span class="no">Jekyll</span><span class="p">.</span><span class="nf">configuration</span><span class="p">({})[</span><span class="s1">'thumbnail'</span><span class="p">][</span><span class="s1">'resize_dimensions'</span><span class="p">]</span>
+       <span class="n">crop_dimensions</span> <span class="o">=</span> <span class="no">Jekyll</span><span class="p">.</span><span class="nf">configuration</span><span class="p">({})[</span><span class="s1">'thumbnail'</span><span class="p">][</span><span class="s1">'crop_dimensions'</span><span class="p">]</span>
+       <span class="n">posts</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+         <span class="n">input_path</span> <span class="o">=</span> <span class="s2">".</span><span class="si">#{</span><span class="n">post</span><span class="p">[</span><span class="s1">'cover'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
+         <span class="n">output_path</span> <span class="o">=</span> <span class="s2">".</span><span class="si">#{</span><span class="n">post</span><span class="p">[</span><span class="s1">'thumbnail'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
+         <span class="k">if</span> <span class="o">!</span><span class="no">File</span><span class="p">.</span><span class="nf">exists?</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span> <span class="o">||</span> <span class="no">File</span><span class="p">.</span><span class="nf">mtime</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="no">File</span><span class="p">.</span><span class="nf">mtime</span><span class="p">(</span><span class="n">input_path</span><span class="p">)</span>
+            <span class="nb">puts</span><span class="p">(</span><span class="s2">"Generating thumbnail"</span><span class="p">,</span> <span class="n">input_path</span><span class="p">,</span> <span class="n">output_path</span><span class="p">)</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="no">MiniMagick</span><span class="o">::</span><span class="no">Image</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="n">input_path</span><span class="p">)</span>
+            <span class="n">image</span><span class="p">.</span><span class="nf">strip</span>
+            <span class="n">image</span><span class="p">.</span><span class="nf">compress</span> <span class="s2">"JPEG2000"</span>
+            <span class="n">image</span><span class="p">.</span><span class="nf">resize</span> <span class="n">resize_dimensions</span>
+            <span class="n">image</span><span class="p">.</span><span class="nf">gravity</span> <span class="s2">"center"</span>
+            <span class="n">image</span><span class="p">.</span><span class="nf">crop</span> <span class="n">crop_dimensions</span>
+            <span class="n">image</span><span class="p">.</span><span class="nf">write</span> <span class="n">output_path</span>
+         <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>Dit selecteert alle artikels waarvoor een thumbnailpad is ingesteld en laadt de afmetingen uit de configuratie. Vervolgens
+worden de geselecteerde artikels doorlopen, wordt de header tot de gewenste afmetingen verkleind en wordt het resultaat naar het thumbnailpad geschreven. 
+Om te vermijden dat afbeeldingen telkens opnieuw onnodig worden verkleind, wordt gecontroleerd of de thumbnail bestaat en of het invoerbestand niet 
+nieuwer is dan de thumbnail.</p>
+
+<p>Ten slotte moet de afbeelding in het artikeloverzicht worden opgenomen, maar dat is even eenvoudig als de titel van het artikel ophalen!</p>
+
+<p>Met dezelfde aanpak bouwde ik ook de <a href="/gallery/">galerij</a>.</p>
+
+<h2 id="artikels-op-een-wereldkaart">Artikels op een wereldkaart</h2>
+
+<p>Voor <a href="http://beyond-the-known.eu/">Beyond the Known</a> wilden we echt een wereldkaart met een speld voor elke locatie waarover een artikel werd geschreven.
+Daarvoor moeten de gps-coördinaten van elk artikel in de YAML-header worden opgenomen. Je kunt ze gemakkelijk via
+Google Maps verkrijgen en zoals hieronder in de header van het artikel opnemen:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">coords</span><span class="pi">:</span>
+  <span class="na">lat</span><span class="pi">:</span> <span class="m">51.151706</span>
+  <span class="na">lng</span><span class="pi">:</span> <span class="m">3.8708973</span>
+</code></pre></div></div>
+
+<p>Je moet een Google Maps API-sleutel aanvragen via de <a href="https://console.developers.google.com/">Google Developer Console</a> en die in het bestand <code class="language-plaintext highlighter-rouge">_config.yml</code> instellen. 
+Zorg ervoor dat je de juiste beperkingen op je sleutel instelt!</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Google maps API key</span>
+<span class="na">google_maps_api_key</span><span class="pi">:</span> <span class="s2">"</span><span class="s">your</span><span class="nv"> </span><span class="s">key</span><span class="nv"> </span><span class="s">here"</span>
+</code></pre></div></div>
+
+<p>Vervolgens hebben we een JSON-bestand nodig dat voor elk artikel de coördinaten, titel, link en
+beschrijving bevat. Dat bestand halen we later op wanneer de eigenlijke kaart wordt gegenereerd. Maak daarvoor een bestand <code class="language-plaintext highlighter-rouge">map_data.json</code> in de
+hoofdmap van de website met deze code:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="nx">layout</span><span class="p">:</span> <span class="kc">null</span>
+<span class="o">---</span>
+
+<span class="p">[</span>
+<span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">post</span> <span class="k">in</span> <span class="nx">site</span><span class="p">.</span><span class="nx">posts</span> <span class="o">%</span><span class="p">}</span> 
+<span class="p">{</span>
+  <span class="dl">"</span><span class="s2">title</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ post.title }}</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">url</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ post.url | prepend: site.base }}</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">date</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ post.date | date: </span><span class="dl">"</span> <span class="o">%</span> <span class="nx">B</span> <span class="o">%</span> <span class="nx">d</span><span class="p">,</span> <span class="o">%</span> <span class="nx">Y</span> <span class="dl">"</span><span class="s2"> }}</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">content</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ post.content | strip_html | smartify | truncatewords: 50 }}</span><span class="dl">"</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="nx">post</span><span class="p">.</span><span class="nx">coords</span> <span class="o">%</span><span class="p">},</span>
+  <span class="dl">"</span><span class="s2">coords</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">lat</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="p">{</span>
+        <span class="nx">post</span><span class="p">.</span><span class="nx">coords</span><span class="p">.</span><span class="nx">lat</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="dl">"</span><span class="s2">lng</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="p">{</span>
+        <span class="nx">post</span><span class="p">.</span><span class="nx">coords</span><span class="p">.</span><span class="nx">lng</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="p">{</span><span class="o">%</span> <span class="nx">endif</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">}</span> 
+<span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="nx">forloop</span><span class="p">.</span><span class="nx">last</span> <span class="o">%</span><span class="p">}</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">},</span> <span class="p">{</span><span class="o">%</span> <span class="nx">endif</span> <span class="o">%</span><span class="p">}</span> 
+<span class="p">{</span><span class="o">%</span> <span class="nx">endfor</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div></div>
+
+<p>Nu kunnen we met de onderstaande code een kaart aan een pagina toevoegen. JQuery laadt de gegevens uit <code class="language-plaintext highlighter-rouge">map_data.json</code> 
+(dat wordt opgebouwd uit de coördinaten in de
+headers van de artikels). Die worden omgezet in markeringen op de kaart (met een pop-upmenu) en samen met de kaart
+toegevoegd aan de div met <code class="language-plaintext highlighter-rouge">id="map"</code>.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"map"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"map_spacer"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://code.jquery.com/jquery-3.4.1.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+	<span class="kd">var</span> <span class="nx">map</span><span class="p">;</span>
+	<span class="kd">function</span> <span class="nf">initMap</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">google</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nc">Map</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">map</span><span class="dl">'</span><span class="p">),</span> <span class="p">{</span>
+			<span class="na">center</span><span class="p">:</span> <span class="p">{</span><span class="na">lat</span><span class="p">:</span> <span class="mf">50.8798</span><span class="p">,</span> <span class="na">lng</span><span class="p">:</span> <span class="mf">4.7005</span><span class="p">},</span>
+			<span class="na">zoom</span><span class="p">:</span> <span class="mi">2</span>
+		<span class="p">});</span>
+
+		<span class="kd">function</span> <span class="nf">addMarker</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">marker</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">google</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nc">Marker</span><span class="p">({</span>
+				<span class="na">position</span><span class="p">:</span> <span class="nx">props</span><span class="p">.</span><span class="nx">coords</span><span class="p">,</span>
+				<span class="na">map</span><span class="p">:</span> <span class="nx">map</span>
+			<span class="p">});</span>
+
+			<span class="kd">var</span> <span class="nx">infoWindow</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">google</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">InfoWindow</span><span class="p">({</span>
+				<span class="na">content</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;h2&gt;&lt;a href="</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">props</span><span class="p">.</span><span class="nx">url</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">"&gt;</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">props</span><span class="p">.</span><span class="nx">title</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">&lt;/a&gt;&lt;/h2&gt;&lt;p class="map_info_window"&gt;</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">props</span><span class="p">.</span><span class="nx">content</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">&lt;/p&gt;</span><span class="dl">'</span>
+			<span class="p">});</span>
+
+			<span class="nx">marker</span><span class="p">.</span><span class="nf">addListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+				<span class="nx">infoWindow</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="nx">map</span><span class="p">,</span> <span class="nx">marker</span><span class="p">);</span>
+			<span class="p">});</span>
+
+		<span class="p">}</span>
+
+		<span class="nx">$</span><span class="p">.</span><span class="nf">getJSON</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/map_data.json</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">data</span> <span class="p">)</span> <span class="p">{</span>
+			<span class="nx">data</span><span class="p">.</span><span class="nf">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">el</span><span class="p">){</span>
+			  <span class="k">if </span><span class="p">(</span><span class="k">typeof</span> <span class="nx">el</span><span class="p">.</span><span class="nx">coords</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">undefined</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+			    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
+				  <span class="nf">addMarker</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
+				<span class="p">}</span>
+			<span class="p">})</span>
+		<span class="p">});</span>
+
+	<span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://maps.googleapis.com/maps/api/js?key=&amp;callback=initMap"</span> <span class="na">async</span> <span class="na">defer</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>Om de kaart weer te geven, is een beetje CSS nodig. Dit werkt voor onze toepassing, maar moet waarschijnlijk worden aangepast 
+aan het ontwerp van je eigen site. Het is belangrijk om een hoogte en breedte in te stellen, anders verschijnt de kaart niet.</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#map</span> <span class="p">{</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">90vh</span><span class="p">;</span>
+    <span class="nl">min-height</span><span class="p">:</span> <span class="m">250px</span><span class="p">;</span>
+    <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+    <span class="nl">left</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nf">#map_spacer</span> <span class="p">{</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">90vh</span><span class="p">;</span>
+    <span class="nl">min-height</span><span class="p">:</span> <span class="m">250px</span><span class="p">;</span>
+    <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">p</span><span class="nc">.map_info_window</span> <span class="p">{</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">350px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><a href="/assets/posts/2020-03-13-Jekyll-Blog/map_extension.png" class="lightgallery-link" data-sub-html="Kaartpagina van Beyond the Known, met aanklikbare spelden die naar het relevante artikel leiden">
+<img src="/assets/posts/2020-03-13-Jekyll-Blog/map_extension.png" alt="Kaartpagina van Beyond the Known, met aanklikbare spelden die naar het relevante artikel leiden" height="1080" width="1920" data-src="/assets/posts/2020-03-13-Jekyll-Blog/map_extension.png" loading="lazy" />
+</a></p>
+
+<p>Het eindresultaat op <a href="http://beyond-the-known.eu/">Beyond the Known</a>. Merk op dat ik ook een aangepaste stijl heb toegevoegd (bekijk de documentatie van de Google Maps JavaScript API
+voor details over hoe je dat doet). Met dit overzicht vind je snel een relevant artikel over een regio die je misschien 
+wilt bezoeken! Een erg nuttige functie voor een reisblog.</p>
+
+<h2 id="conclusie">Conclusie</h2>
+
+<p>Met deze plugins kon ik alle functies toevoegen die ik nodig had voor deze blog en <a href="http://beyond-the-known.eu/">Beyond the Known</a>. Een
+statische website genereren brengt bepaalde beperkingen mee en werken met een uitgesproken framework als <a href="https://jekyllrb.com/">Jekyll</a> vergde 
+wat aanpassing. Nu alles op zijn plaats staat, is er echter één consistente manier om alles te doen. Daardoor wordt
+het onderhoud van beide blogs in de toekomst een stuk eenvoudiger. Statische sites zijn bovendien goedkoop te hosten: GitHub biedt gratis hosting en de
+enige kost is de domeinnaam, die met minder dan $10 per jaar verwaarloosbaar is. Zo komen er tijd en geld vrij
+om inhoud te maken!</p>
+
+<p>Als je zelf een blog hebt, mag je de code hier gerust gebruiken om deze functies aan je website toe te voegen.</p>
+
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/ruby/">ruby</a>,&nbsp;<a href="/nl/tag/jekyll/">jekyll</a>,&nbsp;<a href="/nl/tag/blog/">blog</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=Blogs+verbeteren+met+zelfgemaakte+Jekyll-plugins%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F03%2FJekyll-Blog%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F03%2FJekyll-Blog%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F03%2FJekyll-Blog%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=Blogs+verbeteren+met+zelfgemaakte+Jekyll-plugins&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F03%2FJekyll-Blog%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/diy/2020/02/3D-printing/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">Tips & trucs voor 3D-printen</span></a></span>
+  <span class="next-post"><a href="/nl/programming/games/2020/04/DeckLock/"><span class="page-number">DeckLock: hou je kaartspellen bij</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

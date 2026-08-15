@@ -5,6 +5,7 @@ byline: ""
 description: "Tips and tricks for getting the most out of Stable Diffusion 2.1 in the web UI, covering installation, 768px images, prompting, and an AI art workflow."
 date:   2022-12-31 10:00:00
 author: Sebastian Proost
+post_id: stable-diffusion-workflow
 categories: ai
 tags:	aiart python stable-diffusion dreambooth art
 cover:  "/assets/posts/2022-12-31-Stable-Diffusion-Workflow/header.jpg"

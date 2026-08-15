@@ -124,7 +124,7 @@ Deze test vinkte dus de meeste van mijn vakjes af: ik had wat rudimentaire graph
 
 Hoewel The Royal Game of Ur een dobbelspel is en er dus geluk bij komt kijken, zit er meer strategie in dan je zou denken. De [regels](https://royalur.net/rules) zijn eenvoudig: je racet met je stukken over het bord, vangt tegenstanders door op hen te landen en scoort door stukken aan het einde van het bord af te voeren. Omdat je meerdere stukken op het bord kunt hebben en zelf kiest welk stuk je verzet, is er ruimte om stukken strategisch te plaatsen en efficiënter vangsten op te zetten.
 
-Voor ik eraan begon, wilde ik dus de opties verkennen om een AI voor de CPU-tegenstander te implementeren: nagaan of ik een paar verschillende speelstijlen kon bedenken, testen hoe goed die werkten en parameters optimaliseren. Dat deed ik in Python, de taal die ik het best ken, dus het was logisch om in die omgeving te prototypen. Dit verdient misschien een volledig artikel op zich, maar het concept is relatief eenvoudig en ligt sterk in lijn met [mijn artikel over het gebruik van een agentgebaseerd model]({% post_url 2020/2020-11-11-Gwent-Pro-Rank-ABM %}). Alleen simuleren we hier geen spel: de agents spelen daadwerkelijk een spel. Verschillende agents kunnen verschillende strategieën gebruiken (of dezelfde strategie met andere parameters), waardoor ik een paar opties kon kiezen om in de Game Boy-ROM op te nemen. Uiteindelijk kwam ik uit bij vier strategieën die conceptueel voldoende van elkaar verschilden om aan vier verschillende CPU-tegenstanders in het spel te koppelen. Die strategieën sluiten ook aan bij de achtergrond van de personages: de koopman gebruikt bijvoorbeeld een greedy-strategie die op korte termijn voor de beste zet gaat.
+Voor ik eraan begon, wilde ik dus de opties verkennen om een AI voor de CPU-tegenstander te implementeren: nagaan of ik een paar verschillende speelstijlen kon bedenken, testen hoe goed die werkten en parameters optimaliseren. Dat deed ik in Python, de taal die ik het best ken, dus het was logisch om in die omgeving te prototypen. Dit verdient misschien een volledig artikel op zich, maar het concept is relatief eenvoudig en ligt sterk in lijn met [mijn artikel over het gebruik van een agentgebaseerd model]({% post_url nl/2020/2020-11-11-Gwent-Pro-Rank-ABM %}). Alleen simuleren we hier geen spel: de agents spelen daadwerkelijk een spel. Verschillende agents kunnen verschillende strategieën gebruiken (of dezelfde strategie met andere parameters), waardoor ik een paar opties kon kiezen om in de Game Boy-ROM op te nemen. Uiteindelijk kwam ik uit bij vier strategieën die conceptueel voldoende van elkaar verschilden om aan vier verschillende CPU-tegenstanders in het spel te koppelen. Die strategieën sluiten ook aan bij de achtergrond van de personages: de koopman gebruikt bijvoorbeeld een greedy-strategie die op korte termijn voor de beste zet gaat.
 
 
 In de tabel hieronder zie je welke strategieën het best werkten en hoe ze zich tegenover elkaar verhielden.
@@ -297,9 +297,9 @@ De ROM op echte hardware draaien zou ook geweldig zijn, maar dat wordt prijzig. 
 
 ### Verwante artikels op deze blog
   * [Python to Rust: Porting My Genetic Art Algorithm]({% post_url nl/2025/2025-12-20-rust-experiment %}) -- Een gelijkaardig experiment met Claude Code in een onbekend ecosysteem
-  * [An Agent Based Model to look at Gwent Pro Ladder]({% post_url 2020/2020-11-11-Gwent-Pro-Rank-ABM %}) -- De agent-gebaseerde modelleringsaanpak waarnaar verwezen wordt voor de AI-tegenstanders
-  * [Can ChatGPT write a Python GUI app for me?]({% post_url 2023/2023-02-02-chatgpt-python-gui-app %}) -- Een eerder experiment met AI-ondersteunde ontwikkeling
-  * [GameBoy Zero Builds]({% post_url 2021/2021-01-31-Gameboy-Zero %}) -- Een eerder Game Boy-project op deze blog
+  * [An Agent Based Model to look at Gwent Pro Ladder]({% post_url nl/2020/2020-11-11-Gwent-Pro-Rank-ABM %}) -- De agent-gebaseerde modelleringsaanpak waarnaar verwezen wordt voor de AI-tegenstanders
+  * [Can ChatGPT write a Python GUI app for me?]({% post_url nl/2023/2023-02-02-chatgpt-python-gui-app %}) -- Een eerder experiment met AI-ondersteunde ontwikkeling
+  * [GameBoy Zero Builds]({% post_url nl/2021/2021-01-31-Gameboy-Zero %}) -- Een eerder Game Boy-project op deze blog
 
 ## Dankwoord
 

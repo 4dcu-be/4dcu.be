@@ -5,6 +5,7 @@ byline: "a different take on Vermeer's Girl with a Pearl Earring"
 description: "Using a Python genetic algorithm with Voronoi diagrams and gene duplication to re-draw Vermeer's Girl with a Pearl Earring in a minimalist style."
 date:   2020-02-10 12:00:00
 author: Sebastian Proost
+post_id: genetic-art-algorithm-2
 categories: programming
 tags:	python evolution genetic-algorithm algorithm art
 cover:  "/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/vermeer_header.jpg"
@@ -23,7 +24,7 @@ While the genetic algorithm in the [previous post]({% post_url 2020/2020-01-12-G
 worked very well, it didn't quite produce the style of minimalist artwork I was trying to achieve. Furthermore, it didn't allow
 the chromosomes to evolve using duplication and deletion of existing genes (which is very common in biology). So
 after mulling over these issues a few days, I found a solution using a [Voronoi diagram]. The final 
-result (shown below) is much closer to what I was aiming for. The painting to re-drawn by the algorithm this time is
+result (shown below) is much closer to what I was aiming for. The painting to be re-drawn by the algorithm this time is
 Vermeer's [Girl with a Pearl Earring].
 
 <div class="gallery-2-col" markdown="1">
@@ -120,14 +121,14 @@ including humans !
 
 The strategy used to generate the image in the beginning of the post was to start with 250 points and evolve them for 
 ~1000 generations, then double the number of points and evolve for another 1000 generations, shrink the genome by 
-removing 100 points and double again. Then the population was left to evolve for a while and then force to shed 100 
+removing 100 points and double again. Then the population was left to evolve for a while and then forced to shed 100
 genes, this process was repeated a few times to end up with a final image that contains 600 points. 
 
 ![The evolution at generation 1, 250, 500, 750, 1000, 1500, 2500, 3500 and 5500](/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/vermeer_evolution.png)
 
 In the image above you can see the best individual (out of a population of 250) of generation 1, 250, 500, 750, 1000, 
 1500, 2500, 3500 and 5500. Between generation 1000-1500 and 2500-3500 there were duplications followed by a number of 
-normal evolutionary steps and a few reductions steps. The complexity and detail of the image clearly increases at these
+normal evolutionary steps and a few reduction steps. The complexity and detail of the image clearly increases at these
 steps.
 
 

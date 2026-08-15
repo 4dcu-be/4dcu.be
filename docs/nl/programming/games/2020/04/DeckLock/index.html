@@ -1,0 +1,702 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>DeckLock: hou je kaartspellen bij</title>
+  <meta name="description" content="DeckLock bouwen, een statische-sitegenerator met Pelican en Python om kaartspelcollecties bij te houden, te beginnen met KeyForge-decks die via hun unieke id...">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="DeckLock: hou je kaartspellen bij" />
+  <meta property="og:description" content="DeckLock bouwen, een statische-sitegenerator met Pelican en Python om kaartspelcollecties bij te houden, te beginnen met KeyForge-decks die via hun unieke id..." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/programming/games/2020/04/DeckLock/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2020-04-05-DeckLock-keyforge_game.jpg" /><meta property="og:image:alt" content="DeckLock: hou je kaartspellen bij" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2020-04-05T12:00:00+00:00" /><meta property="article:modified_time" content="2020-04-05T12:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programmeren" /><meta property="article:section" content="Games" /><meta property="article:tag" content="python" /><meta property="article:tag" content="pelican" /><meta property="article:tag" content="blog" /><meta property="article:tag" content="games" /><meta property="article:tag" content="keyforge" /><meta property="article:tag" content="decklock" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="DeckLock: hou je kaartspellen bij"><meta name="twitter:description" content="DeckLock bouwen, een statische-sitegenerator met Pelican en Python om kaartspelcollecties bij te houden, te beginnen met KeyForge-decks die via hun unieke id..."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2020-04-05-DeckLock-keyforge_game.jpg"><meta name="twitter:image:alt" content="DeckLock: hou je kaartspellen bij"><meta name="twitter:url" content="https://blog.4dcu.be/nl/programming/games/2020/04/DeckLock/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/programming/games/2020/04/DeckLock/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/games/2020/04/05/DeckLock.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/games/2020/04/DeckLock/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/games/2020/04/05/DeckLock.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/programming/games/2020/04/DeckLock/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/programming/games/2020/04/DeckLock/" },
+      "url": "https://blog.4dcu.be/nl/programming/games/2020/04/DeckLock/",
+      "headline": "DeckLock: hou je kaartspellen bij",
+      "description": "DeckLock bouwen, een statische-sitegenerator met Pelican en Python om kaartspelcollecties bij te houden, te beginnen met KeyForge-decks die via hun unieke id...",
+      "datePublished": "2020-04-05T12:00:00+00:00",
+      "dateModified": "2020-04-05T12:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2020-04-05-DeckLock-keyforge_game.jpg",
+      "keywords": ["python", "pelican", "blog", "games", "keyforge", "decklock"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/programming/games/2020/04/DeckLock/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Programmeren", "item": "https://blog.4dcu.be/nl/category/programming/" },
+        { "@type": "ListItem", "position": 3, "name": "DeckLock: hou je kaartspellen bij" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/programming/games/2020/04/05/DeckLock.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/programming/games/2020/04/DeckLock/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/keyforge_game.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="DeckLock: hou je kaartspellen bij" class="hero-background is-transparent" src="/assets/posts/2020-04-05-DeckLock/keyforge_game.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">DeckLock: hou je kaartspellen bij</h1><p class="info has-text-white"><em>met Pelican een overzicht van je collectie bouwen</em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 05-04-2020 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/programming/">Programmeren</a>, <a href="/nl/category/games/">Games</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Momenteel speel ik <a href="https://www.keyforgegame.com/">KeyForge</a> en <a href="https://www.playgwent.com/en">Gwent</a>. Een van mijn eerste artikels ging over 
+<a href="/nl/programming/games/2019/12/Magic-the-Gathering/">Magic: the Gathering</a> en ook mijn 3D-geprinte <a href="/nl/diy/2020/02/3D-printing/">dobbelsteen- en fichebakjes</a> verschenen al op deze blog. Het is dus geen geheim dat ik 
+van kaartspellen hou, en mijn collectie decks groeit zowel online als offline snel. Er bestaan genoeg tools om
+je decks voor één spel bij te houden, maar ik wil zelf iets maken dat alle spellen ondersteunt die ik speel.</p>
+
+<p>Dit was ook een goede gelegenheid om <a href="https://blog.getpelican.com/">Pelican</a> te leren kennen, een statische-websitegenerator voor <a href="https://www.python.org/">Python</a>. Ik gebruik <a href="https://jekyllrb.com/">Jekyll</a> al
+een tijdje, maar om extra functies te ontwikkelen (zoals die uit het <a href="/nl/programming/2020/03/Jekyll-Blog/">vorige artikel</a>) heb je
+de programmeertaal <a href="https://www.ruby-lang.org/en/">Ruby</a> nodig. Omdat ik <a href="https://www.ruby-lang.org/en/">Ruby</a> niet zo goed beheers, zou het veel efficiënter zijn om mijn favoriete
+programmeertaal <a href="https://www.python.org/">Python</a> te gebruiken. <a href="https://blog.getpelican.com/">Pelican</a> leek uitstekend te passen en dit was het perfecte project om dat zelf uit te zoeken.</p>
+
+<p>Je kunt het resultaat van deze blog <a href="https://4dcu.be/DeckLock/">hier</a> bekijken. De code en instructies om DeckLock met
+je eigen decks te bouwen vind je op GitHub: <a href="https://github.com/4dcu-be/DeckLock">https://github.com/4dcu-be/DeckLock</a></p>
+
+<p><a href="/assets/posts/2020-04-05-DeckLock/kf_deck_overview.png" class="lightgallery-link" data-sub-html="Overzicht van mijn KeyForge-decks, gegenereerd met DeckLock">
+<img src="/assets/posts/2020-04-05-DeckLock/kf_deck_overview.png" alt="Overzicht van mijn KeyForge-decks, gegenereerd met DeckLock" height="874" width="1890" data-src="/assets/posts/2020-04-05-DeckLock/kf_deck_overview.png" loading="lazy" />
+</a></p>
+
+<h2 id="inleiding">Inleiding</h2>
+
+<h3 id="keyforge">KeyForge</h3>
+
+<p><a href="https://www.keyforgegame.com/">KeyForge</a> is een spel ontworpen door dr. Richard Garfield, bekend als de bedenker van <a href="/nl/programming/games/2019/12/Magic-the-Gathering/">Magic: the Gathering</a>, meer dan 25 jaar geleden. 
+Dit spel is echter uniek: elk deck dat je koopt, is een unieke combinatie van kaarten die uitsluitend in die
+specifieke samenstelling bedoeld is om te spelen. Anders dan bij andere verzamelkaartspellen worden individuele kaarten niet geruild. Bovendien heeft elk 
+deck een QR-code. Wanneer je die met de KeyForge-app scant (beschikbaar in de App Store en Play Store), wordt het deck geregistreerd op
+<a href="https://www.keyforgegame.com/">https://www.keyforgegame.com/</a>.</p>
+
+<p>Dit is perfect voor onze toepassing: alle informatie (naam, decklijst, …) van een gescand deck kunnen we rechtstreeks van de
+<a href="https://www.keyforgegame.com/">KeyForge</a>-website halen. Het enige wat we nodig hebben is de unieke identificatiecode van het deck; al de rest halen we automatisch op.
+Met diezelfde identificatiecode kunnen bovendien extra statistieken over het deck (zoals de geschatte kwaliteit van de kaarten, 
+de synergie ertussen, …) via <a href="https://decksofkeyforge.com/">Decks of KeyForge</a> worden verkregen.</p>
+
+<h3 id="pelican">Pelican</h3>
+
+<p>Statische-websitegeneratoren zoals <a href="https://jekyllrb.com/">Jekyll</a> en <a href="https://blog.getpelican.com/">Pelican</a> combineren je inhoud in een eenvoudig formaat (meestal <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a>
+of <a href="https://docutils.sourceforge.io/rst.html">reStructuredText</a>) met sjablonen die bepalen hoe de uiteindelijke pagina’s eruitzien. Zo ontstaan statische HTML-
+pagina’s die vrijwel overal kunnen worden gehost, omdat er geen databank, PHP, … nodig is. Dit elegante ontwerp met 
+een duidelijke scheiding tussen inhoud en weergave heeft verschillende voordelen. De inhoud staat in een eenvoudig, tekstgebaseerd 
+formaat dat gemakkelijk kan worden opgeslagen, gelezen, bewerkt en hergebruikt. Sites zijn razendsnel omdat alles vooraf wordt berekend.</p>
+
+<h2 id="aan-de-slag">Aan de slag</h2>
+
+<p>Ga eerst naar <a href="https://github.com/4dcu-be/DeckLock">https://github.com/4dcu-be/DeckLock</a> en maak je eigen <em>fork</em> van de
+repository. Gebruik vervolgens de onderstaande commando’s om je eigen repository te klonen, een virtuele omgeving te maken en alle
+vereiste pakketten te installeren.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone &lt;url to your fork of DeckLock&gt; ./DeckLock
+<span class="nb">cd </span>DeckLock
+python <span class="nt">-m</span> venv venv
+<span class="nb">source </span>venv/bin/activate
+pip <span class="nb">install</span> <span class="nt">-r</span> requirements.txt
+</code></pre></div></div>
+
+<p>Op Windows werkt de regel om de virtuele omgeving te activeren (source venv/bin/activate) niet. Gebruik in plaats daarvan 
+de onderstaande regel.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate.bat
+</code></pre></div></div>
+
+<h2 id="decklock-instellen">DeckLock instellen</h2>
+
+<h3 id="het-makefile-configureren">Het Makefile configureren</h3>
+
+<p>Omdat we een virtuele omgeving gebruiken waarin Pelican is geïnstalleerd, moet het pad naar het uitvoerbare bestand in
+die omgeving in het Makefile worden ingesteld. Open het bestand en pas het pad in de onderstaande regel aan je
+systeem aan. Het uitvoerbare Pelican-bestand hoort in <code class="language-plaintext highlighter-rouge">venv/bin</code> of <code class="language-plaintext highlighter-rouge">venv/Scripts</code> te staan.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">PELICAN</span><span class="o">?=</span>d:<span class="se">\G</span>it<span class="se">\D</span>eckLock<span class="se">\v</span><span class="nb">env</span><span class="se">\S</span>cripts<span class="se">\p</span>elican
+</code></pre></div></div>
+
+<h3 id="pelicanconfpy-en-publishconfpy">pelicanconf.py en publishconf.py</h3>
+
+<p><code class="language-plaintext highlighter-rouge">pelicanconf.py</code> zou gebruiksklaar moeten zijn, maar kijk gerust na of bepaalde
+instellingen en paden moeten worden aangepast.</p>
+
+<p>In <code class="language-plaintext highlighter-rouge">publishconf.py</code> moet je wel de uiteindelijke URL van je site instellen.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">SITEURL</span> <span class="o">=</span> <span class="sh">"</span><span class="s">https://4dcu.be/DeckLock</span><span class="sh">"</span>
+</code></pre></div></div>
+
+<h3 id="api-sleutel-voor-decks-of-keyforge">API-sleutel voor Decks of KeyForge</h3>
+
+<p>Als je deckstatistieken van <a href="https://decksofkeyforge.com/">Decks of KeyForge</a> wilt opnemen, moet je een account aanmaken en een API-sleutel aanvragen via
+<a href="https://decksofkeyforge.com/">https://decksofkeyforge.com/</a>. Maak een bestand <code class="language-plaintext highlighter-rouge">.env</code> en voeg de onderstaande regel toe.</p>
+
+<p>Een <code class="language-plaintext highlighter-rouge">.env</code>-bestand dat niet wordt gecommit, houdt je API-sleutel geheim.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DOK_API_KEY=your_api_key
+</code></pre></div></div>
+
+<h3 id="identificatiecodes-van-keyforge-decks">Identificatiecodes van KeyForge-decks</h3>
+
+<p>Vervolgens moet je in <code class="language-plaintext highlighter-rouge">pelicanconf.py</code> instellen in welke map de KeyForge-gegevens te vinden zijn. Merk op dat dit pad
+relatief is ten opzichte van de inhoudsmap.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">KEYFORGE_PATH</span> <span class="o">=</span> <span class="sh">"</span><span class="s">./data</span><span class="sh">"</span>
+</code></pre></div></div>
+
+<p>Voeg nu een bestand <code class="language-plaintext highlighter-rouge">keyforge.json</code> toe aan <code class="language-plaintext highlighter-rouge">./content/data</code>, met de onderstaande structuur en de identificatiecodes van de decks die je wilt opnemen.
+Als voorbeeld is een bestand met mijn eigen KeyForge-decks meegeleverd. De structuur hoort er als volgt uit te zien.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"deck_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"a4268ae8-a9f6-48c7-9739-b28a3553b108"</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"deck_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"bfbf6786-218c-4320-a7b1-7ed4d6eddc69"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="het-platform-bouwen">Het platform bouwen</h3>
+
+<p>Je kunt make gebruiken om de website te bouwen (als make op je systeem beschikbaar is). Met <code class="language-plaintext highlighter-rouge">make html</code> maak je een lokale versie
+om in de map <code class="language-plaintext highlighter-rouge">_site</code> te testen. Gebruik <code class="language-plaintext highlighter-rouge">make release</code> om de publicatieversie in de map <code class="language-plaintext highlighter-rouge">./docs</code> te maken.</p>
+
+<pre><code class="language-commandline">make html
+
+make release
+</code></pre>
+
+<p>Je kunt Pelican ook rechtstreeks gebruiken. De inhoud staat in de map <code class="language-plaintext highlighter-rouge">./content</code> en voor een lokale testbuild stel je 
+<code class="language-plaintext highlighter-rouge">./_site</code> als uitvoermap in. Schrijf de uitvoer met de publicatie-instellingen naar de map <code class="language-plaintext highlighter-rouge">./docs</code>, zodat die gemakkelijk
+op GitHub kan worden gehost.</p>
+
+<pre><code class="language-commandline">pelican ./content -o ./_site
+
+pelican ./content -o ./docs -s publishconf.py
+</code></pre>
+
+<h3 id="lokaal-hosten-om-te-testen">Lokaal hosten om te testen</h3>
+
+<p>Je kunt de ingebouwde webserver van Pelican starten met het commando <code class="language-plaintext highlighter-rouge">make serve</code>.</p>
+
+<p>Je kunt de site ook bouwen met <code class="language-plaintext highlighter-rouge">make html</code>, naar de map <code class="language-plaintext highlighter-rouge">_site</code> gaan en een webserver starten
+met het commando <code class="language-plaintext highlighter-rouge">python -m http.server</code>.</p>
+
+<p>In beide gevallen kun je de site bekijken door in je browser naar <a href="http://localhost:8000">http://localhost:8000</a> te gaan.</p>
+
+<h3 id="hosten-op-github">Hosten op GitHub</h3>
+
+<p>DeckLock bevat een commando <code class="language-plaintext highlighter-rouge">make release</code> dat de definitieve versie van de website naar de map <code class="language-plaintext highlighter-rouge">./docs</code> schrijft. Zorg
+ervoor dat je alle bestanden in je repository commit en pusht. Op GitHub kun je instellen dat deze map voor de projectpagina’s wordt gebruikt. Schakel dat in via de instellingen en je hebt
+gratis hosting om de decks uit je kaartspelcollectie te tonen.</p>
+
+<h2 id="hoe-het-werkt">Hoe het werkt</h2>
+
+<p>Alle code staat op <a href="https://github.com/4dcu-be/DeckLock">https://github.com/4dcu-be/DeckLock</a>. Kort samengevat kan 
+Pelican functies op verschillende momenten tijdens de build activeren. Via een plugin werd de functie 
+<code class="language-plaintext highlighter-rouge">get_keyforge_external_data</code> toegevoegd, die wordt uitgevoerd wanneer Pelican initialiseert. Deze functie leest de instellingen,
+zoekt waar keyforge.json en de API-sleutel zijn opgeslagen en maakt verbinding met de verschillende websites om alle vereiste 
+informatie op te halen.</p>
+
+<p>Pelican gebruikt drie componenten om pagina’s te maken: <strong>Readers</strong> (die bestanden lezen en omzetten in een pagina, zoals blogposts, 
+artikels, …), <strong>Generators</strong> die gegevens verwerken, een URL genereren en alles met het juiste sjabloon naar een 
+<strong>Writer</strong> sturen, die de gegevens en het sjabloon tot één HTML-bestand combineert. Generators worden gebruikt om overzichtspagina’s 
+per categorie, … te maken. De standaard Writer volstaat meestal, dus door Readers en Generators toe te voegen gebeurt de magie
+waarmee je de specifieke structuur van je eigen site bouwt.</p>
+
+<p>De functie <code class="language-plaintext highlighter-rouge">get_keyforge_external_data</code> schrijft alles wat nodig is naar één JSON-bestand. Daardoor kunnen we een Reader achterwege laten
+en een Generator gebruiken die de gegevens laadt, voor elk deck een URL bouwt en de relevante gegevens naar onze sjablonen stuurt.</p>
+
+<p>Hieronder staat een skelet dat toont hoe je een functie maakt en registreert om bij de initialisatie te worden uitgevoerd, en hoe je een generator maakt en
+bij Pelican registreert zodat die onze HTML-bestanden produceert.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">pelican</span> <span class="kn">import</span> <span class="n">signals</span><span class="p">,</span> <span class="n">generators</span>
+
+<span class="k">class</span> <span class="nc">KeyForgeGenerator</span><span class="p">(</span><span class="n">generators</span><span class="p">.</span><span class="n">Generator</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s"> Generator Class to produce pages based on keyforge.cache.json </span><span class="sh">"""</span>
+
+    <span class="n">template_overview</span> <span class="o">=</span> <span class="sh">"</span><span class="s">keyforge_overview.html</span><span class="sh">"</span>
+    <span class="n">template_deck</span> <span class="o">=</span> <span class="sh">"</span><span class="s">keyforge_deck.html</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">settings</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">theme</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># Initialization function
+</span>        
+    <span class="k">def</span> <span class="nf">generate_output</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">writer</span><span class="p">):</span>
+        <span class="c1"># This function is required, this will be started by Pelican
+</span>        <span class="c1"># Here we'll call two other functions, one to create an overview page
+</span>        <span class="c1"># and one to create a page with deck details.
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">generate_keyforge_overview_page</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">keyforge_data</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">keyforge_data</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="n">self</span><span class="p">.</span><span class="nf">generate_keyforge_deck_page</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">generate_keyforge_deck_page</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span> <span class="n">deck_id</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="c1"># Function to generate deck pages
+</span>        
+    <span class="k">def</span> <span class="nf">generate_keyforge_overview_page</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="c1"># Function to generate overview page        
+</span>
+<span class="k">def</span> <span class="nf">get_keyforge_external_data</span><span class="p">(</span><span class="n">generator</span><span class="p">):</span>
+    <span class="c1"># Here we can get all settings from generator.settings ...
+</span>    
+    <span class="c1"># Access APIs
+</span>    
+    <span class="c1"># Write all output to disk
+</span>
+<span class="k">def</span> <span class="nf">get_generators</span><span class="p">(</span><span class="n">generators</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">KeyForgeGenerator</span>
+
+<span class="k">def</span> <span class="nf">register</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">Register our function to get all data and generator to create the pages</span><span class="sh">"""</span>
+    <span class="n">signals</span><span class="p">.</span><span class="n">initialized</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">get_keyforge_external_data</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="conclusie">Conclusie</h2>
+
+<p>Hoewel <a href="https://blog.getpelican.com/">Pelican</a> wat meer configuratie vergde dan <a href="https://jekyllrb.com/">Jekyll</a> en daardoor moeilijker was om mee te beginnen, was het een groot voordeel
+dat ik het met <a href="https://www.python.org/">Python</a> kon uitbreiden. Complexe functies implementeren, zoals gegevens uit
+externe API’s ophalen, was met pakketten als requests en de ingebouwde json-module helemaal niet zo moeilijk. <a href="https://blog.getpelican.com/">Pelican</a>
+is dus een uitstekend framework voor statische pagina’s die een zwaardere verwerking van invoergegevens of verbindingen
+met externe gegevens vereisen. Voor een eenvoudige blog ben je waarschijnlijk sneller aan de slag met <a href="https://jekyllrb.com/">Jekyll</a>.</p>
+
+<p>Er bestaan ook allerlei frameworks in andere talen die ik niet heb bekeken. Vooral <a href="https://www.gatsbyjs.org/">Gatsby</a>, dat
+onder de motorkap het JavaScript-ecosysteem gebruikt, en <a href="https://gohugo.io/">Hugo</a>, dat door Go wordt aangedreven. Gatsby is bijzonder interessant
+omdat het met React verweven is, wat handig kan zijn om een krachtige, interactieve <em>front-end</em> te bouwen…</p>
+
+<p>Ondersteuning voor <a href="/nl/programming/games/2019/12/Magic-the-Gathering/">Magic: the Gathering</a> werd in het <a href="/nl/programming/games/2020/04/DeckLock2/">volgende artikel</a> geïmplementeerd. <a href="https://www.playgwent.com/en">Gwent</a> werd in <a href="/nl/programming/games/2020/05/DeckLock3/">deel 3</a> toegevoegd.</p>
+
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/python/">python</a>,&nbsp;<a href="/nl/tag/pelican/">pelican</a>,&nbsp;<a href="/nl/tag/blog/">blog</a>,&nbsp;<a href="/nl/tag/games/">games</a>,&nbsp;<a href="/nl/tag/keyforge/">keyforge</a>,&nbsp;<a href="/nl/tag/decklock/">decklock</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=DeckLock%3A+hou+je+kaartspellen+bij%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fgames%2F2020%2F04%2FDeckLock%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fgames%2F2020%2F04%2FDeckLock%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fgames%2F2020%2F04%2FDeckLock%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=DeckLock%3A+hou+je+kaartspellen+bij&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fgames%2F2020%2F04%2FDeckLock%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/programming/2020/03/Jekyll-Blog/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">Blogs verbeteren met zelfgemaakte Jekyll-plugins</span></a></span>
+  <span class="next-post"><a href="/nl/programming/games/2020/04/DeckLock2/"><span class="page-number">DeckLock deel 2: Magic the Gathering</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

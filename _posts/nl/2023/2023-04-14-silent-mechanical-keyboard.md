@@ -123,5 +123,5 @@ type-ervaring biedt.
 **Update**: Ik heb de indeling wat aangepast. De backspace bedienen met mijn duim werkte niet en de RGB-bediening is nu
 beter. Het [bijgewerkte JSON-bestand](/assets/posts/2023-04-14-silent-mechanical-keyboard/idobao_id75.layout3.json) kan worden gedownload.
 
-[zelfgemaakte mechanische toetsenbord]: {% post_url 2020/2020-05-01-Mechanical-Keyboard %}
+[zelfgemaakte mechanische toetsenbord]: {% post_url nl/2020/2020-05-01-Mechanical-Keyboard %}
 [keybr.com]: https://www.keybr.com/

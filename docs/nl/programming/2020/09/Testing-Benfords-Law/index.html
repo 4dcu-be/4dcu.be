@@ -1,0 +1,664 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>De wet van Benford op de proef gesteld</title>
+  <meta name="description" content="De wet van Benford testen met Python, pandas en seaborn en onderzoeken waarom het eerste cijfer in echte datasets zo vaak 1 is, geïnspireerd door de Netflix-...">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="De wet van Benford op de proef gesteld" />
+  <meta property="og:description" content="De wet van Benford testen met Python, pandas en seaborn en onderzoeken waarom het eerste cijfer in echte datasets zo vaak 1 is, geïnspireerd door de Netflix-..." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/programming/2020/09/Testing-Benfords-Law/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2020-09-05-Testing-Benfords-Law-log_table.jpg" /><meta property="og:image:alt" content="De wet van Benford op de proef gesteld" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2020-09-05T12:00:00+00:00" /><meta property="article:modified_time" content="2020-09-05T12:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programmeren" /><meta property="article:tag" content="python" /><meta property="article:tag" content="jupyter" /><meta property="article:tag" content="pandas" /><meta property="article:tag" content="data-science" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="De wet van Benford op de proef gesteld"><meta name="twitter:description" content="De wet van Benford testen met Python, pandas en seaborn en onderzoeken waarom het eerste cijfer in echte datasets zo vaak 1 is, geïnspireerd door de Netflix-..."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2020-09-05-Testing-Benfords-Law-log_table.jpg"><meta name="twitter:image:alt" content="De wet van Benford op de proef gesteld"><meta name="twitter:url" content="https://blog.4dcu.be/nl/programming/2020/09/Testing-Benfords-Law/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/programming/2020/09/Testing-Benfords-Law/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/2020/09/05/Testing-Benfords-Law.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/2020/09/Testing-Benfords-Law/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/2020/09/05/Testing-Benfords-Law.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/programming/2020/09/Testing-Benfords-Law/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/programming/2020/09/Testing-Benfords-Law/" },
+      "url": "https://blog.4dcu.be/nl/programming/2020/09/Testing-Benfords-Law/",
+      "headline": "De wet van Benford op de proef gesteld",
+      "description": "De wet van Benford testen met Python, pandas en seaborn en onderzoeken waarom het eerste cijfer in echte datasets zo vaak 1 is, geïnspireerd door de Netflix-...",
+      "datePublished": "2020-09-05T12:00:00+00:00",
+      "dateModified": "2020-09-05T12:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2020-09-05-Testing-Benfords-Law-log_table.jpg",
+      "keywords": ["python", "jupyter", "pandas", "data-science"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/programming/2020/09/Testing-Benfords-Law/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Programmeren", "item": "https://blog.4dcu.be/nl/category/programming/" },
+        { "@type": "ListItem", "position": 3, "name": "De wet van Benford op de proef gesteld" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/programming/2020/09/05/Testing-Benfords-Law.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/programming/2020/09/Testing-Benfords-Law/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/benfordslaw.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="De wet van Benford op de proef gesteld" class="hero-background is-transparent" src="/assets/posts/2020-09-05-Testing-Benfords-Law/log_table.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">De wet van Benford op de proef gesteld</h1><p class="info has-text-white"><em>getallen zijn misschien minder willekeurig dan je denkt</em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 05-09-2020 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/programming/">Programmeren</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Nadat ik in <a href="https://www.imdb.com/title/tt12753692/?ref_=fn_al_tt_2">Connected</a> van <a href="https://twitter.com/latifnasser">Latif Nasser</a> 
+(momenteel op Netflix) de aflevering over de <a href="https://en.wikipedia.org/wiki/Benford%27s_law">wet van Benford</a> had gezien, moest ik testen of die echt klopt en of
+ik enkele datasets kon vinden waarop ze van toepassing is. En … dat lukte! Maar voor we in de details duiken, leggen we eerst 
+uit wat de wet van Benford inhoudt.</p>
+
+<p>De wet van Benford stelt dat het begincijfer (het eerste cijfer van een getal, ook het meest significante cijfer genoemd)
+in veel verzamelingen getallen niet willekeurig verdeeld is. Het eerste cijfer is het vaakst 1 (bij ongeveer 30% van de getallen, tegenover
+11% bij een werkelijk willekeurige verdeling), daarna komt 2 het vaakst voor, … en 9 het minst vaak
+(als begincijfer veel minder vaak dan je zou verwachten). De kans voor de tussenliggende cijfers neemt af
+volgens een logaritmische schaal.</p>
+
+<p>De kansen die hij voor elk cijfer voorstelde, volgen de formule <em>P(n)=log10(1+1/n)</em>. Met een beetje Python-code kunnen we
+die snel berekenen en visualiseren.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+
+<span class="n">palette</span> <span class="o">=</span> <span class="n">sns</span><span class="p">.</span><span class="nf">color_palette</span><span class="p">(</span><span class="sh">"</span><span class="s">GnBu_r</span><span class="sh">"</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+
+<span class="n">benford_proba</span> <span class="o">=</span> <span class="p">({</span><span class="sh">'</span><span class="s">digit</span><span class="sh">'</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="sh">'</span><span class="s">prob</span><span class="sh">'</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="nf">log10</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="o">/</span><span class="n">i</span><span class="p">)}</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">ideal_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">benford_proba</span><span class="p">)</span>
+<span class="n">sns</span><span class="p">.</span><span class="nf">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="sh">'</span><span class="s">digit</span><span class="sh">'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="sh">'</span><span class="s">prob</span><span class="sh">'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">ideal_df</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="n">palette</span><span class="p">).</span><span class="nf">set_title</span><span class="p">(</span><span class="sh">'</span><span class="s">Benford</span><span class="se">\'</span><span class="s">s Law: hypothetical distribution</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Hier wordt een <em>generator comprehension</em> gebruikt die alle kansen voor de cijfers 1 tot en met 9 oplevert. Die worden in een
+Pandas-dataframe omgezet en met Seaborn gevisualiseerd. Dit is de hypothetische verdeling:</p>
+
+<p><a href="/assets/posts/2020-09-05-Testing-Benfords-Law/hypothetical_distribution.png" class="lightgallery-link" data-sub-html="De hypothetische verdeling van de meest significante cijfers volgens de wet van Benford">
+<img src="/assets/posts/2020-09-05-Testing-Benfords-Law/hypothetical_distribution.png" alt="De hypothetische verdeling van de meest significante cijfers volgens de wet van Benford" height="385" width="545" class="small-image" data-src="/assets/posts/2020-09-05-Testing-Benfords-Law/hypothetical_distribution.png" loading="lazy" />
+</a></p>
+
+<p>Laten we nu enkele datasets nemen en controleren of ze overeenkomen!</p>
+
+<h2 id="de-hoogtes-van-hoofdsteden">De hoogtes van hoofdsteden</h2>
+
+<p>Op <a href="https://en.wikipedia.org/wiki/List_of_capital_cities_by_elevation">Wikipedia</a> vind je een lijst van alle landen van de Verenigde 
+Naties, met hun hoofdstad en de hoogte van die stad in meter boven de zeespiegel. Die lijst werd
+omgezet in een Excel-spreadsheet en in een Pandas-dataframe geladen. Daarna was slechts wat code nodig om steden 
+op of onder zeeniveau uit te sluiten, het meest significante cijfer te bepalen en die cijfers te tellen.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_excel</span><span class="p">(</span><span class="sh">'</span><span class="s">./data/capitals_altitude.xlsx</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">Elevation (m)</span><span class="sh">'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">first_digit_m</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nf">str</span><span class="p">(</span><span class="n">n</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">Elevation (m)</span><span class="sh">'</span><span class="p">]]</span>
+                        
+<span class="n">counts_altitude_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span><span class="sh">'</span><span class="s">first_digit_m</span><span class="sh">'</span><span class="p">).</span><span class="nf">agg</span><span class="p">(</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">NamedAgg</span><span class="p">(</span><span class="sh">'</span><span class="s">Country</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">count</span><span class="sh">'</span><span class="p">),</span>
+<span class="p">).</span><span class="nf">reset_index</span><span class="p">()</span>
+</code></pre></div></div>
+<p>Dat leverde een dataframe op dat er als volgt uitzag:</p>
+
+<table class="narrow-rows">
+  <thead>
+    <tr>
+      <th style="text-align: right">first_digit_m</th>
+      <th style="text-align: right">count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">56</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">2</td>
+      <td style="text-align: right">27</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">17</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">4</td>
+      <td style="text-align: right">9</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">5</td>
+      <td style="text-align: right">13</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">6</td>
+      <td style="text-align: right">16</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">7</td>
+      <td style="text-align: right">14</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">8</td>
+      <td style="text-align: right">5</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">9</td>
+      <td style="text-align: right">10</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Het cijfer één komt inderdaad veel vaker voor dan de andere cijfers. Om dat tastbaarder te maken, zetten we de 
+frequenties uit naast de hypothetische frequentie volgens de wet van Benford en gebruiken we een test om te controleren of ze al dan niet significant
+verschillen. Omdat we meerdere datasets willen testen en visualiseren, stoppen we alles in één functie:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">scipy.stats</span> <span class="k">as</span> <span class="n">stats</span>
+
+<span class="k">def</span> <span class="nf">plot_benford</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">sort_values</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">benford_proba</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">log10</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="o">/</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+    
+    <span class="n">observed</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">y</span><span class="p">])</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="nf">round</span><span class="p">(</span><span class="n">prob</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">y</span><span class="p">]))</span> <span class="k">for</span> <span class="n">prob</span> <span class="ow">in</span> <span class="n">benford_proba</span><span class="p">]</span>
+    <span class="n">stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">stats</span><span class="p">.</span><span class="nf">chisquare</span><span class="p">(</span><span class="n">f_obs</span><span class="o">=</span><span class="n">observed</span><span class="p">,</span> <span class="n">f_exp</span><span class="o">=</span><span class="n">expected</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">p_value</span> <span class="o">&gt;</span> <span class="mf">0.05</span><span class="p">:</span>
+        <span class="n">palette</span> <span class="o">=</span> <span class="n">sns</span><span class="p">.</span><span class="nf">color_palette</span><span class="p">(</span><span class="sh">"</span><span class="s">GnBu_r</span><span class="sh">"</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">palette</span> <span class="o">=</span> <span class="n">sns</span><span class="p">.</span><span class="nf">color_palette</span><span class="p">(</span><span class="sh">"</span><span class="s">OrRd_r</span><span class="sh">"</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+    
+    <span class="n">frequencies</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">y</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">y</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">subplots</span><span class="p">()</span>
+    
+    <span class="n">sns</span><span class="p">.</span><span class="nf">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">frequencies</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="n">palette</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">).</span><span class="nf">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">sns</span><span class="p">.</span><span class="nf">pointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="sh">'</span><span class="s">digit</span><span class="sh">'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="sh">'</span><span class="s">prob</span><span class="sh">'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">ideal_df</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">gray</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="sh">'</span><span class="s">First Digit</span><span class="sh">'</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="sh">'</span><span class="s">Frequency</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>De parameters <em>x</em> en <em>y</em> zijn respectievelijk de kolomnamen van de kolom met de cijfers en die met de aantallen. <em>Data</em> is
+het dataframe met de telgegevens en <em>ax</em> is optioneel en kan worden gebruikt om figuren met meerdere panelen te maken. De gegevens worden eerst
+gesorteerd om zeker te zijn dat de cijfers correct van 1 tot 9 staan, waarna we de kansen opnieuw berekenen.
+Vervolgens worden de waargenomen aantallen in een aparte variabele opgeslagen en wordt het verwachte aantal berekend: de kans
+voor elk cijfer vermenigvuldigd met het totale aantal waarnemingen. Met een chi-kwadraattoets controleren we of de verdelingen
+gelijk zijn (p-waarde &gt; 0,05) en stellen we de kleuren van de grafiek daarop af. Ten slotte worden de aantallen 
+omgezet in frequenties en wordt alles gevisualiseerd: gekleurde balken voor de waargenomen gegevens en grijze stippen die aangeven waar
+de wet van Benford ze voorspelt.</p>
+
+<p><a href="/assets/posts/2020-09-05-Testing-Benfords-Law/altitudes.png" class="lightgallery-link" data-sub-html="Verdeling van de meest significante cijfers van de hoogtes in meter van hoofdsteden overal ter wereld">
+<img src="/assets/posts/2020-09-05-Testing-Benfords-Law/altitudes.png" alt="Verdeling van de meest significante cijfers van de hoogtes in meter van hoofdsteden overal ter wereld" height="385" width="545" class="small-image" data-src="/assets/posts/2020-09-05-Testing-Benfords-Law/altitudes.png" loading="lazy" />
+</a></p>
+
+<h2 id="meer-datasets-covid-19-besmettingen-bacteriën-in-de-menselijke-darm-en-gwent-scores">Meer datasets: COVID-19-besmettingen, bacteriën in de menselijke darm en Gwent-scores</h2>
+
+<p>De hoogtes van hoofdsteden lijken de wet van Benford dus inderdaad te volgen. Tijd om enkele andere datasets te nemen en te kijken of 
+de wet ook daar geldt. Ik koos Gwent-MMR-scores uit het <a href="/nl/programming/games/2020/09/GwentProRankAnalysis/">vorige artikel</a>,
+het dagelijkse aantal COVID-19-besmettingen in Belgische provincies van <a href="https://www.sciensano.be/en/covid-19-data">Sciensano</a> en
+de aantallen bacteriën in de menselijke darm uit het <a href="https://www.hmpdacc.org/">Human Microbiome Project</a>.</p>
+
+<p>Deze datasets en de code om ze te laden en te verwerken vind je <a href="https://github.com/4dcu-be/BenfordsLaw">hier</a> op GitHub, in de repository die bij 
+dit artikel hoort.</p>
+
+<p><a href="/assets/posts/2020-09-05-Testing-Benfords-Law/big_graph.png" class="lightgallery-link" data-sub-html="Verdelingen van alle geteste datasets">
+<img src="/assets/posts/2020-09-05-Testing-Benfords-Law/big_graph.png" alt="Verdelingen van alle geteste datasets" height="1600" width="2400" data-src="/assets/posts/2020-09-05-Testing-Benfords-Law/big_graph.png" loading="lazy" />
+</a></p>
+
+<p>De hoogtes en COVID-19-besmettingen volgen de wet van Benford dus statistisch significant (of beter: ze verschillen niet 
+significant van Benfords ideale verdeling) en worden daarom in blauwtinten weergegeven. Ook voor Gwent Pro Rank-
+scores en de (relatieve) aantallen bacteriën in de menselijke darm zijn de meest significante cijfers duidelijk niet 
+uniform verdeeld, maar de waargenomen verdelingen verschillen wel van Benfords hypothetische ideaal (daarom worden deze datasets
+in roodtinten weergegeven). Zelfs wanneer ze afwijken van het geïdealiseerde geval, passen de verdelingen
+nog steeds erg goed bij een logaritmische afname!</p>
+
+<h2 id="conclusie">Conclusie</h2>
+
+<p>Dat de eerste cijfers van schijnbaar willekeurige getallen helemaal niet willekeurig lijken, voelt aanvankelijk erg
+contra-intuïtief aan. Numberphile legt uitstekend uit waarom Benford van toepassing is op verzamelingen getallen met een 
+exponentiële groei. Bekijk hun YouTube-video <a href="https://www.youtube.com/watch?v=XXjlR2OK1kM">hier</a>. Hoewel niet alle datasets
+een exponentiële curve volgen, is van 1 naar 2 gaan in veel gevallen gemakkelijker dan van 2 naar 3, … Dat geldt
+bijvoorbeeld voor Gwent-scores (na aftrek van de basisscore van 9600). Omdat je bij een hogere MMR-score aan 
+steeds betere tegenstanders wordt gekoppeld, kunnen minder mensen 200 punten klimmen dan
+100 punten. Daardoor klimmen meer spelers uiteindelijk 100 dan 200 punten en zien we een verschuiving in de frequenties
+van de eerste cijfers van de scores.</p>
+
+<p>Ook het dagelijkse aantal COVID-19-besmettingen zou zonder ingrijpen exponentieel stijgen (en de wet van Benford zou gelden). Door
+uitgebreide maatregelen om de besmettingsgraad af te remmen (lockdown, sociale en fysieke afstand, mondmaskers, …) wordt het 
+echter moeilijker voor het virus om zich te verspreiden en daalt de curve. Dat is een traag proces en de curve heeft een erg lange staart: het dagelijkse aantal besmettingen
+daalt sneller van 30 naar 20 dan van 20 naar 10. Ook dat veroorzaakt een niet-uniforme verdeling van de eerste cijfers.</p>
+
+<p>Deze aflevering van Connected zette me stevig aan het denken. Ik geloof niet dat ik ooit zoveel tijd over één
+documentaire heb nagedacht (en dat is positief). Hopelijk krijgt Latif Nasser de kans om nog enkele seizoenen te maken!</p>
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/python/">python</a>,&nbsp;<a href="/nl/tag/jupyter/">jupyter</a>,&nbsp;<a href="/nl/tag/pandas/">pandas</a>,&nbsp;<a href="/nl/tag/data-science/">data-science</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=De+wet+van+Benford+op+de+proef+gesteld%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F09%2FTesting-Benfords-Law%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F09%2FTesting-Benfords-Law%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F09%2FTesting-Benfords-Law%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=De+wet+van+Benford+op+de+proef+gesteld&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F09%2FTesting-Benfords-Law%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/programming/games/2020/09/GwentProRankAnalysis/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">Gwent: analyse van de Pro Ladder en nationale ranglijsten</span></a></span>
+  <span class="next-post"><a href="/nl/diy/2020/09/MQTT/"><span class="page-number">Een Aqara Cube toevoegen aan Home Assistant</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

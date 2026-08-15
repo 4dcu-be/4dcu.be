@@ -1,0 +1,720 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>Capture-Mark-Recapture-model in PyMC3</title>
+  <meta name="description" content="Hoe je de grootte van een dierenpopulatie schat met de ecologische Capture-Mark-Recapture-methode, geïmplementeerd als Bayesiaans model in Python met PyMC3.">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Capture-Mark-Recapture-model in PyMC3" />
+  <meta property="og:description" content="Hoe je de grootte van een dierenpopulatie schat met de ecologische Capture-Mark-Recapture-methode, geïmplementeerd als Bayesiaans model in Python met PyMC3." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/programming/biology/2021/08/Capture_Mark_Recapture/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2021-08-30-Capture_Mark_Recapture-fish_header.jpg" /><meta property="og:image:alt" content="Capture-Mark-Recapture-model in PyMC3" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2021-08-30T06:00:00+00:00" /><meta property="article:modified_time" content="2021-08-30T06:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programmeren" /><meta property="article:section" content="Biologie" /><meta property="article:tag" content="python" /><meta property="article:tag" content="pymc3" /><meta property="article:tag" content="data-analysis" /><meta property="article:tag" content="data-science" /><meta property="article:tag" content="machine-learning" /><meta property="article:tag" content="ecology" /><meta property="article:tag" content="biology" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Capture-Mark-Recapture-model in PyMC3"><meta name="twitter:description" content="Hoe je de grootte van een dierenpopulatie schat met de ecologische Capture-Mark-Recapture-methode, geïmplementeerd als Bayesiaans model in Python met PyMC3."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2021-08-30-Capture_Mark_Recapture-fish_header.jpg"><meta name="twitter:image:alt" content="Capture-Mark-Recapture-model in PyMC3"><meta name="twitter:url" content="https://blog.4dcu.be/nl/programming/biology/2021/08/Capture_Mark_Recapture/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/programming/biology/2021/08/Capture_Mark_Recapture/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/biology/2021/08/30/Capture_Mark_Recapture.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/biology/2021/08/Capture_Mark_Recapture/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/biology/2021/08/30/Capture_Mark_Recapture.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/programming/biology/2021/08/Capture_Mark_Recapture/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/programming/biology/2021/08/Capture_Mark_Recapture/" },
+      "url": "https://blog.4dcu.be/nl/programming/biology/2021/08/Capture_Mark_Recapture/",
+      "headline": "Capture-Mark-Recapture-model in PyMC3",
+      "description": "Hoe je de grootte van een dierenpopulatie schat met de ecologische Capture-Mark-Recapture-methode, geïmplementeerd als Bayesiaans model in Python met PyMC3.",
+      "datePublished": "2021-08-30T06:00:00+00:00",
+      "dateModified": "2021-08-30T06:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2021-08-30-Capture_Mark_Recapture-fish_header.jpg",
+      "keywords": ["python", "pymc3", "data-analysis", "data-science", "machine-learning", "ecology", "biology"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/programming/biology/2021/08/Capture_Mark_Recapture/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Programmeren", "item": "https://blog.4dcu.be/nl/category/programming/" },
+        { "@type": "ListItem", "position": 3, "name": "Capture-Mark-Recapture-model in PyMC3" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/programming/biology/2021/08/30/Capture_Mark_Recapture.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/programming/biology/2021/08/Capture_Mark_Recapture/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/fish_school.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="Capture-Mark-Recapture-model in PyMC3" class="hero-background is-transparent" src="/assets/posts/2021-08-30-Capture_Mark_Recapture/fish_header.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">Capture-Mark-Recapture-model in PyMC3</h1><p class="info has-text-white"><em></em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 30-08-2021 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/programming/">Programmeren</a>, <a href="/nl/category/biology/">Biologie</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Stel dat je wilt weten hoeveel vissen er in een vrij grote vijver zitten… Het water is troebel, dus ze eenvoudig
+tellen kun je vergeten… In de ecologie is dit een veelvoorkomend probleem! Vaak moet de populatiegrootte van een soort bekend zijn, maar het is
+onpraktisch of simpelweg onmogelijk om elk afzonderlijk dier in die populatie te tellen. Gelukkig bestaat er
+een relatief eenvoudige manier om tot een schatting te komen!</p>
+
+<p>Om de grootte van de populatie te schatten, bezoek je de locatie twee keer. Bij het eerste bezoek worden enkele 
+dieren gevangen, gemerkt en vrijgelaten. Het is belangrijk ze te merken zonder dat dit hen benadeelt of verwondt, 
+en even belangrijk is een markering te gebruiken die niet gemakkelijk afslijt. Je houdt bij hoeveel dieren uit de populatie werden
+gevangen en gemerkt. Een dag of wat later bezoek je de locatie opnieuw en vang je weer een aantal dieren. Dit keer is het aantal
+gemerkte dieren dat opnieuw wordt gevangen van belang. Het aandeel gemerkte dieren in de vangst van de tweede dag is 
+immers in wezen gelijk aan het aandeel van de populatie dat de eerste dag werd gemerkt. Deze methode heeft verschillende namen,
+zoals <em><a href="https://www.bbc.co.uk/bitesize/guides/zmxbkqt/revision/3">Capture-Mark-Recapture</a></em>, <em><a href="https://en.wikipedia.org/wiki/Mark_and_recapture">Mark and Recapture</a></em> of kleine variaties daarop.</p>
+
+<p>Stel bijvoorbeeld dat je op dag één 50 dieren vangt en merkt. De volgende dag worden 100 dieren gevangen, waarvan er 10
+gemerkt zijn. We weten dus dat ongeveer 10% van alle dieren gemerkt werd, en ook dat er in totaal 50 gemerkte
+dieren zijn. De totale populatiegrootte moet dan ongeveer 500 bedragen.</p>
+
+\[\begin{aligned}
+  \frac{n\_marked}{population\_size} = \frac{n\_recaptured}{captured\_round\_2}
+\end{aligned}\]
+
+<p>Deze formule kan worden herschreven als:</p>
+
+\[\begin{aligned}
+ population\_size = \frac{n\_marked * captured\_round\_2}{n\_recaptured}
+\end{aligned}\]
+
+<p>Hoewel die laatste formule erg eenvoudig is en vergelijkbare oefeningen al in de lagere school aan bod komen (bekend als de 
+<a href="https://en.wikipedia.org/wiki/Cross-multiplication#Rule_of_three">regel van drie</a>), is het berekenen van het <a href="https://en.wikipedia.org/wiki/Mark_and_recapture#Confidence_interval">betrouwbaarheidsinterval</a> van deze schatting — het bereik waarbinnen de werkelijke populatiegrootte met een 
+bepaalde zekerheid, meestal 95%, ligt — verre van eenvoudig (bekijk de link: het is 
+een bijzonder complexe formule). Met een Bayesiaanse aanpak krijgen we de onzekerheid over de populatiegrootte 
+echter automatisch, zonder extra moeite. Laten we dit model dus implementeren in <a href="https://docs.pymc.io/">PyMC3</a> en kijken wat eruit komt.</p>
+
+<h2 id="een-pymc3-model-maken">Een PyMC3-model maken</h2>
+
+<p>De waarnemingen worden in enkele variabelen opgeslagen: <code class="language-plaintext highlighter-rouge">n_marked</code> (het aantal dieren dat bij het 
+eerste bezoek werd gemerkt), <code class="language-plaintext highlighter-rouge">captured_round_2</code> (het totale aantal dieren dat bij het tweede bezoek werd gevangen) en <code class="language-plaintext highlighter-rouge">n_recaptured</code> 
+(het aantal gemerkte dieren dat bij het tweede bezoek werd gevangen). De grote onbekende die we moeten afleiden is de
+<code class="language-plaintext highlighter-rouge">population_size</code>. Daarover weten we eigenlijk alleen dat ze gelijk is aan of groter dan het totale aantal
+unieke dieren dat tijdens beide bezoeken werd gevangen. We kunnen het aantal waargenomen unieke dieren dus als ondergrens instellen.</p>
+
+<p>De kans om bij het tweede bezoek een reeds gemerkt dier te vangen, <code class="language-plaintext highlighter-rouge">p_marked</code>, is het aandeel gemerkte dieren in de
+volledige populatie. Dit is dus een <code class="language-plaintext highlighter-rouge">pm.Deterministic</code>-variabele, want ze wordt bepaald door het aantal gemerkte dieren (dat bekend is) 
+en de populatiegrootte (die we proberen af te leiden). Tot slot is er een likelihood <code class="language-plaintext highlighter-rouge">recapture_obs</code> nodig. Die wordt 
+een <code class="language-plaintext highlighter-rouge">pm.Binomial</code>, met het totale aantal dieren dat de tweede dag werd gevangen als het aantal trekkingen, het aantal 
+opnieuw gevangen gemerkte dieren als waarneming en <code class="language-plaintext highlighter-rouge">p_marked</code> als kans.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">load_ext</span> <span class="n">nb_black</span>
+<span class="kn">import</span> <span class="n">pymc3</span> <span class="k">as</span> <span class="n">pm</span>
+
+<span class="n">n_marked</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">captured_round_2</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">n_recaptured</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="k">with</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">population_size</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Bound</span><span class="p">(</span>
+        <span class="n">pm</span><span class="p">.</span><span class="n">Flat</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="n">n_marked</span> <span class="o">+</span> <span class="n">captured_round_2</span> <span class="o">-</span> <span class="n">n_recaptured</span>
+    <span class="p">)(</span><span class="sh">"</span><span class="s">population_size</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">p_marked</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Deterministic</span><span class="p">(</span><span class="sh">"</span><span class="s">p_marked</span><span class="sh">"</span><span class="p">,</span> <span class="n">n_marked</span> <span class="o">/</span> <span class="n">population_size</span><span class="p">)</span>
+
+    <span class="n">recapture_obs</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">Binomial</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">recapture_obs</span><span class="sh">"</span><span class="p">,</span> <span class="n">captured_round_2</span><span class="p">,</span> <span class="n">p_marked</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">n_recaptured</span>
+    <span class="p">)</span>
+
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nf">sample</span><span class="p">(</span><span class="mi">4000</span><span class="p">,</span> <span class="n">tune</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">return_inferencedata</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Na het samplen van het model krijgen we onze schatting van de populatiegrootte. In dit geval wordt die geschat
+op 294 tot 1034 dieren (hdi_3% en hdi_97%; PyMC3 geeft standaard het kleinste bereik waarin 94% van de
+afgeleide waarden valt), met een gemiddelde van 620. Hoewel dat gemiddelde niet bijzonder ver afwijkt van de 
+populatiegrootte in ons voorbeeld, is de onzekerheid vrij groot. Dit toont dat er in ons gedachte-experiment lang niet genoeg dieren werden 
+gemerkt of opnieuw gevangen.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right">mean</th>
+      <th style="text-align: right">sd</th>
+      <th style="text-align: right">hdi_3%</th>
+      <th style="text-align: right">hdi_97%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">population_size</td>
+      <td style="text-align: right">620.067</td>
+      <td style="text-align: right">220.926</td>
+      <td style="text-align: right">293.750</td>
+      <td style="text-align: right">1034.423</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">p_marked</td>
+      <td style="text-align: right">0.090</td>
+      <td style="text-align: right">0.028</td>
+      <td style="text-align: right">0.039</td>
+      <td style="text-align: right">0.142</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="update-30082022---hypergeometrische-likelihood">Update 30/08/2022 - hypergeometrische <em>likelihood</em></h3>
+
+<p>Omdat de trekkingen uit de populatie in dit geval niet onafhankelijk zijn, past een HyperGeometric-verdeling beter bij dit model. De
+laatste twee onderdelen kunnen worden vervangen door de regels hieronder om die te gebruiken. Als het aantal gemerkte dieren groot genoeg is,
+maakt dat weinig verschil, maar hier beïnvloedt het wel de gemiddelde schatting en de 94%-HDI.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">recapture_obs</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nc">HyperGeometric</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">recapture_obs</span><span class="sh">"</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">population_size</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">n_marked</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">captured_round_2</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">n_recaptured</span>
+    <span class="p">)</span>
+
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="p">.</span><span class="nf">sample</span><span class="p">(</span><span class="mi">4000</span><span class="p">,</span> <span class="n">tune</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">return_inferencedata</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">target_accept</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right">mean</th>
+      <th style="text-align: right">sd</th>
+      <th style="text-align: right">hdi_3%</th>
+      <th style="text-align: right">hdi_97%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">population_size</td>
+      <td style="text-align: right">748.737</td>
+      <td style="text-align: right">372.363</td>
+      <td style="text-align: right">273.785</td>
+      <td style="text-align: right">1396.472</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">p_marked</td>
+      <td style="text-align: right">0.040</td>
+      <td style="text-align: right">0.015</td>
+      <td style="text-align: right">0.012</td>
+      <td style="text-align: right">0.067</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="kunnen-we-verbeteren-zonder-meer-dieren-te-vangen">Kunnen we verbeteren zonder meer dieren te vangen?</h2>
+
+<p>Als we in totaal niet meer dieren vangen, is het dan beter om meer dieren te merken en er bij het volgende bezoek minder te vangen? Of vangen we beter meer
+dieren bij het tweede bezoek en merken we er de eerste keer minder? Met dit model kunnen we dat gemakkelijk testen!</p>
+
+<p>Laten we op dag één 100 dieren merken en er op dag twee 50 vangen. Bij een populatie van 500 verwachten we dat er ongeveer 10
+opnieuw gevangen worden. Als we die getallen in het model invoeren, krijgen we de resultaten hieronder.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right">mean</th>
+      <th style="text-align: right">sd</th>
+      <th style="text-align: right">hdi_3%</th>
+      <th style="text-align: right">hdi_97%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">population_size</td>
+      <td style="text-align: right">610.585</td>
+      <td style="text-align: right">212.195</td>
+      <td style="text-align: right">310.344</td>
+      <td style="text-align: right">1008.055</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">p_marked</td>
+      <td style="text-align: right">0.180</td>
+      <td style="text-align: right">0.054</td>
+      <td style="text-align: right">0.082</td>
+      <td style="text-align: right">0.279</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Hoewel er nog steeds veel onzekerheid is, neemt die af wanneer je op de eerste dag meer dieren vangt en op de
+tweede dag minder. (Het bewijs dat het slechter wordt als je het omgekeerde doet, laat ik aan de lezer over.) Zodra
+je echter zo weinig dieren vangt dat je op de tweede dag nauwelijks gemerkte dieren terugvangt, heeft ook dat een negatieve
+invloed op de schatting.</p>
+
+<h2 id="dubbel-zoveel-dieren-vangen">Dubbel zoveel dieren vangen</h2>
+
+<p>Dit model werkt echt goed als er genoeg dieren kunnen worden gemerkt en opnieuw gevangen. Als we het aantal
+markeringen dus verhogen naar 200 en de tweede dag 100 dieren vangen, verwachten we dat er ongeveer 40 gemerkt zijn. Wanneer we die getallen in het
+model invoeren, zien we dat het gemiddelde nu heel dicht ligt bij de waarde voor onze denkbeeldige populatie en dat de
+onzekerheid veel kleiner is.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right">mean</th>
+      <th style="text-align: right">sd</th>
+      <th style="text-align: right">hdi_3%</th>
+      <th style="text-align: right">hdi_97%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">population_size</td>
+      <td style="text-align: right">519.579</td>
+      <td style="text-align: right">66.165</td>
+      <td style="text-align: right">402.473</td>
+      <td style="text-align: right">643.741</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">p_marked</td>
+      <td style="text-align: right">0.391</td>
+      <td style="text-align: right">0.048</td>
+      <td style="text-align: right">0.302</td>
+      <td style="text-align: right">0.483</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="conclusie">Conclusie</h2>
+
+<p>Hoewel de formule voor dit model eenvoudig is, geldt dat niet voor de berekening van het betrouwbaarheidsinterval. Toch kan het hier cruciaal zijn om te weten
+hoe groot de onzekerheid is. In ons eerste voorbeeld zou je, afhankelijk van hoeveel vissen er in de vijver zitten,
+vissers een bepaald aantal kunnen laten vangen. Of het er 293, 500, 610 of 1034 zijn, kan dus bepalen hoeveel mensen 
+in die vijver mogen vissen.</p>
+
+<p>Met een Bayesiaanse aanpak lossen we het probleem op in enkele eenvoudige regels code en krijgen we meteen ook het betrouwbaarheidsinterval: 
+gemakkelijk! Dat is precies de kracht van Bayesiaanse statistiek. De voordelen worden hier nog duidelijker 
+omdat het erg eenvoudig is met de aantallen te spelen en te zien hoe de onzekerheid kan worden verkleind. Zo kunnen 
+dieren zo efficiënt mogelijk worden gevangen en gemerkt.</p>
+
+<p>Wil je zien wat ik met deze formule deed, lees dan de <a href="/nl/programming/games/2021/09/KeyForge_Decks_Printed/">volgende post</a>, waarin ze wordt gebruikt om te schatten hoeveel KeyForge-decks
+er werden gedrukt.</p>
+
+<h2 id="dankwoord">Dankwoord</h2>
+
+<p>Headerafbeelding door <a href="https://unsplash.com/@sebaspenalambarri?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Sebastian Pena Lambarri</a> op <a href="https://unsplash.com/s/photos/fish?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
+
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/python/">python</a>,&nbsp;<a href="/nl/tag/pymc3/">pymc3</a>,&nbsp;<a href="/nl/tag/data-analysis/">data-analysis</a>,&nbsp;<a href="/nl/tag/data-science/">data-science</a>,&nbsp;<a href="/nl/tag/machine-learning/">machine-learning</a>,&nbsp;<a href="/nl/tag/ecology/">ecology</a>,&nbsp;<a href="/nl/tag/biology/">biology</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=Capture-Mark-Recapture-model+in+PyMC3%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fbiology%2F2021%2F08%2FCapture_Mark_Recapture%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fbiology%2F2021%2F08%2FCapture_Mark_Recapture%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fbiology%2F2021%2F08%2FCapture_Mark_Recapture%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=Capture-Mark-Recapture-model+in+PyMC3&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fbiology%2F2021%2F08%2FCapture_Mark_Recapture%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/programming/games/2021/08/COVID_and_KeyForge/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">De impact van COVID-19 op KeyForge</span></a></span>
+  <span class="next-post"><a href="/nl/programming/games/2021/09/KeyForge_Decks_Printed/"><span class="page-number">KeyForge: hoeveel decks werden er gedrukt?</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

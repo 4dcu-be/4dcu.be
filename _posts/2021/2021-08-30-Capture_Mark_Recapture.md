@@ -5,6 +5,7 @@ byline: ""
 description: "How to estimate an animal population size with the ecology Capture-Mark-Recapture method, implemented as a Bayesian model in Python with PyMC3."
 date:   2021-08-30 06:00:00
 author: Sebastian Proost
+post_id: capture-mark-recapture
 categories: programming biology
 tags:	python pymc3 data-analysis data-science machine-learning ecology biology
 cover:  "/assets/posts/2021-08-30-Capture_Mark_Recapture/fish_header.jpg"

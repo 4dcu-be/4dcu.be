@@ -1,0 +1,617 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>Een Google Cloud Function instellen</title>
+  <meta name="description" content="Een Google Cloud Function instellen als Python-microservice die via HTTP citatiegegevens uit een Google Scholar-profiel haalt.">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Een Google Cloud Function instellen" />
+  <meta property="og:description" content="Een Google Cloud Function instellen als Python-microservice die via HTTP citatiegegevens uit een Google Scholar-profiel haalt." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/programming/2021/01/Google-Cloud-Functions/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2021-01-09-Google-Cloud-Functions-header.jpg" /><meta property="og:image:alt" content="Een Google Cloud Function instellen" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2021-01-09T13:00:00+00:00" /><meta property="article:modified_time" content="2021-01-09T13:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programmeren" /><meta property="article:tag" content="python" /><meta property="article:tag" content="google" /><meta property="article:tag" content="cloud" /><meta property="article:tag" content="web" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Een Google Cloud Function instellen"><meta name="twitter:description" content="Een Google Cloud Function instellen als Python-microservice die via HTTP citatiegegevens uit een Google Scholar-profiel haalt."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2021-01-09-Google-Cloud-Functions-header.jpg"><meta name="twitter:image:alt" content="Een Google Cloud Function instellen"><meta name="twitter:url" content="https://blog.4dcu.be/nl/programming/2021/01/Google-Cloud-Functions/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/programming/2021/01/Google-Cloud-Functions/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/2021/01/09/Google-Cloud-Functions.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/2021/01/Google-Cloud-Functions/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/2021/01/09/Google-Cloud-Functions.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/programming/2021/01/Google-Cloud-Functions/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/programming/2021/01/Google-Cloud-Functions/" },
+      "url": "https://blog.4dcu.be/nl/programming/2021/01/Google-Cloud-Functions/",
+      "headline": "Een Google Cloud Function instellen",
+      "description": "Een Google Cloud Function instellen als Python-microservice die via HTTP citatiegegevens uit een Google Scholar-profiel haalt.",
+      "datePublished": "2021-01-09T13:00:00+00:00",
+      "dateModified": "2021-01-09T13:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2021-01-09-Google-Cloud-Functions-header.jpg",
+      "keywords": ["python", "google", "cloud", "web"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/programming/2021/01/Google-Cloud-Functions/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Programmeren", "item": "https://blog.4dcu.be/nl/category/programming/" },
+        { "@type": "ListItem", "position": 3, "name": "Een Google Cloud Function instellen" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/programming/2021/01/09/Google-Cloud-Functions.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/programming/2021/01/Google-Cloud-Functions/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/server_header.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="Een Google Cloud Function instellen" class="hero-background is-transparent" src="/assets/posts/2021-01-09-Google-Cloud-Functions/header.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">Een Google Cloud Function instellen</h1><p class="info has-text-white"><em>een microservice maken</em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 09-01-2021 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/programming/">Programmeren</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Met Googles <a href="https://cloud.google.com/functions">Cloud Functions</a> kun je eenvoudige microservices maken die een taak uitvoeren op de infrastructuur van
+Google. Zo kun je een deel van de functionaliteit van een app naar de cloud verplaatsen. Dat kan in verschillende
+gevallen nuttig zijn, bijvoorbeeld voor het dashboard uit een <a href="/nl/diy/2020/10/PythonKindleDashboard_2/">vorige post</a>. Als je scripts uitvoert op een platform
+zoals de Kindle Paperwhite, zijn de tools en pakketten die je makkelijk kunt gebruiken enigszins beperkt. Extra
+Python-pakketten installeren is bijvoorbeeld niet zo eenvoudig, net als andere software installeren. Daarom gebruikt
+het script gewone reguliere expressies om HTML te verwerken in plaats van een gespecialiseerder pakket zoals
+<a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">BeautifulSoup</a>.</p>
+
+<p>Wanneer er complexere verwerking nodig is, zou alles opnieuw implementeren echter behoorlijk omslachtig zijn. Een
+<em>cloud function</em> kan dan een prima oplossing zijn. Elke functie kan via een HTTP-verzoek worden aangeroepen, net als de
+meeste web-API’s. Het script draait vervolgens op de hardware van Google en de resultaten worden in een antwoord
+teruggestuurd. Als voorbeeld stel ik een Cloud Function in die citatiegegevens uit een <a href="https://scholar.google.com/">Google Scholar</a>-profiel haalt.
+Scholar heeft geen API, dus de enige manier om citatiestatistieken te verkrijgen is ze uit de HTML-code te halen. De
+code vind je op <a href="https://github.com/4dcu-be/ScholarJSON">GitHub</a>.</p>
+
+<h2 id="een-google-cloud-account-instellen-en-een-functie-maken">Een Google Cloud-account instellen en een functie maken</h2>
+
+<p>Om te beginnen heb je een Google Cloud-account nodig. Dat kun je <a href="https://cloud.google.com/">hier</a> aanmaken. Merk op dat
+je geldige kredietkaartgegevens moet opgeven, al is er een gratis niveau in het account inbegrepen. Zolang je het aantal
+verzoeken, de rekentijd enzovoort daarvan niet overschrijdt, wordt er niets aangerekend. (Je kunt ook een budget voor
+je account instellen. Zo wordt er zelfs na het opgebruiken van het gratis niveau nooit meer dan het opgegeven bedrag
+aangerekend.)</p>
+
+<p>Vervolgens moet je een project maken, Cloud Functions inschakelen en een nieuwe Cloud Function aanmaken. Dat is goed
+gedocumenteerd op Google Cloud, dus voor de details verwijs ik naar de officiële documentatie.</p>
+
+<p><a href="/assets/posts/2021-01-09-Google-Cloud-Functions/cloud_functions.png" class="lightgallery-link" data-sub-html="Zoek in de Google Cloud-interface naar Cloud Functions in het menu en maak een nieuwe functie om te beginnen">
+<img src="/assets/posts/2021-01-09-Google-Cloud-Functions/cloud_functions.png" alt="Zoek in de Google Cloud-interface naar Cloud Functions in het menu en maak een nieuwe functie om te beginnen" height="1061" width="1420" data-src="/assets/posts/2021-01-09-Google-Cloud-Functions/cloud_functions.png" loading="lazy" />
+</a></p>
+
+<p>Wanneer je een functie begint te maken, moet je ze een naam geven en een server in je buurt kiezen. Hier maken we een
+dienst die via het web werkt. Die moet dus reageren op <em>HTTP</em>-verzoeken en de toegang moet op <em>unrestricted</em> staan.</p>
+
+<p>Als je op <em>Save</em> en <em>Next</em> klikt, kun je de code van je functie toevoegen via een online editor, zoals hieronder. Je
+mist er de mogelijkheden van een volwaardige IDE, maar voor een kleine functie volstaat dit. Hier moeten we de taal op
+<em>Python 3.7</em> instellen. Extra pakketten die je wilt gebruiken, kun je aan <code class="language-plaintext highlighter-rouge">requirements.txt</code> toevoegen, terwijl de
+hoofdcode in <code class="language-plaintext highlighter-rouge">main.py</code> staat. Je moet ook een <em>entry point</em> instellen. Dat is de naam van de functie die wordt
+uitgevoerd wanneer het eindpunt wordt aangeroepen; in dit voorbeeld is dat <code class="language-plaintext highlighter-rouge">hello_world</code>.</p>
+
+<p><a href="/assets/posts/2021-01-09-Google-Cloud-Functions/cloud_editor.png" class="lightgallery-link" data-sub-html="Je kunt je functie in de online editor implementeren">
+<img src="/assets/posts/2021-01-09-Google-Cloud-Functions/cloud_editor.png" alt="Je kunt je functie in de online editor implementeren" height="732" width="1452" data-src="/assets/posts/2021-01-09-Google-Cloud-Functions/cloud_editor.png" loading="lazy" />
+</a></p>
+
+<h2 id="een-functie-schrijven">Een functie schrijven</h2>
+
+<p>Google rekent je (boven het gratis niveau) het uitvoeren van functies aan op basis van het aantal verzoeken en het
+RAM- en CPU-gebruik per milliseconde. Functies houd je dus best eenvoudig en gestroomlijnd. Een paar regels verwerken
+het verzoek (Cross Origin Resource Sharing, CORS, inschakelen zodat we deze gegevens met JS van andere websites kunnen
+ophalen, en de argumenten uitlezen), bouwen de URL op en gebruiken de <a href="https://requests.readthedocs.io/en/master/">requests</a>-bibliotheek om de HTML op te halen.
+Nog een paar regels verwerken die HTML. Alles wordt als JSON teruggestuurd. Hieronder staat de code in <code class="language-plaintext highlighter-rouge">main.py</code>.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">requests</span>
+<span class="kn">import</span> <span class="n">re</span>
+<span class="kn">import</span> <span class="n">json</span>
+
+
+<span class="k">def</span> <span class="nf">parse_scholar</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="c1"># Code to handle CORS (from docs)
+</span>    <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">method</span> <span class="o">==</span> <span class="sh">'</span><span class="s">OPTIONS</span><span class="sh">'</span><span class="p">:</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">Access-Control-Allow-Origin</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">*</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">Access-Control-Allow-Methods</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">GET</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">Access-Control-Allow-Headers</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Content-Type</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">Access-Control-Max-Age</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">3600</span><span class="sh">'</span>
+        <span class="p">}</span>
+
+        <span class="nf">return </span><span class="p">(</span><span class="sh">''</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+
+    <span class="c1"># Set CORS headers for the main request
+</span>    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">'</span><span class="s">Access-Control-Allow-Origin</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">*</span><span class="sh">'</span>
+    <span class="p">}</span>
+
+    <span class="n">request_json</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">get_json</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">request_json</span> <span class="ow">and</span> <span class="sh">'</span><span class="s">user</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">request_json</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">'</span><span class="s">https://scholar.google.com/citations?user=</span><span class="si">{</span><span class="n">request_json</span><span class="p">[</span><span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">]</span><span class="si">}</span><span class="sh">'</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">args</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">user</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">'</span><span class="s">https://scholar.google.com/citations?user=</span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="sh">'</span>
+
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="n">hits</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nf">findall</span><span class="p">(</span><span class="sa">r</span><span class="sh">'</span><span class="s">&lt;td class=</span><span class="sh">"</span><span class="s">gsc_rsb_std</span><span class="sh">"</span><span class="s">&gt;(\d+)&lt;/td&gt;</span><span class="sh">'</span><span class="p">,</span> <span class="n">r</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">citations</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">citations_recent</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">h_index</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">h_index_recent</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">i10_index</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">i10_index_recent</span><span class="sh">'</span><span class="p">]</span>
+
+    <span class="nf">return </span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="nf">dict</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">hits</span><span class="p">))),</span> <span class="mi">200</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Voor Google Cloud Functions moet dit worden gecombineerd met <code class="language-plaintext highlighter-rouge">requirements.txt</code>, dat je hieronder vindt. Vergeet
+niet het doel op <code class="language-plaintext highlighter-rouge">parse_scholar</code> in te stellen. Daarmee zou het moeten werken!</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># requirements.txt
+requests==2.25.1
+</code></pre></div></div>
+
+<p>Om je <em>cloud function</em> te gebruiken, open je in je browser de <em>trigger</em>-URL (die je bij Trigger in de instellingen van
+Cloud Function vindt) en voeg je een gebruikersargument met de ID van het Google Scholar-profiel toe. Mijn Scholar-ID
+is 4niBmJUAAAAJ, dus ik moet ?user=4niBmJUAAAAJ aan de <em>trigger</em>-URL toevoegen om die aan de functie door te geven. Als
+alles werkt, krijg je een antwoord met de citatiestatistieken zoals dit …</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+   </span><span class="nl">"citations"</span><span class="p">:</span><span class="s2">"5602"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"citations_recent"</span><span class="p">:</span><span class="s2">"3240"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"h_index"</span><span class="p">:</span><span class="s2">"24"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"h_index_recent"</span><span class="p">:</span><span class="s2">"23"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"i10_index"</span><span class="p">:</span><span class="s2">"29"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"i10_index_recent"</span><span class="p">:</span><span class="s2">"29"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="cloud-functions-lokaal-testen">Cloud Functions lokaal testen</h2>
+
+<p>Tijdens de ontwikkeling van je functie is het een goed idee om ze lokaal te testen voor je ze op de hardware van
+Google implementeert. Het Python-pakket <a href="https://github.com/GoogleCloudPlatform/functions-framework-python">functions-framework</a> maakt dat eenvoudig. Installeer het pakket met pip en
+voer het uit met de onderstaande commando’s. Merk op dat het bestand met je code <code class="language-plaintext highlighter-rouge">main.py</code> moet heten en dat je de
+functie als doel opgeeft.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>functions-framework
+functions-framework <span class="nt">--target</span> parse_scholar <span class="nt">--debug</span>
+</code></pre></div></div>
+
+<p>Nu kun je testen of de code werkt door je browser bijvoorbeeld naar <strong>http://localhost:8080/?user=4niBmJUAAAAJ</strong> te
+sturen. Er bestaan ook andere oplossingen om lokaal te testen op basis van Flask, maar daarvoor is wat extra code
+nodig. Een eenvoudige oneliner lijkt mij een elegantere oplossing.</p>
+
+<h2 id="conclusie">Conclusie</h2>
+
+<p>Hiermee kon ik bijzonder makkelijk code naar de cloud verplaatsen, waar die nu met een eenvoudig verzoek kan worden
+uitgevoerd en gegevens als JSON terugstuurt die anders moeilijk te verwerken zijn. Dat kan bijvoorbeeld de code voor
+het dashboard uit een <a href="/nl/diy/2020/10/PythonKindleDashboard_2/">vorige post</a> vereenvoudigen. Bovendien kun je JSON-gegevens makkelijk met JavaScript ophalen. Ik
+wil code toevoegen aan mijn cv-website, <a href="https://sebastian.proost.science">sebastian.proost.science</a>, die deze functie gebruikt om bij elk bezoek actuele
+citatiestatistieken op te halen. Zo hoef ik die niet meer regelmatig zelf bij te werken (en daarom is CORS ingeschakeld).</p>
+
+<p>Header door <a href="https://unsplash.com/@ianjbattaglia">Ian Battaglia</a> op <a href="https://unsplash.com/s/photos/server">Unsplash</a></p>
+
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/python/">python</a>,&nbsp;<a href="/nl/tag/google/">google</a>,&nbsp;<a href="/nl/tag/cloud/">cloud</a>,&nbsp;<a href="/nl/tag/web/">web</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=Een+Google+Cloud+Function+instellen%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2021%2F01%2FGoogle-Cloud-Functions%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2021%2F01%2FGoogle-Cloud-Functions%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2021%2F01%2FGoogle-Cloud-Functions%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=Een+Google+Cloud+Function+instellen&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2021%2F01%2FGoogle-Cloud-Functions%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/programming/games/diy/2021/01/One-Year/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">Eén jaar 4DCu.be</span></a></span>
+  <span class="next-post"><a href="/nl/diy/2021/01/Bluetooth-Speaker/"><span class="page-number">Een Bluetooth-luidspreker bouwen — deel 1</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

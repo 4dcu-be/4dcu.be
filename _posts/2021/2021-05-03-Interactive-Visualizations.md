@@ -5,6 +5,7 @@ byline: ""
 description: "How to add interactive charts to static sites like Jekyll using Altair, Vega and the justcharts library, exporting plots as JSON without writing JavaScript."
 date:   2021-05-03 10:00:00
 author: Sebastian Proost
+post_id: interactive-visualizations
 categories: programming
 tags:	python pandas data-science altair vega
 cover:  "/assets/images/headers/python_code.jpg"

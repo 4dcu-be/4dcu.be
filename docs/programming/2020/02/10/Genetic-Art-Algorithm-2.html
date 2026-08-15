@@ -21,13 +21,17 @@
   <meta property="og:url" content="https://blog.4dcu.be/programming/2020/02/10/Genetic-Art-Algorithm-2.html" />
   <meta property="og:type" content="article" />
   <meta property="og:locale" content="en_US" />
-  
+  <meta property="og:locale:alternate" content="nl_NL" />
   <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2020-02-10-Genetic-Art-Algorithm-2-vermeer_header.jpg" /><meta property="og:image:alt" content="Minimalist Art Using a Genetic Algorithm" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
   <meta property="article:published_time" content="2020-02-10T12:00:00+00:00" /><meta property="article:modified_time" content="2020-02-10T12:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programming" /><meta property="article:tag" content="python" /><meta property="article:tag" content="evolution" /><meta property="article:tag" content="genetic-algorithm" /><meta property="article:tag" content="algorithm" /><meta property="article:tag" content="art" />
 
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Minimalist Art Using a Genetic Algorithm"><meta name="twitter:description" content="Using a Python genetic algorithm with Voronoi diagrams and gene duplication to re-draw Vermeer&#39;s Girl with a Pearl Earring in a minimalist style."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2020-02-10-Genetic-Art-Algorithm-2-vermeer_header.jpg"><meta name="twitter:image:alt" content="Minimalist Art Using a Genetic Algorithm"><meta name="twitter:url" content="https://blog.4dcu.be/programming/2020/02/10/Genetic-Art-Algorithm-2.html">
 
   <link rel="canonical" href="https://blog.4dcu.be/programming/2020/02/10/Genetic-Art-Algorithm-2.html">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/2020/02/10/Genetic-Art-Algorithm-2.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/2020/02/Genetic-Art-Algorithm-2/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/2020/02/10/Genetic-Art-Algorithm-2.html">
   
   <link rel="alternate" type="application/rss+xml" title="4DCu.be (en-US)" href="https://blog.4dcu.be/feed.xml" />
   <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
@@ -111,7 +115,7 @@
       
         <a class="navbar-item lang-switch__option is-current" lang="en" href="/programming/2020/02/10/Genetic-Art-Algorithm-2.html" aria-current="true"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
       
-        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/programming/2020/02/Genetic-Art-Algorithm-2/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
       
       </div>
     </div>
@@ -135,7 +139,7 @@
 worked very well, it didn’t quite produce the style of minimalist artwork I was trying to achieve. Furthermore, it didn’t allow
 the chromosomes to evolve using duplication and deletion of existing genes (which is very common in biology). So
 after mulling over these issues a few days, I found a solution using a <a href="https://en.wikipedia.org/wiki/Voronoi_diagram">Voronoi diagram</a>. The final 
-result (shown below) is much closer to what I was aiming for. The painting to re-drawn by the algorithm this time is
+result (shown below) is much closer to what I was aiming for. The painting to be re-drawn by the algorithm this time is
 Vermeer’s <a href="https://en.wikipedia.org/wiki/Girl_with_a_Pearl_Earring">Girl with a Pearl Earring</a>.</p>
 
 <div class="gallery-2-col">
@@ -238,7 +242,7 @@ including humans !</p>
 
 <p>The strategy used to generate the image in the beginning of the post was to start with 250 points and evolve them for 
 ~1000 generations, then double the number of points and evolve for another 1000 generations, shrink the genome by 
-removing 100 points and double again. Then the population was left to evolve for a while and then force to shed 100 
+removing 100 points and double again. Then the population was left to evolve for a while and then forced to shed 100
 genes, this process was repeated a few times to end up with a final image that contains 600 points.</p>
 
 <p><a href="/assets/posts/2020-02-10-Genetic-Art-Algorithm-2/vermeer_evolution.png" class="lightgallery-link" data-sub-html="The evolution at generation 1, 250, 500, 750, 1000, 1500, 2500, 3500 and 5500">
@@ -247,7 +251,7 @@ genes, this process was repeated a few times to end up with a final image that c
 
 <p>In the image above you can see the best individual (out of a population of 250) of generation 1, 250, 500, 750, 1000, 
 1500, 2500, 3500 and 5500. Between generation 1000-1500 and 2500-3500 there were duplications followed by a number of 
-normal evolutionary steps and a few reductions steps. The complexity and detail of the image clearly increases at these
+normal evolutionary steps and a few reduction steps. The complexity and detail of the image clearly increases at these
 steps.</p>
 
 <h2 id="comparison-to-the-previous-algorithm">Comparison to the previous algorithm</h2>

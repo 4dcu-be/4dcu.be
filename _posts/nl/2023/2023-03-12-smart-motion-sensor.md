@@ -145,8 +145,8 @@ onverwachte bewegingen, maar voldoen mogelijk niet aan dezelfde normen als profe
 Daarom is het altijd verstandig om je beveiligingsbehoeften te beoordelen en eventueel een beveiligingsexpert te raadplegen om de
 beste oplossing voor jouw specifieke situatie te bepalen.
 
-[installeren van Home Assistant met MQTT en ZigBee]: {% post_url 2020/2020-09-10-MQTT %}
+[installeren van Home Assistant met MQTT en ZigBee]: {% post_url nl/2020/2020-09-10-MQTT %}
 [Home Assistant]: https://www.home-assistant.io/
 [MQTT]: https://www.home-assistant.io/integrations/mqtt/
 [ZigBee2MQTT]: https://www.zigbee2mqtt.io/guide/usage/integrations/home_assistant.html
-[met HA te koppelen]: {% post_url 2021/2021-04-28-MQTT-Ikea-Tradfri %}
+[met HA te koppelen]: {% post_url nl/2021/2021-04-28-MQTT-Ikea-Tradfri %}

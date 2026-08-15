@@ -5,6 +5,7 @@ byline: "which one should you use?"
 description: "Comparing the static site generators Jekyll, Pelican and Gatsby from real project experience, weighing the strengths and weaknesses of each to help you choose."
 date:   2020-11-22 13:00:00
 author: Sebastian Proost
+post_id: static-web-generators
 categories: programming
 tags:	python ruby javascript pelican jekyll gatsby
 cover:  "/assets/posts/2020-11-22-Static-Web-Generators/generator_header.jpg"
@@ -26,7 +27,7 @@ section below.
 ![Jekyll logo](/assets/posts/2020-11-22-Static-Web-Generators/jekyll-logo-2x.png){:.small-image}
 
 [Jekyll], released in 2008, is one of the first static site generators and has grown in popularity as it has 
-integrated in GitHub. While it is possible to build a wide variety of sites using Jekyll, at the core it is intended
+been integrated with GitHub. While it is possible to build a wide variety of sites using Jekyll, at the core it is intended
 for blogs. It is rather opinionated about file structure, post metadata, extensions, ... but once you accept these 
 patterns it really allows you to forget the web development aspect and focus on the content.
 
@@ -78,7 +79,7 @@ markdown files in the ```/docs``` folder and picking a template to create simple
 boon. This can also be easily changed and extended though GitHub's system. So anyone that adds a feature to the code
 can add the corresponding documentation without having to install any additional tools on their system.
 
-For simple websites, where there are few variable elements that need to updated from time to time, there is also a case 
+For simple websites, where there are few variable elements that need to be updated from time to time, there is also a case
 to be made for Jekyll. Here all work can go into creating the web design and the few variable pieces can be pulled from
 a YAML file. Now updating those values is as simple as changing the values in that YAML file and GitHub can take care
 of everything else. I can think of plenty of cases, ranging from small businesses, sports clubs, ... where this would be
@@ -86,7 +87,7 @@ an efficient way to set up and maintain a website. My previous resume was set up
 one powered by [Gatsby] last week. You can still find the previous version [here](https://github.com/sepro/resume-pre2020).
 
 Both blogs I've set up ([Beyond the Known] and this one), are also powered by Jekyll, though they both use plugins and
-customizations that GitHub doesn't support. So these are build locally into the ```/docs``` folder and committed to 
+customizations that GitHub doesn't support. So these are built locally into the ```/docs``` folder and committed to
 GitHub. A bit more involved, but a similar step is required for all other static site generators.
 
 ## Pelican
@@ -94,7 +95,7 @@ GitHub. A bit more involved, but a similar step is required for all other static
 ![Pelican logo](/assets/posts/2020-11-22-Static-Web-Generators/pelly.png){:.small-image}
 
 Given that I'm most proficient with Python, a static site generator which is based on Python sounds very attractive. 
-There are a few option available, though Pelican was the most popular of those platforms, so I picked this to play around
+There are a few options available, though Pelican was the most popular of those platforms, so I picked this to play around
 with and ultimately created [DeckLock], a website to keep track of decks I have for various collectible card games.   
 
 ### Pros
@@ -121,7 +122,7 @@ is a little steeper than with Jekyll.
 ### Where to use it ?
 
 Pelican is a great option if you need to do some significant processing of your input before it can be turned into
-a page. [DeckLock] starts with very limited information (e.g. a decks identifier for a KeyForge deck), pulls in all
+a page. [DeckLock] starts with very limited information (e.g. a deck's identifier for a KeyForge deck), pulls in all
 information it needs (like the decklist, card art, card details, ... ), does some additional statistics and then turns 
 that into a page using a template. While I won't say this is impossible using [Jekyll] or [Gatsby], it will be 
 quite a bit more complicated. Being able to leverage amazing packages from the Python ecosystem really gives Pelican a
@@ -152,7 +153,7 @@ are far more time consuming to include using other frameworks.
 ### Cons
 
 Steepest learning curve of the frameworks discussed here. Apart from knowing the frameworks and some HTML + CSS to pull
-of the template, Gatsby will require some knowledge of React, modern JavaScript (ES6 is the current flavor), npm, ...
+off the template, Gatsby will require some knowledge of React, modern JavaScript (ES6 is the current flavor), npm, ...
 Not something everybody will be able or willing to do.
 
 ### Where to use it ?
@@ -163,12 +164,12 @@ as long as you are willing to put in the extra time to learn JavaScript, React, 
 for [Jekyll]
 
 For a niche project like [DeckLock] where all sorts of pre-processing is necessary to build a page Python might have better
-options. So here [Pelican] could be an advantage, though with some extra effort this can be pulled of in JS and hence
+options. So here [Pelican] could be an advantage, though with some extra effort this can be pulled off in JS and hence
 Gatsby as well.
 
 ## Conclusion
 
-I must admit I didn't think highly about statically generated sites a few year ago. Mostly because my first
+I must admit I didn't think highly of statically generated sites a few years ago. Mostly because my first
 encounter with a statically generated site was abysmal. It simply wasn't the right tool for that job, but a misguided 
 attempt at avoiding the use of a proper database. With a terrible implementation on top, having to maintain that code 
 was a major pain...

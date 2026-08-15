@@ -21,13 +21,17 @@
   <meta property="og:url" content="https://blog.4dcu.be/programming/2020/11/02/Steganography.html" />
   <meta property="og:type" content="article" />
   <meta property="og:locale" content="en_US" />
-  
+  <meta property="og:locale:alternate" content="nl_NL" />
   <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2020-11-02-Steganography-post_header.jpg" /><meta property="og:image:alt" content="Steganography using PIL and NumPy" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
   <meta property="article:published_time" content="2020-11-02T12:00:00+00:00" /><meta property="article:modified_time" content="2020-11-02T12:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programming" /><meta property="article:tag" content="python" /><meta property="article:tag" content="numpy" /><meta property="article:tag" content="steganography" />
 
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Steganography using PIL and NumPy"><meta name="twitter:description" content="Hiding secret messages inside images using Python with PIL and NumPy, encoding text into the least significant bits of each pixel&#39;s RGB values."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2020-11-02-Steganography-post_header.jpg"><meta name="twitter:image:alt" content="Steganography using PIL and NumPy"><meta name="twitter:url" content="https://blog.4dcu.be/programming/2020/11/02/Steganography.html">
 
   <link rel="canonical" href="https://blog.4dcu.be/programming/2020/11/02/Steganography.html">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/2020/11/02/Steganography.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/2020/11/Steganography/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/2020/11/02/Steganography.html">
   
   <link rel="alternate" type="application/rss+xml" title="4DCu.be (en-US)" href="https://blog.4dcu.be/feed.xml" />
   <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
@@ -111,7 +115,7 @@
       
         <a class="navbar-item lang-switch__option is-current" lang="en" href="/programming/2020/11/02/Steganography.html" aria-current="true"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
       
-        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/programming/2020/11/Steganography/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
       
       </div>
     </div>
@@ -136,7 +140,7 @@ pictures, hide a file within another file, … Here we’ll try to hide some inf
 
 <p>Images are essentially two dimensional lists of pixels, which in turn consist of three integer numbers in the range 
 0-255 that represent values for red, green and blue. The difference between a pixel with value rgb(230, 129, 200) and 
-rgb(229, 129, 201) are virtually imperceptible. So we can leverage this and hide information in that least significant 
+rgb(229, 129, 201) are virtually imperceptible. So we can leverage this and hide information in the least significant
 bits of each pixel.</p>
 
 <p>To hide a message in an image a function is needed that <strong>converts a string to a binary representation</strong> and one that 
@@ -193,7 +197,7 @@ decoded: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
 <h2 id="hiding-information-in-an-image">Hiding Information in an Image</h2>
 
 <p>With functions to convert any text into binary and back, the code to bake that binary information into an image can be 
-written. Here the <a href="https://pillow.readthedocs.io/en/stable/">PIL</a> library is used to load the image, which is than 
+written. Here the <a href="https://pillow.readthedocs.io/en/stable/">PIL</a> library is used to load the image, which is then
 turned into a one-dimensional list of all Red, Green and Blue values of the pixel in the image.</p>
 
 <p>A suffix <STOP> is added to the hidden message so when decoding the image it is clear where the message ends. This is 
@@ -201,11 +205,10 @@ then converted to binary. Next, a loop goes over all bits, and encodes them in t
 flattened image. This is done by applying a binary mask (0b11111110) to the value to set the least significant bit to 
 zero and then a binary *or* operation is used to set that value to the desired value.</STOP></p>
 
-<p>The clause <code class="language-plaintext highlighter-rouge">ix &lt; len(encoded_text) else value</code> ensures that if that pixels in spots where hidden information isn’t 
-stored remain identical.</p>
+<p>The clause <code class="language-plaintext highlighter-rouge">ix &lt; len(encoded_text) else value</code> ensures that the pixels in spots where hidden information isn’t stored remain identical.</p>
 
 <p>Finally, the one-dimensional array is turned back into a 2D image with 3 color channels and exported as PIL image. To 
-test this, and image <code class="language-plaintext highlighter-rouge">pear.png</code> is loaded, a Hello World message inserted and the image written to disk again. Make 
+test this, an image <code class="language-plaintext highlighter-rouge">pear.png</code> is loaded, a Hello World message inserted and the image written to disk again. Make
 sure that when saving the image, a lossless file format is used. JPEG files are compressed in a way that some minor 
 details are lost, this could remove the hidden content, so here PNG is used.</p>
 
@@ -243,8 +246,8 @@ details are lost, this could remove the hidden content, so here PNG is used.</p>
 
 <h2 id="extracting-the-hidden-content">Extracting the Hidden Content</h2>
 
-<p>Cool, our image looks identical to the input image. By eye the minor differences are imperceivable. One last function 
-to add, to extract the hidden message from an image. This is fairly simple, after te image is loaded it is flattened 
+<p>Cool, our image looks identical to the input image. By eye the minor differences are imperceptible. One last function
+to add, to extract the hidden message from an image. This is fairly simple, after the image is loaded it is flattened
 into a one-dimensional array again. For each value the least significant bit is extracted using a bit mask. These 
 values are joined into a single string, which is decoded using the <code class="language-plaintext highlighter-rouge">decode_text</code> function. Finally, we need to 
 break the decoded text on the suffix <STOP>, beyond that suffix there is no information encoded and there will be a lot 
@@ -273,9 +276,9 @@ of gibberish returned. A simple ```split()``` does that trick.</STOP></p>
 <p>Being able to hide information in a plain looking file is a cool gimmick. There are plenty of cool use-cases known, you
 can find more information on <a href="https://en.wikipedia.org/wiki/Steganography">WikiPedia</a> about this. As a binary signature is inserted, essentially all kinds of data
 could be hidden. For text, you need just under three pixels to store a single character using only the least significant
- bit. So a fair amount of text can be stored in an image. You could double that amount by either compressing the text 
- first, and by the information into the two least significant bits of each pixels channels. Computerphile has an 
- example where the entire works of Shakespeare are included in a single image of tree. Check out that movie 
+ bit. So a fair amount of text can be stored in an image. You could double that amount by compressing the text first and by storing the information in the two least significant
+ bits of each pixel’s channels. Computerphile has an
+ example where the entire works of Shakespeare are included in a single image of a tree. Check out that movie
  <a href="https://www.youtube.com/watch?v=TWEXCYQKyDc">here</a>.</p>
 
 </article>

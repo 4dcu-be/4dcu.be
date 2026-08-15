@@ -1,0 +1,728 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>BusyBoard: geen onderbrekingen meer tijdens vergaderingen</title>
+  <meta name="description" content="BusyBoard bouwen, een Python-Flask-webapp met SQLAlchemy, Flask-Admin en Bulma, in een uitdaging van vier uur om huisgenoten te laten weten wanneer je bezig ...">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="BusyBoard: geen onderbrekingen meer tijdens vergaderingen" />
+  <meta property="og:description" content="BusyBoard bouwen, een Python-Flask-webapp met SQLAlchemy, Flask-Admin en Bulma, in een uitdaging van vier uur om huisgenoten te laten weten wanneer je bezig ..." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/programming/2020/07/BusyBoard/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2020-07-26-BusyBoard-header.jpg" /><meta property="og:image:alt" content="BusyBoard: geen onderbrekingen meer tijdens vergaderingen" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2020-07-26T12:00:00+00:00" /><meta property="article:modified_time" content="2020-07-26T12:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programmeren" /><meta property="article:tag" content="python" /><meta property="article:tag" content="flask" /><meta property="article:tag" content="sqlalchemy" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="BusyBoard: geen onderbrekingen meer tijdens vergaderingen"><meta name="twitter:description" content="BusyBoard bouwen, een Python-Flask-webapp met SQLAlchemy, Flask-Admin en Bulma, in een uitdaging van vier uur om huisgenoten te laten weten wanneer je bezig ..."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2020-07-26-BusyBoard-header.jpg"><meta name="twitter:image:alt" content="BusyBoard: geen onderbrekingen meer tijdens vergaderingen"><meta name="twitter:url" content="https://blog.4dcu.be/nl/programming/2020/07/BusyBoard/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/programming/2020/07/BusyBoard/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/2020/07/26/BusyBoard.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/2020/07/BusyBoard/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/2020/07/26/BusyBoard.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/programming/2020/07/BusyBoard/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/programming/2020/07/BusyBoard/" },
+      "url": "https://blog.4dcu.be/nl/programming/2020/07/BusyBoard/",
+      "headline": "BusyBoard: geen onderbrekingen meer tijdens vergaderingen",
+      "description": "BusyBoard bouwen, een Python-Flask-webapp met SQLAlchemy, Flask-Admin en Bulma, in een uitdaging van vier uur om huisgenoten te laten weten wanneer je bezig ...",
+      "datePublished": "2020-07-26T12:00:00+00:00",
+      "dateModified": "2020-07-26T12:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2020-07-26-BusyBoard-header.jpg",
+      "keywords": ["python", "flask", "sqlalchemy"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/programming/2020/07/BusyBoard/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Programmeren", "item": "https://blog.4dcu.be/nl/category/programming/" },
+        { "@type": "ListItem", "position": 3, "name": "BusyBoard: geen onderbrekingen meer tijdens vergaderingen" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/programming/2020/07/26/BusyBoard.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/programming/2020/07/BusyBoard/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/busyboard_header.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="BusyBoard: geen onderbrekingen meer tijdens vergaderingen" class="hero-background is-transparent" src="/assets/posts/2020-07-26-BusyBoard/header.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">BusyBoard: geen onderbrekingen meer tijdens vergaderingen</h1><p class="info has-text-white"><em></em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 26-07-2020 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/programming/">Programmeren</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Sinds het begin van de COVID-19-pandemie is thuiswerken voor mij de norm geworden, en het ziet er niet naar uit dat dit
+binnenkort verandert. Omdat thuiswerken hand in hand gaat met onlinevergaderingen, is het handig om
+je huisgenoten te kunnen laten weten dat je bezig bent en liever niet wordt gestoord. Er bestaan eenvoudige
+oplossingen (bijvoorbeeld een elastiek rond de deurknop …), maar ik besloot hiervoor een webapp te maken.</p>
+
+<p><a href="/assets/posts/2020-07-26-BusyBoard/busyboard.png" class="lightgallery-link" data-sub-html="BusyBoard in actie, een eenvoudige webapp op het lokale netwerk die je huisgenoten laat zien dat je bezig bent">
+<img src="/assets/posts/2020-07-26-BusyBoard/busyboard.png" alt="BusyBoard in actie, een eenvoudige webapp op het lokale netwerk die je huisgenoten laat zien dat je bezig bent" height="653" width="1333" data-src="/assets/posts/2020-07-26-BusyBoard/busyboard.png" loading="lazy" />
+</a></p>
+
+<p>Bij sollicitatiegesprekken voor technische functies is het blijkbaar gebruikelijk om kandidaten te vragen in
+vrij korte tijd een klein stukje software te ontwikkelen. Omdat ik alleen in de academische wereld heb gewerkt, is dit concept nieuw voor mij! Om te testen hoe ik
+het tijdens zo’n gesprek zou doen, legde ik mezelf een tijdslimiet van vier uur op (een halve werkdag) en keek ik hoe ver
+ik raakte.</p>
+
+<h2 id="de-juiste-tools-kiezen">De juiste tools kiezen</h2>
+
+<p>Om dit efficiënt te doen, is het essentieel de juiste tools voor de klus te kiezen. Omdat dit een webapp is, ligt <a href="https://flask.palletsprojects.com/">Flask</a> voor
+mij voor de hand: dat is het framework waarmee ik het meest vertrouwd ben. We hebben een database nodig en een manier om gegevens toe te voegen, te wijzigen en te verwijderen,
+dus <a href="https://flask-sqlalchemy.palletsprojects.com/">Flask-SQLAlchemy</a> en <a href="https://flask-admin.readthedocs.io/">Flask-Admin</a> zijn degelijke opties. Verder heb ik een CSS-bibliotheek nodig om de
+<em>front-end</em> met weinig moeite aanvaardbaar te doen ogen. Voor grotere projecten is <a href="https://getbootstrap.com/">Bootstrap</a> doorgaans mijn vaste keuze, maar hier
+zou dat wat overdreven zijn. <a href="https://milligram.io/">Milligram</a> is dan weer uitstekend voor kleine projecten. 
+Helaas ondersteunt Milligram standaard geen panelen of kaarten, die ik echt nodig had voor de lay-out die ik in
+gedachten had. Omdat het behoorlijk wat werk zou zijn om die zelf te implementeren, kwam ik uiteindelijk bij <a href="https://bulma.io/">Bulma</a> uit.</p>
+
+<p>Tot slot is het handig om met een vooraf opgebouwde codestructuur te beginnen. Je kunt een <a href="https://github.com/cookiecutter-flask/cookiecutter-flask">cookiecutter</a>
+voor Flask gebruiken om met enkele opdrachten een basisapp te maken. Omdat ik die nog nooit had gebruikt, nam ik wat code uit een 
+vorig project, <a href="https://github.com/sepro/MemoBoard">MemoBoard</a>, dat veel van dezelfde componenten gebruikt.</p>
+
+<h2 id="het-eerste-uur-een-basisapp-aan-de-praat-krijgen">Het eerste uur: een basisapp aan de praat krijgen</h2>
+
+<p>De code die ik in iets minder dan een uur in elkaar bokste, vind je <a href="https://github.com/4dcu-be/BusyBoard/tree/a3b013da6ae27797864c8e51611cd71a09fd5960/busyboard">hier</a>.
+Hij gebruikt de basiscode van MemoBoard en Flask-Admin om gegevens in de database te krijgen en bevat een heel eenvoudige
+sjabloon (alleen tekst) die toont wie wel en niet bezig is. Het werkte, maar het was lelijk.</p>
+
+<h2 id="de-volgende-twee-uur-het-er-mooi-laten-uitzien">De volgende twee uur: het er mooi laten uitzien</h2>
+
+<p>De lay-out liet veel te wensen over en werd daarom verbeterd met wat CSS in de sjabloon. Met het <a href="https://bulma.io/">Bulma</a>-CSS-framework
+kon ik snel kaarten voor elke gebruiker maken, en na wat bijsturen zag het er prima uit. Met enkele geavanceerdere 
+opties van Flask-Admin werd het ook gemakkelijk om de status van gebruikers via het beheerpaneel te wijzigen. In dit stadium besloot ik bovendien 
+dat gebruikers een foto moesten kunnen toevoegen. <a href="https://pythonhosted.org/Flask-Uploads/">Flask-Uploads</a> kan de uploads verwerken en er bestaan opties om
+het met Flask-Admin te integreren, zoals <a href="https://web.archive.org/web/20201123223344/https://mrl33h.de/post/30">hier</a> beschreven. Dit vergde enkele pogingen en
+ik verloor behoorlijk wat tijd voordat ik ontdekte dat Flask-Uploads niet compatibel was met de recentste versie van
+<a href="https://werkzeug.palletsprojects.com/">Werkzeug</a>.</p>
+
+<p>Na ongeveer drie uur werken had ik dus <a href="https://github.com/4dcu-be/BusyBoard/tree/7a693a621d7986d6fd74861252ffb8ae18363f67">deze versie</a>.
+De interessante delen van de code worden hieronder uitgelicht.</p>
+
+<h2 id="het-laatste-uur-de-afwerking">Het laatste uur: de afwerking</h2>
+
+<p>Een laatste functie die ik echt wilde, was tonen wanneer iemands status werd bijgewerkt. Een elegante oplossing is inhaken op een
+SQLAlchemy-event dat afgaat voordat een entiteit wordt bijgewerkt. Zo kun je het veld met de laatste wijziging aanpassen vlak voordat
+de gegevens in de database worden gewijzigd. Dat kan met slechts enkele regels code en garandeert dat
+elke wijziging aan een gebruiker via SQLAlchemy ook het veld bijwerkt. Om het tijdsverschil tussen het huidige tijdstip en
+de laatste wijziging in een menselijk leesbaar formaat weer te geven, is de <a href="https://arrow.readthedocs.io/">Arrow</a>-bibliotheek fantastisch en eenvoudig te gebruiken.</p>
+
+<p>Tot slot besteedde ik enkele minuten aan documentatie. Omdat dit ongeveer de meest traditionele Flask-app is die je kunt bedenken, kon ik 
+voor veel zaken verwijzen naar de officiële documentatie.</p>
+
+<h2 id="de-code">De code</h2>
+
+<p>Wil je zien hoe dit project evolueerde, bekijk dan de commitgeschiedenis in de <a href="https://github.com/4dcu-be/BusyBoard">GitHub-repository</a>.</p>
+
+<h3 id="modelspy">models.py</h3>
+
+<p>Het databasemodel bevat slechts één tabel voor gebruikers en enkele eigenschappen voor de samenwerking met Flask-Uploads
+en Arrow. Het leuke deel is de functie <strong>on_change</strong> en de laatste regel, die ze aan het 
+<strong>before_update</strong>-event van SQLAlchemy koppelt. Dankzij dit kleine stukje code wordt telkens wanneer een item verandert ook het veld last_update
+automatisch bijgewerkt.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">busyboard</span> <span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">images</span>
+<span class="kn">from</span> <span class="n">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="n">arrow</span>
+
+
+<span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="sh">'</span><span class="s">users</span><span class="sh">'</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">busy</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Boolean</span><span class="p">)</span>
+    <span class="n">busy_with</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">can_be_disturbed</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Boolean</span><span class="p">)</span>
+    <span class="n">notes</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="nc">Unicode</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span>
+    <span class="n">last_change</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="n">utcnow</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">url</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">path</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">return</span> <span class="n">images</span><span class="p">.</span><span class="nf">url</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">path</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">filepath</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">path</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">return</span> <span class="n">images</span><span class="p">.</span><span class="nf">path</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">path</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">last_changed</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">age_arrow</span> <span class="o">=</span> <span class="n">arrow</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">last_change</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">age_arrow</span><span class="p">.</span><span class="nf">humanize</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">on_change</span><span class="p">(</span><span class="n">mapper</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+        <span class="n">target</span><span class="p">.</span><span class="n">last_change</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">utcnow</span><span class="p">()</span>
+
+
+<span class="n">db</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="nf">listen</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="sh">'</span><span class="s">before_update</span><span class="sh">'</span><span class="p">,</span> <span class="n">User</span><span class="p">.</span><span class="n">on_change</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="adminpy">admin.py</h3>
+
+<p>De allereerste versie gebruikte gewoon de standaard-ModelView van Flask-Admin. Dat is uitstekend om te beginnen en vereist
+vrijwel geen code om een CRUD-interface voor een tabel te krijgen. Voor meer verfijnde controle is wat extra werk 
+nodig.</p>
+
+<p><strong>column_editable_list</strong> is bijvoorbeeld handig om in te stellen, omdat records daarmee rechtstreeks vanuit de overzichtspagina kunnen worden bewerkt. 
+<strong>CustomIndexView</strong> wordt hier gedefinieerd om de knop <em>Home</em> in het beheerpaneel te verbergen (die geen doel dient) en 
+de link achter de naam te vervangen door een link naar de hoofdapp (zodat je na een wijziging gemakkelijk naar de app kunt terugkeren)
+.</p>
+
+<p><a href="/assets/posts/2020-07-26-BusyBoard/admin_interface.png" class="lightgallery-link" data-sub-html="Beheerinterface: met enkele kleine aanpassingen is ze veel gebruiksvriendelijker">
+<img src="/assets/posts/2020-07-26-BusyBoard/admin_interface.png" alt="Beheerinterface: met enkele kleine aanpassingen is ze veel gebruiksvriendelijker" height="357" width="1241" data-src="/assets/posts/2020-07-26-BusyBoard/admin_interface.png" loading="lazy" />
+</a></p>
+
+<p>De functie _list_thumbnail voegt een miniatuurvoorbeeld toe zodra een afbeelding is geüpload. In de klasse staat ook extra code om
+dit aan het model te koppelen. ImageUploadField wordt hier toegevoegd zodat gebruikers een afbeelding kunnen uploaden en het
+pad in één beweging naar het model kunnen schrijven, zonder dat ze zelf met het pad kunnen knoeien.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">flask</span> <span class="kn">import</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span>
+<span class="kn">from</span> <span class="n">flask_admin.contrib.sqla</span> <span class="kn">import</span> <span class="n">ModelView</span>
+<span class="kn">from</span> <span class="n">busyboard</span> <span class="kn">import</span> <span class="n">form</span>
+<span class="kn">from</span> <span class="n">jinja2</span> <span class="kn">import</span> <span class="n">Markup</span>
+<span class="kn">import</span> <span class="n">os</span>
+<span class="kn">import</span> <span class="n">uuid</span>
+<span class="kn">from</span> <span class="n">werkzeug</span> <span class="kn">import</span> <span class="n">secure_filename</span>
+<span class="kn">from</span> <span class="n">flask_admin</span> <span class="kn">import</span> <span class="n">expose</span><span class="p">,</span> <span class="n">AdminIndexView</span>
+
+
+<span class="k">def</span> <span class="nf">_list_thumbnail</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">model</span><span class="p">.</span><span class="n">filename</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sh">''</span>
+
+    <span class="k">return</span> <span class="nc">Markup</span><span class="p">(</span>
+        <span class="sh">'</span><span class="s">&lt;img src=</span><span class="sh">"</span><span class="s">{model.url}</span><span class="sh">"</span><span class="s"> style=</span><span class="sh">"</span><span class="s">width: 150px;</span><span class="sh">"</span><span class="s">&gt;</span><span class="sh">'</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+    <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">UserAdminView</span><span class="p">(</span><span class="n">ModelView</span><span class="p">):</span>
+    <span class="n">form_columns</span> <span class="o">=</span> <span class="p">(</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">busy</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">busy_with</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">can_be_disturbed</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">notes</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">path</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">form_excluded_columns</span> <span class="o">=</span> <span class="p">(</span><span class="sh">'</span><span class="s">last_updated</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">column_editable_list</span> <span class="o">=</span> <span class="p">(</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">busy</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">busy_with</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">can_be_disturbed</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">notes</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">form_create_rules</span> <span class="o">=</span> <span class="p">(</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">busy</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">busy_with</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">can_be_disturbed</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">notes</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">path</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">form_edit_rules</span> <span class="o">=</span> <span class="p">(</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">busy</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">busy_with</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">can_be_disturbed</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">notes</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">path</span><span class="sh">'</span><span class="p">)</span>
+
+    <span class="n">can_create</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="n">column_formatters</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">'</span><span class="s">image</span><span class="sh">'</span><span class="p">:</span> <span class="n">_list_thumbnail</span>
+    <span class="p">}</span>
+
+    <span class="n">form_extra_fields</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">'</span><span class="s">path</span><span class="sh">'</span><span class="p">:</span> <span class="n">form</span><span class="p">.</span><span class="nc">ImageUploadField</span><span class="p">(</span>
+            <span class="sh">'</span><span class="s">Image</span><span class="sh">'</span><span class="p">,</span>
+            <span class="n">base_path</span><span class="o">=</span><span class="sh">'</span><span class="s">busyboard/static/images</span><span class="sh">'</span><span class="p">,</span>
+            <span class="n">url_relative_path</span><span class="o">=</span><span class="sh">'</span><span class="s">images/</span><span class="sh">'</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+
+
+<span class="k">class</span> <span class="nc">CustomIndexView</span><span class="p">(</span><span class="n">AdminIndexView</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">is_visible</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="c1"># This view won't appear in the menu structure
+</span>        <span class="k">return</span> <span class="bp">False</span>
+
+    <span class="nd">@expose</span><span class="p">(</span><span class="sh">'</span><span class="s">/</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nf">redirect</span><span class="p">(</span><span class="nf">url_for</span><span class="p">(</span><span class="sh">'</span><span class="s">main_route</span><span class="sh">'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="initpy"><strong>init</strong>.py</h3>
+
+<p>Hier staat alle code om de BusyBoard-app op te zetten. Er is niets echt verrassends, misschien met uitzondering van het gedeelte <code class="language-plaintext highlighter-rouge">createdb</code>.
+Dit voegt een opdrachtregeloptie toe waarmee je de database aanmaakt via <code class="language-plaintext highlighter-rouge">flask createdb</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span>
+
+<span class="kn">from</span> <span class="n">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
+<span class="kn">from</span> <span class="n">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+<span class="kn">from</span> <span class="n">flask_admin</span> <span class="kn">import</span> <span class="n">Admin</span><span class="p">,</span> <span class="n">form</span>
+<span class="kn">from</span> <span class="n">busyboard.admin</span> <span class="kn">import</span> <span class="n">UserAdminView</span><span class="p">,</span> <span class="n">CustomIndexView</span>
+<span class="kn">from</span> <span class="n">flask_uploads</span> <span class="kn">import</span> <span class="n">UploadSet</span><span class="p">,</span> <span class="n">IMAGES</span><span class="p">,</span> <span class="n">configure_uploads</span><span class="p">,</span> <span class="n">patch_request_class</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="nc">SQLAlchemy</span><span class="p">()</span>
+
+<span class="n">images</span> <span class="o">=</span> <span class="nc">UploadSet</span><span class="p">(</span><span class="sh">'</span><span class="s">images</span><span class="sh">'</span><span class="p">,</span> <span class="n">IMAGES</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">create_app</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+    <span class="c1"># Set up app, database and login manager before importing models and controllers
+</span>    <span class="c1"># Important for db_create script
+</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="nc">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="nf">from_object</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+    <span class="n">db</span><span class="p">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
+    <span class="n">db</span><span class="p">.</span><span class="nf">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+    <span class="nf">configure_uploads</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="p">(</span><span class="n">images</span><span class="p">))</span>
+    <span class="nf">patch_request_class</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span>
+
+    <span class="kn">from</span> <span class="n">busyboard.models</span> <span class="kn">import</span> <span class="n">User</span>
+
+    <span class="n">admin</span> <span class="o">=</span> <span class="nc">Admin</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sh">'</span><span class="s">BusyBoard</span><span class="sh">'</span><span class="p">,</span> <span class="n">template_mode</span><span class="o">=</span><span class="sh">'</span><span class="s">bootstrap3</span><span class="sh">'</span><span class="p">,</span> <span class="n">index_view</span><span class="o">=</span><span class="nc">CustomIndexView</span><span class="p">())</span>
+    <span class="n">admin</span><span class="p">.</span><span class="nf">add_view</span><span class="p">(</span><span class="nc">UserAdminView</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">db</span><span class="p">.</span><span class="n">session</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="sh">'</span><span class="s">users</span><span class="sh">'</span><span class="p">))</span>
+
+    <span class="nd">@app.route</span><span class="p">(</span><span class="sh">'</span><span class="s">/</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">main_route</span><span class="p">():</span>
+        <span class="n">users</span> <span class="o">=</span> <span class="n">User</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="nf">all</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nf">render_template</span><span class="p">(</span><span class="sh">'</span><span class="s">index.html</span><span class="sh">'</span><span class="p">,</span> <span class="n">users</span><span class="o">=</span><span class="n">users</span><span class="p">)</span>
+
+    <span class="nd">@app.cli.command</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">createdb</span><span class="p">():</span>
+        <span class="sh">"""</span><span class="s">
+        function to create the initial database and migration information
+        </span><span class="sh">"""</span>
+        <span class="n">SQLALCHEMY_DATABASE_URI</span> <span class="o">=</span> <span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">[</span><span class="sh">'</span><span class="s">SQLALCHEMY_DATABASE_URI</span><span class="sh">'</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">SQLALCHEMY_DATABASE_URI</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">sqlite:///</span><span class="sh">'</span><span class="p">):</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">dirname</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">realpath</span><span class="p">(</span><span class="n">SQLALCHEMY_DATABASE_URI</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="sh">'</span><span class="s">sqlite:///</span><span class="sh">'</span><span class="p">,</span> <span class="sh">''</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+                <span class="n">os</span><span class="p">.</span><span class="nf">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="n">db</span><span class="p">.</span><span class="nf">create_all</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">app</span>
+</code></pre></div></div>
+
+<h2 id="conclusie">Conclusie</h2>
+
+<p>In ongeveer vier uur kon ik een grappige kleine app maken die aan al mijn eisen voldeed. Dit toont echt
+hoeveel je met Python en zijn ecosysteem kunt bereiken met heel weinig tijd en code. Het was ook interessant
+om te simuleren hoe zo’n sollicitatiegesprek zou verlopen. Als het om een echte situatie ging, zou ik echter meer tijd hebben besteed
+aan tests in plaats van afbeeldingen van gebruikers.</p>
+
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/python/">python</a>,&nbsp;<a href="/nl/tag/flask/">flask</a>,&nbsp;<a href="/nl/tag/sqlalchemy/">sqlalchemy</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=BusyBoard%3A+geen+onderbrekingen+meer+tijdens+vergaderingen%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F07%2FBusyBoard%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F07%2FBusyBoard%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F07%2FBusyBoard%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=BusyBoard%3A+geen+onderbrekingen+meer+tijdens+vergaderingen&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F07%2FBusyBoard%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/programming/games/2020/05/DeckLock3/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">DeckLock deel 3: een spelletje Gwent?</span></a></span>
+  <span class="next-post"><a href="/nl/programming/2020/08/BusyBoard2/"><span class="page-number">BusyBoard integreren in Home Assistant</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

@@ -5,6 +5,7 @@ byline: "numbers might not be as random as you think"
 description: "Testing Benford's Law with Python, pandas and seaborn, exploring why leading digits in real datasets favor 1, inspired by the Netflix show Connected."
 date:   2020-09-05 12:00:00
 author: Sebastian Proost
+post_id: testing-benfords-law
 categories: programming
 tags:	python jupyter pandas data-science
 cover:  "/assets/posts/2020-09-05-Testing-Benfords-Law/log_table.jpg"
@@ -52,9 +53,9 @@ Now let's get some datasets and check if they match or not!
 
 ## The Altitudes of Capitals
 
-On [WikiPedia](https://en.wikipedia.org/wiki/List_of_capital_cities_by_elevation) you an find a list of all United 
+On [WikiPedia](https://en.wikipedia.org/wiki/List_of_capital_cities_by_elevation) you can find a list of all United
 Nations Countries, with their capital and how many meters above sea-level those cities are located at. This list was
-converted into an Excel spreadsheat, and loaded into Pandas dataframe. Now a little code was needed to filter out cities 
+converted into an Excel spreadsheet, and loaded into a Pandas dataframe. Now a little code was needed to filter out cities
 located at or below sea level, extract the most significant digit and then count these.
 
 ```python
@@ -82,7 +83,7 @@ This resulted in a dataframe that looked like this :
 |             8 |     5 |
 |             9 |    10 |
 
-Indeed, number one occurs far more frequently than other digits. Though to make this more tangible, lets plot the 
+Indeed, number one occurs far more frequently than other digits. Though to make this more tangible, let's plot the
 frequencies with the hypothetical frequency according to Benford's Law and use a test to check if they are significantly
 different or not. As there will be multiple datasets to test and plot, let's put everything in one function:
 
@@ -136,21 +137,21 @@ this post [here](https://github.com/4dcu-be/BenfordsLaw).
 
 ![Distributions of all tested datasets](/assets/posts/2020-09-05-Testing-Benfords-Law/big_graph.png)
 
-So the altitudes and COVID-19 infections follow Benford's Law with statistical significant (or better they aren't 
+So the altitudes and COVID-19 infections follow Benford's Law with statistical significance (or better they aren't
 significantly different from Benford's ideal distribution), hence these are plotted in shades of blue. For Gwent Pro Rank
 scores and (relative) abundances of bacteria in the human gut it is clear that the most significant digits aren't 
 uniformly distributed either, but the observed distributions do differ from Benford's hypothetical ideal (hence shades
-of red are use for plotting these datasets). Though even if these differ from the idealized case, the distributions
+of red are used for plotting these datasets). Though even if these differ from the idealized case, the distributions
 still fit a logarithmic decrease very well!
 
 ## Conclusion
 
-The fact that the first digits of seemingly random numbers don't seem to be random at all is very counter intuitive at
-first. Numberphile offers a very good explanation why Benford applies on sets of numbers that follow an 
+The fact that the first digits of seemingly random numbers don't seem to be random at all is very counterintuitive at
+first. Numberphile offers a very good explanation why Benford applies to sets of numbers that follow an
 exponential growth. Check out their YouTube video [here](https://www.youtube.com/watch?v=XXjlR2OK1kM). While not all datasets
 adhere to an exponential curve, in a lot of cases going from 1 to 2 is easier than going from 2 to 3, ... This would
 for instance be the case for Gwent scores (after subtracting the baseline score of 9600). As you are paired with 
-better and better opponents as you get at higher MMR score, there are fewer people that can climb 200 points compared
+better and better opponents as you get a higher MMR score, there are fewer people that can climb 200 points compared
 to 100 points. Therefore more players end up climbing 100 points than 200 and we start to see a shift in the frequencies
 of the first digits of the scores. 
 
@@ -159,5 +160,5 @@ take extensive measures to ensure the infection rate is curbed down (lockdown, s
 become harder for the virus to spread and the curve will go down. But this is a slow process, and this curve has a very long tail, where the number of daily infections
 will go down from 30 to 20 faster than from 20 to 10 and this will also cause a non uniform distribution of first digits.
 
-This episode of Connected was a head-scratcher and I don't think I have ever spend this much time thinking about a single
+This episode of Connected was a head-scratcher and I don't think I have ever spent this much time thinking about a single
 documentary (which is a good thing). Hopefully, Latif Nasser will have a chance to make a couple more seasons !

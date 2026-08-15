@@ -21,13 +21,17 @@
   <meta property="og:url" content="https://blog.4dcu.be/programming/2020/08/25/BusyBoard2.html" />
   <meta property="og:type" content="article" />
   <meta property="og:locale" content="en_US" />
-  
+  <meta property="og:locale:alternate" content="nl_NL" />
   <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2020-08-25-BusyBoard2-moon_light.jpg" /><meta property="og:image:alt" content="Integrate BusyBoard into HomeAssistant" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
   <meta property="article:published_time" content="2020-08-25T12:00:00+00:00" /><meta property="article:modified_time" content="2020-08-25T12:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programming" /><meta property="article:tag" content="python" /><meta property="article:tag" content="flask" /><meta property="article:tag" content="sqlalchemy" /><meta property="article:tag" content="home-assistant" />
 
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Integrate BusyBoard into HomeAssistant"><meta name="twitter:description" content="Adding an API to the Flask BusyBoard app so Home Assistant can read your busy status and trigger automations, like turning a smart light red when you are busy."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2020-08-25-BusyBoard2-moon_light.jpg"><meta name="twitter:image:alt" content="Integrate BusyBoard into HomeAssistant"><meta name="twitter:url" content="https://blog.4dcu.be/programming/2020/08/25/BusyBoard2.html">
 
   <link rel="canonical" href="https://blog.4dcu.be/programming/2020/08/25/BusyBoard2.html">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/2020/08/25/BusyBoard2.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/2020/08/BusyBoard2/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/2020/08/25/BusyBoard2.html">
   
   <link rel="alternate" type="application/rss+xml" title="4DCu.be (en-US)" href="https://blog.4dcu.be/feed.xml" />
   <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
@@ -111,7 +115,7 @@
       
         <a class="navbar-item lang-switch__option is-current" lang="en" href="/programming/2020/08/25/BusyBoard2.html" aria-current="true"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
       
-        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/programming/2020/08/BusyBoard2/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
       
       </div>
     </div>
@@ -138,15 +142,15 @@ turn a smart light on (and switch the color to red).</p>
 
 <p>While the BusyBoard was a nifty solution to indicate to your household when you are busy with work and should not be 
 interrupted, this does require everyone to check the BusyBoard regularly. Not the most user-friendly experience! It would be far
-more convenient if we can somehow indicate thi in the real world … similar to an “On Air” sign in radio- and tv-studios.
+more convenient if we can somehow indicate this in the real world … similar to an “On Air” sign in radio- and tv-studios.
 As I’ve already got a few smart lights linked up with HA this can fairly easily be done, but we’ll need an API in
 BusyBoard we can read from Home Assistant, so let’s implement this.</p>
 
 <h2 id="adding-an-api-to-busyboard">Adding an API to BusyBoard</h2>
 
-<p>If you are developing a larger application an you need an API, have a look at packages like <a href="https://flask-restful.readthedocs.io/en/latest/">Flask-Restful</a>
+<p>If you are developing a larger application and you need an API, have a look at packages like <a href="https://flask-restful.readthedocs.io/en/latest/">Flask-Restful</a>
 or even a framework designed specifically for APIs like <a href="https://fastapi.tiangolo.com/">FastAPI</a>! Here however we don’t need bells and whistles, we 
-simply need an endpoint for each users where we can see if they are busy or not. The first step is do add a function to the
+simply need an endpoint for each user where we can see if they are busy or not. The first step is to add a function to the
 database model to export a user to a dictionary. To do this a little code needs to be added to the model 
 (in <code class="language-plaintext highlighter-rouge">./busyboard/models.py</code>) as shown below.</p>
 
@@ -174,7 +178,7 @@ database model to export a user to a dictionary. To do this a little code needs 
         <span class="p">}</span>
 </code></pre></div></div>
 
-<p>This couldn’t be more straightforward, a single function that an export the data from the model as a dictionary. Here,
+<p>This couldn’t be more straightforward, a single function that can export the data from the model as a dictionary. Here,
 all fields are explicitly converted to integers, strings and bools. This isn’t strictly necessary for all fields, but it
 helps avoiding errors when converting them to JSON later on.</p>
 
@@ -225,7 +229,7 @@ the URL will have to be adjusted to the spot where your instance of BusyBoard is
 
 <p>After this you’ll have to restart Home Assistant and the sensor will be available as <code class="language-plaintext highlighter-rouge">sensor.user_name</code>. Now using the
 GUI or directly in the configuration file <code class="language-plaintext highlighter-rouge">automations.yaml</code> you can create a new automation that triggers another device, like a light. 
-You’ll have to add a trigger that goes of once the sensor goes from <strong>False</strong> to <strong>True</strong> and the other way around, the action will 
+You’ll have to add a trigger that goes off once the sensor goes from <strong>False</strong> to <strong>True</strong> and the other way around, the action will
 be a service, in this case a smart light, will be switched on or off. Details how to do this will depend a lot on the
 type of light you are using and how it is configured in HA. Though feel free to use the section from my <code class="language-plaintext highlighter-rouge">automations.yaml</code>
 file as a reference (shown below).</p>

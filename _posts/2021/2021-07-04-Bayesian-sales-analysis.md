@@ -5,6 +5,7 @@ byline: ""
 description: "A first attempt at Bayesian analysis with PyMC3 on KeyForge deck registration data, modelling the impact of new set releases and COVID-19 on sales."
 date:   2021-07-04 08:00:00
 author: Sebastian Proost
+post_id: bayesian-sales-analysis
 categories: programming games
 tags:	python pymc3 keyforge data-analysis data-science machine-learning altair covid-19
 cover:  "/assets/posts/2021-07-04-Bayesian-sales-analysis/bayesian_sales.jpg"

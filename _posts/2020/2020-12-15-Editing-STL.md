@@ -5,6 +5,7 @@ byline: "Comparing MeshMixer, Fusion360 and Blender"
 description: "Comparing MeshMixer, Fusion360 and Blender for editing STL files, using a Kyber Crystal Crate Bluetooth speaker project to weigh each tool's strengths."
 date:   2020-12-15 13:00:00
 author: Sebastian Proost
+post_id: editing-stl
 categories: diy
 tags:	3d-printing creality CR10S Fusion360 MeshMixer Blender
 cover:  "/assets/posts/2020-12-15-Editing-STL/blender_header.png"
@@ -19,14 +20,14 @@ be downloaded for free, though they all have their own strengths and weaknesses,
 
 The Kyber Crystal Crate STLs used by the guys from [The Smuggler's Room], can be found on [Thingiverse]. Though if
 you look at their project, there are quite a few modifications necessary to the prints before they can be used. Holes
-for ports and switches need to be added, a hole for the speaker, ... Which requires a few tools I don't have access too
+for ports and switches need to be added, a hole for the speaker, ... Which requires a few tools I don't have access to
 or would take me ages with hand tools to do. So I decided a better route would be to alter the models digitally before 
 printing, no extra tools required ... except sanding, there will always be a ton of sanding with 3D printed projects ...
 
 ## Fusion360
 
-Fusion360 is my goto program in case I need to model something myself, it is free to use under an educational licence 
-(which is great learning how the tool works and doing personal projects, though be aware that if you plan to sell models
+Fusion360 is my go-to program in case I need to model something myself, it is free to use under an educational licence
+(which is great for learning how the tool works and doing personal projects, though be aware that if you plan to sell models
 and/or prints, commercial, professional and for-profit use is not permitted under this type of licence). 
 The parametric modelling allows you to go back at any point, make a change to a size, position, ... and the entire model 
 updates automatically. This is very powerful when designing prototypes for printing. However, STL files
@@ -45,21 +46,21 @@ faces for a cleaner representation.
 
 So while it is a great tool, Fusion360 isn't designed for editing STL files. It might work for some models, but your
 mileage may vary! I only used Fusion360 because it was a tool I was familiar with already, if you have to start out
-fresh, check out the other option first!
+fresh, check out the other options first!
 
 ## MeshMixer
 
 AutoDesk's MeshMixer is a user-friendly tool that allows you to, as in the name, combine meshes (such as objects in an
 STL file). It also has a few basic objects (such as cubes, spheres, cylinders, ...) built in. Using MeshMixer it was
-straightforward to load even the most complex STL and add a few cubes to the inside of the care to attach the electronics.
+straightforward to load even the most complex STL and add a few cubes to the inside of the crate to attach the electronics.
 
 Similarly, a cube and cylinder were created where the holes for speakers, usb-port and on-off switch were necessary and
 then these shapes were subtracted from the main model to create actual holes. While it worked eventually, subtracting a 
 simple primitive from the complex geometry took a long time and the resulting mesh wasn't perfect (you can see in the 
 image below the joins aren't perfectly straight and edges are no longer crisp). I also found it hard to work in a very precise
-manner. Placing an object at an exact distance of another one, ... isn't included in the software.
+manner. Placing an object at an exact distance from another one, ... isn't included in the software.
 
-![MeshMixer can handle more complex modes, but the geometry it produces after combining objects isn't optimal](/assets/posts/2020-12-15-Editing-STL/meshmixer.png)
+![MeshMixer can handle more complex models, but the geometry it produces after combining objects isn't optimal](/assets/posts/2020-12-15-Editing-STL/meshmixer.png)
 
 MeshMixer did allow for changing STL files that could not be edited using Fusion360, and it is very user-friendly. So this
 tool is often recommended as the first one to try. Finally, it has a few options that are often needed for 3D printing, 
@@ -70,9 +71,9 @@ correct the issue by editing vertices in the mesh directly are lacking.
 
 ## Blender
 
-Blender has been around the longest, and can be used to do extremely advanced 3D modelling and animation. To no surprise
+Blender has been around the longest, and can be used to do extremely advanced 3D modelling and animation. Unsurprisingly
 this tool has a steep learning curve. However, if you need more precision than MeshMixer, or you are working
-with complex geometry were MeshMixer runs into problems, this is your best bet!
+with complex geometry where MeshMixer runs into problems, this is your best bet!
 
 To add some holes to the sides of the crate for the sound of the speakers I had to resort to Blender. Aligning all
 cylinders correctly in MeshMixer was tough and even if this would have worked, MeshMixer wasn't able to subtract the

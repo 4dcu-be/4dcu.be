@@ -138,7 +138,7 @@
 <article class="post-content" data-pagefind-body><p>De nieuwste versie van onze software, StableDiffusion, met de toepasselijke naam SDXL, is onlangs uitgebracht. Daardoor is 
 tegelijk ook de belangstelling voor <a href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a> aangewakkerd, een nieuwe tool die het gebruik van deze modellen eenvoudiger maakt. Het is 
 wel belangrijk om te weten dat de workflows met knooppunten van ComfyUI sterk verschillen van het <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">Automatic1111</a>-framework 
-dat ik eerder gebruikte (mijn tips en trucs voor dat framework vind je in een <a href="/ai/2022/12/31/Stable-Diffusion-Workflow.html">vorige post</a>). In dit artikel 
+dat ik eerder gebruikte (mijn tips en trucs voor dat framework vind je in een <a href="/nl/ai/2022/12/Stable-Diffusion-Workflow/">vorige post</a>). In dit artikel 
 neem ik je mee langs enkele technieken die voor mij goed werken met ComfyUI.</p>
 
 <h2 id="achtergrond">Achtergrond</h2>
@@ -212,7 +212,7 @@ over de inhoud en compositie van een afbeelding.</p>
 <p><a href="/assets/posts/2023-09-04-comfyui-sdxl-workflows/dual_controlnet_basic.json"><strong>Download deze workflow</strong></a> als .json-bestand.</p>
 
 <p>Zodra je een afbeelding hebt die dicht bij 
-het gewenste resultaat ligt, kun je img2img nog altijd gebruiken om vergelijkbare afbeeldingen te genereren, zoals in een <a href="/ai/2022/12/31/Stable-Diffusion-Workflow.html">vorige post</a> wordt getoond! Laad de afbeelding met het juiste 
+het gewenste resultaat ligt, kun je img2img nog altijd gebruiken om vergelijkbare afbeeldingen te genereren, zoals in een <a href="/nl/ai/2022/12/Stable-Diffusion-Workflow/">vorige post</a> wordt getoond! Laad de afbeelding met het juiste 
 knooppunt, stuur ze door een <code class="language-plaintext highlighter-rouge">VAE Encode</code>-knooppunt en gebruik het resulterende latent als invoer voor de sampler (ter vervanging van <code class="language-plaintext highlighter-rouge">Empty Latent Image</code> als startpunt). Vergeet niet de 
 denoise-sterkte te verlagen (0.6 geeft de AI veel vrijheid om de invoerafbeelding te wijzigen; hoe lager deze waarde, hoe minder speelruimte 
 de AI heeft), en je kunt aan de slag.</p>

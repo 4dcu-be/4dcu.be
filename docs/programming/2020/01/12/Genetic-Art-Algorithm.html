@@ -21,13 +21,17 @@
   <meta property="og:url" content="https://blog.4dcu.be/programming/2020/01/12/Genetic-Art-Algorithm.html" />
   <meta property="og:type" content="article" />
   <meta property="og:locale" content="en_US" />
-  
+  <meta property="og:locale:alternate" content="nl_NL" />
   <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2020-01-12-Genetic-Art-Algorithm-post_header.jpg" /><meta property="og:image:alt" content="Genetic Art Algorithm" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
   <meta property="article:published_time" content="2020-01-12T12:00:00+00:00" /><meta property="article:modified_time" content="2020-01-12T12:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programming" /><meta property="article:tag" content="python" /><meta property="article:tag" content="evolution" /><meta property="article:tag" content="genetic-algorithm" /><meta property="article:tag" content="algorithm" /><meta property="article:tag" content="art" />
 
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Genetic Art Algorithm"><meta name="twitter:description" content="Building a Python genetic algorithm with the Evol library that evolves 150 random triangles to re-draw Van Gogh&#39;s The Starry Night over 5000 generations."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2020-01-12-Genetic-Art-Algorithm-post_header.jpg"><meta name="twitter:image:alt" content="Genetic Art Algorithm"><meta name="twitter:url" content="https://blog.4dcu.be/programming/2020/01/12/Genetic-Art-Algorithm.html">
 
   <link rel="canonical" href="https://blog.4dcu.be/programming/2020/01/12/Genetic-Art-Algorithm.html">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/2020/01/12/Genetic-Art-Algorithm.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/2020/01/Genetic-Art-Algorithm/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/2020/01/12/Genetic-Art-Algorithm.html">
   
   <link rel="alternate" type="application/rss+xml" title="4DCu.be (en-US)" href="https://blog.4dcu.be/feed.xml" />
   <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
@@ -111,7 +115,7 @@
       
         <a class="navbar-item lang-switch__option is-current" lang="en" href="/programming/2020/01/12/Genetic-Art-Algorithm.html" aria-current="true"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
       
-        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/programming/2020/01/Genetic-Art-Algorithm/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
       
       </div>
     </div>
@@ -146,7 +150,7 @@ an algorithm that evolves 150 random triangles into a famous piece of art. The w
 
 <p>The code for this post can be found on GitHub <a href="https://github.com/4dcu-be/Genetic-Art-Algorithm">here</a></p>
 
-<p><strong>Update 25/03/20201</strong>: There was a change in the Evol API in version 0.5.2 where the function <code class="language-plaintext highlighter-rouge">apply()</code> has been 
+<p><strong>Update 25/03/2021</strong>: There was a change in the Evol API in version 0.5.2 where the function <code class="language-plaintext highlighter-rouge">apply()</code> has been
 renamed to <code class="language-plaintext highlighter-rouge">callback()</code>, the code here and in the repository has been updated.</p>
 
 <h2 id="genetic-algorithms">Genetic algorithms</h2>
@@ -175,16 +179,16 @@ be removed (the ones with the worst fitness), they can <strong>breed</strong> (c
 <h2 id="implementing-the-algorithm-in-python">Implementing the algorithm in Python</h2>
 
 <p>Coding all steps yourself wouldn’t be that difficult, though the <a href="https://evol.readthedocs.io/en/latest/#">Evol</a>
-provides a great API that takes care of all the scoring, breeding, … and has multi-processing build in for calculating
-the finess of each individual in a population.</p>
+provides a great API that takes care of all the scoring, breeding, … and has multiprocessing built in for calculating
+the fitness of each individual in a population.</p>
 
 <h3 id="the-triangle-class">The triangle class</h3>
 
-<p>A chromosome here is a list of triangles. A single triangle has three point with x,y coordinates and a color with 
+<p>A chromosome here is a list of triangles. A single triangle has three points with x,y coordinates and a color with
 opacity. A few different changes can occur during a mutation, the triangle can move (shift all points), change shape (move points
 individually) or the color can change. There also is a more significant event that will destroy the current triangle and
 replace it with a totally random one. This is all taken care of by the <code class="language-plaintext highlighter-rouge">.mutate</code> function. The sigma value can be used to
-specify the strenght of a mutation (how strong the change will be) and the weights are used to specify which types of 
+specify the strength of a mutation (how strong the change will be) and the weights are used to specify which types of
 mutation will occur more often than others.</p>
 
 <div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">random</span>
@@ -354,7 +358,7 @@ is inspired by <strong>crossing over</strong> events in biology where two chromo
 
 <h3 id="putting-the-algorithm-together">Putting the algorithm together</h3>
 
-<p>The <a href="https://evol.readthedocs.io/en/latest/#">Evol</a> package will take care of most of the work for use, but we do need to define a couple functions to get 
+<p>The <a href="https://evol.readthedocs.io/en/latest/#">Evol</a> package will take care of most of the work for us, but we do need to define a couple functions to get
 started. We will have a score function, that checks the distance to the target image. A function how individuals will
 find a partner to mate with and define how we wish to evolve the population. We’ll also add a function to print the
 fitness scores (so we can see if there is still progress), that stores the image of the best individual and that stores
@@ -500,7 +504,7 @@ though these images have comparable distances to the target image, they are quit
 
 <h2 id="conclusion--outlook">Conclusion &amp; outlook</h2>
 
-<p>There results are quite cool, and since there is very little difference between generation 4500 and 5000 this is probably
+<p>These results are quite cool, and since there is very little difference between generation 4500 and 5000 this is probably
 as good as it gets using only 150 triangles. There are a few things that could be improved though. The algorithm
 tries to match as many pixels correctly as possible. So matching pixels in large even spaces yields a much better score
 than getting details right. You could generate a mask, highlighting detailed areas, and rewarding correct pixels in those

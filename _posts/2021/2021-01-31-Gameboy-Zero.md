@@ -5,6 +5,7 @@ byline: ""
 description: "Showcasing two GameBoy Zero builds, a Raspberry Pi Zero inside a Game Boy shell, the newest based on Kite's Circuit Sword Lite with rear buttons."
 date: 2021-01-31 12:00:00
 author: Sebastian Proost
+post_id: gameboy-zero
 categories: diy games
 tags:	gameboy retrogaming raspberry-pi
 cover:  "/assets/posts/2021-01-31-Gameboy-Zero/mkII.jpg"

@@ -1,0 +1,869 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>Genetisch kunstalgoritme</title>
+  <meta name="description" content="Een genetisch algoritme in Python bouwen met de Evol-bibliotheek, dat 150 willekeurige driehoeken gedurende 5000 generaties laat evolueren om Van Goghs De st...">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Genetisch kunstalgoritme" />
+  <meta property="og:description" content="Een genetisch algoritme in Python bouwen met de Evol-bibliotheek, dat 150 willekeurige driehoeken gedurende 5000 generaties laat evolueren om Van Goghs De st..." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/programming/2020/01/Genetic-Art-Algorithm/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2020-01-12-Genetic-Art-Algorithm-post_header.jpg" /><meta property="og:image:alt" content="Genetisch kunstalgoritme" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2020-01-12T12:00:00+00:00" /><meta property="article:modified_time" content="2020-01-12T12:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programmeren" /><meta property="article:tag" content="python" /><meta property="article:tag" content="evolution" /><meta property="article:tag" content="genetic-algorithm" /><meta property="article:tag" content="algorithm" /><meta property="article:tag" content="art" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Genetisch kunstalgoritme"><meta name="twitter:description" content="Een genetisch algoritme in Python bouwen met de Evol-bibliotheek, dat 150 willekeurige driehoeken gedurende 5000 generaties laat evolueren om Van Goghs De st..."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2020-01-12-Genetic-Art-Algorithm-post_header.jpg"><meta name="twitter:image:alt" content="Genetisch kunstalgoritme"><meta name="twitter:url" content="https://blog.4dcu.be/nl/programming/2020/01/Genetic-Art-Algorithm/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/programming/2020/01/Genetic-Art-Algorithm/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/2020/01/12/Genetic-Art-Algorithm.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/2020/01/Genetic-Art-Algorithm/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/2020/01/12/Genetic-Art-Algorithm.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/programming/2020/01/Genetic-Art-Algorithm/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/programming/2020/01/Genetic-Art-Algorithm/" },
+      "url": "https://blog.4dcu.be/nl/programming/2020/01/Genetic-Art-Algorithm/",
+      "headline": "Genetisch kunstalgoritme",
+      "description": "Een genetisch algoritme in Python bouwen met de Evol-bibliotheek, dat 150 willekeurige driehoeken gedurende 5000 generaties laat evolueren om Van Goghs De st...",
+      "datePublished": "2020-01-12T12:00:00+00:00",
+      "dateModified": "2020-01-12T12:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2020-01-12-Genetic-Art-Algorithm-post_header.jpg",
+      "keywords": ["python", "evolution", "genetic-algorithm", "algorithm", "art"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/programming/2020/01/Genetic-Art-Algorithm/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Programmeren", "item": "https://blog.4dcu.be/nl/category/programming/" },
+        { "@type": "ListItem", "position": 3, "name": "Genetisch kunstalgoritme" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/programming/2020/01/12/Genetic-Art-Algorithm.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/programming/2020/01/Genetic-Art-Algorithm/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/starry_night_generation_5000.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="Genetisch kunstalgoritme" class="hero-background is-transparent" src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/post_header.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">Genetisch kunstalgoritme</h1><p class="info has-text-white"><em>Van Goghs De sterrennacht natekenen met een genetisch algoritme</em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 12-01-2020 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/programming/">Programmeren</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Genetische algoritmen zijn leuk, want ze vragen een andere manier van denken. Hier neem ik je mee door mijn proces om een 
+algoritme te bouwen dat 150 willekeurige driehoeken laat evolueren tot een beroemd kunstwerk. Het werk dat ik koos om na te tekenen: Van Goghs 
+<a href="https://en.wikipedia.org/wiki/The_Starry_Night">De sterrennacht</a>. Het origineel en de versie die het algoritme na 5000 generaties maakte, zie je hieronder.</p>
+
+<div class="gallery-2-col">
+  <p><a href="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_full.jpg" class="lightgallery-link" data-sub-html="Het origineel van Van Gogh, getiteld De sterrennacht">
+<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_full.jpg" alt="Het origineel van Van Gogh, getiteld De sterrennacht" height="903" width="1140" data-src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_full.jpg" loading="lazy" />
+</a>
+<a href="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" class="lightgallery-link" data-sub-html="De uitvoer van het algoritme na 5000 generaties">
+<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" alt="De uitvoer van het algoritme na 5000 generaties" height="452" width="570" data-src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" loading="lazy" />
+</a></p>
+</div>
+
+<p>De code voor deze post vind je <a href="https://github.com/4dcu-be/Genetic-Art-Algorithm">hier</a> op GitHub.</p>
+
+<p><strong>Update 25/03/2021</strong>: In versie 0.5.2 wijzigde de Evol-API: de functie <code class="language-plaintext highlighter-rouge">apply()</code> werd 
+hernoemd naar <code class="language-plaintext highlighter-rouge">callback()</code>. De code hier en in de repository werd bijgewerkt.</p>
+
+<h2 id="genetische-algoritmen">Genetische algoritmen</h2>
+
+<p>Voor we beginnen, eerst een korte uitleg over genetische algoritmen. Op <a href="https://en.wikipedia.org/wiki/Genetic_algorithm">WikiPedia</a> staat een vrij uitvoerige beschrijving,
+maar hier houden we het kort en eenvoudig. Deze algoritmen zijn sterk gebaseerd op biologische principes zoals overerving, voortplanting en evolutie. Je hebt een aantal oplossingen, die samen de 
+<strong>populatie</strong> vormen. Elke <strong>individuele</strong> oplossing heeft een lijst met onderdelen, waarden, … die het <strong>chromosoom</strong> wordt genoemd. Een
+<strong>fitnessfunctie</strong> beoordeelt hoe goed een bepaalde oplossing voor ons probleem is. Binnen deze populatie kunnen individuen
+worden verwijderd (die met de slechtste fitheid), zich <strong>voortplanten</strong> (hun chromosomen combineren tot een nieuw individu) en 
+<strong>muteren</strong> (willekeurige wijzigingen in het chromosoom aanbrengen).</p>
+
+<p>In deze context:</p>
+
+<ul>
+  <li>de <strong>populatie</strong> is een verzameling van 200 schilderijen</li>
+  <li>elk <strong>individu</strong> is één schilderij</li>
+  <li>het <strong>chromosoom</strong> is een lijst van 150 driehoeken met een bepaalde vorm, positie en kleur (rood, groen, blauw en ondoorzichtigheid)</li>
+  <li>de <strong>fitness</strong> is de afstand tot het doelschilderij op basis van pixels (we moeten deze score minimaliseren)</li>
+  <li>individuen kunnen zich <strong>voortplanten</strong> en een nieuw schilderij maken met de helft van de driehoeken van de ene <strong>ouder</strong> en de helft van de andere</li>
+  <li>individuen kunnen <strong>muteren</strong>: driehoeken kunnen bewegen, van vorm of kleur veranderen, van positie in het chromosoom wisselen of opnieuw worden ingesteld</li>
+  <li>de populatie kan door een <strong>flessenhals</strong> gaan, waarbij een groot deel van de individuen (met de slechtste fitness) wordt
+  weggegooid en de overlevenden vervolgens worden gebruikt om de populatie opnieuw tot de gewenste grootte te laten groeien</li>
+</ul>
+
+<h2 id="het-algoritme-implementeren-in-python">Het algoritme implementeren in Python</h2>
+
+<p>Zelf alle stappen programmeren zou niet zo moeilijk zijn, maar <a href="https://evol.readthedocs.io/en/latest/#">Evol</a>
+biedt een geweldige API die alle scoring, voortplanting, … afhandelt en ingebouwde multiprocessing heeft om
+de fitness van elk individu in een populatie te berekenen.</p>
+
+<h3 id="de-klasse-triangle">De klasse Triangle</h3>
+
+<p>Een chromosoom is hier een lijst van driehoeken. Eén driehoek heeft drie punten met x- en y-coördinaten en een kleur met 
+ondoorzichtigheid. Tijdens een mutatie kunnen verschillende wijzigingen optreden: de driehoek kan bewegen (alle punten verschuiven), van vorm veranderen (punten
+afzonderlijk verplaatsen) of van kleur veranderen. Er is ook een ingrijpendere gebeurtenis die de huidige driehoek vernietigt en
+vervangt door een volledig willekeurige. De functie <code class="language-plaintext highlighter-rouge">.mutate</code> regelt dit allemaal. Met de waarde sigma kun je de
+sterkte van een mutatie opgeven (hoe groot de verandering is), terwijl de gewichten bepalen welke soorten 
+mutaties vaker optreden dan andere.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">random</span>
+
+
+<span class="k">class</span> <span class="nc">Triangle</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">img_width</span><span class="p">,</span> <span class="n">img_height</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nf">int</span><span class="p">(</span><span class="n">img_width</span><span class="p">))</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nf">int</span><span class="p">(</span><span class="n">img_height</span><span class="p">))</span>
+
+        <span class="n">self</span><span class="p">.</span><span class="n">points</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span> <span class="n">y</span> <span class="o">+</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">)),</span>
+            <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span> <span class="n">y</span> <span class="o">+</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">)),</span>
+            <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span> <span class="n">y</span> <span class="o">+</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">))]</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+            <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+            <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+            <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">self</span><span class="p">.</span><span class="n">_img_width</span> <span class="o">=</span> <span class="n">img_width</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_img_height</span> <span class="o">=</span> <span class="n">img_height</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">Trangle: %s in color %s</span><span class="sh">"</span> <span class="o">%</span> <span class="p">(</span><span class="sh">'</span><span class="s">,</span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">([</span><span class="nf">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">points</span><span class="p">]),</span> <span class="nf">str</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">color</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">mutate</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+        <span class="n">mutations</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">shift</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">point</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">color</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">reset</span><span class="sh">'</span><span class="p">]</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+
+        <span class="n">mutation_type</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">choices</span><span class="p">(</span><span class="n">mutations</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">mutation_type</span> <span class="o">==</span> <span class="sh">'</span><span class="s">shift</span><span class="sh">'</span><span class="p">:</span>
+            <span class="n">x_shift</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span><span class="o">*</span><span class="n">sigma</span><span class="p">)</span>
+            <span class="n">y_shift</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span><span class="o">*</span><span class="n">sigma</span><span class="p">)</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">points</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span> <span class="o">+</span> <span class="n">x_shift</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">y_shift</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">points</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">mutation_type</span> <span class="o">==</span> <span class="sh">'</span><span class="s">point</span><span class="sh">'</span><span class="p">:</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">points</span><span class="p">))))</span>
+
+            <span class="n">self</span><span class="p">.</span><span class="n">points</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">points</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="nf">int</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span><span class="o">*</span><span class="n">sigma</span><span class="p">),</span>
+                                  <span class="n">self</span><span class="p">.</span><span class="n">points</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nf">int</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span><span class="o">*</span><span class="n">sigma</span><span class="p">),)</span>
+        <span class="k">elif</span> <span class="n">mutation_type</span> <span class="o">==</span> <span class="sh">'</span><span class="s">color</span><span class="sh">'</span><span class="p">:</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">(</span>
+                <span class="n">c</span> <span class="o">+</span> <span class="nf">int</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span><span class="o">*</span><span class="n">sigma</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">color</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Ensure color is within correct range
+</span>            <span class="n">self</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">(</span>
+                <span class="nf">min</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">255</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">color</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_triangle</span> <span class="o">=</span> <span class="nc">Triangle</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">_img_width</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">_img_height</span><span class="p">)</span>
+
+            <span class="n">self</span><span class="p">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">new_triangle</span><span class="p">.</span><span class="n">points</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">new_triangle</span><span class="p">.</span><span class="n">color</span>
+</code></pre></div></div>
+
+<h3 id="de-klasse-painting">De klasse Painting</h3>
+
+<p>Het schilderij bevat een lijst met Triangles, samen met de nodige functies om de driehoeken te tekenen (met de 
+<a href="https://pillow.readthedocs.io/en/stable/">Pillow</a>-bibliotheek) en de afbeelding met het doel te vergelijken (met de 
+<a href="https://github.com/datenhahn/imgcompare">Imagecompare</a>-bibliotheek). Verder is er een functie om twee schilderijen te kruisen. Die is
+geïnspireerd op <strong>crossing-over</strong> in de biologie, waarbij twee chromosomen stukken uitwisselen om twee nieuwe chromosomen te maken.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">triangle</span> <span class="kn">import</span> <span class="n">Triangle</span>
+<span class="kn">from</span> <span class="n">random</span> <span class="kn">import</span> <span class="n">shuffle</span><span class="p">,</span> <span class="n">randint</span>
+<span class="kn">from</span> <span class="n">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span>
+<span class="kn">from</span> <span class="n">imgcompare</span> <span class="kn">import</span> <span class="n">image_diff</span>
+<span class="kn">import</span> <span class="n">random</span>
+
+
+<span class="k">class</span> <span class="nc">Painting</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">num_triangles</span><span class="p">,</span> <span class="n">target_image</span><span class="p">,</span> <span class="n">background_color</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_img_width</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">_img_height</span> <span class="o">=</span> <span class="n">target_image</span><span class="p">.</span><span class="n">size</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">triangles</span> <span class="o">=</span> <span class="p">[</span><span class="nc">Triangle</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">_img_width</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">_img_height</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">num_triangles</span><span class="p">)]</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_background_color</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">background_color</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">target_image</span> <span class="o">=</span> <span class="n">target_image</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">get_background_color</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_background_color</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">get_img_width</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_img_width</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">get_img_height</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_img_height</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">num_triangles</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">triangles</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">Painting with %d triangles</span><span class="sh">"</span> <span class="o">%</span> <span class="n">self</span><span class="p">.</span><span class="n">num_triangles</span>
+
+    <span class="k">def</span> <span class="nf">mutate_triangles</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">0.04</span><span class="p">,</span> <span class="n">swap</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+        <span class="n">total_mutations</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">rate</span><span class="o">*</span><span class="n">self</span><span class="p">.</span><span class="n">num_triangles</span><span class="p">)</span>
+        <span class="n">random_indices</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">num_triangles</span><span class="p">))</span>
+        <span class="nf">shuffle</span><span class="p">(</span><span class="n">random_indices</span><span class="p">)</span>
+
+        <span class="c1"># mutate random triangles
+</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">total_mutations</span><span class="p">):</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">random_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">triangles</span><span class="p">[</span><span class="n">index</span><span class="p">].</span><span class="nf">mutate</span><span class="p">(</span><span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span>
+
+        <span class="c1"># Swap two triangles randomly
+</span>        <span class="k">if</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">swap</span><span class="p">:</span>
+            <span class="nf">shuffle</span><span class="p">(</span><span class="n">random_indices</span><span class="p">)</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">triangles</span><span class="p">[</span><span class="n">random_indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">self</span><span class="p">.</span><span class="n">triangles</span><span class="p">[</span><span class="n">random_indices</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">triangles</span><span class="p">[</span><span class="n">random_indices</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">self</span><span class="p">.</span><span class="n">triangles</span><span class="p">[</span><span class="n">random_indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Image</span><span class="p">:</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="sh">"</span><span class="s">RGBA</span><span class="sh">"</span><span class="p">,</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">_img_width</span><span class="o">*</span><span class="n">scale</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">_img_height</span><span class="o">*</span><span class="n">scale</span><span class="p">))</span>
+        <span class="n">draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="p">.</span><span class="nc">Draw</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nf">hasattr</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="sh">'</span><span class="s">_background_color</span><span class="sh">'</span><span class="p">):</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">_background_color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+
+        <span class="n">draw</span><span class="p">.</span><span class="nf">polygon</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">_img_height</span><span class="o">*</span><span class="n">scale</span><span class="p">),</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">_img_width</span><span class="o">*</span><span class="n">scale</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">_img_height</span><span class="o">*</span><span class="n">scale</span><span class="p">),</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">_img_width</span><span class="o">*</span><span class="n">scale</span><span class="p">,</span> <span class="mi">0</span><span class="p">)],</span>
+                     <span class="n">fill</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">_background_color</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">triangles</span><span class="p">:</span>
+            <span class="n">new_triangle</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="sh">"</span><span class="s">RGBA</span><span class="sh">"</span><span class="p">,</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">_img_width</span><span class="o">*</span><span class="n">scale</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">_img_height</span><span class="o">*</span><span class="n">scale</span><span class="p">))</span>
+            <span class="n">tdraw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="p">.</span><span class="nc">Draw</span><span class="p">(</span><span class="n">new_triangle</span><span class="p">)</span>
+            <span class="n">tdraw</span><span class="p">.</span><span class="nf">polygon</span><span class="p">([(</span><span class="n">x</span><span class="o">*</span><span class="n">scale</span><span class="p">,</span> <span class="n">y</span><span class="o">*</span><span class="n">scale</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">t</span><span class="p">.</span><span class="n">points</span><span class="p">],</span> <span class="n">fill</span><span class="o">=</span><span class="n">t</span><span class="p">.</span><span class="n">color</span><span class="p">)</span>
+
+            <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="nf">alpha_composite</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">new_triangle</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">image</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_mate_possible</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nf">all</span><span class="p">([</span><span class="n">a</span><span class="p">.</span><span class="n">num_triangles</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">num_triangles</span><span class="p">,</span>
+                   <span class="n">a</span><span class="p">.</span><span class="n">get_img_width</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">get_img_width</span><span class="p">,</span>
+                   <span class="n">a</span><span class="p">.</span><span class="n">get_img_height</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">get_img_height</span><span class="p">])</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">mate</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">Painting</span><span class="p">.</span><span class="nf">_mate_possible</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="nc">Exception</span><span class="p">(</span><span class="sh">"</span><span class="s">Cannot mate images with different dimensions or number of triangles</span><span class="sh">"</span><span class="p">)</span>
+
+        <span class="n">ab</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">get_background_color</span>
+        <span class="n">bb</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">get_background_color</span>
+        <span class="n">new_background</span> <span class="o">=</span> <span class="p">(</span><span class="nf">int</span><span class="p">((</span><span class="n">ab</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">bb</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+        <span class="n">child_a</span> <span class="o">=</span> <span class="nc">Painting</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">target_image</span><span class="p">,</span> <span class="n">background_color</span><span class="o">=</span><span class="n">new_background</span><span class="p">)</span>
+        <span class="n">child_b</span> <span class="o">=</span> <span class="nc">Painting</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">target_image</span><span class="p">,</span> <span class="n">background_color</span><span class="o">=</span><span class="n">new_background</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">at</span><span class="p">,</span> <span class="n">bt</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">triangles</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="n">triangles</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nf">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">child_a</span><span class="p">.</span><span class="n">triangles</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">at</span><span class="p">)</span>
+                <span class="n">child_b</span><span class="p">.</span><span class="n">triangles</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">bt</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">child_a</span><span class="p">.</span><span class="n">triangles</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">bt</span><span class="p">)</span>
+                <span class="n">child_b</span><span class="p">.</span><span class="n">triangles</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">at</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">child_a</span><span class="p">,</span> <span class="n">child_b</span>
+
+    <span class="k">def</span> <span class="nf">image_diff</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">Image</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="nf">image_diff</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h3 id="het-algoritme-samenstellen">Het algoritme samenstellen</h3>
+
+<p>Het pakket <a href="https://evol.readthedocs.io/en/latest/#">Evol</a> neemt het meeste werk voor zijn rekening, maar we moeten wel enkele functies definiëren om te 
+beginnen. We hebben een scorefunctie nodig die de afstand tot de doelafbeelding controleert, een functie die bepaalt hoe individuen
+een partner vinden om mee te kruisen en een definitie van hoe we de populatie willen laten evolueren. We voegen ook een functie toe die de
+fitnessscores weergeeft (zodat we zien of er nog vooruitgang is), de afbeelding van het beste individu opslaat en
+de populatie om de vijftig generaties bewaart (zodat we niet opnieuw hoeven te beginnen als er iets misgaat).</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="n">evol</span> <span class="kn">import</span> <span class="n">Evolution</span><span class="p">,</span> <span class="n">Population</span>
+
+<span class="kn">import</span> <span class="n">random</span>
+<span class="kn">import</span> <span class="n">os</span>
+<span class="kn">from</span> <span class="n">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+
+<span class="kn">from</span> <span class="n">painting</span> <span class="kn">import</span> <span class="n">Painting</span>
+
+
+<span class="k">def</span> <span class="nf">score</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Painting</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">
+    Calculate the distance to the target image
+    
+    :param x: a Painting object to calculate the distance for
+    :return: distance based on pixel differences
+    </span><span class="sh">"""</span>
+    <span class="n">current_score</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="nf">image_diff</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">target_image</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">.</span><span class="sh">"</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="sh">''</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">current_score</span>
+
+
+<span class="k">def</span> <span class="nf">pick_best_and_random</span><span class="p">(</span><span class="n">pop</span><span class="p">,</span> <span class="n">maximize</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Here we select the best individual from a population and pair it with a random individual from a population
+    
+    :param pop: input population
+    :param maximize: when true a higher fitness score is better, otherwise a lower score is considered better
+    :return: a tuple with the best and a random individual
+    </span><span class="sh">"""</span>
+    <span class="n">evaluated_individuals</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">(</span><span class="nf">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">.</span><span class="n">fitness</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">,</span> <span class="n">pop</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">evaluated_individuals</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">mom</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">evaluated_individuals</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">.</span><span class="n">fitness</span> <span class="k">if</span> <span class="n">maximize</span> <span class="k">else</span> <span class="o">-</span><span class="n">x</span><span class="p">.</span><span class="n">fitness</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">mom</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="n">pop</span><span class="p">)</span>
+    <span class="n">dad</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="n">pop</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mom</span><span class="p">,</span> <span class="n">dad</span>
+
+
+<span class="k">def</span> <span class="nf">mutate_painting</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Painting</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">0.04</span><span class="p">,</span> <span class="n">swap</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Painting</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">
+    This will mutate a painting by randomly applying changes to the triangles.
+    
+    :param x: Painting to mutate
+    :param rate: the chance a triangle will be mutated
+    :param swap: the chance a pair of traingles will be swapped
+    :param sigma: the strenght of the mutation (how much a triangle can be changed)
+    :return: New painting object with mutations
+    </span><span class="sh">"""</span>
+    <span class="n">x</span><span class="p">.</span><span class="nf">mutate_triangles</span><span class="p">(</span><span class="n">rate</span><span class="o">=</span><span class="n">rate</span><span class="p">,</span> <span class="n">swap</span><span class="o">=</span><span class="n">swap</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nf">deepcopy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">mate</span><span class="p">(</span><span class="n">mom</span><span class="p">:</span> <span class="n">Painting</span><span class="p">,</span> <span class="n">dad</span><span class="p">:</span> <span class="n">Painting</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Takes two paintings, the mom and dad, to create a new painting object made up with triangles from both parents
+    
+    :param mom: One parent painting
+    :param dad: Other parent painting
+    :return: new Painting with features from both parents
+    </span><span class="sh">"""</span>
+    <span class="n">child_a</span><span class="p">,</span> <span class="n">child_b</span> <span class="o">=</span> <span class="n">Painting</span><span class="p">.</span><span class="nf">mate</span><span class="p">(</span><span class="n">mom</span><span class="p">,</span> <span class="n">dad</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nf">deepcopy</span><span class="p">(</span><span class="n">child_a</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">print_summary</span><span class="p">(</span><span class="n">pop</span><span class="p">,</span> <span class="n">img_template</span><span class="o">=</span><span class="sh">"</span><span class="s">output%d.png</span><span class="sh">"</span><span class="p">,</span> <span class="n">checkpoint_path</span><span class="o">=</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Population</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">
+    This will print a summary of the population fitness and store an image of the best individual of the current
+    generation. Every fifty generations the entire population is stored.
+    
+    :param pop: Population
+    :param img_template: a template for the name of the output images, should contain %d as the number of the generation is included
+    :param checkpoint_path: directory to write output.
+    :return: The input population
+    </span><span class="sh">"""</span>
+    <span class="n">avg_fitness</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">([</span><span class="n">i</span><span class="p">.</span><span class="n">fitness</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pop</span><span class="p">.</span><span class="n">individuals</span><span class="p">])</span><span class="o">/</span><span class="nf">len</span><span class="p">(</span><span class="n">pop</span><span class="p">.</span><span class="n">individuals</span><span class="p">)</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">Current generation %d, best score %f, pop. avg. %f </span><span class="sh">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">pop</span><span class="p">.</span><span class="n">generation</span><span class="p">,</span>
+                                                                     <span class="n">pop</span><span class="p">.</span><span class="n">current_best</span><span class="p">.</span><span class="n">fitness</span><span class="p">,</span>
+                                                                     <span class="n">avg_fitness</span><span class="p">))</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">pop</span><span class="p">.</span><span class="n">current_best</span><span class="p">.</span><span class="n">chromosome</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+    <span class="n">img</span><span class="p">.</span><span class="nf">save</span><span class="p">(</span><span class="n">img_template</span> <span class="o">%</span> <span class="n">pop</span><span class="p">.</span><span class="n">generation</span><span class="p">,</span> <span class="sh">'</span><span class="s">PNG</span><span class="sh">'</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">pop</span><span class="p">.</span><span class="n">generation</span> <span class="o">%</span> <span class="mi">50</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">pop</span><span class="p">.</span><span class="nf">checkpoint</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">checkpoint_path</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="sh">'</span><span class="s">pickle</span><span class="sh">'</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">pop</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">"</span><span class="s">__main__</span><span class="sh">"</span><span class="p">:</span>
+    <span class="n">target_image_path</span> <span class="o">=</span> <span class="sh">"</span><span class="s">./img/starry_night_half.jpg</span><span class="sh">"</span>
+    <span class="n">checkpoint_path</span> <span class="o">=</span> <span class="sh">"</span><span class="s">./starry_night/</span><span class="sh">"</span>
+    <span class="n">image_template</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">checkpoint_path</span><span class="p">,</span> <span class="sh">"</span><span class="s">drawing_%05d.png</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">target_image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="n">target_image_path</span><span class="p">).</span><span class="nf">convert</span><span class="p">(</span><span class="sh">'</span><span class="s">RGBA</span><span class="sh">'</span><span class="p">)</span>
+
+    <span class="n">num_triangles</span> <span class="o">=</span> <span class="mi">150</span>
+    <span class="n">population_size</span> <span class="o">=</span> <span class="mi">200</span>
+
+    <span class="n">pop</span> <span class="o">=</span> <span class="nc">Population</span><span class="p">(</span><span class="n">chromosomes</span><span class="o">=</span><span class="p">[</span><span class="nc">Painting</span><span class="p">(</span><span class="n">num_triangles</span><span class="p">,</span> <span class="n">target_image</span><span class="p">,</span> <span class="n">background_color</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">population_size</span><span class="p">)],</span>
+                     <span class="n">eval_function</span><span class="o">=</span><span class="n">score</span><span class="p">,</span> <span class="n">maximize</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">concurrent_workers</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+    <span class="n">evolution</span> <span class="o">=</span> <span class="p">(</span><span class="nc">Evolution</span><span class="p">()</span>
+                 <span class="p">.</span><span class="nf">survive</span><span class="p">(</span><span class="n">fraction</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+                 <span class="p">.</span><span class="nf">breed</span><span class="p">(</span><span class="n">parent_picker</span><span class="o">=</span><span class="n">pick_best_and_random</span><span class="p">,</span> <span class="n">combiner</span><span class="o">=</span><span class="n">mate</span><span class="p">,</span> <span class="n">population_size</span><span class="o">=</span><span class="n">population_size</span><span class="p">)</span>
+                 <span class="p">.</span><span class="nf">mutate</span><span class="p">(</span><span class="n">mutate_function</span><span class="o">=</span><span class="n">mutate_painting</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">swap</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+                 <span class="p">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="n">lazy</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                 <span class="p">.</span><span class="nf">callback</span><span class="p">(</span><span class="n">print_summary</span><span class="p">,</span>
+                           <span class="n">img_template</span><span class="o">=</span><span class="n">image_template</span><span class="p">,</span>
+                           <span class="n">checkpoint_path</span><span class="o">=</span><span class="n">checkpoint_path</span><span class="p">))</span>
+
+    <span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="p">.</span><span class="nf">evolve</span><span class="p">(</span><span class="n">evolution</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="de-uitvoer">De uitvoer</h2>
+
+<p>Hier zie je het beste individu uit generatie 1, 250, 500, 750, 1000, 1500, 2500, 3500 en 4500 (van links naar rechts, 
+van boven naar beneden).</p>
+
+<p><a href="/assets/posts/2020-01-12-Genetic-Art-Algorithm/evolution_grid.png" class="lightgallery-link" data-sub-html="Uitvoer na verschillende generaties">
+<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/evolution_grid.png" alt="Uitvoer na verschillende generaties" height="904" width="1140" data-src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/evolution_grid.png" loading="lazy" />
+</a></p>
+
+<h3 id="verschillende-uitvoeringen-verschillende-resultaten">Verschillende uitvoeringen, verschillende resultaten</h3>
+
+<p>Omdat zowel het begin van de evolutie als alle mutaties en voortplantingsgebeurtenissen willekeurig zijn, kan de uitvoer
+tussen uitvoeringen verschillen. Hieronder zie je het resultaat van twee onafhankelijke uitvoeringen van elk 5000 generaties. Hoewel
+deze afbeeldingen een vergelijkbare afstand tot de doelafbeelding hebben, verschillen ze sterk van elkaar.</p>
+
+<div class="gallery-2-col">
+  <p><a href="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" class="lightgallery-link" data-sub-html="De uitvoer van het algoritme na 5000 generaties">
+<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" alt="De uitvoer van het algoritme na 5000 generaties" height="452" width="570" data-src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.png" loading="lazy" />
+</a>
+<a href="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.run_2.png" class="lightgallery-link" data-sub-html="De uitvoer van het algoritme na een tweede uitvoering van 5000 generaties">
+<img src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.run_2.png" alt="De uitvoer van het algoritme na een tweede uitvoering van 5000 generaties" height="452" width="570" data-src="/assets/posts/2020-01-12-Genetic-Art-Algorithm/starry_night_generation_5000.run_2.png" loading="lazy" />
+</a></p>
+</div>
+
+<h2 id="conclusie-en-vooruitblik">Conclusie en vooruitblik</h2>
+
+<p>Deze resultaten zijn behoorlijk gaaf. Omdat er heel weinig verschil is tussen generatie 4500 en 5000, is dit waarschijnlijk
+ongeveer het beste wat met slechts 150 driehoeken haalbaar is. Toch zijn er enkele mogelijke verbeteringen. Het algoritme
+probeert zoveel mogelijk pixels correct te benaderen. Correcte pixels in grote egale vlakken leveren dus een veel betere score op
+dan correcte details. Je zou een masker kunnen maken dat gedetailleerde gebieden markeert en correcte pixels in die
+gebieden extra beloont.</p>
+
+<p>De chromosomen zijn in dit geval erg statisch: ze hebben altijd dezelfde lengte (150 onderdelen) en afgezien van het occasioneel
+verwisselen van onderdelen gebeurt er niets. In de natuur evolueert de grootte van chromosomen voortdurend en is duplicatie van genen vaak een 
+bron van innovatie. Je zou de mutatiefunctie kunnen aanpassen om af en toe een extra driehoek toe te voegen, of
+complexere manieren kunnen bedenken om schilderijen te kruisen zodat lijsten met verschillende aantallen onderdelen samen kunnen worden gebruikt. Extra
+driehoeken moeten echter een kost hebben die in de fitness wordt meegerekend. In de natuur betekent een
+groter genoom dat bij elke celdeling meer DNA moet worden gekopieerd, waardoor genomen niet onbeperkt groot kunnen worden. Ook hier is
+een vergelijkbare straf in de fitness nodig. Deze extra parameter afstellen kan moeilijk zijn.</p>
+
+<p>Tot slot kunnen andere stijlen worden gebruikt. Ik koos hier voor een beperkt aantal driehoeken omdat dit het eerste 
+idee was dat bij de start van het project in me opkwam. Tijdens het werk ontstonden echter nog enkele andere (en mogelijk 
+betere) ideeën. Die werk ik uit en behandel ik in een latere post!</p>
+
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/python/">python</a>,&nbsp;<a href="/nl/tag/evolution/">evolution</a>,&nbsp;<a href="/nl/tag/genetic-algorithm/">genetic-algorithm</a>,&nbsp;<a href="/nl/tag/algorithm/">algorithm</a>,&nbsp;<a href="/nl/tag/art/">art</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=Genetisch+kunstalgoritme%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F01%2FGenetic-Art-Algorithm%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F01%2FGenetic-Art-Algorithm%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F01%2FGenetic-Art-Algorithm%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=Genetisch+kunstalgoritme&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F01%2FGenetic-Art-Algorithm%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/programming/games/2019/12/Magic-the-Gathering/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">Machine Learning: the Gathering</span></a></span>
+  <span class="next-post"><a href="/nl/programming/2020/02/Genetic-Art-Algorithm-2/"><span class="page-number">Minimalistische kunst met een genetisch algoritme</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,1005 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>De Gwent Pro Ladder bekeken met een agentgebaseerd model (code)</title>
+  <meta name="description" content="Een agentgebaseerd model in Python bouwen met Mesa en pandas om Gwent-spelers te simuleren en te testen of vaardigheid dan wel wedstrijden grinden de rangsch...">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="De Gwent Pro Ladder bekeken met een agentgebaseerd model (code)" />
+  <meta property="og:description" content="Een agentgebaseerd model in Python bouwen met Mesa en pandas om Gwent-spelers te simuleren en te testen of vaardigheid dan wel wedstrijden grinden de rangsch..." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2020-11-11-Gwent-Pro-Rank-ABM-crowd_header.jpg" /><meta property="og:image:alt" content="De Gwent Pro Ladder bekeken met een agentgebaseerd model (code)" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2020-11-11T12:00:00+00:00" /><meta property="article:modified_time" content="2020-11-11T12:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programmeren" /><meta property="article:section" content="Games" /><meta property="article:tag" content="python" /><meta property="article:tag" content="numpy" /><meta property="article:tag" content="gwent" /><meta property="article:tag" content="mesa" /><meta property="article:tag" content="abm" /><meta property="article:tag" content="agent-based-modeling" /><meta property="article:tag" content="pandas" /><meta property="article:tag" content="data-science" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="De Gwent Pro Ladder bekeken met een agentgebaseerd model (code)"><meta name="twitter:description" content="Een agentgebaseerd model in Python bouwen met Mesa en pandas om Gwent-spelers te simuleren en te testen of vaardigheid dan wel wedstrijden grinden de rangsch..."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2020-11-11-Gwent-Pro-Rank-ABM-crowd_header.jpg"><meta name="twitter:image:alt" content="De Gwent Pro Ladder bekeken met een agentgebaseerd model (code)"><meta name="twitter:url" content="https://blog.4dcu.be/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/games/2020/11/11/Gwent-Pro-Rank-ABM.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/games/2020/11/11/Gwent-Pro-Rank-ABM.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM/" },
+      "url": "https://blog.4dcu.be/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM/",
+      "headline": "De Gwent Pro Ladder bekeken met een agentgebaseerd model (code)",
+      "description": "Een agentgebaseerd model in Python bouwen met Mesa en pandas om Gwent-spelers te simuleren en te testen of vaardigheid dan wel wedstrijden grinden de rangsch...",
+      "datePublished": "2020-11-11T12:00:00+00:00",
+      "dateModified": "2020-11-11T12:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2020-11-11-Gwent-Pro-Rank-ABM-crowd_header.jpg",
+      "keywords": ["python", "numpy", "gwent", "mesa", "abm", "agent-based-modeling", "pandas", "data-science"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Programmeren", "item": "https://blog.4dcu.be/nl/category/programming/" },
+        { "@type": "ListItem", "position": 3, "name": "De Gwent Pro Ladder bekeken met een agentgebaseerd model (code)" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/programming/games/2020/11/11/Gwent-Pro-Rank-ABM.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/crowd_header.png" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="De Gwent Pro Ladder bekeken met een agentgebaseerd model (code)" class="hero-background is-transparent" src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/crowd_header.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">De Gwent Pro Ladder bekeken met een agentgebaseerd model (code)</h1><p class="info has-text-white"><em>een ABM met Mesa en Pandas</em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 11-11-2020 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/programming/">Programmeren</a>, <a href="/nl/category/games/">Games</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Met de gegevens die we van <a href="https://masters.playgwent.com/en/">Gwent Masters</a> kunnen ophalen, is het moeilijk om te beoordelen of meer
+spelen tot een hogere rang leidt. Op basis van de gegevens alleen is het dus lastig om te bepalen of vaardigheid
+dan wel wedstrijden grinden je verder helpt. Met agentgebaseerde modellen, waarin we spelers en hun wedstrijden kunnen
+simuleren en hun vaardigheidsniveau beheren, kunnen we dit echter degelijk onderzoeken.</p>
+
+<p>Het grootste probleem met de gegevens die aan het einde van het seizoen worden vrijgegeven, is dat er geen goede manier bestaat om de werkelijke 
+vaardigheid van een speler te beoordelen. Je zou het aantal gespeelde wedstrijden en de piek-MMR als maatstaf voor efficiëntie kunnen gebruiken, maar dat is
+niet noodzakelijk een goede benadering van vaardigheid. Alle zes facties spelen zou die score negatief beïnvloeden. Hetzelfde geldt voor spelers die
+erg goed presteren, maar na het bereiken van een MMR waar ze tevreden mee zijn losser gaan spelen met leuke, minder optimale decks.
+Hoewel we dit kunnen verbeteren door spelersprofielen tijdens het seizoen meerdere keren te scrapen, 
+blijven er aannames nodig om dat naar een schatting van vaardigheid te vertalen.</p>
+
+<p>Hoewel vaardigheid niet rechtstreeks meetbaar is, kunnen we een populatie spelers met uiteenlopende vaardigheden modelleren die elk
+een verschillend aantal wedstrijden spelen tijdens een gesimuleerd seizoen. In dit artikel onderzoeken we of een met de <a href="https://mesa.readthedocs.io/en/stable/#">Mesa</a>-bibliotheek
+geïmplementeerd agentgebaseerd model (ABM) kan inschatten hoeveel grinden je Gwent-rangschikking kan verbeteren, of dat pure vaardigheid
+de doorslag geeft.</p>
+
+<p>Dit artikel behandelt de technische details van de implementatie van het model. Wil je meteen naar de resultaten en
+conclusies over de <em>ranked ladder</em>, ga dan rechtstreeks naar het <a href="/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM_2/">volgende artikel</a>.</p>
+
+<h2 id="de-klasse-gwentagent-maken">De klasse GwentAgent maken</h2>
+
+<p>De volledige code voor dit project staat op <a href="https://github.com/4dcu-be/GwentAgentBasedModeling">GitHub</a>, maar enkele belangrijke onderdelen worden hier uitgelicht. Wanneer je
+met <a href="https://mesa.readthedocs.io/en/stable/#">Mesa</a> werkt, moet je een Agent-klasse definiëren. Die klasse bevat alle parameters die een entiteit in de
+simulatie heeft en bepaalt hoe ze zich gedraagt. Onze agenten hebben hier dus twee belangrijke eigenschappen:</p>
+
+<ul>
+  <li><strong>ELO-niveau</strong>: dit stelt de vaardigheid van een entiteit aan het begin van het seizoen voor. Voor elke entiteit wordt
+  bij de start een <a href="https://en.wikipedia.org/wiki/Elo_rating_system">ELO</a>-niveau gekozen. Dit beoordelingssysteem wordt in het schaken gebruikt om spelers te rangschikken. (Merk op
+  dat het MMR-systeem van Gwent in wezen een ELO-score is, waarbij wijzigingen worden berekend met een 
+  K-factor van 14.)</li>
+  <li><strong>Speelfrequentie</strong>: de kans dat een speler bij elke stap van het model speelt. Hoe hoger die is, hoe meer wedstrijden de 
+  agent tijdens een gesimuleerd seizoen speelt.</li>
+</ul>
+
+<p>Daarnaast moeten we het aantal gespeelde en gewonnen wedstrijden, de huidige MMR en de
+piek-MMR bijhouden. Daarom bevat de klasse <code class="language-plaintext highlighter-rouge">GwentAgent</code> ook velden voor al die eigenschappen. Twee functies
+met de decorator <code class="language-plaintext highlighter-rouge">@property</code> berekenen het winstpercentage en de ELO-score met ervaringscorrectie: het basis-
+ELO-niveau plus een ervaringsscore op basis van het aantal gespeelde wedstrijden.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">mesa</span> <span class="kn">import</span> <span class="n">Agent</span><span class="p">,</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="n">mesa.time</span> <span class="kn">import</span> <span class="n">RandomActivation</span>
+<span class="kn">from</span> <span class="n">mesa.datacollection</span> <span class="kn">import</span> <span class="n">DataCollector</span>
+
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="n">numpy</span> <span class="kn">import</span> <span class="n">random</span>
+
+<span class="n">max_playrate</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">experience_factor</span> <span class="o">=</span> <span class="mi">20</span>
+
+
+<span class="k">def</span> <span class="nf">win_probability</span><span class="p">(</span><span class="n">elo_difference</span><span class="p">):</span>
+    <span class="n">proba</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">elo_difference</span> <span class="o">/</span> <span class="mi">400</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">proba</span>
+
+
+<span class="k">def</span> <span class="nf">elo_change</span><span class="p">(</span><span class="n">elo_difference</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">14</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">K</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="nf">win_probability</span><span class="p">(</span><span class="n">elo_difference</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">pick_elo</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">
+    Generate a random elo value from a distribution that mimicks the distribution
+    of chess elo scores on Lichess Blitz.
+    </span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="nf">min</span><span class="p">(</span>
+        <span class="mi">1200</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1500</span> <span class="o">/</span> <span class="mi">14</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="nf">abs</span><span class="p">(</span><span class="mi">51</span> <span class="o">-</span> <span class="n">random</span><span class="p">.</span><span class="nf">binomial</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)),</span> <span class="mi">2700</span>
+    <span class="p">)</span> <span class="o">-</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">GwentAgent</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">unique_id</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">(</span><span class="n">unique_id</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">peak_mmr</span> <span class="o">=</span> <span class="mi">2400</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">=</span> <span class="mi">2400</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">games_played</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">wins</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">self</span><span class="p">.</span><span class="n">elo_level</span> <span class="o">=</span> <span class="nf">pick_elo</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">playrate</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_playrate</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">win_rate</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">games_played</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nf">return </span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">wins</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="n">self</span><span class="p">.</span><span class="n">games_played</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">elo_experience</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+        Take the ELO increased with an experience score based on the number of 
+        games played and the experience factor.
+        </span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">elo_level</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">games_played</span><span class="p">)</span> <span class="o">*</span> <span class="n">experience_factor</span>
+
+    <span class="k">def</span> <span class="nf">win</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other_player</span><span class="p">):</span>
+        <span class="n">mmr_change</span> <span class="o">=</span> <span class="nf">elo_change</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">-</span> <span class="n">other_player</span><span class="p">.</span><span class="n">current_mmr</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">+=</span> <span class="n">mmr_change</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">peak_mmr</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">current_mmr</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">peak_mmr</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">games_played</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">wins</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other_player</span><span class="p">):</span>
+        <span class="n">mmr_change</span> <span class="o">=</span> <span class="nf">elo_change</span><span class="p">(</span><span class="n">other_player</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">-</span> <span class="n">self</span><span class="p">.</span><span class="n">current_mmr</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">-=</span> <span class="n">mmr_change</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">games_played</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">find_opponent</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">min_number</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+        Pick a random other agent to play against. This agent should have a 
+        comparable current mmr. So we will grow the mmr range until there 
+        are at least
+        </span><span class="sh">"""</span>
+        <span class="n">mmr_range</span> <span class="o">=</span> <span class="mi">10</span>
+
+        <span class="nf">while </span><span class="p">(</span>
+            <span class="nf">len</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">a</span>
+                    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span>
+                    <span class="k">if</span> <span class="n">a</span><span class="p">.</span><span class="n">unique_id</span> <span class="o">!=</span> <span class="n">self</span><span class="p">.</span><span class="n">unique_id</span>
+                    <span class="ow">and</span> <span class="nf">abs</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">-</span> <span class="n">a</span><span class="p">.</span><span class="n">current_mmr</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">mmr_range</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+            <span class="o">&lt;</span> <span class="n">min_number</span>
+        <span class="p">):</span>
+            <span class="n">mmr_range</span> <span class="o">+=</span> <span class="mi">7</span>
+
+        <span class="n">possible_opponents</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">a</span>
+            <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span>
+            <span class="k">if</span> <span class="n">a</span><span class="p">.</span><span class="n">unique_id</span> <span class="o">!=</span> <span class="n">self</span><span class="p">.</span><span class="n">unique_id</span>
+            <span class="ow">and</span> <span class="nf">abs</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">current_mmr</span> <span class="o">-</span> <span class="n">a</span><span class="p">.</span><span class="n">current_mmr</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">mmr_range</span>
+        <span class="p">]</span>
+
+        <span class="n">opponent</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">possible_opponents</span><span class="p">],</span>
+            <span class="mi">1</span><span class="p">,</span>
+            <span class="p">[</span><span class="n">a</span><span class="p">.</span><span class="n">playrate</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">possible_opponents</span><span class="p">],</span>
+        <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">opponent</span>
+
+    <span class="k">def</span> <span class="nf">play_against</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other_agent</span><span class="p">):</span>
+        <span class="c1"># Calculate win probability, check if player won, adjust scores accordingly
+</span>        <span class="n">wp</span> <span class="o">=</span> <span class="nf">win_probability</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">elo_experience</span> <span class="o">-</span> <span class="n">other_agent</span><span class="p">.</span><span class="n">elo_experience</span><span class="p">)</span>
+        <span class="n">rp</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span>
+        <span class="n">won</span> <span class="o">=</span> <span class="n">rp</span> <span class="o">&lt;</span> <span class="n">wp</span>
+
+        <span class="k">if</span> <span class="n">won</span><span class="p">:</span>
+            <span class="n">self</span><span class="p">.</span><span class="nf">win</span><span class="p">(</span><span class="n">other_agent</span><span class="p">)</span>
+            <span class="n">other_agent</span><span class="p">.</span><span class="nf">loss</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">other_agent</span><span class="p">.</span><span class="nf">win</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+            <span class="n">self</span><span class="p">.</span><span class="nf">loss</span><span class="p">(</span><span class="n">other_agent</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="c1"># Check if this agent will play a round
+</span>        <span class="n">rp</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="n">max_playrate</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rp</span> <span class="o">&gt;=</span> <span class="n">self</span><span class="p">.</span><span class="n">playrate</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Find an opponent
+</span>        <span class="n">other_agent</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">find_opponent</span><span class="p">()</span>
+
+        <span class="c1"># Play against opponent and adjust score
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">play_against</span><span class="p">(</span><span class="n">other_agent</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Verder zijn nog enkele functies nodig. De functies <code class="language-plaintext highlighter-rouge">win</code> en <code class="language-plaintext highlighter-rouge">loss</code> verwerken de MMR-scores nadat
+een entiteit een wedstrijd wint of verliest. De functie <code class="language-plaintext highlighter-rouge">find_opponent</code> bootst het Gwent-wachtrijsysteem na: ze
+probeert een actieve speler met een vergelijkbare huidige MMR te vinden. Als er binnen het huidige bereik onvoldoende spelers zijn,
+wordt het MMR-bereik vergroot en zoekt ze opnieuw. <code class="language-plaintext highlighter-rouge">play_against</code> simuleert een wedstrijd tussen twee spelers,
+waarbij de uitkomst wordt berekend op basis van hun ELO-score en ervaring. Aan de hand van die kans wordt willekeurig een winnaar gekozen en
+worden de statistieken van de spelers bijgewerkt. Ten slotte implementeert de verplichte functie <code class="language-plaintext highlighter-rouge">step</code> alles wat een speler 
+bij elke simulatiestap doet. Op basis van de <code class="language-plaintext highlighter-rouge">playrate</code> speelt een speler in die ronde al dan niet. Als de 
+speler een wedstrijd speelt, wordt een andere agent met een vergelijkbare MMR gezocht. Ze nemen het tegen elkaar op in een wedstrijd waarvan de uitslag 
+door hun vaardigheidsniveau en ervaring wordt bepaald.</p>
+
+<h3 id="de-ervaringsfactor">De ervaringsfactor</h3>
+
+<p>We mogen aannemen dat een speler zijn of haar deck en de huidige meta beter leert kennen naarmate die meer wedstrijden
+speelt. Door te leren hoe het deck tegen verschillende populaire decks moet worden gespeeld, stijgt de kans om te winnen.
+Om dit in het model op te nemen, gebruiken we ervaring: de vierkantswortel van het aantal gespeelde wedstrijden, vermenigvuldigd
+met de ervaringsfactor, die voor alle spelers gelijk is. In deze voorbeelden staat de factor op 20. Iemand die 100 wedstrijden speelde,
+krijgt tijdens het spelen dus een ELO-bonus van <code class="language-plaintext highlighter-rouge">sqrt(10) * 20</code>. Hoewel deze factor willekeurig werd gekozen, 
+is een bonus van 200 ELO een aanzienlijke verbetering en waarschijnlijk groter dan je in werkelijkheid zou verwachten.</p>
+
+<h2 id="het-gwentmodel-instellen">Het GwentModel instellen</h2>
+
+<p>Het Mesa-model is hier eenvoudig. We maken <em>N</em> agenten, een <em>scheduler</em> die bij elke stap alle agenten
+in willekeurige volgorde activeert, en een <code class="language-plaintext highlighter-rouge">DataCollector</code> die bij elke stap alle gewenste eigenschappen van alle agenten opslaat, zodat de 
+geschiedenis van die eigenschappen tijdens de simulatie wordt bewaard en later kan worden geanalyseerd.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">GwentModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">num_agents</span> <span class="o">=</span> <span class="n">N</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">schedule</span> <span class="o">=</span> <span class="nc">RandomActivation</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">num_agents</span><span class="p">):</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="nc">GwentAgent</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">self</span><span class="p">)</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+            <span class="n">self</span><span class="p">.</span><span class="n">datacollector</span> <span class="o">=</span> <span class="nc">DataCollector</span><span class="p">(</span>
+                <span class="n">agent_reporters</span><span class="o">=</span><span class="p">{</span>
+                    <span class="sh">"</span><span class="s">Peak MMR</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">peak_mmr</span><span class="sh">"</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">Current MMR</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">current_mmr</span><span class="sh">"</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">Win Rate</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">win_rate</span><span class="sh">"</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">Games Played</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">games_played</span><span class="sh">"</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">Games Won</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">wins</span><span class="sh">"</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">elo</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">elo_level</span><span class="sh">"</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">elo_xp</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">elo_experience</span><span class="sh">"</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">datacollector</span><span class="p">.</span><span class="nf">collect</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="nf">step</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="het-model-uitvoeren">Het model uitvoeren</h2>
+
+<p>Met enkele regels code maken we een model met 8000 agenten dat 100 stappen doorloopt. De module <a href="https://github.com/tqdm/tqdm">tqdm</a> wordt
+gebruikt om een voortgangsbalk en geschatte duur voor onze simulatie weer te geven. Op één core (Ryzen 7 3700X) duurt de volledige 
+simulatie 20-30 minuten (tegenstanders binnen het juiste bereik vinden is de traagste stap). Haal dus een koffie
+of een snack wanneer je dit start, want het duurt even!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="nc">GwentModel</span><span class="p">(</span><span class="mi">8000</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">tqdm</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)):</span>
+    <span class="n">model</span><span class="p">.</span><span class="nf">step</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="gegevens-uit-het-gwentmodel-halen">Gegevens uit het GwentModel halen</h2>
+
+<p>Wanneer de simulatie (en die koffie of snack) klaar is, kunnen we gegevens uit het model halen om mee te werken. Dat
+kan op twee manieren. Een ervan is de gegevens ophalen uit de <code class="language-plaintext highlighter-rouge">DataCollector</code> van het model. Die bevat de
+toestand van alle agenten bij elke stap.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">time_df</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">datacollector</span><span class="p">.</span><span class="nf">get_agent_vars_dataframe</span><span class="p">()</span>
+<span class="n">time_df</span><span class="p">.</span><span class="nf">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">./data/simulation_steps_experience_factor_</span><span class="si">{</span><span class="n">experience_factor</span><span class="si">}</span><span class="s">.csv</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">time_df</span><span class="p">.</span><span class="nf">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<table class="large-table">
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right">Peak MMR</th>
+      <th style="text-align: right">Current MMR</th>
+      <th style="text-align: right">Win Rate</th>
+      <th style="text-align: right">Games Played</th>
+      <th style="text-align: right">Games Won</th>
+      <th style="text-align: right">elo</th>
+      <th style="text-align: right">elo_xp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">Step</td>
+      <td style="text-align: right">AgentID</td>
+      <td style="text-align: right"> </td>
+      <td style="text-align: right"> </td>
+      <td style="text-align: right"> </td>
+      <td style="text-align: right"> </td>
+      <td style="text-align: right"> </td>
+      <td style="text-align: right"> </td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">2400.0</td>
+      <td style="text-align: right">2400.0</td>
+      <td style="text-align: right">NaN</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">1341.285714</td>
+      <td style="text-align: right">1341.285714</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"> </td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">2400.0</td>
+      <td style="text-align: right">2400.0</td>
+      <td style="text-align: right">NaN</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">1656.714286</td>
+      <td style="text-align: right">1656.714286</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"> </td>
+      <td style="text-align: right">2</td>
+      <td style="text-align: right">2400.0</td>
+      <td style="text-align: right">2400.0</td>
+      <td style="text-align: right">NaN</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">1625.571429</td>
+      <td style="text-align: right">1625.571429</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"> </td>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">2400.0</td>
+      <td style="text-align: right">2400.0</td>
+      <td style="text-align: right">NaN</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">1329.285714</td>
+      <td style="text-align: right">1329.285714</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"> </td>
+      <td style="text-align: right">4</td>
+      <td style="text-align: right">2400.0</td>
+      <td style="text-align: right">2400.0</td>
+      <td style="text-align: right">NaN</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">1718.714286</td>
+      <td style="text-align: right">1718.714286</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Hoewel dit uitstekend is om het model opnieuw af te spelen, is het overdreven wanneer je alleen
+de eindtoestand wilt bekijken (of geen <code class="language-plaintext highlighter-rouge">DataCollector</code> hebt opgenomen). De onderstaande code doorloopt alle agenten, haalt 
+bepaalde eigenschappen op en stopt ze in een pandas-dataframe. Spelers worden ook in verschillende groepen verdeeld volgens vaardigheid en het
+aantal gespeelde wedstrijden.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="sh">"</span><span class="s">player</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="sh">"</span><span class="s">Player </span><span class="si">{</span><span class="n">agent</span><span class="p">.</span><span class="n">unique_id</span><span class="si">}</span><span class="sh">"</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
+        <span class="sh">"</span><span class="s">elo</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="n">agent</span><span class="p">.</span><span class="n">elo_level</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
+        <span class="sh">"</span><span class="s">playrate</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="n">agent</span><span class="p">.</span><span class="n">playrate</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
+        <span class="sh">"</span><span class="s">games played</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="n">agent</span><span class="p">.</span><span class="n">games_played</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
+        <span class="sh">"</span><span class="s">current MMR</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="n">agent</span><span class="p">.</span><span class="n">current_mmr</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
+        <span class="sh">"</span><span class="s">peak MMR</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="n">agent</span><span class="p">.</span><span class="n">peak_mmr</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
+        <span class="sh">"</span><span class="s">win rate</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="n">agent</span><span class="p">.</span><span class="n">win_rate</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">schedule</span><span class="p">.</span><span class="n">agents</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">rank</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">peak MMR</span><span class="sh">"</span><span class="p">].</span><span class="nf">rank</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">elo bin</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">cut</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">elo</span><span class="sh">"</span><span class="p">],</span> <span class="nf">list</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">1100</span><span class="p">,</span> <span class="mi">2800</span><span class="p">,</span> <span class="mi">200</span><span class="p">)))</span>
+<span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">games played percentile</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">games played</span><span class="sh">"</span><span class="p">].</span><span class="nf">rank</span><span class="p">(</span><span class="n">pct</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">games played bin</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">cut</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">games played percentile</span><span class="sh">"</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">df</span><span class="p">.</span><span class="nf">to_excel</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">./data/final_data_experience_factor_</span><span class="si">{</span><span class="n">experience_factor</span><span class="si">}</span><span class="s">.xlsx</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">df</span>
+</code></pre></div></div>
+
+<table class="large-table">
+  <thead>
+    <tr>
+      <th style="text-align: right">player</th>
+      <th style="text-align: right">elo</th>
+      <th style="text-align: right">playrate</th>
+      <th style="text-align: right">games played</th>
+      <th style="text-align: right">current MMR</th>
+      <th style="text-align: right">peak MMR</th>
+      <th style="text-align: right">win rate</th>
+      <th style="text-align: right">rank</th>
+      <th style="text-align: right">elo bin</th>
+      <th style="text-align: right">games played percentile</th>
+      <th style="text-align: right">games played bin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">Player 1</td>
+      <td style="text-align: right">1284.142857</td>
+      <td style="text-align: right">4</td>
+      <td style="text-align: right">65</td>
+      <td style="text-align: right">2344.332458</td>
+      <td style="text-align: right">2408.421244</td>
+      <td style="text-align: right">43.076923</td>
+      <td style="text-align: right">5784.0</td>
+      <td style="text-align: right">(1100, 1300]</td>
+      <td style="text-align: right">0.179063</td>
+      <td style="text-align: right">(0.0, 0.25]</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">Player 2</td>
+      <td style="text-align: right">1299.142857</td>
+      <td style="text-align: right">7</td>
+      <td style="text-align: right">71</td>
+      <td style="text-align: right">2357.819543</td>
+      <td style="text-align: right">2400.000000</td>
+      <td style="text-align: right">45.070423</td>
+      <td style="text-align: right">7552.0</td>
+      <td style="text-align: right">(1100, 1300]</td>
+      <td style="text-align: right">0.243312</td>
+      <td style="text-align: right">(0.0, 0.25]</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">Player 40</td>
+      <td style="text-align: right">1238.142857</td>
+      <td style="text-align: right">5</td>
+      <td style="text-align: right">69</td>
+      <td style="text-align: right">2329.815980</td>
+      <td style="text-align: right">2406.859099</td>
+      <td style="text-align: right">42.028986</td>
+      <td style="text-align: right">6435.5</td>
+      <td style="text-align: right">(1100, 1300]</td>
+      <td style="text-align: right">0.221438</td>
+      <td style="text-align: right">(0.0, 0.25]</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">Player 49</td>
+      <td style="text-align: right">1291.142857</td>
+      <td style="text-align: right">4</td>
+      <td style="text-align: right">60</td>
+      <td style="text-align: right">2363.915782</td>
+      <td style="text-align: right">2400.000000</td>
+      <td style="text-align: right">45.000000</td>
+      <td style="text-align: right">7552.0</td>
+      <td style="text-align: right">(1100, 1300]</td>
+      <td style="text-align: right">0.128125</td>
+      <td style="text-align: right">(0.0, 0.25]</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">Player 102</td>
+      <td style="text-align: right">1212.142857</td>
+      <td style="text-align: right">2</td>
+      <td style="text-align: right">48</td>
+      <td style="text-align: right">2349.541087</td>
+      <td style="text-align: right">2413.726378</td>
+      <td style="text-align: right">41.666667</td>
+      <td style="text-align: right">5478.0</td>
+      <td style="text-align: right">(1100, 1300]</td>
+      <td style="text-align: right">0.028250</td>
+      <td style="text-align: right">(0.0, 0.25]</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">Player 6289</td>
+      <td style="text-align: right">2667.000000</td>
+      <td style="text-align: right">18</td>
+      <td style="text-align: right">139</td>
+      <td style="text-align: right">2585.247562</td>
+      <td style="text-align: right">2623.316703</td>
+      <td style="text-align: right">59.712230</td>
+      <td style="text-align: right">16.0</td>
+      <td style="text-align: right">(2500, 2700]</td>
+      <td style="text-align: right">0.957438</td>
+      <td style="text-align: right">(0.75, 1.0]</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">Player 7196</td>
+      <td style="text-align: right">2547.857143</td>
+      <td style="text-align: right">18</td>
+      <td style="text-align: right">130</td>
+      <td style="text-align: right">2571.713937</td>
+      <td style="text-align: right">2578.698543</td>
+      <td style="text-align: right">59.230769</td>
+      <td style="text-align: right">81.0</td>
+      <td style="text-align: right">(2500, 2700]</td>
+      <td style="text-align: right">0.876062</td>
+      <td style="text-align: right">(0.75, 1.0]</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">Player 7523</td>
+      <td style="text-align: right">2555.857143</td>
+      <td style="text-align: right">12</td>
+      <td style="text-align: right">120</td>
+      <td style="text-align: right">2573.058829</td>
+      <td style="text-align: right">2573.058829</td>
+      <td style="text-align: right">60.000000</td>
+      <td style="text-align: right">100.0</td>
+      <td style="text-align: right">(2500, 2700]</td>
+      <td style="text-align: right">0.778188</td>
+      <td style="text-align: right">(0.75, 1.0]</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">Player 7604</td>
+      <td style="text-align: right">2649.000000</td>
+      <td style="text-align: right">17</td>
+      <td style="text-align: right">134</td>
+      <td style="text-align: right">2626.069166</td>
+      <td style="text-align: right">2640.740116</td>
+      <td style="text-align: right">61.940299</td>
+      <td style="text-align: right">8.0</td>
+      <td style="text-align: right">(2500, 2700]</td>
+      <td style="text-align: right">0.915875</td>
+      <td style="text-align: right">(0.75, 1.0]</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">Player 7794</td>
+      <td style="text-align: right">2605.000000</td>
+      <td style="text-align: right">13</td>
+      <td style="text-align: right">120</td>
+      <td style="text-align: right">2585.842820</td>
+      <td style="text-align: right">2599.283118</td>
+      <td style="text-align: right">60.833333</td>
+      <td style="text-align: right">44.0</td>
+      <td style="text-align: right">(2500, 2700]</td>
+      <td style="text-align: right">0.778188</td>
+      <td style="text-align: right">(0.75, 1.0]</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="resultaten">Resultaten</h2>
+
+<p>Met een agentgebaseerd model krijgen we dus een heel nette dataset waarin de echte vaardigheid van elke speler en diens uiteindelijke 
+plaats op de ladder bekend zijn. De <a href="https://mesa.readthedocs.io/en/stable/#">Mesa</a>-bibliotheek maakte het verrassend eenvoudig om dit systeem op te zetten. Nu alle gegevens in het
+vertrouwde pandas-dataframe staan, kan de eigenlijke analyse beginnen. Die bewaren we echter voor het <a href="/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM_2/">volgende artikel</a>!</p>
+
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/python/">python</a>,&nbsp;<a href="/nl/tag/numpy/">numpy</a>,&nbsp;<a href="/nl/tag/gwent/">gwent</a>,&nbsp;<a href="/nl/tag/mesa/">mesa</a>,&nbsp;<a href="/nl/tag/abm/">abm</a>,&nbsp;<a href="/nl/tag/agent-based-modeling/">agent-based-modeling</a>,&nbsp;<a href="/nl/tag/pandas/">pandas</a>,&nbsp;<a href="/nl/tag/data-science/">data-science</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=De+Gwent+Pro+Ladder+bekeken+met+een+agentgebaseerd+model+%28code%29%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fgames%2F2020%2F11%2FGwent-Pro-Rank-ABM%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fgames%2F2020%2F11%2FGwent-Pro-Rank-ABM%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fgames%2F2020%2F11%2FGwent-Pro-Rank-ABM%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=De+Gwent+Pro+Ladder+bekeken+met+een+agentgebaseerd+model+%28code%29&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fgames%2F2020%2F11%2FGwent-Pro-Rank-ABM%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/programming/2020/11/Steganography/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">Steganografie met PIL en NumPy</span></a></span>
+  <span class="next-post"><a href="/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM_2/"><span class="page-number">De Gwent Pro Ladder bekeken met een agentgebaseerd model (resultaten)</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

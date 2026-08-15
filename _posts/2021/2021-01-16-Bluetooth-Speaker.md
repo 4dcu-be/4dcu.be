@@ -5,6 +5,7 @@ byline: "... the electronics"
 description: "Building a portable Bluetooth speaker from scratch, covering the electronics: speakers, LiPo battery, an M38 Bluetooth amplifier module and TP4056 charging."
 date:   2021-01-16 10:00:00
 author: Sebastian Proost
+post_id: bluetooth-speaker-part-1
 categories: diy
 tags:	bluetooth hardware speaker star-wars rogue-one 3d-printing
 cover:  "/assets/posts/2021-01-16-Bluetooth-Speaker/modules.jpg"

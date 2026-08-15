@@ -5,6 +5,7 @@ byline: ""
 description: "Trying competitive programming on CodeForces as a self-taught coder, solving easy algorithm problems in Python to fill gaps in my computer science knowledge."
 date:   2020-12-03 13:00:00
 author: Sebastian Proost
+post_id: codeforces
 categories: programming
 tags:	python 
 cover:  "/assets/images/headers/python_code.jpg"
@@ -19,12 +20,12 @@ a little.
 
 ## Getting Started
 
-On [CodeForces] all problems have a difficulty ranging from 800 to 3500. The lower the difficulty the easier to problem
+On [CodeForces] all problems have a difficulty ranging from 800 to 3500. The lower the difficulty the easier the problem
 is to solve. To get started I recommend picking an easy problem to tackle to get familiar with the platform, how to get
 the input, how to submit a solution, ...
 
 I picked problem 119A titled "[Epic Game]", with the lowest difficulty of 800, to dip my toes in the water. The goal is 
-to write a problem solve this issue:
+to write a program to solve this issue:
 
 ---
 Simon and Antisimon play a game. Initially each player receives one fixed positive integer that doesn't change 
@@ -45,7 +46,7 @@ If Simon wins, print "0" (without the quotes), otherwise print "1" (without the 
 
 ---
 
-The first solution I came up with is very straight forward, the inner loop alternates between both players, adjusting
+The first solution I came up with is very straightforward, the inner loop alternates between both players, adjusting
 *n* as described above. This is repeated (outer loop) until a player wins a game, in that case the winner is printed
 and the loop broken.
 
@@ -78,8 +79,8 @@ number of programming languages you'll have to specify that **Python 3.7.2** is 
 **PyPy 3.6 (7.2.0)**, [PyPy] is a faster version of Python, and as there is a limit to how long your code can run 
 before failing, this could be an advantage (though it really doesn't matter much here).
 
-I also noted that my code here has some later verbose sections, at the bottom of the post you can find my attempt to
-write is as short as possible.
+I also noted that my code here has some rather verbose sections, at the bottom of the post you can find my attempt to
+write it as short as possible.
 
 ## The Next Problem
 
@@ -143,8 +144,8 @@ if __name__ == "__main__":
         print(solve(path))
 ```
 
-While this solution is correct, CodeForces will not accept this as it takes to long to complete... Looking up in a list 
-if the upcoming section was visited before is a very slow step. I didn't pay attention that the maximum input can be
+While this solution is correct, CodeForces will not accept this as it takes too long to complete... Looking up in a list
+if the upcoming section was visited before is a very slow step. I didn't notice that the maximum input can be
 10<sup>5</sup> steps, so **I didn't pick the correct data structure**. A dictionary is the better choice if you need to look 
 things up fast and frequently. So read the instructions carefully before getting started. Especially if you plan to 
 join a real competition where incorrect submissions will cost you points. Not to mention you lose time having to 
@@ -183,10 +184,10 @@ dictionary to one and update the current coordinates.
 
 After solving a few more problems with a difficulty ranging from 800-1600, I got stuck on "[Two Buttons]". While I 
 found a solution which included a recursive, depth-first search, I couldn't get it to work fast enough. Even after
-adding every optimization I could think of ... nothing ... still way to slow. So I took a look at some of the valid 
+adding every optimization I could think of ... nothing ... still way too slow. So I took a look at some of the valid
 solutions which were remarkably simple! There was a trick necessary that I'm certain everyone with a CS degree will
 have encountered during their studies. While it is super inefficient to find the optimal path from start to finish as
-I was doing, it is simple to find the solution when going the opposite direction from stop till start. Now the solution,
+I was doing, it is simple to find the solution when going the opposite direction from stop till start. Now the solution
 is trivial and can be written in a few lines of code.
 
 ```python

@@ -5,6 +5,7 @@ byline: "using pandas, scipy and seaborn"
 description: "How to build correlation heatmaps in Python that also show statistical significance, using pandas, scipy, seaborn and multiple-testing correction."
 date:   2021-03-16 10:00:00
 author: Sebastian Proost
+post_id: code-nugget-correlation-heatmaps
 categories: programming
 tags:	python pandas data-science seaborn code-nugget
 cover:  "/assets/posts/2021-03-16-Code-Nugget-Correlation-Heatmaps/clustermap_header.jpg"

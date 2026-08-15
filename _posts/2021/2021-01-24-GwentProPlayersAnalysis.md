@@ -5,6 +5,7 @@ byline: ""
 description: "Using Python, web scraping and data science to estimate how many players are on Gwent's Pro Ladder, exploring three methods to count them."
 date: 2021-01-24 12:00:00
 author: Sebastian Proost
+post_id: gwent-pro-players-analysis
 categories: programming games
 tags:	python jupyter pandas gwent 
 cover:  "/assets/posts/2020-09-01-GwentProRankAnalysis/gwent_pro_rank.jpg"

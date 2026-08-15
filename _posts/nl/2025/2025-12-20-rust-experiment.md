@@ -12,7 +12,7 @@ cover:  "/assets/posts/2025-12-20-Rust-Experiment/python_rust.jpg"
 thumbnail: "/assets/images/thumbnails/rust_experiment.jpg"
 ---
 
-Een van de eerste posts op deze blog toonde hoe je [een genetisch algoritme implementeert in Python]({% post_url 2020/2020-01-12-Genetic-Art-Algorithm %}). Toen ik dat project opnieuw bekeek, besefte ik dat het een ideale kandidaat was om te porten naar [Rust](https://rust-lang.org/): het is rekenintensief en raakt aan performantie, parallellisme en datastructuren. Kortom, een goed excuus om eindelijk eens tijd in Rust te steken.
+Een van de eerste posts op deze blog toonde hoe je [een genetisch algoritme implementeert in Python]({% post_url nl/2020/2020-01-12-Genetic-Art-Algorithm %}). Toen ik dat project opnieuw bekeek, besefte ik dat het een ideale kandidaat was om te porten naar [Rust](https://rust-lang.org/): het is rekenintensief en raakt aan performantie, parallellisme en datastructuren. Kortom, een goed excuus om eindelijk eens tijd in Rust te steken.
 
 Tegelijk was dit project een gelegenheid om te experimenteren met agentic AI-codeertools, in het bijzonder [Claude Code](https://claude.ai/). Ik gebruik AI-ondersteunde ontwikkeling al een tijdje om documentatie en testdekking te verbeteren, verouderde codebases te moderniseren en sneller kleine tools te bouwen dan ik zelf zou kunnen. In al die gevallen kende ik de taal en het ecosysteem echter al goed genoeg om de AI te sturen en de output kritisch te beoordelen.
 
@@ -86,7 +86,7 @@ CMD ["sleep", "infinity"]
 
 ## De Python-code omzetten
 
-In de [oorspronkelijke blogpost]({% post_url 2020/2020-01-12-Genetic-Art-Algorithm %}) stond het grootste deel van de code. Die voerde ik in de online interface van Claude in en ik verwees naar mijn GitHub-repository. Vervolgens vroeg ik Claude Opus 4.5 om een plan op te stellen om het project naar Rust te vertalen. Dat plan bewaarde ik als een markdownbestand in mijn project.
+In de [oorspronkelijke blogpost]({% post_url nl/2020/2020-01-12-Genetic-Art-Algorithm %}) stond het grootste deel van de code. Die voerde ik in de online interface van Claude in en ik verwees naar mijn GitHub-repository. Vervolgens vroeg ik Claude Opus 4.5 om een plan op te stellen om het project naar Rust te vertalen. Dat plan bewaarde ik als een markdownbestand in mijn project.
 
 Vanuit VSCode opende ik Claude Code in de terminal en vroeg ik om het plan na te kijken en de eerste fase te implementeren. Ik maakte ook duidelijk dat ik iets wilde leren van het proces, en vroeg om implementatiekeuzes toe te lichten en nuttige commentaar in de code te zetten.
 

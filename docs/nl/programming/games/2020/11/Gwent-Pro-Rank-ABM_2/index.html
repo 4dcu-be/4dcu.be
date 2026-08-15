@@ -1,0 +1,655 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>De Gwent Pro Ladder bekeken met een agentgebaseerd model (resultaten)</title>
+  <meta name="description" content="De resultaten van het agentgebaseerde Gwent-model analyseren om te tonen dat meer wedstrijden grinden en puur geluk, naast vaardigheid, de piek-MMR op de Pro...">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="De Gwent Pro Ladder bekeken met een agentgebaseerd model (resultaten)" />
+  <meta property="og:description" content="De resultaten van het agentgebaseerde Gwent-model analyseren om te tonen dat meer wedstrijden grinden en puur geluk, naast vaardigheid, de piek-MMR op de Pro..." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM_2/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2020-11-11-Gwent-Pro-Rank-ABM-graph_header.jpg" /><meta property="og:image:alt" content="De Gwent Pro Ladder bekeken met een agentgebaseerd model (resultaten)" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2020-11-11T13:00:00+00:00" /><meta property="article:modified_time" content="2020-11-11T13:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programmeren" /><meta property="article:section" content="Games" /><meta property="article:tag" content="python" /><meta property="article:tag" content="numpy" /><meta property="article:tag" content="gwent" /><meta property="article:tag" content="mesa" /><meta property="article:tag" content="abm" /><meta property="article:tag" content="agent-based-modeling" /><meta property="article:tag" content="pandas" /><meta property="article:tag" content="seaborn" /><meta property="article:tag" content="data-science" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="De Gwent Pro Ladder bekeken met een agentgebaseerd model (resultaten)"><meta name="twitter:description" content="De resultaten van het agentgebaseerde Gwent-model analyseren om te tonen dat meer wedstrijden grinden en puur geluk, naast vaardigheid, de piek-MMR op de Pro..."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2020-11-11-Gwent-Pro-Rank-ABM-graph_header.jpg"><meta name="twitter:image:alt" content="De Gwent Pro Ladder bekeken met een agentgebaseerd model (resultaten)"><meta name="twitter:url" content="https://blog.4dcu.be/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM_2/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM_2/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/games/2020/11/11/Gwent-Pro-Rank-ABM_2.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM_2/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/games/2020/11/11/Gwent-Pro-Rank-ABM_2.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM_2/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM_2/" },
+      "url": "https://blog.4dcu.be/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM_2/",
+      "headline": "De Gwent Pro Ladder bekeken met een agentgebaseerd model (resultaten)",
+      "description": "De resultaten van het agentgebaseerde Gwent-model analyseren om te tonen dat meer wedstrijden grinden en puur geluk, naast vaardigheid, de piek-MMR op de Pro...",
+      "datePublished": "2020-11-11T13:00:00+00:00",
+      "dateModified": "2020-11-11T13:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2020-11-11-Gwent-Pro-Rank-ABM-graph_header.jpg",
+      "keywords": ["python", "numpy", "gwent", "mesa", "abm", "agent-based-modeling", "pandas", "seaborn", "data-science"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM_2/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Programmeren", "item": "https://blog.4dcu.be/nl/category/programming/" },
+        { "@type": "ListItem", "position": 3, "name": "De Gwent Pro Ladder bekeken met een agentgebaseerd model (resultaten)" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/programming/games/2020/11/11/Gwent-Pro-Rank-ABM_2.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM_2/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/graph_header.png" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="De Gwent Pro Ladder bekeken met een agentgebaseerd model (resultaten)" class="hero-background is-transparent" src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/graph_header.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">De Gwent Pro Ladder bekeken met een agentgebaseerd model (resultaten)</h1><p class="info has-text-white"><em>duiken in de gegevens die het ABM opleverde</em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 11-11-2020 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/programming/">Programmeren</a>, <a href="/nl/category/games/">Games</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Met het agentgebaseerde model (ABM) uit het <a href="/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM/">vorige artikel</a> kunnen we eender welk aantal Gwent-spelers met een bekende 
+vaardigheid en speelfrequentie gedurende een seizoen simuleren. Met dit model proberen we het laddersysteem beter te begrijpen
+en te testen of het vaardigheid of wedstrijden grinden beloont…</p>
+
+<h2 id="de-pro-ladder-beklimmen-vaardigheid-versus-grinden">De Pro Ladder beklimmen: vaardigheid versus grinden</h2>
+
+<p>Het ABM bootst een populatie agenten na die een volledig seizoen Gwent spelen, met verschillende aangeboren vaardigheden en beschikbare speeltijd. 
+Anders dan bij echte mensen kunnen we de parameters van het model aanpassen om precies te onderzoeken wat we willen testen. In het 
+eerste model schakelen we daarom elke vorm van leren uit, waarbij agenten beter zouden worden naarmate ze meer wedstrijden spelen. Zo zien we uitsluitend 
+het effect van meer wedstrijden spelen op de piek-MMR (van één factie).</p>
+
+<p>Daarvoor werd een model met deze parameters uitgevoerd:</p>
+
+<ul>
+  <li><strong>8000 spelers</strong></li>
+  <li><strong>100 stappen</strong>, waardoor spelers 25-170 wedstrijden per seizoen spelen</li>
+  <li><strong>niet leren</strong>: spelers worden niet beter door meer wedstrijden te spelen</li>
+  <li><strong>startvaardigheid</strong> van 1200-2700, vergelijkbaar verdeeld met die van schakers</li>
+</ul>
+
+<p>Na het uitvoeren van het model met deze parameters kunnen we spelers groeperen volgens vaardigheid (in groepen van 200 ELO) en aantal
+gespeelde wedstrijden (in percentielgroepen van 25). Vervolgens zetten we hun piek-MMR uit om te zien hoe goed ze presteerden. De resulterende grafiek 
+(hieronder) toont meteen twee gebreken van het huidige systeem. Binnen een groep spelers met een vergelijkbare vaardigheid
+die ongeveer evenveel wedstrijden speelden, is de spreiding vrij groot. Puur geluk bij het tijdstip waarop je speelt en wie je in de wachtrij treft, kan
+een verschil tot 70 MMR opleveren! Bovendien bereiken spelers die meer spelen doorgaans een hogere piek-MMR dan spelers met 
+een vergelijkbare vaardigheid die minder wedstrijden spelen. Spelers die elk seizoen meer wedstrijden kunnen spelen, hebben dus een duidelijk voordeel
+tegenover wie minder tijd heeft.</p>
+
+<p><a href="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/elo_vs_peakMMR_experience_factor_0.png" class="lightgallery-link" data-sub-html="Piek-MMR bij verschillende groepen spelers in de ABM-simulatie">
+<img src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/elo_vs_peakMMR_experience_factor_0.png" alt="Piek-MMR bij verschillende groepen spelers in de ABM-simulatie" height="504" width="1080" data-src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/elo_vs_peakMMR_experience_factor_0.png" loading="lazy" />
+</a></p>
+
+<p>Uit echte gegevens bleek duidelijk dat spelers in de hogere rangen doorgaans meer spelen dan spelers die lager
+staan. Wanneer we deze grafiek met de gesimuleerde gegevens namaken, verschijnt dat patroon niet. Verderop in het artikel
+gaan we daar dieper op in.</p>
+
+<p><a href="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_0.png" class="lightgallery-link" data-sub-html="Ridgelinegrafiek met de verdeling van gespeelde wedstrijden in verschillende groepen spelers volgens hun eindrang">
+<img src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_0.png" alt="Ridgelinegrafiek met de verdeling van gespeelde wedstrijden in verschillende groepen spelers volgens hun eindrang" height="504" width="540" class="small-image" data-src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_0.png" loading="lazy" />
+</a></p>
+
+<h2 id="leren-aan-het-model-toevoegen">Leren aan het model toevoegen</h2>
+
+<p>We kunnen redelijkerwijs aannemen dat spelers hun deck en de
+meta beter leren kennen naarmate ze meer wedstrijden spelen. Eenvoudig gezegd: door meer te spelen worden ze beter. Kan dat de 
+toename verklaren van spelers met veel wedstrijden op de hogere posities? Om dit te testen wordt een ervaringsfactor aan
+het model toegevoegd, die spelers een ELO-bonus geeft wanneer ze meer wedstrijden spelen. Een nieuw model werd uitgevoerd met deze
+leerfactor op 20. Omdat de ELO-bonus wordt berekend als <code class="language-plaintext highlighter-rouge">experience_factor * sqrt(games_played)</code>, krijgt
+een speler met 100 wedstrijden een bonus van 200 ELO ten opzichte van iemand die er geen speelde, zelfs bij dezelfde aangeboren vaardigheid.</p>
+
+<p>Omdat de overige parameters hetzelfde bleven, gebruikte deze simulatie de volgende instellingen:</p>
+
+<ul>
+  <li><strong>ervaringsfactor 20</strong></li>
+  <li><strong>8000 spelers</strong></li>
+  <li><strong>100 stappen</strong>, zoals voordien</li>
+  <li><strong>startvaardigheid</strong> van 1200-2700, met dezelfde verdeling als voordien</li>
+</ul>
+
+<p>Nu kunnen we dezelfde grafiek maken met de piek-MMR van de agenten, gegroepeerd volgens aangeboren vaardigheid en het aantal
+gespeelde wedstrijden. Omdat agenten nu leren door te spelen, wordt het verschil in piek-MMR tussen spelers die weinig en
+spelers die veel spelen groter, hoewel ze met een vergelijkbaar vaardigheidsniveau begonnen.</p>
+
+<p><a href="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/elo_vs_peakMMR_experience_factor_20.png" class="lightgallery-link" data-sub-html="Piek-MMR bij verschillende groepen spelers in de ABM-simulatie waarin agenten leren door wedstrijden te spelen">
+<img src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/elo_vs_peakMMR_experience_factor_20.png" alt="Piek-MMR bij verschillende groepen spelers in de ABM-simulatie waarin agenten leren door wedstrijden te spelen" height="504" width="1080" data-src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/elo_vs_peakMMR_experience_factor_20.png" loading="lazy" />
+</a></p>
+
+<p>Om te controleren of vaker spelende agenten, nu ze zoals echte spelers leren, naar
+hogere rangen opschuiven, werd dezelfde ridgelinegrafiek gemaakt. Er is een kleine verschuiving, maar die is nauwelijks zichtbaar en komt niet in de buurt van
+de duidelijke verschuiving in echte gegevens.</p>
+
+<p><a href="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_20.png" class="lightgallery-link" data-sub-html="Ridgelinegrafiek met de verdeling van gespeelde wedstrijden in verschillende groepen spelers volgens hun eindrang, met leren ingeschakeld">
+<img src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_20.png" alt="Ridgelinegrafiek met de verdeling van gespeelde wedstrijden in verschillende groepen spelers volgens hun eindrang, met leren ingeschakeld" height="504" width="540" class="small-image" data-src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_20.png" loading="lazy" />
+</a></p>
+
+<p>Zelfs wanneer de ervaringsfactor tot 100 wordt opgedreven (gegevens in de repository), veel meer dan de vaardigheidstoename die je in werkelijkheid mag verwachten, kan dit
+patroon niet worden nagebootst. Er speelt nog een andere factor mee die niet in ons model zit…</p>
+
+<h2 id="bespreking">Bespreking</h2>
+
+<p>Met een model kunnen we enkele zaken controleren die in werkelijkheid niet gemakkelijk te testen zijn. Dat onthult een paar
+aspecten van de werking van het laddersysteem. Met een agentgebaseerd model kennen we exact de aangeboren vaardigheid van elke
+agent en kunnen we nagaan hoe hoog die in een bepaald aantal wedstrijden op de ladder geraakt. Zo kunnen we meten hoe goed de ladder
+individuen op basis van hun echte vaardigheid rangschikt. Ook het effect van meer wedstrijden spelen kon worden blootgelegd, zowel wanneer
+spelers beter worden door meer te spelen als zonder enige vorm van leren.</p>
+
+<h3 id="kom-je-hoger-door-meer-wedstrijden-te-spelen">Kom je hoger door meer wedstrijden te spelen?</h3>
+
+<p><strong>Antwoord: ja, maar niet veel</strong></p>
+
+<p>Meer wedstrijden spelen levert een vrij klein voordeel op tegenover spelers die minder wedstrijden spelen, zelfs wanneer
+een speler niet beter wordt door meer te spelen. Het voordeel is echter niet groot genoeg om een gemiddelde speler
+plots in de top 200 of zelfs de top 500 te brengen door gewoon enorm veel wedstrijden te spelen.</p>
+
+<p>Er is zelfs veel variatie tussen aangeboren vaardigheid en bereikte piek-MMR. Door 30-50 wedstrijden te spelen en
+geluk te hebben met wie je in de wachtrij treft, kun je 50 MMR hoger eindigen dan een even vaardige speler die twee- of driemaal
+zoveel wedstrijden speelt maar minder geluk heeft.</p>
+
+<h3 id="waarom-spelen-hoger-geklasseerde-spelers-meer">Waarom spelen hoger geklasseerde spelers meer?</h3>
+
+<p><strong>Antwoord: menselijke psychologie?</strong></p>
+
+<p>Spelers die meer spelen eindigen niet louter daardoor hoger in het klassement. Geen enkele hoeveelheid leren kan
+de verschuiving uit de echte gegevens verklaren. Menselijke spelers vertonen dus gedrag dat niet uit het model ontstaat. Ik
+waag me aan enkele hypothesen die het verschil tussen model en waarneming kunnen verklaren.</p>
+
+<ul>
+  <li>Spelers die in vorige seizoenen veel speelden, zijn (i) door hun ervaring beter in het spel en 
+  (ii) zullen vaker dan gemiddeld blijven spelen.</li>
+  <li>Hoewel de winst vrij klein is, geeft de werking van de ladder frequente spelers een beperkt voordeel. Hoe hoger 
+  je op de ladder komt, hoe competitiever het wordt en hoe meer spelers bereid zijn extra wedstrijden te spelen om dit
+  kleine voordeel tegenover hun concurrenten te benutten.</li>
+  <li>Spelers in hogere rangen merken dat andere spelers op hun niveau meer spelen. Daardoor voelen ze druk om
+  het tempo bij te houden.</li>
+  <li>Een combinatie van al het bovenstaande … waarschijnlijk geldt niet één verklaring voor alle spelers.</li>
+</ul>
+
+<h3 id="moet-je-grinden">Moet je grinden?</h3>
+
+<p><strong>Antwoord: ja, in hogere rangen</strong></p>
+
+<p>Meer wedstrijden spelen levert een voordeel op en dat voordeel wordt groter binnen de vaardigste groepen spelers. In combinatie
+met het feit dat spelers in die groepen elk seizoen doorgaans vrij veel wedstrijden spelen, verlies je dat voordeel tenzij je nóg meer speelt …
+Dit is een feedbacklus waardoor spelers zich verplicht kunnen voelen meer te spelen dan ze anders zouden doen. Hoewel het 
+voordeel niet groot is, kan een klein MMR-verschil in die relatief kleine groep topspelers het verschil betekenen tussen
+een plaats in de top 200, kroonpunten en een plek in een officieel toernooi, of dat allemaal mislopen.</p>
+
+<h3 id="is-piek-mmr-een-goede-maatstaf">Is piek-MMR een goede maatstaf?</h3>
+
+<p><strong>Antwoord: het kan beter</strong></p>
+
+<p>Piek-MMR correleert als maatstaf redelijk goed met de aangeboren vaardigheid van een speler en geeft die vaardigheid dus over het algemeen behoorlijk
+weer. Uit deze analyse kwamen wel twee belangrijke problemen naar voren:</p>
+
+<ul>
+  <li><strong>Er is veel variatie</strong>: spelers met een vergelijkbare vaardigheid die ongeveer evenveel wedstrijden spelen, kunnen 
+  piek-MMR-scores bereiken die tot ongeveer 70 punten verschillen. Dat hangt enkel af van geluk en wie je in de wachtrij treft.</li>
+  <li><strong>Meer spelen leidt tot een hogere piek-MMR</strong>, zelfs zonder leren. Een winstreeks op het juiste moment
+  kan de piek-MMR verhogen. Meer wedstrijden spelen vergroot de kans dat zo’n reeks op het juiste moment voorkomt.</li>
+</ul>
+
+<p>Omdat de simulatie veronderstelt dat spelers met één factie spelen, terwijl Gwent de MMR-scores van je
+vier beste facties optelt, is de variatie in het echte systeem kleiner: geluk met de ene factie wordt gecompenseerd door pech met een andere.
+Dat kan verder worden verbeterd door de MMR om de 5-10 wedstrijden opnieuw te berekenen, vergelijkbaar met de berekeningen waarmee ELO-
+scores van schakers aan het einde van een toernooi worden aangepast.</p>
+
+<p>Het effect van meer wedstrijden spelen is heel eenvoudig weg te nemen … door op de huidige MMR te rangschikken in plaats van op de piek-
+MMR. Zoals je in de onderstaande grafiek ziet, is er zonder leren bij de huidige MMR geen verschil
+tussen spelers met een vergelijkbare vaardigheid op basis van het aantal wedstrijden dat ze spelen.</p>
+
+<p><a href="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/elo_vs_currentMMR_experience_factor_0.png" class="lightgallery-link" data-sub-html="Huidige MMR bij verschillende groepen spelers in de ABM-simulatie">
+<img src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/elo_vs_currentMMR_experience_factor_0.png" alt="Huidige MMR bij verschillende groepen spelers in de ABM-simulatie" height="504" width="1080" data-src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/elo_vs_currentMMR_experience_factor_0.png" loading="lazy" />
+</a></p>
+
+<p>Piek-MMR moedigt aan om zoveel mogelijk wedstrijden te spelen en geeft spelers de mogelijkheid om rustiger te spelen
+zodra ze met een bepaalde factie niet meer willen klimmen. Dat bevordert een actievere spelersbasis.
+Met de huidige MMR zouden spelers niet losser in <em>ranked</em> kunnen spelen, omdat hun score dan weer zou dalen.
+Zodra je een MMR bereikt die voor jou als een piek aanvoelt, kun je eigenlijk beter de rest van het seizoen niet meer met die
+factie spelen. Daardoor zouden minder mensen actief zijn, zouden de wachttijden oplopen en zou
+dat deel van het spel slechter worden.</p>
+
+<h2 id="conclusie">Conclusie</h2>
+
+<p>Nee, je kunt je niet naar een plek in de top 200 grinden zonder de nodige vaardigheid. Meer wedstrijden spelen dan 
+concurrenten met een vergelijkbare vaardigheid is wel een voordeel. In de hoogste groepen, waar spelers vrij vaak spelen, 
+betekent dat nog meer wedstrijden spelen om dat concurrentievoordeel te benutten.</p>
+
+<p>Moet de huidige MMR de piek-MMR als maatstaf vervangen? Als gameontwikkelaar wil CDPR waarschijnlijk zoveel mogelijk mensen online 
+laten spelen, en piek-MMR gebruiken om prestaties op de ladder te meten sluit daar goed bij aan. Het moedigt 
+spelers echter aan om meer te spelen en competitieve spelers om niet alleen zo goed, maar ook zo veel mogelijk te spelen. In een
+tijd waarin <a href="https://digitalwellbeing.org/">digitaal welzijn</a> op de agenda van bedrijven als Google, Samsung en Apple verschijnt, is dit iets
+waar CDPR vroeg of laat naar moet kijken.</p>
+
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/python/">python</a>,&nbsp;<a href="/nl/tag/numpy/">numpy</a>,&nbsp;<a href="/nl/tag/gwent/">gwent</a>,&nbsp;<a href="/nl/tag/mesa/">mesa</a>,&nbsp;<a href="/nl/tag/abm/">abm</a>,&nbsp;<a href="/nl/tag/agent-based-modeling/">agent-based-modeling</a>,&nbsp;<a href="/nl/tag/pandas/">pandas</a>,&nbsp;<a href="/nl/tag/seaborn/">seaborn</a>,&nbsp;<a href="/nl/tag/data-science/">data-science</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=De+Gwent+Pro+Ladder+bekeken+met+een+agentgebaseerd+model+%28resultaten%29%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fgames%2F2020%2F11%2FGwent-Pro-Rank-ABM_2%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fgames%2F2020%2F11%2FGwent-Pro-Rank-ABM_2%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fgames%2F2020%2F11%2FGwent-Pro-Rank-ABM_2%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=De+Gwent+Pro+Ladder+bekeken+met+een+agentgebaseerd+model+%28resultaten%29&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fgames%2F2020%2F11%2FGwent-Pro-Rank-ABM_2%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">De Gwent Pro Ladder bekeken met een agentgebaseerd model (code)</span></a></span>
+  <span class="next-post"><a href="/nl/programming/2020/11/Static-Web-Generators/"><span class="page-number">Statische-sitegeneratoren: Jekyll versus Pelican versus Gatsby</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

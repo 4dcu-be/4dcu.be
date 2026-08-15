@@ -5,6 +5,7 @@ byline: ""
 description: "Announcing a Buy me a Coffee option to support the 4DCu.be blog, with any surplus going to the Natuurhulpcentrum wildlife charity."
 date:   2021-06-28 10:00:00
 author: Sebastian Proost
+post_id: buy-me-a-coffee
 categories: general
 tags:	coffee contribute
 cover:  "/assets/posts/2021-06-28-Buy-me-a-Coffee/coffee-header.jpg"

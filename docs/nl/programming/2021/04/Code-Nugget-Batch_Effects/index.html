@@ -1,0 +1,770 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>Batcheffecten bestrijden met pyComBat</title>
+  <meta name="description" content="Hoe je batcheffecten in meetgegevens corrigeert met het Python-pakket pyComBat, gedemonstreerd op een synthetische dataset met verschuivings- en schaaleffecten.">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Batcheffecten bestrijden met pyComBat" />
+  <meta property="og:description" content="Hoe je batcheffecten in meetgegevens corrigeert met het Python-pakket pyComBat, gedemonstreerd op een synthetische dataset met verschuivings- en schaaleffecten." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/programming/2021/04/Code-Nugget-Batch_Effects/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2021-04-21-Code-Nugget-Batch_Effects-pycombat_header.jpg" /><meta property="og:image:alt" content="Batcheffecten bestrijden met pyComBat" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2021-04-21T10:00:00+00:00" /><meta property="article:modified_time" content="2021-04-21T10:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programmeren" /><meta property="article:tag" content="python" /><meta property="article:tag" content="pandas" /><meta property="article:tag" content="data-science" /><meta property="article:tag" content="seaborn" /><meta property="article:tag" content="code-nugget" /><meta property="article:tag" content="sklearn" /><meta property="article:tag" content="pycombat" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Batcheffecten bestrijden met pyComBat"><meta name="twitter:description" content="Hoe je batcheffecten in meetgegevens corrigeert met het Python-pakket pyComBat, gedemonstreerd op een synthetische dataset met verschuivings- en schaaleffecten."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2021-04-21-Code-Nugget-Batch_Effects-pycombat_header.jpg"><meta name="twitter:image:alt" content="Batcheffecten bestrijden met pyComBat"><meta name="twitter:url" content="https://blog.4dcu.be/nl/programming/2021/04/Code-Nugget-Batch_Effects/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/programming/2021/04/Code-Nugget-Batch_Effects/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/2021/04/21/Code-Nugget-Batch_Effects.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/2021/04/Code-Nugget-Batch_Effects/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/2021/04/21/Code-Nugget-Batch_Effects.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/programming/2021/04/Code-Nugget-Batch_Effects/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/programming/2021/04/Code-Nugget-Batch_Effects/" },
+      "url": "https://blog.4dcu.be/nl/programming/2021/04/Code-Nugget-Batch_Effects/",
+      "headline": "Batcheffecten bestrijden met pyComBat",
+      "description": "Hoe je batcheffecten in meetgegevens corrigeert met het Python-pakket pyComBat, gedemonstreerd op een synthetische dataset met verschuivings- en schaaleffecten.",
+      "datePublished": "2021-04-21T10:00:00+00:00",
+      "dateModified": "2021-04-21T10:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2021-04-21-Code-Nugget-Batch_Effects-pycombat_header.jpg",
+      "keywords": ["python", "pandas", "data-science", "seaborn", "code-nugget", "sklearn", "pycombat"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/programming/2021/04/Code-Nugget-Batch_Effects/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Programmeren", "item": "https://blog.4dcu.be/nl/category/programming/" },
+        { "@type": "ListItem", "position": 3, "name": "Batcheffecten bestrijden met pyComBat" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/programming/2021/04/21/Code-Nugget-Batch_Effects.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/programming/2021/04/Code-Nugget-Batch_Effects/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/pycombat_header.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="Batcheffecten bestrijden met pyComBat" class="hero-background is-transparent" src="/assets/posts/2021-04-21-Code-Nugget-Batch_Effects/pycombat_header.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">Batcheffecten bestrijden met pyComBat</h1><p class="info has-text-white"><em></em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 21-04-2021 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/programming/">Programmeren</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Zelfs hoogwaardig wetenschappelijk materiaal heeft al eens een slechte dag! De prestaties van een toestel kunnen
+beïnvloed worden door de omgevingstemperatuur, luchtvochtigheid, … Wanneer stalen in verschillende batches gemeten
+worden, moet je daarvoor dus corrigeren. In dit artikel bekijken we het Python-pakket <a href="https://github.com/epigenelabs/pyComBat">pyComBat</a>, dat dit elegant en
+efficiënt doet. Merk wel op dat je <em>stalen correct over de batches moet randomiseren</em>. Stel dat je bodemstalen uit twee
+verschillende omgevingen onderzoekt. Om batcheffecten te kunnen corrigeren, moet je ervoor zorgen dat de helft van de
+stalen uit elke groep in batch één zit en de andere helft in batch twee. Als je alle stalen uit groep één in batch één
+stopt, verwijdert de correctie net de verschillen die je probeert te vinden. Bovendien moeten er <em>voldoende stalen in
+elke batch</em> zitten om dit te laten werken. Met slechts een handvol metingen per batch kun je het effect niet corrigeren.</p>
+
+<h2 id="een-dataset-maken">Een dataset maken</h2>
+
+<p>Om te testen wat <a href="https://github.com/epigenelabs/pyComBat">pyComBat</a> kan, kunnen we een synthetische dataset genereren met een reeks metingen en een tweede reeks
+met een kleine afwijking die nabootst wat er kan gebeuren wanneer stalen op verschillende datums of met verschillende
+toestellen gemeten worden. We gebruiken hier een dataset met waarden uit een normale verdeling en een uniform verdeelde
+reeks waarden. Eén effect dat we invoeren is een verschuiving, waarbij alle waarden die in die batch gemeten zijn gewoon
+een constante hoeveelheid afwijken, en bij een ander effect worden de waarden met een constante factor vermenigvuldigd.
+Als controle voegen we voor elke verdeling ook een kenmerk zonder effect toe.</p>
+
+<div class="language-python large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">num_samples</span> <span class="o">=</span> <span class="mi">200</span>  <span class="c1"># number of samples per batch
+</span>
+<span class="n">batches</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">Batch 1</span><span class="sh">"</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_samples</span> <span class="o">+</span> <span class="p">[</span><span class="sh">"</span><span class="s">Batch 2</span><span class="sh">"</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_samples</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="sh">"</span><span class="s">batch</span><span class="sh">"</span><span class="p">:</span> <span class="n">batches</span><span class="p">,</span>
+        <span class="c1"># Feature 1-3 are normal distributed, we'll shift one, multiply another and leave one untouched
+</span>        <span class="sh">"</span><span class="s">feature_one</span><span class="sh">"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="n">num_samples</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="p">),</span>
+        <span class="sh">"</span><span class="s">feature_two</span><span class="sh">"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="n">num_samples</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.3</span><span class="p">]</span>
+        <span class="p">),</span>
+        <span class="sh">"</span><span class="s">feature_three</span><span class="sh">"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="n">num_samples</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)]</span>
+        <span class="p">),</span>
+        <span class="c1"># Feature 4-6 are uniformly distributed, we'll shift one, multiply another and leave one untouched
+</span>        <span class="sh">"</span><span class="s">feature_four</span><span class="sh">"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.2</span><span class="p">]</span>
+        <span class="p">),</span>
+        <span class="sh">"</span><span class="s">feature_five</span><span class="sh">"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.3</span><span class="p">]</span>
+        <span class="p">),</span>
+        <span class="sh">"</span><span class="s">feature_six</span><span class="sh">"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)]</span>
+        <span class="p">),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="de-artificiële-dataset-bekijken">De artificiële dataset bekijken</h2>
+
+<p>Met enkele regels die Seaborns <code class="language-plaintext highlighter-rouge">FacetGrid</code> en <code class="language-plaintext highlighter-rouge">histplot</code> gebruiken, kunnen we snel een grafiek van de
+synthetische gegevens genereren. Daarvoor moeten de gegevens met Pandas’ functie <code class="language-plaintext highlighter-rouge">melt</code> naar lang formaat worden
+omgezet.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">long_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="nf">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">batch</span><span class="sh">"</span><span class="p">])</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="p">.</span><span class="nc">FacetGrid</span><span class="p">(</span>
+    <span class="n">long_df</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="sh">"</span><span class="s">variable</span><span class="sh">"</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">g</span><span class="p">.</span><span class="nf">map_dataframe</span><span class="p">(</span><span class="n">sns</span><span class="p">.</span><span class="n">histplot</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="sh">"</span><span class="s">batch</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><a href="/assets/posts/2021-04-21-Code-Nugget-Batch_Effects/pycombat_synthetic_dataset.png" class="lightgallery-link" data-sub-html="Verdelingen van de dataset met artificieel ingevoerde batcheffecten">
+<img src="/assets/posts/2021-04-21-Code-Nugget-Batch_Effects/pycombat_synthetic_dataset.png" alt="Verdelingen van de dataset met artificieel ingevoerde batcheffecten" height="1200" width="1800" data-src="/assets/posts/2021-04-21-Code-Nugget-Batch_Effects/pycombat_synthetic_dataset.png" loading="lazy" />
+</a></p>
+
+<h2 id="de-batcheffecten-corrigeren">De batcheffecten corrigeren</h2>
+
+<p>Het dataframe hoort eruit te zien zoals hieronder: één kolom met de batch waartoe een staal behoort, en de andere met
+metingen die mogelijk gecorrigeerd moeten worden.</p>
+
+<table class="large-table">
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right">batch</th>
+      <th style="text-align: right">feature_one</th>
+      <th style="text-align: right">feature_two</th>
+      <th style="text-align: right">feature_three</th>
+      <th style="text-align: right">feature_four</th>
+      <th style="text-align: right">feature_five</th>
+      <th style="text-align: right">feature_six</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">Batch 1</td>
+      <td style="text-align: right">-0.560251</td>
+      <td style="text-align: right">-0.329007</td>
+      <td style="text-align: right">-0.391515</td>
+      <td style="text-align: right">0.705579</td>
+      <td style="text-align: right">0.067287</td>
+      <td style="text-align: right">0.318247</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">Batch 1</td>
+      <td style="text-align: right">-0.676682</td>
+      <td style="text-align: right">-1.219296</td>
+      <td style="text-align: right">0.488081</td>
+      <td style="text-align: right">0.940643</td>
+      <td style="text-align: right">0.786043</td>
+      <td style="text-align: right">0.374624</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">2</td>
+      <td style="text-align: right">Batch 1</td>
+      <td style="text-align: right">0.557334</td>
+      <td style="text-align: right">-0.025515</td>
+      <td style="text-align: right">1.478300</td>
+      <td style="text-align: right">0.851690</td>
+      <td style="text-align: right">0.340614</td>
+      <td style="text-align: right">0.682563</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">399</td>
+      <td style="text-align: right">Batch 2</td>
+      <td style="text-align: right">0.253740</td>
+      <td style="text-align: right">-0.100651</td>
+      <td style="text-align: right">-0.268410</td>
+      <td style="text-align: right">0.788433</td>
+      <td style="text-align: right">0.740919</td>
+      <td style="text-align: right">0.028127</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">398</td>
+      <td style="text-align: right">Batch 2</td>
+      <td style="text-align: right">-0.345181</td>
+      <td style="text-align: right">-0.420646</td>
+      <td style="text-align: right">-0.876879</td>
+      <td style="text-align: right">0.327634</td>
+      <td style="text-align: right">0.815336</td>
+      <td style="text-align: right">0.783284</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">397</td>
+      <td style="text-align: right">Batch 2</td>
+      <td style="text-align: right">-0.189546</td>
+      <td style="text-align: right">1.500048</td>
+      <td style="text-align: right">-1.136106</td>
+      <td style="text-align: right">0.536194</td>
+      <td style="text-align: right">1.118575</td>
+      <td style="text-align: right">0.155961</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>De batchcorrectie toepassen met pyComBat is heel eenvoudig. Je roept de functie aan met de kenmerken als eerste
+argument en als tweede argument een lijst die aangeeft tot welke batch elk staal behoort. Met het bovenstaande
+dataframe doe je dat gemakkelijk met de onderstaande code.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">combat.pycombat</span> <span class="kn">import</span> <span class="n">pycombat</span>
+
+<span class="n">corrected_df</span> <span class="o">=</span> <span class="nf">pycombat</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="nf">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">batch</span><span class="sh">"</span><span class="p">]).</span><span class="nf">transpose</span><span class="p">(),</span> <span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">batch</span><span class="sh">"</span><span class="p">]).</span><span class="nf">transpose</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Het resultaat is een dataframe met de gecorrigeerde kenmerken, zoals hieronder.</p>
+
+<table class="large-table">
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right">feature_one</th>
+      <th style="text-align: right">feature_two</th>
+      <th style="text-align: right">feature_three</th>
+      <th style="text-align: right">feature_four</th>
+      <th style="text-align: right">feature_five</th>
+      <th style="text-align: right">feature_six</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">-0.062237</td>
+      <td style="text-align: right">-0.276713</td>
+      <td style="text-align: right">-0.429908</td>
+      <td style="text-align: right">0.790984</td>
+      <td style="text-align: right">0.089940</td>
+      <td style="text-align: right">0.298606</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">-0.180598</td>
+      <td style="text-align: right">-1.270888</td>
+      <td style="text-align: right">0.458374</td>
+      <td style="text-align: right">1.035210</td>
+      <td style="text-align: right">0.921394</td>
+      <td style="text-align: right">0.356112</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">2</td>
+      <td style="text-align: right">1.073879</td>
+      <td style="text-align: right">0.062193</td>
+      <td style="text-align: right">1.458372</td>
+      <td style="text-align: right">0.942790</td>
+      <td style="text-align: right">0.406123</td>
+      <td style="text-align: right">0.670221</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">-1.299430</td>
+      <td style="text-align: right">-1.993188</td>
+      <td style="text-align: right">1.117924</td>
+      <td style="text-align: right">0.775037</td>
+      <td style="text-align: right">0.635035</td>
+      <td style="text-align: right">0.022828</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+      <td style="text-align: right">…</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="de-wijzigingen-visualiseren">De wijzigingen visualiseren</h2>
+
+<p>Laten we eens kijken welke wijzigingen pyComBat aan onze gegevens heeft aangebracht en of die logisch zijn! Het
+dataframe met gecorrigeerde waarden moet ook naar lang formaat worden omgezet (opnieuw met <code class="language-plaintext highlighter-rouge">melt</code>), met de originele
+gegevens worden samengevoegd via <code class="language-plaintext highlighter-rouge">merge</code> en daarna worden geplot. Hier gebruiken we <code class="language-plaintext highlighter-rouge">scatterplot</code> om de
+originele waarde (x-as) met de gecorrigeerde waarde (y-as) te vergelijken voor waarden uit verschillende batches
+(kleur). Als er geen correcties uitgevoerd werden, zouden alle stalen op de diagonaal liggen omdat hun x- en y-waarden
+identiek zijn. Waar wel correcties toegepast worden, treedt een verschuiving op.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">long_corrected_df</span> <span class="o">=</span> <span class="n">corrected_df</span><span class="p">.</span><span class="nf">melt</span><span class="p">()</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span>
+    <span class="n">long_df</span><span class="p">,</span>
+    <span class="n">long_corrected_df</span><span class="p">,</span>
+    <span class="n">left_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">right_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="sh">"</span><span class="s">_raw</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">_corrected</span><span class="sh">"</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="p">.</span><span class="nc">FacetGrid</span><span class="p">(</span>
+    <span class="n">merged_df</span><span class="p">,</span>
+    <span class="n">col</span><span class="o">=</span><span class="sh">"</span><span class="s">variable_raw</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">aspect</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">sharex</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">sharey</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">col_wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">g</span><span class="p">.</span><span class="nf">map_dataframe</span><span class="p">(</span><span class="n">sns</span><span class="p">.</span><span class="n">scatterplot</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="sh">"</span><span class="s">value_raw</span><span class="sh">"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="sh">"</span><span class="s">value_corrected</span><span class="sh">"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="sh">"</span><span class="s">batch</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><a href="/assets/posts/2021-04-21-Code-Nugget-Batch_Effects/pycombat_corrections.png" class="lightgallery-link" data-sub-html="Vergelijking van ruwe waarden en waarden na correctie voor batcheffecten met pyComBat">
+<img src="/assets/posts/2021-04-21-Code-Nugget-Batch_Effects/pycombat_corrections.png" alt="Vergelijking van ruwe waarden en waarden na correctie voor batcheffecten met pyComBat" height="1200" width="1800" data-src="/assets/posts/2021-04-21-Code-Nugget-Batch_Effects/pycombat_corrections.png" loading="lazy" />
+</a></p>
+
+<p>Kenmerk één en vier, die met een constante hoeveelheid verschoven werden, zijn in beide gevallen perfect gecorrigeerd.
+Ook kenmerk twee en vijf (vermenigvuldigd) worden correct behandeld. Fantastisch! Merk wel op dat er ook een (kleine)
+correctie werd toegepast op kenmerk zes, waar er geen effect was. Als je correcties toepast waar ze niet nodig zijn,
+kun je inderdaad fouten invoeren in plaats van oplossen. Wees dus voorzichtig en pas dit niet zomaar toe als er geen
+batcheffecten aanwezig zijn.</p>
+
+<h2 id="conclusie">Conclusie</h2>
+
+<p><a href="https://github.com/epigenelabs/pyComBat">pyComBat</a> is een geweldige aanvulling op het Python-ecosysteem voor datawetenschap! Het is eenvoudig toe te passen en
+werkt precies zoals je verwacht met Pandas-dataframes. Of het nuttig zal zijn voor jouw projecten hangt af van (a) het
+aantal stalen (je kunt met de parameter <code class="language-plaintext highlighter-rouge">num_samples</code> in de code spelen en zien hoe de correctie mislukt zodra het
+aantal stalen te klein is), (b) of ze correct over de batches gerandomiseerd werden en (c) of er batcheffecten aanwezig
+zijn.</p>
+
+<p>Bekijk voor meer artikels zoals dit de <a href="/tag/code-nugget/">Code Nuggets</a>! Dat zijn allemaal artikels in kookboekstijl met stukjes code om
+veelvoorkomende datawetenschappelijke taken aan te pakken.</p>
+
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/python/">python</a>,&nbsp;<a href="/nl/tag/pandas/">pandas</a>,&nbsp;<a href="/nl/tag/data-science/">data-science</a>,&nbsp;<a href="/nl/tag/seaborn/">seaborn</a>,&nbsp;<a href="/nl/tag/code-nugget/">code-nugget</a>,&nbsp;<a href="/nl/tag/sklearn/">sklearn</a>,&nbsp;<a href="/nl/tag/pycombat/">pycombat</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=Batcheffecten+bestrijden+met+pyComBat%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2021%2F04%2FCode-Nugget-Batch_Effects%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2021%2F04%2FCode-Nugget-Batch_Effects%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2021%2F04%2FCode-Nugget-Batch_Effects%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=Batcheffecten+bestrijden+met+pyComBat&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2021%2F04%2FCode-Nugget-Batch_Effects%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/diy/2021/04/Macropad/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">Een door Python aangedreven MacroPad/StreamDeck</span></a></span>
+  <span class="next-post"><a href="/nl/diy/2021/04/MQTT-Ikea-Tradfri/"><span class="page-number">Zigbee-bereik uitbreiden met Ikea Tradfri-repeaters</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>GameBoy Zero-projecten</title>
+  <meta name="description" content="Twee GameBoy Zero-projecten in de kijker: een Raspberry Pi Zero in een Game Boy-behuizing, met als nieuwste versie Kite&#39;s Circuit Sword Lite met knoppen acht...">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="GameBoy Zero-projecten" />
+  <meta property="og:description" content="Twee GameBoy Zero-projecten in de kijker: een Raspberry Pi Zero in een Game Boy-behuizing, met als nieuwste versie Kite&#39;s Circuit Sword Lite met knoppen acht..." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/diy/games/2021/01/Gameboy-Zero/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2021-01-31-Gameboy-Zero-mkII.jpg" /><meta property="og:image:alt" content="GameBoy Zero-projecten" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2021-01-31T12:00:00+00:00" /><meta property="article:modified_time" content="2021-01-31T12:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="DIY" /><meta property="article:section" content="Games" /><meta property="article:tag" content="gameboy" /><meta property="article:tag" content="retrogaming" /><meta property="article:tag" content="raspberry-pi" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="GameBoy Zero-projecten"><meta name="twitter:description" content="Twee GameBoy Zero-projecten in de kijker: een Raspberry Pi Zero in een Game Boy-behuizing, met als nieuwste versie Kite&#39;s Circuit Sword Lite met knoppen acht..."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2021-01-31-Gameboy-Zero-mkII.jpg"><meta name="twitter:image:alt" content="GameBoy Zero-projecten"><meta name="twitter:url" content="https://blog.4dcu.be/nl/diy/games/2021/01/Gameboy-Zero/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/diy/games/2021/01/Gameboy-Zero/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/diy/games/2021/01/31/Gameboy-Zero.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/diy/games/2021/01/Gameboy-Zero/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/diy/games/2021/01/31/Gameboy-Zero.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/diy/games/2021/01/Gameboy-Zero/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/diy/games/2021/01/Gameboy-Zero/" },
+      "url": "https://blog.4dcu.be/nl/diy/games/2021/01/Gameboy-Zero/",
+      "headline": "GameBoy Zero-projecten",
+      "description": "Twee GameBoy Zero-projecten in de kijker: een Raspberry Pi Zero in een Game Boy-behuizing, met als nieuwste versie Kite's Circuit Sword Lite met knoppen acht...",
+      "datePublished": "2021-01-31T12:00:00+00:00",
+      "dateModified": "2021-01-31T12:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2021-01-31-Gameboy-Zero-mkII.jpg",
+      "keywords": ["gameboy", "retrogaming", "raspberry-pi"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/diy/games/2021/01/Gameboy-Zero/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "DIY", "item": "https://blog.4dcu.be/nl/category/diy/" },
+        { "@type": "ListItem", "position": 3, "name": "GameBoy Zero-projecten" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/diy/games/2021/01/31/Gameboy-Zero.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/diy/games/2021/01/Gameboy-Zero/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/gbz_mkII.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="GameBoy Zero-projecten" class="hero-background is-transparent" src="/assets/posts/2021-01-31-Gameboy-Zero/mkII.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">GameBoy Zero-projecten</h1><p class="info has-text-white"><em></em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 31-01-2021 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/diy/">DIY</a>, <a href="/nl/category/games/">Games</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Ongeveer een jaar geleden bouwde ik een GameBoy Zero (een Raspberry Pi Zero in een Game Boy-behuizing) en dit weekend
+werkte ik een tweede af. Hieronder zie je enkele foto’s van de eerste (zwarte behuizing) en de nieuwe (transparante,
+blauwe behuizing). Ik heb overwogen een echt bouwverslag te schrijven, maar anderen hebben veel beter gedocumenteerd
+hoe je er een bouwt dan ik dat zou kunnen. Als je er zelf een wilt bouwen, bekijk dan de links onderaan. Anders kun je
+gewoon van de foto’s genieten.</p>
+
+<h2 id="nieuw-project">Nieuw project</h2>
+
+<p><a href="/assets/posts/2021-01-31-Gameboy-Zero/mkII.jpg" class="lightgallery-link" data-sub-html="Nieuwe GameBoy Zero op basis van Kite's Circuit Sword Lite">
+<img src="/assets/posts/2021-01-31-Gameboy-Zero/mkII.jpg" alt="Nieuwe GameBoy Zero op basis van Kite's Circuit Sword Lite" height="800" width="1200" data-src="/assets/posts/2021-01-31-Gameboy-Zero/mkII.jpg" loading="lazy" />
+</a></p>
+
+<p><a href="/assets/posts/2021-01-31-Gameboy-Zero/mkII_back.jpg" class="lightgallery-link" data-sub-html="Achterkant met knoppen en rubbermembranen, een flinke verbetering ten opzichte van de klikkende knoppen van het vorige project">
+<img src="/assets/posts/2021-01-31-Gameboy-Zero/mkII_back.jpg" alt="Achterkant met knoppen en rubbermembranen, een flinke verbetering ten opzichte van de klikkende knoppen van het vorige project" height="800" width="1200" data-src="/assets/posts/2021-01-31-Gameboy-Zero/mkII_back.jpg" loading="lazy" />
+</a></p>
+
+<p>Dit is de tweede GameBoy Zero die ik bouwde. Deze is gebaseerd op Kite’s Circuit Sword Lite, dat enkele voordelen heeft
+ten opzichte van het Super-AIO-bord dat hij eerder uitbracht. Er is een printplaat voor knoppen aan de achterkant die
+dezelfde membranen gebruiken als de ABXY-knoppen vooraan. Dat is veel beter dan de “klikkende” exemplaren uit mijn
+vorige versie. Bovendien gebruikte ik alle beschikbare 3D-geprinte onderdelen, zorgde ik dat de draden de juiste lengte
+hadden en bracht ik maar op enkele strategische plaatsen wat hete lijm aan. De binnenkant is daardoor heel netjes, zoals
+het hoort, want ze is zichtbaar door de doorschijnende behuizing. Ik ben heel blij met het resultaat.</p>
+
+<h2 id="oud-project">Oud project</h2>
+
+<p><a href="/assets/posts/2021-01-31-Gameboy-Zero/mkI.jpg" class="lightgallery-link" data-sub-html="GameBoy Zero op basis van Kite's Super AIO-bord">
+<img src="/assets/posts/2021-01-31-Gameboy-Zero/mkI.jpg" alt="GameBoy Zero op basis van Kite's Super AIO-bord" height="800" width="1200" data-src="/assets/posts/2021-01-31-Gameboy-Zero/mkI.jpg" loading="lazy" />
+</a></p>
+
+<p><a href="/assets/posts/2021-01-31-Gameboy-Zero/mkI_back.jpg" class="lightgallery-link" data-sub-html="Twee klikkende schouderknoppen achteraan; ze werken, maar ik raad een oplossing met rubbermembranen aan">
+<img src="/assets/posts/2021-01-31-Gameboy-Zero/mkI_back.jpg" alt="Twee klikkende schouderknoppen achteraan; ze werken, maar ik raad een oplossing met rubbermembranen aan" height="789" width="1200" data-src="/assets/posts/2021-01-31-Gameboy-Zero/mkI_back.jpg" loading="lazy" />
+</a></p>
+
+<p>Mijn eerste versie ziet er aan de buitenkant geweldig uit, maar binnenin is ze wat rommelig. Er waren enkele problemen
+met het solderen (mijn soldeerbout ging stuk toen ik de laatste verbindingen maakte en werkte waarschijnlijk tijdens
+het grootste deel van dit project niet op de juiste temperatuur). Omdat ik minder 3D-geprinte onderdelen gebruikte dan
+ik had moeten doen, zit er ook veel hete lijm in om alles op zijn plaats te houden. De schouderknoppen zijn echter niet
+geweldig en maken sommige GBA- en SNES-games vervelend om te spelen (en luid, omdat ze “klikken”). Het is nog altijd een
+prima apparaat voor games die niet (te veel) van de schouderknoppen afhangen.</p>
+
+<h2 id="links">Links</h2>
+
+<p>Hier vind je een overzicht van de bronnen die ik voor mijn projecten gebruikte. Afhankelijk van het bord dat je
+gebruikt en de opties die je wilt, moet je mogelijk nog andere websites raadplegen.</p>
+
+<ul>
+  <li><a href="https://www.sudomod.com/forum/">SudoMod-forum</a>: hier vind je een massa informatie … Begin hier! In het gedeelte
+Buy/Sell vind je ook topics om de nodige borden te bestellen.</li>
+  <li><a href="https://www.youtube.com/playlist?list=PLhG82WTD_pxLJjDrb0UpIAFgRRK_CbOB2">Project van Arron Morris</a>: je kunt zien
+hoe hij de zijne bouwde. Hoewel hij een ander bord gebruikt, zijn veel stappen hetzelfde voor de Super-AIO en Circuit Sword Lite.</li>
+  <li><a href="https://www.youtube.com/playlist?list=PLDrHbgEPUBbAccWP-X5YRft1sgdaoUCxd">Project van Retro Ghost</a>: stapsgewijze
+instructies voor hoe Retro Ghost zijn GBZ met een Circuit Sword Lite bouwde.</li>
+  <li><a href="https://github.com/kiteretro/Circuit-Sword-Lite/wiki">Kite’s GitHub-repository</a> - Voor de Circuit Sword Lite: officiële
+  instructies om de elektronica in te stellen. De Circuit Sword Lite wordt geleverd als een pakket met alle elektronica die je nodig hebt.</li>
+  <li><a href="https://github.com/kiteretro/Super-AIO">Kite’s GitHub-repository</a> - Voor het Super-AIO-bord: dit is intussen wat
+verouderd. De gearchiveerde handleiding bevat wel nog veel informatie die de moeite waard is.</li>
+</ul>
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/gameboy/">gameboy</a>,&nbsp;<a href="/nl/tag/retrogaming/">retrogaming</a>,&nbsp;<a href="/nl/tag/raspberry-pi/">raspberry-pi</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=GameBoy+Zero-projecten%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2Fgames%2F2021%2F01%2FGameboy-Zero%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2Fgames%2F2021%2F01%2FGameboy-Zero%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2Fgames%2F2021%2F01%2FGameboy-Zero%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=GameBoy+Zero-projecten&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2Fgames%2F2021%2F01%2FGameboy-Zero%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/programming/games/2021/01/GwentProPlayersAnalysis/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">Gwent: hoeveel Pro Players zijn er?</span></a></span>
+  <span class="next-post"><a href="/nl/diy/2021/02/Bluetooth-Speaker/"><span class="page-number">Een Bluetooth-luidspreker bouwen — deel 2</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

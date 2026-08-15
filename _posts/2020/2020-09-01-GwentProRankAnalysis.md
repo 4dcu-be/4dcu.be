@@ -5,6 +5,7 @@ byline: ""
 description: "Scraping Gwent Pro Ladder data with Python and pandas to compute national rankings, ladder efficiency, country popularity and seasonal statistics."
 date:   2020-09-01 12:00:00
 author: Sebastian Proost
+post_id: gwent-pro-rank-analysis
 categories: programming games
 tags:	python jupyter pandas gwent data-science
 cover:  "/assets/posts/2020-09-01-GwentProRankAnalysis/gwent_pro_rank.jpg"
@@ -12,12 +13,12 @@ thumbnail: "/assets/images/thumbnails/gwent_pro_rank.jpg"
 github: "https://github.com/4dcu-be/GwentRank"
 ---
 
-Data for on players in Pro Ladder is released on [playgwent.com](https://masters.playgwent.com/en/), but it is limited.
+Data on players in Pro Ladder is released on [playgwent.com](https://masters.playgwent.com/en/), but it is limited.
 You get the rank, the score, the country of origin and the number of matches played. Using some fairly basic data
 analysis tricks there must be more we can do with these data! Using python we'll scrape data for the top 
 [Gwent players on pro-ladder](https://masters.playgwent.com/en/rankings/masters-2/season-of-the-draconid/1/1) 
 and calculate additional statistics about the current season, popularity of the game in different countries, players' 
-efficiency, players national rank, ...
+efficiency, players' national rank, ...
 
 A jupyter notebook with all code can be found on [GitHub](https://github.com/4dcu-be/GwentRank) which you can explore
 through [Binder](https://mybinder.org/v2/gh/4dcu-be/GwentRank/master?filepath=Gwent%20Stats.ipynb) without installing
@@ -55,7 +56,7 @@ standard](https://www.iso.org/iso-3166-country-codes.html).
 <i class="flag-icon flag-icon-pl"></i>
 ```
 
-The two letter code can be easily extracted from the the html tag, while converting it to a human readable name can be
+The two letter code can be easily extracted from the HTML tag, while converting it to a human readable name can be
 done in a few lines of code using the python library [pycountry](https://pypi.org/project/pycountry/). As shown in the
 stub below, you can provide it with a two letter code (*pl* in the example below) and it will return all other names, including the
 common name (*Poland* here). So after scraping the data, the pycountry library was used to get proper names for all
@@ -69,7 +70,7 @@ pycountry.countries.get(alpha_2='pl')
 # Country(alpha_2='PL', alpha_3='POL', name='Poland', numeric='616', official_name='Republic of Poland')
 ```
 While reading the data we'll also keep track of which players were in the top 500 the season before (note that this
-does require all seasons to be loaded and in orde). So we end up with a table (called full_df in the code), that looks 
+does require all seasons to be loaded and in order). So we end up with a table (called full_df in the code), that looks
 like this:
 
 {:.large-table .narrow-rows }
@@ -95,7 +96,7 @@ In Gwent you need to play at least 25 games with four out of six factions.
 This will give you a base score, MMR, of 9600. Winning a game increases the MMR, depending on the current rank of your
 opponent (usually about 7 points are gained) and losing costs you MMR points. The highest reached MMR per faction is 
 summed up to get the final score. So with a higher win-rate, better scores can be obtained with fewer games. To find out
-which players are more efficient in climbing (and arguably better at the game than others at the same MMR) we we take 
+which players are more efficient in climbing (and arguably better at the game than others at the same MMR) we take
 the MMR, subtract the base value (9600) and divide by the number of matches. However, as 
 increasing the MMR score becomes progressively more difficult as players will face better opponents as they climb the
 ladder, Lerio2 from Team Legacy proposed to divide by the square root of the number of matches. Their metric, the
@@ -161,7 +162,7 @@ The full output from this you can see below:
 The number of matches played by the top players is an indication how many people are playing the game, as more
 active players would require more games to be played to climb pro ladder. You can see that the popularity peaked during
 the Season of the Elves. During this season also some new leader abilities
-were introduced, so the fresh content could also to players return to the game. A similar increase in matches can be 
+were introduced, so the fresh content could also cause players to return to the game. A similar increase in matches can be
 seen in the Season of the Griffin with the release of new cards through the Master Mirror expansion. So it seems that 
 new content is a good incentive for players to play more, and spark a fiercer competition.
 
@@ -170,7 +171,7 @@ You can download the full table [here](/assets/posts/2020-09-01-GwentProRankAnal
 ## Where is Gwent Being Played
 
 So using the `groupby` function in combination with the `agg` we can very quickly count how many pro players there are
-per country. We can then combine this with the population size of each country (and somewhat up-to-date list can be found
+per country. We can then combine this with the population size of each country (a somewhat up-to-date list can be found
 [here](https://www.kaggle.com/erikbruin/countries-of-the-world-iso-codes-and-population/data#)). By dividing the number
 of players in pro-ladder by the number of inhabitants (in millions) we can get the number of pro players per capita.
 
@@ -183,7 +184,7 @@ of players in pro-ladder by the number of inhabitants (in millions) we can get t
 | M2_08 Draconid 2020 |            Belarus |         10260 |          39 |                4.125931 |         263.076923 |
 | M2_08 Draconid 2020 |            Ukraine |         52333 |         162 |                3.682351 |         323.043210 |
 
-The top 5 countries is comprised out of Eastern European Countries, which is no surprise as the company that created
+The top 5 countries comprise Eastern European countries, which is no surprise as the company that created
 Gwent is based in Poland and The Witcher lore has been created based on Slavic myths and legends. Iceland, Finland, 
 Hong Kong, Malta and Croatia complete the top 10. These are all relatively small countries, so a single player 
 making it up to Pro Rank boosts them up in the ranking. 
@@ -213,7 +214,7 @@ followed by Russia and Poland.
 
 For players that made it up to Pro Rank during multiple seasons we'll quickly generate a summary. Again the *groupby* and
 *agg* function are being leveraged again to group things and get the summary statistics. We'll count the number of 
-appearnaces on pro ladder, the min, mean, max MMR score. Average number of matches and total number of matches as well as
+appearances on pro ladder, the min, mean, max MMR score. Average number of matches and total number of matches as well as
 the best global and national ranks.
 
 This can give you a quick impression of all the data available on a player. Here you can see the output from myself (handle *sepro*).
@@ -224,11 +225,11 @@ This can give you a quick impression of all the data available on a player. Here
 | sepro | Belgium |           3 |    9746 |     9782 |    9820 |          243 |         728 |      1138 |                2.0 |
 
 You can download the full table [here](/assets/posts/2020-09-01-GwentProRankAnalysis/player_summaries.xlsx) to find your
-own or your favorite players stats.
+own or your favorite player's stats.
 
 ## Conclusion
 
-Initially, I set out to get players national ranks. When you are from a small country, just making it to 
+Initially, I set out to get players' national ranks. When you are from a small country, just making it to
 Pro Rank will likely give you bragging rights about being in the top 3 of your country. Though with some fairly basic
 data science you can very quickly get a lot more details on various aspects of the game.
 

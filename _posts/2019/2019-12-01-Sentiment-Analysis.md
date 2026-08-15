@@ -5,6 +5,7 @@ byline: "The shape of Lord of the Rings - The Fellowship of the Ring"
 description: "Using Python and NLTK sentiment analysis to plot the emotional shape of a story, applied to Tolkien's Lord of the Rings and inspired by Kurt Vonnegut."
 date:   2019-12-01 12:00:00
 author: Sebastian Proost
+post_id: sentiment-analysis
 categories: programming
 tags:	python NLP NLTK pandas matplotlib LotR data-science
 cover:  "/assets/posts/2019-12-01-Sentiment-Analysis/header.png"
@@ -26,7 +27,7 @@ To understand what this post is about you should really have a look at [this vid
 ## Sentiment analysis in Python
 
 Python has the [Natural Language Toolkit](https://www.nltk.org/) which includes a very easy way to do sentiment 
-analysis. Import the correct library, create a `SentimentIntsenityAnalyzer()` and apply it on a fragment of text. Done! 
+analysis. Import the correct library, create a `SentimentIntensityAnalyzer()` and apply it on a fragment of text. Done!
 Just look at the examples below how a few lines of code can pick up which fragments are positive, negative or 
 neutral (reflected in the 'pos', 'neg', 'neu'). Furthermore there is a **compound score** that is positive if the overall
 sentiment of the text is good and negative if it is bad, this is the metric we want to create the shape of the story.
@@ -122,11 +123,11 @@ plt.show()
 
 ![Sentiment plot of Lord of the Rings - The Fellowship of the Ring](/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.svg)
 
-This looks pretty close to what I wanted ! However, does it make sense ... To figure this out lets add some annotations
+This looks pretty close to what I wanted! However, does it make sense ... To figure this out let's add some annotations
 to the plot. I pinpointed paragraphs containing key moments in the story and will add them to the plot. This will give
 us a better view if the plot makes sense and if it really follows the story.
 
-The code to do this is similar as above, with the exception dots and text will be added.
+The code to do this is similar as above, with the exception that dots and text will be added.
 
 **Note that the section below the code contains SPOILERS for both the book and the movie**
 
@@ -173,7 +174,7 @@ So the story starts very happy and cheerful, as Tolkien describes these characte
 portion of the book. Meeting new characters, like Strider/Aragorn, is often met with positive sentiment.
 
 The sentiment goes down considerably once Frodo makes his way to Bree and the Black Riders (later revealed as the
-ringwraights or [Nazgûl](https://lotr.fandom.com/wiki/Nazg%C3%BBl)) start chasing them, leading to a confrontation at 
+Ringwraiths or [Nazgûl](https://lotr.fandom.com/wiki/Nazg%C3%BBl)) start chasing them, leading to a confrontation at
 the Weathertop. Here Frodo is injured and needs to be rushed to Rivendell. This section in both the book and the movie
 is rather dark, the Hobbits fear the Riders and start to understand their mission is far more perilous than they ever
 imagined.
@@ -188,8 +189,8 @@ negative moments in both the book and the movie. This is also the sharpest negat
 make it out of the Mines alive and are able to find shelter with the elves of Lothlórien. 
 
 Once they leave the forest and their host Galadriel the Lady of Lórien, things quickly take a turn
-for the worst at the end of the story. Orcs are closing in on them, Boromir betrays them and tries to take the ring from
+for the worse at the end of the story. Orcs are closing in on them, Boromir betrays them and tries to take the ring from
 Frodo (Unlike the movie his death isn't included in this book, it is at the start of The Two Towers), the Fellowship 
 breaks up and hence fails to complete their quest.
 
-I wonder if this approach would work as well for other books ?
+I wonder if this approach would work as well for other books?

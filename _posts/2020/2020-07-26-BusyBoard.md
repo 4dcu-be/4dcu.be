@@ -5,6 +5,7 @@ byline: ""
 description: "Building BusyBoard, a Python Flask web app with SQLAlchemy, Flask-Admin and Bulma, in a four-hour challenge to tell your household when you are busy."
 date:   2020-07-26 12:00:00
 author: Sebastian Proost
+post_id: busyboard
 categories: programming
 tags:	python flask sqlalchemy
 cover:  "/assets/posts/2020-07-26-BusyBoard/header.jpg"
@@ -19,7 +20,7 @@ solutions available (e.g. putting a rubber band on the door knob ...) I decided 
 
 ![BusyBoard in action, an easy web app that runs on a local network to show your household that you are busy](/assets/posts/2020-07-26-BusyBoard/busyboard.png)
 
-During tech job interviews it seems to be common practise to ask applicants to develop a small piece of software during
+During tech job interviews it seems to be common practice to ask applicants to develop a small piece of software during
 a rather limited amount of time. Only having worked in academia this concept is foreign to me! To check how I would hold
 up during such an interview, I decided to set a time limit for myself of four hours (half a working day) and see how far
 I would get.
@@ -50,7 +51,7 @@ The layout left much to be desired, so this was improved by adding some CSS to t
 was great to quickly make some cards for each user, and after some tweaking it looked great. Using some of the more 
 advanced options from Flask-Admin it was also made easy to change the status of users from the admin panel. Though, at this stage I also decided to make it 
 possible for users to add their picture. [Flask-Uploads] can be used to handle the uploads and there are some options to
-integrate this with Flask-Admin, which are documented on [here](https://web.archive.org/web/20201123223344/https://mrl33h.de/post/30). This took a few attempts and
+integrate this with Flask-Admin, which are documented [here](https://web.archive.org/web/20201123223344/https://mrl33h.de/post/30). This took a few attempts and
 a fair amount of time was lost figuring out that Flask-Uploads wasn't compatible with the most recent version of
 [Werkzeug]. 
 
@@ -66,7 +67,7 @@ the data is changed into the database. This can also be accomplished in just a f
 any change made through SQLAlchemy to a user, will update the field. To get the timedelta between the current time and
 the last change in a human readable format the [Arrow] library is awesome and easy to use.
 
-Finally, I spend a few minutes writing some documentation. As this is about as traditional a Flask app can be I was 
+Finally, I spent a few minutes writing some documentation. As this is about as traditional a Flask app can be I was
 able to defer a lot to the official documentation.
 
 ## The Code
@@ -75,7 +76,7 @@ If you want to see how this project evolved you can see the commit history in th
 
 ### models.py
 
-The database model, only one table is present for users, there are a couple properties to play along with Flask-Upoads
+The database model, only one table is present for users, there are a couple properties to play along with Flask-Uploads
 and Arrow. Though the cool part is the function **on_change** and the last line which hooks this on the 
 **before_update** event of SQLAlchemy. With this small bit of code, each time an entry is changed, the field last_update
 is automatically updated as well.
@@ -196,7 +197,7 @@ class CustomIndexView(AdminIndexView):
 ### __init__.py
 
 Here is all the code to set up the busyboard app, nothing really surprising here apart maybe the `createdb` section.
-This adds an command line interface option to create the database using `flask createdb`
+This adds a command-line interface option to create the database using `flask createdb`
 
 ```python
 import os
@@ -256,7 +257,7 @@ def create_app(config):
 
 In about four hours I was able to create a rather funny little app that met all my requirements. This really is a
 testament to how much you can do with very little time and coding using Python and its ecosystem. It was also interesting
-to simulate how such a job interview would go, though in case this was serious I would have spend more time
+to simulate how such a job interview would go, though in case this was serious I would have spent more time
 on adding tests rather than having users' images.
 
 [Flask]: https://flask.palletsprojects.com/

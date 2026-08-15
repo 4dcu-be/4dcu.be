@@ -1,0 +1,629 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>DeckLock deel 4: Flesh and Blood</title>
+  <meta name="description" content="Ondersteuning voor Flesh and Blood toevoegen aan DeckLock, een op Pelican gebaseerde statische site om kaartspeldecks te tonen, met kaartgegevens uit de API ...">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="DeckLock deel 4: Flesh and Blood" />
+  <meta property="og:description" content="Ondersteuning voor Flesh and Blood toevoegen aan DeckLock, een op Pelican gebaseerde statische site om kaartspeldecks te tonen, met kaartgegevens uit de API ..." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/programming/games/2021/09/DeckLock4/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2021-09-28-DeckLock4-fab_header.jpg" /><meta property="og:image:alt" content="DeckLock deel 4: Flesh and Blood" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2021-09-28T06:00:00+00:00" /><meta property="article:modified_time" content="2021-09-28T06:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programmeren" /><meta property="article:section" content="Games" /><meta property="article:tag" content="python" /><meta property="article:tag" content="pelican" /><meta property="article:tag" content="blog" /><meta property="article:tag" content="games" /><meta property="article:tag" content="keyforge" /><meta property="article:tag" content="mtg" /><meta property="article:tag" content="magic-the-gathering" /><meta property="article:tag" content="gwent" /><meta property="article:tag" content="decklock" /><meta property="article:tag" content="flesh-and-blood" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="DeckLock deel 4: Flesh and Blood"><meta name="twitter:description" content="Ondersteuning voor Flesh and Blood toevoegen aan DeckLock, een op Pelican gebaseerde statische site om kaartspeldecks te tonen, met kaartgegevens uit de API ..."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2021-09-28-DeckLock4-fab_header.jpg"><meta name="twitter:image:alt" content="DeckLock deel 4: Flesh and Blood"><meta name="twitter:url" content="https://blog.4dcu.be/nl/programming/games/2021/09/DeckLock4/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/programming/games/2021/09/DeckLock4/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/games/2021/09/28/DeckLock4.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/games/2021/09/DeckLock4/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/games/2021/09/28/DeckLock4.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/programming/games/2021/09/DeckLock4/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/programming/games/2021/09/DeckLock4/" },
+      "url": "https://blog.4dcu.be/nl/programming/games/2021/09/DeckLock4/",
+      "headline": "DeckLock deel 4: Flesh and Blood",
+      "description": "Ondersteuning voor Flesh and Blood toevoegen aan DeckLock, een op Pelican gebaseerde statische site om kaartspeldecks te tonen, met kaartgegevens uit de API ...",
+      "datePublished": "2021-09-28T06:00:00+00:00",
+      "dateModified": "2021-09-28T06:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2021-09-28-DeckLock4-fab_header.jpg",
+      "keywords": ["python", "pelican", "blog", "games", "keyforge", "mtg", "magic-the-gathering", "gwent", "decklock", "flesh-and-blood"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/programming/games/2021/09/DeckLock4/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Programmeren", "item": "https://blog.4dcu.be/nl/category/programming/" },
+        { "@type": "ListItem", "position": 3, "name": "DeckLock deel 4: Flesh and Blood" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/programming/games/2021/09/28/DeckLock4.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/programming/games/2021/09/DeckLock4/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/fab_header.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="DeckLock deel 4: Flesh and Blood" class="hero-background is-transparent" src="/assets/posts/2021-09-28-DeckLock4/fab_header.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">DeckLock deel 4: Flesh and Blood</h1><p class="info has-text-white"><em>en andere updates</em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 28-09-2021 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/programming/">Programmeren</a>, <a href="/nl/category/games/">Games</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p><a href="https://fabtcg.com/">Flesh and Blood</a> wint als <em>Trading Card Game</em> snel aan populariteit en onlangs kocht ik twee voorgebouwde decks om
+het spel uit te proberen. Het zou ook geweldig zijn om dit nieuwe spel aan <a href="https://github.com/4dcu-be/DeckLock">DeckLock</a> toe te voegen, want het lijkt me
+interessant en ik ben er vrij zeker van dat ik vroeg of laat nog meer kaarten zal kopen.</p>
+
+<p>Voor wie <a href="https://github.com/4dcu-be/DeckLock">DeckLock</a> niet kent: dit is een op <a href="https://blog.getpelican.com/">Pelican</a> gebouwd framework dat als eenvoudige statische website een
+overzicht genereert van de decks die je voor verschillende spellen bezit (bekijk de <a href="http://4dcu.be/DeckLock">demo</a>). Dat kwam aan bod in
+eerdere artikels (<a href="/nl/programming/games/2020/04/DeckLock/">deel 1</a>, <a href="/nl/programming/games/2020/04/DeckLock2/">deel 2</a> en <a href="/nl/programming/games/2020/05/DeckLock3/">deel 3</a>) en momenteel worden <a href="https://www.playgwent.com/en">Gwent</a>, <a href="https://www.keyforgegame.com/">KeyForge</a> en <a href="https://magic.wizards.com/en">Magic: the Gathering</a>
+ondersteund. Omdat <a href="https://fabtcg.com/">Flesh and Blood</a> snel groeit (en ik zelf enkele voorgebouwde decks kocht), is het tijd voor een
+update die ondersteuning voor dit nieuwe spel toevoegt.</p>
+
+<p>Naast de ondersteuning voor FaB kwamen er tal van kleine toevoegingen aan het framework. Omdat die op zichzelf geen
+artikel rechtvaardigen, licht ik ze op het einde kort toe.</p>
+
+<h2 id="flesh-and-blood-toevoegen">Flesh and Blood toevoegen</h2>
+
+<p>Net als <a href="https://magic.wizards.com/en">Magic: the Gathering</a> is Flesh and Blood een TCG met fysieke kaarten, dus decks toevoegen gebeurt op een
+vergelijkbare manier. Er zijn nog niet zoveel bronnen voor FaB, maar gelukkig kun je met <a href="https://web.archive.org/web/20220105152741/https://fabdb.net/">FaBDB.net</a> online decklijsten
+maken en biedt de site een API om kaartgegevens op te halen. De code lijkt sterk op die van <a href="/nl/programming/games/2020/04/DeckLock2/">deel 2</a>, maar is beter
+gestructureerd. Omdat je ze op <a href="https://github.com/4dcu-be/DeckLock">GitHub</a> vindt, hoeven we er hier niet diep op in te gaan.</p>
+
+<blockquote>
+  <p><strong>Update (november 2025):</strong> <a href="https://web.archive.org/web/20220105152741/https://fabdb.net/">FaBDB.net</a> werd inmiddels stopgezet en is niet langer online (de link verwijst nu
+naar een <a href="https://web.archive.org/web/20220105152741/https://fabdb.net/">gearchiveerde momentopname</a>). Daardoor gebruikt <a href="https://github.com/4dcu-be/DeckLock">DeckLock</a> de API niet meer. Flesh and Blood-decklijsten
+worden nu als handmatig geschreven <code class="language-plaintext highlighter-rouge">.fab</code>-tekstbestanden bijgehouden. De uitleg hieronder blijft staan als historische
+context, maar de links naar <code class="language-plaintext highlighter-rouge">fabdb.net</code> werken niet meer.</p>
+</blockquote>
+
+<p>Het formaat voor decklijsten is vrij eenvoudig als je dit met de hand wilt doen:</p>
+
+<div class="language-text large-code highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Deck build - via https://fabdb.net :
+
+Prism Blitz Precon
+
+Class: Illusionist
+Hero: Prism
+Weapons: Iris of Reality
+Equipment: Dream Weavers, Halo of Illumination, Heartened Cross Strap, Spell Fray Leggings
+
+(2) Herald of Protection (red)
+(2) Herald of Ravages (red)
+(2) Herald of Rebirth (red)
+(2) Herald of Tenacity (red)
+(2) Illuminate (red)
+(1) Phantasmify (red)
+(1) Prismatic Shield (red)
+(2) Seek Enlightenment (red)
+(2) Wartune Herald (red)
+(2) Enigma Chimera (yellow)
+(1) Herald of Judgment
+(1) Merciful Retribution
+(1) Ode to Wrath
+(2) Rising Solartide (yellow)
+(2) Enigma Chimera (blue)
+(2) Herald of Protection (blue)
+(2) Herald of Ravages (blue)
+(2) Herald of Rebirth (blue)
+(2) Herald of Tenacity (blue)
+(2) Illuminate (blue)
+(2) Spears of Surreality (blue)
+(2) Wartune Herald (blue)
+(1) The Librarian
+
+See the full deck at: https://fabdb.net/decks/GkNKXvRA/
+</code></pre></div></div>
+
+<p>Deze bestanden moet je als een <code class="language-plaintext highlighter-rouge">.fab</code>-bestand in de map <code class="language-plaintext highlighter-rouge">content</code> opslaan. De nieuwe klasse <code class="language-plaintext highlighter-rouge">FaBReader</code> doet dan haar
+werk en voegt het deck aan de website toe. Werken met Pelican biedt veel flexibiliteit, maar heeft ook een steile
+leercurve en persoonlijk vind ik het moeilijk om de code goed te structureren. Tijdens dit werk merkte ik wel dat het
+bij het maken van Pelican-plugins belangrijk is om functies eenvoudig te houden, met één duidelijke taak, en
+verantwoordelijkheden van elkaar te scheiden. Dat is algemeen goed programmeeradvies! Ik merkte ook dat ik dit bij de
+andere spellen niet zo goed had aangepakt … Er zal dus binnenkort wat geherstructureerd moeten worden.</p>
+
+<p><a href="/assets/posts/2021-09-28-DeckLock4/decklock_fab_deck.png" class="lightgallery-link" data-sub-html="Weergave van een Flesh and Blood-deckpagina">
+<img src="/assets/posts/2021-09-28-DeckLock4/decklock_fab_deck.png" alt="Weergave van een Flesh and Blood-deckpagina" height="943" width="1272" data-src="/assets/posts/2021-09-28-DeckLock4/decklock_fab_deck.png" loading="lazy" />
+</a></p>
+
+<p>Zoals je op de bovenstaande afbeelding ziet, is de ondersteuning voor FaB nog eenvoudig, maar ze wordt mettertijd
+uitgebreid!</p>
+
+<h2 id="andere-verbeteringen">Andere verbeteringen</h2>
+
+<p>Er kwamen in heel DeckLock enkele visuele wijzigingen, met hier en daar wat extra grafieken. De KeyForge-deckpagina’s
+beginnen er degelijk uit te zien, maar voor de andere spellen is er nog wat werk aan de winkel.</p>
+
+<p><a href="/assets/posts/2021-09-28-DeckLock4/decklock_keyforge_deck.png" class="lightgallery-link" data-sub-html="Weergave van een KeyForge-deckpagina">
+<img src="/assets/posts/2021-09-28-DeckLock4/decklock_keyforge_deck.png" alt="Weergave van een KeyForge-deckpagina" height="1108" width="1126" data-src="/assets/posts/2021-09-28-DeckLock4/decklock_keyforge_deck.png" loading="lazy" />
+</a></p>
+
+<p>Voor MtG en FaB werd een visueel overzicht van de decks toegevoegd. Voor sommigen is dat misschien een interessantere
+manier om een deck te bekijken dan een geschreven decklijst.</p>
+
+<p><a href="/assets/posts/2021-09-28-DeckLock4/mtg_visual_overview.png" class="lightgallery-link" data-sub-html="Visuele voorstelling van een MtG-deck">
+<img src="/assets/posts/2021-09-28-DeckLock4/mtg_visual_overview.png" alt="Visuele voorstelling van een MtG-deck" height="715" width="757" data-src="/assets/posts/2021-09-28-DeckLock4/mtg_visual_overview.png" loading="lazy" />
+</a></p>
+
+<p>Een belangrijke wijziging is de toevoeging van een GitHub Action die de website bouwt zodra wijzigingen worden
+vastgelegd. Dat maakt aanpassingen eenvoudiger, omdat je ze rechtstreeks op GitHub kunt uitvoeren zonder lokaal iets te
+installeren. Het framework wordt zo ook toegankelijker voor mensen zonder Python-kennis, al blijft een degelijk begrip
+van de werking van GitHub nodig. Dit moet nog verder getest worden en de werkwijze zal in de documentatie worden
+beschreven.</p>
+
+<h2 id="toekomstige-updates">Toekomstige updates</h2>
+
+<p>De code herstructureren en documenteren: dit was een leerproject en op veel plaatsen kan en moet de code beter voor we
+verdergaan. Veel code bevindt zich nog in het stadium waarin iets geschreven werd om het aan de praat te krijgen, maar
+fraai is het niet. Nu GitHub Actions worden gebruikt om de website te bouwen, zou ook de installatie vrij eenvoudig
+moeten zijn, zelfs voor wie geen Python kent (fork de repository, voeg inhoud toe, voer een commit en push uit en de
+actie doet de rest). Dat staat echter nog niet in de documentatie.</p>
+
+<p>De lay-out heeft veel werk nodig. Momenteel is het grotendeels de standaard-Bootstrap met een beetje aangepaste CSS en,
+op enkele pictogrammen na, heel weinig grafisch materiaal. Iemand met betere ontwerpvaardigheden kan dit flink
+verbeteren. Ben jij zo iemand, lees dan hieronder hoe je kunt bijdragen!</p>
+
+<p>Hoewel ik niet te veel functies van andere websites wil nabootsen, zouden hier en daar enkele belangrijke grafieken om
+een deck te analyseren wel handig zijn. Ook statistieken over meerdere decks heen kunnen de deckoverzichten
+interessanter maken: welke kaarten populair zijn, hoeveel kaarten gebruikt worden, …</p>
+
+<h2 id="wil-je-bijdragen">Wil je bijdragen?</h2>
+
+<p>Helaas heb ik niet zoveel tijd om hieraan te werken als ik zou willen. Vooral pictogrammen maken en pagina’s ontwerpen
+kost mij veel tijd. Als iemand dit project sneller wil zien groeien, zijn er dus zeker manieren om te helpen!</p>
+
+<ul>
+  <li>Er bestaan heel wat andere TCG’s en ik heb geen tijd om ze allemaal toe te voegen. Als je wat Python kent en dit ook
+voor Yu-Gi-Oh!, Pokémon, … wilt, kun je waarschijnlijk helpen om ondersteuning voor een nieuw spel toe te voegen</li>
+  <li>Als je goed bent in logo-ontwerp, zijn er nog heel wat pictogrammen die je kunt toevoegen …</li>
+  <li>De lay-out is erg eenvoudig; iemand met webdesignvaardigheden kan die helpen verbeteren</li>
+  <li>De documentatie kan altijd worden uitgebreid</li>
+  <li>Gewoon feedback geven helpt al om de prioriteiten te bepalen</li>
+</ul>
+
+<p>Wil je bijdragen, neem dan contact op via e-mail, Twitter, … (bekijk de contactpagina). Je kunt het project ook op
+<a href="https://github.com/4dcu-be/DeckLock">GitHub</a> vinden en beginnen programmeren. Ik aanvaard met plezier PR’s, hoe klein ook.</p>
+
+<h2 id="code">Code</h2>
+
+<p>Alle code voor <a href="https://github.com/4dcu-be/DeckLock">DeckLock</a> staat op GitHub: <a href="https://github.com/4dcu-be/DeckLock">https://github.com/4dcu-be/DeckLock</a>.
+Je kunt ook de <a href="http://4dcu.be/DeckLock">demo</a> bekijken met de decks die ik bezit en graag speel, verspreid over de verschillende spellen.</p>
+
+<h2 id="juridisch">Juridisch</h2>
+
+<p>DeckLock is onofficiële fancontent. De letterlijke en grafische informatie over Flesh and Blood, Gwent, KeyForge en
+Magic: The Gathering in dit project is auteursrechtelijk beschermd door respectievelijk Legend Story Studios, CDPR,
+Fantasy Flight Games en Wizards of the Coast, LLC, een dochteronderneming van Hasbro, Inc. DeckLock en 4DCu.be worden
+niet geproduceerd, aanbevolen, ondersteund door of geassocieerd met een van deze entiteiten.</p>
+
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/python/">python</a>,&nbsp;<a href="/nl/tag/pelican/">pelican</a>,&nbsp;<a href="/nl/tag/blog/">blog</a>,&nbsp;<a href="/nl/tag/games/">games</a>,&nbsp;<a href="/nl/tag/keyforge/">keyforge</a>,&nbsp;<a href="/nl/tag/mtg/">mtg</a>,&nbsp;<a href="/nl/tag/magic-the-gathering/">magic-the-gathering</a>,&nbsp;<a href="/nl/tag/gwent/">gwent</a>,&nbsp;<a href="/nl/tag/decklock/">decklock</a>,&nbsp;<a href="/nl/tag/flesh-and-blood/">flesh-and-blood</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=DeckLock+deel+4%3A+Flesh+and+Blood%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fgames%2F2021%2F09%2FDeckLock4%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fgames%2F2021%2F09%2FDeckLock4%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fgames%2F2021%2F09%2FDeckLock4%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=DeckLock+deel+4%3A+Flesh+and+Blood&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fgames%2F2021%2F09%2FDeckLock4%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/programming/games/2021/09/KeyForge_Decks_Printed/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">KeyForge: hoeveel decks werden er gedrukt?</span></a></span>
+  <span class="next-post"><a href="/nl/programming/2021/10/GitHub-Actions/"><span class="page-number">Licht, camera, GitHub, Actions: mijn favoriete GitHub Actions</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,1014 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>Gwent: analyse van de Pro Ladder en nationale ranglijsten</title>
+  <meta name="description" content="Gegevens van de Gwent Pro Ladder scrapen met Python en pandas om nationale ranglijsten, efficiëntie op de ladder, populariteit per land en seizoensstatistiek...">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Gwent: analyse van de Pro Ladder en nationale ranglijsten" />
+  <meta property="og:description" content="Gegevens van de Gwent Pro Ladder scrapen met Python en pandas om nationale ranglijsten, efficiëntie op de ladder, populariteit per land en seizoensstatistiek..." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/programming/games/2020/09/GwentProRankAnalysis/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2020-09-01-GwentProRankAnalysis-gwent_pro_rank.jpg" /><meta property="og:image:alt" content="Gwent: analyse van de Pro Ladder en nationale ranglijsten" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2020-09-01T12:00:00+00:00" /><meta property="article:modified_time" content="2020-09-01T12:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programmeren" /><meta property="article:section" content="Games" /><meta property="article:tag" content="python" /><meta property="article:tag" content="jupyter" /><meta property="article:tag" content="pandas" /><meta property="article:tag" content="gwent" /><meta property="article:tag" content="data-science" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Gwent: analyse van de Pro Ladder en nationale ranglijsten"><meta name="twitter:description" content="Gegevens van de Gwent Pro Ladder scrapen met Python en pandas om nationale ranglijsten, efficiëntie op de ladder, populariteit per land en seizoensstatistiek..."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2020-09-01-GwentProRankAnalysis-gwent_pro_rank.jpg"><meta name="twitter:image:alt" content="Gwent: analyse van de Pro Ladder en nationale ranglijsten"><meta name="twitter:url" content="https://blog.4dcu.be/nl/programming/games/2020/09/GwentProRankAnalysis/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/programming/games/2020/09/GwentProRankAnalysis/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/games/2020/09/01/GwentProRankAnalysis.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/games/2020/09/GwentProRankAnalysis/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/games/2020/09/01/GwentProRankAnalysis.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/programming/games/2020/09/GwentProRankAnalysis/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/programming/games/2020/09/GwentProRankAnalysis/" },
+      "url": "https://blog.4dcu.be/nl/programming/games/2020/09/GwentProRankAnalysis/",
+      "headline": "Gwent: analyse van de Pro Ladder en nationale ranglijsten",
+      "description": "Gegevens van de Gwent Pro Ladder scrapen met Python en pandas om nationale ranglijsten, efficiëntie op de ladder, populariteit per land en seizoensstatistiek...",
+      "datePublished": "2020-09-01T12:00:00+00:00",
+      "dateModified": "2020-09-01T12:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2020-09-01-GwentProRankAnalysis-gwent_pro_rank.jpg",
+      "keywords": ["python", "jupyter", "pandas", "gwent", "data-science"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/programming/games/2020/09/GwentProRankAnalysis/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Programmeren", "item": "https://blog.4dcu.be/nl/category/programming/" },
+        { "@type": "ListItem", "position": 3, "name": "Gwent: analyse van de Pro Ladder en nationale ranglijsten" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/programming/games/2020/09/01/GwentProRankAnalysis.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/programming/games/2020/09/GwentProRankAnalysis/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/gwent_pro_rank.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="Gwent: analyse van de Pro Ladder en nationale ranglijsten" class="hero-background is-transparent" src="/assets/posts/2020-09-01-GwentProRankAnalysis/gwent_pro_rank.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">Gwent: analyse van de Pro Ladder en nationale ranglijsten</h1><p class="info has-text-white"><em></em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 01-09-2020 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/programming/">Programmeren</a>, <a href="/nl/category/games/">Games</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Op <a href="https://masters.playgwent.com/en/">playgwent.com</a> worden gegevens over spelers in de Pro Ladder gepubliceerd, maar die zijn beperkt.
+Je krijgt de rang, de score, het land van herkomst en het aantal gespeelde wedstrijden. Met enkele vrij eenvoudige technieken voor
+gegevensanalyse moet er meer uit deze gegevens te halen zijn! Met Python scrapen we gegevens voor de beste 
+<a href="https://masters.playgwent.com/en/rankings/masters-2/season-of-the-draconid/1/1">Gwent-spelers op de Pro Ladder</a> 
+en berekenen we bijkomende statistieken over het huidige seizoen, de populariteit van het spel in verschillende landen, de 
+efficiëntie en nationale rang van spelers, …</p>
+
+<p>Een Jupyter-notebook met alle code staat op <a href="https://github.com/4dcu-be/GwentRank">GitHub</a>. Via
+<a href="https://mybinder.org/v2/gh/4dcu-be/GwentRank/master?filepath=Gwent%20Stats.ipynb">Binder</a> kun je het verkennen zonder iets te installeren.
+Wie alleen zijn eigen nationale rang of ladder-efficiëntie-index wil controleren en niet in de code geïnteresseerd is, vindt hier downloadlinks
+voor de volledige tabellen uit deze post (in Excel-formaat):</p>
+
+<ul>
+  <li><a href="/assets/pages/gwent/player_stats.xlsx">Spelerstatistieken</a>: gegevens per speler en seizoen, aangevuld met ladder-efficiëntie en nationale rang.</li>
+  <li><a href="/assets/pages/gwent/player_summaries.xlsx">Spelersoverzichten</a>: samenvattende gegevens voor elke speler die in Pro Rank verscheen. Bevat het aantal vermeldingen op
+  de ranglijsten, minimale en maximale MMR, beste rang, beste nationale rang, …</li>
+  <li><a href="/assets/pages/gwent/seasonal_stats.xlsx">Seizoensoverzicht</a>: aantal gespeelde wedstrijden per seizoen in Masters 2, minimale en maximale MMR en de drempels voor de top 500, 200 en 64.</li>
+  <li><a href="/assets/pages/gwent/national_stats.xlsx">Nationale statistieken</a>: gegevens per land, aantal profspelers per miljoen inwoners, …</li>
+</ul>
+
+<p><strong>Update 04/08/2021:</strong> Downloads verwijzen nu naar de pagina <a href="/gwent/">Gwent Pro Rank Data</a>, die vaker wordt bijgewerkt.</p>
+
+<p><strong>Update 12/03/2021:</strong> Alle bestanden werden bijgewerkt en bevatten nu Season of the Wolf en Season of Love uit Masters 3 (2021).</p>
+
+<p><strong>Update 03/09/2020:</strong> Ere wie ere toekomt! Nadat ik deze blogpost online zette, vond ik twee artikels van Lerio2 die
+ouder waren dan het mijne en waarin hij dezelfde analyse uitvoerde om de populariteit te onderzoeken en landen te rangschikken (op basis van teams van vier spelers). 
+Hoewel ik mijn analyse onafhankelijk uitvoerde, had hij het idee enkele maanden eerder en verdient hij daarvoor alle erkenning! 
+Je kunt zijn artikels, Nations of Gwent, <a href="https://web.archive.org/web/20210415222805/https://teamlegacy.org/gwent-for-geeks-nations-of-gwent/">hier</a> en <a href="https://web.archive.org/web/20210416003340/https://teamlegacy.org/gwent-for-geeks-nations-of-gwent-vol-2/">hier</a> lezen. 
+(06/08/2026 - teamlegacy.org is niet langer online; deze links verwijzen naar gearchiveerde kopieën)</p>
+
+<h2 id="de-gegevens-verzamelen">De gegevens verzamelen</h2>
+
+<p>Python heeft twee krachtige pakketten om gegevens van het web te scrapen: de requests-bibliotheek om gegevens te downloaden en BeautifulSoup
+om de teruggestuurde HTML te verwerken en er informatie uit te halen. De tabelgegevens van <a href="https://masters.playgwent.com/en/">playgwent.com</a>
+zijn vrij eenvoudig te verwerken. Ze bevatten de rang, de spelersnaam, het aantal gespeelde wedstrijden en de score
+(die Matchmaking Rating of MMR wordt genoemd).</p>
+
+<p>Daarnaast geeft een vlagpictogram aan uit welk land de speler
+komt. Deze pictogrammen hebben een klasse met de tweelettercode volgens de officiële internationale <a href="https://www.iso.org/iso-3166-country-codes.html">ISO 3166-
+standaard</a>.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"flag-icon flag-icon-pl"</span><span class="nt">&gt;&lt;/i&gt;</span>
+</code></pre></div></div>
+
+<p>De tweelettercode kan eenvoudig uit de HTML-tag worden gehaald. Met de Python-bibliotheek <a href="https://pypi.org/project/pycountry/">pycountry</a> zet je die in enkele regels code om naar een leesbare naam. Zoals in het
+voorbeeld hieronder geef je een tweelettercode op (<em>pl</em>) en krijg je alle andere namen terug, waaronder de
+gebruikelijke naam (<em>Poland</em>). Na het scrapen gebruikte ik pycountry dus om correcte namen voor alle
+landen te verkrijgen.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pycountry</span>
+<span class="n">pycountry</span><span class="p">.</span><span class="n">countries</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">alpha_2</span><span class="o">=</span><span class="sh">'</span><span class="s">pl</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="c1"># Output: 
+# Country(alpha_2='PL', alpha_3='POL', name='Poland', numeric='616', official_name='Republic of Poland')
+</span></code></pre></div></div>
+<p>Tijdens het inlezen houden we ook bij welke spelers het vorige seizoen in de top 500 stonden (hiervoor
+moeten wel alle seizoenen in de juiste volgorde geladen zijn). Zo krijgen we een tabel, in de code full_df genoemd, die er 
+als volgt uitziet:</p>
+
+<table class="large-table narrow-rows">
+  <thead>
+    <tr>
+      <th style="text-align: right">rank</th>
+      <th style="text-align: right">name</th>
+      <th style="text-align: right">country</th>
+      <th style="text-align: right">matches</th>
+      <th style="text-align: right">mmr</th>
+      <th style="text-align: right">season</th>
+      <th style="text-align: right">previous_top500</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">kolemoen</td>
+      <td style="text-align: right">Germany</td>
+      <td style="text-align: right">431</td>
+      <td style="text-align: right">10484</td>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">no</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">2</td>
+      <td style="text-align: right">kams134</td>
+      <td style="text-align: right">Poland</td>
+      <td style="text-align: right">923</td>
+      <td style="text-align: right">10477</td>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">no</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">TailBot</td>
+      <td style="text-align: right">Poland</td>
+      <td style="text-align: right">538</td>
+      <td style="text-align: right">10472</td>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">no</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">4</td>
+      <td style="text-align: right">Pajabol</td>
+      <td style="text-align: right">Poland</td>
+      <td style="text-align: right">820</td>
+      <td style="text-align: right">10471</td>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">no</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">5</td>
+      <td style="text-align: right">Adzikov</td>
+      <td style="text-align: right">Poland</td>
+      <td style="text-align: right">1105</td>
+      <td style="text-align: right">10442</td>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">no</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="nationale-rang-en-efficiëntiestatistieken-toevoegen">Nationale rang en efficiëntiestatistieken toevoegen</h2>
+
+<p>De rang op playgwent.com is de wereldwijde rang. Een nationale rang voeg je met één regel code toe. De
+functie <code class="language-plaintext highlighter-rouge">groupby</code> in combinatie met <code class="language-plaintext highlighter-rouge">rank</code> doet precies wat we nodig hebben.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">full_df</span><span class="p">[</span><span class="sh">'</span><span class="s">national_rank</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">full_df</span><span class="p">.</span><span class="nf">groupby</span><span class="p">([</span><span class="sh">'</span><span class="s">country</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">season</span><span class="sh">'</span><span class="p">])[</span><span class="sh">"</span><span class="s">mmr</span><span class="sh">"</span><span class="p">].</span><span class="nf">rank</span><span class="p">(</span><span class="sh">"</span><span class="s">first</span><span class="sh">"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In Gwent moet je minstens 25 wedstrijden spelen met vier van de zes facties. 
+Dat levert een basisscore, MMR, van 9600 op. Een overwinning verhoogt de MMR afhankelijk van de huidige rang van je
+tegenstander (meestal met ongeveer 7 punten), terwijl een nederlaag MMR-punten kost. De hoogste behaalde MMR per factie wordt 
+opgeteld tot de eindscore. Met een hoger winstpercentage kun je dus met minder wedstrijden een betere score behalen. Om te bepalen
+welke spelers efficiënter klimmen (en mogelijk beter zijn dan anderen met dezelfde MMR), nemen we 
+de MMR, trekken we de basiswaarde 9600 af en delen we door het aantal wedstrijden. Omdat 
+een hogere MMR steeds moeilijker wordt naarmate spelers sterkere tegenstanders treffen op de
+ladder, stelde Lerio2 van Team Legacy voor om te delen door de vierkantswortel van het aantal wedstrijden. Hun maatstaf, de
+<a href="https://web.archive.org/web/20201001135246/https://teamlegacy.org/2020/08/05/gwent-players-scores-and-efficiency-index/">Ladder Efficiency Index</a> of <em>LEI</em>, wordt 
+hier eveneens berekend.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">full_df</span><span class="p">[</span><span class="sh">'</span><span class="s">efficiency</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">full_df</span><span class="p">[</span><span class="sh">'</span><span class="s">mmr</span><span class="sh">'</span><span class="p">]</span><span class="o">-</span><span class="mi">9600</span><span class="p">))</span><span class="o">/</span><span class="n">full_df</span><span class="p">[</span><span class="sh">'</span><span class="s">matches</span><span class="sh">'</span><span class="p">]</span>
+<span class="n">full_df</span><span class="p">[</span><span class="sh">'</span><span class="s">lei</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">full_df</span><span class="p">[</span><span class="sh">'</span><span class="s">mmr</span><span class="sh">'</span><span class="p">]</span><span class="o">-</span><span class="mi">9600</span><span class="p">))</span><span class="o">/</span><span class="n">np</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">full_df</span><span class="p">[</span><span class="sh">'</span><span class="s">matches</span><span class="sh">'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Ons volledige dataframe heeft nu twee extra kolommen: één met de eenvoudige lineaire efficiëntie en één met Team Legacy’s 
+Ladder Efficiency Index.</p>
+
+<table class="large-table narrow-rows">
+  <thead>
+    <tr>
+      <th style="text-align: right">rank</th>
+      <th style="text-align: right">name</th>
+      <th style="text-align: right">country</th>
+      <th style="text-align: right">matches</th>
+      <th style="text-align: right">mmr</th>
+      <th style="text-align: right">season</th>
+      <th style="text-align: right">previous_top500</th>
+      <th style="text-align: right">national_rank</th>
+      <th style="text-align: right">efficiency</th>
+      <th style="text-align: right">lei</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">kolemoen</td>
+      <td style="text-align: right">Germany</td>
+      <td style="text-align: right">431</td>
+      <td style="text-align: right">10484</td>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">no</td>
+      <td style="text-align: right">1.0</td>
+      <td style="text-align: right">2.051044</td>
+      <td style="text-align: right">42.580782</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">2</td>
+      <td style="text-align: right">kams134</td>
+      <td style="text-align: right">Poland</td>
+      <td style="text-align: right">923</td>
+      <td style="text-align: right">10477</td>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">no</td>
+      <td style="text-align: right">1.0</td>
+      <td style="text-align: right">0.950163</td>
+      <td style="text-align: right">28.866807</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">TailBot</td>
+      <td style="text-align: right">Poland</td>
+      <td style="text-align: right">538</td>
+      <td style="text-align: right">10472</td>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">no</td>
+      <td style="text-align: right">2.0</td>
+      <td style="text-align: right">1.620818</td>
+      <td style="text-align: right">37.594590</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">4</td>
+      <td style="text-align: right">Pajabol</td>
+      <td style="text-align: right">Poland</td>
+      <td style="text-align: right">820</td>
+      <td style="text-align: right">10471</td>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">no</td>
+      <td style="text-align: right">3.0</td>
+      <td style="text-align: right">1.062195</td>
+      <td style="text-align: right">30.416639</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">5</td>
+      <td style="text-align: right">Adzikov</td>
+      <td style="text-align: right">Poland</td>
+      <td style="text-align: right">1105</td>
+      <td style="text-align: right">10442</td>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">no</td>
+      <td style="text-align: right">4.0</td>
+      <td style="text-align: right">0.761991</td>
+      <td style="text-align: right">25.329753</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Je kunt de volledige tabel <a href="/assets/posts/2020-09-01-GwentProRankAnalysis/player_stats.xlsx">hier</a> downloaden.</p>
+
+<h2 id="seizoensoverzicht">Seizoensoverzicht</h2>
+
+<p>Ongeveer elke maand begint er een nieuw seizoen in Gwent. Met <code class="language-plaintext highlighter-rouge">groupby</code> maken we snel een overzicht
+van het aantal wedstrijden dat spelers in Pro Rank speelden (merk op dat alleen de beste 2860 spelers op de website staan).
+We voegen ook de drempelwaarden voor rang 500, 200 en 64 toe, want die zijn belangrijk voor competitieve spelers. 
+Hier gebruiken we de aggregatiefunctie <code class="language-plaintext highlighter-rouge">agg</code> samen met NamedAgg om alle statistieken in één keer te berekenen.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">per_season_df</span> <span class="o">=</span> <span class="n">full_df</span><span class="p">.</span><span class="nf">groupby</span><span class="p">([</span><span class="sh">'</span><span class="s">season</span><span class="sh">'</span><span class="p">]).</span><span class="nf">agg</span><span class="p">(</span>
+    <span class="n">min_mmr</span>     <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">NamedAgg</span><span class="p">(</span><span class="sh">'</span><span class="s">mmr</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">min</span><span class="sh">'</span><span class="p">),</span>
+    <span class="n">max_mmr</span>     <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">NamedAgg</span><span class="p">(</span><span class="sh">'</span><span class="s">mmr</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">max</span><span class="sh">'</span><span class="p">),</span>
+    <span class="n">num_matches</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">NamedAgg</span><span class="p">(</span><span class="sh">'</span><span class="s">matches</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">sum</span><span class="sh">'</span><span class="p">)</span>
+<span class="p">).</span><span class="nf">reset_index</span><span class="p">()</span>
+
+<span class="n">top500_cutoffs</span> <span class="o">=</span> <span class="n">full_df</span><span class="p">[</span><span class="n">full_df</span><span class="p">[</span><span class="sh">'</span><span class="s">rank</span><span class="sh">'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">500</span><span class="p">][[</span><span class="sh">'</span><span class="s">season</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">mmr</span><span class="sh">'</span><span class="p">]].</span><span class="nf">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="sh">'</span><span class="s">mmr</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">top500_cutoff</span><span class="sh">'</span><span class="p">})</span>
+<span class="n">top200_cutoffs</span> <span class="o">=</span> <span class="n">full_df</span><span class="p">[</span><span class="n">full_df</span><span class="p">[</span><span class="sh">'</span><span class="s">rank</span><span class="sh">'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">200</span><span class="p">][[</span><span class="sh">'</span><span class="s">season</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">mmr</span><span class="sh">'</span><span class="p">]].</span><span class="nf">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="sh">'</span><span class="s">mmr</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">top200_cutoff</span><span class="sh">'</span><span class="p">})</span>
+<span class="n">top64_cutoffs</span>  <span class="o">=</span> <span class="n">full_df</span><span class="p">[</span><span class="n">full_df</span><span class="p">[</span><span class="sh">'</span><span class="s">rank</span><span class="sh">'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">64</span><span class="p">][[</span><span class="sh">'</span><span class="s">season</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">mmr</span><span class="sh">'</span><span class="p">]].</span><span class="nf">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="sh">'</span><span class="s">mmr</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">top64_cutoff</span><span class="sh">'</span><span class="p">})</span>
+
+<span class="n">per_season_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span><span class="n">per_season_df</span><span class="p">,</span> <span class="n">top500_cutoffs</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="sh">'</span><span class="s">season</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">per_season_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span><span class="n">per_season_df</span><span class="p">,</span> <span class="n">top200_cutoffs</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="sh">'</span><span class="s">season</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">per_season_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span><span class="n">per_season_df</span><span class="p">,</span> <span class="n">top64_cutoffs</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="sh">'</span><span class="s">season</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">per_season_df</span>
+</code></pre></div></div>
+<p>De volledige uitvoer zie je hieronder:</p>
+
+<table class="large-table narrow-rows">
+  <thead>
+    <tr>
+      <th style="text-align: right">season</th>
+      <th style="text-align: right">min_mmr</th>
+      <th style="text-align: right">max_mmr</th>
+      <th style="text-align: right">num_matches</th>
+      <th style="text-align: right">top500_cutoff</th>
+      <th style="text-align: right">top200_cutoff</th>
+      <th style="text-align: right">top64_cutoff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">M2_01 Wolf 2020</td>
+      <td style="text-align: right">2407</td>
+      <td style="text-align: right">10484</td>
+      <td style="text-align: right">699496</td>
+      <td style="text-align: right">9749</td>
+      <td style="text-align: right">9872</td>
+      <td style="text-align: right">10061</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_02 Love 2020</td>
+      <td style="text-align: right">7776</td>
+      <td style="text-align: right">10537</td>
+      <td style="text-align: right">769358</td>
+      <td style="text-align: right">9832</td>
+      <td style="text-align: right">9952</td>
+      <td style="text-align: right">10117</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_03 Bear 2020</td>
+      <td style="text-align: right">9427</td>
+      <td style="text-align: right">10669</td>
+      <td style="text-align: right">862678</td>
+      <td style="text-align: right">9867</td>
+      <td style="text-align: right">9995</td>
+      <td style="text-align: right">10204</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_04 Elf 2020</td>
+      <td style="text-align: right">9666</td>
+      <td style="text-align: right">10751</td>
+      <td style="text-align: right">1004830</td>
+      <td style="text-align: right">9952</td>
+      <td style="text-align: right">10087</td>
+      <td style="text-align: right">10293</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_05 Viper 2020</td>
+      <td style="text-align: right">9635</td>
+      <td style="text-align: right">10622</td>
+      <td style="text-align: right">859640</td>
+      <td style="text-align: right">9910</td>
+      <td style="text-align: right">10028</td>
+      <td style="text-align: right">10255</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_06 Magic 2020</td>
+      <td style="text-align: right">9624</td>
+      <td style="text-align: right">10597</td>
+      <td style="text-align: right">793401</td>
+      <td style="text-align: right">9896</td>
+      <td style="text-align: right">10002</td>
+      <td style="text-align: right">10191</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_07 Griffin 2020</td>
+      <td style="text-align: right">9698</td>
+      <td style="text-align: right">10667</td>
+      <td style="text-align: right">996742</td>
+      <td style="text-align: right">9978</td>
+      <td style="text-align: right">10100</td>
+      <td style="text-align: right">10289</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_08 Draconid 2020</td>
+      <td style="text-align: right">9666</td>
+      <td style="text-align: right">10546</td>
+      <td style="text-align: right">838212</td>
+      <td style="text-align: right">9946</td>
+      <td style="text-align: right">10061</td>
+      <td style="text-align: right">10246</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Het aantal wedstrijden van de beste spelers geeft een indicatie van hoeveel mensen het spel spelen, want meer
+actieve spelers vereisen meer wedstrijden om de Pro Ladder te beklimmen. Je ziet dat de populariteit piekte tijdens
+Season of the Elves. In dat seizoen werden ook enkele nieuwe leidervaardigheden
+geïntroduceerd, waardoor de verse inhoud spelers mogelijk deed terugkeren. Een vergelijkbare stijging in wedstrijden is 
+zichtbaar in Season of the Griffin, toen de Master Mirror-uitbreiding nieuwe kaarten uitbracht. Nieuwe inhoud lijkt dus 
+een goede stimulans om meer te spelen en de competitie aan te wakkeren.</p>
+
+<p>Je kunt de volledige tabel <a href="/assets/posts/2020-09-01-GwentProRankAnalysis/seasonal_stats.xlsx">hier</a> downloaden.</p>
+
+<h2 id="waar-wordt-gwent-gespeeld">Waar wordt Gwent gespeeld?</h2>
+
+<p>Met <code class="language-plaintext highlighter-rouge">groupby</code> in combinatie met <code class="language-plaintext highlighter-rouge">agg</code> tellen we snel hoeveel profspelers er
+per land zijn. Vervolgens combineren we dat met het bevolkingsaantal van elk land (een enigszins recente lijst staat
+<a href="https://www.kaggle.com/erikbruin/countries-of-the-world-iso-codes-and-population/data#">hier</a>). Door het aantal
+spelers in Pro Rank te delen door het aantal inwoners in miljoenen, krijgen we het aantal profspelers per hoofd van de bevolking.</p>
+
+<table class="large-table narrow-rows">
+  <thead>
+    <tr>
+      <th style="text-align: right">season</th>
+      <th style="text-align: right">country</th>
+      <th style="text-align: right">total_matches</th>
+      <th style="text-align: right">num_players</th>
+      <th style="text-align: right">pro_players_per_million</th>
+      <th style="text-align: right">matches_per_player</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">M2_08 Draconid 2020</td>
+      <td style="text-align: right">Poland</td>
+      <td style="text-align: right">72225</td>
+      <td style="text-align: right">267</td>
+      <td style="text-align: right">7.047129</td>
+      <td style="text-align: right">270.505618</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_08 Draconid 2020</td>
+      <td style="text-align: right">Estonia</td>
+      <td style="text-align: right">1726</td>
+      <td style="text-align: right">7</td>
+      <td style="text-align: right">5.280436</td>
+      <td style="text-align: right">246.571429</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_08 Draconid 2020</td>
+      <td style="text-align: right">Russian Federation</td>
+      <td style="text-align: right">195905</td>
+      <td style="text-align: right">673</td>
+      <td style="text-align: right">4.613626</td>
+      <td style="text-align: right">291.092125</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_08 Draconid 2020</td>
+      <td style="text-align: right">Belarus</td>
+      <td style="text-align: right">10260</td>
+      <td style="text-align: right">39</td>
+      <td style="text-align: right">4.125931</td>
+      <td style="text-align: right">263.076923</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_08 Draconid 2020</td>
+      <td style="text-align: right">Ukraine</td>
+      <td style="text-align: right">52333</td>
+      <td style="text-align: right">162</td>
+      <td style="text-align: right">3.682351</td>
+      <td style="text-align: right">323.043210</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>De top vijf bestaat uit Oost-Europese landen. Dat verbaast niet: het bedrijf achter
+Gwent is in Polen gevestigd en de wereld van The Witcher is gebaseerd op Slavische mythen en legendes. IJsland, Finland, 
+Hongkong, Malta en Kroatië vervolledigen de top tien. Dit zijn allemaal relatief kleine landen, zodat één speler 
+die Pro Rank bereikt hen flink hoger in de ranglijst brengt.</p>
+
+<p>Je kunt de volledige tabel met gegevens voor alle seizoenen en landen <a href="/assets/posts/2020-09-01-GwentProRankAnalysis/national_stats.xlsx">hier</a> downloaden.</p>
+
+<h2 id="welk-land-heeft-het-beste-gwent-team">Welk land heeft het beste Gwent-team?</h2>
+
+<p>Nu weten we waar de meeste profspelers per hoofd van de bevolking wonen, maar wat als landen een team van drie 
+e-sporters naar een wereldkampioenschap mochten sturen? Welke landen zouden met hun drie profspelers het beste presteren? Hiervoor
+selecteerde ik alle landen met minstens drie spelers en koos ik de drie beste spelers uit elk land.
+Daarna berekende ik hun gemiddelde en totale MMR, de efficiëntie waarmee ze klimmen en de rang
+van elk land. De code staat voor geïnteresseerden op GitHub, maar ook hier gaat het eenvoudigweg om gegevens filteren en
+groeperen met ingebouwde pandas-functies.</p>
+
+<p>De resultaten voor Season of the Draconid staan hieronder. China lijkt dit seizoen het beste team van drie te hebben,
+gevolgd door Rusland en Polen.</p>
+
+<table class="large-table narrow-rows">
+  <thead>
+    <tr>
+      <th style="text-align: right">season</th>
+      <th style="text-align: right">country</th>
+      <th style="text-align: right">mean_mmr</th>
+      <th style="text-align: right">total_mmr</th>
+      <th style="text-align: right">mean_matches_per_player</th>
+      <th style="text-align: right">total_matches</th>
+      <th style="text-align: right">nation_rank</th>
+      <th style="text-align: right">efficiency</th>
+      <th style="text-align: right">lei</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">M2_08 Draconid 2020</td>
+      <td style="text-align: right">China</td>
+      <td style="text-align: right">10489.333333</td>
+      <td style="text-align: right">31468</td>
+      <td style="text-align: right">409</td>
+      <td style="text-align: right">1227</td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">2.174409</td>
+      <td style="text-align: right">43.974703</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_08 Draconid 2020</td>
+      <td style="text-align: right">Russian Federation</td>
+      <td style="text-align: right">10479.666667</td>
+      <td style="text-align: right">31439</td>
+      <td style="text-align: right">636</td>
+      <td style="text-align: right">1908</td>
+      <td style="text-align: right">2</td>
+      <td style="text-align: right">1.383124</td>
+      <td style="text-align: right">34.881052</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">M2_08 Draconid 2020</td>
+      <td style="text-align: right">Poland</td>
+      <td style="text-align: right">10439.333333</td>
+      <td style="text-align: right">31318</td>
+      <td style="text-align: right">657</td>
+      <td style="text-align: right">1971</td>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">1.277524</td>
+      <td style="text-align: right">32.745512</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="spelersoverzichten">Spelersoverzichten</h2>
+
+<p>Voor spelers die tijdens meerdere seizoenen Pro Rank bereikten, maken we snel een overzicht. Opnieuw gebruiken we <em>groupby</em> en
+<em>agg</em> om gegevens te groeperen en samenvattende statistieken te berekenen. We tellen het aantal 
+vermeldingen op de Pro Ladder, de minimale, gemiddelde en maximale MMR-score, het gemiddelde en totale aantal wedstrijden en
+de beste wereldwijde en nationale rang.</p>
+
+<p>Zo krijg je snel een beeld van alle beschikbare gegevens over een speler. Hier zie je mijn eigen uitvoer (spelersnaam <em>sepro</em>).</p>
+
+<table class="large-table narrow-rows">
+  <thead>
+    <tr>
+      <th style="text-align: right">name</th>
+      <th style="text-align: right">country</th>
+      <th style="text-align: right">appearances</th>
+      <th style="text-align: right">min_mmr</th>
+      <th style="text-align: right">mean_mmr</th>
+      <th style="text-align: right">max_mmr</th>
+      <th style="text-align: right">mean_matches</th>
+      <th style="text-align: right">num_matches</th>
+      <th style="text-align: right">best_rank</th>
+      <th style="text-align: right">best_national_rank</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">sepro</td>
+      <td style="text-align: right">Belgium</td>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">9746</td>
+      <td style="text-align: right">9782</td>
+      <td style="text-align: right">9820</td>
+      <td style="text-align: right">243</td>
+      <td style="text-align: right">728</td>
+      <td style="text-align: right">1138</td>
+      <td style="text-align: right">2.0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Je kunt de volledige tabel <a href="/assets/posts/2020-09-01-GwentProRankAnalysis/player_summaries.xlsx">hier</a> downloaden om de statistieken van jezelf
+of je favoriete spelers op te zoeken.</p>
+
+<h2 id="conclusie">Conclusie</h2>
+
+<p>Aanvankelijk wilde ik de nationale rang van spelers berekenen. Kom je uit een klein land, dan geeft alleen al het bereiken van 
+Pro Rank je waarschijnlijk het recht om op te scheppen dat je tot de top drie van je land behoort. Met vrij eenvoudige
+datawetenschap haal je echter snel veel meer details uit verschillende aspecten van het spel.</p>
+
+<p>Ik raad dit soort project echt aan voor mensen die leren programmeren. Zoek een onderwerp dat je leuk vindt, schrijf
+wat code om er gegevens over te verzamelen, voer een analyse uit en maak enkele grafieken.</p>
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/python/">python</a>,&nbsp;<a href="/nl/tag/jupyter/">jupyter</a>,&nbsp;<a href="/nl/tag/pandas/">pandas</a>,&nbsp;<a href="/nl/tag/gwent/">gwent</a>,&nbsp;<a href="/nl/tag/data-science/">data-science</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=Gwent%3A+analyse+van+de+Pro+Ladder+en+nationale+ranglijsten%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fgames%2F2020%2F09%2FGwentProRankAnalysis%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fgames%2F2020%2F09%2FGwentProRankAnalysis%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fgames%2F2020%2F09%2FGwentProRankAnalysis%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=Gwent%3A+analyse+van+de+Pro+Ladder+en+nationale+ranglijsten&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2Fgames%2F2020%2F09%2FGwentProRankAnalysis%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/programming/2020/08/BusyBoard2/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">BusyBoard integreren in Home Assistant</span></a></span>
+  <span class="next-post"><a href="/nl/programming/2020/09/Testing-Benfords-Law/"><span class="page-number">De wet van Benford op de proef gesteld</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

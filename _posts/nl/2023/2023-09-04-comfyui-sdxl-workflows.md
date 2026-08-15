@@ -115,7 +115,7 @@ De snelle vooruitgang in dit domein blijft me verbazen. Terwijl bepaalde element
 onmogelijk goed te krijgen waren, geeft SDXL ze correct weer (handen blijven het grootste probleem). Het basismodel 
 kan veel realistischere resultaten maken en de resolutie is aanzienlijk verbeterd. Voor mensen zoals ik, die af en toe een creatieve uitlaatklep nodig hebben en beter overweg kunnen met computers dan met penselen, is deze gereedschapskist onmisbaar om fraaie afbeeldingen te maken.
 
-[vorige post]: {% post_url 2022/2022-12-31-Stable-Diffusion-Workflow %}
+[vorige post]: {% post_url nl/2022/2022-12-31-Stable-Diffusion-Workflow %}
 [ComfyUI]: https://github.com/comfyanonymous/ComfyUI
 [Automatic1111]: https://github.com/AUTOMATIC1111/stable-diffusion-webui
 [Stability AI]: https://huggingface.co/stabilityai

@@ -5,6 +5,7 @@ byline: ""
 description: "A tour of my favorite GitHub Actions workflows to automate tasks like formatting Python with black, running unit tests and pulling in data on a schedule."
 date:   2021-10-15 06:00:00
 author: Sebastian Proost
+post_id: github-actions
 categories: programming
 tags:	python javascript github black unittest ci automation yaml
 cover:  "/assets/posts/2021-10-15-GitHub-Actions/github_logo.png"

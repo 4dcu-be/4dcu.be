@@ -21,13 +21,17 @@
   <meta property="og:url" content="https://blog.4dcu.be/programming/2019/12/01/Sentiment-Analysis.html" />
   <meta property="og:type" content="article" />
   <meta property="og:locale" content="en_US" />
-  
+  <meta property="og:locale:alternate" content="nl_NL" />
   <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2019-12-01-Sentiment-Analysis-header.jpg" /><meta property="og:image:alt" content="Sentiment Analysis and the Shape of Stories" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
   <meta property="article:published_time" content="2019-12-01T12:00:00+00:00" /><meta property="article:modified_time" content="2019-12-01T12:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programming" /><meta property="article:tag" content="python" /><meta property="article:tag" content="NLP" /><meta property="article:tag" content="NLTK" /><meta property="article:tag" content="pandas" /><meta property="article:tag" content="matplotlib" /><meta property="article:tag" content="LotR" /><meta property="article:tag" content="data-science" />
 
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Sentiment Analysis and the Shape of Stories"><meta name="twitter:description" content="Using Python and NLTK sentiment analysis to plot the emotional shape of a story, applied to Tolkien&#39;s Lord of the Rings and inspired by Kurt Vonnegut."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2019-12-01-Sentiment-Analysis-header.jpg"><meta name="twitter:image:alt" content="Sentiment Analysis and the Shape of Stories"><meta name="twitter:url" content="https://blog.4dcu.be/programming/2019/12/01/Sentiment-Analysis.html">
 
   <link rel="canonical" href="https://blog.4dcu.be/programming/2019/12/01/Sentiment-Analysis.html">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/2019/12/01/Sentiment-Analysis.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/2019/12/Sentiment-Analysis/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/2019/12/01/Sentiment-Analysis.html">
   
   <link rel="alternate" type="application/rss+xml" title="4DCu.be (en-US)" href="https://blog.4dcu.be/feed.xml" />
   <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
@@ -111,7 +115,7 @@
       
         <a class="navbar-item lang-switch__option is-current" lang="en" href="/programming/2019/12/01/Sentiment-Analysis.html" aria-current="true"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
       
-        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/programming/2019/12/Sentiment-Analysis/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
       
       </div>
     </div>
@@ -144,7 +148,7 @@ found in a Jupyter notebook in <a href="https://github.com/4dcu-be/ShapeOfStorie
 <h2 id="sentiment-analysis-in-python">Sentiment analysis in Python</h2>
 
 <p>Python has the <a href="https://www.nltk.org/">Natural Language Toolkit</a> which includes a very easy way to do sentiment 
-analysis. Import the correct library, create a <code class="language-plaintext highlighter-rouge">SentimentIntsenityAnalyzer()</code> and apply it on a fragment of text. Done! 
+analysis. Import the correct library, create a <code class="language-plaintext highlighter-rouge">SentimentIntensityAnalyzer()</code> and apply it on a fragment of text. Done!
 Just look at the examples below how a few lines of code can pick up which fragments are positive, negative or 
 neutral (reflected in the ‘pos’, ‘neg’, ‘neu’). Furthermore there is a <strong>compound score</strong> that is positive if the overall
 sentiment of the text is good and negative if it is bad, this is the metric we want to create the shape of the story.</p>
@@ -238,11 +242,11 @@ matplotlib directly.</p>
 <img src="/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.svg" alt="Sentiment plot of Lord of the Rings - The Fellowship of the Ring" height="432" width="1080" data-src="/assets/posts/2019-12-01-Sentiment-Analysis/Fellowship.svg" loading="lazy" />
 </a></p>
 
-<p>This looks pretty close to what I wanted ! However, does it make sense … To figure this out lets add some annotations
+<p>This looks pretty close to what I wanted! However, does it make sense … To figure this out let’s add some annotations
 to the plot. I pinpointed paragraphs containing key moments in the story and will add them to the plot. This will give
 us a better view if the plot makes sense and if it really follows the story.</p>
 
-<p>The code to do this is similar as above, with the exception dots and text will be added.</p>
+<p>The code to do this is similar as above, with the exception that dots and text will be added.</p>
 
 <p><strong>Note that the section below the code contains SPOILERS for both the book and the movie</strong></p>
 
@@ -290,7 +294,7 @@ So the story starts very happy and cheerful, as Tolkien describes these characte
 portion of the book. Meeting new characters, like Strider/Aragorn, is often met with positive sentiment.</p>
 
 <p>The sentiment goes down considerably once Frodo makes his way to Bree and the Black Riders (later revealed as the
-ringwraights or <a href="https://lotr.fandom.com/wiki/Nazg%C3%BBl">Nazgûl</a>) start chasing them, leading to a confrontation at 
+Ringwraiths or <a href="https://lotr.fandom.com/wiki/Nazg%C3%BBl">Nazgûl</a>) start chasing them, leading to a confrontation at
 the Weathertop. Here Frodo is injured and needs to be rushed to Rivendell. This section in both the book and the movie
 is rather dark, the Hobbits fear the Riders and start to understand their mission is far more perilous than they ever
 imagined.</p>
@@ -305,11 +309,11 @@ negative moments in both the book and the movie. This is also the sharpest negat
 make it out of the Mines alive and are able to find shelter with the elves of Lothlórien.</p>
 
 <p>Once they leave the forest and their host Galadriel the Lady of Lórien, things quickly take a turn
-for the worst at the end of the story. Orcs are closing in on them, Boromir betrays them and tries to take the ring from
+for the worse at the end of the story. Orcs are closing in on them, Boromir betrays them and tries to take the ring from
 Frodo (Unlike the movie his death isn’t included in this book, it is at the start of The Two Towers), the Fellowship 
 breaks up and hence fails to complete their quest.</p>
 
-<p>I wonder if this approach would work as well for other books ?</p>
+<p>I wonder if this approach would work as well for other books?</p>
 </article>
 <section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/tag/python/">python</a>,&nbsp;<a href="/tag/nlp/">NLP</a>,&nbsp;<a href="/tag/nltk/">NLTK</a>,&nbsp;<a href="/tag/pandas/">pandas</a>,&nbsp;<a href="/tag/matplotlib/">matplotlib</a>,&nbsp;<a href="/tag/lotr/">LotR</a>,&nbsp;<a href="/tag/data-science/">data-science</a></section>
 <section class="rss">

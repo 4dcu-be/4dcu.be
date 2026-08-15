@@ -21,13 +21,17 @@
   <meta property="og:url" content="https://blog.4dcu.be/programming/games/2020/11/11/Gwent-Pro-Rank-ABM_2.html" />
   <meta property="og:type" content="article" />
   <meta property="og:locale" content="en_US" />
-  
+  <meta property="og:locale:alternate" content="nl_NL" />
   <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2020-11-11-Gwent-Pro-Rank-ABM-graph_header.jpg" /><meta property="og:image:alt" content="An Agent Based Model to look at Gwent Pro Ladder (results)" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
   <meta property="article:published_time" content="2020-11-11T13:00:00+00:00" /><meta property="article:modified_time" content="2020-11-11T13:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programming" /><meta property="article:section" content="Games" /><meta property="article:tag" content="python" /><meta property="article:tag" content="numpy" /><meta property="article:tag" content="gwent" /><meta property="article:tag" content="mesa" /><meta property="article:tag" content="abm" /><meta property="article:tag" content="agent-based-modeling" /><meta property="article:tag" content="pandas" /><meta property="article:tag" content="seaborn" /><meta property="article:tag" content="data-science" />
 
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="An Agent Based Model to look at Gwent Pro Ladder (results)"><meta name="twitter:description" content="Analyzing the Gwent agent based model results to show that grinding more games and simple luck, not just skill, raise peak MMR on Pro Ladder (results)."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2020-11-11-Gwent-Pro-Rank-ABM-graph_header.jpg"><meta name="twitter:image:alt" content="An Agent Based Model to look at Gwent Pro Ladder (results)"><meta name="twitter:url" content="https://blog.4dcu.be/programming/games/2020/11/11/Gwent-Pro-Rank-ABM_2.html">
 
   <link rel="canonical" href="https://blog.4dcu.be/programming/games/2020/11/11/Gwent-Pro-Rank-ABM_2.html">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/games/2020/11/11/Gwent-Pro-Rank-ABM_2.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM_2/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/games/2020/11/11/Gwent-Pro-Rank-ABM_2.html">
   
   <link rel="alternate" type="application/rss+xml" title="4DCu.be (en-US)" href="https://blog.4dcu.be/feed.xml" />
   <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
@@ -111,7 +115,7 @@
       
         <a class="navbar-item lang-switch__option is-current" lang="en" href="/programming/games/2020/11/11/Gwent-Pro-Rank-ABM_2.html" aria-current="true"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
       
-        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM_2/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
       
       </div>
     </div>
@@ -167,8 +171,8 @@ over those with less time on their hands.</p>
 down. When recreating this plot with the simulated data, this pattern doesn’t appear. This will be discussed further
 down in the article.</p>
 
-<p><a href="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_0.png" class="lightgallery-link" data-sub-html="Ridgline plot with distribution of games played in different groups of players based on their final rank">
-<img src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_0.png" alt="Ridgline plot with distribution of games played in different groups of players based on their final rank" height="504" width="540" class="small-image" data-src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_0.png" loading="lazy" />
+<p><a href="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_0.png" class="lightgallery-link" data-sub-html="Ridgeline plot with distribution of games played in different groups of players based on their final rank">
+<img src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_0.png" alt="Ridgeline plot with distribution of games played in different groups of players based on their final rank" height="504" width="540" class="small-image" data-src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_0.png" loading="lazy" />
 </a></p>
 
 <h2 id="adding-learning-to-the-model">Adding Learning to the Model</h2>
@@ -201,8 +205,8 @@ those that play a lot, despite starting at a similar skill level, increases.</p>
 higher ranks the same ridgeline plot was created. There is a minor shift, but it is barely perceptible and nowhere near
 the clear shift that is observed in real data.</p>
 
-<p><a href="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_20.png" class="lightgallery-link" data-sub-html="Ridgline plot with distribution of games played in different groups of players based on their final rank with learning enabled">
-<img src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_20.png" alt="Ridgline plot with distribution of games played in different groups of players based on their final rank with learning enabled" height="504" width="540" class="small-image" data-src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_20.png" loading="lazy" />
+<p><a href="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_20.png" class="lightgallery-link" data-sub-html="Ridgeline plot with distribution of games played in different groups of players based on their final rank with learning enabled">
+<img src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_20.png" alt="Ridgeline plot with distribution of games played in different groups of players based on their final rank with learning enabled" height="504" width="540" class="small-image" data-src="/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_20.png" loading="lazy" />
 </a></p>
 
 <p>Even with the experience factor pushed to 100 (data in repository), which is far beyond the skill increase you can expect in real life, this
@@ -238,7 +242,7 @@ go out on a limb and give a few hypotheses which could explain this discrepancy 
 
 <ul>
   <li>Players that were playing a lot in previous seasons will be (i) more proficient at the game due to experience and 
-  (ii) will continue to do play the game more than average.</li>
+  (ii) will continue to play the game more than average.</li>
   <li>While the gains are relatively small, the way ladder works gives a small advantage to frequent players. The higher 
   up ladder you get the more competitive it gets and more players are willing to play additional games to leverage this
   minor edge over their competition.</li>
@@ -266,7 +270,7 @@ capturing the skill of a player. Though there are two main issues that emerged f
 
 <ul>
   <li><strong>There is a lot of variance</strong>, similarly skilled players that play roughly the same number of games can end up with 
-  peak MMR scores that are up to ~70 point apart. This is simply based on luck and who you queue into.</li>
+  peak MMR scores that are up to ~70 points apart. This is simply based on luck and who you queue into.</li>
   <li><strong>Playing more leads to higher peak MMR scores</strong>, even in the absence of learning. Having a winning streak at the right time
   can push the peak MMR score up. Playing more games increases the chance of such a streak happening at the right moment.</li>
 </ul>

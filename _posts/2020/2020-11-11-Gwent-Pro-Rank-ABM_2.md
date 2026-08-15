@@ -5,6 +5,7 @@ byline: "let's dive into the data the ABM generated"
 description: "Analyzing the Gwent agent based model results to show that grinding more games and simple luck, not just skill, raise peak MMR on Pro Ladder (results)."
 date:   2020-11-11 13:00:00
 author: Sebastian Proost
+post_id: gwent-pro-rank-abm-2
 categories: programming games
 tags:	python numpy gwent mesa abm agent-based-modeling pandas seaborn data-science
 cover:  "/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/graph_header.jpg"
@@ -44,7 +45,7 @@ When looking at actual data, it became obvious that players in the higher ranks 
 down. When recreating this plot with the simulated data, this pattern doesn't appear. This will be discussed further
 down in the article.
 
-![Ridgline plot with distribution of games played in different groups of players based on their final rank](/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_0.png){:.small-image}
+![Ridgeline plot with distribution of games played in different groups of players based on their final rank](/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_0.png){:.small-image}
 
 ## Adding Learning to the Model
 
@@ -72,7 +73,7 @@ To check if with agents learning, as you would expect from actual players, those
 higher ranks the same ridgeline plot was created. There is a minor shift, but it is barely perceptible and nowhere near
 the clear shift that is observed in real data. 
 
-![Ridgline plot with distribution of games played in different groups of players based on their final rank with learning enabled](/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_20.png){:.small-image}
+![Ridgeline plot with distribution of games played in different groups of players based on their final rank with learning enabled](/assets/posts/2020-11-11-Gwent-Pro-Rank-ABM/ridgeplot_experience_factor_20.png){:.small-image}
 
 Even with the experience factor pushed to 100 (data in repository), which is far beyond the skill increase you can expect in real life, this
 pattern cannot be replicated. There is another factor at play here, one that is not included in our model...
@@ -106,7 +107,7 @@ for the shift that is observed in real data. So human players exhibit behaviour 
 go out on a limb and give a few hypotheses which could explain this discrepancy between the model and observation.
 
   * Players that were playing a lot in previous seasons will be (i) more proficient at the game due to experience and 
-  (ii) will continue to do play the game more than average.
+  (ii) will continue to play the game more than average.
   * While the gains are relatively small, the way ladder works gives a small advantage to frequent players. The higher 
   up ladder you get the more competitive it gets and more players are willing to play additional games to leverage this
   minor edge over their competition.
@@ -132,7 +133,7 @@ Peak MMR as a metric is reasonably well correlated with the innate skill of a pl
 capturing the skill of a player. Though there are two main issues that emerged from this analysis:
 
   * **There is a lot of variance**, similarly skilled players that play roughly the same number of games can end up with 
-  peak MMR scores that are up to ~70 point apart. This is simply based on luck and who you queue into.
+  peak MMR scores that are up to ~70 points apart. This is simply based on luck and who you queue into.
   * **Playing more leads to higher peak MMR scores**, even in the absence of learning. Having a winning streak at the right time
   can push the peak MMR score up. Playing more games increases the chance of such a streak happening at the right moment.
   

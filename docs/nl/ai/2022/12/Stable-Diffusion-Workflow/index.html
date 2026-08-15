@@ -1,0 +1,702 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>Haal alles uit Stable Diffusion 2.1: tips en trucs</title>
+  <meta name="description" content="Tips en trucs om alles uit Stable Diffusion 2.1 te halen in de webinterface, met aandacht voor installatie, afbeeldingen van 768 px, prompts en een workflow ...">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Haal alles uit Stable Diffusion 2.1: tips en trucs" />
+  <meta property="og:description" content="Tips en trucs om alles uit Stable Diffusion 2.1 te halen in de webinterface, met aandacht voor installatie, afbeeldingen van 768 px, prompts en een workflow ..." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/ai/2022/12/Stable-Diffusion-Workflow/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2022-12-31-Stable-Diffusion-Workflow-header.jpg" /><meta property="og:image:alt" content="Haal alles uit Stable Diffusion 2.1: tips en trucs" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2022-12-31T10:00:00+00:00" /><meta property="article:modified_time" content="2022-12-31T10:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="AI" /><meta property="article:tag" content="aiart" /><meta property="article:tag" content="python" /><meta property="article:tag" content="stable-diffusion" /><meta property="article:tag" content="dreambooth" /><meta property="article:tag" content="art" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Haal alles uit Stable Diffusion 2.1: tips en trucs"><meta name="twitter:description" content="Tips en trucs om alles uit Stable Diffusion 2.1 te halen in de webinterface, met aandacht voor installatie, afbeeldingen van 768 px, prompts en een workflow ..."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2022-12-31-Stable-Diffusion-Workflow-header.jpg"><meta name="twitter:image:alt" content="Haal alles uit Stable Diffusion 2.1: tips en trucs"><meta name="twitter:url" content="https://blog.4dcu.be/nl/ai/2022/12/Stable-Diffusion-Workflow/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/ai/2022/12/Stable-Diffusion-Workflow/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/ai/2022/12/31/Stable-Diffusion-Workflow.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/ai/2022/12/Stable-Diffusion-Workflow/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/ai/2022/12/31/Stable-Diffusion-Workflow.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/ai/2022/12/Stable-Diffusion-Workflow/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/ai/2022/12/Stable-Diffusion-Workflow/" },
+      "url": "https://blog.4dcu.be/nl/ai/2022/12/Stable-Diffusion-Workflow/",
+      "headline": "Haal alles uit Stable Diffusion 2.1: tips en trucs",
+      "description": "Tips en trucs om alles uit Stable Diffusion 2.1 te halen in de webinterface, met aandacht voor installatie, afbeeldingen van 768 px, prompts en een workflow ...",
+      "datePublished": "2022-12-31T10:00:00+00:00",
+      "dateModified": "2022-12-31T10:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2022-12-31-Stable-Diffusion-Workflow-header.jpg",
+      "keywords": ["aiart", "python", "stable-diffusion", "dreambooth", "art"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/ai/2022/12/Stable-Diffusion-Workflow/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "AI", "item": "https://blog.4dcu.be/nl/category/ai/" },
+        { "@type": "ListItem", "position": 3, "name": "Haal alles uit Stable Diffusion 2.1: tips en trucs" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/ai/2022/12/31/Stable-Diffusion-Workflow.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/ai/2022/12/Stable-Diffusion-Workflow/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/stable_diffusion_part_1.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="Haal alles uit Stable Diffusion 2.1: tips en trucs" class="hero-background is-transparent" src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/header.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">Haal alles uit Stable Diffusion 2.1: tips en trucs</h1><p class="info has-text-white"><em></em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 31-12-2022 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/ai/">AI</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>De nieuwste versie van Stable Diffusion, met uitgebreidere ondersteuning voor grotere afbeeldingen van 768 px, is een aanzienlijke verbetering
+ten opzichte van eerdere modellen die alleen afbeeldingen van 512 px ondersteunden. Het kan wat aanpassing vragen omdat het model met een beperktere
+dataset werd getraind en anders met prompts omgaat, maar dit nieuwe model heeft het potentieel om verbluffende, door AI gegenereerde 
+kunstwerken te maken. In deze reeks delen we enkele nuttige tips en technieken om de
+mogelijkheden van het Stable Diffusion 2.1-model ten volle te benutten.</p>
+
+<h2 id="vereisten">Vereisten</h2>
+
+<p>Om met Stable Diffusion aan de slag te gaan, moet je enkele tools installeren. Omdat elk van die tools eigen
+installatie-instructies heeft, raadpleeg je best de handleidingen voor de specifieke installatieprocedure van elke tool. Hier
+lichten we alleen de instellingen uit die specifiek voor deze workflow nodig zijn. Omdat <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">Stable Diffusion web UI</a> via Git moet worden geïnstalleerd,
+moet je ervoor zorgen dat Git beschikbaar is. Op Windows verkies ik <a href="https://git-scm.com/">Git SCM</a> boven de officiële client.</p>
+
+<ul>
+  <li><a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">Stable Diffusion web UI</a> van AUTOMATIC1111. De UI die we gebruiken om afbeeldingen te genereren, modellen te trainen, …</li>
+  <li><a href="https://github.com/d8ahazard/sd_dreambooth_extension">Dreambooth Extension</a> voor Stable Diffusion web UI. Kan via de UI worden geïnstalleerd (tabblad Extensions)</li>
+  <li>Stable Diffusion 2.1 768-model. Download <code class="language-plaintext highlighter-rouge">v2-1_768-ema-pruned.ckpt</code> van <a href="https://huggingface.co/stabilityai/stable-diffusion-2-1">huggingface.co</a> en plaats dit bestand in de
+  juiste map</li>
+  <li><a href="https://github.com/Sanster/lama-cleaner">Lama Cleaner</a>, een op AI gebaseerde tool voor <em>inpainting</em>, handig om delen van een afbeelding te verwijderen (optioneel)</li>
+  <li><a href="https://github.com/chaiNNer-org/chaiNNer">ChaiNNer</a>, een workflow-editor om workflows voor beeldbewerking te maken, bijvoorbeeld om afbeeldingen op te schalen (optioneel)</li>
+  <li><a href="https://www.gimp.org/">GIMP</a>, een gratis en opensourcetool voor beeldbewerking (optioneel)</li>
+  <li>Je hebt actuele drivers voor je NVIDIA GPU nodig, samen met <a href="https://developer.nvidia.com/cudnn">cuDNN</a></li>
+</ul>
+
+<p>Om de technieken in deze reeks optimaal te benutten, heb je best een uitstekende GPU.
+Als je geen GPU met minstens 16GB VRAM ter beschikking hebt, kun je via <a href="https://www.runpod.io/">Runpod.io</a> een machine
+in de cloud met een krachtige GPU huren voor minder dan een halve dollar per uur. De specificaties van mijn machine, die ik in deze reeks
+gebruik, zijn:</p>
+
+<ul>
+  <li>NVIDIA 4080 RTX (16 Gb VRAM)</li>
+  <li>RAM: 32 Gb</li>
+  <li>CPU: Ryzen 7 3700X</li>
+  <li>100 Gb vrije ruimte</li>
+  <li>Windows 10</li>
+</ul>
+
+<p>Voor deze eerste post volstaat een bescheidener GPU: elke NVIDIA GPU met 6Gb VRAM zou moeten werken. Alleen voor het 
+trainen van nieuwe stijlen of toevoegen van personen en objecten, wat later aan bod komt, is meer VRAM nodig.</p>
+
+<h2 id="stable-diffusion-web-ui-configureren">Stable Diffusion web UI configureren</h2>
+
+<p>Nadat je <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">Stable Diffusion web UI</a> hebt geïnstalleerd, moet je het bestand <code class="language-plaintext highlighter-rouge">webui-user.bat</code> wat aanpassen.
+Het programma moet met twee extra argumenten worden gestart, <code class="language-plaintext highlighter-rouge">--xformers</code> en <code class="language-plaintext highlighter-rouge">--no-half</code>. Voeg die daarom toe
+aan de regel die begint met <code class="language-plaintext highlighter-rouge">set COMMANDLINE_ARGS=</code>. Die regel moet <code class="language-plaintext highlighter-rouge">set COMMANDLINE_ARGS=--xformers --no-half</code> worden.
+<code class="language-plaintext highlighter-rouge">--xformers</code> is een optimalisatie die het VRAM-gebruik wat vermindert. <code class="language-plaintext highlighter-rouge">--no-half</code> is vereist voor SD2.1.
+Sla het bestand nu op en voer het uit om Stable Diffusion te starten (merk op dat bij de eerste start enkele extra
+afhankelijkheden worden geïnstalleerd).</p>
+
+<p>Open na het opstarten Stable Diffusion web UI in je browser (het standaardadres is http://localhost:7860/) en ga naar het
+tabblad <code class="language-plaintext highlighter-rouge">Settings</code>. Zoek de optie <code class="language-plaintext highlighter-rouge">Use cross attention optimizations while training</code> en zorg ervoor dat die is
+<strong>aangevinkt</strong>. Zo kan xformers ook worden gebruikt tijdens het trainen van een <em>embedding</em> of <em>hypernetwork</em>. Dat komt
+in een toekomstige post aan bod.</p>
+
+<h2 id="kunst-maken-met-ai">Kunst maken met AI</h2>
+
+<p>Persoonlijk beschouw ik mezelf niet als een kunstenaar. Wanneer je met door AI gegenereerde kunst werkt, neem je de rol van
+artdirector op. Je geeft instructies, oftewel een <em>prompt</em>, aan het neurale netwerk en hoopt de juiste neuronen te prikkelen
+om een resultaat te krijgen dat je bevalt. Met enkele revisierondes kom je steeds dichter bij een afbeelding die aan je
+verwachtingen voldoet. De workflow die voor mij werkt, begint met het uitwerken van een prompt, waarna ik een grote reeks afbeeldingen genereer,
+de beste kies, enkele variaties genereer, daar opnieuw de beste uitpik, <em>inpainting</em>/img2img/compositing gebruik om
+de details goed te krijgen en ten slotte de afbeelding opschaal.</p>
+
+<h3 id="stap-1-prompts-uitwerken">Stap 1: prompts uitwerken</h3>
+
+<p>Met een prompt geef je het neurale netwerk aan wat je nodig hebt.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>an steam engine leaving the trainstation, fall, sunset, painting, fine-art, detailed
+</code></pre></div></div>
+
+<p>Voor SD2.1 zijn negatieve prompts vrij belangrijk. Hieronder staat een reeks termen waarmee ik begin. Als ik een meer geschilderde
+stijl wil, voeg ik hier <em>photo</em> en <em>photorealistic</em> aan toe (want dat is wat ik niet wil). Wanneer bepaalde ongewenste objecten
+blijven opduiken, is dit de plek om ze neer te schrijven en de AI weg te sturen van afbeeldingen die
+deze objecten bevatten.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>disfigured, kitsch, ugly, oversaturated, grain, low-res, Deformed, blurry, bad anatomy, disfigured, poorly drawn face,
+mutation, mutated, extra limb, ugly, poorly drawn hands, missing limb, blurry, floating limbs, disconnected limbs,
+malformed hands, blur, out of focus, long neck, long body, ugly, disgusting, poorly drawn, childish, mutilated,
+mangled, old, surreal
+</code></pre></div></div>
+
+<p>Na enkele pogingen kreeg ik deze afbeelding. Ik hou van de stijl en de locomotief doet me denken aan een modeltrein die ik als kind had. Dus
+gaan we hiermee verder.</p>
+
+<p><a href="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v1_prompt_only.png" class="lightgallery-link" data-sub-html="Door AI gegenereerde afbeelding van een stoomlocomotief die bij zonsondergang het station verlaat">
+<img src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v1_prompt_only.png" alt="Door AI gegenereerde afbeelding van een stoomlocomotief die bij zonsondergang het station verlaat" height="768" width="768" data-src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v1_prompt_only.png" loading="lazy" />
+</a></p>
+
+<p>Stable Diffusion toont ook de gebruikte prompts en instellingen:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>an steam engine leaving the trainstation, fall, sunset, painting, fine-art, detailed
+Negative prompt: photo, photorealistic, disfigured, kitsch, ugly, oversaturated, grain, low-res, Deformed, blurry, bad anatomy, disfigured, poorly drawn face, mutation, mutated, extra limb, ugly, poorly drawn hands, missing limb, blurry, floating limbs, disconnected limbs, malformed hands, blur, out of focus, long neck, long body, ugly, disgusting, poorly drawn, childish, mutilated, mangled, old, surreal
+Steps: 30, Sampler: Euler a, CFG scale: 7, Seed: 3331645590, Size: 768x768, Model hash: 4bdfc29c, Batch size: 4, Batch pos: 3
+</code></pre></div></div>
+
+<p>Je zult wat heen en weer moeten gaan en instellingen wijzigen om een goede prompt te vinden met instellingen die een goede eerste afbeelding opleveren.
+Je kunt hier ook brute kracht gebruiken, tientallen of zelfs honderden afbeeldingen genereren en de beste kiezen.</p>
+
+<h3 id="stap-2-variaties-genereren">Stap 2: variaties genereren</h3>
+
+<p>Vervolgens genereren we enkele variaties op deze afbeelding om te zien of we een betere versie tevoorschijn kunnen halen. Kopieer daarvoor de
+<em>seed</em> naar het overeenkomstige veld en vink <code class="language-plaintext highlighter-rouge">Extra</code> aan om de opties voor variaties te tonen. Stel de variatiesterkte in op
+0.05 - 0.1 (relatief laag, omdat we de afbeelding niet te veel willen veranderen) en genereer meer afbeeldingen. Verander
+de prompt of de instellingen niet.</p>
+
+<p><a href="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/prompt_variation_settings.jpg" class="lightgallery-link" data-sub-html="Instellingen van Stable Diffusion web UI om variaties op een afbeelding te genereren">
+<img src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/prompt_variation_settings.jpg" alt="Instellingen van Stable Diffusion web UI om variaties op een afbeelding te genereren" height="227" width="811" class="small-image" data-src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/prompt_variation_settings.jpg" loading="lazy" />
+</a></p>
+
+<p>Nadat ik enkele batches had gegenereerd, verscheen de volgende afbeelding. Het gebouw lijkt hier veel meer op een treinstation.
+Hoewel de afbeelding verre van perfect is, is dit een stap in de goede richting. Dus gaan we hiermee verder!</p>
+
+<p><a href="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v2_prompt_variation.png" class="lightgallery-link" data-sub-html="Door AI gegenereerde afbeelding van een stoomlocomotief die bij zonsondergang het station verlaat, versie 2 na het genereren van variaties">
+<img src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v2_prompt_variation.png" alt="Door AI gegenereerde afbeelding van een stoomlocomotief die bij zonsondergang het station verlaat, versie 2 na het genereren van variaties" height="768" width="768" data-src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v2_prompt_variation.png" loading="lazy" />
+</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>an steam engine leaving the trainstation, fall, sunset, painting, fine-art, detailed
+Negative prompt: photo, photorealistic, disfigured, kitsch, ugly, oversaturated, grain, low-res, Deformed, blurry, bad anatomy, disfigured, poorly drawn face, mutation, mutated, extra limb, ugly, poorly drawn hands, missing limb, blurry, floating limbs, disconnected limbs, malformed hands, blur, out of focus, long neck, long body, ugly, disgusting, poorly drawn, childish, mutilated, mangled, old, surreal
+Steps: 30, Sampler: Euler a, CFG scale: 7, Seed: 3331645590, Size: 768x768, Model hash: 4bdfc29c, Batch size: 8, Batch pos: 1, Variation seed: 2387469322, Variation seed strength: 0.05
+</code></pre></div></div>
+
+<p>Merk op dat dit niet met alle samplers werkt. Met <em>Euler a</em> lijkt het vrij goed te werken, maar sommige samplers hebben
+moeite om een afbeelding met dezelfde <em>seed</em> te reproduceren wanneer niet een volledige batch afbeeldingen wordt gegenereerd. (Een oplossing is om
+meerdere batches van één afbeelding te maken.) Efficiënte samplers, die al na enkele stappen convergeren,
+genereren zelfs bij een kleine variatie (&lt; 0.1) sterk verschillende afbeeldingen. Je resultaat kan dus variëren! 
+Een andere manier om verschillende versies van de oorspronkelijke afbeelding te krijgen, is de <code class="language-plaintext highlighter-rouge">CFG Scale</code> en het aantal
+<code class="language-plaintext highlighter-rouge">Sampling Steps</code> te variëren. Met het X/Y Plot-script (dat helemaal onderaan de text2img-instellingen kan worden ingeschakeld) 
+kun je alle combinaties genereren. Je kunt ook meteen doorgaan naar stap 4 en img2img met een hoge <em>denoising</em>-instelling 
+gebruiken om variaties te genereren.</p>
+
+<h3 id="stap-3-fouten-corrigeren-met-inpainting">Stap 3: fouten corrigeren met inpainting</h3>
+
+<p>De rails in de bovenstaande afbeelding zijn duidelijk fout: er ligt een extra spoorstaaf die we de AI moeten laten verwijderen.
+Dat is precies waarvoor <em>inpainting</em> is bedoeld: je schildert over een bepaald deel en geeft een nieuwe prompt om dat
+te bedekken. Spelen met de instellingen en geduld hebben is hier belangrijk. Ik maskeerde de ongewenste spoorstaaf en voerde de
+prompt <code class="language-plaintext highlighter-rouge">ballast, pebbles, painting, fine-art, detailed</code> in, omdat ik de spoorstaaf daardoor wilde vervangen.</p>
+
+<p>Ik probeerde het met en zonder <code class="language-plaintext highlighter-rouge">Inpaint at full resolution</code> en kwam uiteindelijk uit op <code class="language-plaintext highlighter-rouge">0.9</code> voor de <code class="language-plaintext highlighter-rouge">Denoising 
+strength</code>, waardoor de AI veel vrijheid kreeg om de afbeelding te veranderen. Om volledig nieuwe inhoud toe te voegen of iets te verwijderen,
+kan het helpen om <code class="language-plaintext highlighter-rouge">Masked content</code> in te stellen op <code class="language-plaintext highlighter-rouge">Latent noise</code> of <code class="language-plaintext highlighter-rouge">Latent nothing</code>, zodat er iets wordt gegenereerd dat niet op
+de onderliggende afbeelding is gebaseerd. Als je iets wilt verwijderen, kun je ook <a href="https://github.com/Sanster/lama-cleaner">Lama Cleaner</a> gebruiken. Die tool is 
+uitstekend om snel enkele ongewenste elementen weg te werken.</p>
+
+<p>Onze afbeelding ziet er nu zo uit:</p>
+
+<p><a href="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v3_inpainted.png" class="lightgallery-link" data-sub-html="Door AI gegenereerde afbeelding van een stoomlocomotief die bij zonsondergang het station verlaat, versie 3 waarin de extra spoorstaaf met inpainting is verwijderd">
+<img src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v3_inpainted.png" alt="Door AI gegenereerde afbeelding van een stoomlocomotief die bij zonsondergang het station verlaat, versie 3 waarin de extra spoorstaaf met inpainting is verwijderd" height="768" width="768" data-src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v3_inpainted.png" loading="lazy" />
+</a></p>
+
+<p>De spoorstaaf in de onderste hoek verwijderen met <em>inpainting</em> bleek veel omslachtiger. Hier opende ik de
+afbeelding in <a href="https://www.gimp.org/">GIMP</a> en gebruikte ik het kloongereedschap om wat gras te kopiëren. Vervolgens werd met <em>inpainting</em>, een lage <code class="language-plaintext highlighter-rouge">Denoising 
+strength</code> van 0.2 en een prompt met gras en aarde opnieuw wat meer variatie in de textuur van dit deel van
+de afbeelding aangebracht.</p>
+
+<p><a href="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v3-2_inpainted.png" class="lightgallery-link" data-sub-html="Door AI gegenereerde afbeelding van een stoomlocomotief die bij zonsondergang het station verlaat, versie 3-2 waarin de extra spoorstaaf met inpainting is verwijderd">
+<img src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v3-2_inpainted.png" alt="Door AI gegenereerde afbeelding van een stoomlocomotief die bij zonsondergang het station verlaat, versie 3-2 waarin de extra spoorstaaf met inpainting is verwijderd" height="768" width="768" data-src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v3-2_inpainted.png" loading="lazy" />
+</a></p>
+
+<h3 id="stap-4-de-details-verfijnen-met-img2img">Stap 4: de details verfijnen met Img2Img</h3>
+
+<p>Nu verplaatsen we onze afbeelding naar img2img om de details te verfijnen. Voer de oorspronkelijke prompt opnieuw in en stel de <code class="language-plaintext highlighter-rouge">Denoising 
+strength</code> in op een lage waarde, bijvoorbeeld 0.1 tot 0.4, om te voorkomen dat de AI te veel verandert. Genereer daarna nog enkele afbeeldingen.
+Je zult zien dat bij elke iteratie andere aspecten veranderen: sommige versies hebben betere wielen, andere
+betere rails of meer details in het gebouw, …</p>
+
+<p>De truc is om elke afbeelding te kiezen die ergens het beste in is (je kunt afbeeldingen snel naar je Desktop slepen).
+Open de afbeeldingen als verschillende lagen in <a href="https://www.gimp.org/">GIMP</a>, voeg een laagmasker toe en schilder de delen van elke afbeelding die je wilt behouden.
+Omdat er maar heel weinig verschil is tussen de afbeeldingen, is dit erg eenvoudig en hoef je niet bijzonder 
+precies te schilderen.</p>
+
+<p><a href="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/gimp_composite_layers.jpg" class="lightgallery-link" data-sub-html="Drie met img2img gegenereerde variaties in GIMP als afzonderlijke lagen, met een masker dat het beste van elke afbeelding combineert">
+<img src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/gimp_composite_layers.jpg" alt="Drie met img2img gegenereerde variaties in GIMP als afzonderlijke lagen, met een masker dat het beste van elke afbeelding combineert" height="413" width="439" class="small-image" data-src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/gimp_composite_layers.jpg" loading="lazy" />
+</a></p>
+
+<p>We exporteren de afbeelding uit GIMP, want we naderen de definitieve versie!</p>
+
+<p><a href="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v4_img2img_composite.png" class="lightgallery-link" data-sub-html="Samengestelde afbeelding van een stoomlocomotief die bij zonsondergang het station verlaat">
+<img src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v4_img2img_composite.png" alt="Samengestelde afbeelding van een stoomlocomotief die bij zonsondergang het station verlaat" height="768" width="768" data-src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v4_img2img_composite.png" loading="lazy" />
+</a></p>
+
+<p>Stap 3 en 4 kunnen indien nodig worden herhaald.</p>
+
+<h3 id="stap-5-opschalen">Stap 5: opschalen</h3>
+
+<p>Met SD2.1 kunnen we beginnen met een afbeelding van 768x768 of groter, die daardoor dubbel zoveel pixels telt als bij de 512x512-
+modellen. Opschalen is dus aanzienlijk eenvoudiger. Waarschijnlijk volstaat het om de afbeelding naar Extras te sturen en twee methoden te selecteren
+om de afmetingen mooi met een factor 2x - 4x te vergroten.</p>
+
+<p><a href="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v5_upscaled.jpg" class="lightgallery-link" data-sub-html="Definitieve opgeschaalde afbeelding van een stoomlocomotief die bij zonsondergang het station verlaat">
+<img src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v5_upscaled.jpg" alt="Definitieve opgeschaalde afbeelding van een stoomlocomotief die bij zonsondergang het station verlaat" height="1536" width="1536" data-src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v5_upscaled.jpg" loading="lazy" />
+</a></p>
+
+<p><a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">Stable Diffusion web UI</a> ondersteunt ook SD-upscaling in het tabblad img2img. Daarbij wordt de afbeelding in kleinere delen geknipt,
+elk deel vergroot, met img2img van details voorzien en alles weer samengevoegd. Zorg ervoor dat de <code class="language-plaintext highlighter-rouge">Denoising strength</code> op
+een lage waarde is ingesteld. De resultaten variëren, omdat img2img ook bij lage <em>denoising</em>-waarden delen aanpast en zo ons 
+eerdere werk met <em>inpainting</em> en compositing ongedaan kan maken.</p>
+
+<p>Een andere optie is <a href="https://github.com/chaiNNer-org/chaiNNer">ChaiNNer</a> gebruiken om een workflow voor opschalen te maken. Die ondersteunt extra modellen voor opschalen
+die je met andere filters kunt combineren om de helderheid of scherpte van de afbeelding te verbeteren. Ook <a href="https://github.com/n00mkrad/cupscale">CupScale</a>, dat
+verschillende neurale upscalers ondersteunt, kan hiervoor worden gebruikt.</p>
+
+<h3 id="stap-6-laatste-correcties">Stap 6: laatste correcties</h3>
+
+<p>Er staan nog enkele elementen in de afbeelding die ik niet mooi vind, zoals de versieringen vooraan en de antenne
+achteraan. Omdat ik ze niet wil vervangen maar gewoon wil verwijderen, is <a href="https://github.com/Sanster/lama-cleaner">Lama Cleaner</a> eenvoudiger en sneller dan SD-
+inpainting (met het Lama-model).</p>
+
+<p><a href="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v5_upscaled_cleanup.jpg" class="lightgallery-link" data-sub-html="Opgeschaalde versie van een stoomlocomotief die bij zonsondergang het station verlaat, met de laatste handmatige aanpassingen">
+<img src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v5_upscaled_cleanup.jpg" alt="Opgeschaalde versie van een stoomlocomotief die bij zonsondergang het station verlaat, met de laatste handmatige aanpassingen" height="1536" width="1536" data-src="/assets/posts/2022-12-31-Stable-Diffusion-Workflow/train_v5_upscaled_cleanup.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="conclusie">Conclusie</h2>
+
+<p>Door AI gegenereerde kunst kan onze manier van kunst maken en bekijken veranderen. Onze definitieve afbeelding, die doet denken aan de vintage 
+doosillustraties van modelbouwsets, is daar een bewijs van. Zonder de hulp van AI-tools was het voor mij onmogelijk geweest
+om zo’n afbeelding te maken. Hoewel je al geweldige resultaten kunt krijgen door simpelweg een prompt te schrijven, kost het meestal wat meer 
+moeite om de gewenste afbeelding te bekomen. Daarom is het belangrijk om met instellingen te blijven experimenteren en je 
+afbeeldingen te verfijnen. Wees niet bang om je afbeelding meerdere keren opnieuw te genereren tot je tevreden bent met het resultaat.</p>
+
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/aiart/">aiart</a>,&nbsp;<a href="/nl/tag/python/">python</a>,&nbsp;<a href="/nl/tag/stable-diffusion/">stable-diffusion</a>,&nbsp;<a href="/nl/tag/dreambooth/">dreambooth</a>,&nbsp;<a href="/nl/tag/art/">art</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=Haal+alles+uit+Stable+Diffusion+2.1%3A+tips+en+trucs%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fai%2F2022%2F12%2FStable-Diffusion-Workflow%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fai%2F2022%2F12%2FStable-Diffusion-Workflow%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fai%2F2022%2F12%2FStable-Diffusion-Workflow%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=Haal+alles+uit+Stable+Diffusion+2.1%3A+tips+en+trucs&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fai%2F2022%2F12%2FStable-Diffusion-Workflow%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/programming/2022/12/tiny-rp2040/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">XIAO-RP2040: een piepklein alternatief voor de RPi Pico</span></a></span>
+  <span class="next-post"><a href="/nl/programming/2023/02/chatgpt-python-gui-app/"><span class="page-number">Kan ChatGPT voor mij een Python-GUI-app schrijven?</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

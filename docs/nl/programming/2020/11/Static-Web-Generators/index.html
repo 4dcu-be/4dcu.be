@@ -1,0 +1,667 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>Statische-sitegeneratoren: Jekyll versus Pelican versus Gatsby</title>
+  <meta name="description" content="De statische-sitegeneratoren Jekyll, Pelican en Gatsby vergelijken op basis van echte projectervaring, met de sterke en zwakke punten van elk om je te helpen...">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Statische-sitegeneratoren: Jekyll versus Pelican versus Gatsby" />
+  <meta property="og:description" content="De statische-sitegeneratoren Jekyll, Pelican en Gatsby vergelijken op basis van echte projectervaring, met de sterke en zwakke punten van elk om je te helpen..." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/programming/2020/11/Static-Web-Generators/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2020-11-22-Static-Web-Generators-generator_header.jpg" /><meta property="og:image:alt" content="Statische-sitegeneratoren: Jekyll versus Pelican versus Gatsby" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2020-11-22T13:00:00+00:00" /><meta property="article:modified_time" content="2020-11-22T13:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programmeren" /><meta property="article:tag" content="python" /><meta property="article:tag" content="ruby" /><meta property="article:tag" content="javascript" /><meta property="article:tag" content="pelican" /><meta property="article:tag" content="jekyll" /><meta property="article:tag" content="gatsby" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Statische-sitegeneratoren: Jekyll versus Pelican versus Gatsby"><meta name="twitter:description" content="De statische-sitegeneratoren Jekyll, Pelican en Gatsby vergelijken op basis van echte projectervaring, met de sterke en zwakke punten van elk om je te helpen..."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2020-11-22-Static-Web-Generators-generator_header.jpg"><meta name="twitter:image:alt" content="Statische-sitegeneratoren: Jekyll versus Pelican versus Gatsby"><meta name="twitter:url" content="https://blog.4dcu.be/nl/programming/2020/11/Static-Web-Generators/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/programming/2020/11/Static-Web-Generators/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/2020/11/22/Static-Web-Generators.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/2020/11/Static-Web-Generators/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/2020/11/22/Static-Web-Generators.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/programming/2020/11/Static-Web-Generators/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/programming/2020/11/Static-Web-Generators/" },
+      "url": "https://blog.4dcu.be/nl/programming/2020/11/Static-Web-Generators/",
+      "headline": "Statische-sitegeneratoren: Jekyll versus Pelican versus Gatsby",
+      "description": "De statische-sitegeneratoren Jekyll, Pelican en Gatsby vergelijken op basis van echte projectervaring, met de sterke en zwakke punten van elk om je te helpen...",
+      "datePublished": "2020-11-22T13:00:00+00:00",
+      "dateModified": "2020-11-22T13:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2020-11-22-Static-Web-Generators-generator_header.jpg",
+      "keywords": ["python", "ruby", "javascript", "pelican", "jekyll", "gatsby"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/programming/2020/11/Static-Web-Generators/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Programmeren", "item": "https://blog.4dcu.be/nl/category/programming/" },
+        { "@type": "ListItem", "position": 3, "name": "Statische-sitegeneratoren: Jekyll versus Pelican versus Gatsby" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/programming/2020/11/22/Static-Web-Generators.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/programming/2020/11/Static-Web-Generators/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/generator_header.png" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="Statische-sitegeneratoren: Jekyll versus Pelican versus Gatsby" class="hero-background is-transparent" src="/assets/posts/2020-11-22-Static-Web-Generators/generator_header.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">Statische-sitegeneratoren: Jekyll versus Pelican versus Gatsby</h1><p class="info has-text-white"><em>welke kies je het best?</em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 22-11-2020 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/programming/">Programmeren</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Er bestaan heel wat statische-sitegeneratoren! De juiste kiezen is allesbehalve vanzelfsprekend. In dit artikel vergelijk ik drie generatoren
+die ik in enkele projecten gebruikte, zodat je de juiste voor je volgende project kunt kiezen!</p>
+
+<p>Op <a href="https://jamstack.org/generators/">JamStack</a> staat een lange lijst generatoren waaruit je kunt kiezen, waardoor er één selecteren voor
+je volgende project een onmogelijke opgave lijkt. Als je het gevoel hebt dat kiezen onmogelijk is, is dit artikel voor jou! Hier bespreek ik drie sterk
+verschillende tools die ik dit jaar in enkele projecten gebruikte, met hun sterke en zwakke punten.</p>
+
+<p>Dit is gebaseerd op, en dus gekleurd door, mijn ervaring ermee. Deel gerust je mening in de
+reacties hieronder.</p>
+
+<h2 id="jekyll">Jekyll</h2>
+
+<p><a href="/assets/posts/2020-11-22-Static-Web-Generators/jekyll-logo-2x.png" class="lightgallery-link" data-sub-html="Jekyll-logo">
+<img src="/assets/posts/2020-11-22-Static-Web-Generators/jekyll-logo-2x.png" alt="Jekyll-logo" height="230" width="498" class="small-image" data-src="/assets/posts/2020-11-22-Static-Web-Generators/jekyll-logo-2x.png" loading="lazy" />
+</a></p>
+
+<p><a href="https://jekyllrb.com/">Jekyll</a>, uitgebracht in 2008, is een van de eerste statische-sitegeneratoren en werd populairder dankzij de 
+integratie in GitHub. Hoewel je met Jekyll allerlei websites kunt bouwen, is het in de kern bedoeld
+voor blogs. Het legt vrij sterk zijn eigen keuzes op voor bestandsstructuur, artikelmetadata, extensies, … maar zodra je die 
+patronen aanvaardt, kun je het webontwikkelingsaspect echt vergeten en je op de inhoud richten.</p>
+
+<h3 id="voordelen">Voordelen</h3>
+
+<p>Jekyll bestaat intussen ruim 12 jaar en er zijn heel wat thema’s en sjablonen beschikbaar (bijvoorbeeld <a href="http://jekyllthemes.org/">JekyllThemes</a>). 
+Er bestaan verschillende plugins om Jekyll uit te breiden en nuttige functies aan je website toe te voegen, zoals
+een artikelarchief, bibliografie (voor wetenschappelijke artikels met referenties), galerijen, …</p>
+
+<p>Elke statische website kan gratis op GitHub worden gehost, maar een site die met Jekyll is gemaakt kan GitHub ook zelf bouwen.
+Voeg je sjabloon en inhoud aan een nieuwe repository toe, stel in de instellingen de root van de repository in als bron voor de projectpagina 
+(zie hieronder) en je bent vertrokken. Je hoeft Jekyll zelfs niet meer lokaal te installeren: je kunt
+de repository wijzigen (lokaal en de wijzigingen committen/pushen, of rechtstreeks op GitHub via de online-interface). Zodra
+de nieuwe gegevens de servers van GitHub bereiken, wordt de website opnieuw gebouwd en verschijnen de wijzigingen enkele seconden later online. Zo 
+kun je onderweg vrij eenvoudig inhoud toevoegen vanaf elk apparaat met een browser en internetverbinding.</p>
+
+<p><a href="/assets/posts/2020-11-22-Static-Web-Generators/github_settings.png" class="lightgallery-link" data-sub-html="Instellingenpagina van GitHub, waar je GitHub kunt configureren om je site te bouwen">
+<img src="/assets/posts/2020-11-22-Static-Web-Generators/github_settings.png" alt="Instellingenpagina van GitHub, waar je GitHub kunt configureren om je site te bouwen" height="798" width="1177" data-src="/assets/posts/2020-11-22-Static-Web-Generators/github_settings.png" loading="lazy" />
+</a></p>
+
+<p>Een uitgesproken systeem als Jekyll kan een zegen zijn: doorgaans bestaat er maar één manier om iets te doen. Voor sommigen
+voelt dat als een beperking, voor anderen maakt het mogelijk om gewoon de gewenste inhoud te maken zonder veel 
+over webontwikkeling te moeten leren.</p>
+
+<p>Van de drie platformen die hier aan bod komen, is Jekyll het vriendelijkst voor beginners! Elk framework heeft wel een 
+leercurve (als je dat niet ziet zitten, ga dan naar <a href="https://wordpress.com/">wordpress.com</a>), maar volgens mij was Jekyll het snelst 
+gebruiksklaar.</p>
+
+<h3 id="nadelen">Nadelen</h3>
+
+<p>Jekyll is gebaseerd op Ruby, tegenwoordig geen bijzonder populaire programmeertaal. Als je het wilt of moet uitbreiden, 
+zul je die taal dus moeten leren. Voor kleine wijzigingen, zoals die uit <a href="/nl/programming/2020/03/Jekyll-Blog/">dit artikel</a>, is dat maar een beperkte hindernis,
+maar voor grotere functies (bijvoorbeeld ondersteuning voor nieuwe bestandstypes) 
+moet je je in deze programmeertaal verdiepen (waar ik persoonlijk verder niets mee doe). Hoewel er
+uitstekende plugins beschikbaar zijn, is hun aantal wat beperkt in vergelijking met andere platformen.</p>
+
+<p>Je website op GitHub bouwen beperkt het aantal bruikbare plugins nog verder (GitHub ondersteunt slechts een handvol 
+plugins op een toelatingslijst; al de rest is uitgesloten). Het kan handig zijn dat GitHub de pagina voor
+je bouwt, maar zonder toegang tot alle plugins (bijvoorbeeld een plugin die een artikelarchief voor je blog maakt) kun je mogelijk
+niet alle gewenste functies opnemen. Je kunt dit omzeilen door de website lokaal in de map
+<code class="language-plaintext highlighter-rouge">/docs</code> te bouwen of de gebouwde versie naar de branch <code class="language-plaintext highlighter-rouge">gh-pages</code> te pushen. Daardoor verlies je wel wat 
+flexibiliteit om rechtstreeks via GitHub snel wijzigingen aan te brengen.</p>
+
+<p>Met het juiste sjabloon kan een Jekyll-website er modern en strak uitzien, maar dat is wat moeilijker dan met
+bijvoorbeeld <a href="https://www.gatsbyjs.com/">Gatsby</a>, dat standaard door JavaScript en React wordt aangedreven.</p>
+
+<h3 id="waar-gebruik-je-het">Waar gebruik je het?</h3>
+
+<p>Ik zou zonder aarzelen Jekyll kiezen om een project te documenteren. Omdat de code op GitHub staat, is het erg handig om enkele 
+Markdown-bestanden aan de map <code class="language-plaintext highlighter-rouge">/docs</code> toe te voegen en met een sjabloon eenvoudige maar duidelijke documentatie te maken.
+Die kan via het systeem van GitHub ook gemakkelijk worden gewijzigd en uitgebreid. Iedereen die een functie aan de code toevoegt,
+kan zo de bijbehorende documentatie toevoegen zonder extra tools op het eigen systeem te installeren.</p>
+
+<p>Ook voor eenvoudige websites met weinig variabele onderdelen die af en toe moeten worden bijgewerkt, valt er 
+veel voor Jekyll te zeggen. Alle werk kan naar het webdesign gaan en de weinige variabele delen kunnen uit
+een YAML-bestand worden gehaald. Die waarden bijwerken is dan even eenvoudig als ze in dat YAML-bestand aanpassen; GitHub regelt
+al de rest. Ik zie heel wat toepassingen, van kleine ondernemingen tot sportclubs, … waarvoor dit
+een efficiënte manier is om een website op te zetten en te onderhouden. Mijn vorige cv was zo opgebouwd, maar vorige week stapte ik over op
+een versie met <a href="https://www.gatsbyjs.com/">Gatsby</a>. Je vindt de vorige versie nog steeds <a href="https://github.com/sepro/resume-pre2020">hier</a>.</p>
+
+<p>Beide blogs die ik heb opgezet (<a href="https://www.beyond-the-known.eu/">Beyond the Known</a> en deze) draaien ook op Jekyll, maar gebruiken allebei plugins en
+aanpassingen die GitHub niet ondersteunt. Daarom worden ze lokaal in de map <code class="language-plaintext highlighter-rouge">/docs</code> gebouwd en naar 
+GitHub gecommit. Dat is wat omslachtiger, maar alle andere statische-sitegeneratoren vereisen een vergelijkbare stap.</p>
+
+<h2 id="pelican">Pelican</h2>
+
+<p><a href="/assets/posts/2020-11-22-Static-Web-Generators/pelly.png" class="lightgallery-link" data-sub-html="Pelican-logo">
+<img src="/assets/posts/2020-11-22-Static-Web-Generators/pelly.png" alt="Pelican-logo" height="1057" width="1167" class="small-image" data-src="/assets/posts/2020-11-22-Static-Web-Generators/pelly.png" loading="lazy" />
+</a></p>
+
+<p>Omdat ik Python het best beheers, klinkt een statische-sitegenerator op basis van Python erg aantrekkelijk. 
+Er bestaan enkele opties, maar Pelican was het populairste platform. Daarom koos ik het om mee te experimenteren
+en bouwde ik uiteindelijk <a href="/nl/programming/games/2020/04/DeckLock/">DeckLock</a>, een website om mijn decks voor verschillende verzamelkaartspellen bij te houden.</p>
+
+<h3 id="voordelen-1">Voordelen</h3>
+
+<p>Pelican draait op Python, waardoor je gemakkelijk alle bibliotheken uit het Python-ecosysteem kunt benutten. In 
+<a href="/nl/programming/games/2020/04/DeckLock/">DeckLock</a> wordt de requests-bibliotheek bijvoorbeeld gebruikt om gegevens van het web te downloaden, die daarna met 
+de JSON-bibliotheek of BeautifulSoup worden verwerkt. Telkens wanneer de site wordt gebouwd, haalt die automatisch ontbrekende gegevens op
+en plaatst ze op de juiste pagina’s. Dat biedt enorm veel mogelijkheden voor dashboards. Je kunt nieuwe gegevens ophalen,
+een lokale SQLite-databank bijwerken, statistiek uitvoeren met pandas en numpy (of zelfs een <em>machine-learningmodel</em> draaien) en
+de uitvoer in enkele JSON-objecten stoppen die het sjabloon visualiseert (bijvoorbeeld met Charts.js).</p>
+
+<p>De geavanceerde documentatie focust sterk op de interne werking van Pelican en hoe je die uitbreidt. Dat is precies wat je nodig hebt
+om iets te maken dat verder gaat dan blogs, nieuwssites, …</p>
+
+<h3 id="nadelen-1">Nadelen</h3>
+
+<p>Voor Pelican zijn maar een honderdtal thema’s beschikbaar (bijvoorbeeld <a href="http://www.pelicanthemes.com/">Pelican Themes</a>) en die zijn vaak van mindere kwaliteit dan
+de thema’s voor <a href="https://jekyllrb.com/">Jekyll</a>. Mogelijk vind je dus niets dat meteen geschikt is en moet je meer tijd besteden
+aan het aanpassen van het sjabloon.</p>
+
+<p>Hoewel iemand met Python-ervaring gemakkelijk met Pelican aan de slag kan, is de leercurve 
+iets steiler dan bij Jekyll.</p>
+
+<h3 id="waar-gebruik-je-het-1">Waar gebruik je het?</h3>
+
+<p>Pelican is een uitstekende keuze als je de invoer grondig moet verwerken voordat die in
+een pagina kan worden omgezet. <a href="/nl/programming/games/2020/04/DeckLock/">DeckLock</a> begint met heel beperkte informatie (bijvoorbeeld de identificatiecode van een KeyForge-deck), haalt alle
+benodigde informatie op (zoals de decklijst, kaartillustraties, kaartdetails, …), voert extra statistiek uit en zet dat 
+vervolgens met een sjabloon om in een pagina. Ik beweer niet dat dit onmogelijk is met <a href="https://jekyllrb.com/">Jekyll</a> of <a href="https://www.gatsbyjs.com/">Gatsby</a>, maar het wordt 
+een stuk ingewikkelder. De uitstekende pakketten uit het Python-ecosysteem kunnen benutten geeft Pelican hier
+een voorsprong.</p>
+
+<p>Als dat geen vereiste is, zijn <a href="https://jekyllrb.com/">Jekyll</a> of <a href="https://www.gatsbyjs.com/">Gatsby</a> waarschijnlijk betere alternatieven. Beide voelen als rijpere 
+platformen waarvoor meer hulpmiddelen beschikbaar zijn.</p>
+
+<h2 id="gatsby">Gatsby</h2>
+
+<p><a href="/assets/posts/2020-11-22-Static-Web-Generators/Gatsby.jpg" class="lightgallery-link" data-sub-html="Gatsbyjs-logo">
+<img src="/assets/posts/2020-11-22-Static-Web-Generators/Gatsby.jpg" alt="Gatsbyjs-logo" height="896" width="2128" class="small-image" data-src="/assets/posts/2020-11-22-Static-Web-Generators/Gatsby.jpg" loading="lazy" />
+</a></p>
+
+<p>Het recentste framework dat ik bekeek en gebruikte om de huidige versie van mijn cv te bouwen: <a href="http://sebastian.proost.science/">http://sebastian.proost.science/</a>.
+<a href="https://www.gatsbyjs.com/">Gatsby</a> draait op JavaScript en heeft daardoor een duidelijk voordeel tegenover <a href="https://jekyllrb.com/">Jekyll</a> en <a href="https://docs.getpelican.com/en/latest/">Pelican</a>. Het combineert
+niet alleen inhoud met een sjabloon … het kan ook moderne webtechnologie (zoals React) gebruiken om dat sjabloon te bouwen. Als
+de <em>front-end</em> belangrijk is, biedt Gatsby dus een manier om de nieuwste JavaScript-tools in je statische website te verwerken.</p>
+
+<h2 id="voordelen-2">Voordelen</h2>
+
+<p>Net als Jekyll en Pelican zet Gatsby een sjabloon om in een statische website, maar het soort sjabloon vormt het
+grote verschil. De andere frameworks gebruiken Jinja om inhoud in een HTML-sjabloon te plaatsen; met Gatsby kun je
+sjablonen bouwen met React, GraphQL, React-router en webpack. Met deze moderne webtechnologieën kun je leuke
+functies in je website opnemen die met de andere frameworks moeilijk te realiseren zijn.</p>
+
+<p>Samen met Gatsby krijg je het React-ecosysteem. Dat biedt heel wat uitstekende opties voor de lay-out die
+met andere frameworks veel meer tijd kosten om toe te voegen.</p>
+
+<h3 id="nadelen-2">Nadelen</h3>
+
+<p>Van de frameworks die hier worden besproken, heeft Gatsby de steilste leercurve. Naast kennis van frameworks en wat HTML + CSS om
+het sjabloon te bouwen, vereist Gatsby enige kennis van React, modern JavaScript (ES6 is de huidige variant), npm, …
+Niet iedereen zal dat kunnen of willen leren.</p>
+
+<h3 id="waar-gebruik-je-het-2">Waar gebruik je het?</h3>
+
+<p>Zodra je de basis beheerst, kun je Gatsby gebruiken voor vrijwel alles waarvoor je Jekyll gebruikt. 
+Het enige probleem is dat GitHub je site niet kan bouwen, maar met <a href="https://www.netlify.com/">Netlify</a> kun je dat oplossen. Zolang
+je bereid bent extra tijd te investeren om JavaScript, React, npm, … te leren, is er weinig reden om
+voor <a href="https://jekyllrb.com/">Jekyll</a> te kiezen.</p>
+
+<p>Voor een nicheproject als <a href="/nl/programming/games/2020/04/DeckLock/">DeckLock</a>, waar allerlei voorverwerking nodig is om een pagina te bouwen, biedt Python mogelijk betere
+opties. <a href="https://docs.getpelican.com/en/latest/">Pelican</a> kan hier dus een voordeel hebben, al kun je dit met wat extra moeite ook in JS en dus
+met Gatsby realiseren.</p>
+
+<h2 id="conclusie">Conclusie</h2>
+
+<p>Ik geef toe dat ik enkele jaren geleden geen hoge pet op had van statisch gegenereerde sites. Dat kwam vooral doordat mijn eerste
+ervaring ermee rampzalig was. Het was simpelweg niet het juiste hulpmiddel voor die taak, maar een misplaatste 
+poging om een degelijke databank te vermijden. Met daarbovenop een vreselijke implementatie was het onderhoud van die code 
+een ware nachtmerrie…</p>
+
+<p>Tijdens het werk aan enkele blogs, <a href="/nl/programming/games/2020/04/DeckLock/">DeckLock</a> en <a href="http://sebastian.proost.science/">mijn cv</a> ben ik echter helemaal van mening veranderd. Waar
+het past, is dit een uitstekende manier om snel ladende websites te maken die goedkoop (of zelfs gratis) te hosten en eenvoudig te 
+onderhouden zijn.</p>
+
+<p>Mijn persoonlijke keuze voor toekomstige projecten wordt waarschijnlijk <a href="https://www.gatsbyjs.com/">Gatsby</a>. Ik ken de basis al en het biedt de beste 
+mogelijkheden om moderne webtechnologie in de <em>front-end</em> te gebruiken. <a href="https://jekyllrb.com/">Jekyll</a> zal ik vermoedelijk geleidelijk door Gatsby vervangen, al 
+blijft het de efficiëntste optie om snel keurige documentatie op GitHub te maken. Ik verwacht dus niet dat ik het
+binnenkort volledig opgeef. <a href="https://docs.getpelican.com/en/latest/">Pelican</a> bleek een uitstekende keuze voor <a href="/nl/programming/games/2020/04/DeckLock/">DeckLock</a>, maar dat is
+een vrij specifiek geval; voor gangbaardere toepassingen bestaan betere opties.</p>
+
+<h2 id="dankwoord">Dankwoord</h2>
+
+<p>Headerafbeelding door <a href="https://unsplash.com/@jayphen">Jayphen Simpson</a> op <a href="https://unsplash.com/s/photos/generator">Unsplash</a></p>
+
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/python/">python</a>,&nbsp;<a href="/nl/tag/ruby/">ruby</a>,&nbsp;<a href="/nl/tag/javascript/">javascript</a>,&nbsp;<a href="/nl/tag/pelican/">pelican</a>,&nbsp;<a href="/nl/tag/jekyll/">jekyll</a>,&nbsp;<a href="/nl/tag/gatsby/">gatsby</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=Statische-sitegeneratoren%3A+Jekyll+versus+Pelican+versus+Gatsby%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F11%2FStatic-Web-Generators%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F11%2FStatic-Web-Generators%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F11%2FStatic-Web-Generators%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=Statische-sitegeneratoren%3A+Jekyll+versus+Pelican+versus+Gatsby&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F11%2FStatic-Web-Generators%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/programming/games/2020/11/Gwent-Pro-Rank-ABM_2/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">De Gwent Pro Ladder bekeken met een agentgebaseerd model (resultaten)</span></a></span>
+  <span class="next-post"><a href="/nl/programming/2020/12/CodeForces/"><span class="page-number">CodeForces: wedstrijdprogrammeren uitproberen</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

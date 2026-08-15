@@ -21,13 +21,17 @@
   <meta property="og:url" content="https://blog.4dcu.be/programming/games/2020/04/26/DeckLock2.html" />
   <meta property="og:type" content="article" />
   <meta property="og:locale" content="en_US" />
-  
+  <meta property="og:locale:alternate" content="nl_NL" />
   <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2020-04-26-DeckLock2-header.jpg" /><meta property="og:image:alt" content="DeckLock part 2: Magic the Gathering" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
   <meta property="article:published_time" content="2020-04-26T12:00:00+00:00" /><meta property="article:modified_time" content="2020-04-26T12:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programming" /><meta property="article:section" content="Games" /><meta property="article:tag" content="python" /><meta property="article:tag" content="pelican" /><meta property="article:tag" content="blog" /><meta property="article:tag" content="games" /><meta property="article:tag" content="keyforge" /><meta property="article:tag" content="mtg" /><meta property="article:tag" content="magic-the-gathering" /><meta property="article:tag" content="decklock" />
 
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="DeckLock part 2: Magic the Gathering"><meta name="twitter:description" content="Expanding the DeckLock Pelican generator to support Magic the Gathering decks, parsing the Magic Workstation format and fetching card data and images online."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2020-04-26-DeckLock2-header.jpg"><meta name="twitter:image:alt" content="DeckLock part 2: Magic the Gathering"><meta name="twitter:url" content="https://blog.4dcu.be/programming/games/2020/04/26/DeckLock2.html">
 
   <link rel="canonical" href="https://blog.4dcu.be/programming/games/2020/04/26/DeckLock2.html">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/games/2020/04/26/DeckLock2.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/games/2020/04/DeckLock2/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/games/2020/04/26/DeckLock2.html">
   
   <link rel="alternate" type="application/rss+xml" title="4DCu.be (en-US)" href="https://blog.4dcu.be/feed.xml" />
   <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
@@ -111,7 +115,7 @@
       
         <a class="navbar-item lang-switch__option is-current" lang="en" href="/programming/games/2020/04/26/DeckLock2.html" aria-current="true"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
       
-        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/programming/games/2020/04/DeckLock2/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
       
       </div>
     </div>
@@ -152,7 +156,7 @@ inject it into an appropriate template.</p>
 
 <p>A common file format to store decks is the <a href="http://www.magicworkstation.com/">Magic Workstation</a> format, which is also included in MTGTop8 (I’ll admit it,
 I’m netdecking most of the time). This is both machine- and human-readable, there are a number of comment lines which 
-are used to store the name of the deck, who created it, … other lines contain the number of time a card is included in
+are used to store the name of the deck, who created it, … other lines contain the number of times a card is included in
 the deck, the set the card is from and the name of the card. Fields are space delimited. Sideboard cards are included the
 same way, but the line starts with SB:</p>
 
@@ -171,13 +175,13 @@ SB:  2 [MMQ] Rushwood Legate
 SB:  3 [UDS] Compost
 </code></pre></div></div>
 
-<p>Based on the name of the card, all other information can be pulled from <a href="https://scryfall.com/">ScryFall</a>, a website the has images for all 
+<p>Based on the name of the card, all other information can be pulled from <a href="https://scryfall.com/">ScryFall</a>, a website that has images for all
 cards and also includes an API that can be used to fetch useful details to include. The set, included here between
 square brackets is optional, if nothing is entered the most recent version is selected.</p>
 
 <h3 id="the-reader-class">The Reader class</h3>
 
-<p>Below you’ll find the code for the Reader, this needs to be a class that is build upon <a href="https://blog.getpelican.com/">Pelican</a>’s BaseReader, it needs
+<p>Below you’ll find the code for the Reader, this needs to be a class that is built upon <a href="https://blog.getpelican.com/">Pelican</a>’s BaseReader, it needs
 to have a property <code class="language-plaintext highlighter-rouge">enabled</code> which should be set to True and a property <code class="language-plaintext highlighter-rouge">file_extensions</code> which is a list of extensions that
 should be processed by this reader, in this case only .mwDeck files. Note that there are a number of helper functions in
 full code that are required to make this work. Head over to the <a href="https://github.com/4dcu-be/DeckLock">DeckLock GitHub repository</a> to check out the full code.</p>
@@ -185,7 +189,7 @@ full code that are required to make this work. Head over to the <a href="https:/
 <p>Upon creation of an MTGReader the cached data will be loaded (if it exists) and create a path to store card images (if 
 necessary).</p>
 
-<p>The function <code class="language-plaintext highlighter-rouge">read</code> attached to the MTGReader is required, here the metadata is set. A category and data are required by 
+<p>The function <code class="language-plaintext highlighter-rouge">read</code> attached to the MTGReader is required, here the metadata is set. A category and date are required by
 Pelican though we won’t be using them so we just specify any value. Here the required template is also specified which
 is important to ensure the data will be rendered using the correct template. The next block of code reads the .mwDeck
 file, fetches card details and the image from <a href="https://scryfall.com/">Scryfall</a> if it isn’t included in the cached data and creates a 
@@ -318,7 +322,7 @@ readers.</p>
 setting is required, setting this to False will remove <a href="/programming/games/2019/12/29/Magic-the-Gathering.html">Magic: the Gathering</a> from the main page overview. The other
 parts are important to make sure the plugin knows where to find and store data.</p>
 
-<p>Unlike in our previous post, the overview page for Magic makes use of <a href="https://blog.getpelican.com/">Pelican</a>’s build in functions. However, we do need
+<p>Unlike in our previous post, the overview page for Magic makes use of <a href="https://blog.getpelican.com/">Pelican</a>’s built-in functions. However, we do need
 to make sure this file is known to Pelican and properly handled. By adding it to TEMPLATE_PAGES the template 
 mtg_overview.html is known to Pelican and will be rendered and stored as mtg.html.</p>
 
@@ -334,8 +338,8 @@ mtg_overview.html is known to Pelican and will be rendered and stored as mtg.htm
 
 <p>DeckLock will download images from Scryfall when building a local version using <code class="language-plaintext highlighter-rouge">make html</code>. For private use this is 
 permitted in most countries. However, when building a version to release on the internet including copyrighted images 
-might no be a smart thing to do. Most likely it even is illegal. To this end, there are a few options included in the 
-file <code class="language-plaintext highlighter-rouge">publishconf.py</code> which is used when building the version intended for on-line use. The latter can be build with 
+might not be a smart thing to do. Most likely it even is illegal. To this end, there are a few options included in the
+file <code class="language-plaintext highlighter-rouge">publishconf.py</code> which is used when building the version intended for on-line use. The latter can be built with
 the command <code class="language-plaintext highlighter-rouge">make release</code>.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">USE_EXTERNAL_LINKS</span> <span class="o">=</span> <span class="bp">True</span>
@@ -344,7 +348,7 @@ the command <code class="language-plaintext highlighter-rouge">make release</cod
 
 <p><code class="language-plaintext highlighter-rouge">USE_EXTERNAL_LINKS</code> will use links to external platforms for card images rather than the downloaded images. For M:tG,
 Scryfall will be used, for KeyForge the official images from the master vault are used. By excluding the assets folders 
-for both games by setting <code class="language-plaintext highlighter-rouge">STATIC_EXCLUDES</code>, we prevent <a href="https://blog.getpelican.com/">Pelican</a> from copying the downloaded image to the output intended
+for both games by setting <code class="language-plaintext highlighter-rouge">STATIC_EXCLUDES</code>, we prevent <a href="https://blog.getpelican.com/">Pelican</a> from copying the downloaded images to the output intended
 for hosting DeckLock online.</p>
 
 <p>These settings can be changed but should obviously be used with careful consideration. Re-hosting copyrighted material 
@@ -354,7 +358,7 @@ might have repercussions.</p>
 
 <p>Along with support for <a href="/programming/games/2019/12/29/Magic-the-Gathering.html">Magic: the Gathering</a> a number of other improvements were made. Most notably is the inclusion
 of a proper logo for DeckLock. But also under the hood there are a number of improvements. <a href="https://www.playgwent.com/en">Gwent</a> has been added in 
-[part 3].</p>
+<a href="/programming/games/2020/05/25/DeckLock3.html">part 3</a>.</p>
 
 </article>
 <section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/tag/python/">python</a>,&nbsp;<a href="/tag/pelican/">pelican</a>,&nbsp;<a href="/tag/blog/">blog</a>,&nbsp;<a href="/tag/games/">games</a>,&nbsp;<a href="/tag/keyforge/">keyforge</a>,&nbsp;<a href="/tag/mtg/">mtg</a>,&nbsp;<a href="/tag/magic-the-gathering/">magic-the-gathering</a>,&nbsp;<a href="/tag/decklock/">decklock</a></section>

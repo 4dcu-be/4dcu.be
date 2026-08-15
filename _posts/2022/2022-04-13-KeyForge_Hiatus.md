@@ -5,6 +5,7 @@ byline: ""
 description: "Using a Bayesian model in PyMC3 to measure how FFG's KeyForge hiatus announcement and COVID-19 affected weekly deck registrations, visualized with Altair."
 date:   2022-04-13 08:00:00
 author: Sebastian Proost
+post_id: keyforge-hiatus
 categories: programming games
 tags:	python pymc3 keyforge data-analysis data-science machine-learning altair
 cover:  "/assets/posts/2022-04-13-KeyForge_Hiatus/david-kegg-ffg-keyforge-cover-final-small.jpg"

@@ -21,13 +21,17 @@
   <meta property="og:url" content="https://blog.4dcu.be/programming/2020/12/03/CodeForces.html" />
   <meta property="og:type" content="article" />
   <meta property="og:locale" content="en_US" />
-  
+  <meta property="og:locale:alternate" content="nl_NL" />
   <meta property="og:image" content="https://blog.4dcu.be/assets/social/images-headers-python_code.jpg" /><meta property="og:image:alt" content="CodeForces: Trying on Competitive Coding" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
   <meta property="article:published_time" content="2020-12-03T13:00:00+00:00" /><meta property="article:modified_time" content="2020-12-03T13:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programming" /><meta property="article:tag" content="python" />
 
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="CodeForces: Trying on Competitive Coding"><meta name="twitter:description" content="Trying competitive programming on CodeForces as a self-taught coder, solving easy algorithm problems in Python to fill gaps in my computer science knowledge."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/images-headers-python_code.jpg"><meta name="twitter:image:alt" content="CodeForces: Trying on Competitive Coding"><meta name="twitter:url" content="https://blog.4dcu.be/programming/2020/12/03/CodeForces.html">
 
   <link rel="canonical" href="https://blog.4dcu.be/programming/2020/12/03/CodeForces.html">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/2020/12/03/CodeForces.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/2020/12/CodeForces/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/2020/12/03/CodeForces.html">
   
   <link rel="alternate" type="application/rss+xml" title="4DCu.be (en-US)" href="https://blog.4dcu.be/feed.xml" />
   <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
@@ -111,7 +115,7 @@
       
         <a class="navbar-item lang-switch__option is-current" lang="en" href="/programming/2020/12/03/CodeForces.html" aria-current="true"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
       
-        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+        <a class="navbar-item lang-switch__option" lang="nl" href="/nl/programming/2020/12/CodeForces/"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
       
       </div>
     </div>
@@ -139,12 +143,12 @@ a little.</p>
 
 <h2 id="getting-started">Getting Started</h2>
 
-<p>On <a href="http://codeforces.com/">CodeForces</a> all problems have a difficulty ranging from 800 to 3500. The lower the difficulty the easier to problem
+<p>On <a href="http://codeforces.com/">CodeForces</a> all problems have a difficulty ranging from 800 to 3500. The lower the difficulty the easier the problem
 is to solve. To get started I recommend picking an easy problem to tackle to get familiar with the platform, how to get
 the input, how to submit a solution, …</p>
 
 <p>I picked problem 119A titled “<a href="https://codeforces.com/problemset/problem/119/A">Epic Game</a>”, with the lowest difficulty of 800, to dip my toes in the water. The goal is 
-to write a problem solve this issue:</p>
+to write a program to solve this issue:</p>
 
 <hr />
 <p>Simon and Antisimon play a game. Initially each player receives one fixed positive integer that doesn’t change 
@@ -165,7 +169,7 @@ If Simon wins, print “0” (without the quotes), otherwise print “1” (with
 
 <hr />
 
-<p>The first solution I came up with is very straight forward, the inner loop alternates between both players, adjusting
+<p>The first solution I came up with is very straightforward, the inner loop alternates between both players, adjusting
 <em>n</em> as described above. This is repeated (outer loop) until a player wins a game, in that case the winner is printed
 and the loop broken.</p>
 
@@ -197,8 +201,8 @@ number of programming languages you’ll have to specify that <strong>Python 3.7
 <strong>PyPy 3.6 (7.2.0)</strong>, <a href="https://www.pypy.org/">PyPy</a> is a faster version of Python, and as there is a limit to how long your code can run 
 before failing, this could be an advantage (though it really doesn’t matter much here).</p>
 
-<p>I also noted that my code here has some later verbose sections, at the bottom of the post you can find my attempt to
-write is as short as possible.</p>
+<p>I also noted that my code here has some rather verbose sections, at the bottom of the post you can find my attempt to
+write it as short as possible.</p>
 
 <h2 id="the-next-problem">The Next Problem</h2>
 
@@ -261,8 +265,8 @@ the time by five.</p>
         <span class="nf">print</span><span class="p">(</span><span class="nf">solve</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
 </code></pre></div></div>
 
-<p>While this solution is correct, CodeForces will not accept this as it takes to long to complete… Looking up in a list 
-if the upcoming section was visited before is a very slow step. I didn’t pay attention that the maximum input can be
+<p>While this solution is correct, CodeForces will not accept this as it takes too long to complete… Looking up in a list
+if the upcoming section was visited before is a very slow step. I didn’t notice that the maximum input can be
 10<sup>5</sup> steps, so <strong>I didn’t pick the correct data structure</strong>. A dictionary is the better choice if you need to look 
 things up fast and frequently. So read the instructions carefully before getting started. Especially if you plan to 
 join a real competition where incorrect submissions will cost you points. Not to mention you lose time having to 
@@ -300,10 +304,10 @@ dictionary to one and update the current coordinates.</p>
 
 <p>After solving a few more problems with a difficulty ranging from 800-1600, I got stuck on “<a href="https://codeforces.com/problemset/problem/520/B">Two Buttons</a>”. While I 
 found a solution which included a recursive, depth-first search, I couldn’t get it to work fast enough. Even after
-adding every optimization I could think of … nothing … still way to slow. So I took a look at some of the valid 
+adding every optimization I could think of … nothing … still way too slow. So I took a look at some of the valid
 solutions which were remarkably simple! There was a trick necessary that I’m certain everyone with a CS degree will
 have encountered during their studies. While it is super inefficient to find the optimal path from start to finish as
-I was doing, it is simple to find the solution when going the opposite direction from stop till start. Now the solution,
+I was doing, it is simple to find the solution when going the opposite direction from stop till start. Now the solution
 is trivial and can be written in a few lines of code.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>

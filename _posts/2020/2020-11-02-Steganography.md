@@ -5,6 +5,7 @@ byline: "hiding messages in plain sight"
 description: "Hiding secret messages inside images using Python with PIL and NumPy, encoding text into the least significant bits of each pixel's RGB values."
 date:   2020-11-02 12:00:00
 author: Sebastian Proost
+post_id: steganography
 categories: programming
 tags:	python numpy steganography 
 cover:  "/assets/posts/2020-11-02-Steganography/post_header.jpg"
@@ -17,7 +18,7 @@ pictures, hide a file within another file, ... Here we'll try to hide some infor
 
 Images are essentially two dimensional lists of pixels, which in turn consist of three integer numbers in the range 
 0-255 that represent values for red, green and blue. The difference between a pixel with value rgb(230, 129, 200) and 
-rgb(229, 129, 201) are virtually imperceptible. So we can leverage this and hide information in that least significant 
+rgb(229, 129, 201) are virtually imperceptible. So we can leverage this and hide information in the least significant
 bits of each pixel.
 
 To hide a message in an image a function is needed that **converts a string to a binary representation** and one that 
@@ -72,7 +73,7 @@ decoded: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
 ## Hiding Information in an Image
 
 With functions to convert any text into binary and back, the code to bake that binary information into an image can be 
-written. Here the [PIL](https://pillow.readthedocs.io/en/stable/) library is used to load the image, which is than 
+written. Here the [PIL](https://pillow.readthedocs.io/en/stable/) library is used to load the image, which is then
 turned into a one-dimensional list of all Red, Green and Blue values of the pixel in the image. 
 
 A suffix <STOP> is added to the hidden message so when decoding the image it is clear where the message ends. This is 
@@ -80,11 +81,10 @@ then converted to binary. Next, a loop goes over all bits, and encodes them in t
 flattened image. This is done by applying a binary mask (0b11111110) to the value to set the least significant bit to 
 zero and then a binary *or* operation is used to set that value to the desired value. 
     
-The clause ```ix < len(encoded_text) else value``` ensures that if that pixels in spots where hidden information isn't 
-stored remain identical.
+The clause ```ix < len(encoded_text) else value``` ensures that the pixels in spots where hidden information isn't stored remain identical.
     
 Finally, the one-dimensional array is turned back into a 2D image with 3 color channels and exported as PIL image. To 
-test this, and image ```pear.png``` is loaded, a Hello World message inserted and the image written to disk again. Make 
+test this, an image ```pear.png``` is loaded, a Hello World message inserted and the image written to disk again. Make
 sure that when saving the image, a lossless file format is used. JPEG files are compressed in a way that some minor 
 details are lost, this could remove the hidden content, so here PNG is used. 
 
@@ -121,8 +121,8 @@ encoded_im
 
 ## Extracting the Hidden Content
 
-Cool, our image looks identical to the input image. By eye the minor differences are imperceivable. One last function 
-to add, to extract the hidden message from an image. This is fairly simple, after te image is loaded it is flattened 
+Cool, our image looks identical to the input image. By eye the minor differences are imperceptible. One last function
+to add, to extract the hidden message from an image. This is fairly simple, after the image is loaded it is flattened
 into a one-dimensional array again. For each value the least significant bit is extracted using a bit mask. These 
 values are joined into a single string, which is decoded using the ```decode_text``` function. Finally, we need to 
 break the decoded text on the suffix <STOP>, beyond that suffix there is no information encoded and there will be a lot 
@@ -153,9 +153,9 @@ extract_from_image('pears_with_hidden_message.png')
 Being able to hide information in a plain looking file is a cool gimmick. There are plenty of cool use-cases known, you
 can find more information on [WikiPedia] about this. As a binary signature is inserted, essentially all kinds of data
 could be hidden. For text, you need just under three pixels to store a single character using only the least significant
- bit. So a fair amount of text can be stored in an image. You could double that amount by either compressing the text 
- first, and by the information into the two least significant bits of each pixels channels. Computerphile has an 
- example where the entire works of Shakespeare are included in a single image of tree. Check out that movie 
+ bit. So a fair amount of text can be stored in an image. You could double that amount by compressing the text first and by storing the information in the two least significant
+ bits of each pixel's channels. Computerphile has an
+ example where the entire works of Shakespeare are included in a single image of a tree. Check out that movie
  [here](https://www.youtube.com/watch?v=TWEXCYQKyDc).
 
 [WikiPedia]: https://en.wikipedia.org/wiki/Steganography

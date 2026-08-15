@@ -1,0 +1,625 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>BusyBoard integreren in Home Assistant</title>
+  <meta name="description" content="Een API aan de BusyBoard-app in Flask toevoegen, zodat Home Assistant je bezetstatus kan uitlezen en automatiseringen kan activeren, zoals een slimme lamp ro...">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="BusyBoard integreren in Home Assistant" />
+  <meta property="og:description" content="Een API aan de BusyBoard-app in Flask toevoegen, zodat Home Assistant je bezetstatus kan uitlezen en automatiseringen kan activeren, zoals een slimme lamp ro..." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/programming/2020/08/BusyBoard2/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2020-08-25-BusyBoard2-moon_light.jpg" /><meta property="og:image:alt" content="BusyBoard integreren in Home Assistant" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2020-08-25T12:00:00+00:00" /><meta property="article:modified_time" content="2020-08-25T12:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="Programmeren" /><meta property="article:tag" content="python" /><meta property="article:tag" content="flask" /><meta property="article:tag" content="sqlalchemy" /><meta property="article:tag" content="home-assistant" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="BusyBoard integreren in Home Assistant"><meta name="twitter:description" content="Een API aan de BusyBoard-app in Flask toevoegen, zodat Home Assistant je bezetstatus kan uitlezen en automatiseringen kan activeren, zoals een slimme lamp ro..."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2020-08-25-BusyBoard2-moon_light.jpg"><meta name="twitter:image:alt" content="BusyBoard integreren in Home Assistant"><meta name="twitter:url" content="https://blog.4dcu.be/nl/programming/2020/08/BusyBoard2/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/programming/2020/08/BusyBoard2/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/programming/2020/08/25/BusyBoard2.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/programming/2020/08/BusyBoard2/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/programming/2020/08/25/BusyBoard2.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/programming/2020/08/BusyBoard2/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/programming/2020/08/BusyBoard2/" },
+      "url": "https://blog.4dcu.be/nl/programming/2020/08/BusyBoard2/",
+      "headline": "BusyBoard integreren in Home Assistant",
+      "description": "Een API aan de BusyBoard-app in Flask toevoegen, zodat Home Assistant je bezetstatus kan uitlezen en automatiseringen kan activeren, zoals een slimme lamp ro...",
+      "datePublished": "2020-08-25T12:00:00+00:00",
+      "dateModified": "2020-08-25T12:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2020-08-25-BusyBoard2-moon_light.jpg",
+      "keywords": ["python", "flask", "sqlalchemy", "home-assistant"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/programming/2020/08/BusyBoard2/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Programmeren", "item": "https://blog.4dcu.be/nl/category/programming/" },
+        { "@type": "ListItem", "position": 3, "name": "BusyBoard integreren in Home Assistant" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/programming/2020/08/25/BusyBoard2.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/programming/2020/08/BusyBoard2/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/moonlight_header.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="BusyBoard integreren in Home Assistant" class="hero-background is-transparent" src="/assets/posts/2020-08-25-BusyBoard2/moon_light.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">BusyBoard integreren in Home Assistant</h1><p class="info has-text-white"><em>en automatiseringen activeren wanneer je bezig bent</em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 25-08-2020 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/programming/">Programmeren</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Laten we de kleine app uit het <a href="/nl/programming/2020/07/BusyBoard/">vorige artikel</a> naar een hoger niveau tillen en integreren in het domoticaplatform
+<a href="https://www.home-assistant.io/">Home Assistant</a> (HA). Wanneer je je status op BusyBoard wijzigt, kan Home Assistant die zo oppikken en
+een automatisering activeren. We voegen een API aan BusyBoard toe die Home Assistant gemakkelijk kan uitlezen, zodat we
+een slimme lamp kunnen inschakelen (en rood laten kleuren).</p>
+
+<p>Hoewel BusyBoard een handige oplossing was om je huisgenoten te laten weten wanneer je aan het werk bent en niet gestoord wilt 
+worden, moet iedereen BusyBoard daarvoor wel regelmatig controleren. Niet bepaald de gebruiksvriendelijkste ervaring! Het zou veel
+handiger zijn als we dit op de een of andere manier in de echte wereld konden tonen … vergelijkbaar met een bordje “On Air” in radio- en tv-studio’s.
+Omdat ik al enkele slimme lampen aan HA heb gekoppeld, kan dat vrij eenvoudig. We hebben wel een API in
+BusyBoard nodig die Home Assistant kan uitlezen, dus laten we die implementeren.</p>
+
+<h2 id="een-api-aan-busyboard-toevoegen">Een API aan BusyBoard toevoegen</h2>
+
+<p>Als je een grotere toepassing ontwikkelt en een API nodig hebt, bekijk dan pakketten zoals <a href="https://flask-restful.readthedocs.io/en/latest/">Flask-Restful</a>
+of zelfs een framework dat specifiek voor API’s is ontworpen, zoals <a href="https://fastapi.tiangolo.com/">FastAPI</a>! Hier hebben we echter geen toeters en bellen nodig: 
+we willen gewoon voor elke gebruiker een <em>endpoint</em> waarop we kunnen zien of die bezig is. Eerst voegen we aan het
+databankmodel een functie toe die een gebruiker naar een <em>dictionary</em> exporteert. Daarvoor moet een beetje code aan het model 
+(in <code class="language-plaintext highlighter-rouge">./busyboard/models.py</code>) worden toegevoegd, zoals hieronder.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="sh">'</span><span class="s">users</span><span class="sh">'</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">busy</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Boolean</span><span class="p">)</span>
+    <span class="n">busy_with</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">can_be_disturbed</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Boolean</span><span class="p">)</span>
+    <span class="n">notes</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="nc">Unicode</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span>
+    <span class="n">last_change</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nc">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="n">utcnow</span><span class="p">)</span>
+
+    <span class="c1">### see repository for the full code, new function below
+</span>
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">id</span><span class="sh">'</span><span class="p">:</span> <span class="nf">int</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nb">id</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">:</span> <span class="nf">str</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">busy</span><span class="sh">'</span><span class="p">:</span> <span class="nf">bool</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">busy</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">busy_with</span><span class="sh">'</span><span class="p">:</span> <span class="nf">str</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">busy_with</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">can_be_distrubed</span><span class="sh">'</span><span class="p">:</span> <span class="nf">bool</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">can_be_disturbed</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">last_change</span><span class="sh">'</span><span class="p">:</span> <span class="nf">str</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">last_change</span><span class="p">)</span>
+        <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Eenvoudiger kan haast niet: één functie die de gegevens uit het model als een <em>dictionary</em> exporteert. Hier
+worden alle velden expliciet naar gehele getallen, strings en booleans omgezet. Dat is niet strikt noodzakelijk voor elk veld, maar
+helpt fouten te voorkomen wanneer we ze later naar JSON omzetten.</p>
+
+<p>Vervolgens voegen we de routes toe aan <code class="language-plaintext highlighter-rouge">./busyboard/__init__.py</code>. Ook dat is heel eenvoudig: enkele regels code
+zoals hieronder volstaan.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@app.route</span><span class="p">(</span><span class="sh">'</span><span class="s">/api/users</span><span class="sh">'</span><span class="p">)</span>
+    <span class="nd">@app.route</span><span class="p">(</span><span class="sh">'</span><span class="s">/api/users/</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">api_users</span><span class="p">():</span>
+        <span class="n">users</span> <span class="o">=</span> <span class="n">User</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="nf">all</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nf">jsonify</span><span class="p">(</span><span class="nf">list</span><span class="p">([</span><span class="n">u</span><span class="p">.</span><span class="nf">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">users</span><span class="p">]))</span>
+
+    <span class="nd">@app.route</span><span class="p">(</span><span class="sh">'</span><span class="s">/api/users/&lt;int:user_id&gt;</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">api_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nf">jsonify</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="nf">to_dict</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>Als we nu bijvoorbeeld naar <code class="language-plaintext highlighter-rouge">\&lt;busyboard_url\&gt;/api/users/1</code> gaan, krijgen we een JSON-antwoord dat er als volgt uitziet:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"busy"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"busy_with"</span><span class="p">:</span><span class="w"> </span><span class="s2">"programming"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"can_be_distrubed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"last_change"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-07-26 12:51:05.656357"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sebast-I-AH-n"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Dat was eenvoudig genoeg. Nu gaan we naar Home Assistant om deze API uit te lezen en daar iets leuks mee te doen.</p>
+
+<h2 id="home-assistant-configureren">Home Assistant configureren</h2>
+
+<p>Home Assistant ondersteunt het uitlezen van REST-API’s, dus ook hier is er weinig configuratie nodig. Je hoeft
+alleen voor elke gebruiker een REST-sensor toe te voegen die het veld “busy” uitleest. Open in de instellingenmap van Home Assistant
+het bestand <code class="language-plaintext highlighter-rouge">configuration.yml</code> met een teksteditor en voeg het volgende deel aan de sensorsectie toe. Merk op dat
+je de URL moet aanpassen aan de locatie waar jouw BusyBoard-versie draait.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="na">sensor</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">rest</span>
+    <span class="na">resource</span><span class="pi">:</span> <span class="s">&lt;busyboard_url&gt;/api/users/1</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">user_name</span>
+    <span class="na">value_template</span><span class="pi">:</span> <span class="s1">'</span><span class="s">{{</span><span class="nv"> </span><span class="s">value_json.busy</span><span class="nv"> </span><span class="s">}}'</span>
+
+</code></pre></div></div>
+
+<p>Daarna moet je Home Assistant herstarten en is de sensor beschikbaar als <code class="language-plaintext highlighter-rouge">sensor.user_name</code>. Via de
+GUI of rechtstreeks in het configuratiebestand <code class="language-plaintext highlighter-rouge">automations.yaml</code> kun je nu een nieuwe automatisering maken die een ander apparaat activeert, bijvoorbeeld een lamp. 
+Voeg een <em>trigger</em> toe die afgaat wanneer de sensor van <strong>False</strong> naar <strong>True</strong> verandert en omgekeerd. De actie is 
+een service die in dit geval een slimme lamp in- of uitschakelt. De details hangen sterk af van het
+type lamp dat je gebruikt en hoe die in HA is geconfigureerd. Gebruik gerust het onderstaande deel uit mijn bestand <code class="language-plaintext highlighter-rouge">automations.yaml</code>
+als referentie.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1597674094193'</span>
+  <span class="na">alias</span><span class="pi">:</span> <span class="s">User Busy</span>
+  <span class="na">trigger</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">entity_id</span><span class="pi">:</span> <span class="s">sensor.user_name</span>
+    <span class="na">from</span><span class="pi">:</span> <span class="s1">'</span><span class="s">False'</span>
+    <span class="na">platform</span><span class="pi">:</span> <span class="s">state</span>
+    <span class="na">to</span><span class="pi">:</span> <span class="s1">'</span><span class="s">True'</span>
+  <span class="na">condition</span><span class="pi">:</span> <span class="pi">[]</span>
+  <span class="na">action</span><span class="pi">:</span>
+    <span class="na">service</span><span class="pi">:</span> <span class="s">light.turn_on</span>
+    <span class="na">data</span><span class="pi">:</span>
+      <span class="na">brightness</span><span class="pi">:</span> <span class="m">255</span>
+      <span class="na">rgb_color</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="m">255</span>
+      <span class="pi">-</span> <span class="m">0</span>
+      <span class="pi">-</span> <span class="m">0</span>
+      <span class="na">entity_id</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">light.blinkstick</span>
+<span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1597674578965'</span>
+  <span class="na">alias</span><span class="pi">:</span> <span class="s">User No Longer Busy</span>
+  <span class="na">trigger</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">entity_id</span><span class="pi">:</span> <span class="s">sensor.user_name</span>
+    <span class="na">from</span><span class="pi">:</span> <span class="s1">'</span><span class="s">True'</span>
+    <span class="na">platform</span><span class="pi">:</span> <span class="s">state</span>
+    <span class="na">to</span><span class="pi">:</span> <span class="s1">'</span><span class="s">False'</span>
+  <span class="na">condition</span><span class="pi">:</span> <span class="pi">[]</span>
+  <span class="na">action</span><span class="pi">:</span>
+    <span class="na">service</span><span class="pi">:</span> <span class="s">light.turn_off</span>
+    <span class="na">entity_id</span><span class="pi">:</span> <span class="s">light.blinkstick</span>
+
+</code></pre></div></div>
+<h2 id="conclusie">Conclusie</h2>
+
+<p>Ik heb het zo ingesteld dat deze <a href="https://www.blinkstick.com/products/blinkstick-square">BlinkStick Square</a>, ingebouwd in een 3D-geprinte maan in de woonkamer, rood oplicht wanneer iemand 
+in het kantoor bezig is. Een duidelijk teken dat het kantoor voorlopig verboden terrein is.</p>
+
+<p><a href="/assets/posts/2020-08-25-BusyBoard2/moon_light.jpg" class="lightgallery-link" data-sub-html="De slimme lamp in deze maan kleurt dieprood wanneer iemand aangeeft bezig te zijn">
+<img src="/assets/posts/2020-08-25-BusyBoard2/moon_light.jpg" alt="De slimme lamp in deze maan kleurt dieprood wanneer iemand aangeeft bezig te zijn" height="800" width="1200" data-src="/assets/posts/2020-08-25-BusyBoard2/moon_light.jpg" loading="lazy" />
+</a></p>
+
+<p>Met enkele regels code kun je een eigen webservice eenvoudig in Home Assistant integreren en apparaten in
+de echte wereld activeren. De volledige code vind je op <a href="https://github.com/4dcu-be/BusyBoard">GitHub</a>.</p>
+
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/python/">python</a>,&nbsp;<a href="/nl/tag/flask/">flask</a>,&nbsp;<a href="/nl/tag/sqlalchemy/">sqlalchemy</a>,&nbsp;<a href="/nl/tag/home-assistant/">home-assistant</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=BusyBoard+integreren+in+Home+Assistant%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F08%2FBusyBoard2%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F08%2FBusyBoard2%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F08%2FBusyBoard2%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=BusyBoard+integreren+in+Home+Assistant&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fprogramming%2F2020%2F08%2FBusyBoard2%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/programming/2020/07/BusyBoard/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">BusyBoard: geen onderbrekingen meer tijdens vergaderingen</span></a></span>
+  <span class="next-post"><a href="/nl/programming/games/2020/09/GwentProRankAnalysis/"><span class="page-number">Gwent: analyse van de Pro Ladder en nationale ranglijsten</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

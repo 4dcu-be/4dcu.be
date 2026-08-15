@@ -1,0 +1,655 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>Kindle + Python = e-inkdashboard (deel 1)</title>
+  <meta name="description" content="Een oude Kindle Paperwhite 3 hergebruiken als energiezuinig e-inkdashboard door hem via de seriële poort te jailbreaken en Python te installeren (deel 1).">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Kindle + Python = e-inkdashboard (deel 1)" />
+  <meta property="og:description" content="Een oude Kindle Paperwhite 3 hergebruiken als energiezuinig e-inkdashboard door hem via de seriële poort te jailbreaken en Python te installeren (deel 1)." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/diy/2020/09/PythonKindleDashboard_1/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2020-09-27-PythonKindleDashboard_1-kindle_pw3.jpg" /><meta property="og:image:alt" content="Kindle + Python = e-inkdashboard (deel 1)" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2020-09-27T12:00:00+00:00" /><meta property="article:modified_time" content="2020-09-27T12:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="DIY" /><meta property="article:tag" content="python" /><meta property="article:tag" content="kindle" /><meta property="article:tag" content="dashboard" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Kindle + Python = e-inkdashboard (deel 1)"><meta name="twitter:description" content="Een oude Kindle Paperwhite 3 hergebruiken als energiezuinig e-inkdashboard door hem via de seriële poort te jailbreaken en Python te installeren (deel 1)."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2020-09-27-PythonKindleDashboard_1-kindle_pw3.jpg"><meta name="twitter:image:alt" content="Kindle + Python = e-inkdashboard (deel 1)"><meta name="twitter:url" content="https://blog.4dcu.be/nl/diy/2020/09/PythonKindleDashboard_1/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/diy/2020/09/PythonKindleDashboard_1/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/diy/2020/09/27/PythonKindleDashboard_1.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/diy/2020/09/PythonKindleDashboard_1/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/diy/2020/09/27/PythonKindleDashboard_1.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/diy/2020/09/PythonKindleDashboard_1/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/diy/2020/09/PythonKindleDashboard_1/" },
+      "url": "https://blog.4dcu.be/nl/diy/2020/09/PythonKindleDashboard_1/",
+      "headline": "Kindle + Python = e-inkdashboard (deel 1)",
+      "description": "Een oude Kindle Paperwhite 3 hergebruiken als energiezuinig e-inkdashboard door hem via de seriële poort te jailbreaken en Python te installeren (deel 1).",
+      "datePublished": "2020-09-27T12:00:00+00:00",
+      "dateModified": "2020-09-27T12:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2020-09-27-PythonKindleDashboard_1-kindle_pw3.jpg",
+      "keywords": ["python", "kindle", "dashboard"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/diy/2020/09/PythonKindleDashboard_1/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "DIY", "item": "https://blog.4dcu.be/nl/category/diy/" },
+        { "@type": "ListItem", "position": 3, "name": "Kindle + Python = e-inkdashboard (deel 1)" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/diy/2020/09/27/PythonKindleDashboard_1.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/diy/2020/09/PythonKindleDashboard_1/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/kindle_pw3.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="Kindle + Python = e-inkdashboard (deel 1)" class="hero-background is-transparent" src="/assets/posts/2020-09-27-PythonKindleDashboard_1/kindle_pw3.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">Kindle + Python = e-inkdashboard (deel 1)</h1><p class="info has-text-white"><em>een oude Kindle Paperwhite 3 hergebruiken</em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 27-09-2020 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/diy/">DIY</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Kindles hebben fantastische e-inkschermen. Als we erin slagen Python op zo’n toestel te installeren, kunnen we een oude
+Kindle in een energiezuinig dashboard veranderen! Een oude Kindle is ook aanzienlijk goedkoper dan een nieuwe
+e-inkmodule die je op een Raspberry Pi kunt aansluiten. Het is dus heel logisch om mijn oude Kindle, die problemen
+heeft, te hergebruiken. Zelfs nadat ik de batterij verving, gaat hij bij matig gebruik maar 2 à 3 dagen mee. Dat is lang
+niet genoeg voor reizen waarop hij niet dagelijks kan worden opgeladen. Vroeg of laat koop ik wel een nieuwe
+e-bookreader, maar ik gooi een verder prima toestel echt niet graag weg. Zeker niet eentje met een geweldig scherm dat
+nog perfect werkt. Gelukkig vond ik een manier om hem te hergebruiken en dit toestel nieuw leven in te blazen.</p>
+
+<p><a href="/assets/posts/2020-09-27-PythonKindleDashboard_1/all_parts.jpg" class="lightgallery-link" data-sub-html="Alle onderdelen voor de jailbreak via de seriële poort">
+<img src="/assets/posts/2020-09-27-PythonKindleDashboard_1/all_parts.jpg" alt="Alle onderdelen voor de jailbreak via de seriële poort" height="800" width="1200" data-src="/assets/posts/2020-09-27-PythonKindleDashboard_1/all_parts.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="python-op-de-kindle-installeren">Python op de Kindle installeren</h2>
+
+<p>Omdat je geen extra software op een standaard-Kindle kunt installeren, moet je hem eerst jailbreaken. Daardoor vervalt
+je garantie, dus als je dit wilt proberen, doe je dat op eigen risico. Er zijn twee belangrijke manieren:</p>
+
+<ul>
+  <li>Upgrade naar specifieke firmware die gekraakt kan worden en gebruik een softwarematige jailbreak (je huidige versie
+  moet ouder zijn dan de firmware die kan worden gekraakt). Details vind je <a href="https://www.mobileread.com/forums/showthread.php?t=320564">hier</a>
+  en <a href="https://www.mobileread.com/forums/showthread.php?t=313086">hier</a>.</li>
+  <li>Open de Kindle, soldeer draden aan de seriële poort, maak er via een computer verbinding mee en meld je op het
+  toestel aan om een jailbreak toe te passen. Gebruik <a href="https://www.mobileread.com/forums/showthread.php?t=267541">deze handleiding</a>
+  als je deze methode wilt proberen.</li>
+</ul>
+
+<p>Voor de jailbreak via de seriële poort heb je naast een soldeerbout en enkele draden ook een USB-naar-serieeladapter
+nodig. Op Amazon, eBay enzovoort vind je er genoeg, maar zorg dat je model <strong>1,8 V</strong> ondersteunt, want dat heeft de
+Kindle nodig.</p>
+
+<p><a href="/assets/posts/2020-09-27-PythonKindleDashboard_1/usb_to_serial.jpg" class="lightgallery-link" data-sub-html="USB-naar-serieeladapter die 1,8, 3,3 en 5 V ondersteunt">
+<img src="/assets/posts/2020-09-27-PythonKindleDashboard_1/usb_to_serial.jpg" alt="USB-naar-serieeladapter die 1,8, 3,3 en 5 V ondersteunt" height="800" width="1200" data-src="/assets/posts/2020-09-27-PythonKindleDashboard_1/usb_to_serial.jpg" loading="lazy" />
+</a></p>
+
+<p>Omdat mijn firmwareversie te nieuw was voor de softwarematige jailbreak, begon ik met de jailbreak via de seriële
+poort/hardware. Nadat ik de Kindle met mijn computer had verbonden, aanvaardde hij het rootwachtwoord niet (mogelijk
+omdat ik eerder de softwarematige jailbreak had uitgevoerd en die verloor toen ik naar de nieuwste versie bijwerkte in
+een poging het batterijprobleem op te lossen). Daardoor kon ik mijn toestel ook niet op die manier jailbreaken. Als je
+echter via de seriële poort met de Kindle verbonden bent en ook een USB-kabel aansluit, kun je hem in
+<strong>herstelmodus</strong> opstarten (druk op het juiste moment tijdens het opstarten op Enter) en van daaruit de
+<strong>partitietabel exporteren</strong>. De Kindle verschijnt dan als USB-opslagapparaat op je computer. Je kunt eender welk
+firmwarebestand naar de hoofdmap van de Kindle kopiëren en de installatie vanaf de opdrachtregel forceren, waardoor je
+de Kindle feitelijk naar een oudere versie terugbrengt. (Je kunt de oude firmware niet vooraf kopiëren, want bij het
+herstarten van het toestel wordt die verwijderd.) Daarna kun je de softwarematige jailbreak gebruiken.</p>
+
+<p><a href="/assets/posts/2020-09-27-PythonKindleDashboard_1/soldering.jpg" class="lightgallery-link" data-sub-html="Vastgesoldeerde draden">
+<img src="/assets/posts/2020-09-27-PythonKindleDashboard_1/soldering.jpg" alt="Vastgesoldeerde draden" height="800" width="1200" data-src="/assets/posts/2020-09-27-PythonKindleDashboard_1/soldering.jpg" loading="lazy" />
+</a></p>
+
+<p>Zodra je de Kindle met succes hebt gejailbreakt, installeer je <a href="https://www.mobileread.com/forums/showthread.php?t=203326">KUAL</a>.
+Dat is een startprogramma waarmee je andere pakketten vanuit een menu kunt openen. Installeer vervolgens de MobileRead
+Package Installer, ook wel <a href="https://www.mobileread.com/forums/showthread.php?t=251143">MRPI</a>, die de volgende stap
+vereenvoudigt. Ten slotte hebben we Python 3.8 nodig, dat je <a href="https://www.mobileread.com/forums/showthread.php?t=225030">hier</a>
+vindt. Plaats de binaire bestanden in de juiste map en start MRPI vanuit KUAL om ze te installeren.</p>
+
+<p><a href="/assets/posts/2020-09-27-PythonKindleDashboard_1/python_installing.jpg" class="lightgallery-link" data-sub-html="Gelukt, Python wordt geïnstalleerd">
+<img src="/assets/posts/2020-09-27-PythonKindleDashboard_1/python_installing.jpg" alt="Gelukt, Python wordt geïnstalleerd" height="800" width="1200" data-src="/assets/posts/2020-09-27-PythonKindleDashboard_1/python_installing.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="een-kual-extensie-maken">Een KUAL-extensie maken</h2>
+
+<p>Python is geïnstalleerd en KUAL geeft ons een manier om ons script te starten. Laten we een KUAL-extensie bouwen. Hier
+bespreken we alleen de standaardcode; het Python-script voor het dashboard komt in de volgende post aan bod. Hieronder
+zie je de bestandsstructuur van onze extensie. De map <code class="language-plaintext highlighter-rouge">dashboard</code> moet naar de map <code class="language-plaintext highlighter-rouge">extensions</code> op de Kindle worden
+gekopieerd.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>│   .gitignore
+│   README.md
+│
+└───dashboard
+    │   config.xml
+    │   menu.json
+    │
+    ├───bin
+    │       run.py
+    │       start.sh
+    │       start_once.sh
+    │
+    └───cache
+</code></pre></div></div>
+
+<p>Twee bestanden zijn essentieel voor de KUAL-extensie: <code class="language-plaintext highlighter-rouge">config.xml</code> en <code class="language-plaintext highlighter-rouge">menu.json</code>. Je ziet ze hieronder. Ze spreken
+grotendeels voor zich, maar zorg dat de ID in het configuratiebestand overeenkomt met de naam van de map van je
+extensie (in dit geval dashboard). In <code class="language-plaintext highlighter-rouge">menu.json</code> kun je bepalen waar in het KUAL-menu knoppen komen om je script te
+starten (hier staan ze in het hoofdmenu). Omdat het dashboardscript (<code class="language-plaintext highlighter-rouge">start.sh</code>) in een oneindige lus terechtkomt en de
+Kindle opnieuw moet worden opgestart om het te stoppen, is er voor foutopsporing en tests ook een versie toegevoegd die
+maar één lus uitvoert om te testen of alles in orde is (<code class="language-plaintext highlighter-rouge">start_once.sh</code>).</p>
+
+<p><code class="language-plaintext highlighter-rouge">run.py</code> is een tijdelijk bestand dat in de volgende post wordt besproken. Dat Python-script haalt online gegevens op
+en zet ze om in iets wat we op de Kindle kunnen tonen.</p>
+
+<p><strong>config.xml</strong></p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;extension&gt;</span>
+    <span class="nt">&lt;information&gt;</span>
+        <span class="nt">&lt;name&gt;</span>Dashboard 4DCu.be<span class="nt">&lt;/name&gt;</span>
+        <span class="nt">&lt;version&gt;</span>0.1<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;author&gt;</span>4DCu.be - Sebastian Proost<span class="nt">&lt;/author&gt;</span>
+        <span class="nt">&lt;id&gt;</span>dashboard<span class="nt">&lt;/id&gt;</span>
+    <span class="nt">&lt;/information&gt;</span>
+    <span class="nt">&lt;menus&gt;</span>
+        <span class="nt">&lt;menu</span> <span class="na">type=</span><span class="s">"json"</span> <span class="na">dynamic=</span><span class="s">"true"</span><span class="nt">&gt;</span>menu.json<span class="nt">&lt;/menu&gt;</span>
+    <span class="nt">&lt;/menus&gt;</span>
+<span class="nt">&lt;/extension&gt;</span>
+</code></pre></div></div>
+
+<p><strong>menu.json</strong></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dashboard 4DCu.be"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"priority"</span><span class="p">:</span><span class="w"> </span><span class="mi">-999</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"exitmenu"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"refresh"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./bin/start.sh"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dashboard 4DCu.be (Debug)"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"priority"</span><span class="p">:</span><span class="w"> </span><span class="mi">-998</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"exitmenu"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+		</span><span class="nl">"refresh"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+		</span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./bin/start_once.sh"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Voor het eigenlijke dashboard staan alle bestanden in de map <code class="language-plaintext highlighter-rouge">bin</code>. Daar staat een shellscript, <code class="language-plaintext highlighter-rouge">start.sh</code>, dat het
+Python-script uitvoert, het systeem in diepe slaap zet en dat herhaalt zodra het weer ontwaakt. Dit script blijft voor
+altijd draaien en je moet de Kindle opnieuw opstarten om het te beëindigen. Voor een dashboard is dat prima, maar bij
+foutopsporing en tests is het wat vervelend. Daarom is ook <code class="language-plaintext highlighter-rouge">start_once.sh</code> toegevoegd, dat het script één keer uitvoert
+en vervolgens stopt.</p>
+
+<p><strong>bin/start.sh</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
+
+<span class="nb">cd</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">dirname</span> <span class="s2">"</span><span class="nv">$0</span><span class="s2">"</span><span class="si">)</span><span class="s2">"</span>
+
+/usr/sbin/eips <span class="nt">-c</span>
+/usr/sbin/eips 15  4 <span class="s1">'Starting 4DCu.be Dashboard'</span>
+
+<span class="k">while </span><span class="nb">true
+</span><span class="k">do</span>
+    <span class="c"># Make sure there is enough time to reconnect to the wifi</span>
+    <span class="nb">sleep </span>30
+    <span class="c"># Refresh Dashboard</span>
+    python3 /mnt/base-us/extensions/dashboard/bin/run.py
+    <span class="nb">sleep </span>5
+
+    <span class="nb">echo</span> <span class="s2">""</span> <span class="o">&gt;</span> /sys/class/rtc/rtc1/wakealarm
+    <span class="c"># Following line contains the sleep time in seconds</span>
+    <span class="nb">echo</span> <span class="s2">"+3600"</span> <span class="o">&gt;</span> /sys/class/rtc/rtc1/wakealarm
+    <span class="c"># Following line will put device into deep sleep until the alarm above is triggered</span>
+    <span class="nb">echo </span>mem <span class="o">&gt;</span> /sys/power/state
+<span class="k">done</span>
+</code></pre></div></div>
+
+<p>Met deze scripts is alles klaar om aan de Python-code te beginnen die gegevens ophaalt en ze op het scherm toont. Die
+komt echter in de volgende post aan bod. Voorlopig kun je naar de onderstaande foto kijken, waarop KUAL onze eigen
+gloednieuwe knoppen toont. Binnenkort zullen die Python-code uitvoeren om voor ons aan de slag te gaan.</p>
+
+<p><a href="/assets/posts/2020-09-27-PythonKindleDashboard_1/kual_menu.jpg" class="lightgallery-link" data-sub-html="KUAL is helemaal klaar om onze code te starten">
+<img src="/assets/posts/2020-09-27-PythonKindleDashboard_1/kual_menu.jpg" alt="KUAL is helemaal klaar om onze code te starten" height="800" width="1200" data-src="/assets/posts/2020-09-27-PythonKindleDashboard_1/kual_menu.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="conclusie">Conclusie</h2>
+
+<p>Ondanks enkele problemen was het mogelijk om de Kindle Paperwhite 3 te jailbreaken, Python te installeren en er eigen
+code op uit te voeren. Alles is dus klaar om enkele scripts in elkaar te knutselen die de Kindle echt in een dashboard
+veranderen. Binnenkort lees je daarover in de <a href="/nl/diy/2020/10/PythonKindleDashboard_2/">volgende post</a>.</p>
+
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/python/">python</a>,&nbsp;<a href="/nl/tag/kindle/">kindle</a>,&nbsp;<a href="/nl/tag/dashboard/">dashboard</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=Kindle+%2B+Python+%3D+e-inkdashboard+%28deel+1%29%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2F2020%2F09%2FPythonKindleDashboard_1%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2F2020%2F09%2FPythonKindleDashboard_1%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2F2020%2F09%2FPythonKindleDashboard_1%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=Kindle+%2B+Python+%3D+e-inkdashboard+%28deel+1%29&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2F2020%2F09%2FPythonKindleDashboard_1%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/diy/2020/09/MQTT/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">Een Aqara Cube toevoegen aan Home Assistant</span></a></span>
+  <span class="next-post"><a href="/nl/diy/2020/10/PythonKindleDashboard_2/"><span class="page-number">Kindle + Python = e-inkdashboard (deel 2)</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

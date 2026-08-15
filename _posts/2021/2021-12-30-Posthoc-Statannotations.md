@@ -5,6 +5,7 @@ byline: "combining scikit-posthocs with statannotations"
 description: "How to plot post hoc tests in Python by combining scikit-posthocs with statannotations, annotating boxplots from Kruskal-Wallis or ANOVA results."
 date:   2021-12-30 06:00:00
 author: Sebastian Proost
+post_id: posthoc-statannotations
 categories: programming
 tags:	python pandas data-science seaborn code-nugget sklearn scikit-posthocs statannotations
 cover:  "/assets/posts/2021-12-30-Posthoc-Statannotations/posthoc_statannotations_header.png"

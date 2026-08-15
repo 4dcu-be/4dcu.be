@@ -5,6 +5,7 @@ byline: "using decorators"
 description: "Refactoring the DIY MacroPad code into a clean Python class that binds custom functions to key presses using decorators, inspired by the KeyBow 2040."
 date:   2022-05-23 10:00:00
 author: Sebastian Proost
+post_id: macropad-update
 categories: diy
 tags:	raspberry-pi python mechanical-keyboard soldering electronics
 cover:  "/assets/posts/2021-04-05-Macropad/macropad_finished.jpg"

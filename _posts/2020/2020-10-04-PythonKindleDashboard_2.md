@@ -5,6 +5,7 @@ byline: "repurposing an old kindle paperwhite 3"
 description: "Coding the Kindle e-Ink dashboard in Python with a small ETL pipeline that scrapes Google Scholar citations, Gwent rank and TV air dates into an SVG (part 2)."
 date:   2020-10-04 12:00:00
 author: Sebastian Proost
+post_id: python-kindle-dashboard-2
 categories: diy
 tags:	python kindle dashboard gwent TV
 cover:  "/assets/posts/2020-10-04-PythonKindleDashboard_2/header.jpg"
@@ -18,7 +19,7 @@ gallery_items:
 ---
 
 In the [last post] a Kindle Paperwhite 3 was jailbroken, Python 3.8 installed and all boilerplate code was added to 
-have a way to start our script and launch it from [KUAL]. Now we can actually dive into the actual Python code that
+have a way to start our script and launch it from [KUAL]. Now we can dive into the actual Python code that
 will turn the device in a proper DashBoard. To do this we'll create a miniature ETL pipeline (Extract - Transform - Load),
 that will fetch data from relevant websites (the extract part), combine it into a dictionary (the transform) and 
 put all parts in an SVG image (the load). The latter can then be converted into a PNG which we can show on the screen.
@@ -31,11 +32,11 @@ As always, all code for this project can be found on [GitHub](https://github.com
 I have plenty of devices telling me the weather forecast, so I didn't want to do yet another weather dashboard. Matter 
 of fact, a lot of the code here is based on a KUAL Extension that does exactly that. Check it out [here](https://github.com/x-magic/kindle-weather-stand-alone)
 if you are looking to do a weather dashboard. I'll pick something more specific for me, but it should be relatively 
-easy to adapt the code to other websites and API's to make a dashboard tailored to your own interests.
+easy to adapt the code to other websites and APIs to make a dashboard tailored to your own interests.
 
 After some thinking I decided to pull data from three websites; [Google Scholar] to grab the number of citations my
 publications have received as well as my [H-index], my current [Gwent] rank and score (a competitive online card-game) 
-and from TVMaze air dates of upcoming episode for series I like. To avoid making the installation of this extension 
+and from TVMaze air dates of upcoming episodes for series I like. To avoid making the installation of this extension
 overly complicated, no additional packages will be used, so only the standard library will be used. Unfortunately, 
 this means getting websites with [urllib] and regular expressions rather than [requests] and [BeautifulSoup]. Though,
 moving some complexity from the installation (jailbreaking a Kindle to get this to run is hard enough already) to the 
@@ -76,7 +77,7 @@ my computer without, it gives an error on the Kindle without this bit included.
 
 While a few simple lines sufficed for [Google Scholar], getting the data from my [Gwent] profile contains a lot more
 ugly code. Here the lack of a proper package to parse HTML, like [BeautifulSoup], is really tangible. However, while
-not the prettiest code, it get's the job done. It is just a matter of finding the spot in the HTML code where the piece
+not the prettiest code, it gets the job done. It is just a matter of finding the spot in the HTML code where the piece
 of information is located and writing up a regular expression to parse it out. 
 
 ```python
@@ -98,7 +99,7 @@ def get_gwent_data(url):
 
 Note that re.findall returns a list of all hits, which should contain one element here. Though rather than extracting
 that hit with its index, the join function is used. Due to this little trick, if the [Gwent] website is updated and the
-regular expression won't match the code won't yield errors, it will just have an empty strings as values. If the values
+regular expression won't match the code won't yield errors, it will just have empty strings as values. If the values
 no longer appear on the dashboard it is time to revise the code, but the other items will still work as planned.
 
 ### TVMaze
@@ -136,15 +137,15 @@ def get_tvmaze_data(ids):
 
 Most sites don't provide new data every hour, so there is no need to fetch the data that often. We can simply store the
 results and the next time we refresh check the time since the last modification. If that is recent enough we load the
-data and provide that. If the file is older than the chach time, we fetch new data from the internet.
+data and provide that. If the file is older than the cache time, we fetch new data from the internet.
 
 As the data comes from the internet a few things can go wrong, the Kindle's Wifi might not come up fast enough, or 
 the internet might be down, or one of the websites times out ... and these errors aren't caught yet. I also don't want
 the dashboard to display empty information for an hour or more because one website was temporarily unreachable. Here we
-can also leverage the cache, if we fail to get up to fetch data from the internet, we load the cache regardless of the
+can also leverage the cache, if we fail to fetch data from the internet, we load the cache regardless of the
 age and show that. It is better to show (slightly) out of date information than no information at all.
 
-The decorator shown below elegantly combines both of these, note there is some boiler plate code for checking the last
+The decorator shown below elegantly combines both of these, note there is some boilerplate code for checking the last
 modification to a file. This part of the code is included in `./dashboard/bin/cache.py`
 
 {:.large-code}
@@ -308,9 +309,9 @@ if __name__ == "__main__":
 
 Now `run.py` will create a new SVG file each time it is called. However we need to revise `start.sh` to convert this
 SVG into a PNG image and show that image on the screen. The Weather Dashboard uses a combination of [rsvg-convert] and
-pngcruch to create a png file compatible with the Kindle's own `eips` command to put it on the screen. Here, the
+pngcrush to create a png file compatible with the Kindle's own `eips` command to put it on the screen. Here, the
 SVG is still converted using the same tool, but `fbink` is used, which can put any png image on the screen correctly,
-without the need for an additional conversion using pngcruch. Furthermore, the temporary files will be cleaned up in this
+without the need for an additional conversion using pngcrush. Furthermore, the temporary files will be cleaned up in this
 script.
 
 One big issue is that the Kindle mounts most partitions with the `noexec` flag, meaning you can't execute code and
@@ -318,7 +319,7 @@ scripts from there. For scripts that isn't much of an issue as you can overcome 
 interpreter; `/bin/sh <scriptname>` and `python3 <scriptname>` can be used for shell and python scripts respectively. To
 run rsvg-convert there is a bigger issue as this is a binary file. The workaround here is to copy the executable code
 and libraries to a share where code can be executed, here `/var/tmp` is used, add the path to the libraries to the 
-environmental variable `LD_LIBRARY_PATH` and run the program from there.
+environment variable `LD_LIBRARY_PATH` and run the program from there.
 
 To avoid flooding KUAL's log over time (especially `fbink` is very verbose) all output from the tools is caught and
 piped to `/dev/null` (essentially the command line's garbage bin) by appending `> /dev/null 2>&1` to the command.
