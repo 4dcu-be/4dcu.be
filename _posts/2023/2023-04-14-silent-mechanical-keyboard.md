@@ -5,6 +5,7 @@ byline: ""
 description: "Building a quiet mechanical keyboard on the id75 board, explaining what makes mechanical switches loud and the tweaks that keep tactile feel while reducing noise."
 date:   2023-04-14 08:00:00
 author: Sebastian Proost
+post_id: silent-mechanical-keyboard
 categories: diy
 tags:	mechanical-keyboard soldering electronics
 cover:  "/assets/posts/2023-04-14-silent-mechanical-keyboard/completed.jpg"

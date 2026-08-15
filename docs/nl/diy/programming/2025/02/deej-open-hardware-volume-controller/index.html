@@ -1,0 +1,615 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>Een aangepaste Deej-volumemixer bouwen met een RP2040 Pro Micro</title>
+  <meta name="description" content="Een opensource Deej-USB-volumemixer bouwen met een RP2040 Pro Micro en CircuitPython, met een USB-C-poort en enkele handige verbeteringen om het volume per a...">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Een aangepaste Deej-volumemixer bouwen met een RP2040 Pro Micro" />
+  <meta property="og:description" content="Een opensource Deej-USB-volumemixer bouwen met een RP2040 Pro Micro en CircuitPython, met een USB-C-poort en enkele handige verbeteringen om het volume per a..." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/diy/programming/2025/02/deej-open-hardware-volume-controller/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2025-02-03-deej-open-hardware-volume-controller-deej_02.jpg" /><meta property="og:image:alt" content="Een aangepaste Deej-volumemixer bouwen met een RP2040 Pro Micro" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2025-02-03T08:00:00+00:00" /><meta property="article:modified_time" content="2025-02-03T08:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="DIY" /><meta property="article:section" content="Programmeren" /><meta property="article:tag" content="deej" /><meta property="article:tag" content="python" /><meta property="article:tag" content="raspberry-pi" /><meta property="article:tag" content="soldering" /><meta property="article:tag" content="electronics" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Een aangepaste Deej-volumemixer bouwen met een RP2040 Pro Micro"><meta name="twitter:description" content="Een opensource Deej-USB-volumemixer bouwen met een RP2040 Pro Micro en CircuitPython, met een USB-C-poort en enkele handige verbeteringen om het volume per a..."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2025-02-03-deej-open-hardware-volume-controller-deej_02.jpg"><meta name="twitter:image:alt" content="Een aangepaste Deej-volumemixer bouwen met een RP2040 Pro Micro"><meta name="twitter:url" content="https://blog.4dcu.be/nl/diy/programming/2025/02/deej-open-hardware-volume-controller/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/diy/programming/2025/02/deej-open-hardware-volume-controller/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/diy/programming/2025/02/03/deej-open-hardware-volume-controller.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/diy/programming/2025/02/deej-open-hardware-volume-controller/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/diy/programming/2025/02/03/deej-open-hardware-volume-controller.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/diy/programming/2025/02/deej-open-hardware-volume-controller/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/diy/programming/2025/02/deej-open-hardware-volume-controller/" },
+      "url": "https://blog.4dcu.be/nl/diy/programming/2025/02/deej-open-hardware-volume-controller/",
+      "headline": "Een aangepaste Deej-volumemixer bouwen met een RP2040 Pro Micro",
+      "description": "Een opensource Deej-USB-volumemixer bouwen met een RP2040 Pro Micro en CircuitPython, met een USB-C-poort en enkele handige verbeteringen om het volume per a...",
+      "datePublished": "2025-02-03T08:00:00+00:00",
+      "dateModified": "2025-02-03T08:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2025-02-03-deej-open-hardware-volume-controller-deej_02.jpg",
+      "keywords": ["deej", "python", "raspberry-pi", "soldering", "electronics"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/diy/programming/2025/02/deej-open-hardware-volume-controller/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "DIY", "item": "https://blog.4dcu.be/nl/category/diy/" },
+        { "@type": "ListItem", "position": 3, "name": "Een aangepaste Deej-volumemixer bouwen met een RP2040 Pro Micro" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/diy/programming/2025/02/03/deej-open-hardware-volume-controller.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/diy/programming/2025/02/deej-open-hardware-volume-controller/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/deej_header.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="Een aangepaste Deej-volumemixer bouwen met een RP2040 Pro Micro" class="hero-background is-transparent" src="/assets/posts/2025-02-03-deej-open-hardware-volume-controller/deej_02.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">Een aangepaste Deej-volumemixer bouwen met een RP2040 Pro Micro</h1><p class="info has-text-white"><em>met CircuitPython</em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 03-02-2025 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/diy/">DIY</a>, <a href="/nl/category/programming/">Programmeren</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Op zoek naar een zelfgebouwde hardwarevolumemixer waarmee je moeiteloos het volume van afzonderlijke apps regelt? Of je nu gamer, streamer of audiofanaat bent, softwarematige volumeregelaars handmatig aanpassen kan frustrerend zijn. Daar komt <a href="https://github.com/omriharel/deej">Deej</a> van pas, een opensource USB-volumemixer.</p>
+
+<p>In deze handleiding toon ik hoe ik een Deej-volumemixer bouwde met een RP2040 Pro Micro, een Raspberry Pi Pico-kloon in een compacter formaat, met een paar verbeteringen voor het gebruiksgemak en een USB-C-poort. In tegenstelling tot de vaker voorkomende builds met Arduino gebruikt deze opstelling <a href="https://circuitpython.org/">CircuitPython</a> als eenvoudig te programmeren en krachtig alternatief.</p>
+
+<p>Omdat je een Deej op heel wat manieren kunt bouwen, toon ik eerst mijn versie. Daarna bekijken we hoe je de code schrijft en Deej configureert. Hopelijk geeft dit je een goed vertrekpunt voor je eigen aangepaste volumemixer.</p>
+
+<h2 id="wat-heb-je-nodig">Wat heb je nodig?</h2>
+
+<p>Verzamel voor je begint de volgende onderdelen en gereedschappen:</p>
+
+<ul>
+  <li><strong>RP2040 Pro Micro</strong> – Een microcontroller op basis van de RP2040 die het zware werk zal doen.</li>
+  <li><strong>Potentiometers</strong> – Drie potentiometers van 10 kOhm om het volume te regelen.</li>
+  <li><strong>Knoppen</strong> – Drie knoppen voor op de potentiometers.</li>
+  <li><strong>Gaatjesprintplaat</strong> – Een klein stukje gaatjesprintplaat om de onderdelen op te solderen.</li>
+  <li><strong>Jumperdraden</strong> – Om de onderdelen op de gaatjesprintplaat te verbinden.</li>
+  <li><strong>Behuizing</strong> – Een aangepaste behuizing voor de onderdelen.</li>
+  <li>
+    <p><strong>Soldeermateriaal</strong> – Een soldeerbout, soldeertin en flux om de hardware in elkaar te zetten.</p>
+  </li>
+  <li>Optionele onderdelen als je een <strong>stroomindicator</strong> wilt toevoegen:
+    <ul>
+      <li><strong>Led van 3 mm</strong> - Een led die aangeeft wanneer het toestel aanstaat.</li>
+      <li><strong>Weerstand van 82 Ohm</strong> – Om de stroom naar de led te begrenzen.</li>
+      <li><strong>Ledhouder</strong> - Om de led op zijn plaats te houden en het geheel mooi af te werken.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="de-hardware-monteren">De hardware monteren</h2>
+
+<p>Ik begon met de behuizing. In <a href="https://inkscape.org/">Inkscape</a> maakte ik een model van het voorpaneel en verschoof ik de onderdelen tot ik
+tevreden was met de indeling. Ik printte dit ontwerp op stickerpapier en kleefde het daarna op het voorpaneel. Zo kon ik
+de gaten voor de potentiometers en de ledhouder precies op de juiste plaats boren.</p>
+
+<p><a href="/assets/posts/2025-02-03-deej-open-hardware-volume-controller/front_panel_design.png" class="lightgallery-link" data-sub-html="Ontwerp van het voorpaneel voor de Deej-volumemixer">
+<img src="/assets/posts/2025-02-03-deej-open-hardware-volume-controller/front_panel_design.png" alt="Ontwerp van het voorpaneel voor de Deej-volumemixer" height="209" width="664" data-src="/assets/posts/2025-02-03-deej-open-hardware-volume-controller/front_panel_design.png" loading="lazy" />
+</a></p>
+
+<p>Vervolgens soldeerde ik de RP2040 Pro Micro op de gaatjesprintplaat en verbond ik de potentiometers en led met de microcontroller. De kathode van de led moet met de massa verbonden worden en de anode via de weerstand van <strong>82 Ohm</strong> met pin <strong>GP8</strong> van de RP2040 (al kan dit bijna om het even welke andere GPIO-pin zijn). De <strong>middelste pinnen</strong> van de potentiometers worden respectievelijk met pinnen <strong>GP26, GP27 en GP28</strong> van de RP2040 verbonden. Voor de potentiometers kun je alleen deze pinnen gebruiken, omdat enkel zij analoog-naar-digitaalconversie (ADC) ondersteunen. Dat is nodig om de waarden van de potentiometers uit te lezen. De andere pinnen van de potentiometers gaan naar de massa en 3,3 V.</p>
+
+<p>Daarna monteerde ik de gaatjesprintplaat in mijn behuizing, waarvoor ik twee schroefgaten in de printplaat moest boren. De behuizing had al enkele plekken om een printplaat vast te schroeven. Daar plaatste ik schroefdraadbussen in, zodat de schroeven de printplaat stevig op haar plaats zouden houden. Ik maakte in het achterpaneel ook een opening zodat de USB-C-poort van de RP2040 Pro Micro bereikbaar bleef. Tot slot zette ik de knoppen op de potentiometers en bevestigde ik de ledhouder.</p>
+
+<p><a href="/assets/posts/2025-02-03-deej-open-hardware-volume-controller/deej_03.jpg" class="lightgallery-link" data-sub-html="Een zelfgebouwde audiovolumemixer met een minimalistisch ontwerp en een vintage ogende behuizing, drie zwarte draaiknoppen met witte markeringen en een brandende witte led op het voorpaneel. Het toestel staat op een houten oppervlak.">
+<img src="/assets/posts/2025-02-03-deej-open-hardware-volume-controller/deej_03.jpg" alt="Een zelfgebouwde audiovolumemixer met een minimalistisch ontwerp en een vintage ogende behuizing, drie zwarte draaiknoppen met witte markeringen en een brandende witte led op het voorpaneel. Het toestel staat op een houten oppervlak." height="675" width="1080" data-src="/assets/posts/2025-02-03-deej-open-hardware-volume-controller/deej_03.jpg" loading="lazy" />
+</a></p>
+
+<p>De behuizing die ik koos, moet al ruim twintig jaar in mijn onderdelenbak gelegen hebben. De doe-het-zelf-elektronicakit waarvoor ik ze oorspronkelijk kocht, paste er ondanks de aanbevolen behuizing niet goed in. Vanwege de retrosfeer koos ik voor even retro knoppen. De ene witte led is de enige hint dat dit project niet uit de jaren 80 of 90 komt.</p>
+
+<h2 id="de-rp2040-voorbereiden">De RP2040 voorbereiden</h2>
+
+<p>Als je dat nog niet gedaan hebt, moet je de RP2040 Pro Micro instellen voor gebruik met CircuitPython. Volg de stappen in de <a href="https://learn.adafruit.com/getting-started-with-raspberry-pi-pico-circuitpython/circuitpython">handleiding van Adafruit</a> om CircuitPython op de RP2040 te installeren. Daarna kun je verder met de volgende stappen.</p>
+
+<h2 id="de-code-schrijven">De code schrijven</h2>
+
+<p>Om met Deej te communiceren heb je een toestel nodig dat een serieel apparaat nabootst en via die seriële verbinding berichten met de gewenste volumeniveaus verstuurt. De waarden moeten tussen 0 en 1023 liggen, waarbij 0 gedempt is en 1023 het maximale volume, en worden gescheiden door verticale strepen (<code class="language-plaintext highlighter-rouge">|</code>). CircuitPython maakt dit heel eenvoudig: het opent standaard een seriële verbinding en verstuurt <em>print statements</em> via die verbinding. Als je bijvoorbeeld <code class="language-plaintext highlighter-rouge">0|512|1023</code> afdrukt en Deej dat ontvangt, wordt het eerste kanaal op 0, het tweede op 50% en het laatste op 100% gezet.</p>
+
+<p>De code die ik gebruik om de potentiometers uit te lezen en de waarden via de seriële verbinding te versturen ziet er zo uit:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">board</span>
+<span class="kn">import</span> <span class="n">analogio</span>
+<span class="kn">import</span> <span class="n">time</span>
+<span class="kn">import</span> <span class="n">pwmio</span>
+
+<span class="c1"># Constants
+</span><span class="n">MIN_VALUE</span> <span class="o">=</span> <span class="mi">340</span>
+<span class="n">MAX_VALUE</span> <span class="o">=</span> <span class="mi">65535</span>
+<span class="n">RANGE</span> <span class="o">=</span> <span class="n">MAX_VALUE</span> <span class="o">-</span> <span class="n">MIN_VALUE</span>
+<span class="n">ADC_PINS</span> <span class="o">=</span> <span class="p">[</span><span class="n">board</span><span class="p">.</span><span class="n">GP26</span><span class="p">,</span> <span class="n">board</span><span class="p">.</span><span class="n">GP28</span><span class="p">,</span> <span class="n">board</span><span class="p">.</span><span class="n">GP27</span><span class="p">]</span>
+<span class="n">SAMPLES</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">SLEEP_TIME</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># 100ms delay
+</span>
+<span class="c1"># Set up ADC inputs
+</span><span class="n">ADCs</span> <span class="o">=</span> <span class="p">[</span><span class="n">analogio</span><span class="p">.</span><span class="nc">AnalogIn</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span> <span class="k">for</span> <span class="n">pin</span> <span class="ow">in</span> <span class="n">ADC_PINS</span><span class="p">]</span>
+
+<span class="c1"># Set up LED, use PWM otherwise it is too bright
+</span><span class="n">pwm</span> <span class="o">=</span> <span class="n">pwmio</span><span class="p">.</span><span class="nc">PWMOut</span><span class="p">(</span><span class="n">board</span><span class="p">.</span><span class="n">GP8</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">duty_cycle</span><span class="o">=</span><span class="mi">32768</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_smoothed_adc_value</span><span class="p">(</span><span class="n">adc</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="n">SAMPLES</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">Reads and averages multiple ADC samples for noise reduction.</span><span class="sh">"""</span>
+    <span class="n">smooth_value</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">adc</span><span class="p">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">samples</span><span class="p">))</span> <span class="o">//</span> <span class="n">samples</span>
+    <span class="nf">return </span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">smooth_value</span> <span class="o">-</span> <span class="n">MIN_VALUE</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1023</span><span class="p">)</span> <span class="o">//</span> <span class="n">RANGE</span>
+
+<span class="k">def</span> <span class="nf">read_pot_values</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">Reads and returns smoothed values from all ADCs.</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nf">get_smoothed_adc_value</span><span class="p">(</span><span class="n">adc</span><span class="p">)</span> <span class="k">for</span> <span class="n">adc</span> <span class="ow">in</span> <span class="n">ADCs</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">send_pot_values</span><span class="p">(</span><span class="n">pot_values</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">Formats and prints potentiometer values.</span><span class="sh">"""</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">|</span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pot_values</span><span class="p">)))</span>
+
+<span class="c1"># Main loop
+</span><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">pot_values</span> <span class="o">=</span> <span class="nf">read_pot_values</span><span class="p">()</span>
+    <span class="nf">send_pot_values</span><span class="p">(</span><span class="n">pot_values</span><span class="p">)</span>
+    <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="n">SLEEP_TIME</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Deze code leest de waarden van de potentiometers uit, vlakt ze af door het gemiddelde van meerdere metingen te nemen en verstuurt ze via de seriële verbinding. De constanten <code class="language-plaintext highlighter-rouge">MIN_VALUE</code> en <code class="language-plaintext highlighter-rouge">MAX_VALUE</code> schalen de ADC-waarden naar het gewenste bereik en moeten voor andere toestellen mogelijk aangepast worden. De constante <code class="language-plaintext highlighter-rouge">RANGE</code> is het verschil tussen de maximum- en minimumwaarden. De constante <code class="language-plaintext highlighter-rouge">SAMPLES</code> bepaalt hoeveel metingen er genomen worden om de ADC-waarden af te vlakken. De constante <code class="language-plaintext highlighter-rouge">SLEEP_TIME</code> bepaalt de wachttijd tussen elke meting. Dit moet vaak genoeg gebeuren zodat Deej snel op wijzigingen reageert, maar niet zo vaak dat de seriële verbinding overspoeld raakt. Ik vond 100 ms een goed evenwicht, maar ik heb implementaties gezien met wachttijden tot slechts 10 ms. Als je dit wilt gebruiken, sla je het gewoon als <code class="language-plaintext highlighter-rouge">code.py</code> op de RP2040 Pro Micro op.</p>
+
+<h2 id="deej-configureren">Deej configureren</h2>
+
+<p>Download Deej op de hostcomputer van de <a href="https://github.com/omriharel/deej">officiële GitHub-repository</a>. Het uitvoerbare bestand moet gewoon ergens opgeslagen worden. In dezelfde map maak je een bestand <code class="language-plaintext highlighter-rouge">config.yaml</code> aan, waarin je bepaalt welke seriële poort gebruikt wordt en welk kanaal welke app bedient. Het bestand <code class="language-plaintext highlighter-rouge">config.yaml</code> ziet er ongeveer zo uit:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">slider_mapping</span><span class="pi">:</span>
+  <span class="na">0</span><span class="pi">:</span> <span class="s">master</span>
+  <span class="na">1</span><span class="pi">:</span> <span class="s">chrome.exe</span>
+  <span class="na">2</span><span class="pi">:</span> <span class="s">mic</span>
+
+
+<span class="c1"># set this to true if you want the controls inverted (i.e. top is 0%, bottom is 100%)</span>
+<span class="na">invert_sliders</span><span class="pi">:</span> <span class="kc">false</span>
+
+<span class="c1"># settings for connecting to the RP2040 Pro Micro</span>
+<span class="na">com_port</span><span class="pi">:</span> <span class="s">COM4</span>
+<span class="na">baud_rate</span><span class="pi">:</span> <span class="m">9600</span>
+
+<span class="c1"># adjust the amount of signal noise reduction depending on your hardware quality</span>
+<span class="c1"># supported values are "low" (excellent hardware), "default" (regular hardware) or "high" (bad, noisy hardware)</span>
+<span class="na">noise_reduction</span><span class="pi">:</span> <span class="s">default</span>
+</code></pre></div></div>
+
+<p>Ik heb alles zo ingesteld dat de knoppen van links naar rechts het mastervolume, Chrome (handig voor YouTube, …) en de microfoon bedienen. Stel <code class="language-plaintext highlighter-rouge">com_port</code> in op de poort die aan de RP2040 Pro Micro is toegewezen (tip: die vind je via Apparaatbeheer in Windows). Nu kun je Deej starten en van je nieuwe hardwarevolumemixer genieten!</p>
+
+<h2 id="besluit">Besluit</h2>
+
+<p>Een aangepaste Deej-volumemixer bouwen met een RP2040 Pro Micro is een leuk en bevredigend project waarmee je het geluid van je systeem op een tastbare manier kunt regelen. Een microcontroller op basis van de RP2040 met CircuitPython is een uitstekend alternatief voor oplossingen op basis van Arduino als je vertrouwd bent met Python en de mogelijkheden van de RP2040 wilt benutten. Met een paar onderdelen en wat basiskennis van solderen bouw je een aangepaste volumemixer die je audio-ervaring verbetert. Veel knutselplezier!</p>
+
+<p><a href="/assets/posts/2025-02-03-deej-open-hardware-volume-controller/deej_01.jpg" class="lightgallery-link" data-sub-html="Een zelfgebouwde volumemixer met een strakke retrobehuizing en een zwart voorpaneel, drie zwarte draaiknoppen met witte markeringen en een kleine metalen ledhouder. Het toestel staat op een houten oppervlak, waardoor het cleane en minimalistische ontwerp goed tot zijn recht komt.">
+<img src="/assets/posts/2025-02-03-deej-open-hardware-volume-controller/deej_01.jpg" alt="Een zelfgebouwde volumemixer met een strakke retrobehuizing en een zwart voorpaneel, drie zwarte draaiknoppen met witte markeringen en een kleine metalen ledhouder. Het toestel staat op een houten oppervlak, waardoor het cleane en minimalistische ontwerp goed tot zijn recht komt." height="675" width="1080" data-src="/assets/posts/2025-02-03-deej-open-hardware-volume-controller/deej_01.jpg" loading="lazy" />
+</a></p>
+
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/deej/">deej</a>,&nbsp;<a href="/nl/tag/python/">python</a>,&nbsp;<a href="/nl/tag/raspberry-pi/">raspberry-pi</a>,&nbsp;<a href="/nl/tag/soldering/">soldering</a>,&nbsp;<a href="/nl/tag/electronics/">electronics</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=Een+aangepaste+Deej-volumemixer+bouwen+met+een+RP2040+Pro+Micro%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2Fprogramming%2F2025%2F02%2Fdeej-open-hardware-volume-controller%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2Fprogramming%2F2025%2F02%2Fdeej-open-hardware-volume-controller%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2Fprogramming%2F2025%2F02%2Fdeej-open-hardware-volume-controller%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=Een+aangepaste+Deej-volumemixer+bouwen+met+een+RP2040+Pro+Micro&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2Fprogramming%2F2025%2F02%2Fdeej-open-hardware-volume-controller%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/diy/2025/01/diy-mechanical-watch-2/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">Een GMT-horloge op maat bouwen</span></a></span>
+  <span class="next-post"><a href="/nl/diy/programming/2025/07/dashboard-for-home-assisant/"><span class="page-number">Mijn Kindle PW3 als dashboard voor Home Assistant gebruiken</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

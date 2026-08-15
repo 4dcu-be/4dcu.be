@@ -49,48 +49,96 @@
     <lastmod>2025-12-20T08:00:00+00:00</lastmod>
   </url>
   <url>
+    <loc>https://blog.4dcu.be/nl/diy/programming/2025/07/dashboard-for-home-assisant/</loc>
+    <lastmod>2025-07-21T08:00:00+00:00</lastmod>
+  </url>
+  <url>
     <loc>https://blog.4dcu.be/diy/programming/2025/07/21/dashboard-for-home-assisant.html</loc>
     <lastmod>2025-07-21T08:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.4dcu.be/nl/diy/programming/2025/02/deej-open-hardware-volume-controller/</loc>
+    <lastmod>2025-02-03T08:00:00+00:00</lastmod>
   </url>
   <url>
     <loc>https://blog.4dcu.be/diy/programming/2025/02/03/deej-open-hardware-volume-controller.html</loc>
     <lastmod>2025-02-03T08:00:00+00:00</lastmod>
   </url>
   <url>
+    <loc>https://blog.4dcu.be/nl/diy/2025/01/diy-mechanical-watch-2/</loc>
+    <lastmod>2025-01-19T08:00:00+00:00</lastmod>
+  </url>
+  <url>
     <loc>https://blog.4dcu.be/diy/2025/01/19/diy-mechanical-watch-2.html</loc>
     <lastmod>2025-01-19T08:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.4dcu.be/nl/diy/2024/11/diy-mechanical-watch/</loc>
+    <lastmod>2024-11-11T08:00:00+00:00</lastmod>
   </url>
   <url>
     <loc>https://blog.4dcu.be/diy/2024/11/11/diy-mechanical-watch.html</loc>
     <lastmod>2024-11-11T08:00:00+00:00</lastmod>
   </url>
   <url>
+    <loc>https://blog.4dcu.be/nl/diy/2024/02/stand-alone-air-quality-monitor-ikea-vindriktning-esp8266-bme680/</loc>
+    <lastmod>2024-02-11T08:00:00+00:00</lastmod>
+  </url>
+  <url>
     <loc>https://blog.4dcu.be/diy/2024/02/11/stand-alone-air-quality-monitor-ikea-vindriktning-esp8266-bme680.html</loc>
     <lastmod>2024-02-11T08:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.4dcu.be/nl/diy/2024/01/diy-smart-air-quality-monitor-ikea-vindriktning-esp8266-bme680/</loc>
+    <lastmod>2024-01-21T08:00:00+00:00</lastmod>
   </url>
   <url>
     <loc>https://blog.4dcu.be/diy/2024/01/21/diy-smart-air-quality-monitor-ikea-vindriktning-esp8266-bme680.html</loc>
     <lastmod>2024-01-21T08:00:00+00:00</lastmod>
   </url>
   <url>
+    <loc>https://blog.4dcu.be/nl/diy/games/2024/01/3ds-usb-c/</loc>
+    <lastmod>2024-01-07T08:00:00+00:00</lastmod>
+  </url>
+  <url>
     <loc>https://blog.4dcu.be/diy/games/2024/01/07/3ds-usb-c.html</loc>
     <lastmod>2024-01-07T08:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.4dcu.be/nl/diy/2023/12/pi-pico-usb-c/</loc>
+    <lastmod>2023-12-03T08:00:00+00:00</lastmod>
   </url>
   <url>
     <loc>https://blog.4dcu.be/diy/2023/12/03/pi-pico-usb-c.html</loc>
     <lastmod>2023-12-03T08:00:00+00:00</lastmod>
   </url>
   <url>
+    <loc>https://blog.4dcu.be/nl/ai/2023/09/comfyui-sdxl-workflows/</loc>
+    <lastmod>2023-09-03T08:00:00+00:00</lastmod>
+  </url>
+  <url>
     <loc>https://blog.4dcu.be/ai/2023/09/03/comfyui-sdxl-workflows.html</loc>
     <lastmod>2023-09-03T08:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.4dcu.be/nl/diy/2023/04/silent-mechanical-keyboard/</loc>
+    <lastmod>2023-04-14T08:00:00+00:00</lastmod>
   </url>
   <url>
     <loc>https://blog.4dcu.be/diy/2023/04/14/silent-mechanical-keyboard.html</loc>
     <lastmod>2023-04-14T08:00:00+00:00</lastmod>
   </url>
   <url>
+    <loc>https://blog.4dcu.be/nl/diy/2023/03/smart-motion-sensor/</loc>
+    <lastmod>2023-03-12T08:00:00+00:00</lastmod>
+  </url>
+  <url>
     <loc>https://blog.4dcu.be/diy/2023/03/12/smart-motion-sensor.html</loc>
     <lastmod>2023-03-12T08:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.4dcu.be/nl/programming/2023/02/chatgpt-python-gui-app/</loc>
+    <lastmod>2023-02-02T10:00:00+00:00</lastmod>
   </url>
   <url>
     <loc>https://blog.4dcu.be/programming/2023/02/02/chatgpt-python-gui-app.html</loc>
@@ -364,9 +412,11 @@
   </url><url>
     <loc>https://blog.4dcu.be/category/ai/</loc>
   </url><url>
-    <loc>https://blog.4dcu.be/nl/category/ai/</loc>
-  </url><url>
     <loc>https://blog.4dcu.be/nl/category/programming/</loc>
+  </url><url>
+    <loc>https://blog.4dcu.be/nl/category/diy/</loc>
+  </url><url>
+    <loc>https://blog.4dcu.be/nl/category/ai/</loc>
   </url><url>
     <loc>https://blog.4dcu.be/nl/category/games/</loc>
   </url><url>

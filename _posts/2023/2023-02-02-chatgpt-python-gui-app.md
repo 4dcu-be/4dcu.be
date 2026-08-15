@@ -5,6 +5,7 @@ byline: ""
 description: "Using ChatGPT step by step to build a Python GUI app that displays images and saves captions, a tool for preparing training data for AI like Stable Diffusion."
 date:   2023-02-02 10:00:00
 author: Sebastian Proost
+post_id: chatgpt-python-gui-app
 categories: programming
 tags:	python chatgpt ai 
 cover:  "/assets/posts/2023-02-02-chatgpt-python-gui-app/header_chatgpt.jpg"

@@ -5,8 +5,8 @@
     <link>https://blog.4dcu.be/nl/</link>
     <language>nl-NL</language>
     <atom:link href="https://blog.4dcu.be/nl/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 13 Aug 2026 06:17:41 +0000</pubDate>
-    <lastBuildDate>Thu, 13 Aug 2026 06:17:41 +0000</lastBuildDate>
+    <pubDate>Sat, 15 Aug 2026 13:00:02 +0000</pubDate>
+    <lastBuildDate>Sat, 15 Aug 2026 13:00:02 +0000</lastBuildDate>
     <generator>Jekyll v4.4.1</generator>
       <item>
         <title>Hnefatafl, een Vikingschaakspel voor de Game Boy</title>
@@ -20,7 +20,7 @@
     
       <item>
         <title>Cheats maken voor mijn eigen Game Boy-game</title>
-        <description>&lt;p&gt;De computerspellen die ik als kind speelde, hadden vaak ingebouwde cheatcodes waarmee je voorbij stukken kon raken waar je vastzat. Voor draagbare consoles zoals de Game Boy had je echter...</description>
+        <description>&lt;p&gt;De computerspellen die ik als kind speelde, hadden vaak ingebouwde cheatcodes waarmee je door moeilijke stukken heen kon raken. Voor draagbare consoles zoals de Game Boy had je echter speciale...</description>
         <pubDate>Wed, 13 May 2026 08:00:00 +0000</pubDate>
         <link>https://blog.4dcu.be/nl/games/2026/05/cheating-at-my-own-game/</link>
         <guid isPermaLink="true">https://blog.4dcu.be/nl/games/2026/05/cheating-at-my-own-game/</guid>
@@ -30,7 +30,7 @@
     
       <item>
         <title>Claude Design om twee projecten op te frissen</title>
-        <description>&lt;p&gt;Design is altijd mijn Achilleshiel geweest. Meestal heb ik een vrij duidelijk beeld van wat ik wil, maar dat omzetten in een consistente interface, daar loopt het mis. Voor de...</description>
+        <description>&lt;p&gt;Design is altijd mijn achilleshiel geweest. Meestal heb ik een vrij duidelijk beeld van wat ik wil, maar bij het omzetten daarvan in een consistente interface loopt het mis. Voor...</description>
         <pubDate>Mon, 27 Apr 2026 08:00:00 +0000</pubDate>
         <link>https://blog.4dcu.be/nl/ai/programming/2026/04/claude-design/</link>
         <guid isPermaLink="true">https://blog.4dcu.be/nl/ai/programming/2026/04/claude-design/</guid>
@@ -60,12 +60,52 @@
     
       <item>
         <title>Van Python naar Rust: mijn genetisch kunstalgoritme</title>
-        <description>&lt;p&gt;Eén van de eerste posts op deze blog toonde hoe je &lt;a href=&quot;/programming/2020/01/12/Genetic-Art-Algorithm.html&quot;&gt;een genetisch algoritme implementeert in Python&lt;/a&gt;. Toen ik dat project opnieuw bekeek, besefte ik dat het een ideale...</description>
+        <description>&lt;p&gt;Een van de eerste posts op deze blog toonde hoe je &lt;a href=&quot;/programming/2020/01/12/Genetic-Art-Algorithm.html&quot;&gt;een genetisch algoritme implementeert in Python&lt;/a&gt;. Toen ik dat project opnieuw bekeek, besefte ik dat het een ideale...</description>
         <pubDate>Sat, 20 Dec 2025 08:00:00 +0000</pubDate>
         <link>https://blog.4dcu.be/nl/ai/programming/2025/12/rust-experiment/</link>
         <guid isPermaLink="true">https://blog.4dcu.be/nl/ai/programming/2025/12/rust-experiment/</guid>
         <category>python</category><category>rust</category><category>evolution</category><category>genetic-algorithm</category><category>algorithm</category><category>art</category>
         <category>ai</category><category>programming</category>
+      </item>
+    
+      <item>
+        <title>Mijn Kindle PW3 als dashboard voor Home Assistant gebruiken</title>
+        <description>&lt;p&gt;Een oude Kindle die ooit werd &lt;strong&gt;&lt;a href=&quot;/diy/2020/09/27/PythonKindleDashboard_1.html&quot;&gt;gejailbreakt&lt;/a&gt;&lt;/strong&gt; en KUAL draait, kun je hergebruiken als dashboard voor zowat alles. Ik heb dat trouwens &lt;a href=&quot;/diy/2020/10/04/PythonKindleDashboard_2.html&quot;&gt;al eens gedaan&lt;/a&gt;, al heb ik...</description>
+        <pubDate>Mon, 21 Jul 2025 08:00:00 +0000</pubDate>
+        <link>https://blog.4dcu.be/nl/diy/programming/2025/07/dashboard-for-home-assisant/</link>
+        <guid isPermaLink="true">https://blog.4dcu.be/nl/diy/programming/2025/07/dashboard-for-home-assisant/</guid>
+        <category>home-assistant</category><category>yaml</category><category>python</category><category>kindle</category>
+        <category>diy</category><category>programming</category>
+      </item>
+    
+      <item>
+        <title>Een aangepaste Deej-volumemixer bouwen met een RP2040 Pro Micro</title>
+        <description>&lt;p&gt;Op zoek naar een zelfgebouwde hardwarevolumemixer waarmee je moeiteloos het volume van afzonderlijke apps regelt? Of je nu gamer, streamer of audiofanaat bent, softwarematige volumeregelaars handmatig aanpassen kan frustrerend zijn....</description>
+        <pubDate>Mon, 03 Feb 2025 08:00:00 +0000</pubDate>
+        <link>https://blog.4dcu.be/nl/diy/programming/2025/02/deej-open-hardware-volume-controller/</link>
+        <guid isPermaLink="true">https://blog.4dcu.be/nl/diy/programming/2025/02/deej-open-hardware-volume-controller/</guid>
+        <category>deej</category><category>python</category><category>raspberry-pi</category><category>soldering</category><category>electronics</category>
+        <category>diy</category><category>programming</category>
+      </item>
+    
+      <item>
+        <title>Een GMT-horloge op maat bouwen</title>
+        <description>&lt;p&gt;Met al enkele &lt;a href=&quot;/nl/diy/2024/11/diy-mechanical-watch/&quot;&gt;horloges op maat&lt;/a&gt; achter de rug voelde ik me klaar voor een geavanceerder project. Dit project combineert drie nieuwe elementen: een GMT-horloge bouwen met het NH34-uurwerk,...</description>
+        <pubDate>Sun, 19 Jan 2025 08:00:00 +0000</pubDate>
+        <link>https://blog.4dcu.be/nl/diy/2025/01/diy-mechanical-watch-2/</link>
+        <guid isPermaLink="true">https://blog.4dcu.be/nl/diy/2025/01/diy-mechanical-watch-2/</guid>
+        <category>mechanical</category><category>watch</category><category>watchmaking</category>
+        <category>diy</category>
+      </item>
+    
+      <item>
+        <title>Zelf mechanische horloges bouwen met een beperkt budget</title>
+        <description>&lt;p&gt;Onlangs begon ik aan mijn avontuur in de horlogebouw, geïnspireerd door een YouTube-video van &lt;a href=&quot;https://www.youtube.com/@elliotcoll&quot;&gt;Elliot Coll&lt;/a&gt;, waarin hij liet zien hoe je &lt;a href=&quot;https://www.youtube.com/watch?v=g89vt-bN_Po&quot;&gt;horloges op maat bouwt met betaalbare...</description>
+        <pubDate>Mon, 11 Nov 2024 08:00:00 +0000</pubDate>
+        <link>https://blog.4dcu.be/nl/diy/2024/11/diy-mechanical-watch/</link>
+        <guid isPermaLink="true">https://blog.4dcu.be/nl/diy/2024/11/diy-mechanical-watch/</guid>
+        <category>mechanical</category><category>watch</category><category>watchmaking</category>
+        <category>diy</category>
       </item>
     
   </channel>

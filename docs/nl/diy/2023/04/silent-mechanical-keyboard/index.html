@@ -1,0 +1,628 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>De klank van stilte: een stil mechanisch toetsenbord bouwen</title>
+  <meta name="description" content="Een stil mechanisch toetsenbord bouwen met de ID75-printplaat, met uitleg over wat mechanische schakelaars luid maakt en welke aanpassingen het tastgevoel be...">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="De klank van stilte: een stil mechanisch toetsenbord bouwen" />
+  <meta property="og:description" content="Een stil mechanisch toetsenbord bouwen met de ID75-printplaat, met uitleg over wat mechanische schakelaars luid maakt en welke aanpassingen het tastgevoel be..." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/diy/2023/04/silent-mechanical-keyboard/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2023-04-14-silent-mechanical-keyboard-completed.jpg" /><meta property="og:image:alt" content="De klank van stilte: een stil mechanisch toetsenbord bouwen" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2023-04-14T08:00:00+00:00" /><meta property="article:modified_time" content="2023-04-14T08:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="DIY" /><meta property="article:tag" content="mechanical-keyboard" /><meta property="article:tag" content="soldering" /><meta property="article:tag" content="electronics" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="De klank van stilte: een stil mechanisch toetsenbord bouwen"><meta name="twitter:description" content="Een stil mechanisch toetsenbord bouwen met de ID75-printplaat, met uitleg over wat mechanische schakelaars luid maakt en welke aanpassingen het tastgevoel be..."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2023-04-14-silent-mechanical-keyboard-completed.jpg"><meta name="twitter:image:alt" content="De klank van stilte: een stil mechanisch toetsenbord bouwen"><meta name="twitter:url" content="https://blog.4dcu.be/nl/diy/2023/04/silent-mechanical-keyboard/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/diy/2023/04/silent-mechanical-keyboard/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/diy/2023/04/14/silent-mechanical-keyboard.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/diy/2023/04/silent-mechanical-keyboard/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/diy/2023/04/14/silent-mechanical-keyboard.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/diy/2023/04/silent-mechanical-keyboard/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/diy/2023/04/silent-mechanical-keyboard/" },
+      "url": "https://blog.4dcu.be/nl/diy/2023/04/silent-mechanical-keyboard/",
+      "headline": "De klank van stilte: een stil mechanisch toetsenbord bouwen",
+      "description": "Een stil mechanisch toetsenbord bouwen met de ID75-printplaat, met uitleg over wat mechanische schakelaars luid maakt en welke aanpassingen het tastgevoel be...",
+      "datePublished": "2023-04-14T08:00:00+00:00",
+      "dateModified": "2023-04-14T08:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2023-04-14-silent-mechanical-keyboard-completed.jpg",
+      "keywords": ["mechanical-keyboard", "soldering", "electronics"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/diy/2023/04/silent-mechanical-keyboard/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "DIY", "item": "https://blog.4dcu.be/nl/category/diy/" },
+        { "@type": "ListItem", "position": 3, "name": "De klank van stilte: een stil mechanisch toetsenbord bouwen" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/diy/2023/04/14/silent-mechanical-keyboard.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/diy/2023/04/silent-mechanical-keyboard/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/id75_keyboard2.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="De klank van stilte: een stil mechanisch toetsenbord bouwen" class="hero-background is-transparent" src="/assets/posts/2023-04-14-silent-mechanical-keyboard/completed.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">De klank van stilte: een stil mechanisch toetsenbord bouwen</h1><p class="info has-text-white"><em></em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 14-04-2023 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/diy/">DIY</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Tik je nog steeds op een goedkoop toetsenbord met rubberkoepels? Dan mis je misschien de aangename en
+efficiënte ervaring van een mechanisch toetsenbord. Ik gebruik mijn <a href="/diy/2020/05/01/Mechanical-Keyboard.html">zelfgemaakte mechanische toetsenbord</a> intussen al
+jaren en kan me niet voorstellen dat ik terug zou gaan. Bovendien is het formaat van 60% perfect om mijn muis dichtbij te houden
+en onnodige handbewegingen te beperken, maar het geluid kan een nadeel zijn. Daarom heb ik wat tijd besteed aan het zoeken naar
+stillere opties die toch de tactiele respons geven waar ik zo van hou. Lees verder om te ontdekken hoe ik een veel
+stiller mechanisch toetsenbord bouw.</p>
+
+<p><a href="/assets/posts/2023-04-14-silent-mechanical-keyboard/completed.jpg" class="lightgallery-link" data-sub-html="Een stil mechanisch toetsenbord op basis van de ID75-printplaat">
+<img src="/assets/posts/2023-04-14-silent-mechanical-keyboard/completed.jpg" alt="Een stil mechanisch toetsenbord op basis van de ID75-printplaat" height="800" width="1200" data-src="/assets/posts/2023-04-14-silent-mechanical-keyboard/completed.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="wat-maakt-mechanische-toetsenborden-luid">Wat maakt mechanische toetsenborden luid?</h2>
+
+<p>Wat mechanische toetsenborden onderscheidt van exemplaren met rubberkoepels, is dat ze voor elke toets een afzonderlijke schakelaar gebruiken.
+Die schakelaars bestaan uit een veer en een steel die bij het indrukken een elektrisch circuit sluiten en de
+toetsaanslag registreren. Het resultaat is een voelbare en hoorbare respons, waardoor je weet wanneer een toets correct werd ingedrukt.
+Bovendien veroorzaken de stabilisatoren onder grotere toetsen, zoals de spatiebalk en shifttoets, extra geluid. Die
+stabilisatoren zijn nodig om ervoor te zorgen dat deze toetsen langs alle kanten gelijkmatig worden ingedrukt, maar ze voegen extra
+onderdelen toe die kunnen rammelen.</p>
+
+<h2 id="de-juiste-onderdelen-kiezen-om-lawaai-te-vermijden">De juiste onderdelen kiezen om lawaai te vermijden</h2>
+
+<p>Stille schakelaars kunnen het geluid van toetsaanslagen aanzienlijk beperken zonder dat de tactiele feedback verloren gaat. Een andere
+optie is overschakelen op een ortholineair toetsenbord. Dat gebruikt een rasterindeling waardoor er geen stabilisatoren nodig zijn,
+want er zijn geen grote toetsen. Dit ontwerp maakt typen ook ergonomischer, omdat je vingers
+minder ver hoeven te bewegen om verschillende toetsen te bereiken. O-ringen aan de toetskapjes of een schuimlaag in de behuizing kunnen het geluid
+van de schakelaars en stabilisatoren nog verder dempen. Door deze methodes te combineren, kun je bijna geruisloos typen
+zonder je collega’s of huisgenoten te storen.</p>
+
+<h2 id="de-onderdelen">De onderdelen</h2>
+
+<ul>
+  <li><strong>ID75</strong> <em>hot-swappable</em> printplaat met aluminium achterplaat</li>
+  <li>Outemu <strong>Silent</strong> Lemon tactiele <strong>schakelaars</strong> (je hebt er 75 nodig, plus enkele reserve-exemplaren voor de zekerheid)</li>
+  <li><strong>Schuimlaag</strong> tussen de achterplaat en de printplaat</li>
+  <li>Een set toetskapjes met <strong>XDA-profiel</strong></li>
+  <li>Rubberen <strong>O-ringen</strong> voor de toetskapjes (75, één voor elk toetskapje)</li>
+  <li>Een <strong>behuizing</strong> die je mooi vindt (de meeste behuizingen van 60% werken met de ID75, maar moeten mogelijk wat worden aangepast)</li>
+  <li>Een toetskapjestrekker en een schakelaarstrekker (doorgaans meegeleverd met respectievelijk de toetskapjes en schakelaars)</li>
+</ul>
+
+<p>Alle onderdelen (behalve de rubberen O-ringen) zijn hierboven afgebeeld. De schuimlaag die onder de printplaat moest komen, paste echter
+niet goed in de behuizing en werd uiteindelijk niet gebruikt. Bij de standaardbehuizing van 60% moesten wel enkele afstandsbusjes
+worden verwijderd en moest een stukje plastic dat op de resetknop van de ID75 drukte worden bijgesneden.</p>
+
+<p><a href="/assets/posts/2023-04-14-silent-mechanical-keyboard/parts.jpg" class="lightgallery-link" data-sub-html="Overzicht van alle onderdelen die nodig zijn om een stil mechanisch toetsenbord te bouwen">
+<img src="/assets/posts/2023-04-14-silent-mechanical-keyboard/parts.jpg" alt="Overzicht van alle onderdelen die nodig zijn om een stil mechanisch toetsenbord te bouwen" height="800" width="1200" data-src="/assets/posts/2023-04-14-silent-mechanical-keyboard/parts.jpg" loading="lazy" />
+</a></p>
+
+<p>Merk op dat er bij toetskapjes met een XDA-profiel geen verschil is tussen de toetsen op de verschillende rijen van het toetsenbord. Ze hebben
+allemaal dezelfde vorm. Omdat alle toetskapjes dezelfde vorm hebben, kun je wat creatiever zijn met waar je welke toets plaatst,
+zonder je zorgen te maken of de toetsen wel de juiste vorm hebben.</p>
+
+<h2 id="de-bouw">De bouw</h2>
+
+<p>Omdat deze printplaat <em>hot-swappable</em> is, kun je de schakelaars er gewoon induwen en hoef je niet te solderen. Plaats eerst enkele schakelaars in
+de juiste richting in de hoeken van de achterplaat, leg het schuim op de juiste plek, klik dit geheel op de printplaat en
+duw vervolgens de overige schakelaars erin. Zorg er zeker voor dat de pinnen van de schakelaars mooi recht staan! Als ze niet correct uitgelijnd zijn,
+buig je ze onherstelbaar krom en kun je de schakelaar niet meer gebruiken met een <em>hot-swappable</em> printplaat. Of erger nog: je beschadigt misschien de
+aansluiting op de printplaat. Wees voorzichtig en zorg dat je enkele reserveschakelaars hebt.</p>
+
+<p><a href="/assets/posts/2023-04-14-silent-mechanical-keyboard/installing_switches.jpg" class="lightgallery-link" data-sub-html="De achterplaat wordt met enkele eerst geplaatste schakelaars op de printplaat vastgehouden">
+<img src="/assets/posts/2023-04-14-silent-mechanical-keyboard/installing_switches.jpg" alt="De achterplaat wordt met enkele eerst geplaatste schakelaars op de printplaat vastgehouden" height="800" width="1200" data-src="/assets/posts/2023-04-14-silent-mechanical-keyboard/installing_switches.jpg" loading="lazy" />
+</a></p>
+
+<p>Wanneer alle schakelaars geplaatst zijn, sluit je de printplaat aan en test je of ze allemaal werken. Zo niet, gebruik dan de schakelaarstrekker
+om de defecte schakelaar uit het toetsenbord te halen en een andere te installeren.</p>
+
+<p><a href="/assets/posts/2023-04-14-silent-mechanical-keyboard/more_switches.jpg" class="lightgallery-link" data-sub-html="Meer schakelaars worden aan het mechanische toetsenbord toegevoegd">
+<img src="/assets/posts/2023-04-14-silent-mechanical-keyboard/more_switches.jpg" alt="Meer schakelaars worden aan het mechanische toetsenbord toegevoegd" height="800" width="1200" data-src="/assets/posts/2023-04-14-silent-mechanical-keyboard/more_switches.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="de-indeling">De indeling</h2>
+
+<p>Dankzij de combinatie van toetskapjes met een XDA-profiel en een ortholineaire printplaat kun je elke toets om het even waar op het bord plaatsen. Zo kun je
+elke mogelijke indeling maken. Hoewel de meesten een indeling gebruiken die op qwerty lijkt (wat ik zou aanraden om het typen
+op een normaal toetsenbord niet af te leren en problemen met een laptop te vermijden), heb je zelfs dan meerdere opties. Zodra je
+beslist hebt welke indeling je wilt proberen, kun je de toetsen met de <a href="https://usevia.app/">VIA-software</a> toewijzen. Dat is een eenvoudig proces dat
+weinig moeite zal kosten als je tot hier geraakt bent. Gebruik <a href="/assets/posts/2023-04-14-silent-mechanical-keyboard/idobao_id75.layout2.json">dit JSON-bestand</a>
+als je dezelfde indeling wilt gebruiken als degene waarop ik uiteindelijk ben uitgekomen.</p>
+
+<p><a href="/assets/posts/2023-04-14-silent-mechanical-keyboard/layout.png" class="lightgallery-link" data-sub-html="Schermafbeelding van de VIA-app met een qwerty-achtige indeling voor de ID75-printplaat">
+<img src="/assets/posts/2023-04-14-silent-mechanical-keyboard/layout.png" alt="Schermafbeelding van de VIA-app met een qwerty-achtige indeling voor de ID75-printplaat" height="333" width="856" data-src="/assets/posts/2023-04-14-silent-mechanical-keyboard/layout.png" loading="lazy" />
+</a></p>
+
+<h2 id="hoe-luid-is-het">Hoe luid is het?</h2>
+
+<p>Omdat ik geen echte decibelmeter had, moest ik een app op mijn mobiele telefoon gebruiken om het
+geluidsniveau objectief te meten. Hoewel ik niet verwacht dat die heel nauwkeurig is, zouden de metingen wel vergelijkbaar moeten zijn en
+een indicatie moeten geven van het relatieve geluidsniveau van verschillende toetsenborden. Voor de test legde ik de telefoon met de app gewoon naast
+het toetsenbord en typte ik een minuut lang aan een gematigd tempo op <a href="https://www.keybr.com/">keybr.com</a>. Zo wist ik zeker
+dat ik op elk toetsenbord ongeveer even snel typte. De resultaten waren verbluffend: het verschil
+in geluidsniveau tussen de toetsenborden was opmerkelijk!</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Toetsenbord</th>
+      <th>Gemiddelde</th>
+      <th>Piek</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Mijn oude mechanische toetsenbord</td>
+      <td>30.4 dB</td>
+      <td>56.9 dB</td>
+    </tr>
+    <tr>
+      <td>Goedkoop toetsenbord met rubberkoepels</td>
+      <td>25.0 dB</td>
+      <td>42.7 dB</td>
+    </tr>
+    <tr>
+      <td>Logitech K400</td>
+      <td>21.5 dB</td>
+      <td>39.5 dB</td>
+    </tr>
+    <tr>
+      <td>Stil mechanisch toetsenbord</td>
+      <td>20.3 dB</td>
+      <td>32.0 dB</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Dit toetsenbord is indrukwekkend stil en produceert 10 decibel minder geluid dan het gemiddelde toetsenbord. Vergeleken met een
+doorsnee mechanisch toetsenbord, dat meer dan 20 decibel produceert, is het verschil behoorlijk groot. Het is de ideale oplossing
+voor wie wil typen zonder collega’s of geliefden te storen, of gewoon een
+stillere type-ervaring verkiest.</p>
+
+<p><a href="/assets/posts/2023-04-14-silent-mechanical-keyboard/top.jpg" class="lightgallery-link" data-sub-html="Een stil mechanisch toetsenbord op basis van de ID75-printplaat">
+<img src="/assets/posts/2023-04-14-silent-mechanical-keyboard/top.jpg" alt="Een stil mechanisch toetsenbord op basis van de ID75-printplaat" height="800" width="1200" data-src="/assets/posts/2023-04-14-silent-mechanical-keyboard/top.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="conclusie">Conclusie</h2>
+
+<p>Een stil mechanisch toetsenbord bouwen is absoluut haalbaar en de resultaten spreken voor zich. De tactiele
+feedback van een mechanisch toetsenbord blijft behouden, maar het geluid wordt drastisch beperkt. Als je het goed aanpakt,
+kun je zelfs een toetsenbord bouwen dat stiller is dan exemplaren met rubberkoepels en tegelijk een veel aangenamere
+type-ervaring biedt.</p>
+
+<p><strong>Update</strong>: Ik heb de indeling wat aangepast. De backspace bedienen met mijn duim werkte niet en de RGB-bediening is nu
+beter. Het <a href="/assets/posts/2023-04-14-silent-mechanical-keyboard/idobao_id75.layout3.json">bijgewerkte JSON-bestand</a> kan worden gedownload.</p>
+
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/mechanical-keyboard/">mechanical-keyboard</a>,&nbsp;<a href="/nl/tag/soldering/">soldering</a>,&nbsp;<a href="/nl/tag/electronics/">electronics</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=De+klank+van+stilte%3A+een+stil+mechanisch+toetsenbord+bouwen%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2F2023%2F04%2Fsilent-mechanical-keyboard%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2F2023%2F04%2Fsilent-mechanical-keyboard%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2F2023%2F04%2Fsilent-mechanical-keyboard%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=De+klank+van+stilte%3A+een+stil+mechanisch+toetsenbord+bouwen&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2F2023%2F04%2Fsilent-mechanical-keyboard%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/diy/2023/03/smart-motion-sensor/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">Een slimme bewegingssensor gebruiken met Home Assistant</span></a></span>
+  <span class="next-post"><a href="/nl/ai/2023/09/comfyui-sdxl-workflows/"><span class="page-number">ComfyUI en SDXL: nieuwe workflows</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

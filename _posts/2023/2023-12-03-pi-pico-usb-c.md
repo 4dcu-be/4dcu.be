@@ -5,6 +5,7 @@ byline: "DIY Today - Future-Proof Tomorrow"
 description: "Beginner soldering mod to replace the Raspberry Pi Pico's micro-USB port with a USB Type-C breakout board, including notes on power delivery resistors for USB-C cables."
 date:   2023-12-03 08:00:00
 author: Sebastian Proost
+post_id: pi-pico-usb-c
 categories: diy
 tags:	python raspberry-pi soldering electronics
 cover:  "/assets/posts/2023-12-03-pi-pico-usb-c/pico_close.jpg"

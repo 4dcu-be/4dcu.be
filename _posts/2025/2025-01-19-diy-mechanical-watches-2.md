@@ -5,6 +5,7 @@ byline: "and swapping the crystal and date-wheel"
 description: "Building a custom GMT watch from AliExpress parts with the NH34 movement, plus upgrading to a double-domed crystal and swapping the date wheel to match the color scheme."
 date:   2025-01-19 08:00:00
 author: Sebastian Proost
+post_id: diy-mechanical-watches-2
 slug: diy-mechanical-watch-2
 categories: diy
 tags:	mechanical watch watchmaking

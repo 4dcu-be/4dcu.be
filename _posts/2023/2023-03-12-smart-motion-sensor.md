@@ -5,6 +5,7 @@ byline: ""
 description: "How to add a ZigBee smart motion sensor to Home Assistant via MQTT and ZigBee2MQTT to build a simple alarm system or trigger lights on detected movement."
 date:   2023-03-12 08:00:00
 author: Sebastian Proost
+post_id: smart-motion-sensor
 categories: diy
 tags:	home-assistant MQTT Zigbee yaml security
 cover:  "/assets/posts/2023-03-12-smart-motion-sensor/header.jpg"

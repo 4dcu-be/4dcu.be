@@ -1,0 +1,627 @@
+<!DOCTYPE html><html lang="nl">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>Een slimme bewegingssensor gebruiken met Home Assistant</title>
+  <meta name="description" content="Een slimme ZigBee-bewegingssensor via MQTT en ZigBee2MQTT toevoegen aan Home Assistant om een eenvoudig alarmsysteem te bouwen of verlichting in te schakelen...">
+  
+  <meta name="author" content="Sebastian Proost"><meta name="copyright" content="&copy; Sebastian Proost 2026">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="theme-color" content="#ffffff"><meta property="og:site_name" content="4DCu.be" />
+  <meta property="og:title" content="Een slimme bewegingssensor gebruiken met Home Assistant" />
+  <meta property="og:description" content="Een slimme ZigBee-bewegingssensor via MQTT en ZigBee2MQTT toevoegen aan Home Assistant om een eenvoudig alarmsysteem te bouwen of verlichting in te schakelen..." />
+  <meta property="og:url" content="https://blog.4dcu.be/nl/diy/2023/03/smart-motion-sensor/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://blog.4dcu.be/assets/social/posts-2023-03-12-smart-motion-sensor-header.jpg" /><meta property="og:image:alt" content="Een slimme bewegingssensor gebruiken met Home Assistant" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2023-03-12T08:00:00+00:00" /><meta property="article:modified_time" content="2023-03-12T08:00:00+00:00" /><meta property="article:author" content="Sebastian Proost" /><meta property="article:section" content="DIY" /><meta property="article:tag" content="home-assistant" /><meta property="article:tag" content="MQTT" /><meta property="article:tag" content="Zigbee" /><meta property="article:tag" content="yaml" /><meta property="article:tag" content="security" />
+
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Een slimme bewegingssensor gebruiken met Home Assistant"><meta name="twitter:description" content="Een slimme ZigBee-bewegingssensor via MQTT en ZigBee2MQTT toevoegen aan Home Assistant om een eenvoudig alarmsysteem te bouwen of verlichting in te schakelen..."><meta name="twitter:image" content="https://blog.4dcu.be/assets/social/posts-2023-03-12-smart-motion-sensor-header.jpg"><meta name="twitter:image:alt" content="Een slimme bewegingssensor gebruiken met Home Assistant"><meta name="twitter:url" content="https://blog.4dcu.be/nl/diy/2023/03/smart-motion-sensor/">
+
+  <link rel="canonical" href="https://blog.4dcu.be/nl/diy/2023/03/smart-motion-sensor/">
+  
+  
+  <link rel="alternate" hreflang="en-US" href="https://blog.4dcu.be/diy/2023/03/12/smart-motion-sensor.html"><link rel="alternate" hreflang="nl-NL" href="https://blog.4dcu.be/nl/diy/2023/03/smart-motion-sensor/">
+  <link rel="alternate" hreflang="x-default" href="https://blog.4dcu.be/diy/2023/03/12/smart-motion-sensor.html">
+  
+  <link rel="alternate" type="application/rss+xml" title="4DCu.be (nl-NL)" href="https://blog.4dcu.be/nl/feed.xml" />
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.4dcu.be/#website",
+      "url": "https://blog.4dcu.be/",
+      "name": "4DCu.be",
+      "description": "A blog about Programming (mostly in Python), Machine Learning, Gaming, Technology and more.",
+      "inLanguage": ["en-US", "nl-NL"],
+      "publisher": { "@id": "https://blog.4dcu.be/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.4dcu.be/#person",
+      "name": "Sebastian Proost",
+      "url": "https://blog.4dcu.be/",
+      "image": "https://blog.4dcu.be/assets/icons/apple-icon-76x76.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://blog.4dcu.be/nl/diy/2023/03/smart-motion-sensor/#article",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.4dcu.be/nl/diy/2023/03/smart-motion-sensor/" },
+      "url": "https://blog.4dcu.be/nl/diy/2023/03/smart-motion-sensor/",
+      "headline": "Een slimme bewegingssensor gebruiken met Home Assistant",
+      "description": "Een slimme ZigBee-bewegingssensor via MQTT en ZigBee2MQTT toevoegen aan Home Assistant om een eenvoudig alarmsysteem te bouwen of verlichting in te schakelen...",
+      "datePublished": "2023-03-12T08:00:00+00:00",
+      "dateModified": "2023-03-12T08:00:00+00:00",
+      "inLanguage": "nl-NL",
+      "author": { "@id": "https://blog.4dcu.be/#person" },
+      "publisher": { "@id": "https://blog.4dcu.be/#person" },
+      "isPartOf": { "@id": "https://blog.4dcu.be/#website" },
+      "image": "https://blog.4dcu.be/assets/social/posts-2023-03-12-smart-motion-sensor-header.jpg",
+      "keywords": ["home-assistant", "MQTT", "Zigbee", "yaml", "security"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blog.4dcu.be/nl/diy/2023/03/smart-motion-sensor/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "4DCu.be", "item": "https://blog.4dcu.be/nl/" },
+        { "@type": "ListItem", "position": 2, "name": "DIY", "item": "https://blog.4dcu.be/nl/category/diy/" },
+        { "@type": "ListItem", "position": 3, "name": "Een slimme bewegingssensor gebruiken met Home Assistant" }
+      ]
+    }
+  ]
+}
+</script>
+
+  <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <script type="text/javascript">window.tooltips = [];</script>
+  <script type="text/javascript">function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");</script>
+</head>
+
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/nl/" class="navbar-item">
+      <img src="/assets/icons/apple-icon-76x76.png" alt="4DCu.be" width="58" height="58" />
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu"><div class="navbar-end">
+    
+<a href="/nl/over-mij/" class="navbar-item">Over mij</a>
+  
+<a href="/nl/galerij/" class="navbar-item">Galerij</a>
+  
+<a href="/nl/artikels/" class="navbar-item">Artikels</a>
+  <a href="#" class="navbar-item nav-link-contact">Contact</a><a href="#" class="navbar-item nav-link-search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" style="width:16px;height:16px"></i></a>
+
+    
+    <div class="navbar-item has-dropdown is-hoverable lang-switch">
+      <a class="navbar-link lang-switch__current" aria-label="Kies een taal">NL</a>
+      <span class="lang-switch__label" aria-hidden="true">Taal:</span>
+      <div class="navbar-dropdown is-right lang-switch__options">
+      
+        <a class="navbar-item lang-switch__option" lang="en" href="/diy/2023/03/12/smart-motion-sensor.html"><span class="lang-switch__name">English</span><span class="lang-switch__short" aria-hidden="true">EN</span></a>
+      
+        <a class="navbar-item lang-switch__option is-current" lang="nl" href="/nl/diy/2023/03/smart-motion-sensor/" aria-current="true"><span class="lang-switch__name">Nederlands</span><span class="lang-switch__short" aria-hidden="true">NL</span></a>
+      
+      </div>
+    </div>
+    
+  </div></div>
+</nav>
+
+    <div class="page-content"><img data-pagefind-meta="image[src]" src="/assets/images/thumbnails/motion_sensor.jpg" alt="" aria-hidden="true" style="display:none" />
+<div class="post">
+<section class="hero is-medium has-background has-dark-overlay has-text-shadow has-box-shadow ">
+  <img alt="Een slimme bewegingssensor gebruiken met Home Assistant" class="hero-background is-transparent" src="/assets/posts/2023-03-12-smart-motion-sensor/header.jpg" />
+  <div class="hero-body"><div class="container has-text-centered"><h1 class="title has-text-white">Een slimme bewegingssensor gebruiken met Home Assistant</h1><p class="info has-text-white"><em></em></p></div></div>
+</section>
+<div class="wrapper">
+
+<section class="post-meta">
+  <div class="post-date">Geplaatst 12-03-2023 door Sebastian Proost</div>
+  <div class="post-categories">in <a href="/nl/category/diy/">DIY</a></div>
+</section>
+<article class="post-content" data-pagefind-body><p>Ben je op zoek naar een eenvoudige maar doeltreffende manier om je huis of kantoor te beveiligen, dan is een slimme bewegingssensor
+die met <a href="https://www.home-assistant.io/">Home Assistant</a> verbonden is misschien wel de perfecte oplossing. Zo kun je een eenvoudig alarm-
+systeem opzetten dat onverwachte bewegingen in de buurt herkent en je daarvan op de hoogte brengt. Of je nu
+thuis bent of niet, je kunt gerust zijn in de wetenschap dat je eigendom dag en nacht in de gaten wordt gehouden. In dit artikel lees je
+hoe je zo’n opstelling maakt. Ook wie de sensor wil gebruiken om een lamp in of uit te schakelen,
+kan met dit artikel aan de slag.</p>
+
+<p><a href="/assets/posts/2023-03-12-smart-motion-sensor/sensor_front.jpg" class="lightgallery-link" data-sub-html="Foto van de bewegingssensor die we aan Home Assistant toevoegen">
+<img src="/assets/posts/2023-03-12-smart-motion-sensor/sensor_front.jpg" alt="Foto van de bewegingssensor die we aan Home Assistant toevoegen" height="800" width="1200" data-src="/assets/posts/2023-03-12-smart-motion-sensor/sensor_front.jpg" loading="lazy" />
+</a></p>
+
+<h2 id="aan-de-slag">Aan de slag</h2>
+
+<p>Voor je erin vliegt, kun je het best eerst ons vorige artikel over het <a href="/diy/2020/09/20/MQTT.html">installeren van Home Assistant met MQTT en ZigBee</a> lezen. Zodra dat in orde is, kun je deze handleiding volgen met een werkende installatie van
+<a href="https://www.home-assistant.io/">Home Assistant</a> waarop <a href="https://www.home-assistant.io/integrations/mqtt/">MQTT</a> en <a href="https://www.zigbee2mqtt.io/guide/usage/integrations/home_assistant.html">ZigBee2MQTT</a> al actief zijn. Om te beginnen heb je enkel enkele
+ZigBee-compatibele bewegingssensoren nodig. Ik koos voor een exemplaar van SilverCrest dat ik met korting in de
+lokale supermarkt vond, maar andere modellen zouden net zo goed moeten werken.</p>
+
+<p>Volg eerst de instructies bij je sensor om hem <a href="/diy/2021/04/28/MQTT-Ikea-Tradfri.html">met HA te koppelen</a>. Zodra de verbinding gemaakt is,
+geef je de sensor een geschikte naam (ik koos voor <code class="language-plaintext highlighter-rouge">Motion Sensor Test</code>). Ga vervolgens naar
+<code class="language-plaintext highlighter-rouge">Settings</code> &gt; <code class="language-plaintext highlighter-rouge">Devices &amp; Services</code> en klik op <code class="language-plaintext highlighter-rouge">Configure</code> in het paneel <code class="language-plaintext highlighter-rouge">Mosquitto broker</code>. Hier kun je
+naar MQTT-berichten luisteren om na te gaan of je toestel correct werkt. Om te beginnen luisteren,
+voer je gewoon de naam van je toestel in (<code class="language-plaintext highlighter-rouge">zigbee2mqtt/&lt;your sensor name&gt;</code>) en klik je op <code class="language-plaintext highlighter-rouge">Start Listening</code>. Probeer nu
+de sensor te activeren door ervoor te bewegen. Verschijnt er een bericht op het scherm, dan weet je dat je sensor correct
+met Home Assistant verbonden is en kun je je woning beginnen te automatiseren.</p>
+
+<p><a href="/assets/posts/2023-03-12-smart-motion-sensor/001_sensor_working.png" class="lightgallery-link" data-sub-html="De bewegingssensor werkt correct: het bericht wordt met succes naar de MQTT-broker doorgestuurd">
+<img src="/assets/posts/2023-03-12-smart-motion-sensor/001_sensor_working.png" alt="De bewegingssensor werkt correct: het bericht wordt met succes naar de MQTT-broker doorgestuurd" height="483" width="624" class="small-image" data-src="/assets/posts/2023-03-12-smart-motion-sensor/001_sensor_working.png" loading="lazy" />
+</a></p>
+
+<h2 id="mqtt-berichten-die-de-sensoren-versturen">MQTT-berichten die de sensoren versturen</h2>
+
+<p>Hieronder zie je een voorbeeld van een bericht dat een bewegingssensor naar MQTT stuurt. Hou er wel rekening mee dat er verschillende
+situaties zijn waarin de sensor een bericht kan uitsturen:</p>
+
+<ul>
+  <li>Wanneer de sensor beweging heeft gedetecteerd, stuurt hij een MQTT-bericht met <code class="language-plaintext highlighter-rouge">"occupancy": true</code>. Daardoor wordt de sensor ook
+gedurende een bepaalde tijd uitgeschakeld (drie minuten bij het model dat ik gebruik).</li>
+  <li>Wanneer de sensor na een detectie opnieuw actief wordt, stuurt hij nog een MQTT-bericht met <code class="language-plaintext highlighter-rouge">"occupancy": false</code>.</li>
+  <li>Als iemand met de sensor knoeit door hem uit zijn houder te halen, stuurt hij een bericht met
+<code class="language-plaintext highlighter-rouge">"tamper": true</code> zodra de sabotageknop aan de achterkant van de sensor wordt losgelaten. (Zie hieronder de sabotageknop aan de
+achterkant van de sensor; die wordt geactiveerd zodra hij niet langer ingedrukt is.)</li>
+  <li>Zolang de sabotageknop niet ingedrukt blijft, herhaalt de sensor elk halfuur het bericht met <code class="language-plaintext highlighter-rouge">"tamper": true</code>.</li>
+</ul>
+
+<p><a href="/assets/posts/2023-03-12-smart-motion-sensor/sensor_back.jpg" class="lightgallery-link" data-sub-html="Achterkant van de sensor met de sabotageknop. Zolang die ingedrukt is, zit de sensor in zijn houder en is alles in orde. Zodra de knop niet meer ingedrukt is, begint de sensor berichten te versturen">
+<img src="/assets/posts/2023-03-12-smart-motion-sensor/sensor_back.jpg" alt="Achterkant van de sensor met de sabotageknop. Zolang die ingedrukt is, zit de sensor in zijn houder en is alles in orde. Zodra de knop niet meer ingedrukt is, begint de sensor berichten te versturen" height="800" width="1200" data-src="/assets/posts/2023-03-12-smart-motion-sensor/sensor_back.jpg" loading="lazy" />
+</a></p>
+
+<p>Om automatiseringen te activeren wanneer er beweging wordt gedetecteerd, hebben we een filter nodig dat alleen reageert op berichten met
+“occupancy”: true. Zo weten we zeker dat onze automatiseringen alleen worden uitgevoerd wanneer de bewegings-
+sensor daadwerkelijk beweging detecteert, en niet door een sabotagebericht of een bericht dat meldt dat de sensor opnieuw actief is.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"battery"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"battery_low"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"linkquality"</span><span class="p">:</span><span class="w"> </span><span class="mi">63</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"occupancy"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tamper"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"voltage"</span><span class="p">:</span><span class="w"> </span><span class="mi">3000</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="automatiseringen-maken">Automatiseringen maken</h2>
+
+<p>Nu we weten welke informatie de sensor(en) zullen versturen en wanneer dat gebeurt, kunnen we een
+automatisering maken. Voor we dit als alarm instellen, raad ik wel aan om eerst wat extra te testen door gewoon te tellen
+hoe vaak de sensor elke dag wordt geactiveerd. Daarvoor stellen we in het bestand <code class="language-plaintext highlighter-rouge">configuration.yaml</code> van Home Assistant een teller in
+door de volgende code toe te voegen:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>counter:
+  motion_triggers:
+    initial: 0
+    step: 1
+
+</code></pre></div></div>
+
+<p>Zodra het bestand opgeslagen is en HA opnieuw werd opgestart, is de teller actief. Vervolgens voegen we twee automatiseringen toe:
+één die telkens wordt geactiveerd wanneer er een MQTT-bericht van de sensor verschijnt met <code class="language-plaintext highlighter-rouge">"occupancy": true</code> en onze teller verhoogt,
+en een timer die de teller elke dag om middernacht opnieuw op nul zet. In recente versies van HA kan dat eenvoudig via de
+interface. Ga naar <code class="language-plaintext highlighter-rouge">Settings</code> &gt; <code class="language-plaintext highlighter-rouge">Automations &amp; Scenes</code> en klik op <code class="language-plaintext highlighter-rouge">Create Automation</code>.</p>
+
+<p><a href="/assets/posts/2023-03-12-smart-motion-sensor/002_sensor_automation.png" class="lightgallery-link" data-sub-html="Schermafbeelding van de Home Assistant-interface om de automatisering te maken">
+<img src="/assets/posts/2023-03-12-smart-motion-sensor/002_sensor_automation.png" alt="Schermafbeelding van de Home Assistant-interface om de automatisering te maken" height="1031" width="1081" data-src="/assets/posts/2023-03-12-smart-motion-sensor/002_sensor_automation.png" loading="lazy" />
+</a></p>
+
+<p>Stel de trigger in op <strong>When an MQTT message has been received</strong> en het onderwerp op
+<code class="language-plaintext highlighter-rouge">zigbee2mqtt/&lt;your sensor name&gt;</code>. Om te voorkomen dat elk bericht de automatisering activeert, hebben we onder de
+voorwaarden een <strong>Template condition</strong> nodig, met <code class="language-plaintext highlighter-rouge">{{ trigger.payload_json.occupancy }}</code> als <strong>Value template</strong>. Zo worden de berichten
+van de sensor gefilterd en worden de acties alleen voor relevante berichten uitgevoerd. Tot slot voegen we een actie met de service
+<strong>Counter:Increment</strong> toe, die verwijst naar de teller die we in de vorige stap hebben gemaakt.</p>
+
+<p>Om de teller opnieuw op nul te zetten, moet je een tweede automatisering instellen, zoals hieronder:</p>
+
+<p><a href="/assets/posts/2023-03-12-smart-motion-sensor/003_reset_counter.png" class="lightgallery-link" data-sub-html="Automatisering om de teller opnieuw op nul te zetten">
+<img src="/assets/posts/2023-03-12-smart-motion-sensor/003_reset_counter.png" alt="Automatisering om de teller opnieuw op nul te zetten" height="951" width="1072" data-src="/assets/posts/2023-03-12-smart-motion-sensor/003_reset_counter.png" loading="lazy" />
+</a></p>
+
+<p>Laat dit enkele dagen draaien om na te gaan hoe goed het werkt en of er valse positieven zijn. Een vals positief resultaat kan
+onnodige ongerustheid of acties veroorzaken wanneer je niet thuis bent. Na het testen waren er echter geen onverwachte detecties
+op momenten dat er niemand thuis was of wanneer we sliepen.</p>
+
+<h2 id="ha-als-alarmsysteem-instellen">HA als alarmsysteem instellen</h2>
+
+<p>Nu we weten hoe we een teller kunnen verhogen, kunnen we ook een melding sturen naar een mobiel toestel waarop de
+Home Assistant-app staat. De trigger en voorwaarde voor deze automatisering zijn dezelfde als voordien, maar we veranderen de actie
+zodat er een melding naar mijn telefoon wordt gestuurd. Als je een toestel met audio-uitvoer hebt dat geluid kan afspelen,
+kun je dat samen met de melding activeren.</p>
+
+<p><a href="/assets/posts/2023-03-12-smart-motion-sensor/004_notification.png" class="lightgallery-link" data-sub-html="Automatisering die een melding naar een mobiele telefoon stuurt wanneer de sensor wordt geactiveerd">
+<img src="/assets/posts/2023-03-12-smart-motion-sensor/004_notification.png" alt="Automatisering die een melding naar een mobiele telefoon stuurt wanneer de sensor wordt geactiveerd" height="1044" width="1075" data-src="/assets/posts/2023-03-12-smart-motion-sensor/004_notification.png" loading="lazy" />
+</a></p>
+
+<p>Ik wil natuurlijk niet telkens een melding krijgen wanneer ik zelf langs de sensor loop. Daarom heb ik enkele
+onderdelen aan het dashboard toegevoegd, zodat ik de meldingen eenvoudig kan in- en uitschakelen en de teller in de gaten kan houden.</p>
+
+<p><a href="/assets/posts/2023-03-12-smart-motion-sensor/005_dashboard.png" class="lightgallery-link" data-sub-html="HA-interface met een grafiek voor de teller en een knop om het alarm in te schakelen">
+<img src="/assets/posts/2023-03-12-smart-motion-sensor/005_dashboard.png" alt="HA-interface met een grafiek voor de teller en een knop om het alarm in te schakelen" height="234" width="1016" data-src="/assets/posts/2023-03-12-smart-motion-sensor/005_dashboard.png" loading="lazy" />
+</a></p>
+
+<h2 id="conclusie">Conclusie</h2>
+
+<p>Bewegingssensoren zijn dus een betaalbare en doeltreffende manier om met Home Assistant een beveiligingssysteem na te bootsen. We
+kunnen deze sensoren eenvoudig in ons systeem integreren en ze gebruiken om allerlei automatiseringen te activeren, zoals
+meldingen naar onze mobiele toestellen sturen, alarmen inschakelen en aanwezigheid bijhouden. Zo geeft het wat
+gemoedsrust dat er tijdens je vakantie geen onverwachte bezoekers zijn langsgekomen, zonder dat het je handenvol geld kost.</p>
+
+<p>Naast de bovenstaande voordelen hebben bewegingssensoren nog andere praktische toepassingen binnen domotica. Ze kunnen bijvoorbeeld
+worden gebruikt om verlichting in te schakelen wanneer iemand een kamer binnenkomt en die na een bepaalde tijd zonder
+beweging weer uit te schakelen, wat energie en geld kan besparen. Ze kunnen ook de thermostaat bijstellen naargelang een kamer
+al dan niet bezet is, wat nog meer energie kan besparen.</p>
+
+<p>Kortom, bewegingssensoren zijn een veelzijdig en betaalbaar hulpmiddel dat je domotica-
+systeem functioneler maakt en tegelijk voor extra beveiliging en gemoedsrust zorgt. Of je nu een doe-het-zelver bent of al
+heel wat ervaring met domotica hebt, het is zeker het overwegen waard om bewegingssensoren in je systeem te integreren.</p>
+
+<h2 id="disclaimer">Disclaimer</h2>
+
+<p>Hoewel een slimme bewegingssensor die met Home Assistant verbonden is een eenvoudige en doeltreffende manier kan zijn om de beveiliging van je huis of
+kantoor te verbeteren, is het belangrijk om te beseffen dat zulke systemen hun beperkingen hebben. Ze kunnen je waarschuwen voor
+onverwachte bewegingen, maar voldoen mogelijk niet aan dezelfde normen als professioneel geïnstalleerde, gespecialiseerde alarmsystemen.
+Daarom is het altijd verstandig om je beveiligingsbehoeften te beoordelen en eventueel een beveiligingsexpert te raadplegen om de
+beste oplossing voor jouw specifieke situatie te bepalen.</p>
+
+</article>
+<section class="tags"><strong><i class="fa-solid fa-tags"></i> Tags:</strong> <a href="/nl/tag/home-assistant/">home-assistant</a>,&nbsp;<a href="/nl/tag/mqtt/">MQTT</a>,&nbsp;<a href="/nl/tag/zigbee/">Zigbee</a>,&nbsp;<a href="/nl/tag/yaml/">yaml</a>,&nbsp;<a href="/nl/tag/security/">security</a></section>
+<section class="rss">
+  <p class="rss-subscribe text">Vond je dit artikel interessant? <strong><a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie <i class="fa-solid fa-mug-hot"></i></a></strong></p>
+  
+</section>
+<section class="share"><span>Delen: </span>
+  
+    
+    
+    
+    
+  
+    
+    <a href="//bsky.app/intent/compose?text=Een+slimme+bewegingssensor+gebruiken+met+Home+Assistant%20https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2F2023%2F03%2Fsmart-motion-sensor%2F" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+    
+    
+  
+    
+    
+    <a href="//www.facebook.com/sharer/sharer.php?&u=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2F2023%2F03%2Fsmart-motion-sensor%2F" target="_blank"><i class="fa-brands fa-square-facebook fa-lg"></i></a>
+    
+  
+    
+    
+    
+    <a href="//www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2F2023%2F03%2Fsmart-motion-sensor%2F" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+  
+    <a href="//x.com/share?text=Een+slimme+bewegingssensor+gebruiken+met+Home+Assistant&url=https%3A%2F%2Fblog.4dcu.be%2Fnl%2Fdiy%2F2023%2F03%2Fsmart-motion-sensor%2F&via=" target="_blank"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+    
+    
+    
+  
+</section>
+<section class="post-navigation">
+  <span class="prev-post"><a href="/nl/programming/2023/02/chatgpt-python-gui-app/"><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-left fa-stack-1x fa-inverse"></i></span><span class="page-number">Kan ChatGPT voor mij een Python-GUI-app schrijven?</span></a></span>
+  <span class="next-post"><a href="/nl/diy/2023/04/silent-mechanical-keyboard/"><span class="page-number">De klank van stilte: een stil mechanisch toetsenbord bouwen</span><span class="fa-stack fa-lg"><i class="fa-solid fa-square fa-stack-2x"></i><i class="fa-solid fa-angle-double-right fa-stack-1x fa-inverse"></i></span></a></span>
+</section>
+</div></div>
+</div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-1-title">
+					Contact
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-1-content">
+				<p>Have any comments or suggestions, feel free to reach out !</p>
+				<ul class="modal__list">
+						<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+				
+				<br />
+				<p>Do you like this blog and wish to contribute? You could <a href="https://buymeacoffee.com/4dcube">Buy me a Coffee <i class="fa-solid fa-mug-hot"></i></a>!</p>
+				
+			</main>
+			<footer class="modal__footer">
+				<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+			<header class="modal__header">
+				<h2 class="modal__title" id="modal-2-title">
+					Search
+				</h2>
+			</header>
+			<main class="modal__content" id="modal-2-content">
+				<div id="search"></div>
+			</main>
+			<footer class="modal__footer">
+					<button class="modal__btn modal__btn-primary" data-micromodal-close="" aria-label="Close this dialog window">Close</button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">4DCu.be</h3>
+
+		<div class="footer-content">
+			<div class="site-navigation">
+
+				<p><strong>Overzicht</strong></p>
+				<ul class="pages">
+					<li class="nav-link"><a href="/nl/over-mij/">Over mij</a></li><li class="nav-link"><a href="/nl/galerij/">Galerij</a></li><li class="nav-link"><a href="/nl/artikels/">Artikels</a></li><li class="nav-link"><a href="#" class="nav-link-contact">Contact</a></li>
+				</ul>
+				<br />
+				<p><strong>Juridisch</strong></p>
+				<p><a href="/policy/">Privacybeleid</a></p>
+			</div>
+
+			<div class="site-contact">
+				<p><strong>Contact</strong></p>
+				<ul class="social-media-list">
+					<li>
+	<i class="fa-solid fa-envelope"></i>
+	<a href="mailto:sebastian.proost@gmail.com">
+		<span class="username">sebastian.proost@gmail.com</span>
+	</a>
+</li>
+
+
+	
+	<li>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://github.com/4dcu-be" title="Fork me on GitHub">
+			<span class="username">4dcu-be</span>
+		</a>
+	</li>
+	
+
+	
+	<li>
+		<i class="fa-brands fa-bluesky"></i>
+		<a href="https://bsky.app/profile/blog.4dcu.be" title="Follow me on BlueSky">
+			<span class="username">blog.4dcu.be</span>
+		</a>
+	</li>
+	
+
+	
+
+	
+
+	
+
+
+				</ul>
+			</div>
+
+			<div class="site-signature">
+				
+				<p><strong>Steunen</strong></p>
+				<p><i class="fa-solid fa-mug-hot"></i> <a href="https://buymeacoffee.com/4dcube">Trakteer me op een koffie </a></p>
+				
+				<p class="rss-subscribe text"><strong>Abonneer <a href="/nl/feed.xml">via RSS</a></strong></p>
+				
+			</div>
+		</div>
+
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+ <script data-goatcounter="https://4dcube.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    enableMenu: false
+  },
+  tex: {
+    packages: ['base', 'ams']
+  },
+  loader: {
+    load: ['ui/menu', '[tex]/ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.min.js">
+</script>
+<script>
+	AOS.init({
+   once: true,
+   offset: -20,
+   duration: 600
+	});
+</script>
+
+
+<script type="text/javascript">
+// Bulma Navbar Burger Toggle (Vanilla JS)
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".post-content").lightGallery({
+			 thumbnail:false,
+			 selector: '.lightgallery-link'
+		});
+});
+</script>
+<!-- Contact Modal and search modal-->
+<script type="text/javascript">
+$(document).ready(function() {
+	MicroModal.init();
+
+	$('.nav-link-contact').click(function(ev) {
+	  ev.preventDefault();
+	  MicroModal.show('modal-1', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+	});
+
+	$('.nav-link-search').click(function(ev) {
+	  ev.preventDefault();
+
+	  MicroModal.show('modal-2', {
+	  		onClose: function() { $('.nav-link-contact').blur(); },
+	  		disableFocus: true
+	  });
+
+	  document.querySelector('.pagefind-ui__search-input').focus();
+	});
+
+});
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search" });
+    });
+</script>
+
+<script type="text/javascript">
+// Copy-to-clipboard for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBlocks = document.querySelectorAll('div.highlighter-rouge');
+  codeBlocks.forEach(function(block) {
+    if (!block.querySelector('pre')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+    block.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre code');
+      if (!code) return;
+      var text = code.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess, onFallback);
+      } else {
+        onFallback();
+      }
+
+      function onSuccess() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+
+      function onFallback() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          onSuccess();
+        } catch (e) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed';
+          setTimeout(function() {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+  </body>
+</html>

@@ -5,6 +5,7 @@ byline: "using CircuitPython"
 description: "Building a Deej open-source USB volume mixer with an RP2040 Pro Micro and CircuitPython, with a USB-C port and quality-of-life tweaks to control per-app volumes."
 date:   2025-02-03 08:00:00
 author: Sebastian Proost
+post_id: deej-open-hardware-volume-controller
 categories: diy programming
 tags:	deej python raspberry-pi soldering electronics
 cover:  "/assets/posts/2025-02-03-deej-open-hardware-volume-controller/deej_02.jpg"

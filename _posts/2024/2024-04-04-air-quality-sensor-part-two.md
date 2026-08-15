@@ -5,6 +5,7 @@ byline: "untethering esphome from home assistant"
 description: "Turning the upgraded IKEA Vindriktning air quality monitor into a stand-alone device by adding status LEDs and configuring ESPHome on the ESP8266 to host its own web page."
 date:   2024-02-11 08:00:00
 author: Sebastian Proost
+post_id: air-quality-sensor-part-two
 slug: stand-alone-air-quality-monitor-ikea-vindriktning-esp8266-bme680
 categories: diy
 tags:	Ikea soldering electronics home-assistant yaml esphome esp8266

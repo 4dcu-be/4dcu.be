@@ -27,7 +27,7 @@ This is the only change this workflow may make to the English source.
 - Search `_posts/nl/` for the same `post_id`.
 - If a Dutch translation exists, tell the user and ask whether it should be
   updated or skipped.
-- Otherwise create `_posts/nl/<date>-<slug>.<extension>`, retaining the source
+- Otherwise create `_posts/nl/<year>/<date>-<slug>.<extension>`, retaining the source
   filename and extension but not its optional year directory. Do not append `NL`
   to the slug.
 - Do not add `locale` or `permalink`; `_config.yml` supplies `nl_NL` and the

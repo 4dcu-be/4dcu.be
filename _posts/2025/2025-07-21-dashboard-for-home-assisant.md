@@ -5,6 +5,7 @@ byline: ""
 description: "Repurposing a jailbroken Kindle Paperwhite 3 running KUAL as a low-power e-ink Home Assistant dashboard, pulling real-time data through the Home Assistant API with Python."
 date:   2025-07-21 08:00:00
 author: Sebastian Proost
+post_id: dashboard-for-home-assisant
 categories: diy programming
 tags:	home-assistant yaml python kindle
 cover:  "/assets/posts/2025-07-21-dashboard-for-home-assisant/kindle_dashboard_update.jpg"

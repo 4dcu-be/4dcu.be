@@ -5,6 +5,7 @@ byline: "A Step-by-Step Guide"
 description: "Step-by-step guide to upgrading the IKEA Vindriktning air quality monitor with an ESP8266 and BME680 VOC sensor, integrated into Home Assistant via ESPHome."
 date:   2024-01-21 08:00:00
 author: Sebastian Proost
+post_id: air-quality-sensor
 slug: diy-smart-air-quality-monitor-ikea-vindriktning-esp8266-bme680
 categories: diy
 tags:	Ikea soldering electronics home-assistant yaml esphome esp8266
