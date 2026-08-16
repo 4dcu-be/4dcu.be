@@ -98,7 +98,7 @@ thumbnail:
     crop_dimensions: '430x288+0+0'
 ```
 
-We'll also need to add mini_magic to the `Gemfile`, it should look like this:
+We'll also need to add mini_magick to the `Gemfile`, it should look like this:
 
 ```bash
 source 'https://rubygems.org'
@@ -198,26 +198,17 @@ layout: null
 ---
 
 [
-{% for post in site.posts %} 
-{
-  "title": "{{ post.title }}",
-  "url": "{{ post.url | prepend: site.base }}",
-  "date": "{{ post.date | date: " % B % d, % Y " }}",
-  "content": "{{ post.content | strip_html | smartify | truncatewords: 50 }}" {% if post.coords %},
-  "coords": {
-    "lat": {
-      {
-        post.coords.lat
-      }
-    },
-    "lng": {
-      {
-        post.coords.lng
-      }
-    }
-  } {% endif %}
-} 
-{% if forloop.last %} {% else %}, {% endif %} 
+{% for post in site.posts %}
+  {
+    "title": {{ post.title | jsonify }},
+    "url": {{ post.url | prepend: site.baseurl | jsonify }},
+    "date": {{ post.date | date: "%B %d, %Y" | jsonify }},
+    "content": {{ post.content | strip_html | smartify | truncatewords: 50 | jsonify }}{% if post.coords %},
+    "coords": {
+      "lat": {{ post.coords.lat | jsonify }},
+      "lng": {{ post.coords.lng | jsonify }}
+    }{% endif %}
+  }{% unless forloop.last %},{% endunless %}
 {% endfor %}
 ]
 ``` 

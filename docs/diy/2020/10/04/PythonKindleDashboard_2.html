@@ -315,8 +315,9 @@ modification to a file. This part of the code is included in <code class="langua
     <span class="k">return</span> <span class="n">deco_cache</span>
 </code></pre></div></div>
 
-<p>To get this running we’ll need to decorate the extract functions like shown below. The decorator takes one argument, the 
-filename to write to (potentially this could be done automatically based on the decorated function’s name).</p>
+<p>To get this running, we’ll need to decorate the extract functions as shown below. The decorator takes two arguments: the
+cache filename and the maximum cache age in hours. The filename could potentially be derived automatically from the
+decorated function’s name.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ...
 </span><span class="kn">from</span> <span class="n">dashboard.bin.cache</span> <span class="kn">import</span> <span class="n">cache_dir</span><span class="p">,</span> <span class="n">cache</span>

@@ -198,7 +198,7 @@ We mogen aannemen dat een speler zijn of haar deck en de huidige meta beter leer
 speelt. Door te leren hoe het deck tegen verschillende populaire decks moet worden gespeeld, stijgt de kans om te winnen.
 Om dit in het model op te nemen, gebruiken we ervaring: de vierkantswortel van het aantal gespeelde wedstrijden, vermenigvuldigd
 met de ervaringsfactor, die voor alle spelers gelijk is. In deze voorbeelden staat de factor op 20. Iemand die 100 wedstrijden speelde,
-krijgt tijdens het spelen dus een ELO-bonus van ```sqrt(10) * 20```. Hoewel deze factor willekeurig werd gekozen, 
+krijgt tijdens het spelen dus een ELO-bonus van ```sqrt(100) * 20```. Hoewel deze factor willekeurig werd gekozen,
 is een bonus van 200 ELO een aanzienlijke verbetering en waarschijnlijk groter dan je in werkelijkheid zou verwachten.
 
 ## Het GwentModel instellen

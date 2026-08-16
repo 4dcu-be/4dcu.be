@@ -198,7 +198,7 @@ It is reasonable to assume that as a player plays more games his/her familiarity
 increase. As they learn how to play their deck against different popular decks their ability to win should become higher.
 To include this in the model the experience is included which is the square root of the number of games played multiplied
 with the experience factor which is the same for all players. In the examples here the factor is set to 20 which means
-that someone that played 100 games has an ```sqrt(10) * 20``` ELO bonus when playing. While this factor was set 
+that someone that played 100 games has an ```sqrt(100) * 20``` ELO bonus when playing. While this factor was set
 arbitrarily, a 200 ELO bonus is a significant improvement and likely higher than you would expect in reality.
 
 ## Setting up the GwentModel

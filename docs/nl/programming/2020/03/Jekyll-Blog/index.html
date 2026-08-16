@@ -207,7 +207,7 @@ parameters worden aan ImageMagick doorgegeven.</p>
     <span class="na">crop_dimensions</span><span class="pi">:</span> <span class="s1">'</span><span class="s">430x288+0+0'</span>
 </code></pre></div></div>
 
-<p>We moeten mini_magic ook aan het <code class="language-plaintext highlighter-rouge">Gemfile</code> toevoegen. Dat ziet er als volgt uit:</p>
+<p>We moeten mini_magick ook aan het <code class="language-plaintext highlighter-rouge">Gemfile</code> toevoegen. Dat ziet er als volgt uit:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> <span class="s1">'https://rubygems.org'</span>
 gem <span class="s1">'jekyll'</span>, <span class="s1">'&lt;4'</span>
@@ -300,26 +300,17 @@ hoofdmap van de website met deze code:</p>
 <span class="o">---</span>
 
 <span class="p">[</span>
-<span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">post</span> <span class="k">in</span> <span class="nx">site</span><span class="p">.</span><span class="nx">posts</span> <span class="o">%</span><span class="p">}</span> 
-<span class="p">{</span>
-  <span class="dl">"</span><span class="s2">title</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ post.title }}</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">url</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ post.url | prepend: site.base }}</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">date</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ post.date | date: </span><span class="dl">"</span> <span class="o">%</span> <span class="nx">B</span> <span class="o">%</span> <span class="nx">d</span><span class="p">,</span> <span class="o">%</span> <span class="nx">Y</span> <span class="dl">"</span><span class="s2"> }}</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">content</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ post.content | strip_html | smartify | truncatewords: 50 }}</span><span class="dl">"</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="nx">post</span><span class="p">.</span><span class="nx">coords</span> <span class="o">%</span><span class="p">},</span>
-  <span class="dl">"</span><span class="s2">coords</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="dl">"</span><span class="s2">lat</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="p">{</span>
-        <span class="nx">post</span><span class="p">.</span><span class="nx">coords</span><span class="p">.</span><span class="nx">lat</span>
-      <span class="p">}</span>
-    <span class="p">},</span>
-    <span class="dl">"</span><span class="s2">lng</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="p">{</span>
-        <span class="nx">post</span><span class="p">.</span><span class="nx">coords</span><span class="p">.</span><span class="nx">lng</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">}</span> <span class="p">{</span><span class="o">%</span> <span class="nx">endif</span> <span class="o">%</span><span class="p">}</span>
-<span class="p">}</span> 
-<span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="nx">forloop</span><span class="p">.</span><span class="nx">last</span> <span class="o">%</span><span class="p">}</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">},</span> <span class="p">{</span><span class="o">%</span> <span class="nx">endif</span> <span class="o">%</span><span class="p">}</span> 
+<span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">post</span> <span class="k">in</span> <span class="nx">site</span><span class="p">.</span><span class="nx">posts</span> <span class="o">%</span><span class="p">}</span>
+  <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">title</span><span class="dl">"</span><span class="p">:</span> <span class="p">{{</span> <span class="nx">post</span><span class="p">.</span><span class="nx">title</span> <span class="o">|</span> <span class="nx">jsonify</span> <span class="p">}},</span>
+    <span class="dl">"</span><span class="s2">url</span><span class="dl">"</span><span class="p">:</span> <span class="p">{{</span> <span class="nx">post</span><span class="p">.</span><span class="nx">url</span> <span class="o">|</span> <span class="na">prepend</span><span class="p">:</span> <span class="nx">site</span><span class="p">.</span><span class="nx">baseurl</span> <span class="o">|</span> <span class="nx">jsonify</span> <span class="p">}},</span>
+    <span class="dl">"</span><span class="s2">date</span><span class="dl">"</span><span class="p">:</span> <span class="p">{{</span> <span class="nx">post</span><span class="p">.</span><span class="nx">date</span> <span class="o">|</span> <span class="na">date</span><span class="p">:</span> <span class="dl">"</span><span class="s2">%B %d, %Y</span><span class="dl">"</span> <span class="o">|</span> <span class="nx">jsonify</span> <span class="p">}},</span>
+    <span class="dl">"</span><span class="s2">content</span><span class="dl">"</span><span class="p">:</span> <span class="p">{{</span> <span class="nx">post</span><span class="p">.</span><span class="nx">content</span> <span class="o">|</span> <span class="nx">strip_html</span> <span class="o">|</span> <span class="nx">smartify</span> <span class="o">|</span> <span class="na">truncatewords</span><span class="p">:</span> <span class="mi">50</span> <span class="o">|</span> <span class="nx">jsonify</span> <span class="p">}}{</span><span class="o">%</span> <span class="k">if</span> <span class="nx">post</span><span class="p">.</span><span class="nx">coords</span> <span class="o">%</span><span class="p">},</span>
+    <span class="dl">"</span><span class="s2">coords</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">lat</span><span class="dl">"</span><span class="p">:</span> <span class="p">{{</span> <span class="nx">post</span><span class="p">.</span><span class="nx">coords</span><span class="p">.</span><span class="nx">lat</span> <span class="o">|</span> <span class="nx">jsonify</span> <span class="p">}},</span>
+      <span class="dl">"</span><span class="s2">lng</span><span class="dl">"</span><span class="p">:</span> <span class="p">{{</span> <span class="nx">post</span><span class="p">.</span><span class="nx">coords</span><span class="p">.</span><span class="nx">lng</span> <span class="o">|</span> <span class="nx">jsonify</span> <span class="p">}}</span>
+    <span class="p">}{</span><span class="o">%</span> <span class="nx">endif</span> <span class="o">%</span><span class="p">}</span>
+  <span class="p">}{</span><span class="o">%</span> <span class="nx">unless</span> <span class="nx">forloop</span><span class="p">.</span><span class="nx">last</span> <span class="o">%</span><span class="p">},{</span><span class="o">%</span> <span class="nx">endunless</span> <span class="o">%</span><span class="p">}</span>
 <span class="p">{</span><span class="o">%</span> <span class="nx">endfor</span> <span class="o">%</span><span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div></div>

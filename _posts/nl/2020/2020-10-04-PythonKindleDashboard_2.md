@@ -206,9 +206,9 @@ def cache(cache_file, cache_time):
     return deco_cache
 ```
 
-Om dit te laten werken, moeten we de extractiefuncties van een *decorator* voorzien zoals hieronder. Die krijgt één
-argument: de bestandsnaam waarnaar moet worden geschreven. (Dat zou eventueel automatisch kunnen op basis van de naam
-van de gedecoreerde functie.)
+Om dit te laten werken, moeten we de extractiefuncties van een *decorator* voorzien zoals hieronder. Die krijgt twee
+argumenten: de bestandsnaam voor de cache en de maximale cacheduur in uren. De bestandsnaam zou eventueel automatisch
+kunnen worden afgeleid van de naam van de gedecoreerde functie.
 
 ```python
 # ...

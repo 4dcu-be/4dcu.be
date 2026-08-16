@@ -204,8 +204,9 @@ def cache(cache_file, cache_time):
     return deco_cache
 ```
 
-To get this running we'll need to decorate the extract functions like shown below. The decorator takes one argument, the 
-filename to write to (potentially this could be done automatically based on the decorated function's name).
+To get this running, we'll need to decorate the extract functions as shown below. The decorator takes two arguments: the
+cache filename and the maximum cache age in hours. The filename could potentially be derived automatically from the
+decorated function's name.
 
 ```python
 # ...
