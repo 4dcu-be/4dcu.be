@@ -1,5 +1,7 @@
 {%- assign footer_locale = page.locale | default: site.languages[0].locale -%}
 {%- assign footer_strings = site.data.translations[footer_locale] -%}
+{%- assign policy_url = "/policy/" -%}
+{%- if footer_locale == "nl_NL" -%}{%- assign policy_url = "/nl/policy/" -%}{%- endif -%}
 <footer class="site-footer">
 
   <div class="wrapper">
@@ -15,7 +17,7 @@
 				</ul>
 				<br />
 				<p><strong>{{ footer_strings.legal }}</strong></p>
-				<p><a href="{{ "/policy/" | prepend: site.baseurl }}">{{ footer_strings.privacy }}</a></p>
+				<p><a href="{{ policy_url | prepend: site.baseurl }}">{{ footer_strings.privacy }}</a></p>
 			</div>
 
 			<div class="site-contact">
