@@ -98,6 +98,9 @@ Located in `_plugins/`:
 - biology: Science and nature content
 - general: Site-related content
 
+### Writing Style
+- Post headings use **title case** (e.g. "Setting Up the Environment", "Further Reading"). Older posts (2023 to early 2024) mix in sentence case; don't copy that.
+
 ### Important Notes
 - Requires ImageMagick for thumbnail generation
 - Not compatible with standard GitHub Pages due to custom plugins
