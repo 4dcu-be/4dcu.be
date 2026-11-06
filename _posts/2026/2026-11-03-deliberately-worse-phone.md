@@ -51,6 +51,16 @@ The last thing I noticed was that the haptics option (the small vibrations you f
 
 Since I prefer the option that gives me more control, which in this case means the launcher ignoring the system-wide setting, I had Claude figure out a way to do just that. This was the one change Claude couldn't check on its own (the emulator doesn't vibrate), so I built a test APK and tried it on my phone instead. That being said, I'm not a huge fan of haptic feedback (mostly because of the buzzing noise the vibration motor makes), so I switched it off again a few days later.
 
+## A Built-in Equalizer
+
+Detent had an option to switch on the mic and open any app by simply saying its name. As I'm not a huge fan of voice control, this is not a button I need. Instead of hiding it, I decided to replace it with a quick way to change the sound settings, since I use my phone a lot to listen to music and podcasts. Being able to switch between a voice setting for podcasts and different settings for different types of music seemed really useful. I do have other ways of doing this, but they have too much friction, so I never use them. This is the flip side of everything above: friction works both ways, and removing it from something you'd like to do more often is just as effective as adding it to things you'd like to do less.
+
+After some back and forth about what to build and how, we landed on a second, smaller dial that appears around the equalizer button when you tap it. Turn it to pick one of seven presets: *off*, *voice*, *clear*, *music*, *bass boost*, *loud* and *night*. *Voice* cuts the low rumble and lifts the range where speech sits, which makes podcasts easier to follow on a noisy train. *Night* softens the bass and brings loud and quiet parts closer together, so you don't have to keep adjusting the volume (and the bass doesn't carry through the walls). While a preset is on, the headphones icon lights up in the theme's accent color, so you can see at a glance that the sound is being changed.
+
+![The sound dial in Detent, with the bass boost preset selected](/assets/posts/2026-11-03-deliberately-worse-phone/detent_sound.jpg)
+
+There is a catch, though. Android doesn't let apps change the phone's own equalizer, so Detent runs its own on top of the sound output. Some phones don't allow that, and then the equalizer only reaches music apps that announce their audio to equalizer apps. Many streaming apps, YouTube among them, don't do that. The dial tells you when this happens, so you aren't left wondering why nothing changed. On top of that, Android may close a launcher running in the background, which would switch the equalizer off with it. To prevent that, Detent shows a notification while a preset is on, with an `off` button. That's a small price to pay.
+
 ## My Own Theme
 
 I could have made all of the features above by hand, but learning the tools and programming language, and then actually making the changes in my spare time, would have taken far too long. Creating images, however, is something I simply can't do myself, so here I relied on Gemini and ChatGPT to bring my vision to life. While I understand, and agree with, the concerns creatives have about AI, for me it is often the only way to get symbols, logos, backgrounds and the like, and the results are far better than anything I could create myself.
