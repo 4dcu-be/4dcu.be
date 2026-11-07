@@ -1,6 +1,7 @@
 {%- assign nav_locale = page.locale | default: site.languages[0].locale -%}
 {%- assign strings = site.data.translations[nav_locale] -%}
-{% for nav_page in site.pages -%}
-  {% if nav_page.title and nav_page.main_nav == true and nav_page.locale == nav_locale %}<li class="nav-link"><a href="{{ nav_page.url | prepend: site.baseurl }}">{{ nav_page.title }}</a></li>{% endif %}
+{%- comment -%}site.data.nav is built by _plugins/precompute_navigation.rb{%- endcomment -%}
+{% for nav_page in site.data.nav[nav_locale] -%}
+  <li class="nav-link"><a href="{{ nav_page.url | prepend: site.baseurl }}">{{ nav_page.title }}</a></li>
 {%- endfor %}
 {%- if site.email %}<li class="nav-link"><a href="#" class="nav-link-contact">{{ strings.contact }}</a></li>{% endif -%}

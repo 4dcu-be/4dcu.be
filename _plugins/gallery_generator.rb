@@ -7,8 +7,8 @@ module Jekyll
 
     def generate(site)
        posts = site.posts.docs.select { |post| post.data['gallery_items'] }
-       resize_dimensions = Jekyll.configuration({})['gallery_items']['resize_dimensions']
-       crop_dimensions = Jekyll.configuration({})['gallery_items']['crop_dimensions']
+       resize_dimensions = site.config['gallery_items']['resize_dimensions']
+       crop_dimensions = site.config['gallery_items']['crop_dimensions']
        posts.each do |post|
          post.data['gallery_items'].each do |item|
              input_path = ".#{item['image']}"

@@ -13,6 +13,7 @@ exclude:
   - "*.sh"
   - "CLAUDE.md"
   - "plan.md"
+  - "speedup.md"
   - "Dockerfile"
   - "Gemfile*"
   - "circle.yml"

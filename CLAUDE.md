@@ -11,7 +11,7 @@ This is a Jekyll-based blog website for 4DCu.be - Sebastian Proost's blog about 
 ### Local Development Server
 ```bash
 # Start development server (uses _config_dev.yml)
-bundle exec jekyll serve --config _config_dev.yml --incremental --port 5000
+bundle exec jekyll serve --config _config_dev.yml --port 5000
 
 # Or use the batch file on Windows
 run_server.bat

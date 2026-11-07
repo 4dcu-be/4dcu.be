@@ -7,8 +7,8 @@ module Jekyll
 
     def generate(site)
        posts = site.posts.docs.select { |post| post.data['thumbnail'] }
-       resize_dimensions = Jekyll.configuration({})['thumbnail']['resize_dimensions']
-       crop_dimensions = Jekyll.configuration({})['thumbnail']['crop_dimensions']
+       resize_dimensions = site.config['thumbnail']['resize_dimensions']
+       crop_dimensions = site.config['thumbnail']['crop_dimensions']
        posts.each do |post|
          input_path = ".#{post['cover']}"
          output_path = ".#{post['thumbnail']}"
